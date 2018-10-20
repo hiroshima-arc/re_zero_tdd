@@ -7,10 +7,10 @@
 | ソフトウェア   | バージョン   | 備考        |
 |:---------------|:-------------|:------------|
 | Visual Studio Code         |  |             |
+| vagrant        |2.0.3  |             |
 | Ruby           |2.5.3    |             |
 | Node.js        |8.10.0    |             |
 | Python         |3.6.0  |             |
-| vagrant        |2.0.3  |             |
 
 
 # 構成 #
@@ -25,8 +25,6 @@
 + [VS Live Share Extension Packのセットアップ](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack)
 
 ### 開発用仮想マシンの起動・プロビジョニング
-+ Dockerのインストール
-+ docker-composeのインストール
 ```bash
 vagrant up
 vagrant ssh
