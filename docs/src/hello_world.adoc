@@ -1,0 +1,59 @@
+:toc: left
+:toclevels: 5
+:sectnums:
+= Hello World
+
+== 仕様
+
+== 設計
+
+=== TODOリスト
+* [ ] TODO
+* [x] [line-through]#TODO DONE#
+
+=== ユースケース図
+[plantuml]
+----
+left to right direction
+skinparam packageStyle rectangle
+actor customer
+actor clerk
+rectangle checkout {
+  customer -- (checkout)
+  (checkout) .> (payment) : include
+  (help) .> (checkout) : extends
+  (checkout) -- clerk
+}
+----
+
+=== クラス図
+[plantuml]
+----
+class Car
+Driver - Car : drives >
+Car *- Wheel : have 4 >
+Car -- Person : < owns
+----
+
+=== シーケンス図
+[plantuml]
+----
+participant User
+User -> A: DoWork
+activate A
+A -> B: << createRequest >>
+activate B
+B -> C: DoWork
+activate C
+C --> B: WorkDone
+destroy C
+B --> A: RequestCreated
+deactivate B
+A -> User: Done
+deactivate A
+----
+
+== 開発
+
+== 参照
+* PlantUML[http://plantuml.com]

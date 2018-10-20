@@ -116,6 +116,15 @@ pyenv local 3.6.0
 **[⬆ back to top](#構成)**
 
 ## 配置
+ドキュメントの生成
+```
+cd /vagrant
+gradle build
+gradle asciidoctor
+gradle livereload
+```
+[http://localhost:35729/](http://localhost:35729/)に接続して確認する
+
 **[⬆ back to top](#構成)**
 
 ## 運用

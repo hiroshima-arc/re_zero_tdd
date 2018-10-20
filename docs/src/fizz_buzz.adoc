@@ -1,0 +1,59 @@
+:toc: left
+:toclevels: 5
+:sectnums:
+
+= Fizz Buzz
+
+== 仕様
+* ３で割り切れる場合は「Fizz」を出力する。
+* ５で割り切れる場合は「Buzz」を出力する。
+* 両者で割り切れる場合は「FizzBuzz」を出力する。
+* 上記の条件以外の場合は番号を返す。
+* 指定された回数だけ繰り返し実行する。
+
+== 設計
+=== TODOリスト
+* [ ] 「Fizz」を出力できるようにする
+* [ ] 「Buzz」を出力できるようにする
+* [ ] 「FizzBuzz」を出力できるようにする
+* [ ] 繰り返し実行できるようにする
+
+=== ユースケース図
+[plantuml]
+----
+left to right direction
+skinparam packageStyle rectangle
+actor User
+rectangle FizzBuzz {
+  User -- (Put Value)
+}
+----
+
+=== クラス図
+[plantuml]
+----
+class FizzBuzz {
++ {static}generate(number)
++ iterate(count)
+}
+----
+
+=== シーケンス図
+[plantuml]
+----
+actor User
+
+User -> FizzBuzz: iterate
+loop for each iterate
+      activate FizzBuzz
+      FizzBuzz -> FizzBuzz: generate
+            User <- FizzBuzz
+      deactivate FizzBuzz
+end
+----
+
+== 開発
+
+== 参照
+* Asciidoctor[http://asciidoctor.org/]
+* PlantUML[http://www.plantuml.com]

@@ -64,4 +64,9 @@ fabric.properties
 .idea
 re_zero_tdd.iml
 .vagrant
+docs/.asciidoctor
+.gradle
+.vscode
+.settings
+.project
 
