@@ -63,4 +63,5 @@ fabric.properties
 
 .idea
 re_zero_tdd.iml
+.vagrant
 
