@@ -69,4 +69,6 @@ docs/.asciidoctor
 .vscode
 .settings
 .project
-
+*.iml
+.vscode
+node_modules
