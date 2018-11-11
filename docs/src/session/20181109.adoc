@@ -1,0 +1,1629 @@
+:toc: left
+:toclevels: 5
+:sectnums:
+
+= テストおじさん、襲来
+
+== 概要
+=== 実施日時
+* https://hiroshima-arc.connpass.com/event/105735/[2018年11月9日（金） 18:00 - 21:00]
+
+=== 会場
+
+++++
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6584.583947396631!2d132.458662!3d34.393924!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe874ed70577dcf46!2z44Kz44Ov44O844Kt44Oz44Kw44K544Oa44O844K5IFNoYWtlSGFuZHM!5e0!3m2!1sja!2sjp!4v1541923570346" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+++++
+
+=== 参加メンバー
+* https://portfolio.forkwell.com/@k2works[テストおじさん]
+* テスト書いてないとt_wadaさんの前で言った人(https://twitter.com/NeXTSTEP2OSX/status/863387435228475392[証拠video])
+* テスト書きたい人
+* テストしてない人
+
+=== お題
+* http://www.hiroshima-arc.org/re_zero_tdd/fizz_buzz.html[FizzBuzz]
+
+=== 言語
+* Python 3.6
+
+== セッション
+=== TODOリストから始めるテスト駆動開発
+==== TODOリスト
+
+*テストおじさん*: はい、第１回 Re:ゼロから始めるテスト駆動開発生活 はじめます、レポジトリは https://github.com/hiroshima-arc/re_zero_tdd[ここね]。
+
+*テストおじさん*: まず、皆さんVSCodeでセッションの共有をお願いしますね。
+
+ちなみにVisual Studio Live Shareの利用イメージは https://medium.com/@satoryu/visual-studio-live-share%E3%82%92%E5%B0%91%E3%81%97%E8%A9%A6%E3%81%97%E3%81%9F%E3%82%89%E6%9C%9F%E5%BE%85%E3%81%97%E3%81%9F%E6%9C%AA%E6%9D%A5%E3%81%A0%E3%81%A3%E3%81%9F-9afb0e9d6f82[こんな感じ]。
+
+今回のセッションはテストおじさんの端末を参加者で共有してテスト駆動でどのように http://www.hiroshima-arc.org/re_zero_tdd/fizz_buzz.html[お題] を実装していくかをライブデモします。
+
+*テストおじさん*: まずはお題の仕様の確認と [red]#TODOリスト# の作成をします。
+
+そう言うとおもむろに https://github.com/hiroshima-arc/re_zero_tdd/blob/d6b42704664dac5fe00a34406f9eb5c2d62b09fb/dev/20181109/README.md[REAME.md]に以下の文章を追記するテストおじさん。
+
+* [ ] 値が３ならばFizzを返すようにする
+* [ ] 値が５ならばBuzzを返すようにする
+* [ ] 値が１５ならばFizzBuzzを返すようにする
+
+
+[quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
+____
+TODOリスト
+
+何をテストすべきだろうか----着手する前に、必要になりそうなテストをリストに書き出しておこう。
+____
+
+=== テストファーストから始めるテスト駆動開発
+==== テストファースト・アサートファースト
+
+*テストおじさん*: つぎに [red]#テストファースト# でやります。
+
+ややぎごちない動作で `main_test.py` に以下のコードを記述するテストおじさん。
+
+[source, Python]
+----
+import unittest
+
+
+class FizzBuzzTest(unittest.TestCase):
+    def test_値が３ならばFizzを返すようにする(self):
+        self.assertEqual("Fizz", 3)
+
+
+if __name__ == "__main__":
+    unittest.main()
+----
+
+*テストおじさん*: テストを実行してみましょう・・・はい、失敗。
+
+[source, bash]
+----
+$ python main_test.py
+F
+======================================================================
+FAIL: test_値が3ならばFizzを返すようにする (__main__.FizzBuzzTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "replay_main_test.py", line 7, in test_値が3ならばFizzを返すようにする
+    self.assertEqual("Fizz", 3)
+AssertionError: 'Fizz' != 3
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)
+----
+
+*テストおじさん以外のメンバー*: ポカーン( ﾟдﾟ)
+
+*テスト書きたい人*: ...実装する前に、テストコードを確認するのですか？
+
+*テストおじさん*: イエス、今やっていることはテストといいながら設計をしています。事実、最初のテスト項目は [red]#TODOリスト# の内容をそのまま転記してますからね。
+
+*テストおじさん*: テスト駆動開発の進め方として [red]#テストファースト# ・ [red]#アサートファースト# で進めていきます。
+
+[quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
+____
+テストファースト
+
+いつテストを書くべきだろうか----それはテスト対象のコードを書く前だ。
+____
+
+[quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
+____
+アサートファースト
+
+いつアサーションを書くべきだろうか----最初に書こう
+
+* システム構築はどこから始めるべきだろうか。システム構築が終わったらこうなる、というストーリーを語るところからだ。
+* 機能はどこから書き始めるべきだろうか。コードが書き終わったらこのように動く、というテストを書くところからだ。
+* ではテストはどこから書き始めるべきだろうか。それはテストの終わりにパスすべきアサーションを書くところからだ。
+____
+
+
+*テスト書いてないとt_wadaさんの前で言った人*:　class FizzBuzzTest(unittest.TestCase):の表記は？
+
+*テストおじさん*: これはunittest.TestCaseクラスを継承したFizzBuzzTestクラスという意味です。
+
+*テスト書いてないとt_wadaさんの前で言った人*: Pythonは()の中に継承を記述するのね。
+
+*テストおじさん*: そっすね、ちなみにPythonは多重継承もサポートしているので複数のクラスを列挙できます。
+
+*テストおじさん*: なんというかPythonのクラスの継承はカルチャーギャップがありました。
+
+注：テスト書いてないとt_wadaさんの前で言った人もテストおじさんもRubyがメインの人。
+ちなみにRubyだとこんな感じ。
+
+[source, Ruby]
+----
+require 'minitest/autorun'
+
+class FizzBuzzSpec < Minitest::Spec
+  describe FizzBuzz do
+    it '3ならFizzを返す' do
+      expect(3).must_equal 'Fizz'
+    end
+  end
+end
+----
+
+*テストおじさん*: さて次は失敗するテストをパスするようにしないといけませんね。
+
+=== 仮実装から始めるテスト駆動開発
+==== 仮実装
+
+*テストおじさん*: 最初のテストを通すために [red]#仮実装# を実施します。
+
+[source, Python]
+----
+import unittest
+
+
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        return "Fizz"
+
+
+class FizzBuzzTest(unittest.TestCase):
+    def test_値が３ならばFizzを返すようにする(self):
+        self.assertEqual("Fizz", FizzBuzz.generate(3))
+
+
+if __name__ == "__main__":
+    unittest.main()
+----
+
+*テストおじさん*: テストを実行してみましょう・・・はい、成功。
+
+[source, bash]
+----
+$ python main_test.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+----
+
+[quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
+____
+仮実装を経て本実装へ
+
+失敗するテストを書いてから、最初に行う実装はどのようなものだろうか----ベタ書きの値を返そう。
+____
+
+*テストおじさん以外のメンバー*: これが実装だと...！？
+
+image::https://1.bp.blogspot.com/-xq3WvB0qe1Q/VPQTvPriLOI/AAAAAAAAsBI/CZac1jFKUzo/s800/apron_man2-2shock.png[width="100"]
+
+*テストおじさん*: これで実装完了・・・とはいきませんね、ロジックは実装して本当にテストがパスするようにしましょう。
+
+[source, Python]
+----
+import unittest
+
+
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0:
+            value = "Fizz"
+
+        return value
+
+
+class FizzBuzzTest(unittest.TestCase):
+    def test_値が３ならばFizzを返すようにする(self):
+        self.assertEqual("Fizz", FizzBuzz.generate(3))
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+----
+
+*テストおじさん*: テストを実行してみましょう・・・はい、成功。
+
+[source, bash]
+----
+$ python main_test.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+----
+
+==== 三角測量
+
+*テストおじさん*: １つ目のテストがパスしたので [red]#TODOリスト# からテストを追加してみましょうか。
+
+[source, Python]
+----
+import unittest
+
+
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0:
+            value = "Fizz"
+
+        return value
+
+
+class FizzBuzzTest(unittest.TestCase):
+    def test_値が３ならばFizzを返すようにする(self):
+        self.assertEqual("Fizz", FizzBuzz.generate(3))
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+----
+
+*テストおじさん*: テストを実行してみましょう・・・はい、失敗。
+
+[source, bash]
+----
+ $ python main_test.py
+.F
+======================================================================
+FAIL: test_値が5ならばBuzzを返すようにする (__main__.FizzBuzzTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "replay_main_test.py", line 21, in test_値が5ならばBuzzを返すようにする
+    self.assertEqual("Buzz", FizzBuzz.generate(5))
+AssertionError: 'Buzz' != 5
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: あー対応する処理がないからテストが失敗してますな。修正修正...
+
+[source, Python]
+----
+import unittest
+
+
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0:
+            value = "Fizz"
+        elif number % 5 == 0:
+            value = "Buzz"
+
+        return value
+
+
+class FizzBuzzTest(unittest.TestCase):
+    def test_値が３ならばFizzを返すようにする(self):
+        self.assertEqual("Fizz", FizzBuzz.generate(3))
+
+    def test_値が５ならばBuzzを返すようにする(self):
+        self.assertEqual("Buzz", FizzBuzz.generate(5))
+
+
+if __name__ == "__main__":
+    unittest.main()
+----
+
+*テストおじさん*: テストを実行してみましょう・・・はい、OK。
+
+[source, bash]
+----
+ $ python main_test.py
+ ..
+ ----------------------------------------------------------------------
+ Ran 2 tests in 0.000s
+
+ OK
+----
+
+*テストおじさん*: ２つ目のテストによってgenerateメソッドの一般化が実現できたわけですがこのようなアプローチを [red]#三角測量# といいます。
+
+[quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
+____
+三角測量
+
+テストから最も慎重に一般化を引き出すやり方はどのようなものだろうか----２つ以上の例があるときだけ、一般化を行うようにしよう。
+____
+
+*テストおじさん*: はい、残りの [red]#TODOリスト# の内容もサクッと片付けちゃいましょう。
+
+[source, Python]
+----
+import unittest
+
+
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0:
+            value = "Fizz"
+        elif number % 5 == 0:
+            value = "Buzz"
+        elif number % 3 == 0 and number % 5 == 0:
+            value = "FizzBuzz"
+
+        return value
+
+
+class FizzBuzzTest(unittest.TestCase):
+    def test_値が３ならばFizzを返すようにする(self):
+        self.assertEqual("Fizz", FizzBuzz.generate(3))
+
+    def test_値が５ならばBuzzを返すようにする(self):
+        self.assertEqual("Buzz", FizzBuzz.generate(5))
+
+    def test_値が１５ならばFizzBuzzを返すようにする(self):
+        self.assertEqual("FizzBuzz", FizzBuzz.generate(15))
+
+
+if __name__ == "__main__":
+    unittest.main()
+----
+
+*テストおじさん*: テストを実行してみましょう・・・はい、オッケい！？。
+
+[source, bash]
+----
+ $ python replay_main_test.py
+ F..
+ ======================================================================
+ FAIL: test_値が15ならばFizzBuzzを返すようにする (__main__.FizzBuzzTest)
+ ----------------------------------------------------------------------
+ Traceback (most recent call last):
+   File "replay_main_test.py", line 28, in test_値が15ならばFizzBuzzを返すようにする
+     self.assertEqual("FizzBuzz", FizzBuzz.generate(15))
+ AssertionError: 'FizzBuzz' != 'Fizz'
+ - FizzBuzz
+ + Fizz
+
+
+ ----------------------------------------------------------------------
+ Ran 3 tests in 0.000s
+
+ FAILED (failures=1)
+----
+
+image::https://2.bp.blogspot.com/-YrxyfE6OwjY/VPQTvaYi8SI/AAAAAAAAsBM/5ycnFpmMl2U/s800/apron_man2-3surprise.png[width="100"]
+
+*テストおじさん*: おっと、意図した結果と違いますね。デバッガで確認してみましょう。
+
+VSCodeのデバッガを起動してステップ実行で条件分岐を確認するテストおじさん
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0: //<1>
+            value = "Fizz"
+        elif number % 5 == 0:
+            value = "Buzz"
+        elif number % 3 == 0 and number % 5 == 0: //<2>
+            value = "FizzBuzz"
+
+        return value
+----
+
+*テストおじさん*: numberが15の場合は最初の判定で処理を抜けてますね。ここはこうかな
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0 and number % 5 == 0:  //<2>
+            value = "FizzBuzz"
+        elif number % 3 == 0: //<1>
+            value = "Fizz"
+        elif number % 5 == 0:
+            value = "Buzz"
+
+        return value
+----
+
+*テストおじさん*: テストを再実行してみましょう・・・はい、OK。
+
+[source, bash]
+----
+ $ python main_test.py
+ ...
+ ----------------------------------------------------------------------
+ Ran 3 tests in 0.000s
+
+ OK
+----
+
+*テストおじさん*: はい、これでTODOリストの内容を完了することができました。
+
+* [x] 値が３ならばFizzを返すようにする
+* [x] 値が５ならばBuzzを返すようにする
+* [x] 値が１５ならばFizzBuzzを返すようにする
+
+
+仕様を眺めながら
+
+*テストおじさん*: あ、仕様にそれ以外では値を返すというのがあるのでテストに明記しておきましょう
+
+[source, Python]
+----
+    def test_値が１００ならば１００を返すようにする(self):
+        self.assertEqual(100, FizzBuzz.generate(100))
+----
+
+*テスト書いてないとt_wadaさんの前で言った人*: その条件だと・・・
+
+ニヤリと笑うテストおじさん
+
+*テストおじさん*: 実行・・・はい、仕様を書いた人が間違ってましたね。
+
+[source, bash]
+----
+ $ python main_test.py
+ F...
+ ======================================================================
+ FAIL: test_値が100ならば100を返すようにする (__main__.FizzBuzzTest)
+ ----------------------------------------------------------------------
+ Traceback (most recent call last):
+   File "replay_main_test.py", line 31, in test_値が100ならば100を返すようにする
+     self.assertEqual(100, FizzBuzz.generate(100))
+ AssertionError: 100 != 'Buzz'
+
+ ----------------------------------------------------------------------
+ Ran 4 tests in 0.000s
+
+ FAILED (failures=1)
+----
+
+*テストおじさん*: ここはこうで・・・
+
+[source, python]
+----
+    def test_値が１０１ならば１０１を返すようにする(self):
+        self.assertEqual(101, FizzBuzz.generate(101))
+----
+
+*テストおじさん*: こう！
+
+[source, bash]
+----
+  $ python main_test.py
+ ....
+ ----------------------------------------------------------------------
+ Ran 4 tests in 0.000s
+
+ OK
+----
+
+image::https://2.bp.blogspot.com/-uAnQWK08j8Q/WtRzcRFVDFI/AAAAAAABLmc/7AGh1dcJprsh0dCFEfKljxrilj6OdwZ1QCLcBGAs/s800/seikou_syukufuku_man.png[width="200"]
+
+*テスト書きたい人*: ちなみに実務でもテスト書いてますか？
+
+*テストおじさん*: イエス！自社の基幹業務システム(Ruby on Rails)は自分で作ったけど一応自動テストは完備してますよ。
+
+解説しよう！テストおじさんはユーザー企業のぼっち社内プログラマなのだ。
+
+*テスト書きたい人*: テスト駆動を実践してる現場って見たことないんですよね〜
+
+*テストしてない人*: ですよね〜
+
+*テスト書いてないとt_wadaさんの前で言った人*: GitHubに公開されているプロダクトなんかはテストコードついてますけどね。
+
+*テストおじさん*: 正直テストコードを書くのは最初はしんどいけど後になるほど楽になります。
+
+*テスト書きたい人*: ことろで@staticmethodというのは？
+
+*テストおじさん*: スタティックメソッドのアノテーションなんですがスタティックメソッドはインスタンスメソッドとは違って・・・
+
+この後クラスの概念とかいろいろディスカッションする
+
+image::https://1.bp.blogspot.com/-e5OUtIS7-gc/WcB5sUDJ9xI/AAAAAAABG1s/JPB7b7D0MmIQ3JDl8iPW7D-W2NW8ZaZTQCLcBGAs/s800/kaigi_shifuku_brainstorming2.png[width="200"]
+
+*テストおじさん*: ・・・オブジェクトシコウムズカシイネ
+
+==== TODOリスト
+
+*テストおじさん*: さて、残りの仕様を実現するために [red]#TODOリスト# を更新しましょうか
+
+* [x] 値が３ならばFizzを返すようにする
+* [x] 値が５ならばBuzzを返すようにする
+* [x] 値が１５ならばFizzBuzzを返すようにする
+* [ ] 複数回実行されたら結果を返すようにする
+
+*テストおじさん*: これは少し複雑な感じがしますね、まずはテストコードを通して振る舞いを考えてましょう。
+
+[source, python]
+----
+    def test_回数を５回実行すると配列を返すようにする(self):
+        self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
+----
+
+*テストおじさん*: 引数に回数を取り戻り値に配列を返すインターフェイスを設計しました。
+
+*テストおじさん*: おわかりいただけだろうか・・・
+
+*テストおじさん*: テストコードと言いながら設計をしているのです、そうテストではなく設計を！
+
+[quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
+____
+皮肉なことに、TDDはテスト技法ではない（Cunninghamの公案)。TDDは分析技法であり、設計技法であり、実際には開発のすべてのアクティビティを構造化する技法なのだ。
+____
+
+*テストおじさん以外のメンバー*: https://dic.nicovideo.jp/a/%E3%81%8A%E3%80%81%E3%81%8A%E3%81%86%E3%83%BB%E3%83%BB%E3%83%BB[お、おう・・・]
+
+*テストおじさん*: ・・・えーと、実装に移りますね。ここはセオリーどおり仮実装から。
+
+[source, Python]
+----
+import unittest
+
+
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0 and number % 5 == 0:
+            value = "FizzBuzz"
+        elif number % 3 == 0:
+            value = "Fizz"
+        elif number % 5 == 0:
+            value = "Buzz"
+
+        return value
+
+    @staticmethod
+    def iterate(count):
+        return [1, 2, "Fizz", 4, "Buzz"]
+
+
+class FizzBuzzTest(unittest.TestCase):
+    def test_値が３ならばFizzを返すようにする(self):
+        self.assertEqual("Fizz", FizzBuzz.generate(3))
+
+    def test_値が５ならばBuzzを返すようにする(self):
+        self.assertEqual("Buzz", FizzBuzz.generate(5))
+
+    def test_値が１５ならばFizzBuzzを返すようにする(self):
+        self.assertEqual("FizzBuzz", FizzBuzz.generate(15))
+
+    def test_値が１０１ならば１０１を返すようにする(self):
+        self.assertEqual(101, FizzBuzz.generate(101))
+
+    def test_回数を５回実行すると配列を返すようにする(self):
+        self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
+
+
+if __name__ == "__main__":
+    unittest.main()
+----
+
+*テストおじさん*: からの〜
+
+[source, bash]
+----
+ $ python main_test.py
+ .....
+ ----------------------------------------------------------------------
+ Ran 5 tests in 0.000s
+
+ OK
+----
+
+*テストおじさん*: 繰り返しの実行処理は・・・こんな感じかな
+
+[source, Python]
+----
+    @staticmethod
+    def iterate(count):
+        # 配列を宣言する
+        # 指定された回数だけ繰り返し実行する
+        #   配列に実行結果をセットする
+        # 配列を返す
+        return [1, 2, "Fizz", 4, "Buzz"]
+----
+
+*テストおじさん*: Pythonの繰り返し構文はfor in一択だから...(しれっとrangeを使う)
+
+[source, Python]
+----
+    @staticmethod
+    def iterate(count):
+        # 配列を宣言する
+        array = []
+        # 指定された回数だけ繰り返し実行する
+        for n in range(count):
+        #   配列に実行結果をセットする
+            array.append(n)
+        # 配列を返す
+        return array
+----
+
+*テストおじさん*: テストして・・・よし、数字が連続して出力されてるな。
+
+[source, Python]
+----
+$ python main_test.py
+....F
+======================================================================
+FAIL: test_回数を5回実行すると配列を返すようにする (__main__.FizzBuzzTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "replay_main_test.py", line 44, in test_回数を5回実行すると配列を返すようにする
+    self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
+AssertionError: Lists differ: [1, 2, 'Fizz', 4, 'Buzz'] != [0, 1, 2, 3, 4]
+
+First differing element 0:
+1
+0
+
+- [1, 2, 'Fizz', 4, 'Buzz']
++ [0, 1, 2, 3, 4]
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (failures=1)
+----
+
+[source, Python]
+----
+    @staticmethod
+    def iterate(count):
+        # 配列を宣言する
+        array = []
+        # 指定された回数だけ繰り返し実行する
+        for n in range(count):
+        #   配列に実行結果をセットする
+            array.append(FizzBuzz.generate(n))
+        # 配列を返す
+        return array
+----
+
+*テストおじさん*: これでいいかな・・・ありゃ。
+
+[source, Python]
+----
+$ python main_test.py
+....F
+======================================================================
+FAIL: test_回数を5回実行すると配列を返すようにする (__main__.FizzBuzzTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "replay_main_test.py", line 44, in test_回数を5回実行すると配列を返すようにする
+    self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
+AssertionError: Lists differ: [1, 2, 'Fizz', 4, 'Buzz'] != ['FizzBuzz', 1, 2, 'Fizz', 4]
+
+First differing element 0:
+1
+'FizzBuzz'
+
+- [1, 2, 'Fizz', 4, 'Buzz']
++ ['FizzBuzz', 1, 2, 'Fizz', 4]
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: あー、generateの引数のnumberが０から始まってるからね
+
+[source, Python]
+----
+    @staticmethod
+    def iterate(count):
+        # 配列を宣言する
+        array = []
+        # 指定された回数だけ繰り返し実行する
+        for n in range(count):
+        #   配列に実行結果をセットする
+            array.append(FizzBuzz.generate(n + 1))
+        # 配列を返す
+        return array
+----
+
+*テストおじさん*: これでオッケー
+
+[source, bash]
+----
+ $ python main_test.py
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK
+----
+
+*テストおじさん*: カバレッジを満たすテストケースを追加してと。
+
+[source, Python]
+----
+    def test_回数を１５回実行すると配列を返す(self):
+        expect = [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"]
+        self.assertEqual(expect, FizzBuzz.iterate(15))
+----
+
+*テストおじさん*: これでオッケー
+
+[source, bash]
+----
+ $ python main_test.py
+ ......
+ ----------------------------------------------------------------------
+ Ran 6 tests in 0.000s
+
+ OK
+----
+
+==== アジャイルソフトウェア開発
+
+*テストおじさん*: はい、これで仕様を満たすプログラムができました。
+
+* [x] 値が３ならばFizzを返すようにする
+* [x] 値が５ならばBuzzを返すようにする
+* [x] 値が１５ならばFizzBuzzを返すようにする
+* [x] 複数回実行されたら結果を返すようにする
+
+*テストしてない人*: 設計ドキュメントを書いて開発・テストという流れとはずいぶん違いますね。
+
+*テストおじさん*: そうですね、いわゆるウォーターフォール型のアプローチだと最初にExcelとかでドキュメント書きますよね。
+
+*テストおじさん*: 昔 https://www.sjve.org/ronbun/4045[IPO] 書きましたよ。
+
+解説しよう！テストおじさんはシステムエンジニアをやっていたのだ
+
+*テストおじさん*: ドキュメントがソフトウェアの変更と動機が取れていれば問題ないんですけどねー
+
+*テストおじさん*: テストコードを見てください
+
+[source, Python]
+----
+class FizzBuzzTest(unittest.TestCase):
+    def test_値が３ならばFizzを返すようにする(self):
+        self.assertEqual("Fizz", FizzBuzz.generate(3))
+
+    def test_値が５ならばBuzzを返すようにする(self):
+        self.assertEqual("Buzz", FizzBuzz.generate(5))
+
+    def test_値が１５ならばFizzBuzzを返すようにする(self):
+        self.assertEqual("FizzBuzz", FizzBuzz.generate(15))
+
+    def test_値が１０１ならば１０１を返すようにする(self):
+        self.assertEqual(101, FizzBuzz.generate(101))
+
+    def test_回数を５回実行すると配列を返すようにする(self):
+        self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
+
+    def test_回数を１０回実行すると配列を返すようにする(self):
+        self.assertEqual([1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz"], FizzBuzz.iterate(10))
+----
+
+*テストおじさん*: これは仕様だから、こうしたほうがいいですね
+
+[source, Python]
+----
+class FizzBuzzTest(unittest.TestCase):
+    def test_値が３ならばFizzを返す(self):
+        self.assertEqual("Fizz", FizzBuzz.generate(3))
+
+    def test_値が５ならばBuzzを返す(self):
+        self.assertEqual("Buzz", FizzBuzz.generate(5))
+
+    def test_値が１５ならばFizzBuzzを返す(self):
+        self.assertEqual("FizzBuzz", FizzBuzz.generate(15))
+
+    def test_値が１０１ならば１０１を返す(self):
+        self.assertEqual(101, FizzBuzz.generate(101))
+
+    def test_回数を５回実行すると配列を返す(self):
+        self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
+
+    def test_回数を１０回実行すると配列を返す(self):
+        self.assertEqual([1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz"], FizzBuzz.iterate(10))
+----
+
+*テストおじさん*: vオプションをつけてテストを実行したら
+
+[source, Python]
+----
+ $ python main_test.py -v
+test_値が101ならば101を返す (__main__.FizzBuzzTest) ... ok
+test_値が15ならばFizzBuzzを返す (__main__.FizzBuzzTest) ... ok
+test_値が3ならばFizzを返す (__main__.FizzBuzzTest) ... ok
+test_値が5ならばBuzzを返す (__main__.FizzBuzzTest) ... ok
+test_回数を10回実行すると配列を返す (__main__.FizzBuzzTest) ... ok
+test_回数を5回実行すると配列を返す (__main__.FizzBuzzTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.000s
+
+OK
+----
+
+*テストおじさん*: これって実行できる設計ドキュメントみたいなもんですね。
+
+*テストおじさん*: 従来のウォーターフォール型との考え方の違いは [red]#アジャイルソフトウェア開発宣言# という価値から来ているんですけどね。
+
+[quote, 'http://agilemanifesto.org/iso/ja/manifesto.html[アジャイルソフトウェア開発宣言]']
+____
+
+私たちは、ソフトウェア開発の実践
+
+あるいは実践を手助けをする活動を通じて、
+
+よりよい開発方法を見つけだそうとしている。
+
+この活動を通して、私たちは以下の価値に至った。
+
+プロセスやツールよりも個人と対話を、
+
+包括的なドキュメントよりも動くソフトウェアを、
+
+契約交渉よりも顧客との協調を、
+
+計画に従うことよりも変化への対応を、
+
+価値とする。すなわち、左記のことがらに価値があることを
+
+認めながらも、私たちは右記のことがらにより価値をおく。
+____
+
+*テストおじさん*: 最も有名なアジャイルメソッド（手法）のエクストリームプログラミング（XP)の主要プラクティスの一つが [red]#テストファーストプログラミング# なんですよ。
+
+[quote, 'https://amzn.to/2Qvx5ms[エクストリームプログラミング]']
+____
+テストファーストプログラミング(Tes-First Programming)
+
+コードを変更する前に、失敗する自動テストを書くこと。
+____
+
+*テストおじさん*: 個人的には [red]#インクリメンタルな設計# も含まれているかな。
+
+[quote, 'https://amzn.to/2Qvx5ms[エクストリームプログラミング]']
+____
+インクリメンタルな設計(Incremental Design)
+
+システムの設計に毎日手を入れること。システムの設計は、その日のシステムのニーズにうまく合致させること。最適だと思われる設計が理解できなくなってきたら、少しずつだが着実に、自分の理解できる設計に戻していくこと。
+____
+
+この後、開発プロセスに関するディスカッションを行う
+
+image::https://1.bp.blogspot.com/-e5OUtIS7-gc/WcB5sUDJ9xI/AAAAAAABG1s/JPB7b7D0MmIQ3JDl8iPW7D-W2NW8ZaZTQCLcBGAs/s800/kaigi_shifuku_brainstorming2.png[width="200"]
+
+=== リファクタリングから始めるテスト駆動開発
+
+*テストおじさん*: 仕様を満たすコードを実装してテストもパスするようになりましたが・・・
+
+*テストおじさん*: テストがパスしたら終わりではありません！
+
+*テスト書いてないとt_wadaさんの前で言った人*: ？
+
+*テスト書きたい人*: ？
+
+*テストしてない人*: ？
+
+*テストおじさん*: [red]#リファクタリング# の始まりです。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+リファクタリング（名詞）：外部から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。
+____
+
+==== コードの不吉な臭い
+
+*テストおじさん*: まずは [red]#コードの不吉な臭い# を嗅ぎ取ります。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+コードの不吉な臭い
+
+* 重複したコード
+* 長過ぎるコード
+* 巨大なクラス
+* 長すぎるパラメータリスト
+* 変更の偏り
+* 変更の分散
+* 特性の横恋慕
+* データの群れ
+* 基本データ型への執着
+* スイッチ文
+* パラレル継承
+* 怠け者クラス
+* 疑わしき一般化
+* 一時的属性
+* メッセージの連鎖
+* 仲介人
+* 不適切な関係
+* クラスのインタフェース不一致
+* 未成熟なクラスライブラリ
+* データクラス
+* 相続拒否
+* コメント
+____
+
+*テスト書いてないとt_wadaさんの前で言った人*: 臭い？
+
+*テストおじさん*: うーむ、なんというかコードを眺めていてこれはアレだなとかそんな感覚ですかね。
+
+*テストおじさん*: 実際にコードを見ましょう。
+
+==== コメント
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0 and number % 5 == 0:
+            value = "FizzBuzz"
+        elif number % 3 == 0:
+            value = "Fizz"
+        elif number % 5 == 0:
+            value = "Buzz"
+
+        return value
+
+    @staticmethod
+    def iterate(count):
+        # 配列を宣言する
+        array = []
+        # 指定された回数だけ繰り返し実行する
+        for n in range(count):
+            #   配列に実行結果をセットする
+            array.append(FizzBuzz.generate(n + 1))
+        # 配列を返す
+        return array
+----
+
+*テストおじさん*: 自分が最初に臭いを感じたのが [red]#コメント# ですね。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+コメント
+
+コメントを書いてはいけないなどと言うつもりはまったくありません。コメントは決して悪い臭いではなく、むしろいい香りなのです。ここでコメントについて言及しているのは、コメントが消臭剤として使われることがあるからです。コメントが非常に丁寧に書かれていたのは、実にわかりにくいコードを補うためだったということがよくあるのです。
+____
+
+*テストおじさん*: この場合は繰り返し処理を導出するための下書きコメントが冗長な消臭香をプンプン出してる感じですかね。
+
+*テストおじさん*: こういうのを放置しておくと・・・
+
+[source, Python]
+----
+    @staticmethod
+    def iterate(count):
+        # 配列を宣言する
+        array = []
+        # 指定された回数だけ繰り返し実行する
+        for n in range(count):
+            #   配列に実行結果をセットする
+            array.append(FizzBuzz.generate(n + 1))
+        # 配列を返す //<1>
+        return str(array) //<2>
+----
+
+*テストおじさん*: コメントは配列を返すとあるのに実際は文字列を返すというコメントバグの原因になります。
+
+*テストおじさん*: 冗長なコメントは削除しましょう。
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0 and number % 5 == 0:
+            value = "FizzBuzz"
+        elif number % 3 == 0:
+            value = "Fizz"
+        elif number % 5 == 0:
+            value = "Buzz"
+
+        return value
+
+    @staticmethod
+    def iterate(count):
+        array = []
+
+        for n in range(count):
+            array.append(FizzBuzz.generate(n + 1))
+
+        return array
+----
+
+*テストおじさん*: テストを実行して変更がプログラムを壊してないか確認します。
+
+[source, bash]
+----
+  $ python replay_main_test.py
+ ......
+ ----------------------------------------------------------------------
+ Ran 6 tests in 0.000s
+
+ OK
+----
+
+*テストおじさん*: はい、冗長なコメント削除リファクタリング完了。
+
+==== 長すぎるメソッド
+
+*テストおじさん*: 変更後のコードを眺めながら [red]#コードの不吉な臭い# がする部分を探します。
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0 and number % 5 == 0:
+            value = "FizzBuzz"
+        elif number % 3 == 0:
+            value = "Fizz"
+        elif number % 5 == 0:
+            value = "Buzz"
+
+        return value
+----
+
+*テストおじさん*: 次に自分が感じたのが [red]#長すぎるメソッド# ですね。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+長すぎるメソッド
+
+オブジェクト指向プログラムで、長く充実した人生を送るのは、常に、短いメソッドを持ったオブジェクトです。
+____
+
+*テストおじさん*: if-else文は仕様変更とともに条件分岐が複雑になっていく傾向があります。
+
+*テストおじさん*: 今回は [red]#ガード節による入れ子条件記述の置き換え# からガード節の導入を実施しましょう。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+ガード節による入れ子条件記述の置き換え
+
+メソッド内に正常ルートが不明確な条件つき振る舞いがある。
+
+特殊ケースすべてに対してガード節を使う。
+____
+
+プロダクトコードを変更するテストおじさん
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        value = number
+
+        if number % 3 == 0 and number % 5 == 0:
+            return "FizzBuzz"
+        if number % 3 == 0:
+            return "Fizz"
+        if number % 5 == 0:
+            return "Buzz"
+
+        return value
+----
+
+*テストおじさん*: テストを実行して変更がプログラムを壊してないか確認します。
+
+[source, bash]
+----
+  $ python replay_main_test.py
+ ......
+ ----------------------------------------------------------------------
+ Ran 6 tests in 0.000s
+
+ OK
+----
+
+*テストおじさん*: あー、一時変数valueが冗長ですね削除しましょう。
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        if number % 3 == 0 and number % 5 == 0:
+            return "FizzBuzz"
+        if number % 3 == 0:
+            return "Fizz"
+        if number % 5 == 0:
+            return "Buzz"
+        return number
+----
+
+*テストおじさん*: 確認、確認
+
+[source, bash]
+----
+  $ python replay_main_test.py
+ ......
+ ----------------------------------------------------------------------
+ Ran 6 tests in 0.000s
+
+ OK
+----
+
+*テストおじさん*: ガード節なんですがPythonは言語仕様上インデントしないといけないですが言語によっては１行で書けます。
+
+*テストおじさん*: 例えばRuby
+
+[source, Ruby]
+----
+class FizzBuzz
+  def self.generate(number)
+    return 'FizzBuzz' if number % 3 == 0 and number % 5 == 0
+    return 'Fizz' if number % 3 == 0
+    return 'Buzz' if number % 5 == 0
+    return number
+  end
+----
+
+*テストおじさん*: 次は条件内容に注意を向けてみましょう。
+
+*テストおじさん*: ここでは [red]#条件記述の分解# を適用していましょう。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+条件記述の分解
+
+複雑な条件(if-then-els)がある。
+
+その条件記述部とthen部およびelse部から、メソッドを抽出する。
+____
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        if FizzBuzz.can_divide_three_and_five(number):
+            return "FizzBuzz"
+        if number % 3 == 0:
+            return "Fizz"
+        if number % 5 == 0:
+            return "Buzz"
+        return number
+
+    @staticmethod
+    def can_divide_three_and_five(number):
+        return number % 3 == 0 and number % 5 == 0
+----
+
+*テストおじさん*: 壊れてませんよね。
+
+[source, bash]
+----
+  $ python replay_main_test.py
+ ......
+ ----------------------------------------------------------------------
+ Ran 6 tests in 0.000s
+
+ OK
+----
+
+*テスト書いてないとt_wadaさんの前で言った人*: ここは割り切れるなのでcan be dividedですね。
+
+*テストおじさん*: 確かに表現が的確でないですね。
+
+解説しよう！テスト書いてないとt_wadaさんの前で言った人は教育関係のお仕事に従事されているのだ。
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        if FizzBuzz.can_bd_divided_three_and_five(number):
+            return "FizzBuzz"
+        if number % 3 == 0:
+            return "Fizz"
+        if number % 5 == 0:
+            return "Buzz"
+        return number
+
+    @staticmethod
+    def can_be_divided_three_and_five(number):
+        return number % 3 == 0 and number % 5 == 0
+----
+
+*テストおじさん*: テスト、テスト
+
+[source, bash]
+----
+  $ python replay_main_test.py
+ ......
+ ----------------------------------------------------------------------
+ Ran 6 tests in 0.000s
+
+ OK
+----
+
+*テストおじさん*: 残りの条件も変更しましょう。
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        if FizzBuzz.can_be_divided_three_and_five(number):
+            return "FizzBuzz"
+        if FizzBuzz.can_be_divided_three(number):
+            return "Fizz"
+        if FizzBuzz.can_be_divided_five(number):
+            return "Buzz"
+        return number
+
+    @staticmethod
+    def can_be_divided_three_and_five(number):
+        return number % 3 == 0 and number % 5 == 0
+
+    @staticmethod
+    def can_be_divided_three(number):
+        number % 3 == 0
+
+    @staticmethod
+    def can_be_divided_five(number):
+        number % 5 == 0
+----
+
+*テストおじさん*: 今回は少し横着をしてテストなしに２つコードを追加しました。ではまとめてテスト・・・ファッ！？
+
+[source, bash]
+----
+ $ python replay_main_test.py
+..FFFF
+======================================================================
+FAIL: test_値が3ならばFizzを返す (__main__.FizzBuzzTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "replay_main_test.py", line 40, in test_値が3ならばFizzを返す
+    self.assertEqual("Fizz", FizzBuzz.generate(3))
+AssertionError: 'Fizz' != 3
+
+======================================================================
+FAIL: test_値が5ならばBuzzを返す (__main__.FizzBuzzTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "replay_main_test.py", line 43, in test_値が5ならばBuzzを返す
+    self.assertEqual("Buzz", FizzBuzz.generate(5))
+AssertionError: 'Buzz' != 5
+
+======================================================================
+FAIL: test_回数を10回実行すると配列を返す (__main__.FizzBuzzTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "replay_main_test.py", line 55, in test_回数を10回実行すると配列を返す
+    self.assertEqual([1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz"], FizzBuzz.iterate(10))
+AssertionError: Lists differ: [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz'] != [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+First differing element 2:
+'Fizz'
+3
+
+- [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz']
++ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+======================================================================
+FAIL: test_回数を5回実行すると配列を返す (__main__.FizzBuzzTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "replay_main_test.py", line 52, in test_回数を5回実行すると配列を返す
+    self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
+AssertionError: Lists differ: [1, 2, 'Fizz', 4, 'Buzz'] != [1, 2, 3, 4, 5]
+
+First differing element 2:
+'Fizz'
+3
+
+- [1, 2, 'Fizz', 4, 'Buzz']
++ [1, 2, 3, 4, 5]
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (failures=4)
+----
+
+*テスト書いてないとt_wadaさんの前で言った人*: returnが書かれてませんね。
+
+*テストおじさん*: こいつは失礼しました。とまあ、しょぼいミスもテストが教えてくれるわけですね。
+
+そしてコードを修正してテストを再実行するテストおじさん
+
+[source, Python]
+----
+class FizzBuzz:
+
+    @staticmethod
+    def generate(number):
+        if FizzBuzz.can_be_divided_three_and_five(number):
+            return "FizzBuzz"
+        if FizzBuzz.can_be_divided_three(number):
+            return "Fizz"
+        if FizzBuzz.can_be_divided_five(number):
+            return "Buzz"
+        return number
+
+    @staticmethod
+    def can_be_divided_three_and_five(number):
+        return number % 3 == 0 and number % 5 == 0
+
+    @staticmethod
+    def can_be_divided_three(number):
+        return number % 3 == 0
+
+    @staticmethod
+    def can_be_divided_five(number):
+        return number % 5 == 0
+----
+
+[source, bash]
+----
+  $ python replay_main_test.py
+ ......
+ ----------------------------------------------------------------------
+ Ran 6 tests in 0.000s
+
+ OK
+----
+
+*テストおじさん*: オッケー
+
+==== ３度目の法則
+
+*テストしてない人*: リファクタリングをするタイミングはあるのですか？
+
+*テストおじさん*: [red]#３度目の法則# というのがありますね。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+３度目の法則
+
+最初は、単純に作業を行います。２度目に以前と似たようなことをしていると気づいた場合は、重複や無駄を意識しつつも、とにかく作業を続けてかまいません。
+そして３度目に同じようなことをしていると気づいたならば、そこでリファクタリングをするのです。
+____
+
+*テストおじさん*: あとは
+
+* 機能追加時にリファクタリングを行う
+* バグフィックスの時にリファクタリングを行う
+* コードレビューの時にリファクタリングを行う
+
+*テストおじさん*: あたりですかね。
+
+==== 名前重要
+
+*テスト書きたい人*: 変数名やメソッド名が長くてもいいのですか？
+
+*テストおじさん*: [red]#意図が明確な名前にする# ために [red]#名前に情報を詰め込む# 結果長い名前になるのは問題ないと思いますよ。
+
+[quote, 'https://amzn.to/2Qu4QEK[Clean Code アジャイルソフトウェア達人の技]']
+____
+意図が明確な名前にする
+
+その意図が明確な名前を付ける。いおうだけなら簡単なことです。ここで、しっかりと胸に刻みつけておいて欲しいのは我々が名前付けを大変重要なことだと思っているということです。
+よい名前を付けるのには時間がかかりますが、それによって、より多くの時間を節約できます。それ故、名前を付けるときには注意深く、そして後でよりよいものが思い浮かんだら、変更してください。
+そうすることで、あなたのコードを読む人（あなた自身を含めて）を幸福にすることができます。
+
+変数、関数、クラス名は、次の大命題に応える必要があります。なぜそれが存在するのか、何をするのか、どのように使用するのか。
+もしも名前に解説が必要なら、その名前は、意図が明確とはいえません。
+____
+
+[quote, 'https://amzn.to/2QB39FM[リーダブルコード ―より良いコードを書くためのシンプルで実践的なテクニック (Theory in practice)]']
+____
+名前に情報を詰め込む
+
+名前をつけるときには、それが変数であっても、関数であっても、クラスであっても、同じ原則を当てはめることができる。
+名前は短いコメントだと思えばいい。短くてもいい名前をつければ、それだけ多くの情報を伝えることができる。
+____
+
+*テストおじさん*: ちなみにRubyのコードですが
+
+[source, Ruby]
+----
+class FizzBuzz
+  def self.generate(number)
+    return 'FizzBuzz' if can_be_divided_by_three_and_five(number)
+    return 'Fizz' if can_be_divided_by_three(number)
+    return 'Buzz' if can_be_divided_by_five(number)
+    return number
+  end
+----
+
+*テストおじさん*: FizzBuzz generate FizzBuzz if number can be divided by three and five. (FizzBuzzはもし３と５で割り切れるならFizzBuzzを返す)とそのまま読めませんか？
+
+*テストおじさん*: 今日のPythonコードも日本語にするとこんな感じ
+
+[source, Python]
+----
+class FizzBuzz():
+  @staticmethod
+  def generate(数値):
+    if FizzBuzz.三と五で割り切れる(数値):
+      return "FizzBuzz"
+    elif FizzBuzz.三で割れる(数値):
+      return "Fizz"
+    elif FizzBuzz.五で割れる(数値):
+      return "Buzz"
+    return 数値
+
+  @staticmethod
+  def 三と五で割り切れる(数値):
+    return 数値 % 3 == 0 and 数値 % 5 == 0
+
+  @staticmethod
+  def 三で割れる(数値):
+    return 数値 % 3 == 0
+
+  @staticmethod
+  def 五で割れる(数値):
+    return 数値 % 5 == 0
+----
+
+*テストおじさん*: 非プログラマでも日本語が読めればなんとなくやってることわかるとも思うんですよね。
+
+*テストおじさん*: 個人的に非プログラマがコード見てウッってなるのはアルファベットや数字の羅列に対するアレルギー反応みたいなもんじゃないかと思ってるんですけどね。
+
+*テストおじさん*: まあ、プログラマが見てもウッってなるコードはあるわけですが・・・
+
+*テスト書いてないとt_wadaさんの前で言った人*: 名前大事！
+
+*テストおじさん*: そうっすね、Matzも言ってますし。
+
+https://プログラマが知るべき97のこと.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81/[名前重要]
+
+*テスト書きたい人*: 表記のルールとかスタイルってあるんですか？
+
+*テストおじさん*: 代表的なスタイルとしてPascal形式、Camel形式あとハンガリアン記法なんてのもあります。
+
+* https://wa3.i-3-i.info/word13955.html[パスカルケース]
+* https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%A1%E3%83%AB%E3%82%B1%E3%83%BC%E3%82%B9[キャメルケース]
+* https://ja.wikipedia.org/wiki/%E3%83%8F%E3%83%B3%E3%82%AC%E3%83%AA%E3%82%A2%E3%83%B3%E8%A8%98%E6%B3%95[ハンガリアン記法]
+
+*テストおじさん*: Pythonにはスタイルガイドがあるのでそれに従いましょう。
+
+https://pep8-ja.readthedocs.io/ja/latest/#id23[Python コードのスタイルガイド]
+
+== ふりかえり
+
+image::https://1.bp.blogspot.com/-e5OUtIS7-gc/WcB5sUDJ9xI/AAAAAAABG1s/JPB7b7D0MmIQ3JDl8iPW7D-W2NW8ZaZTQCLcBGAs/s800/kaigi_shifuku_brainstorming2.png[width="200"]
+
+*テストおじさん*: さて、そろそろ時間となりますので本日のふりかえりに入りましょう。
+
+*テストおじさん*: まず、今日やったことですがFizzBuzzをお題に [red]#型# の実演をして以下のコードを作成しました。
+
+[source, Python]
+----
+include::../../../dev/20181109/replay_main_test.py[]
+----
+
+[quote, 'https://amzn.to/2QxHP3H[Clean Coder プロフェッショナルプログラマへの道]']
+____
+型
+
+プログラミングの型というのは、プログラミングの問題を解くためにキーボードやマウスの動きの練習である。実際に問題を解くわけではない。解き方はすでにわかっている。問題を解きながら体の動きや意思決定の練習をするのである。
+
+ここでも完全に限りなく近づくことが目標となる。脳や指に動きや反応を覚えさせるために、何度も練習するのだ。練習するうちに、自分の動きや解決策が少しづつ改善・効率化されることに気づくだろう。
+
+型を使った練習は、ホットキーや操作のイデオムの学習に適している。TDDやCI（継続的インテグレーション）などの規律の学習にも優れた方法である。そして、最も重要なのは、よくある問題と解決策の組み合わせを潜在意識に植えつけることで、現実のプログラミングの問題解決方法がわかるようになるということだ。
+
+武術家のようにプログラマは複数の型を知り、定期的に練習することで、記憶に残るようになる。型の多くは、http://katas.softwarecraftsmanship.org にある。
+____
+
+==== Keep
+*テストおじさん*: テスト駆動を進めるにあたってまず、 [red]#TODOリスト# を作成します。
+
+*テストおじさん*: [red]#TODOリスト# を作成したら次は、[red]#テスファースト# [red]#アサートファースト# を心がけてください。
+
+*テストおじさん*: 次に実装の流れですが、 何を書くべきかわかっているときは、[red]#明白な実装# を行う。わからないときには [red]#仮実装# を行う。まだ正しい実装が見えてこないなら、 [red]#三角測量# を行います。
+
+*テストおじさん*: そして、常に [red]#ベイビーステップ# で進めて行くことに留意しましょう。
+
+[quote, 'https://amzn.to/2Qvx5ms[エクストリームプログラミング]']
+____
+ベイビーステップ（Baby Steps)
+
+大きな変更は、大きなステップでやりたくなるものである。距離が長く、時間を書けずにそこまで行くとなれば、そうするしかないように思える。だが、重大な変更を一気に行うのは危険だ。変更を頼まれるのは人間である。変更は不安が伴う。不安を伴えば、人間は変更をすばやくやろうとする。
+____
+
+*テストおじさん*: 最後に、テスト駆動開発はテストではないということです、 https://dic.nicovideo.jp/a/%E5%A4%A7%E4%BA%8B%E3%81%AA%E3%81%93%E3%81%A8%E3%81%AA%E3%81%AE%E3%81%A7%E4%BA%8C%E5%9B%9E%E8%A8%80%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F[大事なことなので二回言いました]。
+
+[quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
+____
+皮肉なことに、TDDはテスト技法ではない（Cunninghamの公案)。TDDは分析技法であり、設計技法であり、実際には開発のすべてのアクティビティを構造化する技法なのだ。
+____
+
+==== Problem
+*テストおじさん*: 今回のセッションの問題点ですが・・・
+
+*テスト書いてないとt_wadaさんの前で言った人*: スタティックメソッドに関する説明をするとインスタンスやクラスの概念の説明にまで展開してしまいましたね。
+
+*テストおじさん*: オブジェクト指向に関することは今回の主要な関心事ではなかったし説明するなら構成を考えないといけませんよね。
+
+*テストおじさん*: あと、今回は時間的に実演だけになってしまいましたが参加メンバーにも手を動かしてもらってわかるからできる状態を体感してほしいですね。
+
+*テスト書いてないとt_wadaさんの前で言った人*: 一方がテストを書いてもう一方が実装するみたいな？
+
+*テストおじさん*: そうですね、いわゆる [red]#技# の実演です。
+
+[quote, 'https://amzn.to/2QxHP3H[Clean Coder プロフェッショナルプログラマへの道]']
+____
+技
+
+プログラマもこれと同じ練習ができる。 http://wiki.c2.com/?PairProgrammingPingPongPattern[ピンポンゲーム] を使うのだ。まず、２人で型または簡単な問題を選ぶ。次に、１人がユニットテストを書き、もう１人がテストを成功させる。そして、役割を交代する。
+____
+
+
+==== Try
+*テストおじさん*: 今回のセッションの問題点を踏まえて・・・
+
+*テスト書いてないとt_wadaさんの前で言った人*: クラスベースの実装ではなく関数から実装するアプローチなら前提となる概念理解の負担が減りそうですね。
+
+*テストおじさん*: それな！ 次回は関数ベースの手続き型からテスト駆動開発で進めてみましょうか。
+
+*テストおじさん*: あと、[red]#技# の実演もしたいですね。
+
+*テストおじさん*: そろそろ時間となりましたので本日のセッションを終了したいと思います。
+
+*テストおじさん*: 皆さんお疲れ様でした。
+
+*テストおじさん以外のメンバー*: ありがとうございました。
+
+image::https://4.bp.blogspot.com/-PSd2xMIqM5M/VJ6Xcu17JhI/AAAAAAAAqLE/wSlWHEFvLIg/s800/hakusyu.png[width="200"]
+
+== 参照
+
+=== 参考図書
+
+++++
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217884&linkId=568f25b974af5645e862928a12c354e1&bc1=ffffff&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217620&linkId=59f5959cf4575e61b0eeb1afc17b1715&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=427405019X&linkId=08e705a5969e20f5129b4d3cefbcdb15&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4873115655&linkId=e21564361eb1f332f0f6162e093e32aa&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4048930591&linkId=c8b0dd9694e9fa1531b54c59a9ba89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4048930648&linkId=3961311f77f1935642f73abe19685897&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+++++

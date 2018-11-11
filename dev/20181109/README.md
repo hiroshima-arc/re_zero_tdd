@@ -1,4 +1,4 @@
-# 20181109 TDD大地に立つ
+# 20181109
 ## 概要
 [FizzBuzz](http://www.hiroshima-arc.org/re_zero_tdd/fizz_buzz.html)をお題にテスト駆動開発のモブプログラミングを実施
 
