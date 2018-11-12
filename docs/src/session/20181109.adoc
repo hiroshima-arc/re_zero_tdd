@@ -777,7 +777,7 @@ OK
 
 [source, Python]
 ----
-    def test_回数を１５回実行すると配列を返す(self):
+    def test_回数を１５回実行すると配列を返すようにする(self):
         expect = [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"]
         self.assertEqual(expect, FizzBuzz.iterate(15))
 ----
@@ -833,8 +833,9 @@ class FizzBuzzTest(unittest.TestCase):
     def test_回数を５回実行すると配列を返すようにする(self):
         self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
 
-    def test_回数を１０回実行すると配列を返すようにする(self):
-        self.assertEqual([1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz"], FizzBuzz.iterate(10))
+    def test_回数を１５回実行すると配列を返すようにする(self):
+        expect = [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"]
+        self.assertEqual(expect, FizzBuzz.iterate(15))
 ----
 
 *テストおじさん*: これは仕様だから、こうしたほうがいいですね。
@@ -859,6 +860,10 @@ class FizzBuzzTest(unittest.TestCase):
 
     def test_回数を１０回実行すると配列を返す(self):
         self.assertEqual([1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz"], FizzBuzz.iterate(10))
+
+    def test_回数を１５回実行すると配列を返す(self):
+        expect = [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"]
+        self.assertEqual(expect, FizzBuzz.iterate(15))
 ----
 
 *テストおじさん*: vオプションをつけてテストを実行したら。
@@ -870,7 +875,7 @@ test_値が101ならば101を返す (__main__.FizzBuzzTest) ... ok
 test_値が15ならばFizzBuzzを返す (__main__.FizzBuzzTest) ... ok
 test_値が3ならばFizzを返す (__main__.FizzBuzzTest) ... ok
 test_値が5ならばBuzzを返す (__main__.FizzBuzzTest) ... ok
-test_回数を10回実行すると配列を返す (__main__.FizzBuzzTest) ... ok
+test_回数を15回実行すると配列を返す (__main__.FizzBuzzTest) ... ok
 test_回数を5回実行すると配列を返す (__main__.FizzBuzzTest) ... ok
 
 ----------------------------------------------------------------------
@@ -1392,7 +1397,7 @@ FAILED (failures=4)
 
 *テストおじさん*: とまあ、しょぼいミスもテストが教えてくれるわけですね。
 
-そしてコードを修正してテストを再実行するテストおじさん
+そしてコードを修正してテストを再実行するテストおじさん。
 
 [source, Python]
 ----
