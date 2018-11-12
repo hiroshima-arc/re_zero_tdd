@@ -85,7 +85,7 @@ F
 FAIL: test_値が3ならばFizzを返すようにする (__main__.FizzBuzzTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "replay_main_test.py", line 7, in test_値が3ならばFizzを返すようにする
+  File "main_test.py", line 7, in test_値が3ならばFizzを返すようにする
     self.assertEqual("Fizz", 3)
 AssertionError: 'Fizz' != 3
 
@@ -284,7 +284,7 @@ if __name__ == "__main__":
 FAIL: test_値が5ならばBuzzを返すようにする (__main__.FizzBuzzTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "replay_main_test.py", line 21, in test_値が5ならばBuzzを返すようにする
+  File "main_test.py", line 21, in test_値が5ならばBuzzを返すようにする
     self.assertEqual("Buzz", FizzBuzz.generate(5))
 AssertionError: 'Buzz' != 5
 
@@ -394,13 +394,13 @@ if __name__ == "__main__":
 
 [source, bash]
 ----
- $ python replay_main_test.py
+ $ python main_test.py
  F..
  ======================================================================
  FAIL: test_値が15ならばFizzBuzzを返すようにする (__main__.FizzBuzzTest)
  ----------------------------------------------------------------------
  Traceback (most recent call last):
-   File "replay_main_test.py", line 28, in test_値が15ならばFizzBuzzを返すようにする
+   File "main_test.py", line 28, in test_値が15ならばFizzBuzzを返すようにする
      self.assertEqual("FizzBuzz", FizzBuzz.generate(15))
  AssertionError: 'FizzBuzz' != 'Fizz'
  - FizzBuzz
@@ -500,7 +500,7 @@ class FizzBuzz:
  FAIL: test_値が100ならば100を返すようにする (__main__.FizzBuzzTest)
  ----------------------------------------------------------------------
  Traceback (most recent call last):
-   File "replay_main_test.py", line 31, in test_値が100ならば100を返すようにする
+   File "main_test.py", line 31, in test_値が100ならば100を返すようにする
      self.assertEqual(100, FizzBuzz.generate(100))
  AssertionError: 100 != 'Buzz'
 
@@ -687,7 +687,7 @@ $ python main_test.py
 FAIL: test_回数を5回実行すると配列を返すようにする (__main__.FizzBuzzTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "replay_main_test.py", line 44, in test_回数を5回実行すると配列を返すようにする
+  File "main_test.py", line 44, in test_回数を5回実行すると配列を返すようにする
     self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
 AssertionError: Lists differ: [1, 2, 'Fizz', 4, 'Buzz'] != [0, 1, 2, 3, 4]
 
@@ -728,7 +728,7 @@ $ python main_test.py
 FAIL: test_回数を5回実行すると配列を返すようにする (__main__.FizzBuzzTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "replay_main_test.py", line 44, in test_回数を5回実行すると配列を返すようにする
+  File "main_test.py", line 44, in test_回数を5回実行すると配列を返すようにする
     self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
 AssertionError: Lists differ: [1, 2, 'Fizz', 4, 'Buzz'] != ['FizzBuzz', 1, 2, 'Fizz', 4]
 
@@ -1091,7 +1091,7 @@ class FizzBuzz:
 
 [source, bash]
 ----
-  $ python replay_main_test.py
+  $ python main_test.py
  ......
  ----------------------------------------------------------------------
  Ran 6 tests in 0.000s
@@ -1169,7 +1169,7 @@ class FizzBuzz:
 
 [source, bash]
 ----
-  $ python replay_main_test.py
+  $ python main_test.py
  ......
  ----------------------------------------------------------------------
  Ran 6 tests in 0.000s
@@ -1198,7 +1198,7 @@ class FizzBuzz:
 
 [source, bash]
 ----
-  $ python replay_main_test.py
+  $ python main_test.py
  ......
  ----------------------------------------------------------------------
  Ran 6 tests in 0.000s
@@ -1257,7 +1257,7 @@ class FizzBuzz:
 
 [source, bash]
 ----
-  $ python replay_main_test.py
+  $ python main_test.py
  ......
  ----------------------------------------------------------------------
  Ran 6 tests in 0.000s
@@ -1294,7 +1294,7 @@ class FizzBuzz:
 
 [source, bash]
 ----
-  $ python replay_main_test.py
+  $ python main_test.py
  ......
  ----------------------------------------------------------------------
  Ran 6 tests in 0.000s
@@ -1337,13 +1337,13 @@ class FizzBuzz:
 
 [source, bash]
 ----
- $ python replay_main_test.py
+ $ python main_test.py
 ..FFFF
 ======================================================================
 FAIL: test_値が3ならばFizzを返す (__main__.FizzBuzzTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "replay_main_test.py", line 40, in test_値が3ならばFizzを返す
+  File "main_test.py", line 40, in test_値が3ならばFizzを返す
     self.assertEqual("Fizz", FizzBuzz.generate(3))
 AssertionError: 'Fizz' != 3
 
@@ -1351,7 +1351,7 @@ AssertionError: 'Fizz' != 3
 FAIL: test_値が5ならばBuzzを返す (__main__.FizzBuzzTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "replay_main_test.py", line 43, in test_値が5ならばBuzzを返す
+  File "main_test.py", line 43, in test_値が5ならばBuzzを返す
     self.assertEqual("Buzz", FizzBuzz.generate(5))
 AssertionError: 'Buzz' != 5
 
@@ -1359,7 +1359,7 @@ AssertionError: 'Buzz' != 5
 FAIL: test_回数を10回実行すると配列を返す (__main__.FizzBuzzTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "replay_main_test.py", line 55, in test_回数を10回実行すると配列を返す
+  File "main_test.py", line 55, in test_回数を10回実行すると配列を返す
     self.assertEqual([1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz"], FizzBuzz.iterate(10))
 AssertionError: Lists differ: [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz'] != [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
@@ -1374,7 +1374,7 @@ First differing element 2:
 FAIL: test_回数を5回実行すると配列を返す (__main__.FizzBuzzTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "replay_main_test.py", line 52, in test_回数を5回実行すると配列を返す
+  File "main_test.py", line 52, in test_回数を5回実行すると配列を返す
     self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
 AssertionError: Lists differ: [1, 2, 'Fizz', 4, 'Buzz'] != [1, 2, 3, 4, 5]
 
@@ -1428,7 +1428,7 @@ class FizzBuzz:
 
 [source, bash]
 ----
-  $ python replay_main_test.py
+  $ python main_test.py
  ......
  ----------------------------------------------------------------------
  Ran 6 tests in 0.000s
