@@ -20,6 +20,7 @@
 == 詳細
 === link:./hello_world.html[HelloWorld][[anchor-1]]
 === link:./fizz_buzz.html[FizzBuzz][[anchor-2]]
+==== link:./session/20181109.html[テストおじさん、襲来]
 
 == 参照
 * Asciidoctor[http://asciidoctor.org/]
