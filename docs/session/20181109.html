@@ -456,8 +456,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_仮実装">2.3.1. 仮実装</a></li>
 <li><a href="#_三角測量">2.3.2. 三角測量</a></li>
-<li><a href="#_todoリスト_2">2.3.3. TODOリスト</a></li>
-<li><a href="#_アジャイルソフトウェア開発">2.3.4. アジャイルソフトウェア開発</a></li>
+<li><a href="#_オブジェクト指向">2.3.3. オブジェクト指向</a></li>
+<li><a href="#_todoリスト再び">2.3.4. TODOリスト再び</a></li>
+<li><a href="#_アジャイルソフトウェア開発">2.3.5. アジャイルソフトウェア開発</a></li>
 </ul>
 </li>
 <li><a href="#_リファクタリングから始めるテスト駆動開発">2.4. リファクタリングから始めるテスト駆動開発</a>
@@ -603,7 +604,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="_テストファースト_アサートファースト">2.2.1. テストファースト・アサートファースト</h4>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: つぎに <span class="red">テストファースト</span> でやります。</p>
+<p><strong>テストおじさん</strong>: 次に <span class="red">テストファースト</span> でやります。</p>
 </div>
 <div class="paragraph">
 <p>ややぎごちない動作で <code>main_test.py</code> に以下のコードを記述するテストおじさん。</p>
@@ -650,7 +651,10 @@ FAILED (failures=1)</code></pre>
 <p><strong>テスト書きたい人</strong>: &#8230;&#8203;実装する前に、テストコードを確認するのですか？</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: イエス、今やっていることはテストといいながら設計をしています。事実、最初のテスト項目は <span class="red">TODOリスト</span> の内容をそのまま転記してますからね。</p>
+<p><strong>テストおじさん</strong>: イエス、今やっていることはテストといいながら設計をしています。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 実際、最初のテスト項目は <span class="red">TODOリスト</span> の内容をそのまま転記してますからね。</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: テスト駆動開発の進め方として <span class="red">テストファースト</span> ・ <span class="red">アサートファースト</span> で進めていきます。</p>
@@ -695,10 +699,10 @@ FAILED (failures=1)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テスト書いてないとt_wadaさんの前で言った人</strong>:　class FizzBuzzTest(unittest.TestCase):の表記は？</p>
+<p><strong>テスト書いてないとt_wadaさんの前で言った人</strong>:　<code>class FizzBuzzTest(unittest.TestCase):</code> の表記は？</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: これはunittest.TestCaseクラスを継承したFizzBuzzTestクラスという意味です。</p>
+<p><strong>テストおじさん</strong>: これは <code>unittest.TestCase</code> クラスを継承した <code>FizzBuzzTest</code> クラスという意味です。</p>
 </div>
 <div class="paragraph">
 <p><strong>テスト書いてないとt_wadaさんの前で言った人</strong>: Pythonは()の中に継承を記述するのね。</p>
@@ -710,8 +714,10 @@ FAILED (failures=1)</code></pre>
 <p><strong>テストおじさん</strong>: なんというかPythonのクラスの継承はカルチャーギャップがありました。</p>
 </div>
 <div class="paragraph">
-<p>注：テスト書いてないとt_wadaさんの前で言った人もテストおじさんもRubyがメインの人。
-ちなみにRubyだとこんな感じ。</p>
+<p>注：テスト書いてないとt_wadaさんの前で言った人もテストおじさんもRubyがメインの人。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ちなみにRubyだとこんな感じ。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -794,7 +800,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: これで実装完了・・・とはいきませんね、ロジックは実装して本当にテストがパスするようにしましょう。</p>
+<p><strong>テストおじさん</strong>: これで実装完了・・・とはいきませんね、ロジックを実装して本当にテストがパスするようにしましょう。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -889,7 +895,10 @@ FAILED (failures=1)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: あー対応する処理がないからテストが失敗してますな。修正修正&#8230;&#8203;</p>
+<p><strong>テストおじさん</strong>: あー対応する処理がないからテストが失敗してますな。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 修正修正・・・</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -936,7 +945,10 @@ if __name__ == "__main__":
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: ２つ目のテストによってgenerateメソッドの一般化が実現できたわけですがこのようなアプローチを <span class="red">三角測量</span> といいます。</p>
+<p><strong>テストおじさん</strong>: ２つ目のテストによってgenerateメソッドの一般化が実現できました。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: このようなアプローチを <span class="red">三角測量</span> といいます。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -1023,7 +1035,7 @@ if __name__ == "__main__":
 <p><strong>テストおじさん</strong>: おっと、意図した結果と違いますね。デバッガで確認してみましょう。</p>
 </div>
 <div class="paragraph">
-<p>VSCodeのデバッガを起動してステップ実行で条件分岐を確認するテストおじさん</p>
+<p><a href="http://www.atmarkit.co.jp/ait/articles/1806/05/news023.html">VSCodeのデバッガ</a> を起動してステップ実行で条件分岐を確認するテストおじさん。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1044,7 +1056,7 @@ if __name__ == "__main__":
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: numberが15の場合は最初の判定で処理を抜けてますね。ここはこうかな</p>
+<p><strong>テストおじさん</strong>: <code>number</code> が15の場合は最初の判定で処理を抜けてますね、ここはこうかな。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1097,7 +1109,7 @@ if __name__ == "__main__":
 <p>仕様を眺めながら</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: あ、仕様にそれ以外では値を返すというのがあるのでテストに明記しておきましょう</p>
+<p><strong>テストおじさん</strong>: あー仕様にそれ以外では値を返すというのがあるのでテストに明記しておきましょう。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1109,7 +1121,7 @@ if __name__ == "__main__":
 <p><strong>テスト書いてないとt_wadaさんの前で言った人</strong>: その条件だと・・・</p>
 </div>
 <div class="paragraph">
-<p>ニヤリと笑うテストおじさん</p>
+<p>ニヤリと笑うテストおじさん。</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: 実行・・・はい、仕様を書いた人が間違ってましたね。</p>
@@ -1159,8 +1171,11 @@ if __name__ == "__main__":
 <img src="https://2.bp.blogspot.com/-uAnQWK08j8Q/WtRzcRFVDFI/AAAAAAABLmc/7AGh1dcJprsh0dCFEfKljxrilj6OdwZ1QCLcBGAs/s800/seikou_syukufuku_man.png" alt="seikou syukufuku man" width="200">
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクト指向">2.3.3. オブジェクト指向</h4>
 <div class="paragraph">
-<p><strong>テスト書きたい人</strong>: ちなみに実務でもテスト書いてますか？</p>
+<p><strong>テスト書きたい人</strong>: 実務でもテスト書いてますか？</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: イエス！自社の基幹業務システム(Ruby on Rails)は自分で作ったけど一応自動テストは完備してますよ。</p>
@@ -1181,13 +1196,13 @@ if __name__ == "__main__":
 <p><strong>テストおじさん</strong>: 正直テストコードを書くのは最初はしんどいけど後になるほど楽になります。</p>
 </div>
 <div class="paragraph">
-<p><strong>テスト書きたい人</strong>: ことろで@staticmethodというのは？</p>
+<p><strong>テスト書きたい人</strong>: ことろで <code>@staticmethod</code> というのは？</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: スタティックメソッドのアノテーションなんですがスタティックメソッドはインスタンスメソッドとは違って・・・</p>
 </div>
 <div class="paragraph">
-<p>この後クラスの概念とかいろいろディスカッションする</p>
+<p>この後クラスの概念とかいろいろディスカッションする。</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1195,11 +1210,11 @@ if __name__ == "__main__":
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: ・・・オブジェクトシコウムズカシイネ</p>
+<p><strong>テストおじさん</strong>: ・・・オブジェクトシコウムズカシイネ。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_todoリスト_2">2.3.3. TODOリスト</h4>
+<h4 id="_todoリスト再び">2.3.4. TODOリスト再び</h4>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: さて、残りの仕様を実現するために <span class="red">TODOリスト</span> を更新しましょうか</p>
 </div>
@@ -1229,13 +1244,13 @@ if __name__ == "__main__":
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 引数に回数を取り戻り値に配列を返すインターフェイスを設計しました。</p>
+<p><strong>テストおじさん</strong>: 引数に回数を取り戻り値に配列を返す振る舞いを設計しました。</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: おわかりいただけだろうか・・・</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: テストコードと言いながら設計をしているのです、そうテストではなく設計を！</p>
+<p><strong>テストおじさん</strong>: テストと言いながら設計をしているのです、そうテストではなく設計を！</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -1251,7 +1266,7 @@ if __name__ == "__main__":
 <p><strong>テストおじさん以外のメンバー</strong>: <a href="https://dic.nicovideo.jp/a/%E3%81%8A%E3%80%81%E3%81%8A%E3%81%86%E3%83%BB%E3%83%BB%E3%83%BB">お、おう・・・</a></p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: ・・・えーと、実装に移りますね。ここはセオリーどおり仮実装から。</p>
+<p><strong>テストおじさん</strong>: ・・・えーと、実装に移りますね。ここはセオリー通り仮実装。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1313,7 +1328,7 @@ if __name__ == "__main__":
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 繰り返しの実行処理は・・・こんな感じかな</p>
+<p><strong>テストおじさん</strong>: 繰り返しの実行処理は・・・こんな感じかな。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1327,7 +1342,7 @@ if __name__ == "__main__":
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: Pythonの繰り返し構文はfor in一択だから&#8230;&#8203;(しれっとrangeを使う)</p>
+<p><strong>テストおじさん</strong>: Pythonの繰り返し構文はfor in一択だから・・・(しれっとrangeを使う)。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1414,7 +1429,7 @@ FAILED (failures=1)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: あー、generateの引数のnumberが０から始まってるからね</p>
+<p><strong>テストおじさん</strong>: あー、<code>generate</code> の引数の <code>number</code> が０から始まってるからなのね。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1431,7 +1446,7 @@ FAILED (failures=1)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: これでオッケー</p>
+<p><strong>テストおじさん</strong>: これでオッケー。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1448,13 +1463,13 @@ OK</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_回数を１５回実行すると配列を返す(self):
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_回数を１５回実行すると配列を返すようにする(self):
         expect = [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"]
         self.assertEqual(expect, FizzBuzz.iterate(15))</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: これでオッケー</p>
+<p><strong>テストおじさん</strong>: これでオッケー。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1468,7 +1483,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_アジャイルソフトウェア開発">2.3.4. アジャイルソフトウェア開発</h4>
+<h4 id="_アジャイルソフトウェア開発">2.3.5. アジャイルソフトウェア開発</h4>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: はい、これで仕様を満たすプログラムができました。</p>
 </div>
@@ -1498,13 +1513,13 @@ OK</code></pre>
 <p><strong>テストおじさん</strong>: 昔 <a href="https://www.sjve.org/ronbun/4045">IPO</a> 書きましたよ。</p>
 </div>
 <div class="paragraph">
-<p>解説しよう！テストおじさんはシステムエンジニアをやっていたのだ</p>
+<p>解説しよう！テストおじさんはシステムエンジニアをやっていたのだ。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: ドキュメントがソフトウェアの変更と動機が取れていれば問題ないんですけどねー</p>
+<p><strong>テストおじさん</strong>: ドキュメントがソフトウェアの変更と動機が取れていれば問題ないんですけどね。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: テストコードを見てください</p>
+<p><strong>テストおじさん</strong>: テストコードを見てください。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1524,12 +1539,13 @@ OK</code></pre>
     def test_回数を５回実行すると配列を返すようにする(self):
         self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
 
-    def test_回数を１０回実行すると配列を返すようにする(self):
-        self.assertEqual([1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz"], FizzBuzz.iterate(10))</code></pre>
+    def test_回数を１５回実行すると配列を返すようにする(self):
+        expect = [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"]
+        self.assertEqual(expect, FizzBuzz.iterate(15))</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: これは仕様だから、こうしたほうがいいですね</p>
+<p><strong>テストおじさん</strong>: これは仕様だから、こうしたほうがいいですね。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1550,11 +1566,15 @@ OK</code></pre>
         self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
 
     def test_回数を１０回実行すると配列を返す(self):
-        self.assertEqual([1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz"], FizzBuzz.iterate(10))</code></pre>
+        self.assertEqual([1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz"], FizzBuzz.iterate(10))
+
+    def test_回数を１５回実行すると配列を返す(self):
+        expect = [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"]
+        self.assertEqual(expect, FizzBuzz.iterate(15))</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: vオプションをつけてテストを実行したら</p>
+<p><strong>テストおじさん</strong>: vオプションをつけてテストを実行したら。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1563,7 +1583,7 @@ test_値が101ならば101を返す (__main__.FizzBuzzTest) ... ok
 test_値が15ならばFizzBuzzを返す (__main__.FizzBuzzTest) ... ok
 test_値が3ならばFizzを返す (__main__.FizzBuzzTest) ... ok
 test_値が5ならばBuzzを返す (__main__.FizzBuzzTest) ... ok
-test_回数を10回実行すると配列を返す (__main__.FizzBuzzTest) ... ok
+test_回数を15回実行すると配列を返す (__main__.FizzBuzzTest) ... ok
 test_回数を5回実行すると配列を返す (__main__.FizzBuzzTest) ... ok
 
 ----------------------------------------------------------------------
@@ -1573,10 +1593,13 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: これって実行できる設計ドキュメントみたいなもんですね。</p>
+<p><strong>テストおじさん</strong>: これって実行できる設計ドキュメントみたいなものですよね。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 従来のウォーターフォール型との考え方の違いは <span class="red">アジャイルソフトウェア開発宣言</span> という価値から来ているんですけどね。</p>
+<p><strong>テストおじさん</strong>: これまでの実装からもわかると思いますが従来のウォーターフォール型とは違う考え方がテスト駆動開発の根底にあります。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: その考え方は <span class="red">アジャイルソフトウェア開発宣言</span> から来ているんですよ。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -1632,7 +1655,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 個人的には <span class="red">インクリメンタルな設計</span> も含まれているかな。</p>
+<p><strong>テストおじさん</strong>: 個人的には <span class="red">インクリメンタルな設計</span> も含めてテスト駆動開発かなと思ってます。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -1648,7 +1671,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>この後、開発プロセスに関するディスカッションを行う</p>
+<p>この後、開発プロセスに関するディスカッションを行う。</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1681,6 +1704,16 @@ OK</code></pre>
 <blockquote>
 <div class="paragraph">
 <p>リファクタリング（名詞）：外部から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
 </div>
 </blockquote>
 <div class="attribution">
@@ -1822,7 +1855,7 @@ OK</code></pre>
 <p>コメント</p>
 </div>
 <div class="paragraph">
-<p>コメントを書いてはいけないなどと言うつもりはまったくありません。コメントは決して悪い臭いではなく、むしろいい香りなのです。ここでコメントについて言及しているのは、コメントが消臭剤として使われることがあるからです。コメントが非常に丁寧に書かれていたのは、実にわかりにくいコードを補うためだったということがよくあるのです。</p>
+<p>コメントを書いてはいけないなどと言うつもりはまったくありません。コメントは決して悪い臭いではなく、むしろいい香りなのです。ここでコメントについて言及しているのは、コメントが消臭剤として使われることがあるからです。コメントが非常に丁寧に書かれていたのは、実はわかりにくいコードを補うためだったということがよくあるのです。</p>
 </div>
 </blockquote>
 <div class="attribution">
@@ -1961,7 +1994,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>プロダクトコードを変更するテストおじさん</p>
+<p>プロダクトコードを変更するテストおじさん。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1995,7 +2028,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: あー、一時変数valueが冗長ですね削除しましょう。</p>
+<p><strong>テストおじさん</strong>: 一時変数 <code>value</code> が冗長ですね削除しましょう。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2013,7 +2046,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 確認、確認</p>
+<p><strong>テストおじさん</strong>: 確認、確認。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2026,10 +2059,10 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: ガード節なんですがPythonは言語仕様上インデントしないといけないですが言語によっては１行で書けます。</p>
+<p><strong>テストおじさん</strong>: ガード節なんですがPythonは言語仕様上インデントしないといけないんですが言語によっては１行で書けます。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 例えばRuby</p>
+<p><strong>テストおじさん</strong>: 例えばRubyだとこう。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2046,7 +2079,7 @@ OK</code></pre>
 <p><strong>テストおじさん</strong>: 次は条件内容に注意を向けてみましょう。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: ここでは <span class="red">条件記述の分解</span> を適用していましょう。</p>
+<p><strong>テストおじさん</strong>: ここでは <span class="red">条件記述の分解</span> を適用してみましょう。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -2100,7 +2133,7 @@ OK</code></pre>
 <p><strong>テスト書いてないとt_wadaさんの前で言った人</strong>: ここは割り切れるなのでcan be dividedですね。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 確かに表現が的確でないですね。</p>
+<p><strong>テストおじさん</strong>: 確かに表現が不適切ですね。</p>
 </div>
 <div class="paragraph">
 <p>解説しよう！テスト書いてないとt_wadaさんの前で言った人は教育関係のお仕事に従事されているのだ。</p>
@@ -2125,7 +2158,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: テスト、テスト</p>
+<p><strong>テストおじさん</strong>: テスト、テスト。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2168,7 +2201,10 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 今回は少し横着をしてテストなしに２つコードを追加しました。ではまとめてテスト・・・ファッ！？</p>
+<p><strong>テストおじさん</strong>: 今回は少し横着をしてテストなしに２つコードを追加しました。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ではまとめてテスト・・・ファッ！？</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2227,13 +2263,16 @@ FAILED (failures=4)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テスト書いてないとt_wadaさんの前で言った人</strong>: returnが書かれてませんね。</p>
+<p><strong>テスト書いてないとt_wadaさんの前で言った人</strong>: <code>return</code> が書かれてませんね。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: こいつは失礼しました。とまあ、しょぼいミスもテストが教えてくれるわけですね。</p>
+<p><strong>テストおじさん</strong>: こいつは失礼しました(´Д｀)</p>
 </div>
 <div class="paragraph">
-<p>そしてコードを修正してテストを再実行するテストおじさん</p>
+<p><strong>テストおじさん</strong>: とまあ、しょぼいミスもテストが教えてくれるわけですね。</p>
+</div>
+<div class="paragraph">
+<p>そしてコードを修正してテストを再実行するテストおじさん。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2273,7 +2312,7 @@ FAILED (failures=4)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: オッケー</p>
+<p><strong>テストおじさん</strong>: オッケー。</p>
 </div>
 </div>
 <div class="sect3">
@@ -2282,7 +2321,7 @@ FAILED (failures=4)</code></pre>
 <p><strong>テストしてない人</strong>: リファクタリングをするタイミングはあるのですか？</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <span class="red">３度目の法則</span> というのがありますね。</p>
+<p><strong>テストおじさん</strong>: <span class="red">３度目の法則</span> というのがあります。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -2299,7 +2338,7 @@ FAILED (failures=4)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: あとは</p>
+<p><strong>テストおじさん</strong>: あとは・・・</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2317,6 +2356,56 @@ FAILED (failures=4)</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: あたりですかね。</p>
 </div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">リファクタリングのヒント</span> も参考になりますね。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>リファクタリングのヒント</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10063; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
+</li>
+<li>
+<p>&#10063; リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
+</li>
+<li>
+<p>&#10063; リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。</p>
+</li>
+<li>
+<p>&#10063; コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。</p>
+</li>
+<li>
+<p>&#10063; リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。</p>
+</li>
+<li>
+<p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
+</li>
+<li>
+<p>&#10063; ３三度目になったらリファクタリング開始。</p>
+</li>
+<li>
+<p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
+</li>
+<li>
+<p>&#10063; コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。</p>
+</li>
+<li>
+<p>&#10063; テストを完全に自動化して、その結果もテストにチェックさせること。</p>
+</li>
+<li>
+<p>&#10063; テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
+</li>
+</ul>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_名前重要">2.4.5. 名前重要</h4>
@@ -2332,7 +2421,7 @@ FAILED (failures=4)</code></pre>
 <p>意図が明確な名前にする</p>
 </div>
 <div class="paragraph">
-<p>その意図が明確な名前を付ける。いおうだけなら簡単なことです。ここで、しっかりと胸に刻みつけておいて欲しいのは我々が名前付けを大変重要なことだと思っているということです。
+<p>その意図が明確な名前を付ける。いうだけなら簡単なことです。ここで、しっかりと胸に刻みつけておいて欲しいのは我々が名前付けを大変重要なことだと思っているということです。
 よい名前を付けるのには時間がかかりますが、それによって、より多くの時間を節約できます。それ故、名前を付けるときには注意深く、そして後でよりよいものが思い浮かんだら、変更してください。
 そうすることで、あなたのコードを読む人（あなた自身を含めて）を幸福にすることができます。</p>
 </div>
@@ -2377,7 +2466,7 @@ FAILED (failures=4)</code></pre>
 <p><strong>テストおじさん</strong>: FizzBuzz generate FizzBuzz if number can be divided by three and five. (FizzBuzzはもし３と５で割り切れるならFizzBuzzを返す)とそのまま読めませんか？</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 今日のPythonコードも日本語にするとこんな感じ</p>
+<p><strong>テストおじさん</strong>: 今日のPythonコードも日本語にするとこんな感じかな。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2418,10 +2507,7 @@ FAILED (failures=4)</code></pre>
 <p><strong>テスト書いてないとt_wadaさんの前で言った人</strong>: 名前大事！</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: そうっすね、Matzも言ってますし。</p>
-</div>
-<div class="paragraph">
-<p><a href="https://プログラマが知るべき97のこと.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81/">名前重要</a></p>
+<p><strong>テストおじさん</strong>: そうっすね、Matzも <a href="https://プログラマが知るべき97のこと.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81/">名前重要</a> と言ってますし。</p>
 </div>
 <div class="paragraph">
 <p><strong>テスト書きたい人</strong>: 表記のルールとかスタイルってあるんですか？</p>
@@ -2564,7 +2650,7 @@ if __name__ == "__main__":
 <p><strong>テストおじさん</strong>: 次に実装の流れですが、 何を書くべきかわかっているときは、<span class="red">明白な実装</span> を行う。わからないときには <span class="red">仮実装</span> を行う。まだ正しい実装が見えてこないなら、 <span class="red">三角測量</span> を行います。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: そして、常に <span class="red">ベイビーステップ</span> で進めて行くことに留意しましょう。</p>
+<p><strong>テストおじさん</strong>: そして、常に <span class="red">ベイビーステップ</span> で進めて行くことに留意してください。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -2585,7 +2671,7 @@ if __name__ == "__main__":
 <div class="quoteblock">
 <blockquote>
 <div class="paragraph">
-<p>皮肉なことに、TDDはテスト技法ではない（Cunninghamの公案)。TDDは分析技法であり、設計技法であり、実際には開発のすべてのアクティビティを構造化する技法なのだ。</p>
+<p>TDDは分析技法であり、設計技法であり、実際には開発のすべてのアクティビティを構造化する技法なのだ。</p>
 </div>
 </blockquote>
 <div class="attribution">
@@ -2675,7 +2761,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-11 17:28:54 JST
+Last updated 2018-11-12 10:55:29 JST
 </div>
 </div>
 </body>
