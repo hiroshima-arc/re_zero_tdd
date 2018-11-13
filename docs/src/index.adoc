@@ -23,6 +23,6 @@
 ==== link:./session/20181109.html[テストおじさん、襲来]
 
 == 参照
-* Asciidoctor[http://asciidoctor.org/]
-* PlantUML[http://www.plantuml.com]
-* draw.io[https://about.draw.io/]
+* http://asciidoctor.org/[Asciidoctor]
+* http://www.plantuml.com[PlantUML]
+* https://about.draw.io/[draw.io]
