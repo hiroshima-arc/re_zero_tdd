@@ -11,6 +11,8 @@
 | Ruby           |2.5.3    |             |
 | Node.js        |8.10.0    |             |
 | Python         |3.6.0  |             |
+| Elixir         |1.7.4  |             |
+| Erlang         |21.1.1 |             |
 
 
 # 構成 #
@@ -55,7 +57,10 @@ sudo yum install -y build-essential \
                    readline-devel  \
                    sqlite-devel  \
                    python-devel  \
-                   python3-dev
+                   python3-dev  \
+                   automake  \
+                   autoconf  \
+                   ncurses-devel
 ```
 
 #### Rubyのセットアップ
@@ -109,6 +114,45 @@ cd /vagrant
 pyenv install -l
 pyenv install 3.6.0
 pyenv local 3.6.0
+```
+
+**[⬆ back to top](#構成)**
+
+#### Elixirのセットアップ
++ asdfのインストール
++ Erlangのインストール
++ Elixirのインストール
+
+```bash
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.6.0
+echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc
+echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
+```
+
+シェルに再ログインする
+
+
+利用するasdfのプラグインをインストール
+
+```
+asdf plugin-add erlang
+asdf plugin-add elixir
+```
+
+
+利用するElixirとErlangをインストール
+
+注意 利用するElixirによって利用可能なErlangのバージョンが違います。
+参考 [Compatibility between Elixir and Erlang/OTP ](https://hexdocs.pm/elixir/compatibility-and-deprecations.html#compatibility-between-elixir-and-erlang-otp)
+
+```
+cd /vagrant
+asdf list-all erlang
+asdf install erlang 21.1.1
+asdf local erlang 21.1.1
+asdf list-all elixir
+asdf install elixir 1.7.4
+asdf local elixir 1.7.4
 ```
 
 **[⬆ back to top](#構成)**
