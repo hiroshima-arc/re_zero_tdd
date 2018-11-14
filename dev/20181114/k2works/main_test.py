@@ -10,21 +10,24 @@ data = {
 }
         
 def execute(count=100):
-    data["count"] = count
-    iterate(data["count"])
+    set_count(count)
+    set_values_by_generate()
     print_value()
+    
+
+def set_count(count):
+    data["count"] = count + 1
 
         
 def print_value():
     for value in data["values"]:
         print(value)    
     
-
-def iterate(count):
-    for n in range(count + 1):
+def set_values_by_generate():
+    for n in range(data["count"]):
         data["values"].append(generate(n))
     
-            
+
 def generate(number):
     value = number
     
