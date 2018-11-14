@@ -15,8 +15,21 @@ def execute():
             print(n)
 
         n = n - 1
+        
+def for_execute():
+    for n in range(100):
+        print(n)
+        
 
 class MainTest(unittest.TestCase):
+    
+    def test_for_execute(self):
+        with captured_stdout() as stdout:
+            for_execute()
+            lines = stdout.getvalue().splitlines()
+            
+        self.assertEqual(lines[1],"1")
+
     
     def test_1から100までの数をプリントする(self):
         with captured_stdout() as stdout:

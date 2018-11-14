@@ -19,6 +19,11 @@
 
 
 ## 開発
+任意のテストを実行する
+
+```
+python3 -m unittest main_test.MainTest.test_for_execute                                                                                                                    
+```
 
 ### ふりかえり
 #### Keep
@@ -28,3 +33,4 @@
 ## 参照
 + [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)
 + [Pythonプログラムの標準出力をテストする](https://qiita.com/Asayu123/items/6f2471aa5ebe597b2638)
++ [Python の unittest で任意の関数 “だけ” テストしたい](https://cloudpack.media/39817)
