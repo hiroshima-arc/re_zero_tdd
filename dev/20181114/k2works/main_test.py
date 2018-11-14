@@ -12,8 +12,12 @@ data = {
 def execute(count=100):
     data["count"] = count
     iterate(data["count"])
+    print_value()
+
+        
+def print_value():
     for value in data["values"]:
-        print(value)
+        print(value)    
     
 
 def iterate(count):
