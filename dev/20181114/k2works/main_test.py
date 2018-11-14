@@ -9,19 +9,21 @@ def execute():
 
 def iterate(count):
     for n in range(count + 1):
-        generate(n)
+        value= generate(n)
+        print(value)
     
             
 def generate(number):
+    value = number
+    
     if number % 3 == 0 and number % 5 == 0:
-        print("FizzBuzz")
+        value = "FizzBuzz"
     elif number % 3 == 0:
-        print("Fizz")        
+        value = "Fizz"
     elif number % 5 == 0:
-        print("Buzz")
-    else:
-        print(number)    
-
+        value = "Buzz"
+        
+    return value
         
 
 class MainTest(unittest.TestCase):
