@@ -1,12 +1,16 @@
 import unittest
+from test.support import captured_stdout
 
 def execute():
-    return "1"
+    print(1)
 
 class MainTest(unittest.TestCase):
     
     def test_1から100までの数をプリントする(self):
-        self.assertEqual("1", execute())
+        with captured_stdout() as stdout:
+            execute()
+            
+        self.assertEqual( stdout.getvalue(),"1\n")
 
 if __name__ == "__main__":
     unittest.main()

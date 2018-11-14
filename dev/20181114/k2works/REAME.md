@@ -27,3 +27,4 @@
 
 ## 参照
 + [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)
++ [Pythonプログラムの標準出力をテストする](https://qiita.com/Asayu123/items/6f2471aa5ebe597b2638)
