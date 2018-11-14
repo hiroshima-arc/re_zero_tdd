@@ -5,11 +5,12 @@ FIZZ_BUZZ = "FizzBuzz"
 FIZZ = "Fizz"
 BUZZ = "Buzz"
 data = {
-    "count": 100,
+    "count": 0,
     "values": []
 }
         
-def execute():
+def execute(count=100):
+    data["count"] = count
     iterate(data["count"])
     for value in data["values"]:
         print(value)
@@ -34,6 +35,14 @@ def generate(number):
         
 
 class MainTest(unittest.TestCase):
+    
+    def test_1から10までの数をプリントする(self):
+        with captured_stdout() as stdout:
+            execute(10)
+            lines = stdout.getvalue().splitlines()
+            
+        self.assertEqual(lines[1],"1")
+        self.assertEqual(lines[10],"Buzz")    
     
     
     def test_1から100までの数をプリントする(self):
