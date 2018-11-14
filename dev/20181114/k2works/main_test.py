@@ -2,9 +2,9 @@ import unittest
 from test.support import captured_stdout
 
 values = []
+count = 100
         
 def execute():
-    count = 100
     iterate(count)
     for value in values:
         print(value)
