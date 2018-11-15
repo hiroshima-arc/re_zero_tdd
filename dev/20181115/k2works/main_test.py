@@ -5,12 +5,14 @@ BUZZ = "Buzz"
 FIZZ = "Fizz"
 FIZZ_BUZZ = "FizzBuzz"
 data = {
-    'count': 101, 
+    'count': 0,
     'values': []
 }
 
 
-def execute():
+def execute(count=101):
+    data['count'] = count + 1
+    data['values'] = []
     iterate(data['count'])
     for value in data['values']:
         print(value)
@@ -41,6 +43,14 @@ class MainTest(unittest.TestCase):
         with captured_stdout() as stdout:
             execute()
             self.lines = stdout.getvalue().splitlines()
+
+    def test_1から10まで数をプリントする(self):
+        with captured_stdout() as stdout:
+            execute(10)
+            self.lines = stdout.getvalue().splitlines()
+
+        self.assertNotIn("11", self.lines)
+        self.assertEqual("Buzz", self.lines[10])
 
     def test_1から100まで数をプリントする(self):
         self.assertEqual("Buzz", self.lines[100])
