@@ -8,11 +8,13 @@ def execute():
 
 class MainTest(unittest.TestCase):
 
-    def test_１から１００まで数をプリントする(self):
+    def test_1から100まで数をプリントする(self):
         with captured_stdout() as stdout:
             execute()
+            lines = stdout.getvalue().splitlines()
 
-        self.assertEqual(stdout.getvalue(), "1\n")
+        self.assertEqual(lines[0], "1")
+        self.assertEqual(lines[99], "100")
 
 
 if __name__ == "__main__":
