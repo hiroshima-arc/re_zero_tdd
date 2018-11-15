@@ -6,6 +6,7 @@ def execute():
     n = 100
     while n != 0:
         print(n)
+        n = n - 1
 
 
 class MainTest(unittest.TestCase):
@@ -15,8 +16,8 @@ class MainTest(unittest.TestCase):
             execute()
             lines = stdout.getvalue().splitlines()
 
-        self.assertEqual(lines[0], "1")
-        self.assertEqual(lines[99], "100")
+        self.assertEqual("100", lines[0])
+        self.assertEqual("1", lines[99])
 
 
 if __name__ == "__main__":
