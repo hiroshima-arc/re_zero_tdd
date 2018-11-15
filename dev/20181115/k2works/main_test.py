@@ -4,7 +4,8 @@ from test.support import captured_stdout
 
 def execute():
     for n in range(101):
-        print(generate(n))
+        value = generate(n)
+        print(value)
 
 
 def generate(number):
