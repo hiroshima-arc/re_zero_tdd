@@ -3,7 +3,9 @@ from test.support import captured_stdout
 
 
 def execute():
-    print(1)
+    n = 100
+    while n != 0:
+        print(n)
 
 
 class MainTest(unittest.TestCase):
