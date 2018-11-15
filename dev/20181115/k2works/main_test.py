@@ -3,7 +3,12 @@ from test.support import captured_stdout
 
 
 def execute():
-    for n in range(101):
+    count = 101
+    iterate(count)
+
+
+def iterate(count):
+    for n in range(count):
         value = generate(n)
         print(value)
 
@@ -19,6 +24,7 @@ def generate(number):
         value = "Buzz"
 
     return value
+
 
 class MainTest(unittest.TestCase):
 
