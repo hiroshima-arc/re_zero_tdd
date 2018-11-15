@@ -73,3 +73,5 @@ docs/.asciidoctor
 .vscode
 node_modules
 .DS_Store
+.floo
+.flooignore

@@ -1,4 +1,5 @@
 # Re:ゼロから始めるテスト駆動開発
+[![Floobits Status](https://floobits.com/k2work/re_zero_tdd.svg)](https://floobits.com/k2work/re_zero_tdd/redirect)
 
 # 目的
 
