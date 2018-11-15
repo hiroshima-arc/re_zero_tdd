@@ -45,6 +45,6 @@ Floobits から始めるテスト駆動開発
 
 ## 参照
 
-- [Floobits]()https://floobits.com/k2work)
+- [Floobits](https://floobits.com/k2work)
 - [Python プログラムの標準出力をテストする](https://qiita.com/Asayu123/items/6f2471aa5ebe597b2638)
 - [テストクラス](https://docs.python.jp/3/library/unittest.html#unittest.TestCase.setUp)
