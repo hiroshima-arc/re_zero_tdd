@@ -1,20 +1,22 @@
 import unittest
 from test.support import captured_stdout
 
-values = []
+data = {
+    'count': 101, 
+    'values': []
+}
 
 
 def execute():
-    count = 101
-    iterate(count)
-    for value in values:
+    iterate(data['count'])
+    for value in data['values']:
         print(value)
 
 
 def iterate(count):
     for n in range(count):
         value = generate(n)
-        values.append(value)
+        data['values'].append(value)
 
 
 def generate(number):
