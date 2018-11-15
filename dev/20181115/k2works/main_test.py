@@ -16,7 +16,15 @@ def execute():
         n = n - 1
 
 
+def for_execute():
+    for n in range(100):
+        print(n)
+
+
 class MainTest(unittest.TestCase):
+
+    def test_for(self):
+        self.assertTrue(for_execute())
 
     def setUp(self):
         with captured_stdout() as stdout:
