@@ -24,6 +24,7 @@ Floobitsから始めるテスト駆動開発
 #### Problem
 + while文はデバッグがしんどい
 + テストコードの重複
++ Pythonのコンテナの仕様
 
 #### Try
 
