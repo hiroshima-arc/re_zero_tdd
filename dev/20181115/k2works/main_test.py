@@ -18,34 +18,23 @@ def execute():
 
 class MainTest(unittest.TestCase):
 
-    def test_1から100まで数をプリントする(self):
+    def setUp(self):
         with captured_stdout() as stdout:
             execute()
-            lines = stdout.getvalue().splitlines()
+            self.lines = stdout.getvalue().splitlines()
 
-        self.assertEqual("Buzz", lines[0])
-        self.assertEqual("1", lines[99])
+    def test_1から100まで数をプリントする(self):
+        self.assertEqual("Buzz", self.lines[0])
+        self.assertEqual("1", self.lines[99])
 
     def test_3の倍数のときは数の代わりにFizzをプリントする(self):
-        with captured_stdout() as stdout:
-            execute()
-            lines = stdout.getvalue().splitlines()
-
-        self.assertEqual("Fizz", lines[97])
+        self.assertEqual("Fizz", self.lines[97])
 
     def test_5の倍数のときはBuzzとプリントする(self):
-        with captured_stdout() as stdout:
-            execute()
-            lines = stdout.getvalue().splitlines()
-
-        self.assertEqual("Buzz", lines[95])
+        self.assertEqual("Buzz", self.lines[95])
 
     def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
-        with captured_stdout() as stdout:
-            execute()
-            lines = stdout.getvalue().splitlines()
-
-        self.assertEqual("FizzBuzz", lines[85])
+        self.assertEqual("FizzBuzz", self.lines[85])
 
 
 if __name__ == "__main__":

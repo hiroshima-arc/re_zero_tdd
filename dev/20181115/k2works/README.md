@@ -23,9 +23,11 @@ Floobitsから始めるテスト駆動開発
 #### Keep
 #### Problem
 + while文はデバッグがしんどい
++ テストコードの重複
 
 #### Try
 
 ## 参照
 + [Floobits]()https://floobits.com/k2work)
 + [Pythonプログラムの標準出力をテストする](https://qiita.com/Asayu123/items/6f2471aa5ebe597b2638)
++ [テストクラス](https://docs.python.jp/3/library/unittest.html#unittest.TestCase.setUp)
