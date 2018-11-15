@@ -192,9 +192,26 @@ gradle livereload
 
 ## 開発
 
+#### Prettier
+
+マークダウンファイルのフォーマットをする
+
+インストール
+
+```
+npm install --save-dev --save-exact prettier
+```
+
+実行
+
+```
+npm run prettier
+```
+
 **[⬆ back to top](#構成)**
 
 # 参照
 
 - [AWS SAM Node.js Hands-on](https://github.com/hiroshima-arc/aws_sam_nodejs_hands-on)
 - [AWS SAM Python Hands-on](https://github.com/hiroshima-arc/aws_sam_python_hands-on)
+- [Prettier](https://prettier.io/)
