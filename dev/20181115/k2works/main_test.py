@@ -4,14 +4,18 @@ from test.support import captured_stdout
 
 def execute():
     for n in range(101):
-        if n % 3 == 0 and n % 5 == 0:
-            print("FizzBuzz")
-        elif n % 3 == 0:
-            print("Fizz")
-        elif n % 5 == 0:
-            print("Buzz")
-        else:
-            print(n)
+        generate(n)
+
+
+def generate(n):
+    if n % 3 == 0 and n % 5 == 0:
+        print("FizzBuzz")
+    elif n % 3 == 0:
+        print("Fizz")
+    elif n % 5 == 0:
+        print("Buzz")
+    else:
+        print(n)
 
 
 class MainTest(unittest.TestCase):
