@@ -173,6 +173,22 @@ class SetTest(unittest.TestCase):
         self.assertEqual({10, 50, 30}, st1 - st2)
 
 
+class DictTest(unittest.TestCase):
+
+    def test_辞書とは(self):
+        dc = {'a': 100, 'b': 200, 'c': 300}
+        dc['d'] = 1000
+        dc['a'] = dc['b'] + dc['c']
+        self.assertEqual({'a': 500, 'b': 200, 'c': 300, 'd': 1000}, dc)
+        del dc['a']
+        self.assertEqual({'b': 200, 'c': 300, 'd': 1000}, dc)
+
+    def test_キーワードと値の取得(self):
+        dc = {'a': 100, 'b': 200, 'c': 300}
+        self.assertEqual(['a', 'b', 'c'], list(dc.keys()))
+        self.assertEqual([100, 200, 300], list(dc.values()))
+        self.assertEqual([('a', 100), ('b', 200), ('c', 300)], list(dc.items()))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -23,7 +23,7 @@
 - [x] リスト（list）
 - [x] タプル（tuple）とレンジ（range）
 - [x] セット（set）
-- [ ] 辞書（dict）
+- [x] 辞書（dict）
 
 ## 開発
 
