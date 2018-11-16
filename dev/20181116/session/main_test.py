@@ -11,21 +11,21 @@ data = {
 
 def execute():
     set_count()
-    iterate()
+    set_values_by_generate()
     print_values()
 
 def set_count():
     # 配列は0から始めまるので100まで出すのに必要
     data['count'] = data['count'] + 1
 
-def print_values():
-    for value in data['values']:
-        print(value)
-
-def iterate():
+def set_values_by_generate():
     for n in range(data['count']):
         value = generate(n)
         data['values'].append(value)
+
+def print_values():
+    for value in data['values']:
+        print(value)
 
 def generate(number):
     value = number
