@@ -8,9 +8,11 @@ values = []
 
 def execute():
     iterate(101)
+    print_values()
+
+def print_values():
     for value in values:
         print(value)
-
 
 def iterate(c):
     for n in range(c):
