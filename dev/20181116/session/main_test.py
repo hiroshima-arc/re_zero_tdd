@@ -4,20 +4,28 @@ from test.support import captured_stdout
 FIZZ_BUZZ = "FizzBuzz"
 FIZZ = "Fizz"
 BUZZ = "Buzz"
-values = []
+data = {
+    'values':[],
+    'count':100
+}
 
 def execute():
-    iterate(101)
+    set_count()
+    iterate()
     print_values()
 
+def set_count():
+    # 配列は0から始めまるので100まで出すのに必要
+    data['count'] = data['count'] + 1
+
 def print_values():
-    for value in values:
+    for value in data['values']:
         print(value)
 
-def iterate(c):
-    for n in range(c):
+def iterate():
+    for n in range(data['count']):
         value = generate(n)
-        values.append(value)
+        data['values'].append(value)
 
 def generate(number):
     value = number
