@@ -1,6 +1,7 @@
 # Re:ゼロから始めるテスト駆動開発
 
 [![Floobits Status](https://floobits.com/k2work/re_zero_tdd.svg)](https://floobits.com/k2work/re_zero_tdd/redirect)
+[![CircleCI](https://circleci.com/gh/hiroshima-arc/re_zero_tdd.svg?style=svg)](https://circleci.com/gh/hiroshima-arc/re_zero_tdd)
 
 # 目的
 
