@@ -21,7 +21,7 @@
 ### TODO リスト
 
 - [x] リスト（list）
-- [ ] タプル（tuple）とレンジ（range）
+- [x] タプル（tuple）とレンジ（range）
 - [ ] セット（set）
 - [ ] 辞書（dict）
 
