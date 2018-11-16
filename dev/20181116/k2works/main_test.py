@@ -90,7 +90,7 @@ class TupleTest(unittest.TestCase):
         with self.assertRaises(TypeError) as ex:
             tp[0] = 20
         exception = ex.exception
-        self.assertEquals(str(exception), "'tuple' object does not support item assignment")
+        self.assertEqual(str(exception), "'tuple' object does not support item assignment")
 
     def test_タプルの算術演算(self):
         tp = (100, 'a') + (200, 'b')
