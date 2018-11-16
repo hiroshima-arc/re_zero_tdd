@@ -4,7 +4,10 @@ from test.support import captured_stdout
 def execute():
     n = 100
     while n != 0:
-        print(n) 
+        if n % 3 == 0:
+            print("Fizz")
+        else:            
+            print(n) 
         n = n - 1       
 
 class MainTest(unittest.TestCase):
@@ -14,8 +17,17 @@ class MainTest(unittest.TestCase):
             execute()
             lines = stdout.getvalue().splitlines()
 
-        self.assertEqual(lines[99], "1")
-        self.assertEqual(lines[0], "100")
+        self.assertEqual( "1", lines[99])
+        self.assertEqual("100", lines[0])
+
+    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+
+        self.assertEqual("Fizz", lines[97])
+
+
 
 
 if __name__ == "__main__":
