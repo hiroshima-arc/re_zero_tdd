@@ -1,0 +1,8 @@
+version: '3'
+services:
+  repo:
+    build:
+      context: ./ops
+    volumes:
+    - .:/repo
+    working_dir: "/repo"

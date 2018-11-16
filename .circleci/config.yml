@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+    - image: hiroshimaarc/re-zero-tdd:1.0.0
+    working_directory: ~/repo
+    steps:
+    - checkout
+    - run:
+        name: Running all tests
+        command: rake test:all
+
