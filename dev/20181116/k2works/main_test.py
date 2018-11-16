@@ -71,6 +71,53 @@ class ListTest(unittest.TestCase):
         arr.sort(reverse=True)
         self.assertEqual([2000, 1000, 200, 100, 30, 20, 10], arr)
 
+class TupleTest(unittest.TestCase):
+
+    def test_タプルとは(self):
+        tp = (10, 'a', True)
+        self.assertEqual(10, tp[0])
+        self.assertEqual('a', tp[1])
+        self.assertTrue(tp[2])
+
+    def test_ミュータブルとイミュータブル(self):
+        arr = [10, 'a', True]
+        tp = (10, 'a', True)
+
+        arr[0] = 20
+        self.assertEqual(20, arr[0])
+
+        with self.assertRaises(TypeError) as ex:
+            tp[0] = 20
+        exception = ex.exception
+        self.assertEquals(str(exception), "'tuple' object does not support item assignment")
+
+    def test_タプルの算術演算(self):
+        tp = (100, 'a') + (200, 'b')
+        self.assertEqual((100, 'a', 200, 'b'), tp)
+
+        tp = (100, 'a') * 3
+        self.assertEqual((100, 'a', 100, 'a', 100, 'a'), tp)
+
+        tp = (10, 'a')
+        tp += (20, 'b')
+        self.assertEqual((10, 'a', 20, 'b'), tp)
+        tp *= 2
+        self.assertEqual((10, 'a', 20, 'b', 10, 'a', 20, 'b'), tp)
+
+    def test_タプルのシーケンス演算(self):
+        tp = [10, 20, 30]
+        self.assertTrue(10 in tp)
+        self.assertTrue(0 not in tp)
+
+        tp = [10, 20, 30, 40, 50]
+        self.assertEqual([20, 30, 40], tp[1:4])
+        self.assertEqual(5, len(tp))
+        self.assertEqual(50, max(tp))
+        self.assertEqual(10, min(tp))
+
+
+
+
 
 if __name__ == "__main__":
     unittest.main()

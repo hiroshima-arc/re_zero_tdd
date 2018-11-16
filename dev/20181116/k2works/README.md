@@ -38,3 +38,4 @@
 ## 参照
 
 - [かんたん Python プログラミングの教科書](https://www.amazon.co.jp/dp/B07B4TTS24/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1)
+- [Pythonでエラーが発生することをテストする](http://y0m0r.hateblo.jp/entry/20121108/1352382659)
