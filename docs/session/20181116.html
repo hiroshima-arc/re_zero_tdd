@@ -453,6 +453,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_テストファーストから始めるアーキテクチャ">2.3. テストファーストから始めるアーキテクチャ</a>
 <ul class="sectlevel3">
 <li><a href="#_テストファースト">2.3.1. テストファースト</a></li>
+<li><a href="#_アサートファースト">2.3.2. アサートファースト</a></li>
 </ul>
 </li>
 <li><a href="#_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</a></li>
@@ -866,6 +867,87 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_アサートファースト">2.3.2. アサートファースト</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: さて、1から100までコンソールに出力させないといけませんがまずは <span class="red">アサートファースト</span> で <span class="red">仮実装</span> を行ってテストを通しておきましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>アサートファースト</p>
+</div>
+<div class="paragraph">
+<p>いつアサーションを書くべきだろうか----最初に書こう</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>システム構築はどこから始めるべきだろうか。システム構築が終わったらこうなる、というストーリーを語るところからだ。</p>
+</li>
+<li>
+<p>機能はどこから書き始めるべきだろうか。コードが書き終わったらこのように動く、というテストを書くところからだ。</p>
+</li>
+<li>
+<p>ではテストはどこから書き始めるべきだろうか。それはテストの終わりにパスすべきアサーションを書くところからだ。</p>
+</li>
+</ul>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2QtCA5b">テスト駆動開発</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>仮実装を経て本実装へ</p>
+</div>
+<div class="paragraph">
+<p>失敗するテストを書いてから、最初に行う実装はどのようなものだろうか----ベタ書きの値を返そう。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2QtCA5b">テスト駆動開発</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: はい、オッケー。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py -v
+ test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+
+ ----------------------------------------------------------------------
+ Ran 1 test in 0.000s
+
+ OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テスト鬼さん</strong>: <code>-v</code> のオプションは？</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: これは実施するテストを表示するオプションです。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: オプションなしで実行すると。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py
+ .
+ ----------------------------------------------------------------------
+ Ran 1 test in 0.000s
+
+ OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: こんな感じになります。</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</h3>
@@ -926,8 +1008,13 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 <pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
 
 
+def execute():
+    return "1"
+
+
 class MainTest(unittest.TestCase):
-    pass
+    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", execute())
 
 
 if __name__ == "__main__":
@@ -970,7 +1057,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-17 16:18:07 JST
+Last updated 2018-11-17 16:38:37 JST
 </div>
 </div>
 </body>
