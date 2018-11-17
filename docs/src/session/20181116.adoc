@@ -58,6 +58,32 @@ http://www.hiroshima-arc.org/re_zero_tdd/session/20181109.html#_problem[前回�
 
 *テストおじさん*: http://www.hiroshima-arc.org/re_zero_tdd/session/20181109.html#_%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3[前回のセッション]との違いとして今回はコンソールに出力させるというのが大きな違いですかね。
 
+==== TODOリスト
+
+*テストおじさん*: 最初にまず [red]#TODOリスト# の作成をしましょう。
+
+[quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
+____
+TODOリスト
+
+何をテストすべきだろうか----着手する前に、必要になりそうなテストをリストに書き出しておこう。
+____
+
+*テストおじさん*: 仕様からTODOリストを作成するわけですがここは [red]#一つのプログラムには一つのことをうまくやらせる# の原則に従ってシンプルにやってみましょう。
+
+TODOリストを書き出すテストおじさん。
+
+* [ ] 1 から 100 まで数をプリントできるようにする。
+* [ ] 3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
+* [ ] 5 の倍数のときは｢Buzz｣とプリントできるようにする。
+* [ ] 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
+
+*テストおじさん*: まずは100回繰り返し処理をすることをどうやって実装するかを考えるとして条件に関しては一旦置いておきましょう。
+
+*テストおじさん*: 一つのTODOには一つのことをテストできるようにする・・・みたいな。
+
+
+
 
 === テストファーストから始めるアーキテクチャ
 
@@ -78,5 +104,9 @@ include::../../../dev/20181116/replay/README.md[]
 == 参照
 
 === 参考図書
+
+++++
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217884&linkId=568f25b974af5645e862928a12c354e1&bc1=ffffff&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+++++
 
 === 参考リンク

@@ -446,6 +446,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_todoリストから始めるプロジェクト管理">2.2. TODOリストから始めるプロジェクト管理</a>
 <ul class="sectlevel3">
 <li><a href="#_仕様">2.2.1. 仕様</a></li>
+<li><a href="#_todoリスト">2.2.2. TODOリスト</a></li>
 </ul>
 </li>
 <li><a href="#_テストファーストから始めるアーキテクチャ">2.3. テストファーストから始めるアーキテクチャ</a></li>
@@ -513,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="http://www.hiroshima-arc.org/re_zero_tdd/fizz_buzz.html">FizzBuzz</a></p>
 </li>
 <li>
-<p>クラスを使わずに実装する。</p>
+<p>FizzBuzz をクラスを使わずにテスト駆動で実装する。</p>
 </li>
 </ul>
 </div>
@@ -565,7 +566,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong>テストおじさん</strong>: 今日はFizzBuzzをクラスを使わずにテスト駆動で実装してみたいと思います。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 仕様はこれです。</p>
+<p><strong>テストおじさん</strong>: 今回のお題の仕様です。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -577,6 +578,53 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: <a href="http://www.hiroshima-arc.org/re_zero_tdd/session/20181109.html#_%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3">前回のセッション</a>との違いとして今回はコンソールに出力させるというのが大きな違いですかね。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_todoリスト">2.2.2. TODOリスト</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 最初にまず <span class="red">TODOリスト</span> の作成をしましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>TODOリスト</p>
+</div>
+<div class="paragraph">
+<p>何をテストすべきだろうか----着手する前に、必要になりそうなテストをリストに書き出しておこう。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2QtCA5b">テスト駆動開発</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 仕様からTODOリストを作成するわけですがここは <span class="red">一つのプログラムには一つのことをうまくやらせる</span> の原則に従ってシンプルにやってみましょう。</p>
+</div>
+<div class="paragraph">
+<p>TODOリストを書き出すテストおじさん。</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10063; 1 から 100 まで数をプリントできるようにする。</p>
+</li>
+<li>
+<p>&#10063; 3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。</p>
+</li>
+<li>
+<p>&#10063; 5 の倍数のときは｢Buzz｣とプリントできるようにする。</p>
+</li>
+<li>
+<p>&#10063; 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: まずは100回繰り返し処理をすることをどうやって実装するかを考えるとして条件に関しては一旦置いておきましょう。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 一つのTODOには一つのことをテストできるようにする・・・みたいな。</p>
 </div>
 </div>
 </div>
@@ -618,6 +666,11 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 
 ### TODO リスト
 
+- 1 から 100 まで数をプリントできるようにする。
+- 3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
+- 5 の倍数のときは｢Buzz｣とプリントできるようにする。
+- 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
+
 ## 開発
 
 ### ふりかえり
@@ -631,11 +684,6 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 ## 参照
 
 - [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-Python" data-lang="Python">Unresolved directive in 20181116.adoc - include::../../../dev/20181116/replay/main_test.py[]</code></pre>
 </div>
 </div>
 <div class="sect3">
@@ -657,7 +705,7 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_参考図書">4.1. 参考図書</h3>
-
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217884&linkId=568f25b974af5645e862928a12c354e1&bc1=ffffff&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 </div>
 <div class="sect2">
 <h3 id="_参考リンク">4.2. 参考リンク</h3>
@@ -668,7 +716,7 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-17 13:27:14 JST
+Last updated 2018-11-17 13:51:13 JST
 </div>
 </div>
 </body>
