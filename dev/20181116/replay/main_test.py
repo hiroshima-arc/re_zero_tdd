@@ -3,14 +3,20 @@ from test.support import captured_stdout
 
 
 def execute():
-    print(1)
+    n = 100
+    while n != 0:
+        print(n)
+        n = n - 1
 
 
 class MainTest(unittest.TestCase):
     def test_1から100まで数をプリントできるようにする(self):
         with captured_stdout() as stdout:
             execute()
-        self.assertEqual("1\n", stdout.getvalue())
+            lines = stdout.getvalue().splitlines()
+
+        self.assertEqual("1", lines[99])
+        self.assertEqual("100", lines[0])
 
 
 if __name__ == "__main__":
