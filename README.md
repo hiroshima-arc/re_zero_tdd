@@ -132,8 +132,6 @@ pyenv install 3.6.0
 pyenv local 3.6.0
 ```
 
-**[⬆ back to top](#構成)**
-
 #### Elixir のセットアップ
 
 - asdf のインストール
