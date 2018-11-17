@@ -50,6 +50,24 @@ RUN source  $HOME/.bash_profile && \
 ENV PATH $HOME/.rbenv/shims:$PATH
 RUN gem install bundler rake
 
+# For NodeJs
+ENV NVM_DIR $HOME/.nvm
+ENV NODE_VERSION 8.10.0
+# Install nvm
+RUN git clone https://github.com/creationix/nvm.git $NVM_DIR && \
+    cd $NVM_DIR && \
+    git checkout `git describe --abbrev=0 --tags`
+# Install default version of Node.js
+RUN source $NVM_DIR/nvm.sh && \
+    nvm install v$NODE_VERSION && \
+    nvm alias default v$NODE_VERSION && \
+    nvm use default
+# Add nvm.sh to .bashrc for startup...
+RUN echo "source ${NVM_DIR}/nvm.sh" > $HOME/.bashrc && \
+    source $HOME/.bashrc
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
 # For Python
 ENV PYTHON_VER 3.6.0
 ENV AWS_SAM_VER 0.5.0

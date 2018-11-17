@@ -132,8 +132,6 @@ pyenv install 3.6.0
 pyenv local 3.6.0
 ```
 
-**[⬆ back to top](#構成)**
-
 #### Elixir のセットアップ
 
 - asdf のインストール
@@ -234,6 +232,22 @@ circleci config validate -c .circleci/config.yml
 circleci build .circleci/config.yml
 ```
 
+### Prettier
+
+マークダウンファイルのフォーマットをする
+
+インストール
+
+```
+npm install --save-dev --save-exact prettier
+```
+
+実行
+
+```
+npm run prettier
+```
+
 **[⬆ back to top](#構成)**
 
 ## 開発
@@ -246,3 +260,4 @@ circleci build .circleci/config.yml
 - [AWS SAM Python Hands-on](https://github.com/hiroshima-arc/aws_sam_python_hands-on)
 - [circleci](https://circleci.com/)
 - [docker cloud](https://cloud.docker.com/u/hiroshimaarc/repository/docker/hiroshimaarc/re-zero-tdd)
+- [Prettier](https://prettier.io/)

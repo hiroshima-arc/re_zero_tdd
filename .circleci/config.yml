@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-    - image: hiroshimaarc/re-zero-tdd:1.0.0
+    - image: hiroshimaarc/re-zero-tdd:1.1.0
     working_directory: ~/repo
     steps:
     - checkout

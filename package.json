@@ -1,0 +1,27 @@
+{
+  "name": "re_zero_tdd",
+  "version": "1.0.0",
+  "description": "[![Floobits Status](https://floobits.com/k2work/re_zero_tdd.svg)](https://floobits.com/k2work/re_zero_tdd/redirect)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "1.15.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier **/*.md --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiroshima-arc/re_zero_tdd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hiroshima-arc/re_zero_tdd/issues"
+  },
+  "homepage": "https://github.com/hiroshima-arc/re_zero_tdd#readme"
+}
