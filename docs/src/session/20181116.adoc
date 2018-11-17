@@ -676,6 +676,149 @@ OK
 * [ ] 5 の倍数のときは｢Buzz｣とプリントできるようにする。
 * [ ] 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
 
+==== 明白な実装
+
+*テストおじさん*: さて、　二つ目の [red]#TODOリスト# に取り掛かるとしましょうか。
+
+テストコードを追加するテストおじさん。
+
+[source, Python]
+----
+    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("Fizz", lines[97])
+----
+
+*テストおじさん*: テストは・・・失敗するね、オッケー。
+
+[source, bash]
+----
+$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... FAIL
+
+======================================================================
+FAIL: test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 25, in test_3の倍数のときは数の代わりにFizzをプリントする
+    self.assertEqual("Fizz", lines[97])
+AssertionError: 'Fizz' != '3'
+- Fizz
++ 3
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (failures=1)
+----
+
+*テスト初めて書いたひと*: テストが失敗するのにオッケーだと!?
+
+ニヤリと笑うテストおじさん。
+
+*テストおじさん*: お忘れなく・・・今やっていることはテストではなく設計だということ。
+
+[quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
+____
+皮肉なことに、TDDはテスト技法ではない（Cunninghamの公案)。TDDは分析技法であり、設計技法であり、実際には開発のすべてのアクティビティを構造化する技法なのだ。
+____
+
+*テストおじさん*: さて、では設計を満たす振る舞いを [red]#明白な実装# しましょう。
+
+[source, Python]
+----
+def execute():
+    n = 100
+    while n != 0:
+        if n % 3 == 0:
+            print("Fizz")
+        print(n)
+        n = n - 1
+----
+
+*テストおじさん*: えい!
+
+[source, bash]
+----
+ $ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... FAIL
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 20, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", lines[99])
+AssertionError: '1' != '26'
+- 1
++ 26
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: おや、最初のテストが失敗してしまいました。
+
+変更箇所を眺めるテストおじさん。
+
+[source, Python]
+----
+def execute():
+    n = 100
+    while n != 0:
+        if n % 3 == 0:
+            print("Fizz") <1>
+        print(n) <2>
+        n = n - 1
+----
+
+*テストおじさん*: あー、printが２回実行されてますね。
+
+*テストおじさん*: ここはこうで・・・
+
+[source, Python]
+----
+def execute():
+    n = 100
+    while n != 0:
+        if n % 3 == 0:
+            print("Fizz")
+        else:
+            print(n)
+        n = n - 1
+----
+
+*テストおじさん*: こう！
+
+[source, bash]
+----
+$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: [red]#TODOリスト# 二つ目を片付けることができました。
+
+* [x] 1 から 100 まで数をプリントできるようにする。
+* [x] 3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
+* [ ] 5 の倍数のときは｢Buzz｣とプリントできるようにする。
+* [ ] 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
+
+
+
 === リファクタリングから始める構造化プログラミング
 
 == ふりかえり
