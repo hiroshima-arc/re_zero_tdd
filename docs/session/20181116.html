@@ -450,7 +450,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_アジャイルソフトウェア開発">2.2.3. アジャイルソフトウェア開発</a></li>
 </ul>
 </li>
-<li><a href="#_テストファーストから始めるアーキテクチャ">2.3. テストファーストから始めるアーキテクチャ</a></li>
+<li><a href="#_テストファーストから始めるアーキテクチャ">2.3. テストファーストから始めるアーキテクチャ</a>
+<ul class="sectlevel3">
+<li><a href="#_テストファースト">2.3.1. テストファースト</a></li>
+</ul>
+</li>
 <li><a href="#_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</a></li>
 </ul>
 </li>
@@ -827,7 +831,41 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="sect2">
 <h3 id="_テストファーストから始めるアーキテクチャ">2.3. テストファーストから始めるアーキテクチャ</h3>
+<div class="sect3">
+<h4 id="_テストファースト">2.3.1. テストファースト</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: では1つ目の <span class="red">TODOリスト</span> から片付けていきましょうか。</p>
+</div>
+<div class="paragraph">
+<p>ファイルを新規作成するテストおじさん。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: まずは <span class="red">テストファースト</span> で。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py -v
 
+ ----------------------------------------------------------------------
+ Ran 0 tests in 0.000s
+
+ OK</code></pre>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>テストファースト</p>
+</div>
+<div class="paragraph">
+<p>いつテストを書くべきだろうか----それはテスト対象のコードを書く前だ。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2QtCA5b">テスト駆動開発</a>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</h3>
@@ -883,6 +921,19 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 - [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)</code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
+
+
+class MainTest(unittest.TestCase):
+    pass
+
+
+if __name__ == "__main__":
+    unittest.main()</code></pre>
+</div>
+</div>
 <div class="sect3">
 <h4 id="_keep">3.1. Keep</h4>
 
@@ -919,7 +970,7 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-17 15:45:51 JST
+Last updated 2018-11-17 16:18:07 JST
 </div>
 </div>
 </body>
