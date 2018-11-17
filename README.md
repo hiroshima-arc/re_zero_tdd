@@ -234,11 +234,7 @@ circleci config validate -c .circleci/config.yml
 circleci build .circleci/config.yml
 ```
 
-**[⬆ back to top](#構成)**
-
-## 開発
-
-#### Prettier
+### Prettier
 
 マークダウンファイルのフォーマットをする
 
@@ -253,6 +249,10 @@ npm install --save-dev --save-exact prettier
 ```
 npm run prettier
 ```
+
+**[⬆ back to top](#構成)**
+
+## 開発
 
 **[⬆ back to top](#構成)**
 
