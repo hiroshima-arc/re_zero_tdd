@@ -1,6 +1,7 @@
 # Re:ゼロから始めるテスト駆動開発
 
 [![Floobits Status](https://floobits.com/k2work/re_zero_tdd.svg)](https://floobits.com/k2work/re_zero_tdd/redirect)
+[![CircleCI](https://circleci.com/gh/hiroshima-arc/re_zero_tdd.svg?style=svg)](https://circleci.com/gh/hiroshima-arc/re_zero_tdd)
 
 # 目的
 
@@ -169,6 +170,39 @@ asdf install elixir 1.7.4
 asdf local elixir 1.7.4
 ```
 
+### CI 環境のセットアップ
+
+#### CI 用イメージのビルド
+
+```
+vagrant up
+vagrant ssh
+cd /vagrant
+docker build -t re-zero-tdd . -f ops/Dockerfile
+docker tag re-zero-tdd:latest hiroshimaarc/re-zero-tdd:1.0.0
+```
+
+#### イメージのプッシュ
+
+```
+docker login
+docker push hiroshimaarc/re-zero-tdd:1.0.0
+```
+
+#### circleci コマンドのインストール
+
+```
+sudo curl -fLSs https://circle.ci/cli | bash
+circleci update
+```
+
+#### circleci 設定ファイルの作成
+
+```
+mkdir .circleci
+touch .circleci/config.yml
+```
+
 **[⬆ back to top](#構成)**
 
 ## 配置
@@ -187,6 +221,18 @@ gradle livereload
 **[⬆ back to top](#構成)**
 
 ## 運用
+
+### circleci
+
+#### local 環境で circleci を動かす
+
+```
+vagrant up
+vagrant ssh
+cd /vagrnt
+circleci config validate -c .circleci/config.yml
+circleci build .circleci/config.yml
+```
 
 **[⬆ back to top](#構成)**
 
@@ -214,4 +260,6 @@ npm run prettier
 
 - [AWS SAM Node.js Hands-on](https://github.com/hiroshima-arc/aws_sam_nodejs_hands-on)
 - [AWS SAM Python Hands-on](https://github.com/hiroshima-arc/aws_sam_python_hands-on)
+- [circleci](https://circleci.com/)
+- [docker cloud](https://cloud.docker.com/u/hiroshimaarc/repository/docker/hiroshimaarc/re-zero-tdd)
 - [Prettier](https://prettier.io/)

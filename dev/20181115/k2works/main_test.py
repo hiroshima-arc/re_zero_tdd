@@ -12,7 +12,7 @@ data = {
 
 def execute(count=100):
     set_data(count)
-    set_values_by_generate(data['count'])
+    set_values_by_generate()
     print_values()
 
 
@@ -26,8 +26,8 @@ def set_data(count):
     data['values'] = []
 
 
-def set_values_by_generate(count):
-    for n in range(count):
+def set_values_by_generate():
+    for n in range(data['count']):
         value = generate(n)
         data['values'].append(value)
 
