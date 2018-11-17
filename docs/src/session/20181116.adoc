@@ -1,0 +1,44 @@
+:toc: left
+:toclevels: 5
+:sectnums:
+
+= 見知らぬ、構造化プログラミング
+
+== 概要
+=== 実施日時
+* https://hiroshima-arc.connpass.com/event/109589/[2018年11月16日（金） 18:00 - 21:00]
+
+=== 会場
+
+++++
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6584.583947396631!2d132.458662!3d34.393924!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe874ed70577dcf46!2z44Kz44Ov44O844Kt44Oz44Kw44K544Oa44O844K5IFNoYWtlSGFuZHM!5e0!3m2!1sja!2sjp!4v1541923570346" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+++++
+
+=== 参加メンバー
+* https://portfolio.forkwell.com/@k2works[テストおじさん]
+* リモートさん
+* テスト鬼さん
+* テスト初めて書いたひと
+
+=== お題
+* http://www.hiroshima-arc.org/re_zero_tdd/fizz_buzz.html[FizzBuzz]
+* クラスを使わずに実装する。
+
+=== 言語
+* Python 3.6
+
+== セッション
+
+== ふりかえり
+
+==== Keep
+
+==== Problem
+
+==== Try
+
+== 参照
+
+=== 参考図書
+
+=== 参考リンク
