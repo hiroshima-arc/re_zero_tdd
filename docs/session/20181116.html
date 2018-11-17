@@ -442,8 +442,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_セッション">2. セッション</a>
 <ul class="sectlevel2">
-<li><a href="#_前回のあらすじ">2.1. 前回のあらすじ</a></li>
-<li><a href="#_todoリストから始めるプロジェクト管理">2.2. TODOリストから始めるプロジェクト管理</a></li>
+<li><a href="#_前回までのあらすじ">2.1. 前回までのあらすじ</a></li>
+<li><a href="#_todoリストから始めるプロジェクト管理">2.2. TODOリストから始めるプロジェクト管理</a>
+<ul class="sectlevel3">
+<li><a href="#_仕様">2.2.1. 仕様</a></li>
+</ul>
+</li>
 <li><a href="#_テストファーストから始めるアーキテクチャ">2.3. テストファーストから始めるアーキテクチャ</a></li>
 <li><a href="#_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</a></li>
 </ul>
@@ -530,12 +534,51 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_セッション">2. セッション</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_前回のあらすじ">2.1. 前回のあらすじ</h3>
-
+<h3 id="_前回までのあらすじ">2.1. 前回までのあらすじ</h3>
+<div class="paragraph">
+<p><a href="http://www.hiroshima-arc.org/re_zero_tdd/session/20181109.html#_problem">前回のセッション</a>でクラスベースだとオブジェクト指向に関する解説も必要になることがわかったテストおじさん。</p>
+</div>
+<div class="paragraph">
+<p>そこで今回はクラスを使わずにテスト駆動開発をやってみることにしたのであった。</p>
+</div>
+<div class="paragraph">
+<p>さてさてどうなることやら・・・</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_todoリストから始めるプロジェクト管理">2.2. TODOリストから始めるプロジェクト管理</h3>
-
+<div class="sect3">
+<h4 id="_仕様">2.2.1. 仕様</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: はい、第２回 Re:ゼロから始めるテスト駆動開発 はじめます、レポジトリは <a href="https://github.com/hiroshima-arc/re_zero_tdd">ここ</a>ね。</p>
+</div>
+<div class="paragraph">
+<p><strong>リモートさん</strong>: 今日は家からうっすら参加です。ご飯を食べたりで適当に抜けています。</p>
+</div>
+<div class="paragraph">
+<p><strong>テスト鬼さん</strong>: よろしくお願いします。</p>
+</div>
+<div class="paragraph">
+<p><strong>テスト初めて書いたひと</strong>: よろしくお願いします。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 今日はFizzBuzzをクラスを使わずにテスト駆動で実装してみたいと思います。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 仕様はこれです。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>1 から 100 までの数をプリントするプログラムを書け。
+ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <a href="http://www.hiroshima-arc.org/re_zero_tdd/session/20181109.html#_%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3">前回のセッション</a>との違いとして今回はコンソールに出力させるというのが大きな違いですかね。</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_テストファーストから始めるアーキテクチャ">2.3. テストファーストから始めるアーキテクチャ</h3>
@@ -550,6 +593,51 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_ふりかえり">3. ふりかえり</h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Markdown" data-lang="Markdown"># 20181116 セッションリプレイ
+
+## 概要
+
+FizzBuzz をクラスを使わずにテスト駆動で実装する。
+
+### 参加メンバー
+
+- テストおじさん
+- テスト鬼さん
+- テスト初めて書いたひと
+
+
+## 仕様
+
+&gt; 1 から 100 までの数をプリントするプログラムを書け。
+&gt; ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。
+
+
+## 設計
+
+### TODO リスト
+
+## 開発
+
+### ふりかえり
+
+#### Keep
+
+#### Problem
+
+#### Try
+
+## 参照
+
+- [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">Unresolved directive in 20181116.adoc - include::../../../dev/20181116/replay/main_test.py[]</code></pre>
+</div>
+</div>
 <div class="sect3">
 <h4 id="_keep">3.1. Keep</h4>
 
@@ -580,7 +668,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-17 12:50:55 JST
+Last updated 2018-11-17 13:27:14 JST
 </div>
 </div>
 </body>
