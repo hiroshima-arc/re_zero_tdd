@@ -283,6 +283,112 @@ ____
 
 *テストおじさん*: こんな感じになります。
 
+==== 仮実装
+
+コードを書き換えてテストを実行するテストをおじさん。
+
+[source, Python]
+----
+def execute():
+    print(1)
+----
+
+[source, bash]
+----
+ python main_test.py
+1
+F
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 10, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", execute())
+AssertionError: '1' != None
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: 1をコンソールに出力はできたけど結果をどうやってアサーションしましょうかね。
+
+*テストおじさん*: だいたいこんな時私は https://www.google.com/search?q=Python+unittest+%E6%A8%99%E6%BA%96%E5%87%BA%E5%8A%9B&ie=utf-8&oe=utf-8&client=firefox-b-ab[Python unittest 標準出力] みたいなキーワードでググります。
+
+*テストおじさん*: いくつかの記事を眺めて良さげなのを試します。
+
+*テストおじさん*: 今回は https://qiita.com/Asayu123/items/6f2471aa5ebe597b2638[こちらのQiitaの記事] を参考にさせていただきましょう。
+
+いくつかコードを追記するテストおじさん
+
+[source, Python]
+----
+import unittest
+from test.support import captured_stdout
+
+
+def execute():
+    print(1)
+
+
+class MainTest(unittest.TestCase):
+    def test_1から100まで数をプリントできるようにする(self):
+        with captured_stdout() as stdout:
+            execute()
+        self.assertEqual("1", stdout.getvalue())
+----
+
+*テストおじさん*: こうかな・・・テスト!
+
+[source, bash]
+----
+$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... FAIL
+
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 13, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", stdout.getvalue())
+AssertionError: '1' != '1\n'
+- 1
++ 1
+
+?   +
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: ありゃ、えーと `AssertionError: '1' != '1\n'` ・・・ふむ、改行されて出力されるのね。
+
+[source, Python]
+----
+class MainTest(unittest.TestCase):
+    def test_1から100まで数をプリントできるようにする(self):
+        with captured_stdout() as stdout:
+            execute()
+        self.assertEqual("1\n", stdout.getvalue())
+----
+
+*テストおじさん*: これで・・・オッケー。
+
+[source, bash]
+----
+ $ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+----
+
 === リファクタリングから始める構造化プログラミング
 
 == ふりかえり

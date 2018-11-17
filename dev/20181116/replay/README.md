@@ -39,3 +39,4 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 ## 参照
 
 - [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)
+- [Python プログラムの標準出力をテストする](https://qiita.com/Asayu123/items/6f2471aa5ebe597b2638)

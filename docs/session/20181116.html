@@ -454,6 +454,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_テストファースト">2.3.1. テストファースト</a></li>
 <li><a href="#_アサートファースト">2.3.2. アサートファースト</a></li>
+<li><a href="#_仮実装">2.3.3. 仮実装</a></li>
 </ul>
 </li>
 <li><a href="#_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</a></li>
@@ -948,6 +949,122 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong>テストおじさん</strong>: こんな感じになります。</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_仮実装">2.3.3. 仮実装</h4>
+<div class="paragraph">
+<p>コードを書き換えてテストを実行するテストをおじさん。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    print(1)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"> python main_test.py
+1
+F
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 10, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", execute())
+AssertionError: '1' != None
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 1をコンソールに出力はできたけど結果をどうやってアサーションしましょうかね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: だいたいこんな時私は <a href="https://www.google.com/search?q=Python+unittest+%E6%A8%99%E6%BA%96%E5%87%BA%E5%8A%9B&amp;ie=utf-8&amp;oe=utf-8&amp;client=firefox-b-ab">Python unittest 標準出力</a> みたいなキーワードでググります。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: いくつかの記事を眺めて良さげなのを試します。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 今回は <a href="https://qiita.com/Asayu123/items/6f2471aa5ebe597b2638">こちらのQiitaの記事</a> を参考にさせていただきましょう。</p>
+</div>
+<div class="paragraph">
+<p>いくつかコードを追記するテストおじさん</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
+from test.support import captured_stdout
+
+
+def execute():
+    print(1)
+
+
+class MainTest(unittest.TestCase):
+    def test_1から100まで数をプリントできるようにする(self):
+        with captured_stdout() as stdout:
+            execute()
+        self.assertEqual("1", stdout.getvalue())</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: こうかな・・・テスト!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... FAIL
+
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 13, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", stdout.getvalue())
+AssertionError: '1' != '1\n'
+- 1
++ 1
+
+?   +
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ありゃ、えーと <code>AssertionError: '1' != '1\n'</code> ・・・ふむ、改行されて出力されるのね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">class MainTest(unittest.TestCase):
+    def test_1から100まで数をプリントできるようにする(self):
+        with captured_stdout() as stdout:
+            execute()
+        self.assertEqual("1\n", stdout.getvalue())</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: これで・・・オッケー。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</h3>
@@ -1000,21 +1117,25 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 
 ## 参照
 
-- [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)</code></pre>
+- [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)
+- [Python プログラムの標準出力をテストする](https://qiita.com/Asayu123/items/6f2471aa5ebe597b2638)</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
+from test.support import captured_stdout
 
 
 def execute():
-    return "1"
+    print(1)
 
 
 class MainTest(unittest.TestCase):
     def test_1から100まで数をプリントできるようにする(self):
-        self.assertEqual("1", execute())
+        with captured_stdout() as stdout:
+            execute()
+        self.assertEqual("1\n", stdout.getvalue())
 
 
 if __name__ == "__main__":
@@ -1057,7 +1178,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-17 16:38:37 JST
+Last updated 2018-11-17 17:05:21 JST
 </div>
 </div>
 </body>
