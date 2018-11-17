@@ -443,10 +443,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_セッション">2. セッション</a>
 <ul class="sectlevel2">
 <li><a href="#_前回までのあらすじ">2.1. 前回までのあらすじ</a></li>
-<li><a href="#_todoリストから始めるプロジェクト管理">2.2. TODOリストから始めるプロジェクト管理</a>
+<li><a href="#_todoリストから始めるアジャイルソフトウェア開発">2.2. TODOリストから始めるアジャイルソフトウェア開発</a>
 <ul class="sectlevel3">
 <li><a href="#_仕様">2.2.1. 仕様</a></li>
 <li><a href="#_todoリスト">2.2.2. TODOリスト</a></li>
+<li><a href="#_アジャイルソフトウェア開発">2.2.3. アジャイルソフトウェア開発</a></li>
 </ul>
 </li>
 <li><a href="#_テストファーストから始めるアーキテクチャ">2.3. テストファーストから始めるアーキテクチャ</a></li>
@@ -547,7 +548,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="_todoリストから始めるプロジェクト管理">2.2. TODOリストから始めるプロジェクト管理</h3>
+<h3 id="_todoリストから始めるアジャイルソフトウェア開発">2.2. TODOリストから始めるアジャイルソフトウェア開発</h3>
 <div class="sect3">
 <h4 id="_仕様">2.2.1. 仕様</h4>
 <div class="paragraph">
@@ -625,6 +626,202 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: 一つのTODOには一つのことをテストできるようにする・・・みたいな。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_アジャイルソフトウェア開発">2.2.3. アジャイルソフトウェア開発</h4>
+<div class="paragraph">
+<p><strong>テスト鬼さん</strong>: TODOリストの粒度はどれくらいが適切なんですかね？</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 自分はテストメソッドに対応するぐらいを目安に書いてますね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テスト初めて書いたひと</strong>: 実際の開発だとTODOリストの粒度って立場によって変わってくると思うんですがどう取りまとめて行けばいいんですかね？</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: そうですよね、作業者レベルのTODOもアプリケーションの要求から落とし込まないといけませよね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: そういったものをどう取り扱うかは <span class="red">アジャイルソフトウェア開発手法</span> が参考になるかと思います。</p>
+</div>
+<div class="paragraph">
+<p><strong>テスト初めて書いたひと</strong>: アジャイル?</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: えーとです、例えば今日のお題の仕様ですが。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>1 から 100 までの数をプリントするプログラムを書け。
+ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: これが</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><span class="red">1 から 1000</span> までの数をプリントするプログラムを書け。
+ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: とか</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><span class="red">1 から 1000</span> までの数をプリントするプログラムを書け。
+ただし 3 の倍数のときは数の代わりに <span class="red">｢FizzFizzFizz｣</span> と、5 の倍数のときは <span class="red">｢BuzzBuzzBuzz｣</span> とプリントし、3 と 5 両方の倍数の場合には <span class="red">｢FizzBuzzFizzBuzzFizzBuzz｣</span> とプリントすること。
+<span class="red">ただし、上記の処理は月初のみに行うこと。</span></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: からの</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p><span class="red">1 から 1000</span> までの数をプリントするプログラムを書け。
+ただし 3 の倍数のときは数の代わりに <span class="red">｢FizzFizzFizz｣</span> と、5 の倍数のときは <span class="red">｢BuzzBuzzBuzz｣</span> とプリントし、3 と 5 両方の倍数の場合には <span class="red">｢FizzBuzzFizzBuzzFizzBuzz｣</span> とプリントすること。
+<span class="red">ただし、上記の処理は月初のみに行うこと。</span>
+<span class="red">上記の仕様は現状のビジネスモデルの変更に伴い無効とする。</span></p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><strong>テスト鬼さん</strong>: !</p>
+</div>
+<div class="paragraph">
+<p><strong>テスト初めて書いたひと</strong>: !!</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: みたいに仕様が確定した後もコロコロ変わっていくと従来型の開発アプローチでは対応が難しいですよね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: そういったビジネスとITの変化が <span class="red">アジャイルソフトウェア開発宣言</span> につながることになりました。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>私たちは、ソフトウェア開発の実践</p>
+</div>
+<div class="paragraph">
+<p>あるいは実践を手助けをする活動を通じて、</p>
+</div>
+<div class="paragraph">
+<p>よりよい開発方法を見つけだそうとしている。</p>
+</div>
+<div class="paragraph">
+<p>この活動を通して、私たちは以下の価値に至った。</p>
+</div>
+<div class="paragraph">
+<p>プロセスやツールよりも個人と対話を、</p>
+</div>
+<div class="paragraph">
+<p>包括的なドキュメントよりも動くソフトウェアを、</p>
+</div>
+<div class="paragraph">
+<p>契約交渉よりも顧客との協調を、</p>
+</div>
+<div class="paragraph">
+<p>計画に従うことよりも変化への対応を、</p>
+</div>
+<div class="paragraph">
+<p>価値とする。すなわち、左記のことがらに価値があることを</p>
+</div>
+<div class="paragraph">
+<p>認めながらも、私たちは右記のことがらにより価値をおく。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="http://agilemanifesto.org/iso/ja/manifesto.html">アジャイルソフトウェア開発宣言</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: そして <span class="red">アジャイル宣言の背後にある原則</span> を実現するための手法として <span class="red">XP（eXtreme Programming）</span> や <span class="red">スクラム</span> があります。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>私たちは以下の原則に従う:</p>
+</div>
+<div class="paragraph">
+<p>顧客満足を最優先し、
+価値のあるソフトウェアを早く継続的に提供します。</p>
+</div>
+<div class="paragraph">
+<p>要求の変更はたとえ開発の後期であっても歓迎します。
+変化を味方につけることによって、お客様の競争力を引き上げます。</p>
+</div>
+<div class="paragraph">
+<p>動くソフトウェアを、2-3週間から2-3ヶ月という
+できるだけ短い時間間隔でリリースします。</p>
+</div>
+<div class="paragraph">
+<p>ビジネス側の人と開発者は、プロジェクトを通して
+日々一緒に働かなければなりません。</p>
+</div>
+<div class="paragraph">
+<p>意欲に満ちた人々を集めてプロジェクトを構成します。
+環境と支援を与え仕事が無事終わるまで彼らを信頼します。</p>
+</div>
+<div class="paragraph">
+<p>情報を伝えるもっとも効率的で効果的な方法は
+フェイス・トゥ・フェイスで話をすることです。</p>
+</div>
+<div class="paragraph">
+<p>動くソフトウェアこそが進捗の最も重要な尺度です。</p>
+</div>
+<div class="paragraph">
+<p>アジャイル･プロセスは持続可能な開発を促進します。
+一定のペースを継続的に維持できるようにしなければなりません。</p>
+</div>
+<div class="paragraph">
+<p>技術的卓越性と優れた設計に対する
+不断の注意が機敏さを高めます。</p>
+</div>
+<div class="paragraph">
+<p>シンプルさ（ムダなく作れる量を最大限にすること）が本質です。</p>
+</div>
+<div class="paragraph">
+<p>最良のアーキテクチャ・要求・設計は、
+自己組織的なチームから生み出されます。</p>
+</div>
+<div class="paragraph">
+<p>チームがもっと効率を高めることができるかを定期的に振り返り、
+それに基づいて自分たちのやり方を最適に調整します。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="http://agilemanifesto.org/iso/ja/principles.html">アジャイル宣言の背後にある原則</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 要求をソフトウェアに落とし込むためのプラクティスとして <span class="red">ストーリー</span> や <span class="red">プロダクトバックログ</span> <span class="red">スプリントバックログ</span> なんてのがありますね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: プログラムマ目線なら <span class="red">TODOリスト</span> は <span class="red">スプリントバックログ</span> より細かい粒度になるんじゃないかなと思ってます。</p>
+</div>
+<div class="paragraph">
+<p><strong>テスト初めて書いたひと</strong>: <span class="red">TODOリスト</span> に抜けや漏れがあった場合はどうするんですかね?</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>要求の変更はたとえ開発の後期であっても歓迎します。
+変化を味方につけることによって、お客様の競争力を引き上げます。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: の原則に従い、<span class="red">テストファーストプログラミング</span> と <span class="red">インクリメンタルな設計</span> で <span class="red">TODOリスト</span> の抜けを埋めて漏れを塞ぎましょう。</p>
 </div>
 </div>
 </div>
@@ -709,14 +906,20 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 </div>
 <div class="sect2">
 <h3 id="_参考リンク">4.2. 参考リンク</h3>
-
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.buildinsider.net/enterprise/agile/01">アジャイルとは何か？ ツールと開発手法「スクラム／XP」、ウォーターフォールとの違い</a></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-17 13:51:13 JST
+Last updated 2018-11-17 15:45:51 JST
 </div>
 </div>
 </body>
