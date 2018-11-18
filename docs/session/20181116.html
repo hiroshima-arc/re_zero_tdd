@@ -460,7 +460,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_アーキテクチャ">2.3.6. アーキテクチャ</a></li>
 </ul>
 </li>
-<li><a href="#_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</a></li>
+<li><a href="#_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</a>
+<ul class="sectlevel3">
+<li><a href="#_重複したコード">2.4.1. 重複したコード</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_ふりかえり">3. ふりかえり</a>
@@ -2067,7 +2071,261 @@ OK</code></pre>
 </div>
 <div class="sect2">
 <h3 id="_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</h3>
+<div class="sect3">
+<h4 id="_重複したコード">2.4.1. 重複したコード</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: さて、仕様を満たすプログラムはできましたがまだ完了ではありません。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: リファクタリングの時間です!</p>
+</div>
+<div class="paragraph">
+<p><strong>テスト初めて書いたひと</strong>: <span class="red">コードの不吉な臭い</span> ですね。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>コードの不吉な臭い</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>重複したコード</p>
+</li>
+<li>
+<p>長過ぎるコード</p>
+</li>
+<li>
+<p>巨大なクラス</p>
+</li>
+<li>
+<p>長すぎるパラメータリスト</p>
+</li>
+<li>
+<p>変更の偏り</p>
+</li>
+<li>
+<p>変更の分散</p>
+</li>
+<li>
+<p>特性の横恋慕</p>
+</li>
+<li>
+<p>データの群れ</p>
+</li>
+<li>
+<p>基本データ型への執着</p>
+</li>
+<li>
+<p>スイッチ文</p>
+</li>
+<li>
+<p>パラレル継承</p>
+</li>
+<li>
+<p>怠け者クラス</p>
+</li>
+<li>
+<p>疑わしき一般化</p>
+</li>
+<li>
+<p>一時的属性</p>
+</li>
+<li>
+<p>メッセージの連鎖</p>
+</li>
+<li>
+<p>仲介人</p>
+</li>
+<li>
+<p>不適切な関係</p>
+</li>
+<li>
+<p>クラスのインタフェース不一致</p>
+</li>
+<li>
+<p>未成熟なクラスライブラリ</p>
+</li>
+<li>
+<p>データクラス</p>
+</li>
+<li>
+<p>相続拒否</p>
+</li>
+<li>
+<p>コメント</p>
+</li>
+</ul>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: イエス! その前に <span class="red">リファクタリングのヒント</span> からチェックしてみましょう。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: テストに関してはどうですかね。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>リファクタリングのヒント</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10003; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
+</li>
+<li>
+<p>&#10003; リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
+</li>
+<li>
+<p>&#10063; リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。</p>
+</li>
+<li>
+<p>&#10063; コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。</p>
+</li>
+<li>
+<p>&#10063; リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。</p>
+</li>
+<li>
+<p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
+</li>
+<li>
+<p>&#10063; ３三度目になったらリファクタリング開始。</p>
+</li>
+<li>
+<p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
+</li>
+<li>
+<p>&#10063; コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。</p>
+</li>
+<li>
+<p>&#10063; テストを完全に自動化して、その結果もテストにチェックさせること。</p>
+</li>
+<li>
+<p>&#10003; テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
+</li>
+</ul>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="paragraph">
+<p>コードを眺めるテストおじさん。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">class MainTest(unittest.TestCase):
+    def test_1から100まで数をプリントできるようにする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
 
+        self.assertEqual("1", lines[99])
+        self.assertEqual("Buzz", lines[0])
+
+    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("Fizz", lines[97])
+
+    def test_5の倍数のときはBuzzとプリントする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("Buzz", lines[95])
+
+    def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("FizzBuzz", lines[85])</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: テストコードに <span class="red">重複したコード</span> がありますね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">メソッドの抽出</span> を実施して <span class="red">フィクスチャー</span> にまとめましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>メソッドの抽出</p>
+</div>
+<div class="paragraph">
+<p>ひとまとめにできるコードの断片がある。</p>
+</div>
+<div class="paragraph">
+<p>コードの断片をメソッドにして、それに目的を表すような名前をつける。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>フィクスチャー</p>
+</div>
+<div class="paragraph">
+<p>複数のテストから使われる共通のオブジェクトを作るにはどうしたらよいだろうか---テストメソッド内のローカル変数をインスタンス変数に引き上げ、オーバーライドしたsetUpメソッドの中で初期化を行う。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2QtCA5b">テスト駆動開発</a>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">class MainTest(unittest.TestCase):
+    def setUp(self):
+        with captured_stdout() as stdout:
+            execute()
+            self.lines = stdout.getvalue().splitlines()
+
+    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[99])
+        self.assertEqual("Buzz", self.lines[0])
+
+    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        self.assertEqual("Fizz", self.lines[97])
+
+    def test_5の倍数のときはBuzzとプリントする(self):
+        self.assertEqual("Buzz", self.lines[95])
+
+    def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
+        self.assertEqual("FizzBuzz", self.lines[85])</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: プログラムが壊れてないか確認しましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 大丈夫ですね。</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2102,7 +2360,7 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 - ~~1 から 100 まで数をプリントできるようにする。~~
 - ~~3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。~~
 - ~~5 の倍数のときは｢Buzz｣とプリントできるようにする。~~
-- 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
+- ~~3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。~~
 
 ## 開発
 
@@ -2141,31 +2399,23 @@ def execute():
 
 
 class MainTest(unittest.TestCase):
-    def test_1から100まで数をプリントできるようにする(self):
+    def setUp(self):
         with captured_stdout() as stdout:
             execute()
-            lines = stdout.getvalue().splitlines()
+            self.lines = stdout.getvalue().splitlines()
 
-        self.assertEqual("1", lines[99])
-        self.assertEqual("Buzz", lines[0])
+    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[99])
+        self.assertEqual("Buzz", self.lines[0])
 
     def test_3の倍数のときは数の代わりにFizzをプリントする(self):
-        with captured_stdout() as stdout:
-            execute()
-            lines = stdout.getvalue().splitlines()
-        self.assertEqual("Fizz", lines[97])
+        self.assertEqual("Fizz", self.lines[97])
 
     def test_5の倍数のときはBuzzとプリントする(self):
-        with captured_stdout() as stdout:
-            execute()
-            lines = stdout.getvalue().splitlines()
-        self.assertEqual("Buzz", lines[95])
+        self.assertEqual("Buzz", self.lines[95])
 
     def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
-        with captured_stdout() as stdout:
-            execute()
-            lines = stdout.getvalue().splitlines()
-        self.assertEqual("FizzBuzz", lines[85])
+        self.assertEqual("FizzBuzz", self.lines[85])
 
 
 if __name__ == "__main__":
@@ -2192,6 +2442,7 @@ if __name__ == "__main__":
 <div class="sect2">
 <h3 id="_参考図書">4.1. 参考図書</h3>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217884&linkId=568f25b974af5645e862928a12c354e1&bc1=ffffff&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=427405019X&linkId=08e705a5969e20f5129b4d3cefbcdb15&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4798105538&linkId=12f5983ecb6ad915457406c2fd0d89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 </div>
 <div class="sect2">
@@ -2215,7 +2466,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-18 16:34:57 JST
+Last updated 2018-11-18 17:43:20 JST
 </div>
 </div>
 </body>

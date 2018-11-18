@@ -1213,6 +1213,166 @@ ____
 
 === リファクタリングから始める構造化プログラミング
 
+==== 重複したコード
+
+*テストおじさん*: さて、仕様を満たすプログラムはできましたがまだ完了ではありません。
+
+*テストおじさん*: リファクタリングの時間です!
+
+*テスト初めて書いたひと*: [red]#コードの不吉な臭い# ですね。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+コードの不吉な臭い
+
+* 重複したコード
+* 長過ぎるコード
+* 巨大なクラス
+* 長すぎるパラメータリスト
+* 変更の偏り
+* 変更の分散
+* 特性の横恋慕
+* データの群れ
+* 基本データ型への執着
+* スイッチ文
+* パラレル継承
+* 怠け者クラス
+* 疑わしき一般化
+* 一時的属性
+* メッセージの連鎖
+* 仲介人
+* 不適切な関係
+* クラスのインタフェース不一致
+* 未成熟なクラスライブラリ
+* データクラス
+* 相続拒否
+* コメント
+____
+
+*テストおじさん*: イエス! その前に [red]#リファクタリングのヒント# からチェックしてみましょう。
+
+*テストおじさん*: テストに関してはどうですかね。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+リファクタリングのヒント
+
+* [x] 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。
+
+* [x] リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。
+
+* [ ] リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。
+
+* [ ] コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。
+
+* [ ] リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。
+
+* [ ] リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。
+
+* [ ] ３三度目になったらリファクタリング開始。
+
+* [ ] あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。
+
+* [ ] コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。
+
+* [ ] テストを完全に自動化して、その結果もテストにチェックさせること。
+
+* [x] テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。
+____
+
+コードを眺めるテストおじさん。
+
+[source, Python]
+----
+class MainTest(unittest.TestCase):
+    def test_1から100まで数をプリントできるようにする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+
+        self.assertEqual("1", lines[99])
+        self.assertEqual("Buzz", lines[0])
+
+    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("Fizz", lines[97])
+
+    def test_5の倍数のときはBuzzとプリントする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("Buzz", lines[95])
+
+    def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("FizzBuzz", lines[85])
+----
+
+*テストおじさん*: テストコードに [red]#重複したコード# がありますね。
+
+*テストおじさん*: [red]#メソッドの抽出# を実施して [red]#フィクスチャー# にまとめましょう。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+メソッドの抽出
+
+ひとまとめにできるコードの断片がある。
+
+コードの断片をメソッドにして、それに目的を表すような名前をつける。
+____
+
+[quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
+____
+フィクスチャー
+
+複数のテストから使われる共通のオブジェクトを作るにはどうしたらよいだろうか---テストメソッド内のローカル変数をインスタンス変数に引き上げ、オーバーライドしたsetUpメソッドの中で初期化を行う。
+____
+
+[source, Python]
+----
+class MainTest(unittest.TestCase):
+    def setUp(self):
+        with captured_stdout() as stdout:
+            execute()
+            self.lines = stdout.getvalue().splitlines()
+
+    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[99])
+        self.assertEqual("Buzz", self.lines[0])
+
+    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        self.assertEqual("Fizz", self.lines[97])
+
+    def test_5の倍数のときはBuzzとプリントする(self):
+        self.assertEqual("Buzz", self.lines[95])
+
+    def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
+        self.assertEqual("FizzBuzz", self.lines[85])
+----
+
+*テストおじさん*: プログラムが壊れてないか確認しましょう。
+
+[source, bash]
+----
+$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: 大丈夫ですね。
+
+
 == ふりかえり
 [source, Markdown]
 ----
@@ -1237,6 +1397,7 @@ include::../../../dev/20181116/replay/main_test.py[]
 
 ++++
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217884&linkId=568f25b974af5645e862928a12c354e1&bc1=ffffff&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=427405019X&linkId=08e705a5969e20f5129b4d3cefbcdb15&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4798105538&linkId=12f5983ecb6ad915457406c2fd0d89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 ++++
 
