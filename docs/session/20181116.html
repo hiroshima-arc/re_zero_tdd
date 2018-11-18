@@ -1561,6 +1561,144 @@ OK</code></pre>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: さて、　三つ目の <span class="red">TODOリスト</span> に取り掛かるとしましょうか。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: まずはテスト・・・もとい、設計でしたね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_5の倍数のときはBuzzとプリントする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("Buzz", lines[95])</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: テストは・・・失敗すると。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... FAIL
+
+======================================================================
+FAIL: test_5の倍数のときはBuzzとプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 34, in test_5の倍数のときはBuzzとプリントする
+    self.assertEqual("Buzz", lines[95])
+AssertionError: 'Buzz' != '5'
+- Buzz
++ 5
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ５の場合はBuzzをプリントするから。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    n = 100
+    while n != 0:
+        if n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n - 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: これでどうかな?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... FAIL
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
+
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 24, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("100", lines[0])
+AssertionError: '100' != 'Buzz'
+- 100
++ Buzz
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 最初のテストが失敗してますね。えーと、 <code>AssertionError: '100' != 'Buzz'</code> ・・・</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 100は5で割り切れるからBuzzを返すのが正しい仕様ですね、修正しましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_1から100まで数をプリントできるようにする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+
+        self.assertEqual("1", lines[99])
+        self.assertEqual("Buzz", lines[0]) <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: はい、オッケーっと。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">TODOリスト</span> 三つ目を片付けることができました。</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10003; 1 から 100 まで数をプリントできるようにする。</p>
+</li>
+<li>
+<p>&#10003; 3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。</p>
+</li>
+<li>
+<p>&#10003; 5 の倍数のときは｢Buzz｣とプリントできるようにする。</p>
+</li>
+<li>
+<p>&#10063; 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1599,7 +1737,7 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 
 - ~~1 から 100 まで数をプリントできるようにする。~~
 - ~~3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。~~
-- 5 の倍数のときは｢Buzz｣とプリントできるようにする。
+- ~~5 の倍数のときは｢Buzz｣とプリントできるようにする。~~
 - 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
 
 ## 開発
@@ -1629,6 +1767,8 @@ def execute():
     while n != 0:
         if n % 3 == 0:
             print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
         else:
             print(n)
         n = n - 1
@@ -1641,13 +1781,19 @@ class MainTest(unittest.TestCase):
             lines = stdout.getvalue().splitlines()
 
         self.assertEqual("1", lines[99])
-        self.assertEqual("100", lines[0])
+        self.assertEqual("Buzz", lines[0])
 
     def test_3の倍数のときは数の代わりにFizzをプリントする(self):
         with captured_stdout() as stdout:
             execute()
             lines = stdout.getvalue().splitlines()
         self.assertEqual("Fizz", lines[97])
+
+    def test_5の倍数のときはBuzzとプリントする(self):
+        with captured_stdout() as stdout:
+            execute()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("Buzz", lines[95])
 
 
 if __name__ == "__main__":
@@ -1690,7 +1836,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-17 18:14:49 JST
+Last updated 2018-11-18 10:54:00 JST
 </div>
 </div>
 </body>
