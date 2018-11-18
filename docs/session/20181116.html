@@ -457,6 +457,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_仮実装">2.3.3. 仮実装</a></li>
 <li><a href="#_三角測量">2.3.4. 三角測量</a></li>
 <li><a href="#_明白な実装">2.3.5. 明白な実装</a></li>
+<li><a href="#_アーキテクチャ">2.3.6. アーキテクチャ</a></li>
 </ul>
 </li>
 <li><a href="#_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</a></li>
@@ -1916,6 +1917,153 @@ OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_アーキテクチャ">2.3.6. アーキテクチャ</h4>
+<div class="paragraph">
+<p><strong>テスト初めて書いたひと</strong>: 実際のアプリケーションだといろいろなプログラムや外部モジュールやサービスと連携されてますけど全部同じようにテストするんですか?</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 確かに全部同じように実施するのは現実的ではありませんよね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">製品アーキテクチャ</span> というのがあります。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>製品アーキテクチャとは、普通に訳すと「基本設計思想」ですが、それを経営戦略に応用すると、
+「どのようにして製品を構成部品の単位に分解し、そこに製品機能を配分し、それによって必要となる部品間のインターフェース（つなぎ目）をいかに設計・調整するか」を意味します。</p>
+</div>
+<div class="paragraph">
+<p>代表的な分類として、「モジュール型」「インテグラル型」があり、また「クローズ型」と「オープン型」に分けられます。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 構成部品が今書いているプログラムに該当しますかね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 構成部品はテスト駆動で作り込みます。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 部品間のインターフェース（つなぎ目）の設計もテスト駆動が適用できます。</p>
+</div>
+<div class="paragraph">
+<p><strong>テスト鬼さん</strong>: AWSのS3サービスと連携させる場合は自動テスト実行時に毎回呼び出したりするんですか?</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 独立したサービスの連携をテストする場合には <span class="red">Mock Object（偽装オブジェクト）パターン</span> を使って振る舞いを差し替えたります。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Mock Object（偽装オブジェクト）パターン</p>
+</div>
+<div class="paragraph">
+<p>構築処理が重かったり、準備に手間がかかったりするようなリソースに依存したオブジェクトをテストするにはどうすればよいだろうか----決められた結果を返す、偽物のオブジェクトを代わりに作成しよう。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2QtCA5b">テスト駆動開発</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テスト初めて書いたひと</strong>: スタブやドライバと言うやつですね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: そうですね、TDD界隈では以下に分類されているそうです。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/diag-8492495552876534393d7ba7fa1b749e.png" alt="diag 8492495552876534393d7ba7fa1b749e" width="463" height="174">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">製品アーキテクチャ</span> というのは主に製造業の分野の考えですがソフトウェアにもあります。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: そのソフトウェア分野でアーキテクチャに関して <span class="red">エンタープライズアプリケーションアーキテクチャパターン</span> ではこう言及されてます。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>アーキテクチャ</p>
+</div>
+<div class="paragraph">
+<p>アーキテクチャは、多くの人が定義しようとして、なかなか同意に至らない用語である。
+この用語には誰もが認める２つの要素があるという。１つは、システムから個々のパーツへとどこまでもブレークダウンできるということ、もう１つは、簡単には変更できない決定事項だということである。
+また、次第に理解されてきたことだが、システムのアーキテクチャのあり方は１つだけでなく、１つのシステムには複数のアーキテクチャがあり、アーキテクチャにとって重要なことはシステムの存続期間の中で変わることがある。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2QMAUUu">エンタープライズ アプリケーションアーキテクチャパターン (Object Oriented SELECTION)</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 私はいわゆる <span class="red">エンタープライズアプリケーション</span> 分野の人です。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>エンタープライズアプリケーション</p>
+</div>
+<div class="paragraph">
+<p>エンタープライズアプリケーションには、給与計算、診療記録、出荷管理、コスト分析、信用調査、保険、サプライチェーン、会計、顧客サービス、外国為替取引などが含まれる。
+一方、自動車用燃料噴射、ワープロ、エレベータ制御、化学プラント制御、化学プラント制御、電話交換、OS,コンパイラ、ゲームはエンタープライズアプリケーションに含まれない。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2QMAUUu">エンタープライズ アプリケーションアーキテクチャパターン (Object Oriented SELECTION)</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">エンタープライズアプリケーション</span> の特徴として以下の物があります。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>永続データを伴う。</p>
+</li>
+<li>
+<p>たくさんのデータを扱う。</p>
+</li>
+<li>
+<p>多くのユーザが同時にデータにアクセスする。</p>
+</li>
+<li>
+<p>多くのユーザインターフェース画面がある。</p>
+</li>
+<li>
+<p>他のエンタープライズアプリケーションと統合する必要がある。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: その <span class="red">エンタープライズアプリケーション</span> をWebベースで作るときにはWebアプリケーションフレームワークを使うことでテストする範囲を狭めることができます。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: Webプレゼンテーションパターンの <span class="red">モデルビューコントローラ</span> を実装したWebアプリケーションフレームワークに <a href="https://rubyonrails.org/">Ruby on Rails</a> や <a href="https://www.djangoproject.com/">Django</a> があります。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>モデルビューコントローラ</p>
+</div>
+<div class="paragraph">
+<p>ユーザインターフェースの相互作用を３つの明確な役割へ分割する。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2QMAUUu">エンタープライズ アプリケーションアーキテクチャパターン (Object Oriented SELECTION)</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: こうしたWebアプリケーションを導入することで業務ロジックに集中してテスト駆動開発を進めることができます。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: まあ、フレームワークに習熟しないといけないし癖もありますけどね・・・</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</h3>
@@ -2044,6 +2192,7 @@ if __name__ == "__main__":
 <div class="sect2">
 <h3 id="_参考図書">4.1. 参考図書</h3>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217884&linkId=568f25b974af5645e862928a12c354e1&bc1=ffffff&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4798105538&linkId=12f5983ecb6ad915457406c2fd0d89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 </div>
 <div class="sect2">
 <h3 id="_参考リンク">4.2. 参考リンク</h3>
@@ -2051,6 +2200,12 @@ if __name__ == "__main__":
 <ul>
 <li>
 <p><a href="https://www.buildinsider.net/enterprise/agile/01">アジャイルとは何か？ ツールと開発手法「スクラム／XP」、ウォーターフォールとの違い</a></p>
+</li>
+<li>
+<p><a href="https://globis.jp/article/2046">MBA経営辞書「製品アーキテクチャ」</a></p>
+</li>
+<li>
+<p><a href="http://www.itmedia.co.jp/im/articles/1111/07/news183.html">テストドライバ（てすとどらいば）</a></p>
 </li>
 </ul>
 </div>
@@ -2060,7 +2215,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-18 11:49:32 JST
+Last updated 2018-11-18 16:34:57 JST
 </div>
 </div>
 </body>
