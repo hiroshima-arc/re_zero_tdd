@@ -465,6 +465,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_重複したコード">2.4.1. 重複したコード</a></li>
 <li><a href="#_ベイビーステップ">2.4.2. ベイビーステップ</a></li>
 <li><a href="#_学習用テスト">2.4.3. 学習用テスト</a></li>
+<li><a href="#_アルゴリズムの取り替え">2.4.4. アルゴリズムの取り替え</a></li>
 </ul>
 </li>
 </ul>
@@ -3075,6 +3076,427 @@ OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_アルゴリズムの取り替え">2.4.4. アルゴリズムの取り替え</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">学習用テスト</span> で <span class="red">for文</span> と <span class="red">レンジ</span> の使い方がわかったので <span class="red">アルゴリズムの取り替え</span> を実施しましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>アルゴリズムの取り替え</p>
+</div>
+<div class="paragraph">
+<p>アルゴリズムをよりわかりやすいものに置き換えたい。</p>
+</div>
+<div class="paragraph">
+<p>メソッドの本体を新たなアルゴリズムで置き換える。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: まずは <span class="red">学習用テスト</span> 関数を使って <span class="red">明白な実装</span> をします。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute_for():
+    for n in range(101):
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n + 1
+
+
+
+class MainTest(unittest.TestCase):
+    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[1])
+        self.assertEqual("100", lines[-1])</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: どうかな?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_execute_for
+F
+======================================================================
+FAIL: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 39, in test_execute_for
+    self.assertEqual("100", lines[-1])
+AssertionError: '100' != 'Buzz'
+- 100
++ Buzz
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>AssertionError: '100' != 'Buzz'</code> ・・・あー100は5で割り切れるからこれはテストが間違っているね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: いや、設計の仕様が間違っているかな。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[1])
+        self.assertEqual("Buzz", lines[-1]) <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: これで・・・オッケー。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_execute_for
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>n = n + 1</code> の <span class="red">変数</span> への代入は不要なので削除して。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute_for():
+    for n in range(101):
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: プログラムは壊れてないよね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_execute_for
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+k2works-mbp-pro@k2works:replay (feature/2018116_replay) $ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
+test_execute_for (__main__.MainTest) ... ok
+test_シーケンス間の変換 (__main__.RangeTest) ... ok
+test_レンジのシーケンス演算 (__main__.RangeTest) ... ok
+test_範囲を示すレンジ (__main__.RangeTest) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: よし、それでは <code>execute_for</code> 関数を <code>execute</code> に差し替えましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute_for():
+    n = 1
+    while n != 101:
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n + 1
+
+
+def execute():
+    for n in range(101):
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 確認・・・ファッ!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... FAIL
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... FAIL
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... FAIL
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... FAIL
+test_execute_for (main_test.MainTest) ... FAIL
+
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 46, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[0])
+AssertionError: '1' != 'FizzBuzz'
+- 1
++ FizzBuzz
+
+
+======================================================================
+FAIL: test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 56, in test_3と5両方の倍数の場合にはFizzBuzzとプリントする
+    self.assertEqual("FizzBuzz", self.lines[14])
+AssertionError: 'FizzBuzz' != '14'
+- FizzBuzz
++ 14
+
+
+======================================================================
+FAIL: test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 50, in test_3の倍数のときは数の代わりにFizzをプリントする
+    self.assertEqual("Fizz", self.lines[2])
+AssertionError: 'Fizz' != '2'
+- Fizz
++ 2
+
+
+======================================================================
+FAIL: test_5の倍数のときはBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 53, in test_5の倍数のときはBuzzとプリントする
+    self.assertEqual("Buzz", self.lines[4])
+AssertionError: 'Buzz' != '4'
+- Buzz
++ 4
+
+
+======================================================================
+FAIL: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 37, in test_execute_for
+    self.assertEqual("1", lines[1])
+AssertionError: '1' != '2'
+- 1
++ 2
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (failures=5)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: またまた、テストが壊れてしまいました。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">ベイビーステップ</span> <span class="red">ベイビーステップ</span> ・・・</p>
+</div>
+<div class="paragraph">
+<p>テスト結果を眺めるテストおじさん</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 46, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[0])
+AssertionError: '1' != 'FizzBuzz'
+- 1
++ FizzBuzz
+
+======================================================================
+FAIL: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 37, in test_execute_for
+    self.assertEqual("1", lines[1])
+AssertionError: '1' != '2'
+- 1
++ 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>execute</code> 関数が <code>AssertionError: '1' != 'FizzBuzz'</code> で <code>execute_for</code> が <code>AssertionError: '1' != '2'</code> となってるということは・・・</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: また <span class="red">リスト</span> の添字の問題のようですね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>execute_for</code> 関数はこうかな・・・よし!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[0]) <b class="conum">(1)</b>
+        self.assertEqual("Buzz", lines[-1])</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_execute_for
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: となると <code>execute</code> 関数はこうね・・・よし!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[1]) <b class="conum">(1)</b>
+        self.assertEqual("Buzz", self.lines[100]) <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 残りも同じっすね・・・オッケー!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        self.assertEqual("Fizz", self.lines[3]) <b class="conum">(1)</b>
+
+    def test_5の倍数のときはBuzzとプリントする(self):
+        self.assertEqual("Buzz", self.lines[5]) <b class="conum">(2)</b>
+
+    def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
+        self.assertEqual("FizzBuzz", self.lines[15]) <b class="conum">(3)</b></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+test_execute_for (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 後は不要な <code>execute_for</code> 関数を削除して <span class="red">アルゴリズムの取り替え</span> 完了です。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: プログラムが壊れてないか確認・・・おう!?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+test_execute_for (main_test.MainTest) ... ERROR
+
+======================================================================
+ERROR: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 20, in test_execute_for
+    execute_for()
+NameError: name 'execute_for' is not defined
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (errors=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>NameError: name 'execute_for' is not defined</code> ・・・あー関数を削除したからね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[0])
+        self.assertEqual("Buzz", lines[-1])</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>test_execute_for</code> も不要なので削除して確認・・・オッケー!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3134,8 +3556,7 @@ from test.support import captured_stdout
 
 
 def execute():
-    n = 1
-    while n != 101:
+    for n in range(101):
         if n % 3 == 0 and n % 5 == 0:
             print("FizzBuzz")
         elif n % 3 == 0:
@@ -3144,39 +3565,26 @@ def execute():
             print("Buzz")
         else:
             print(n)
-        n = n + 1
-
-
-def execute_for():
-    for n in range(101):
-        print(n)
 
 
 class MainTest(unittest.TestCase):
-    def test_execute_for(self):
-        with captured_stdout() as stdout:
-            execute_for()
-            lines = stdout.getvalue().splitlines()
-        self.assertEqual("1", lines[1])
-        self.assertEqual("100", lines[-1])
-
     def setUp(self):
         with captured_stdout() as stdout:
             execute()
             self.lines = stdout.getvalue().splitlines()
 
     def test_1から100まで数をプリントできるようにする(self):
-        self.assertEqual("1", self.lines[0])
-        self.assertEqual("Buzz", self.lines[99])
+        self.assertEqual("1", self.lines[1])
+        self.assertEqual("Buzz", self.lines[100])
 
     def test_3の倍数のときは数の代わりにFizzをプリントする(self):
-        self.assertEqual("Fizz", self.lines[2])
+        self.assertEqual("Fizz", self.lines[3])
 
     def test_5の倍数のときはBuzzとプリントする(self):
-        self.assertEqual("Buzz", self.lines[4])
+        self.assertEqual("Buzz", self.lines[5])
 
     def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
-        self.assertEqual("FizzBuzz", self.lines[14])
+        self.assertEqual("FizzBuzz", self.lines[15])
 
 
 class RangeTest(unittest.TestCase):
@@ -3258,7 +3666,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-19 12:28:03 JST
+Last updated 2018-11-19 13:40:18 JST
 </div>
 </div>
 </body>

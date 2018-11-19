@@ -2027,6 +2027,397 @@ Ran 3 tests in 0.000s
 OK
 ----
 
+==== アルゴリズムの取り替え
+
+*テストおじさん*: [red]#学習用テスト# で [red]#for文# と [red]#レンジ# の使い方がわかったので [red]#アルゴリズムの取り替え# を実施しましょう。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+アルゴリズムの取り替え
+
+アルゴリズムをよりわかりやすいものに置き換えたい。
+
+メソッドの本体を新たなアルゴリズムで置き換える。
+____
+
+*テストおじさん*: まずは [red]#学習用テスト# 関数を使って [red]#明白な実装# をします。
+
+[source, Python]
+----
+def execute_for():
+    for n in range(101):
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n + 1
+
+
+
+class MainTest(unittest.TestCase):
+    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[1])
+        self.assertEqual("100", lines[-1])
+----
+
+*テストおじさん*: どうかな?
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+F
+======================================================================
+FAIL: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 39, in test_execute_for
+    self.assertEqual("100", lines[-1])
+AssertionError: '100' != 'Buzz'
+- 100
++ Buzz
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: `AssertionError: '100' != 'Buzz'` ・・・あー100は5で割り切れるからこれはテストが間違っているね。
+
+*テストおじさん*: いや、設計の仕様が間違っているかな。
+
+[source, Python]
+----
+    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[1])
+        self.assertEqual("Buzz", lines[-1]) <1>
+----
+
+*テストおじさん*: これで・・・オッケー。
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+----
+
+*テストおじさん*: `n = n + 1` の [red]#変数# への代入は不要なので削除して。
+
+[source, Python]
+----
+def execute_for():
+    for n in range(101):
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+----
+
+*テストおじさん*: プログラムは壊れてないよね。
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+k2works-mbp-pro@k2works:replay (feature/2018116_replay) $ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
+test_execute_for (__main__.MainTest) ... ok
+test_シーケンス間の変換 (__main__.RangeTest) ... ok
+test_レンジのシーケンス演算 (__main__.RangeTest) ... ok
+test_範囲を示すレンジ (__main__.RangeTest) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: よし、それでは `execute_for` 関数を `execute` に差し替えましょう。
+
+[source, Python]
+----
+def execute_for():
+    n = 1
+    while n != 101:
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n + 1
+
+
+def execute():
+    for n in range(101):
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+----
+
+*テストおじさん*: 確認・・・ファッ!
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... FAIL
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... FAIL
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... FAIL
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... FAIL
+test_execute_for (main_test.MainTest) ... FAIL
+
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 46, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[0])
+AssertionError: '1' != 'FizzBuzz'
+- 1
++ FizzBuzz
+
+
+======================================================================
+FAIL: test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 56, in test_3と5両方の倍数の場合にはFizzBuzzとプリントする
+    self.assertEqual("FizzBuzz", self.lines[14])
+AssertionError: 'FizzBuzz' != '14'
+- FizzBuzz
++ 14
+
+
+======================================================================
+FAIL: test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 50, in test_3の倍数のときは数の代わりにFizzをプリントする
+    self.assertEqual("Fizz", self.lines[2])
+AssertionError: 'Fizz' != '2'
+- Fizz
++ 2
+
+
+======================================================================
+FAIL: test_5の倍数のときはBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 53, in test_5の倍数のときはBuzzとプリントする
+    self.assertEqual("Buzz", self.lines[4])
+AssertionError: 'Buzz' != '4'
+- Buzz
++ 4
+
+
+======================================================================
+FAIL: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 37, in test_execute_for
+    self.assertEqual("1", lines[1])
+AssertionError: '1' != '2'
+- 1
++ 2
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (failures=5)
+----
+
+*テストおじさん*: またまた、テストが壊れてしまいました。
+
+*テストおじさん*: [red]#ベイビーステップ# [red]#ベイビーステップ# ・・・
+
+テスト結果を眺めるテストおじさん
+
+[source, bash]
+----
+
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 46, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[0])
+AssertionError: '1' != 'FizzBuzz'
+- 1
++ FizzBuzz
+
+======================================================================
+FAIL: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 37, in test_execute_for
+    self.assertEqual("1", lines[1])
+AssertionError: '1' != '2'
+- 1
++ 2
+----
+
+*テストおじさん*: `execute` 関数が `AssertionError: '1' != 'FizzBuzz'` で `execute_for` が `AssertionError: '1' != '2'` となってるということは・・・
+
+*テストおじさん*: また [red]#リスト# の添字の問題のようですね。
+
+*テストおじさん*: `execute_for` 関数はこうかな・・・よし!
+
+[source, Python]
+----
+    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[0]) <1>
+        self.assertEqual("Buzz", lines[-1])
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+----
+
+*テストおじさん*: となると `execute` 関数はこうね・・・よし!
+
+[source, Python]
+----
+    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[1]) <1>
+        self.assertEqual("Buzz", self.lines[100]) <2>
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+----
+
+*テストおじさん*: 残りも同じっすね・・・オッケー!
+
+[source, Python]
+----
+    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        self.assertEqual("Fizz", self.lines[3]) <1>
+
+    def test_5の倍数のときはBuzzとプリントする(self):
+        self.assertEqual("Buzz", self.lines[5]) <2>
+
+    def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
+        self.assertEqual("FizzBuzz", self.lines[15]) <3>
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+test_execute_for (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: 後は不要な `execute_for` 関数を削除して [red]#アルゴリズムの取り替え# 完了です。
+
+*テストおじさん*: プログラムが壊れてないか確認・・・おう!?
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+test_execute_for (main_test.MainTest) ... ERROR
+
+======================================================================
+ERROR: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 20, in test_execute_for
+    execute_for()
+NameError: name 'execute_for' is not defined
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (errors=1)
+----
+
+*テストおじさん*: `NameError: name 'execute_for' is not defined` ・・・あー関数を削除したからね。
+
+[source, Python]
+----
+    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[0])
+        self.assertEqual("Buzz", lines[-1])
+----
+
+*テストおじさん*: `test_execute_for` も不要なので削除して確認・・・オッケー!
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
 
 == ふりかえり
 [source, Markdown]
