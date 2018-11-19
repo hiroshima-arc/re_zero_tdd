@@ -1739,6 +1739,295 @@ ____
 大きな変更は、大きなステップでやりたくなるものである。距離が長く、時間を書けずにそこまで行くとなれば、そうするしかないように思える。だが、重大な変更を一気に行うのは危険だ。変更を頼まれるのは人間である。変更は不安が伴う。不安を伴えば、人間は変更をすばやくやろうとする。
 ____
 
+==== 学習用テスト
+
+*テストおじさん*: [red]#while文# を使った繰り返し処理では無限ループが発生する恐れがありますよね。
+
+*テストおじさん*: [red]#for文# に書き換えて無限ループが発生しないようにしておきましょう。
+
+*テストおじさん*: 皆さん同様、私もPythonは詳しくないので [red]#学習用テスト# を使って [red]#for文# の振る舞いを確認して見ましょう。
+
+*テストおじさん*: 1から5まで [red]#for文# で出力するにはこんな感じかな。
+
+[source, Python]
+----
+def execute_for():
+    for n in [1, 2, 3, 4, 5]:
+        print(n)
+
+
+class MainTest(unittest.TestCase):
+    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertTrue(1, lines[0])
+        self.assertTrue(4, lines[-1])
+----
+
+*テストおじさん*: （学習用）テスト。
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+----
+
+*テストおじさん*: [red]#リスト# だとこうすると失敗するのよね。
+
+[source, Python]
+----
+def execute_for():
+    list = [1, 2, 3, 4, 5]
+    list[4] = 6
+    for n in list:
+        print(n)
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+F
+======================================================================
+FAIL: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 32, in test_execute_for
+    self.assertEqual("5", lines[-1])
+AssertionError: '5' != '6'
+- 5
++ 6
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: こういう時は [red]#タプル# を使います。
+
+[source, Python]
+----
+def execute_for():
+    tuple = (1, 2, 3, 4, 5)
+    tuple[4] = 6
+    for n in tuple:
+        print(n)
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+E
+======================================================================
+ERROR: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 28, in test_execute_for
+    execute_for()
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 21, in execute_for
+    tuple[4] = 6
+TypeError: 'tuple' object does not support item assignment
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)
+----
+
+*テストおじさん*: `TypeError: 'tuple' object does not support item assignment` と怒られますね。
+
+*テストおじさん*: これで、オッケー。
+
+[source, Python]
+----
+def execute_for():
+    tuple = (1, 2, 3, 4, 5)
+    for n in tuple:
+        print(n)
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+----
+
+*テストおじさん*: あとは100まで入力すれば・・・ってそれは現実的ではありませんよね。
+
+*テストおじさん*: そんな時は [red]#レンジ# を使います。
+
+[source, Python]
+----
+def execute_for():
+    for n in range(100):
+        print(n)
+
+class MainTest(unittest.TestCase):
+    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[0])
+        self.assertEqual("100", lines[-1])
+----
+
+*テストおじさん*: （学習用）テスト。
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+F
+======================================================================
+FAIL: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 28, in test_execute_for
+    self.assertEqual("1", lines[0])
+AssertionError: '1' != '0'
+- 1
++ 0
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: これでどうよ?
+
+[source, Python]
+----
+def execute_for():
+    for n in range(100):
+        print(n)
+
+class MainTest(unittest.TestCase):
+    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[1])
+        self.assertEqual("100", lines[-1])
+----
+
+*テストおじさん*: （学習用）テスト。
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+F
+======================================================================
+FAIL: test_execute_for (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 29, in test_execute_for
+    self.assertEqual("100", lines[-1])
+AssertionError: '100' != '99'
+- 100
++ 99
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: えーと、今度は `AssertionError: '100' != '99'` ・・・ [red]#レンジ# は指定した値は範囲に含まないんですね。
+
+*テストおじさん*: ということは、こうして。
+
+[source, Python]
+----
+def execute_for():
+    for n in range(101):
+        print(n)
+
+
+class MainTest(unittest.TestCase):
+    def test_execute_for(self):
+        with captured_stdout() as stdout:
+            execute_for()
+            lines = stdout.getvalue().splitlines()
+        self.assertEqual("1", lines[1])
+        self.assertEqual("100", lines[-1])
+----
+
+*テストおじさん*: こう。
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_execute_for
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+----
+
+*テストおじさん*: [red]#レンジ# を使うことで1から100までの出力を簡単にすることができるようになりました。
+
+*テストおじさん*: せっかくなので [red]#レンジ# の [red]#学習用テスト# を別途作成してみましょう。
+
+[source, Python]
+----
+class RangeTest(unittest.TestCase):
+    def test_範囲を示すレンジ(self):
+        rg = range(10)
+        self.assertEqual(0, rg[0])
+        self.assertEqual(9, rg[-1])
+        rg = range(5, 10)
+        self.assertEqual(5, rg[0])
+        self.assertEqual(9, rg[-1])
+        rg = range(10, 20, 2)
+        self.assertEqual(12, rg[1])
+        self.assertEqual(18, rg[-1])
+
+    def test_レンジのシーケンス演算(self):
+        rg = range(30)
+        self.assertTrue(10 in rg)
+        self.assertTrue(30 not in rg)
+        rg = range(50)
+        self.assertEqual(range(1, 4), rg[1:4])
+        self.assertEqual(50, len(rg))
+        self.assertEqual(49, max(rg))
+        self.assertEqual(0, min(rg))
+
+    def test_シーケンス間の変換(self):
+        list1 = [100, 200, 300]
+        tpl1 = (123, 'ok', True)
+        rng1 = range(10, 20)
+        result = list1 + list(tpl1) + list(rng1)
+        self.assertEqual([100, 200, 300, 123, 'ok', True, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], result)
+----
+
+*テストおじさん*: レンジの学習用テストだけ実行する場合はこうですね。
+
+[source, bash]
+----
+$ python -m unittest main_test.RangeTest -v
+test_シーケンス間の変換 (main_test.RangeTest) ... ok
+test_レンジのシーケンス演算 (main_test.RangeTest) ... ok
+test_範囲を示すレンジ (main_test.RangeTest) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+----
+
+
 == ふりかえり
 [source, Markdown]
 ----
