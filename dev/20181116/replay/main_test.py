@@ -4,18 +4,21 @@ from test.support import captured_stdout
 BUZZ = "Buzz"
 FIZZ = "Fizz"
 FIZZ_BUZZ = "FizzBuzz"
+values = []
 
 
 def execute():
     # 100回繰り返す
     count = 101
     iterate(count)
+    for value in values:
+        print(value)
 
 
 def iterate(count):
     for number in range(count):
         # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
-        fizz_buzz(number)
+        values.append(fizz_buzz(number))
 
 
 def fizz_buzz(number):
@@ -28,7 +31,7 @@ def fizz_buzz(number):
     elif number % 5 == 0:
         value = BUZZ
 
-    print(value)
+    return value
 
 
 class MainTest(unittest.TestCase):

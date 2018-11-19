@@ -2723,6 +2723,114 @@ Ran 4 tests in 0.001s
 OK
 ----
 
+==== 副作用のある関数・ない関数
+
+`execute` [red]#関数# を見ながら
+
+[source, Python]
+----
+def execute():
+    # 100回繰り返す
+    count = 101
+    iterate(count)
+----
+
+*テスト初めて書いたひと*: この関数からは繰り返しを実行していること以外は読み取れませんね。
+
+*テストおじさん*: そうですね、詳細は `iterate` [red]#関数# を読まないとわかりませんね。
+
+*テストおじさん*: `execute` [red]#関数# で処理の概要が把握できるようにしましょう。
+
+*テストおじさん*: まず、`fizz_buzz` [red]#関数# を値を返す関数に変更します。
+
+[source, Python]
+----
+def iterate(count):
+    for number in range(count):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        print(fizz_buzz(number))
+
+
+def fizz_buzz(number):
+    value = number
+
+    if number % 3 == 0 and number % 5 == 0:
+        value = FIZZ_BUZZ
+    elif number % 3 == 0:
+        value = FIZZ
+    elif number % 5 == 0:
+        value = BUZZ
+
+    return value
+----
+
+*テストおじさん*: テストが壊れないように `iterate` [red]#関数# で `print` [red]#関数# を実行するようにします。
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: 次に、[red]#関数# 間で値を共有できるように [red]#グローバル変数# の [red]#リスト# を作ります。
+
+[source, Python]
+----
+values = []
+
+
+def execute():
+    # 100回繰り返す
+    count = 101
+    iterate(count)
+    for value in values:
+        print(value)
+
+
+def iterate(count):
+    for number in range(count):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        values.append(fizz_buzz(number))
+----
+
+*テストおじさん*: テストが壊れないように `execute` [red]#関数# で `print` [red]#関数# を実行するようにします。
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+*リモートさん*: `fizz_buzz` [red]#関数# から副作用の `print` が消えたっ!
+
+*テストおじさん*: 副作用の無い `fizz_buzz` [red]#関数# の結果を 副作用のある `iterate` [red]#関数# が [red]#グローバル変数# に値を設定した結果 `execute` [red]#関数# で処理の概要を読み取れるようになりました。
+
+[source, Python]
+----
+def execute():
+    # 100回繰り返す
+    count = 101
+    iterate(count)
+    for value in values:
+        print(value)
+----
+
 
 == ふりかえり
 [source, Markdown]
