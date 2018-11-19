@@ -466,6 +466,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_ベイビーステップ">2.4.2. ベイビーステップ</a></li>
 <li><a href="#_学習用テスト">2.4.3. 学習用テスト</a></li>
 <li><a href="#_アルゴリズムの取り替え">2.4.4. アルゴリズムの取り替え</a></li>
+<li><a href="#_長すぎるコード">2.4.5. 長すぎるコード</a></li>
 </ul>
 </li>
 </ul>
@@ -3497,6 +3498,168 @@ OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_長すぎるコード">2.4.5. 長すぎるコード</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: さて <code>execute</code> 関数が実行している内容ですが・・・</p>
+</div>
+<div class="paragraph">
+<p>コメント追加するテストおじさん。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    # 100回繰り返す
+    for n in range(101):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: コメントが必要になる <span class="red">長すぎるコード</span> ですね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: どうやらリファクタリングの必要がありそうです。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>リファクタリングのヒント</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10003; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
+</li>
+<li>
+<p>&#10003; リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
+</li>
+<li>
+<p>&#10003; リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。</p>
+</li>
+<li>
+<p>&#10003; コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。</p>
+</li>
+<li>
+<p>&#10063; リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。</p>
+</li>
+<li>
+<p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
+</li>
+<li>
+<p>&#10063; ３三度目になったらリファクタリング開始。</p>
+</li>
+<li>
+<p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
+</li>
+<li>
+<p>&#10003; コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。</p>
+</li>
+<li>
+<p>&#10063; テストを完全に自動化して、その結果もテストにチェックさせること。</p>
+</li>
+<li>
+<p>&#10003; テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
+</li>
+</ul>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: まず、繰り返し内部の処理に対して <span class="red">メソッドの抽出</span> を実施します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    # 100回繰り返す
+    for n in range(101):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        fizz_buzz(n)
+
+
+def fizz_buzz(n):
+    if n % 3 == 0 and n % 5 == 0:
+        print("FizzBuzz")
+    elif n % 3 == 0:
+        print("Fizz")
+    elif n % 5 == 0:
+        print("Buzz")
+    else:
+        print(n)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 変更したら、確認です。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 繰り返し部分も同様に。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    # 100回繰り返す
+    iterate(101)
+
+
+def iterate(c):
+    for n in range(c):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        fizz_buzz(n)
+
+
+def fizz_buzz(n):
+    if n % 3 == 0 and n % 5 == 0:
+        print("FizzBuzz")
+    elif n % 3 == 0:
+        print("Fizz")
+    elif n % 5 == 0:
+        print("Buzz")
+    else:
+        print(n)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 大丈夫・・・ですね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3556,15 +3719,25 @@ from test.support import captured_stdout
 
 
 def execute():
-    for n in range(101):
-        if n % 3 == 0 and n % 5 == 0:
-            print("FizzBuzz")
-        elif n % 3 == 0:
-            print("Fizz")
-        elif n % 5 == 0:
-            print("Buzz")
-        else:
-            print(n)
+    # 100回繰り返す
+    iterate(101)
+
+
+def iterate(c):
+    for n in range(c):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        fizz_buzz(n)
+
+
+def fizz_buzz(n):
+    if n % 3 == 0 and n % 5 == 0:
+        print("FizzBuzz")
+    elif n % 3 == 0:
+        print("Fizz")
+    elif n % 5 == 0:
+        print("Buzz")
+    else:
+        print(n)
 
 
 class MainTest(unittest.TestCase):
@@ -3666,7 +3839,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-19 13:40:18 JST
+Last updated 2018-11-19 14:23:11 JST
 </div>
 </div>
 </body>

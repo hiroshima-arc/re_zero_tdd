@@ -3,15 +3,25 @@ from test.support import captured_stdout
 
 
 def execute():
-    for n in range(101):
-        if n % 3 == 0 and n % 5 == 0:
-            print("FizzBuzz")
-        elif n % 3 == 0:
-            print("Fizz")
-        elif n % 5 == 0:
-            print("Buzz")
-        else:
-            print(n)
+    # 100回繰り返す
+    iterate(101)
+
+
+def iterate(c):
+    for n in range(c):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        fizz_buzz(n)
+
+
+def fizz_buzz(n):
+    if n % 3 == 0 and n % 5 == 0:
+        print("FizzBuzz")
+    elif n % 3 == 0:
+        print("Fizz")
+    elif n % 5 == 0:
+        print("Buzz")
+    else:
+        print(n)
 
 
 class MainTest(unittest.TestCase):
