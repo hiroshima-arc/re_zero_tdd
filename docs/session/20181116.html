@@ -463,6 +463,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_リファクタリングから始める構造化プログラミング">2.4. リファクタリングから始める構造化プログラミング</a>
 <ul class="sectlevel3">
 <li><a href="#_重複したコード">2.4.1. 重複したコード</a></li>
+<li><a href="#_ベイビーステップ">2.4.2. ベイビーステップ</a></li>
 </ul>
 </li>
 </ul>
@@ -2326,6 +2327,444 @@ OK</code></pre>
 <p><strong>テストおじさん</strong>: 大丈夫ですね。</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_ベイビーステップ">2.4.2. ベイビーステップ</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 続いてプロダクトコードに関してはどうですかね。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>リファクタリングのヒント</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10003; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
+</li>
+<li>
+<p>&#10003; リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
+</li>
+<li>
+<p>&#10063; リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。</p>
+</li>
+<li>
+<p>&#10003; コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。</p>
+</li>
+<li>
+<p>&#10063; リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。</p>
+</li>
+<li>
+<p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
+</li>
+<li>
+<p>&#10063; ３三度目になったらリファクタリング開始。</p>
+</li>
+<li>
+<p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
+</li>
+<li>
+<p>&#10063; コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。</p>
+</li>
+<li>
+<p>&#10063; テストを完全に自動化して、その結果もテストにチェックさせること。</p>
+</li>
+<li>
+<p>&#10003; テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
+</li>
+</ul>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="paragraph">
+<p>コードを眺めるテストおじさん。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    n = 100
+    while n != 0: <b class="conum">(1)</b>
+        if n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        elif n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        else:
+            print(n)
+        n = n - 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 1から100までをプリントするのに100から処理を開始していますね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[99])
+        self.assertEqual("Buzz", self.lines[0])</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 結果をリストに保存していますが1に対応するリストの添字が99って分かりづらいですよね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テスト初めて書いたひと</strong>: たしかにそうですね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: こういう時はまずこうしてみましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    n = 1
+    while n != 100: <b class="conum">(1)</b>
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n - 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: はい、確認・・・ありゃ？</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>テストを <code>Ctr-c</code> で強制停止した後、デバッガを起動してステップ実行するテストおじさん。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: あー <code>n = n - 1</code> では <code>n != 100</code> の条件に到達することは永久にないっすね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    n = 1
+    while n != 100: <b class="conum">(1)</b>
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n - 1 <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ここはこうかな。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    n = 1
+    while n != 100:
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n + 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: テスト!・・・ファッ!!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ERROR
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... FAIL
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... FAIL
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... FAIL
+
+======================================================================
+ERROR: test_1から100まで数をプリントできるようにする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 26, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[99])
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 36, in test_3と5両方の倍数の場合にはFizzBuzzとプリントする
+    self.assertEqual("FizzBuzz", self.lines[85])
+AssertionError: 'FizzBuzz' != '86'
+- FizzBuzz
++ 86
+
+
+======================================================================
+FAIL: test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 30, in test_3の倍数のときは数の代わりにFizzをプリントする
+    self.assertEqual("Fizz", self.lines[97])
+AssertionError: 'Fizz' != '98'
+- Fizz
++ 98
+
+
+======================================================================
+FAIL: test_5の倍数のときはBuzzとプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 33, in test_5の倍数のときはBuzzとプリントする
+    self.assertEqual("Buzz", self.lines[95])
+AssertionError: 'Buzz' != 'Fizz'
+- Buzz
++ Fizz
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+FAILED (failures=3, errors=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: テストが全部失敗してしまいましたね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: こういう時は落ち着いて一つづつ確認していきましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>リファクタリングのヒント</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10003; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
+</li>
+<li>
+<p>&#10003; リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
+</li>
+<li>
+<p>&#10003; リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。</p>
+</li>
+<li>
+<p>&#10003; コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。</p>
+</li>
+<li>
+<p>&#10063; リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。</p>
+</li>
+<li>
+<p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
+</li>
+<li>
+<p>&#10063; ３三度目になったらリファクタリング開始。</p>
+</li>
+<li>
+<p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
+</li>
+<li>
+<p>&#10063; コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。</p>
+</li>
+<li>
+<p>&#10063; テストを完全に自動化して、その結果もテストにチェックさせること。</p>
+</li>
+<li>
+<p>&#10003; テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
+</li>
+</ul>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
+E
+======================================================================
+ERROR: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 26, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[99])
+IndexError: list index out of range
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (errors=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>IndexError: list index out of range</code> リストの100番目に値が存在しないってこと?</p>
+</div>
+<div class="paragraph">
+<p>コードを眺めるテストおじさん。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    n = 1
+    while n != 100: <b class="conum">(1)</b>
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n + 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: あー <code>while n != 100</code> だと100は含まれないわな。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: だから、ここはこうね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    n = 1
+    while n != 101: <b class="conum">(1)</b>
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n + 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: こうするとどうかな?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
+F
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 26, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[99])
+AssertionError: '1' != 'Buzz'
+- 1
++ Buzz
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>IndexError: list index out of range</code> は解決しましたね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>AssertionError: '1' != 'Buzz'</code> はリストの最後を評価しているのでこうすればリストの最初の評価になります。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[0])
+        self.assertEqual("Buzz", self.lines[99])</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: これでどうですかね・・・オッケー!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 残りのテストもリストの添字が原因のようなので修正しましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">class MainTest(unittest.TestCase):
+    def setUp(self):
+        with captured_stdout() as stdout:
+            execute()
+            self.lines = stdout.getvalue().splitlines()
+
+    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[0])
+        self.assertEqual("Buzz", self.lines[99])
+
+    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        self.assertEqual("Fizz", self.lines[2])
+
+    def test_5の倍数のときはBuzzとプリントする(self):
+        self.assertEqual("Buzz", self.lines[4])
+
+    def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
+        self.assertEqual("FizzBuzz", self.lines[14])</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 確認、確認。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: このようにリファクタリングは <span class="red">ベイビーステップ</span> で進めて行くことに留意してください。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>ベイビーステップ（Baby Steps)</p>
+</div>
+<div class="paragraph">
+<p>大きな変更は、大きなステップでやりたくなるものである。距離が長く、時間を書けずにそこまで行くとなれば、そうするしかないように思える。だが、重大な変更を一気に行うのは危険だ。変更を頼まれるのは人間である。変更は不安が伴う。不安を伴えば、人間は変更をすばやくやろうとする。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qvx5ms">エクストリームプログラミング</a>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2385,8 +2824,8 @@ from test.support import captured_stdout
 
 
 def execute():
-    n = 100
-    while n != 0:
+    n = 1
+    while n != 101:
         if n % 3 == 0 and n % 5 == 0:
             print("FizzBuzz")
         elif n % 3 == 0:
@@ -2395,7 +2834,7 @@ def execute():
             print("Buzz")
         else:
             print(n)
-        n = n - 1
+        n = n + 1
 
 
 class MainTest(unittest.TestCase):
@@ -2405,17 +2844,17 @@ class MainTest(unittest.TestCase):
             self.lines = stdout.getvalue().splitlines()
 
     def test_1から100まで数をプリントできるようにする(self):
-        self.assertEqual("1", self.lines[99])
-        self.assertEqual("Buzz", self.lines[0])
+        self.assertEqual("1", self.lines[0])
+        self.assertEqual("Buzz", self.lines[99])
 
     def test_3の倍数のときは数の代わりにFizzをプリントする(self):
-        self.assertEqual("Fizz", self.lines[97])
+        self.assertEqual("Fizz", self.lines[2])
 
     def test_5の倍数のときはBuzzとプリントする(self):
-        self.assertEqual("Buzz", self.lines[95])
+        self.assertEqual("Buzz", self.lines[4])
 
     def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
-        self.assertEqual("FizzBuzz", self.lines[85])
+        self.assertEqual("FizzBuzz", self.lines[14])
 
 
 if __name__ == "__main__":
@@ -2444,6 +2883,7 @@ if __name__ == "__main__":
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217884&linkId=568f25b974af5645e862928a12c354e1&bc1=ffffff&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=427405019X&linkId=08e705a5969e20f5129b4d3cefbcdb15&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4798105538&linkId=12f5983ecb6ad915457406c2fd0d89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217620&linkId=59f5959cf4575e61b0eeb1afc17b1715&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 </div>
 <div class="sect2">
 <h3 id="_参考リンク">4.2. 参考リンク</h3>
@@ -2466,7 +2906,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-18 17:43:20 JST
+Last updated 2018-11-19 10:45:50 JST
 </div>
 </div>
 </body>

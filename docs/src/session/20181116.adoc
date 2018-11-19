@@ -1372,6 +1372,372 @@ OK
 
 *テストおじさん*: 大丈夫ですね。
 
+==== ベイビーステップ
+
+*テストおじさん*: 続いてプロダクトコードに関してはどうですかね。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+リファクタリングのヒント
+
+* [x] 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。
+
+* [x] リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。
+
+* [ ] リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。
+
+* [x] コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。
+
+* [ ] リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。
+
+* [ ] リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。
+
+* [ ] ３三度目になったらリファクタリング開始。
+
+* [ ] あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。
+
+* [ ] コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。
+
+* [ ] テストを完全に自動化して、その結果もテストにチェックさせること。
+
+* [x] テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。
+____
+
+コードを眺めるテストおじさん。
+
+[source, Python]
+----
+def execute():
+    n = 100
+    while n != 0: <1>
+        if n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        elif n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        else:
+            print(n)
+        n = n - 1
+----
+
+*テストおじさん*: 1から100までをプリントするのに100から処理を開始していますね。
+
+[source, Python]
+----
+    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[99])
+        self.assertEqual("Buzz", self.lines[0])
+----
+
+*テストおじさん*: 結果をリストに保存していますが1に対応するリストの添字が99って分かりづらいですよね。
+
+*テスト初めて書いたひと*: たしかにそうですね。
+
+*テストおじさん*: こういう時はまずこうしてみましょう。
+
+[source, Python]
+----
+def execute():
+    n = 1
+    while n != 100: <1>
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n - 1
+----
+
+*テストおじさん*: はい、確認・・・ありゃ？
+
+[source, bash]
+----
+$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ...
+----
+
+テストを `Ctr-c` で強制停止した後、デバッガを起動してステップ実行するテストおじさん。
+
+*テストおじさん*: あー `n = n - 1` では `n != 100` の条件に到達することは永久にないっすね。
+
+[source, Python]
+----
+def execute():
+    n = 1
+    while n != 100: <1>
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n - 1 <2>
+----
+
+*テストおじさん*: ここはこうかな。
+
+[source, Python]
+----
+def execute():
+    n = 1
+    while n != 100:
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n + 1
+----
+
+*テストおじさん*: テスト!・・・ファッ!!
+
+[source, bash]
+----
+$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ERROR
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... FAIL
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... FAIL
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... FAIL
+
+======================================================================
+ERROR: test_1から100まで数をプリントできるようにする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 26, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[99])
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 36, in test_3と5両方の倍数の場合にはFizzBuzzとプリントする
+    self.assertEqual("FizzBuzz", self.lines[85])
+AssertionError: 'FizzBuzz' != '86'
+- FizzBuzz
++ 86
+
+
+======================================================================
+FAIL: test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 30, in test_3の倍数のときは数の代わりにFizzをプリントする
+    self.assertEqual("Fizz", self.lines[97])
+AssertionError: 'Fizz' != '98'
+- Fizz
++ 98
+
+
+======================================================================
+FAIL: test_5の倍数のときはBuzzとプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "main_test.py", line 33, in test_5の倍数のときはBuzzとプリントする
+    self.assertEqual("Buzz", self.lines[95])
+AssertionError: 'Buzz' != 'Fizz'
+- Buzz
++ Fizz
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+FAILED (failures=3, errors=1)
+----
+
+*テストおじさん*: テストが全部失敗してしまいましたね。
+
+*テストおじさん*: こういう時は落ち着いて一つづつ確認していきましょう。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+リファクタリングのヒント
+
+* [x] 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。
+
+* [x] リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。
+
+* [x] リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。
+
+* [x] コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。
+
+* [ ] リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。
+
+* [ ] リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。
+
+* [ ] ３三度目になったらリファクタリング開始。
+
+* [ ] あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。
+
+* [ ] コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。
+
+* [ ] テストを完全に自動化して、その結果もテストにチェックさせること。
+
+* [x] テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。
+____
+
+[source, bash]
+----
+ $ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
+E
+======================================================================
+ERROR: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 26, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[99])
+IndexError: list index out of range
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (errors=1)
+----
+
+*テストおじさん*: `IndexError: list index out of range` リストの100番目に値が存在しないってこと?
+
+コードを眺めるテストおじさん。
+
+[source, Python]
+----
+def execute():
+    n = 1
+    while n != 100: <1>
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n + 1
+----
+
+*テストおじさん*: あー `while n != 100` だと100は含まれないわな。
+
+*テストおじさん*: だから、ここはこうね。
+
+[source, Python]
+----
+def execute():
+    n = 1
+    while n != 101: <1>
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n + 1
+----
+
+*テストおじさん*: こうするとどうかな?
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
+F
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 26, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[99])
+AssertionError: '1' != 'Buzz'
+- 1
++ Buzz
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: `IndexError: list index out of range` は解決しましたね。
+
+*テストおじさん*: `AssertionError: '1' != 'Buzz'` はリストの最後を評価しているのでこうすればリストの最初の評価になります。
+
+[source, Python]
+----
+    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[0])
+        self.assertEqual("Buzz", self.lines[99])
+----
+
+*テストおじさん*: これでどうですかね・・・オッケー!
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+----
+
+*テストおじさん*: 残りのテストもリストの添字が原因のようなので修正しましょう。
+
+[source, Python]
+----
+class MainTest(unittest.TestCase):
+    def setUp(self):
+        with captured_stdout() as stdout:
+            execute()
+            self.lines = stdout.getvalue().splitlines()
+
+    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[0])
+        self.assertEqual("Buzz", self.lines[99])
+
+    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        self.assertEqual("Fizz", self.lines[2])
+
+    def test_5の倍数のときはBuzzとプリントする(self):
+        self.assertEqual("Buzz", self.lines[4])
+
+    def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
+        self.assertEqual("FizzBuzz", self.lines[14])
+----
+
+*テストおじさん*: 確認、確認。
+
+[source, bash]
+----
+$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: このようにリファクタリングは [red]#ベイビーステップ# で進めて行くことに留意してください。
+
+[quote, 'https://amzn.to/2Qvx5ms[エクストリームプログラミング]']
+____
+ベイビーステップ（Baby Steps)
+
+大きな変更は、大きなステップでやりたくなるものである。距離が長く、時間を書けずにそこまで行くとなれば、そうするしかないように思える。だが、重大な変更を一気に行うのは危険だ。変更を頼まれるのは人間である。変更は不安が伴う。不安を伴えば、人間は変更をすばやくやろうとする。
+____
 
 == ふりかえり
 [source, Markdown]
@@ -1399,6 +1765,7 @@ include::../../../dev/20181116/replay/main_test.py[]
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217884&linkId=568f25b974af5645e862928a12c354e1&bc1=ffffff&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=427405019X&linkId=08e705a5969e20f5129b4d3cefbcdb15&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4798105538&linkId=12f5983ecb6ad915457406c2fd0d89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217620&linkId=59f5959cf4575e61b0eeb1afc17b1715&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 ++++
 
 === 参考リンク
