@@ -6,22 +6,24 @@ FIZZ = "Fizz"
 FIZZ_BUZZ = "FizzBuzz"
 fizz_buzz_date = {
     'values': [],
-    'count': 100
+    'count': 0
 }
 
 
-def execute():
-    set_count()
+def execute(count=100):
+    set_count(count)
     set_values_by_fizz_buzz()
     print_values()
 
 
-def set_count():
+def set_count(count):
     # レンジは指定された値を範囲に含めないので1プラスする
-    fizz_buzz_date['count'] = fizz_buzz_date['count'] + 1
+    fizz_buzz_date['count'] = count + 1
 
 
 def set_values_by_fizz_buzz():
+    fizz_buzz_date['values'] = []
+
     for number in range(fizz_buzz_date['count']):
         value = fizz_buzz(number)
         fizz_buzz_date['values'].append(value)
@@ -50,6 +52,13 @@ class MainTest(unittest.TestCase):
         with captured_stdout() as stdout:
             execute()
             self.lines = stdout.getvalue().splitlines()
+
+    def test_1から10まで数をプリントする(self):
+        with captured_stdout() as stdout:
+            execute(count=10)
+            self.lines = stdout.getvalue().splitlines()
+        self.assertNotIn("11", self.lines)
+        self.assertEqual("Buzz", self.lines[10])
 
     def test_1から100まで数をプリントできるようにする(self):
         self.assertEqual("1", self.lines[1])
