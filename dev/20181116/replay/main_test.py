@@ -5,20 +5,22 @@ BUZZ = "Buzz"
 FIZZ = "Fizz"
 FIZZ_BUZZ = "FizzBuzz"
 values = []
+count = 100
 
 
 def execute():
-    # 100回繰り返す
-    count = 101
-    iterate(count)
+    global count
+    # レンジは指定された値を範囲に含めないので1プラスする
+    count = count + 1
+    iterate()
     for value in values:
         print(value)
 
 
-def iterate(count):
+def iterate():
     for number in range(count):
-        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
-        values.append(fizz_buzz(number))
+        value = fizz_buzz(number)
+        values.append(value)
 
 
 def fizz_buzz(number):

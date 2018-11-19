@@ -2831,6 +2831,121 @@ def execute():
         print(value)
 ----
 
+==== コメント
+
+*テストおじさん*: `execute` 関数の見通しは良くなりましたが・・・
+
+[source, Python]
+----
+def execute():
+    # 100回繰り返す
+    count = 101
+    iterate(count)
+    for value in values:
+        print(value)
+
+
+def iterate(count):
+    for number in range(count):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        values.append(fizz_buzz(number))
+----
+
+*テストおじさん*: [red]#コメント# の臭いがしますね。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+コメント
+
+コメントを書いてはいけないなどと言うつもりはまったくありません。
+コメントは決して悪い臭いではなく、むしろいい香りなのです。
+ここでコメントについて言及しているのは、コメントが消臭剤として使われることがあるからです。
+コメントが非常に丁寧に書かれていたのは、実はわかりにくいコードを補うためだったということがよくあるのです。
+____
+
+*テストおじさん*: まず、`iterate` 関数ですが実際にやっていることとコメントの内容が違いますね。
+
+[source, Python]
+----
+def iterate(count):
+    for number in range(count):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする <1>
+        values.append(fizz_buzz(number))
+----
+
+*テストおじさん*: こーゆーのをコメントバグというのですがここは [red]#説明用変数の導入# を使ってコード自体に説明させましょう。
+
+[source, Python]
+----
+def iterate(count):
+    for number in range(count):
+        value = fizz_buzz(number)
+        values.append(value)
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: 次に `execute` 関数ですが・・・
+
+[source, Python]
+----
+def execute():
+    # 100回繰り返す
+    count = 101
+    iterate(count)
+    for value in values:
+        print(value)
+----
+
+*テストおじさん*: 100回繰り返すのに `count` 変数には101を代入している。これは [red]#レンジ# の仕様なのですがちょっと違和感ありますよね。
+
+*テストおじさん*: [red]#グローバル変数# を使って `count` を共有すると共に有益なコメントに書き換えましょう。
+
+[source, Python]
+----
+count = 100
+
+
+def execute():
+    global count
+    # レンジは指定された値を範囲に含めないので1プラスする
+    count = count + 1
+    iterate()
+    for value in values:
+        print(value)
+
+
+def iterate():
+    for number in range(count):
+        value = fizz_buzz(number)
+        values.append(value)
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
 
 == ふりかえり
 [source, Markdown]
