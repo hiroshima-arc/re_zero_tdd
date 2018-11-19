@@ -2552,6 +2552,92 @@ Ran 4 tests in 0.001s
 OK
 ----
 
+==== 説明用変数の導入
+
+*テストおじさん*: さて [red]#メソッドの抽出# により見通しの良いコードになりましたが・・・・
+
+コードを眺めるテストおじさん。
+
+[source, Python]
+----
+def execute():
+    # 100回繰り返す
+    iterate(101)
+
+
+def iterate(c):
+    for n in range(c):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        fizz_buzz(n)
+
+
+def fizz_buzz(n):
+    if n % 3 == 0 and n % 5 == 0:
+        print("FizzBuzz")
+    elif n % 3 == 0:
+        print("Fizz")
+    elif n % 5 == 0:
+        print("Buzz")
+    else:
+        print(n)
+----
+
+*テストおじさん*: [red]#関数# の間で `n` や `c` といった [red]#変数# を使っていますがパット見なにか分かりづらいですね。
+
+*テストおじさん*: [red]#説明変数の導入# を導入して読みやすいコードにしましょう。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+説明用変数の導入
+
+複雑な式がある。
+
+その式の結果または部分的な結果を、その目的を説明する名前をつけた一時変数に代入する。
+____
+
+*テストおじさん*: `count` と `number` という変数名に変更しましょう。
+
+[source, Python]
+----
+def execute():
+    # 100回繰り返す
+    count = 101
+    iterate(count)
+
+
+def iterate(count):
+    for number in range(count):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        fizz_buzz(number)
+
+
+def fizz_buzz(number):
+    if number % 3 == 0 and number % 5 == 0:
+        print("FizzBuzz")
+    elif number % 3 == 0:
+        print("Fizz")
+    elif number % 5 == 0:
+        print("Buzz")
+    else:
+        print(number)
+----
+
+*テストおじさん*: テスト・・・オッケー。
+
+[source, bash]
+----
+ $ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
 == ふりかえり
 [source, Markdown]
 ----

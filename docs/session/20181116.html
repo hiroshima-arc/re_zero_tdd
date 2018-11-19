@@ -467,6 +467,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_学習用テスト">2.4.3. 学習用テスト</a></li>
 <li><a href="#_アルゴリズムの取り替え">2.4.4. アルゴリズムの取り替え</a></li>
 <li><a href="#_長すぎるコード">2.4.5. 長すぎるコード</a></li>
+<li><a href="#_説明用変数の導入">2.4.6. 説明用変数の導入</a></li>
 </ul>
 </li>
 </ul>
@@ -3660,6 +3661,106 @@ OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_説明用変数の導入">2.4.6. 説明用変数の導入</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: さて <span class="red">メソッドの抽出</span> により見通しの良いコードになりましたが・・・・</p>
+</div>
+<div class="paragraph">
+<p>コードを眺めるテストおじさん。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    # 100回繰り返す
+    iterate(101)
+
+
+def iterate(c):
+    for n in range(c):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        fizz_buzz(n)
+
+
+def fizz_buzz(n):
+    if n % 3 == 0 and n % 5 == 0:
+        print("FizzBuzz")
+    elif n % 3 == 0:
+        print("Fizz")
+    elif n % 5 == 0:
+        print("Buzz")
+    else:
+        print(n)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">関数</span> の間で <code>n</code> や <code>c</code> といった <span class="red">変数</span> を使っていますがパット見なにか分かりづらいですね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">説明変数の導入</span> を導入して読みやすいコードにしましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>説明用変数の導入</p>
+</div>
+<div class="paragraph">
+<p>複雑な式がある。</p>
+</div>
+<div class="paragraph">
+<p>その式の結果または部分的な結果を、その目的を説明する名前をつけた一時変数に代入する。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>count</code> と <code>number</code> という変数名に変更しましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    # 100回繰り返す
+    count = 101
+    iterate(count)
+
+
+def iterate(count):
+    for number in range(count):
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        fizz_buzz(number)
+
+
+def fizz_buzz(number):
+    if number % 3 == 0 and number % 5 == 0:
+        print("FizzBuzz")
+    elif number % 3 == 0:
+        print("Fizz")
+    elif number % 5 == 0:
+        print("Buzz")
+    else:
+        print(number)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: テスト・・・オッケー。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3720,24 +3821,25 @@ from test.support import captured_stdout
 
 def execute():
     # 100回繰り返す
-    iterate(101)
+    count = 101
+    iterate(count)
 
 
-def iterate(c):
-    for n in range(c):
+def iterate(count):
+    for number in range(count):
         # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
-        fizz_buzz(n)
+        fizz_buzz(number)
 
 
-def fizz_buzz(n):
-    if n % 3 == 0 and n % 5 == 0:
+def fizz_buzz(number):
+    if number % 3 == 0 and number % 5 == 0:
         print("FizzBuzz")
-    elif n % 3 == 0:
+    elif number % 3 == 0:
         print("Fizz")
-    elif n % 5 == 0:
+    elif number % 5 == 0:
         print("Buzz")
     else:
-        print(n)
+        print(number)
 
 
 class MainTest(unittest.TestCase):
@@ -3839,7 +3941,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-19 14:23:11 JST
+Last updated 2018-11-19 15:32:42 JST
 </div>
 </div>
 </body>

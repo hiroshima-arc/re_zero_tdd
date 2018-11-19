@@ -4,24 +4,25 @@ from test.support import captured_stdout
 
 def execute():
     # 100回繰り返す
-    iterate(101)
+    count = 101
+    iterate(count)
 
 
-def iterate(c):
-    for n in range(c):
+def iterate(count):
+    for number in range(count):
         # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
-        fizz_buzz(n)
+        fizz_buzz(number)
 
 
-def fizz_buzz(n):
-    if n % 3 == 0 and n % 5 == 0:
+def fizz_buzz(number):
+    if number % 3 == 0 and number % 5 == 0:
         print("FizzBuzz")
-    elif n % 3 == 0:
+    elif number % 3 == 0:
         print("Fizz")
-    elif n % 5 == 0:
+    elif number % 5 == 0:
         print("Buzz")
     else:
-        print(n)
+        print(number)
 
 
 class MainTest(unittest.TestCase):
