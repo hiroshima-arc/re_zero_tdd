@@ -4,8 +4,10 @@ from test.support import captured_stdout
 BUZZ = "Buzz"
 FIZZ = "Fizz"
 FIZZ_BUZZ = "FizzBuzz"
-values = []
-count = 100
+fizz_buzz_date = {
+    'values': [],
+    'count': 100
+}
 
 
 def execute():
@@ -15,19 +17,18 @@ def execute():
 
 
 def set_count():
-    global count
     # レンジは指定された値を範囲に含めないので1プラスする
-    count = count + 1
+    fizz_buzz_date['count'] = fizz_buzz_date['count'] + 1
 
 
 def set_values_by_fizz_buzz():
-    for number in range(count):
+    for number in range(fizz_buzz_date['count']):
         value = fizz_buzz(number)
-        values.append(value)
+        fizz_buzz_date['values'].append(value)
 
 
 def print_values():
-    for value in values:
+    for value in fizz_buzz_date['values']:
         print(value)
 
 

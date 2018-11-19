@@ -3071,6 +3071,234 @@ OK
 
 *テストおじさん*: これで [red]#関数は1つの抽象レベルを担うべき# という条件をみたすことができました。
 
+==== データの抽象化
+
+*テストおじさん*: [red]#グローバル変数# を使って値を共有していますが・・・
+
+おもむろにコードを追加してテストを実行するテストをおじさん。
+
+[source, Python]
+----
+BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+values = []
+count = 100
+
+
+def execute():
+    set_count()
+    set_values_by_fizz_buzz()
+    print_values()
+
+
+def set_count():
+    global count
+    # レンジは指定された値を範囲に含めないので1プラスする
+    count = count + 1
+
+
+def set_values_by_fizz_buzz():
+    for number in range(count):
+        value = fizz_buzz(number)
+        values.append(value)
+
+
+def print_values():
+    for value in values:
+        print(value)
+
+
+def fizz_buzz(number):
+    value = number
+
+    if number % 3 == 0 and number % 5 == 0:
+        value = FIZZ_BUZZ
+    elif number % 3 == 0:
+        value = FIZZ
+    elif number % 5 == 0:
+        value = BUZZ
+
+    return value
+
+del values <1>
+----
+
+[source, bash]
+----
+ $ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ERROR
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ERROR
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ERROR
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ERROR
+
+======================================================================
+ERROR: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 51, in setUp
+    execute()
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 13, in execute
+    set_values_by_fizz_buzz()
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 26, in set_values_by_fizz_buzz
+    values.append(value)
+NameError: name 'values' is not defined
+
+======================================================================
+ERROR: test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 51, in setUp
+    execute()
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 13, in execute
+    set_values_by_fizz_buzz()
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 26, in set_values_by_fizz_buzz
+    values.append(value)
+NameError: name 'values' is not defined
+
+======================================================================
+ERROR: test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 51, in setUp
+    execute()
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 13, in execute
+    set_values_by_fizz_buzz()
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 26, in set_values_by_fizz_buzz
+    values.append(value)
+NameError: name 'values' is not defined
+
+======================================================================
+ERROR: test_5の倍数のときはBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 51, in setUp
+    execute()
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 13, in execute
+    set_values_by_fizz_buzz()
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 26, in set_values_by_fizz_buzz
+    values.append(value)
+NameError: name 'values' is not defined
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+FAILED (errors=4)
+----
+
+*テストおじさん*: こうでも
+
+[source, Python]
+----
+values.append(10) <2>
+----
+
+[source, bash]
+----
+ $ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... FAIL
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... FAIL
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... FAIL
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... FAIL
+
+======================================================================
+FAIL: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 55, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[1])
+AssertionError: '1' != 'FizzBuzz'
+- 1
++ FizzBuzz
+
+
+======================================================================
+FAIL: test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 65, in test_3と5両方の倍数の場合にはFizzBuzzとプリントする
+    self.assertEqual("FizzBuzz", self.lines[15])
+AssertionError: 'FizzBuzz' != '14'
+- FizzBuzz
++ 14
+
+
+======================================================================
+FAIL: test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 59, in test_3の倍数のときは数の代わりにFizzをプリントする
+    self.assertEqual("Fizz", self.lines[3])
+AssertionError: 'Fizz' != '2'
+- Fizz
++ 2
+
+
+======================================================================
+FAIL: test_5の倍数のときはBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 62, in test_5の倍数のときはBuzzとプリントする
+    self.assertEqual("Buzz", self.lines[5])
+AssertionError: 'Buzz' != '4'
+- Buzz
++ 4
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+FAILED (failures=4)
+----
+
+*テストおじさん*: このように [red]#グローバル変数# はいつ誰がどこかで書き換えるかわかりません。
+
+*テストおじさん*: FizzBuzzの関数モジュールの範囲だけ共有できればいいのですが現状のコードではそれは難しい・・・
+
+*テストおじさん*: とりあえず [red]#辞書# を使ってFizzBuzzで使う抽象データであることをコードで表現しておきましょう。
+
+[source, Python]
+----
+fizz_buzz_date = {
+    'values': [],
+    'count': 100
+}
+
+....
+
+def set_count():
+    # レンジは指定された値を範囲に含めないので1プラスする
+    fizz_buzz_date['count'] = fizz_buzz_date['count'] + 1
+
+
+def set_values_by_fizz_buzz():
+    for number in range(fizz_buzz_date['count']):
+        value = fizz_buzz(number)
+        fizz_buzz_date['values'].append(value)
+
+
+def print_values():
+    for value in fizz_buzz_date['values']:
+        print(value)
+
+----
+
+[source, bash]
+----
+ $ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: [red]#辞書# でも [red]#グローバル変数# であることに変わりありませんが読み手に意識させることはできますね。
+
 == ふりかえり
 [source, Markdown]
 ----
