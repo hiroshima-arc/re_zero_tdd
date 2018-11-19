@@ -2947,6 +2947,130 @@ Ran 4 tests in 0.001s
 OK
 ----
 
+==== 抽象レベルが正しくないコード
+
+*テストおじさん*: 次に `execute` 関数ですが・・・
+
+[source, Python]
+----
+def execute():
+    global count
+    # レンジは指定された値を範囲に含めないので1プラスする
+    count = count + 1
+    iterate()
+    for value in values:
+        print(value)
+----
+
+*テストおじさん*: [red]#変数# への代入、 [red]#関数# の呼び出し、 [red]#文# の実行と [red]#抽象レベルが正しくないコード# になっています。
+
+*テストおじさん*: [red]#メソッドの抽出# で処理の抽出レベルをあわせましょう。
+
+*テストおじさん*: 副作用のあるカウントの設定は [red]#名前で副作用を示すべき# に従って。
+
+[source, Python]
+----
+def execute():
+    set_count()
+    iterate()
+    for value in values:
+        print(value)
+
+
+def set_count():
+    global count
+    # レンジは指定された値を範囲に含めないので1プラスする
+    count = count + 1
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: 同様に副作用のある値のプリントはこう。
+
+[source, Python]
+----
+def execute():
+    set_count()
+    iterate()
+    print_values()
+
+
+def print_values():
+    for value in values:
+        print(value)
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: 処理の抽出レベルは一致したのですが `iterate` 関数は [red]#関数名は体を表すべき# を満たしているとは言えませんね。
+
+*テストおじさん*: ここはこうして。
+
+[source, Python]
+----
+def execute():
+    set_count()
+    set_values_by_fizz_buzz()
+    print_values()
+
+
+def set_count():
+    global count
+    # レンジは指定された値を範囲に含めないので1プラスする
+    count = count + 1
+
+
+def set_values_by_fizz_buzz():
+    for number in range(count):
+        value = fizz_buzz(number)
+        values.append(value)
+
+
+def print_values():
+    for value in values:
+        print(value)
+----
+
+[source, bash]
+----
+ $ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: これで [red]#関数は1つの抽象レベルを担うべき# という条件をみたすことができました。
+
 == ふりかえり
 [source, Markdown]
 ----

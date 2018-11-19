@@ -471,6 +471,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_関数と変数と定数">2.4.7. 関数と変数と定数</a></li>
 <li><a href="#_副作用のある関数_ない関数">2.4.8. 副作用のある関数・ない関数</a></li>
 <li><a href="#_コメント">2.4.9. コメント</a></li>
+<li><a href="#_抽象レベルが正しくないコード">2.4.10. 抽象レベルが正しくないコード</a></li>
 </ul>
 </li>
 </ul>
@@ -4102,6 +4103,139 @@ OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_抽象レベルが正しくないコード">2.4.10. 抽象レベルが正しくないコード</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 次に <code>execute</code> 関数ですが・・・</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    global count
+    # レンジは指定された値を範囲に含めないので1プラスする
+    count = count + 1
+    iterate()
+    for value in values:
+        print(value)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">変数</span> への代入、 <span class="red">関数</span> の呼び出し、 <span class="red">文</span> の実行と <span class="red">抽象レベルが正しくないコード</span> になっています。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">メソッドの抽出</span> で処理の抽出レベルをあわせましょう。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 副作用のあるカウントの設定は <span class="red">名前で副作用を示すべき</span> に従って。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    set_count()
+    iterate()
+    for value in values:
+        print(value)
+
+
+def set_count():
+    global count
+    # レンジは指定された値を範囲に含めないので1プラスする
+    count = count + 1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 同様に副作用のある値のプリントはこう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    set_count()
+    iterate()
+    print_values()
+
+
+def print_values():
+    for value in values:
+        print(value)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 処理の抽出レベルは一致したのですが <code>iterate</code> 関数は <span class="red">関数名は体を表すべき</span> を満たしているとは言えませんね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ここはこうして。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    set_count()
+    set_values_by_fizz_buzz()
+    print_values()
+
+
+def set_count():
+    global count
+    # レンジは指定された値を範囲に含めないので1プラスする
+    count = count + 1
+
+
+def set_values_by_fizz_buzz():
+    for number in range(count):
+        value = fizz_buzz(number)
+        values.append(value)
+
+
+def print_values():
+    for value in values:
+        print(value)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: これで <span class="red">関数は1つの抽象レベルを担うべき</span> という条件をみたすことができました。</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -4167,18 +4301,26 @@ count = 100
 
 
 def execute():
+    set_count()
+    set_values_by_fizz_buzz()
+    print_values()
+
+
+def set_count():
     global count
     # レンジは指定された値を範囲に含めないので1プラスする
     count = count + 1
-    iterate()
-    for value in values:
-        print(value)
 
 
-def iterate():
+def set_values_by_fizz_buzz():
     for number in range(count):
         value = fizz_buzz(number)
         values.append(value)
+
+
+def print_values():
+    for value in values:
+        print(value)
 
 
 def fizz_buzz(number):
@@ -4293,7 +4435,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-19 17:22:10 JST
+Last updated 2018-11-19 17:53:20 JST
 </div>
 </div>
 </body>

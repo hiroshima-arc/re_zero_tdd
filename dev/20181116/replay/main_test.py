@@ -9,18 +9,26 @@ count = 100
 
 
 def execute():
+    set_count()
+    set_values_by_fizz_buzz()
+    print_values()
+
+
+def set_count():
     global count
     # レンジは指定された値を範囲に含めないので1プラスする
     count = count + 1
-    iterate()
-    for value in values:
-        print(value)
 
 
-def iterate():
+def set_values_by_fizz_buzz():
     for number in range(count):
         value = fizz_buzz(number)
         values.append(value)
+
+
+def print_values():
+    for value in values:
+        print(value)
 
 
 def fizz_buzz(number):
