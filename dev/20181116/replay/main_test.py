@@ -1,6 +1,10 @@
 import unittest
 from test.support import captured_stdout
 
+BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+
 
 def execute():
     # 100回繰り返す
@@ -15,14 +19,16 @@ def iterate(count):
 
 
 def fizz_buzz(number):
+    value = number
+
     if number % 3 == 0 and number % 5 == 0:
-        print("FizzBuzz")
+        value = FIZZ_BUZZ
     elif number % 3 == 0:
-        print("Fizz")
+        value = FIZZ
     elif number % 5 == 0:
-        print("Buzz")
-    else:
-        print(number)
+        value = BUZZ
+
+    print(value)
 
 
 class MainTest(unittest.TestCase):

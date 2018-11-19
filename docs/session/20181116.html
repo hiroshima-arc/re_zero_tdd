@@ -468,6 +468,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_アルゴリズムの取り替え">2.4.4. アルゴリズムの取り替え</a></li>
 <li><a href="#_長すぎるコード">2.4.5. 長すぎるコード</a></li>
 <li><a href="#_説明用変数の導入">2.4.6. 説明用変数の導入</a></li>
+<li><a href="#_関数と変数と定数">2.4.7. 関数と変数と定数</a></li>
 </ul>
 </li>
 </ul>
@@ -3761,6 +3762,95 @@ OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_関数と変数と定数">2.4.7. 関数と変数と定数</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>fizz_buzz</code> <span class="red">関数</span> を見てください。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def fizz_buzz(number):
+    if number % 3 == 0 and number % 5 == 0:
+        print("FizzBuzz")
+    elif number % 3 == 0:
+        print("Fizz")
+    elif number % 5 == 0:
+        print("Buzz")
+    else:
+        print(number)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 一時 <span class="red">変数</span> を使って <code>print</code> <span class="red">関数</span> の呼び出しを一回にしてみましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">def fizz_buzz(number):
+    value = number
+
+    if number % 3 == 0 and number % 5 == 0:
+        value = "FizzBuzz"
+    elif number % 3 == 0:
+        value = "Fizz"
+    elif number % 5 == 0:
+        value = "Buzz"
+
+    print(value)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 文字 <span class="red">リテラル</span> は <span class="red">定数</span> に抽出して変更箇所をわかりやすくしましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+
+.....
+
+def fizz_buzz(number):
+    value = number
+
+    if number % 3 == 0 and number % 5 == 0:
+        value = FIZZ_BUZZ
+    elif number % 3 == 0:
+        value = FIZZ
+    elif number % 5 == 0:
+        value = BUZZ
+
+    print(value)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3818,6 +3908,10 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 <pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
 from test.support import captured_stdout
 
+BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+
 
 def execute():
     # 100回繰り返す
@@ -3832,15 +3926,16 @@ def iterate(count):
 
 
 def fizz_buzz(number):
-    if number % 3 == 0 and number % 5 == 0:
-        print("FizzBuzz")
-    elif number % 3 == 0:
-        print("Fizz")
-    elif number % 5 == 0:
-        print("Buzz")
-    else:
-        print(number)
+    value = number
 
+    if number % 3 == 0 and number % 5 == 0:
+        value = FIZZ_BUZZ
+    elif number % 3 == 0:
+        value = FIZZ
+    elif number % 5 == 0:
+        value = BUZZ
+
+    print(value)
 
 class MainTest(unittest.TestCase):
     def setUp(self):
@@ -3941,7 +4036,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-19 15:32:42 JST
+Last updated 2018-11-19 15:52:09 JST
 </div>
 </div>
 </body>

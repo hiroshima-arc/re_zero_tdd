@@ -2638,6 +2638,92 @@ Ran 4 tests in 0.001s
 OK
 ----
 
+==== 関数と変数と定数
+
+*テストおじさん*: `fizz_buzz` [red]#関数# を見てください。
+
+[source, Python]
+----
+def fizz_buzz(number):
+    if number % 3 == 0 and number % 5 == 0:
+        print("FizzBuzz")
+    elif number % 3 == 0:
+        print("Fizz")
+    elif number % 5 == 0:
+        print("Buzz")
+    else:
+        print(number)
+----
+
+*テストおじさん*: 一時 [red]#変数# を使って `print` [red]#関数# の呼び出しを一回にしてみましょう。
+
+[source, bash]
+----
+def fizz_buzz(number):
+    value = number
+
+    if number % 3 == 0 and number % 5 == 0:
+        value = "FizzBuzz"
+    elif number % 3 == 0:
+        value = "Fizz"
+    elif number % 5 == 0:
+        value = "Buzz"
+
+    print(value)
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: 文字 [red]#リテラル# は [red]#定数# に抽出して変更箇所をわかりやすくしましょう。
+
+[source, bash]
+----
+BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+
+.....
+
+def fizz_buzz(number):
+    value = number
+
+    if number % 3 == 0 and number % 5 == 0:
+        value = FIZZ_BUZZ
+    elif number % 3 == 0:
+        value = FIZZ
+    elif number % 5 == 0:
+        value = BUZZ
+
+    print(value)
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+----
+
+
 == ふりかえり
 [source, Markdown]
 ----
