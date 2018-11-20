@@ -39,8 +39,6 @@ http://www.hiroshima-arc.org/re_zero_tdd/session/20181109.html#_problem[前回�
 
 === TODOリストから始めるアジャイルソフトウェア開発
 
-==== 仕様
-
 *テストおじさん*: はい、第２回 Re:ゼロから始めるテスト駆動開発 はじめます、レポジトリは https://github.com/hiroshima-arc/re_zero_tdd[ここ]ね。
 
 *リモートさん*: 今日は家からうっすら参加です。ご飯を食べたりで適当に抜けています。

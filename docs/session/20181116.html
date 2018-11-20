@@ -445,9 +445,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_前回までのあらすじ">2.1. 前回までのあらすじ</a></li>
 <li><a href="#_todoリストから始めるアジャイルソフトウェア開発">2.2. TODOリストから始めるアジャイルソフトウェア開発</a>
 <ul class="sectlevel3">
-<li><a href="#_仕様">2.2.1. 仕様</a></li>
-<li><a href="#_todoリスト">2.2.2. TODOリスト</a></li>
-<li><a href="#_アジャイルソフトウェア開発">2.2.3. アジャイルソフトウェア開発</a></li>
+<li><a href="#_todoリスト">2.2.1. TODOリスト</a></li>
+<li><a href="#_アジャイルソフトウェア開発">2.2.2. アジャイルソフトウェア開発</a></li>
 </ul>
 </li>
 <li><a href="#_テストファーストから始めるアーキテクチャ">2.3. テストファーストから始めるアーキテクチャ</a>
@@ -578,8 +577,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="sect2">
 <h3 id="_todoリストから始めるアジャイルソフトウェア開発">2.2. TODOリストから始めるアジャイルソフトウェア開発</h3>
-<div class="sect3">
-<h4 id="_仕様">2.2.1. 仕様</h4>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: はい、第２回 Re:ゼロから始めるテスト駆動開発 はじめます、レポジトリは <a href="https://github.com/hiroshima-arc/re_zero_tdd">ここ</a>ね。</p>
 </div>
@@ -609,9 +606,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: <a href="http://www.hiroshima-arc.org/re_zero_tdd/session/20181109.html#_%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3">前回のセッション</a>との違いとして今回はコンソールに出力させるというのが大きな違いですかね。</p>
 </div>
-</div>
 <div class="sect3">
-<h4 id="_todoリスト">2.2.2. TODOリスト</h4>
+<h4 id="_todoリスト">2.2.1. TODOリスト</h4>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: 最初にまず <span class="red">TODOリスト</span> の作成をしましょう。</p>
 </div>
@@ -658,7 +654,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect3">
-<h4 id="_アジャイルソフトウェア開発">2.2.3. アジャイルソフトウェア開発</h4>
+<h4 id="_アジャイルソフトウェア開発">2.2.2. アジャイルソフトウェア開発</h4>
 <div class="paragraph">
 <p><strong>テスト鬼さん</strong>: TODOリストの粒度はどれくらいが適切なんですかね？</p>
 </div>
@@ -960,12 +956,12 @@ OK</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py
- .
- ----------------------------------------------------------------------
- Ran 1 test in 0.000s
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
 
- OK</code></pre>
+OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -985,7 +981,7 @@ OK</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> python main_test.py
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py
 1
 F
 ======================================================================
@@ -1078,7 +1074,7 @@ FAILED (failures=1)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
 
 ----------------------------------------------------------------------
@@ -1305,7 +1301,7 @@ FAILED (failures=1)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ERROR
 
 ======================================================================
@@ -1492,7 +1488,7 @@ FAILED (failures=1)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... FAIL
 test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
 
@@ -1646,7 +1642,7 @@ FAILED (failures=1)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... FAIL
 test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
 test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
@@ -1787,7 +1783,7 @@ FAILED (failures=1)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python main_test.py -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... FAIL
 test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
@@ -2373,7 +2369,7 @@ OK</code></pre>
 <p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
 </li>
 <li>
-<p>&#10063; ３三度目になったらリファクタリング開始。</p>
+<p>&#10003; ３三度目になったらリファクタリング開始。</p>
 </li>
 <li>
 <p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
@@ -2588,7 +2584,7 @@ FAILED (failures=3, errors=1)</code></pre>
 <p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
 </li>
 <li>
-<p>&#10063; ３三度目になったらリファクタリング開始。</p>
+<p>&#10003; ３三度目になったらリファクタリング開始。</p>
 </li>
 <li>
 <p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
@@ -2611,7 +2607,7 @@ FAILED (failures=3, errors=1)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
 E
 ======================================================================
 ERROR: test_1から100まで数をプリントできるようにする (main_test.MainTest)
@@ -3213,13 +3209,7 @@ OK</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_execute_for
-.
-----------------------------------------------------------------------
-Ran 1 test in 0.000s
-
-OK
-k2works-mbp-pro@k2works:replay (feature/2018116_replay) $ python main_test.py -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ok
 test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
@@ -3566,7 +3556,7 @@ OK</code></pre>
 <p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
 </li>
 <li>
-<p>&#10063; ３三度目になったらリファクタリング開始。</p>
+<p>&#10003; ３三度目になったらリファクタリング開始。</p>
 </li>
 <li>
 <p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
@@ -3759,7 +3749,7 @@ def fizz_buzz(number):
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
 test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
@@ -4227,7 +4217,7 @@ def print_values():
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
 test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
@@ -4300,7 +4290,7 @@ del values <b class="conum">(1)</b></code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ERROR
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ERROR
 test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ERROR
@@ -4370,7 +4360,7 @@ FAILED (errors=4)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... FAIL
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... FAIL
 test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... FAIL
@@ -4462,7 +4452,7 @@ def print_values():
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
 test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
@@ -4546,7 +4536,7 @@ def set_count(count):
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest.test_1から10まで数をプリントする
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_1から10まで数をプリントする
 E
 ======================================================================
 ERROR: test_1から10まで数をプリントする (main_test.MainTest)
@@ -4640,7 +4630,7 @@ FAILED (failures=1)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash"> $ python -m unittest main_test.MainTest -v
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
 test_1から10まで数をプリントする (main_test.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
@@ -6307,7 +6297,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-20 17:05:11 JST
+Last updated 2018-11-21 06:05:28 JST
 </div>
 </div>
 </body>
