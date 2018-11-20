@@ -1,6 +1,8 @@
 import unittest
 from test.support import captured_stdout
 
+MAX_COUNT = 100
+ERROR_MSG = f"回数は{MAX_COUNT}までです"
 BUZZ = "Buzz"
 FIZZ = "Fizz"
 FIZZ_BUZZ = "FizzBuzz"
@@ -10,10 +12,13 @@ fizz_buzz_date = {
 }
 
 
-def execute(count=100):
-    set_count(count)
-    set_values_by_fizz_buzz()
-    print_values()
+def execute(count=MAX_COUNT):
+    if count <= MAX_COUNT:
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()
 
 
 def set_count(count):
@@ -32,6 +37,10 @@ def set_values_by_fizz_buzz():
 def print_values():
     for value in fizz_buzz_date['values']:
         print(value)
+
+
+def print_error_message():
+    print(ERROR_MSG)
 
 
 def fizz_buzz(number):
@@ -62,7 +71,7 @@ class MainTest(unittest.TestCase):
 
     def test_1から100まで数をプリントできるようにする(self):
         self.assertEqual("1", self.lines[1])
-        self.assertEqual("Buzz", self.lines[100])
+        self.assertEqual("Buzz", self.lines[MAX_COUNT])
 
     def test_3の倍数のときは数の代わりにFizzをプリントする(self):
         self.assertEqual("Fizz", self.lines[3])
@@ -72,6 +81,12 @@ class MainTest(unittest.TestCase):
 
     def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
         self.assertEqual("FizzBuzz", self.lines[15])
+
+    def test_100より多い場合はプリントしない(self):
+        with captured_stdout() as stdout:
+            execute(count=101)
+            self.lines = stdout.getvalue().splitlines()
+        self.assertEqual(f"回数は{MAX_COUNT}までです", self.lines[0])
 
 
 class RangeTest(unittest.TestCase):
@@ -97,11 +112,11 @@ class RangeTest(unittest.TestCase):
         self.assertEqual(0, min(rg))
 
     def test_シーケンス間の変換(self):
-        list1 = [100, 200, 300]
+        list1 = [MAX_COUNT, 200, 300]
         tpl1 = (123, 'ok', True)
         rng1 = range(10, 20)
         result = list1 + list(tpl1) + list(rng1)
-        self.assertEqual([100, 200, 300, 123, 'ok', True, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], result)
+        self.assertEqual([MAX_COUNT, 200, 300, 123, 'ok', True, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], result)
 
 
 if __name__ == "__main__":

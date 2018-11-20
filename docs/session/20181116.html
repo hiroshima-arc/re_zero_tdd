@@ -474,6 +474,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_抽象レベルが正しくないコード">2.4.10. 抽象レベルが正しくないコード</a></li>
 <li><a href="#_データの抽象化">2.4.11. データの抽象化</a></li>
 <li><a href="#_名前付き引数">2.4.12. 名前付き引数</a></li>
+<li><a href="#_エラーハンドリング">2.4.13. エラーハンドリング</a></li>
 </ul>
 </li>
 </ul>
@@ -4649,6 +4650,311 @@ OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_エラーハンドリング">2.4.13. エラーハンドリング</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 回数を引数で指定できるようにしましたが現行の仕様では1から100までとあるので100より多い場合はプリントしないようにしておきましょう。</p>
+</div>
+<div class="paragraph">
+<p>テストコードを追加するテストをおじさん。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_100より多い場合はプリントしない(self):
+        with captured_stdout() as stdout:
+            execute(count=101)
+            self.lines = stdout.getvalue().splitlines()
+        self.assertNotIn("回数は100までです", self.lines[0])</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... FAIL
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+======================================================================
+FAIL: test_100より多い場合はプリントしない (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 80, in test_100より多い場合はプリントしない
+    self.assertEqual("回数は100までです", self.lines[0])
+AssertionError: '回数は100までです' != 'FizzBuzz'
+- 回数は100までです
++ FizzBuzz
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (failures=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: テストをパスするための <span class="red">明白な実装</span> を行います。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=100):
+    if count &lt; 100:
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print("回数は100までです")</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ERROR
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ERROR
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ERROR
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ERROR
+
+======================================================================
+ERROR: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 67, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[1])
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 77, in test_3と5両方の倍数の場合にはFizzBuzzとプリントする
+    self.assertEqual("FizzBuzz", self.lines[15])
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 71, in test_3の倍数のときは数の代わりにFizzをプリントする
+    self.assertEqual("Fizz", self.lines[3])
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_5の倍数のときはBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 74, in test_5の倍数のときはBuzzとプリントする
+    self.assertEqual("Buzz", self.lines[5])
+IndexError: list index out of range
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (errors=4)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ありゃ? あー <code>count &lt; 100</code> だと100の場合は評価されないわな。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=100):
+    if count &lt; 100: <b class="conum">(1)</b>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print("回数は100までです")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ここはこうかな。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=100):
+    if count &lt;= 100: <b class="conum">(2)</b>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print("回数は100までです")</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: さてテストはパスしましたが <span class="red">抽象レベルが正しくないコード</span> を追加してしまいました。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ここは <span class="red">メソッドの抽出</span> を実施して <span class="red">名前で副作用を示すべき</span> 関数にしましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=100):
+    if count &lt;= 100:
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()
+
+
+def print_error_message():
+    print("回数は100までです")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: エラーメッセージは変更する可能があるので <span class="red">定数</span> にしておきましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">ERROR_MSG = "回数は100までです"
+
+...
+
+def print_error_message():
+    print(ERROR_MSG)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: あと・・・ <code>100</code> というのがぱっと見何を意味するかわかりませんね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=100): <b class="conum">(1)</b>
+    if count &lt;= 100: <b class="conum">(2)</b>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">シンボリック定数によるマジックナンバーの置き換え</span> を実施して <span class="red">抽象レベルに適切な名前を選び</span> ましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>シンボリック定数によるマジックナンバーの置き換え</p>
+</div>
+<div class="paragraph">
+<p>特別な意味を持った数字のリテラルがある。</p>
+</div>
+<div class="paragraph">
+<p>定数を作り、それにふさわしい名前をつけて、そのリテラルを置き換える。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">MAX_COUNT = 100 <b class="conum">(3)</b>
+ERROR_MSG = "回数は100までです"
+BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+fizz_buzz_date = {
+    'values': [],
+    'count': 0
+}
+
+
+def execute(count=MAX_COUNT): <b class="conum">(1)</b>
+    if count &lt;= MAX_COUNT: <b class="conum">(2)</b>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: メッセージも定数から参照できるようしておきましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">MAX_COUNT = 100
+ERROR_MSG = f"回数は{MAX_COUNT}までです" <b class="conum">(1)</b>
+
+...
+
+    def test_100より多い場合はプリントしない(self):
+        with captured_stdout() as stdout:
+            execute(count=101)
+            self.lines = stdout.getvalue().splitlines()
+        self.assertEqual(f"回数は{MAX_COUNT}までです", self.lines[0]) <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -4706,6 +5012,8 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 <pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
 from test.support import captured_stdout
 
+MAX_COUNT = 100
+ERROR_MSG = f"回数は{MAX_COUNT}までです"
 BUZZ = "Buzz"
 FIZZ = "Fizz"
 FIZZ_BUZZ = "FizzBuzz"
@@ -4715,10 +5023,13 @@ fizz_buzz_date = {
 }
 
 
-def execute(count=100):
-    set_count(count)
-    set_values_by_fizz_buzz()
-    print_values()
+def execute(count=MAX_COUNT):
+    if count &lt;= MAX_COUNT:
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()
 
 
 def set_count(count):
@@ -4737,6 +5048,10 @@ def set_values_by_fizz_buzz():
 def print_values():
     for value in fizz_buzz_date['values']:
         print(value)
+
+
+def print_error_message():
+    print(ERROR_MSG)
 
 
 def fizz_buzz(number):
@@ -4767,7 +5082,7 @@ class MainTest(unittest.TestCase):
 
     def test_1から100まで数をプリントできるようにする(self):
         self.assertEqual("1", self.lines[1])
-        self.assertEqual("Buzz", self.lines[100])
+        self.assertEqual("Buzz", self.lines[MAX_COUNT])
 
     def test_3の倍数のときは数の代わりにFizzをプリントする(self):
         self.assertEqual("Fizz", self.lines[3])
@@ -4777,6 +5092,12 @@ class MainTest(unittest.TestCase):
 
     def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
         self.assertEqual("FizzBuzz", self.lines[15])
+
+    def test_100より多い場合はプリントしない(self):
+        with captured_stdout() as stdout:
+            execute(count=101)
+            self.lines = stdout.getvalue().splitlines()
+        self.assertEqual(f"回数は{MAX_COUNT}までです", self.lines[0])
 
 
 class RangeTest(unittest.TestCase):
@@ -4802,11 +5123,11 @@ class RangeTest(unittest.TestCase):
         self.assertEqual(0, min(rg))
 
     def test_シーケンス間の変換(self):
-        list1 = [100, 200, 300]
+        list1 = [MAX_COUNT, 200, 300]
         tpl1 = (123, 'ok', True)
         rng1 = range(10, 20)
         result = list1 + list(tpl1) + list(rng1)
-        self.assertEqual([100, 200, 300, 123, 'ok', True, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], result)
+        self.assertEqual([MAX_COUNT, 200, 300, 123, 'ok', True, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], result)
 
 
 if __name__ == "__main__":
@@ -4858,7 +5179,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-19 19:05:20 JST
+Last updated 2018-11-20 10:35:22 JST
 </div>
 </div>
 </body>

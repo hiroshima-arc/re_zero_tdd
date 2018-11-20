@@ -3464,6 +3464,294 @@ Ran 5 tests in 0.002s
 OK
 ----
 
+==== エラーハンドリング
+
+*テストおじさん*: 回数を引数で指定できるようにしましたが現行の仕様では1から100までとあるので100より多い場合はプリントしないようにしておきましょう。
+
+テストコードを追加するテストをおじさん。
+
+[source, Python]
+----
+    def test_100より多い場合はプリントしない(self):
+        with captured_stdout() as stdout:
+            execute(count=101)
+            self.lines = stdout.getvalue().splitlines()
+        self.assertNotIn("回数は100までです", self.lines[0])
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... FAIL
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+======================================================================
+FAIL: test_100より多い場合はプリントしない (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 80, in test_100より多い場合はプリントしない
+    self.assertEqual("回数は100までです", self.lines[0])
+AssertionError: '回数は100までです' != 'FizzBuzz'
+- 回数は100までです
++ FizzBuzz
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (failures=1)
+----
+
+*テストおじさん*: テストをパスするための [red]#明白な実装# を行います。
+
+[source, Python]
+----
+def execute(count=100):
+    if count < 100:
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print("回数は100までです")
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ERROR
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ERROR
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ERROR
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ERROR
+
+======================================================================
+ERROR: test_1から100まで数をプリントできるようにする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 67, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("1", self.lines[1])
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 77, in test_3と5両方の倍数の場合にはFizzBuzzとプリントする
+    self.assertEqual("FizzBuzz", self.lines[15])
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 71, in test_3の倍数のときは数の代わりにFizzをプリントする
+    self.assertEqual("Fizz", self.lines[3])
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_5の倍数のときはBuzzとプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 74, in test_5の倍数のときはBuzzとプリントする
+    self.assertEqual("Buzz", self.lines[5])
+IndexError: list index out of range
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (errors=4)
+----
+
+*テストおじさん*: ありゃ? あー `count < 100` だと100の場合は評価されないわな。
+
+[source, Python]
+----
+def execute(count=100):
+    if count < 100: <1>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print("回数は100までです")
+----
+
+*テストおじさん*: ここはこうかな。
+
+[source, Python]
+----
+def execute(count=100):
+    if count <= 100: <2>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print("回数は100までです")
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: さてテストはパスしましたが [red]#抽象レベルが正しくないコード# を追加してしまいました。
+
+*テストおじさん*: ここは [red]#メソッドの抽出# を実施して [red]#名前で副作用を示すべき# 関数にしましょう。
+
+[source, Python]
+----
+def execute(count=100):
+    if count <= 100:
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()
+
+
+def print_error_message():
+    print("回数は100までです")
+----
+
+*テストおじさん*: エラーメッセージは変更する可能があるので [red]#定数# にしておきましょう。
+
+[source, Python]
+----
+ERROR_MSG = "回数は100までです"
+
+...
+
+def print_error_message():
+    print(ERROR_MSG)
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: あと・・・ `100` というのがぱっと見何を意味するかわかりませんね。
+
+[source, Python]
+----
+def execute(count=100): <1>
+    if count <= 100: <2>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()
+----
+
+*テストおじさん*: [red]#シンボリック定数によるマジックナンバーの置き換え# を実施して [red]#抽象レベルに適切な名前を選び# ましょう。
+
+[quote, 'https://amzn.to/2T3Jek7[新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) ]']
+____
+シンボリック定数によるマジックナンバーの置き換え
+
+特別な意味を持った数字のリテラルがある。
+
+定数を作り、それにふさわしい名前をつけて、そのリテラルを置き換える。
+____
+
+[source, Python]
+----
+MAX_COUNT = 100 <3>
+ERROR_MSG = "回数は100までです"
+BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+fizz_buzz_date = {
+    'values': [],
+    'count': 0
+}
+
+
+def execute(count=MAX_COUNT): <1>
+    if count <= MAX_COUNT: <2>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: メッセージも定数から参照できるようしておきましょう。
+
+[source, Python]
+----
+MAX_COUNT = 100
+ERROR_MSG = f"回数は{MAX_COUNT}までです" <1>
+
+...
+
+    def test_100より多い場合はプリントしない(self):
+        with captured_stdout() as stdout:
+            execute(count=101)
+            self.lines = stdout.getvalue().splitlines()
+        self.assertEqual(f"回数は{MAX_COUNT}までです", self.lines[0]) <2>
+
+----
+
+[source, bash]
+----
+$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+----
+
+
 == ふりかえり
 [source, Markdown]
 ----
