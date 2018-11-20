@@ -13,12 +13,16 @@ fizz_buzz_date = {
 
 
 def execute(count=MAX_COUNT):
-    if count <= MAX_COUNT:
+    if within_max_count(count):
         set_count(count)
         set_values_by_fizz_buzz()
         print_values()
     else:
         print_error_message()
+
+
+def within_max_count(count):
+    return count <= MAX_COUNT
 
 
 def set_count(count):
@@ -43,14 +47,26 @@ def print_error_message():
     print(ERROR_MSG)
 
 
+def is_fizz(number):
+    return number % 3 == 0
+
+
+def is_buzz(number):
+    return number % 5 == 0
+
+
+def is_fizz_buzz(number):
+    return number % 3 == 0 and number % 5 == 0
+
+
 def fizz_buzz(number):
     value = number
 
-    if number % 3 == 0 and number % 5 == 0:
+    if is_fizz_buzz(number):
         value = FIZZ_BUZZ
-    elif number % 3 == 0:
+    elif is_fizz(number):
         value = FIZZ
-    elif number % 5 == 0:
+    elif is_buzz(number):
         value = BUZZ
 
     return value

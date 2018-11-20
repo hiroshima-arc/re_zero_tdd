@@ -475,6 +475,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_データの抽象化">2.4.11. データの抽象化</a></li>
 <li><a href="#_名前付き引数">2.4.12. 名前付き引数</a></li>
 <li><a href="#_エラーハンドリング">2.4.13. エラーハンドリング</a></li>
+<li><a href="#_条件記述の分解">2.4.14. 条件記述の分解</a></li>
 </ul>
 </li>
 </ul>
@@ -4955,6 +4956,291 @@ OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_条件記述の分解">2.4.14. 条件記述の分解</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: さて、いよいよリファクタリングも佳境に入ってきました。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 仕上げに <span class="red">条件記述の分解</span> を実施して完了としましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>条件記述の分解</p>
+</div>
+<div class="paragraph">
+<p>複雑な条件記述(if-then-else)がある。</p>
+</div>
+<div class="paragraph">
+<p>その条件記述部とthenm部およびelse部から、メソッドを抽出する。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: まずは、 <code>fizz_buzz</code> 関数から</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def fizz_buzz(number):
+    value = number
+
+    if number % 3 == 0 and number % 5 == 0:
+        value = FIZZ_BUZZ
+    elif number % 3 == 0:
+        value = FIZZ
+    elif number % 5 == 0:
+        value = BUZZ
+
+    return value</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">クエリーメソッド</span> を <span class="red">メソッドの抽出</span> します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def is_fizz(number): <b class="conum">(2)</b>
+    number % 3 == 0
+
+
+def fizz_buzz(number):
+    value = number
+
+    if number % 3 == 0 and number % 5 == 0:
+        value = FIZZ_BUZZ
+    elif is_fizz(number): <b class="conum">(1)</b>
+        value = FIZZ
+    elif number % 5 == 0:
+        value = BUZZ
+
+    return value</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 確認・・・ありゃ?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... FAIL
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+======================================================================
+FAIL: test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/k2works/Projects/hiroshima-arc/re_zero_tdd/dev/20181116/replay/main_test.py", line 81, in test_3の倍数のときは数の代わりにFizzをプリントする
+    self.assertEqual("Fizz", self.lines[3])
+AssertionError: 'Fizz' != '3'
+- Fizz
++ 3
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (failures=1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 変更部分が早速失敗してますね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テスト初めて書いたひと</strong>: <code>is_fizz</code> 関数が結果を返していないですね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def is_fizz(number):
+    number % 3 == 0 <b class="conum">(3)</b>
+
+
+def fizz_buzz(number):
+    value = number
+
+    if number % 3 == 0 and number % 5 == 0:
+        value = FIZZ_BUZZ
+    elif is_fizz(number):
+        value = FIZZ
+    elif number % 5 == 0:
+        value = BUZZ
+
+    return value</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: そっすね・・・ここはこうかな。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def is_fizz(number):
+    return number % 3 == 0 <b class="conum">(4)</b>
+
+
+def fizz_buzz(number):
+    value = number
+
+    if number % 3 == 0 and number % 5 == 0:
+        value = FIZZ_BUZZ
+    elif is_fizz(number):
+        value = FIZZ
+    elif number % 5 == 0:
+        value = BUZZ
+
+    return value</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: オッケー、残りも <span class="red">明白な実装</span> で片付けましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def is_buzz(number): <b class="conum">(2)</b>
+    return number % 5 == 0
+
+
+def is_fizz_buzz(number): <b class="conum">(3)</b>
+    return number % 3 == 0 and number % 5 == 0
+
+
+def fizz_buzz(number):
+    value = number
+
+    if is_fizz_buzz(number): <b class="conum">(3)</b>
+        value = FIZZ_BUZZ
+    elif is_fizz(number):
+        value = FIZZ
+    elif is_buzz(number): <b class="conum">(1)</b>
+        value = BUZZ
+
+    return value</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: お次は、 <code>execute</code> 関数です。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=MAX_COUNT):
+    if count &lt;= MAX_COUNT: <b class="conum">(1)</b>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">明白な実装</span> で <span class="red">クエリーメソッド</span> を <span class="red">メソッドの抽出</span> します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=MAX_COUNT):
+    if is_not_max_count(count): <b class="conum">(2)</b>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()
+
+
+def is_not_max_count(count): <b class="conum">(2)</b>
+    return count &lt;= MAX_COUNT</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>リモートさん</strong>: <code>MAX_COUNT</code> は含まれるから <span class="red">正確であれ</span> でないですね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: そうですね、ここは <code>MAX_COUNT</code> を含むので・・・</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=MAX_COUNT):
+    if within_max_count(count): <b class="conum">(3)</b>
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()
+
+
+def within_max_count(count): <b class="conum">(3)</b>
+    return count &lt;= MAX_COUNT</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest -v
+test_100より多い場合はプリントしない (main_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
+test_1から10まで数をプリントする (main_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (main_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -5024,12 +5310,16 @@ fizz_buzz_date = {
 
 
 def execute(count=MAX_COUNT):
-    if count &lt;= MAX_COUNT:
+    if within_max_count(count):
         set_count(count)
         set_values_by_fizz_buzz()
         print_values()
     else:
         print_error_message()
+
+
+def within_max_count(count):
+    return count &lt;= MAX_COUNT
 
 
 def set_count(count):
@@ -5054,14 +5344,26 @@ def print_error_message():
     print(ERROR_MSG)
 
 
+def is_fizz(number):
+    return number % 3 == 0
+
+
+def is_buzz(number):
+    return number % 5 == 0
+
+
+def is_fizz_buzz(number):
+    return number % 3 == 0 and number % 5 == 0
+
+
 def fizz_buzz(number):
     value = number
 
-    if number % 3 == 0 and number % 5 == 0:
+    if is_fizz_buzz(number):
         value = FIZZ_BUZZ
-    elif number % 3 == 0:
+    elif is_fizz(number):
         value = FIZZ
-    elif number % 5 == 0:
+    elif is_buzz(number):
         value = BUZZ
 
     return value
@@ -5179,7 +5481,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-20 10:35:22 JST
+Last updated 2018-11-20 11:57:31 JST
 </div>
 </div>
 </body>
