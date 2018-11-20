@@ -215,12 +215,12 @@ ____
 
 [source, bash]
 ----
- $ python main_test.py -v
+$ python main_test.py -v
 
- ----------------------------------------------------------------------
- Ran 0 tests in 0.000s
+----------------------------------------------------------------------
+Ran 0 tests in 0.000s
 
- OK
+OK
 ----
 
 [quote, 'https://amzn.to/2QtCA5b[テスト駆動開発]']
@@ -256,13 +256,13 @@ ____
 
 [source, bash]
 ----
- $ python main_test.py -v
- test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+$ python main_test.py -v
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
 
- ----------------------------------------------------------------------
- Ran 1 test in 0.000s
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
 
- OK
+OK
 ----
 
 *テスト鬼さん*: `-v` のオプションは？
@@ -273,12 +273,12 @@ ____
 
 [source, bash]
 ----
- $ python main_test.py
- .
- ----------------------------------------------------------------------
- Ran 1 test in 0.000s
+$ python main_test.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
 
- OK
+OK
 ----
 
 *テストおじさん*: こんな感じになります。
@@ -295,7 +295,7 @@ def execute():
 
 [source, bash]
 ----
- python main_test.py
+$ python main_test.py
 1
 F
 ======================================================================
@@ -380,7 +380,7 @@ class MainTest(unittest.TestCase):
 
 [source, bash]
 ----
- $ python main_test.py -v
+$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
 
 ----------------------------------------------------------------------
@@ -595,7 +595,7 @@ FAILED (failures=1)
 
 [source, bash]
 ----
- $ python main_test.py -v
+$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ERROR
 
 ======================================================================
@@ -744,7 +744,7 @@ def execute():
 
 [source, bash]
 ----
- $ python main_test.py -v
+$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... FAIL
 test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
 
@@ -876,7 +876,7 @@ def execute():
 
 [source, bash]
 ----
- $ python main_test.py -v
+$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... FAIL
 test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
 test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
@@ -997,7 +997,7 @@ def execute():
 
 [source, bash]
 ----
- $ python main_test.py -v
+$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... FAIL
 test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
@@ -1588,7 +1588,7 @@ ____
 
 [source, bash]
 ----
- $ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
+$ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
 E
 ======================================================================
 ERROR: test_1から100まで数をプリントできるようにする (main_test.MainTest)
@@ -2136,13 +2136,7 @@ def execute_for():
 
 [source, bash]
 ----
-$ python -m unittest main_test.MainTest.test_execute_for
-.
-----------------------------------------------------------------------
-Ran 1 test in 0.000s
-
-OK
-k2works-mbp-pro@k2works:replay (feature/2018116_replay) $ python main_test.py -v
+$ python main_test.py -v
 test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ok
 test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
@@ -2626,7 +2620,7 @@ def fizz_buzz(number):
 
 [source, bash]
 ----
- $ python -m unittest main_test.MainTest -v
+$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
 test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
@@ -3057,7 +3051,7 @@ def print_values():
 
 [source, bash]
 ----
- $ python -m unittest main_test.MainTest -v
+$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
 test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
@@ -3126,7 +3120,7 @@ del values <1>
 
 [source, bash]
 ----
- $ python -m unittest main_test.MainTest -v
+$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ERROR
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ERROR
 test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ERROR
@@ -3195,7 +3189,7 @@ values.append(10) <2>
 
 [source, bash]
 ----
- $ python -m unittest main_test.MainTest -v
+$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... FAIL
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... FAIL
 test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... FAIL
@@ -3285,7 +3279,7 @@ def print_values():
 
 [source, bash]
 ----
- $ python -m unittest main_test.MainTest -v
+$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
 test_3の倍数のときは数の代わりにFizzをプリントする (main_test.MainTest) ... ok
@@ -3363,7 +3357,7 @@ def set_count(count):
 
 [source, bash]
 ----
- $ python -m unittest main_test.MainTest.test_1から10まで数をプリントする
+$ python -m unittest main_test.MainTest.test_1から10まで数をプリントする
 E
 ======================================================================
 ERROR: test_1から10まで数をプリントする (main_test.MainTest)
@@ -3451,7 +3445,7 @@ def set_values_by_fizz_buzz():
 
 [source, bash]
 ----
- $ python -m unittest main_test.MainTest -v
+$ python -m unittest main_test.MainTest -v
 test_1から100まで数をプリントできるようにする (main_test.MainTest) ... ok
 test_1から10まで数をプリントする (main_test.MainTest) ... ok
 test_3と5両方の倍数の場合にはFizzBuzzとプリントする (main_test.MainTest) ... ok
