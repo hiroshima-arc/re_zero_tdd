@@ -76,3 +76,4 @@ node_modules
 .floo
 .flooignore
 .pyc
+.asciidoctor
