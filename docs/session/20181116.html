@@ -478,6 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_条件記述の分解">2.4.14. 条件記述の分解</a></li>
 <li><a href="#_モジュール分割">2.4.15. モジュール分割</a></li>
 <li><a href="#_名前重要">2.4.16. 名前重要</a></li>
+<li><a href="#_構造化プログラミング">2.4.17. 構造化プログラミング</a></li>
 </ul>
 </li>
 </ul>
@@ -5876,6 +5877,189 @@ OK</code></pre>
 <p><strong>テストおじさん</strong>: <a href="https://プログラマが知るべき97のこと.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81/">名前重要</a> です。</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_構造化プログラミング">2.4.17. 構造化プログラミング</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: さて、今回は3つのプログラミングパラダイムの一つである <span class="red">構造化プログラミング</span> アプローチで構築しました。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>構造化プログラミング</p>
+</div>
+<div class="paragraph">
+<p>最初に導入された（最初に誕生したわけではない）パラダイムは、1968年にEdsger Wybe Dijkstraが発見した「構造化プログラミング」である。
+Dijkstraは、制限のないジャンプ（goto文の使用）がプログラムの構造に対して有害であることを示した。
+今後の章で示すことになるが、彼はこのようなジャンプを、なじみのあるif/then/elseやdo/while/untilといった構文に置き換えた。</p>
+</div>
+<div class="paragraph">
+<p>構造化プログラミングのパラダイムは、以下のように要約できる。</p>
+</div>
+<div class="paragraph">
+<p><strong>構造化プログラミングは、直接的な制御の移行に規律を課すものである。</strong></p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2PGgVdM">Clean Architecture　達人に学ぶソフトウェアの構造と設計 (アスキードワンゴ)</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: まず、 <a href="#_テストファーストから始めるアーキテクチャ">テストファーストから始めるアーキテクチャ </a> からプログラミングの基本要素である <span class="red">基本のデータ</span> <span class="red">変数</span> <span class="red">演算</span> <span class="red">データ構造</span> <span class="red">制御構文</span> を使って以下のコードを実装しました。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    n = 100
+    while n != 0:
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)
+        n = n - 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: このコードはあらゆるプログラムを構築できる制御構造の最小セット <span class="red">順次</span> <span class="red">選択</span> <span class="red">反復</span> のすべてを含んています。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: さらに、 <a href="#_リファクタリングから始める構造化プログラミング">リファクタリングから始める構造化プログラミング </a> から以下の特徴をコードに見出すことができました。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>単純な文を組み合わせた文を1つの抽象文としてみなす</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def generate(number):
+    value = number
+
+    if is_fizz_buzz(number):
+        value = FIZZ_BUZZ
+    elif is_fizz(number):
+        value = FIZZ
+    elif is_buzz(number):
+        value = BUZZ
+
+    return value</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>抽象化した文を組み合わせた文をさらに1つの抽象文としてみなす(階層化する)</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=MAX_COUNT):
+    if within_max_count(count):
+        set_count(count)
+        set_values_by_generate()
+        print_values()
+    else:
+        print_error_message()</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>データも抽象化する</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">MAX_COUNT = 100
+ERROR_MSG = f"回数は{MAX_COUNT}までです"
+BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+data = {
+    'values': [],
+    'count': 0
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>抽象データとそれを扱う抽象文を他の部分と分離する</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">data = {
+    'values': [],
+    'count': 0
+}
+
+...
+
+def set_values_by_generate():
+    data['values'] = []
+
+    for number in range(data['count']):
+        value = generate(number)
+        data['values'].append(value)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: そして、モジュール分割により <span class="red">機能分割</span> を実現しました。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>機能分割</p>
+</div>
+<div class="paragraph">
+<p>構造化プログラミングは、モジュールを証明可能な単位に再帰的に分割することを可能にする。
+それによって、モジュールは機能的に分割できる。つまり、大きな問題は上位のレベルの機能に分割できるというわけだ。
+分割された機能は、さらに下位レベルの機能へと無限に分割していくことができる。
+また、このように分割された機能は、構造化プログラミングの制限された制御構造を使って表現することができる。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2PGgVdM">Clean Architecture　達人に学ぶソフトウェアの構造と設計 (アスキードワンゴ)</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 一方で <span class="red">データと手続きをひとかたまりにする</span> ことを <span class="red">構造化プログラミング</span> アプローチで実現するのは簡単ではなさそうです。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">オブジェクト指向プログラミング</span> の出番が来たようです。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>オブジェクト指向プログラミング</p>
+</div>
+<div class="paragraph">
+<p>次に導入されたパラダイムは、構造化プログラミングの2年前の1966年に、Ole Johan Dahl と Kristen Nygaardが発見した「オブジェクト指向プログラミング」である。
+この2人のプログラマは、ALGOL言語の関数呼び出しのスタックフレームをヒープに移動できること、そのことにより、関数から戻ってきたあとでも関数で宣言したローカル変数が存在し続けられることに気づいた。
+この関数はクラスのコンストラクタになり、ローカル変数はインスタンス変数になった。そして、ネストした関数はメソッドになった。
+その後、規律のある関数ポインタの使用によって、必然的にポリモーフィズムの発見につながった。</p>
+</div>
+<div class="paragraph">
+<p>オブジェクト指向プログラミングのパラダイムは、以下のように要約できる。</p>
+</div>
+<div class="paragraph">
+<p>オブジェクト指向プログラミングは、間接的な制御の移行に規律を課すものである。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2PGgVdM">Clean Architecture　達人に学ぶソフトウェアの構造と設計 (アスキードワンゴ)</a>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -6097,6 +6281,7 @@ if __name__ == "__main__":
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=427405019X&linkId=08e705a5969e20f5129b4d3cefbcdb15&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4798105538&linkId=12f5983ecb6ad915457406c2fd0d89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217620&linkId=59f5959cf4575e61b0eeb1afc17b1715&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=B07FSBHS2V&linkId=f45ebc5e48c84f7dde27434ae9fbdb9b&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 </div>
 <div class="sect2">
 <h3 id="_参考リンク">4.2. 参考リンク</h3>
@@ -6111,6 +6296,9 @@ if __name__ == "__main__":
 <li>
 <p><a href="http://www.itmedia.co.jp/im/articles/1111/07/news183.html">テストドライバ（てすとどらいば）</a></p>
 </li>
+<li>
+<p><a href="http://www.tatapa.org/~takuo/structured_programming/structured_programming.html">意外と知られていない構造化プログラミング、あるいは構造化プログラミングはデータも手続きと一緒に抽象化する、あるいはストロヴストルップのオブジェクト指向プログラミング史観</a></p>
+</li>
 </ul>
 </div>
 </div>
@@ -6119,7 +6307,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-20 13:19:20 JST
+Last updated 2018-11-20 16:34:11 JST
 </div>
 </div>
 </body>
