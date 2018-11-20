@@ -476,6 +476,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_名前付き引数">2.4.12. 名前付き引数</a></li>
 <li><a href="#_エラーハンドリング">2.4.13. エラーハンドリング</a></li>
 <li><a href="#_条件記述の分解">2.4.14. 条件記述の分解</a></li>
+<li><a href="#_モジュール分割">2.4.15. モジュール分割</a></li>
 </ul>
 </li>
 </ul>
@@ -5241,64 +5242,23 @@ OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_モジュール分割">2.4.15. モジュール分割</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: リファクタリングも一段落つきました。いよいよ <span class="red">モジュール</span> 分割の時間です。</p>
 </div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 今回は <code>fizz_buzz</code> モジュールとテスト用モジュールに分割しましょう。</p>
 </div>
+<div class="paragraph">
+<p><code>main_test.py</code> をコピーして <code>fizz_buzz.py</code> ファイルを作成して編集するテストをおじさん。</p>
 </div>
-<div class="sect1">
-<h2 id="_ふりかえり">3. ふりかえり</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-Markdown" data-lang="Markdown"># 20181116 セッションリプレイ
-
-## 概要
-
-FizzBuzz をクラスを使わずにテスト駆動で実装する。
-
-### 参加メンバー
-
-- テストおじさん
-- テスト鬼さん
-- テスト初めて書いたひと
-
-
-## 仕様
-
-&gt; 1 から 100 までの数をプリントするプログラムを書け。
-&gt; ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。
-
-
-## 設計
-
-### TODO リスト
-
-- ~~1 から 100 まで数をプリントできるようにする。~~
-- ~~3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。~~
-- ~~5 の倍数のときは｢Buzz｣とプリントできるようにする。~~
-- ~~3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。~~
-
-## 開発
-
-### ふりかえり
-
-#### Keep
-
-#### Problem
-
-#### Try
-
-## 参照
-
-- [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)
-- [Python プログラムの標準出力をテストする](https://qiita.com/Asayu123/items/6f2471aa5ebe597b2638)</code></pre>
-</div>
+<div class="paragraph">
+<p><code>fizz_buzz.py</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
-from test.support import captured_stdout
-
-MAX_COUNT = 100
+<pre class="highlight"><code class="language-Python" data-lang="Python">MAX_COUNT = 100
 ERROR_MSG = f"回数は{MAX_COUNT}までです"
 BUZZ = "Buzz"
 FIZZ = "Fizz"
@@ -5366,8 +5326,388 @@ def fizz_buzz(number):
     elif is_buzz(number):
         value = BUZZ
 
-    return value
+    return value</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: テストモジュール名もふさわしい名前に変更しておきましょう。</p>
+</div>
+<div class="paragraph">
+<p><code>main_test.py</code> のファイル名を <code>fizz_buzz_test.py</code> に変えるテストをおじさん。</p>
+</div>
+<div class="paragraph">
+<p><code>fizz_buzz_test.py</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
+from test.support import captured_stdout
 
+
+class MainTest(unittest.TestCase):
+    def setUp(self):
+        with captured_stdout() as stdout:
+            execute()
+            self.lines = stdout.getvalue().splitlines()
+
+    def test_1から10まで数をプリントする(self):
+        with captured_stdout() as stdout:
+            execute(count=10)
+            self.lines = stdout.getvalue().splitlines()
+        self.assertNotIn("11", self.lines)
+        self.assertEqual("Buzz", self.lines[10])
+
+    def test_1から100まで数をプリントできるようにする(self):
+        self.assertEqual("1", self.lines[1])
+        self.assertEqual("Buzz", self.lines[MAX_COUNT])
+
+    def test_3の倍数のときは数の代わりにFizzをプリントする(self):
+        self.assertEqual("Fizz", self.lines[3])
+
+    def test_5の倍数のときはBuzzとプリントする(self):
+        self.assertEqual("Buzz", self.lines[5])
+
+    def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
+        self.assertEqual("FizzBuzz", self.lines[15])
+
+    def test_100より多い場合はプリントしない(self):
+        with captured_stdout() as stdout:
+            execute(count=101)
+            self.lines = stdout.getvalue().splitlines()
+        self.assertEqual(f"回数は{MAX_COUNT}までです", self.lines[0])
+
+
+class RangeTest(unittest.TestCase):
+    def test_範囲を示すレンジ(self):
+        rg = range(10)
+        self.assertEqual(0, rg[0])
+        self.assertEqual(9, rg[-1])
+        rg = range(5, 10)
+        self.assertEqual(5, rg[0])
+        self.assertEqual(9, rg[-1])
+        rg = range(10, 20, 2)
+        self.assertEqual(12, rg[1])
+        self.assertEqual(18, rg[-1])
+
+    def test_レンジのシーケンス演算(self):
+        rg = range(30)
+        self.assertTrue(10 in rg)
+        self.assertTrue(30 not in rg)
+        rg = range(50)
+        self.assertEqual(range(1, 4), rg[1:4])
+        self.assertEqual(50, len(rg))
+        self.assertEqual(49, max(rg))
+        self.assertEqual(0, min(rg))
+
+    def test_シーケンス間の変換(self):
+        list1 = [MAX_COUNT, 200, 300]
+        tpl1 = (123, 'ok', True)
+        rng1 = range(10, 20)
+        result = list1 + list(tpl1) + list(rng1)
+        self.assertEqual([MAX_COUNT, 200, 300, 123, 'ok', True, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], result)
+
+
+if __name__ == "__main__":
+    unittest.main()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: テストが動くか確認しておきましょう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python fizz_buzz_test.py -v
+test_100より多い場合はプリントしない (__main__.MainTest) ... ERROR
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ERROR
+test_1から10まで数をプリントする (__main__.MainTest) ... ERROR
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ERROR
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ERROR
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ERROR
+test_シーケンス間の変換 (__main__.RangeTest) ... ERROR
+test_レンジのシーケンス演算 (__main__.RangeTest) ... ok
+test_範囲を示すレンジ (__main__.RangeTest) ... ok
+
+======================================================================
+ERROR: test_100より多い場合はプリントしない (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "fizz_buzz_test.py", line 8, in setUp
+    execute()
+NameError: name 'execute' is not defined
+
+======================================================================
+ERROR: test_1から100まで数をプリントできるようにする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "fizz_buzz_test.py", line 8, in setUp
+    execute()
+NameError: name 'execute' is not defined
+
+======================================================================
+ERROR: test_1から10まで数をプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "fizz_buzz_test.py", line 8, in setUp
+    execute()
+NameError: name 'execute' is not defined
+
+======================================================================
+ERROR: test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "fizz_buzz_test.py", line 8, in setUp
+    execute()
+NameError: name 'execute' is not defined
+
+======================================================================
+ERROR: test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "fizz_buzz_test.py", line 8, in setUp
+    execute()
+NameError: name 'execute' is not defined
+
+======================================================================
+ERROR: test_5の倍数のときはBuzzとプリントする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "fizz_buzz_test.py", line 8, in setUp
+    execute()
+NameError: name 'execute' is not defined
+
+======================================================================
+ERROR: test_シーケンス間の変換 (__main__.RangeTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "fizz_buzz_test.py", line 61, in test_シーケンス間の変換
+    list1 = [MAX_COUNT, 200, 300]
+NameError: name 'MAX_COUNT' is not defined
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.001s
+
+FAILED (errors=7)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: まあ、そうでしょうね。なになに <code>NameError: name 'execute' is not defined</code> ・・・ 分離した <code>fizz_buzz</code> モジュールをインポートしてませんね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
+from test.support import captured_stdout
+from fizz_buzz import execute <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>fizz_buzz</code> モジュールから <code>execute</code> 関数をインポートすると・・・ありゃ?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python fizz_buzz_test.py -v
+test_100より多い場合はプリントしない (__main__.MainTest) ... ERROR
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ERROR
+test_1から10まで数をプリントする (__main__.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
+test_シーケンス間の変換 (__main__.RangeTest) ... ERROR
+test_レンジのシーケンス演算 (__main__.RangeTest) ... ok
+test_範囲を示すレンジ (__main__.RangeTest) ... ok
+
+======================================================================
+ERROR: test_100より多い場合はプリントしない (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "fizz_buzz_test.py", line 35, in test_100より多い場合はプリントしない
+    self.assertEqual(f"回数は{MAX_COUNT}までです", self.lines[0])
+NameError: name 'MAX_COUNT' is not defined
+
+======================================================================
+ERROR: test_1から100まで数をプリントできるようにする (__main__.MainTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "fizz_buzz_test.py", line 20, in test_1から100まで数をプリントできるようにする
+    self.assertEqual("Buzz", self.lines[MAX_COUNT])
+NameError: name 'MAX_COUNT' is not defined
+
+======================================================================
+ERROR: test_シーケンス間の変換 (__main__.RangeTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "fizz_buzz_test.py", line 61, in test_シーケンス間の変換
+    list1 = [MAX_COUNT, 200, 300]
+NameError: name 'MAX_COUNT' is not defined
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.001s
+
+FAILED (errors=3)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>NameError: name 'MAX_COUNT' is not defined</code> ・・・あー、 <code>fizz_buzz</code> モジュールから定数 <code>MAX_COUNT</code> をインポートしないとけないのね。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
+from test.support import captured_stdout
+from fizz_buzz import execute, MAX_COUNT <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: これでいいかな・・・オッケー!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python fizz_buzz_test.py -v
+test_100より多い場合はプリントしない (__main__.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (__main__.MainTest) ... ok
+test_1から10まで数をプリントする (__main__.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (__main__.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (__main__.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (__main__.MainTest) ... ok
+test_シーケンス間の変換 (__main__.RangeTest) ... ok
+test_レンジのシーケンス演算 (__main__.RangeTest) ... ok
+test_範囲を示すレンジ (__main__.RangeTest) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.002s
+
+OK</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ふりかえり">3. ふりかえり</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Markdown" data-lang="Markdown"># 20181116 セッションリプレイ
+
+## 概要
+
+FizzBuzz をクラスを使わずにテスト駆動で実装する。
+
+### 参加メンバー
+
+- テストおじさん
+- テスト鬼さん
+- テスト初めて書いたひと
+
+
+## 仕様
+
+&gt; 1 から 100 までの数をプリントするプログラムを書け。
+&gt; ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。
+
+
+## 設計
+
+### TODO リスト
+
+- ~~1 から 100 まで数をプリントできるようにする。~~
+- ~~3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。~~
+- ~~5 の倍数のときは｢Buzz｣とプリントできるようにする。~~
+- ~~3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。~~
+
+## 開発
+
+### ふりかえり
+
+#### Keep
+
+#### Problem
+
+#### Try
+
+## 参照
+
+- [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)
+- [Python プログラムの標準出力をテストする](https://qiita.com/Asayu123/items/6f2471aa5ebe597b2638)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">MAX_COUNT = 100
+ERROR_MSG = f"回数は{MAX_COUNT}までです"
+BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+fizz_buzz_date = {
+    'values': [],
+    'count': 0
+}
+
+
+def execute(count=MAX_COUNT):
+    if within_max_count(count):
+        set_count(count)
+        set_values_by_fizz_buzz()
+        print_values()
+    else:
+        print_error_message()
+
+
+def within_max_count(count):
+    return count &lt;= MAX_COUNT
+
+
+def set_count(count):
+    # レンジは指定された値を範囲に含めないので1プラスする
+    fizz_buzz_date['count'] = count + 1
+
+
+def set_values_by_fizz_buzz():
+    fizz_buzz_date['values'] = []
+
+    for number in range(fizz_buzz_date['count']):
+        value = fizz_buzz(number)
+        fizz_buzz_date['values'].append(value)
+
+
+def print_values():
+    for value in fizz_buzz_date['values']:
+        print(value)
+
+
+def print_error_message():
+    print(ERROR_MSG)
+
+
+def is_fizz(number):
+    return number % 3 == 0
+
+
+def is_buzz(number):
+    return number % 5 == 0
+
+
+def is_fizz_buzz(number):
+    return number % 3 == 0 and number % 5 == 0
+
+
+def fizz_buzz(number):
+    value = number
+
+    if is_fizz_buzz(number):
+        value = FIZZ_BUZZ
+    elif is_fizz(number):
+        value = FIZZ
+    elif is_buzz(number):
+        value = BUZZ
+
+    return value</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
+from test.support import captured_stdout
+from fizz_buzz import execute, MAX_COUNT
 
 class MainTest(unittest.TestCase):
     def setUp(self):
@@ -5481,7 +5821,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-20 11:57:31 JST
+Last updated 2018-11-20 12:24:20 JST
 </div>
 </div>
 </body>
