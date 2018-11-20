@@ -625,7 +625,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 仕様からTODOリストを作成するわけですがここは <span class="red">一つのプログラムには一つのことをうまくやらせる</span> の原則に従ってシンプルにやってみましょう。</p>
+<p><strong>テストおじさん</strong>: 仕様からTODOリストを作成するわけですがここは <span class="red">スモール・イズ・ビューティフル</span> の原則に従ってシンプルに進めていきましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>定理1: スモール・イズ・ビューティフル</p>
+</div>
+<div class="paragraph">
+<p>プログラムを書く時は小さなものから初めて、それを小さなままに保っておく。
+簡単なフィルタプログラムでも、グラフィックパッケージでも、巨大なデータベースを構築するときでも、同じく小さな実用的なプログラムにする。
+一つの巨大なプログラムにしようとする誘惑に負けないで、シンプルさを追求する。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2KnsFM4">UNIXという考え方―その設計思想と哲学</a>
+</div>
 </div>
 <div class="paragraph">
 <p>TODOリストを書き出すテストおじさん。</p>
@@ -650,7 +665,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong>テストおじさん</strong>: まずは100回繰り返し処理をすることをどうやって実装するかを考えるとして条件に関しては一旦置いておきましょう。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 一つのTODOには一つのことをテストできるようにする・・・みたいな。</p>
+<p><strong>テストおじさん</strong>: <span class="red">一つのプログラムには一つのことをうまくやらせる</span> の原則ですね。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>定理2: 一つのプログラムには一つのことをうまくやらせる</p>
+</div>
+<div class="paragraph">
+<p>最良のプログラムは、クストーのレイク・フライのように、生涯において一つのことをうまくやらせるプログラムだ。
+プログラムはメモリにロードされて、所定の働きをし、次の単一機能のプログラムの実行のために道を譲る。
+簡単に聞こえるが、ソフトウェア開発者たちが単一機能プログラムを作り上げることだけを追求し続けること、これがいかに難しいことかを知ったら驚くかもしれない。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2KnsFM4">UNIXという考え方―その設計思想と哲学</a>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -730,7 +760,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong>テストおじさん</strong>: みたいに仕様が確定した後もコロコロ変わっていくと従来型の開発アプローチでは対応が難しいですよね。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: そういったビジネスとITの変化が <span class="red">アジャイルソフトウェア開発宣言</span> につながることになりました。</p>
+<p><strong>テストおじさん</strong>: そういったビジネスとITの変化背景に生まれたのが <span class="red">アジャイルソフトウェア開発宣言</span> です。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -828,11 +858,161 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 &#8212; <a href="http://agilemanifesto.org/iso/ja/principles.html">アジャイル宣言の背後にある原則</a>
 </div>
 </div>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 要求をソフトウェアに落とし込むためのプラクティスとして <span class="red">ストーリー</span> や <span class="red">プロダクトバックログ</span> <span class="red">スプリントバックログ</span> なんてのがありますね。</p>
+<p>XPとは何か</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: プログラムマ目線なら <span class="red">TODOリスト</span> は <span class="red">スプリントバックログ</span> より細かい粒度になるんじゃないかなと思ってます。</p>
+<p>エクストリームプログラミング（XP）はソーシャルチェンジである。
+XPとは、以前はうまくいいていたかもしれないが、今では最高の仕事の邪魔になっている習慣やパターンを手放すことだ。
+XPとは、これまで自分たちを守ってきてくれたが、今では生産性の妨げになっているものを捨て去ることだ。
+何だか自分がさらけ出されたような気持ちになるかもしれない。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qvx5ms">エクストリームプログラミング</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>スクラムとは何か</p>
+</div>
+<div class="paragraph">
+<p>スクラムは、共同創始者の2人、すなわちJeff Sutherland と Ken Schwaber による共著「スクラムガイド」というコンパクトな文書により定義される、ソフトウェア開発プロセスです。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Tv9uUQ">スクラム実践入門 ── 成果を生み出すアジャイルな開発プロセス (WEB+DB PRESS plus)</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>スクラムの定義</p>
+</div>
+<div class="paragraph">
+<p>スクラム（名詞）：複雑で変化の激しい問題に対応するためのフレームワークであり、可能な限り価値の高いプロダクトを生産的かつ創造的に届けるためのものである。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://www.scrumguides.org/docs/scrumguide/v2017/2017-Scrum-Guide-Japanese.pdf#zoom=100">スクラムガイド 日本語版</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 要求をソフトウェアに落とし込むためのプラクティスとして <span class="red">ユーザーストーリー</span> というのがあります。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">ユーザーストーリー</span> を管理する <span class="red">スクラム</span> のプラクティスとして <span class="red">プロダクトバックログ</span> <span class="red">スプリントバックログ</span> というのがあります。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>ユーザーストーリーは、顧客がソフトウェアで実現したいと思っているフィーチャを簡潔に記述したものだ。
+通常、ユーザーストーリーは、あまり大きくないインデックスカードに書く（なんでもかんでも書き出そうとすることを物理的に制限するためだ）。
+インデックスカードには簡潔にしか記述しないので、詳細は顧客のところへ出向いてじかに会話することを促進するという仕掛けになっているんだ。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2S2VQqI">アジャイルサムライ−達人開発者への道−</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>プロダクバックログとは何か</p>
+</div>
+<div class="paragraph">
+<p>プロダクトバックログは、プロダクトで実現したいことを優先順位をつけて一覧にしたものです。
+プロダクトバックログには、機能の追加や修正、ユーザの要望などが含まれます。
+プロダクトオーナーが、その内容と優先順位付けに責任を持ちます。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Tv9uUQ">スクラム実践入門 ── 成果を生み出すアジャイルな開発プロセス (WEB+DB PRESS plus)</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>スプリントバックログとは何か</p>
+</div>
+<div class="paragraph">
+<p>スプリントバックログは、スプリント期間内で行うと判断したプロダクトバックログアイテムと、それらプロダクトバックログアイテムを実現するためのタスクを俯瞰できるよう表したものです。
+開発チームが、その内容に責任を持ちます。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Tv9uUQ">スクラム実践入門 ── 成果を生み出すアジャイルな開発プロセス (WEB+DB PRESS plus)</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: プログラムマ目線なら <span class="red">TODOリスト</span> は <span class="red">スプリントバックログ</span> でいうプロダクトバックログアイテムを実現するためのタスクあたりの粒度になるんじゃ何ですかね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 今回のお題をそれぞれのスタイルで記述すると。</p>
+</div>
+<div class="paragraph">
+<p><code>ユーザーストーリー</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;テスト駆動開発主催者&gt;として</p>
+</li>
+<li>
+<p>&lt;シンプルなプログラムを題材にテスト駆動開発を体験して&gt;欲しい</p>
+</li>
+<li>
+<p>なぜなら&lt;テスト駆動開発は体験しないと&gt;わからないからだ</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>プロダクトバックログ</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>テスト駆動開発を体験するシンプルなプログラムを作成する</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>スプリントバックログアイテム</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>以下の仕様のPythonプログラムをテスト駆動開発で実装する。なお、実装にあたってクラスは使用しない。</p>
+<div class="literalblock">
+<div class="content">
+<pre>1 から 100 までの数をプリントするプログラムを書け。
+ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>プロダクトバックログアイテムを実現するためのタスク</code></p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10063; 1 から 100 まで数をプリントできるようにする。</p>
+</li>
+<li>
+<p>&#10063; 3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。</p>
+</li>
+<li>
+<p>&#10063; 5 の倍数のときは｢Buzz｣とプリントできるようにする。</p>
+</li>
+<li>
+<p>&#10063; 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><strong>テスト初めて書いたひと</strong>: <span class="red">TODOリスト</span> に抜けや漏れがあった場合はどうするんですかね?</p>
@@ -844,6 +1024,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 変化を味方につけることによって、お客様の競争力を引き上げます。</p>
 </div>
 </blockquote>
+<div class="attribution">
+&#8212; <a href="http://agilemanifesto.org/iso/ja/principles.html">アジャイル宣言の背後にある原則</a>
+</div>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: の原則に従い、<span class="red">テストファーストプログラミング</span> と <span class="red">インクリメンタルな設計</span> で <span class="red">TODOリスト</span> の抜けを埋めて漏れを塞ぎましょう。</p>
@@ -6268,6 +6451,10 @@ if __name__ == "__main__":
 <div class="sect2">
 <h3 id="_参考図書">4.1. 参考図書</h3>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217884&linkId=568f25b974af5645e862928a12c354e1&bc1=ffffff&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274064069&linkId=a4bafadad7f33ac34e240646262957d6&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217620&linkId=59f5959cf4575e61b0eeb1afc17b1715&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4774172367&linkId=0c11d31b8a2b9208ffb9ace2c60dda04&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274068560&linkId=b230f1c3657bdf3b4957534e09d9979c&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=427405019X&linkId=08e705a5969e20f5129b4d3cefbcdb15&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4798105538&linkId=12f5983ecb6ad915457406c2fd0d89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217620&linkId=59f5959cf4575e61b0eeb1afc17b1715&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
@@ -6277,6 +6464,9 @@ if __name__ == "__main__":
 <h3 id="_参考リンク">4.2. 参考リンク</h3>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="https://www.scrumguides.org/docs/scrumguide/v2017/2017-Scrum-Guide-Japanese.pdf#zoom=100">スクラムガイド 日本語版</a></p>
+</li>
 <li>
 <p><a href="https://www.buildinsider.net/enterprise/agile/01">アジャイルとは何か？ ツールと開発手法「スクラム／XP」、ウォーターフォールとの違い</a></p>
 </li>
@@ -6297,7 +6487,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-21 06:05:28 JST
+Last updated 2018-11-21 07:42:14 JST
 </div>
 </div>
 </body>

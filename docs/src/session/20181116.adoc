@@ -67,7 +67,16 @@ TODOリスト
 何をテストすべきだろうか----着手する前に、必要になりそうなテストをリストに書き出しておこう。
 ____
 
-*テストおじさん*: 仕様からTODOリストを作成するわけですがここは [red]#一つのプログラムには一つのことをうまくやらせる# の原則に従ってシンプルにやってみましょう。
+*テストおじさん*: 仕様からTODOリストを作成するわけですがここは [red]#スモール・イズ・ビューティフル# の原則に従ってシンプルに進めていきましょう。
+
+[quote, 'https://amzn.to/2KnsFM4[UNIXという考え方―その設計思想と哲学]']
+____
+定理1: スモール・イズ・ビューティフル
+
+プログラムを書く時は小さなものから初めて、それを小さなままに保っておく。
+簡単なフィルタプログラムでも、グラフィックパッケージでも、巨大なデータベースを構築するときでも、同じく小さな実用的なプログラムにする。
+一つの巨大なプログラムにしようとする誘惑に負けないで、シンプルさを追求する。
+____
 
 TODOリストを書き出すテストおじさん。
 
@@ -78,7 +87,16 @@ TODOリストを書き出すテストおじさん。
 
 *テストおじさん*: まずは100回繰り返し処理をすることをどうやって実装するかを考えるとして条件に関しては一旦置いておきましょう。
 
-*テストおじさん*: 一つのTODOには一つのことをテストできるようにする・・・みたいな。
+*テストおじさん*: [red]#一つのプログラムには一つのことをうまくやらせる# の原則ですね。
+
+[quote, 'https://amzn.to/2KnsFM4[UNIXという考え方―その設計思想と哲学]']
+____
+定理2: 一つのプログラムには一つのことをうまくやらせる
+
+最良のプログラムは、クストーのレイク・フライのように、生涯において一つのことをうまくやらせるプログラムだ。
+プログラムはメモリにロードされて、所定の働きをし、次の単一機能のプログラムの実行のために道を譲る。
+簡単に聞こえるが、ソフトウェア開発者たちが単一機能プログラムを作り上げることだけを追求し続けること、これがいかに難しいことかを知ったら驚くかもしれない。
+____
 
 ==== アジャイルソフトウェア開発
 
@@ -123,7 +141,7 @@ TODOリストを書き出すテストおじさん。
 
 *テストおじさん*: みたいに仕様が確定した後もコロコロ変わっていくと従来型の開発アプローチでは対応が難しいですよね。
 
-*テストおじさん*: そういったビジネスとITの変化が [red]#アジャイルソフトウェア開発宣言# につながることになりました。
+*テストおじさん*: そういったビジネスとITの変化背景に生まれたのが [red]#アジャイルソフトウェア開発宣言# です。
 
 [quote, 'http://agilemanifesto.org/iso/ja/manifesto.html[アジャイルソフトウェア開発宣言]']
 ____
@@ -190,14 +208,93 @@ ____
 それに基づいて自分たちのやり方を最適に調整します。
 ____
 
-*テストおじさん*: 要求をソフトウェアに落とし込むためのプラクティスとして [red]#ストーリー# や [red]#プロダクトバックログ# [red]#スプリントバックログ# なんてのがありますね。
+[quote, 'https://amzn.to/2Qvx5ms[エクストリームプログラミング]']
+____
+XPとは何か
 
-*テストおじさん*: プログラムマ目線なら [red]#TODOリスト# は [red]#スプリントバックログ# より細かい粒度になるんじゃないかなと思ってます。
+エクストリームプログラミング（XP）はソーシャルチェンジである。
+XPとは、以前はうまくいいていたかもしれないが、今では最高の仕事の邪魔になっている習慣やパターンを手放すことだ。
+XPとは、これまで自分たちを守ってきてくれたが、今では生産性の妨げになっているものを捨て去ることだ。
+何だか自分がさらけ出されたような気持ちになるかもしれない。
+____
+
+[quote, 'https://amzn.to/2Tv9uUQ[スクラム実践入門 ── 成果を生み出すアジャイルな開発プロセス (WEB+DB PRESS plus)]']
+____
+スクラムとは何か
+
+スクラムは、共同創始者の2人、すなわちJeff Sutherland と Ken Schwaber による共著「スクラムガイド」というコンパクトな文書により定義される、ソフトウェア開発プロセスです。
+____
+
+[quote, 'https://www.scrumguides.org/docs/scrumguide/v2017/2017-Scrum-Guide-Japanese.pdf#zoom=100[スクラムガイド 日本語版]']
+____
+スクラムの定義
+
+スクラム（名詞）：複雑で変化の激しい問題に対応するためのフレームワークであり、可能な限り価値の高いプロダクトを生産的かつ創造的に届けるためのものである。
+____
+
+*テストおじさん*: 要求をソフトウェアに落とし込むためのプラクティスとして [red]#ユーザーストーリー# というのがあります。
+
+*テストおじさん*: [red]#ユーザーストーリー# を管理する [red]#スクラム# のプラクティスとして [red]#プロダクトバックログ# [red]#スプリントバックログ# というのがあります。
+
+[quote, 'https://amzn.to/2S2VQqI[アジャイルサムライ−達人開発者への道−]']
+____
+ユーザーストーリーは、顧客がソフトウェアで実現したいと思っているフィーチャを簡潔に記述したものだ。
+通常、ユーザーストーリーは、あまり大きくないインデックスカードに書く（なんでもかんでも書き出そうとすることを物理的に制限するためだ）。
+インデックスカードには簡潔にしか記述しないので、詳細は顧客のところへ出向いてじかに会話することを促進するという仕掛けになっているんだ。
+____
+
+[quote, 'https://amzn.to/2Tv9uUQ[スクラム実践入門 ── 成果を生み出すアジャイルな開発プロセス (WEB+DB PRESS plus)]']
+____
+プロダクバックログとは何か
+
+プロダクトバックログは、プロダクトで実現したいことを優先順位をつけて一覧にしたものです。
+プロダクトバックログには、機能の追加や修正、ユーザの要望などが含まれます。
+プロダクトオーナーが、その内容と優先順位付けに責任を持ちます。
+____
+
+[quote, 'https://amzn.to/2Tv9uUQ[スクラム実践入門 ── 成果を生み出すアジャイルな開発プロセス (WEB+DB PRESS plus)]']
+____
+スプリントバックログとは何か
+
+スプリントバックログは、スプリント期間内で行うと判断したプロダクトバックログアイテムと、それらプロダクトバックログアイテムを実現するためのタスクを俯瞰できるよう表したものです。
+開発チームが、その内容に責任を持ちます。
+____
+
+*テストおじさん*: プログラムマ目線なら [red]#TODOリスト# は [red]#スプリントバックログ# でいうプロダクトバックログアイテムを実現するためのタスクあたりの粒度になるんじゃ何ですかね。
+
+*テストおじさん*: 今回のお題をそれぞれのスタイルで記述すると。
+
+`ユーザーストーリー`
+
+* <テスト駆動開発主催者>として
+* <シンプルなプログラムを題材にテスト駆動開発を体験して>欲しい
+* なぜなら<テスト駆動開発は体験しないと>わからないからだ
+
+`プロダクトバックログ`
+
+* テスト駆動開発を体験するシンプルなプログラムを作成する
+
+`スプリントバックログアイテム`
+
+* 以下の仕様のPythonプログラムをテスト駆動開発で実装する。なお、実装にあたってクラスは使用しない。
+
+ 1 から 100 までの数をプリントするプログラムを書け。
+ ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。
+
+`プロダクトバックログアイテムを実現するためのタスク`
+
+* [ ] 1 から 100 まで数をプリントできるようにする。
+* [ ] 3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
+* [ ] 5 の倍数のときは｢Buzz｣とプリントできるようにする。
+* [ ] 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
 
 *テスト初めて書いたひと*: [red]#TODOリスト# に抜けや漏れがあった場合はどうするんですかね?
 
-> 要求の変更はたとえ開発の後期であっても歓迎します。
-> 変化を味方につけることによって、お客様の競争力を引き上げます。
+[quote, 'http://agilemanifesto.org/iso/ja/principles.html[アジャイル宣言の背後にある原則]']
+____
+要求の変更はたとえ開発の後期であっても歓迎します。
+変化を味方につけることによって、お客様の競争力を引き上げます。
+____
 
 *テストおじさん*: の原則に従い、[red]#テストファーストプログラミング# と [red]#インクリメンタルな設計# で [red]#TODOリスト# の抜けを埋めて漏れを塞ぎましょう。
 
@@ -4745,6 +4842,10 @@ include::../../../dev/20181116/replay/fizz_buzz_test.py[]
 
 ++++
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217884&linkId=568f25b974af5645e862928a12c354e1&bc1=ffffff&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274064069&linkId=a4bafadad7f33ac34e240646262957d6&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217620&linkId=59f5959cf4575e61b0eeb1afc17b1715&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4774172367&linkId=0c11d31b8a2b9208ffb9ace2c60dda04&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274068560&linkId=b230f1c3657bdf3b4957534e09d9979c&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=427405019X&linkId=08e705a5969e20f5129b4d3cefbcdb15&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4798105538&linkId=12f5983ecb6ad915457406c2fd0d89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217620&linkId=59f5959cf4575e61b0eeb1afc17b1715&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
@@ -4753,6 +4854,7 @@ include::../../../dev/20181116/replay/fizz_buzz_test.py[]
 
 === 参考リンク
 
+* https://www.scrumguides.org/docs/scrumguide/v2017/2017-Scrum-Guide-Japanese.pdf#zoom=100[スクラムガイド 日本語版]
 * https://www.buildinsider.net/enterprise/agile/01[アジャイルとは何か？ ツールと開発手法「スクラム／XP」、ウォーターフォールとの違い]
 * https://globis.jp/article/2046[MBA経営辞書「製品アーキテクチャ」]
 * http://www.itmedia.co.jp/im/articles/1111/07/news183.html[テストドライバ（てすとどらいば）]
