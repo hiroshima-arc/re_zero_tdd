@@ -15,7 +15,7 @@ class MainTest(unittest.TestCase):
         self.assertNotIn("11", self.lines)
         self.assertEqual("Buzz", self.lines[10])
 
-    def test_1から100まで数をプリントできるようにする(self):
+    def test_1から100まで数をプリントする(self):
         self.assertEqual("1", self.lines[1])
         self.assertEqual("Buzz", self.lines[MAX_COUNT])
 

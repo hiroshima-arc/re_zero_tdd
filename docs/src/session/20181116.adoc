@@ -4337,6 +4337,259 @@ Ran 9 tests in 0.002s
 OK
 ----
 
+==== 名前重要
+
+`fizz_buzz` モジュールを眺めるテストおじさん。
+
+[source, Python]
+----
+MAX_COUNT = 100
+ERROR_MSG = f"回数は{MAX_COUNT}までです"
+BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+fizz_buzz_date = {   <1>
+    'values': [],
+    'count': 0
+}
+
+
+def execute(count=MAX_COUNT):
+    if within_max_count(count):
+        set_count(count)
+        set_values_by_fizz_buzz() <2>
+        print_values()
+    else:
+        print_error_message()
+
+
+def within_max_count(count):
+    return count <= MAX_COUNT
+
+
+def set_count(count):
+    # レンジは指定された値を範囲に含めないので1プラスする
+    fizz_buzz_date['count'] = count + 1 <3>
+
+
+def set_values_by_fizz_buzz(): <4>
+    fizz_buzz_date['values'] = [] <5>
+
+    for number in range(fizz_buzz_date['count']):
+        value = fizz_buzz(number) <6>
+        fizz_buzz_date['values'].append(value) <7>
+
+
+def print_values():
+    for value in fizz_buzz_date['values']: <8>
+        print(value)
+
+
+def print_error_message():
+    print(ERROR_MSG)
+
+
+def is_fizz(number):
+    return number % 3 == 0
+
+
+def is_buzz(number):
+    return number % 5 == 0
+
+
+def is_fizz_buzz(number):
+    return number % 3 == 0 and number % 5 == 0
+
+
+def fizz_buzz(number): <9>
+    value = number
+
+    if is_fizz_buzz(number):
+        value = FIZZ_BUZZ
+    elif is_fizz(number):
+        value = FIZZ
+    elif is_buzz(number):
+        value = BUZZ
+
+    return value
+----
+
+*テストおじさん*: `fizz_buzz` という関心ごとのモジュール無い `fizz_buzz` という単語は冗長というか [red]#抽出レベルに適切な名前を選ぶ# に即していない気がします。
+
+*テストおじさん*: 名前を変更しましょう。
+
+*テストおじさん*: `fizz_buzz_date` は・・・あ、これ `typo` ですね。 `fizz_buzz_data` は `fizz_buzz` モジュールの `data` だからこう。
+
+[source, Python]
+----
+data = {
+    'values': [],
+    'count': 0
+}
+
+...
+
+def set_count(count):
+    # レンジは指定された値を範囲に含めないので1プラスする
+    data['count'] = count + 1
+
+
+def set_values_by_fizz_buzz():
+    data['values'] = []
+
+    for number in range(data['count']):
+        value = fizz_buzz(number)
+        data['values'].append(value)
+
+
+def print_values():
+    for value in data['values']:
+        print(value)
+----
+
+[source, bash]
+----
+$ python -m unittest fizz_buzz_test.MainTest -v
+test_100より多い場合はプリントしない (fizz_buzz_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (fizz_buzz_test.MainTest) ... ok
+test_1から10まで数をプリントする (fizz_buzz_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (fizz_buzz_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: `fizz_buzz` 関数は `fizz_buzz` モジュール内で生成されているから。
+
+[source, Python]
+----
+def execute(count=MAX_COUNT):
+    if within_max_count(count):
+        set_count(count)
+        set_values_by_generate()
+        print_values()
+    else:
+        print_error_message()
+
+...
+
+def set_count(count):
+    # レンジは指定された値を範囲に含めないので1プラスする
+    data['count'] = count + 1
+
+
+def set_values_by_generate():
+    data['values'] = []
+
+    for number in range(data['count']):
+        value = generate(number)
+        data['values'].append(value)
+
+...
+
+def generate(number):
+    value = number
+
+    if is_fizz_buzz(number):
+        value = FIZZ_BUZZ
+    elif is_fizz(number):
+        value = FIZZ
+    elif is_buzz(number):
+        value = BUZZ
+
+    return value
+----
+
+[source, bash]
+----
+$ python -m unittest fizz_buzz_test.MainTest -v
+test_100より多い場合はプリントしない (fizz_buzz_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (fizz_buzz_test.MainTest) ... ok
+test_1から10まで数をプリントする (fizz_buzz_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (fizz_buzz_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: `execute` 関数を見てください。
+
+[source, Python]
+----
+def execute(count=MAX_COUNT):
+    if within_max_count(count):
+        set_count(count)
+        set_values_by_generate()
+        print_values()
+    else:
+        print_error_message()
+----
+
+*テストおじさん*: `execute` 関数だけで処理の概要を読み上げる事ができますね。
+
+* `fizz_buzz` モジュールの
+** `execute` 実行関数は
+** `if within_max_count` もし、最大カウント以内なら
+*** `set_count` カウントを設定して
+*** `set_values_by_generate` 生成関数によって値を設定して
+*** `print_values` 値をプリントします
+** `else` そうでなければ
+*** `print_error_message` エラーメッセージをプリントします
+
+*テストおじさん*: あと、気になったのはテストメッセージですが。
+
+[source, bash]
+----
+$ python -m unittest fizz_buzz_test.MainTest -v
+test_100より多い場合はプリントしない (fizz_buzz_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (fizz_buzz_test.MainTest) ... ok (1)
+test_1から10まで数をプリントする (fizz_buzz_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (fizz_buzz_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: `できるようにする` では要求になってしまうのでここは仕様だから。
+
+[source, Python]
+----
+    def test_1から100まで数をプリントする(self):
+        self.assertEqual("1", self.lines[1])
+        self.assertEqual("Buzz", self.lines[MAX_COUNT])
+----
+
+[source, bash]
+----
+$ python -m unittest fizz_buzz_test.MainTest -v
+test_100より多い場合はプリントしない (fizz_buzz_test.MainTest) ... ok
+test_1から100まで数をプリントする (fizz_buzz_test.MainTest) ... ok (2)
+test_1から10まで数をプリントする (fizz_buzz_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (fizz_buzz_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+----
+
+*テストおじさん*: ですね。
+
+*テストおじさん*: https://プログラマが知るべき97のこと.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81/[名前重要] です。
 
 == ふりかえり
 [source, Markdown]

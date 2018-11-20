@@ -477,6 +477,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_エラーハンドリング">2.4.13. エラーハンドリング</a></li>
 <li><a href="#_条件記述の分解">2.4.14. 条件記述の分解</a></li>
 <li><a href="#_モジュール分割">2.4.15. モジュール分割</a></li>
+<li><a href="#_名前重要">2.4.16. 名前重要</a></li>
 </ul>
 </li>
 </ul>
@@ -5578,6 +5579,303 @@ OK</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_名前重要">2.4.16. 名前重要</h4>
+<div class="paragraph">
+<p><code>fizz_buzz</code> モジュールを眺めるテストおじさん。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">MAX_COUNT = 100
+ERROR_MSG = f"回数は{MAX_COUNT}までです"
+BUZZ = "Buzz"
+FIZZ = "Fizz"
+FIZZ_BUZZ = "FizzBuzz"
+fizz_buzz_date = {   <b class="conum">(1)</b>
+    'values': [],
+    'count': 0
+}
+
+
+def execute(count=MAX_COUNT):
+    if within_max_count(count):
+        set_count(count)
+        set_values_by_fizz_buzz() <b class="conum">(2)</b>
+        print_values()
+    else:
+        print_error_message()
+
+
+def within_max_count(count):
+    return count &lt;= MAX_COUNT
+
+
+def set_count(count):
+    # レンジは指定された値を範囲に含めないので1プラスする
+    fizz_buzz_date['count'] = count + 1 <b class="conum">(3)</b>
+
+
+def set_values_by_fizz_buzz(): <b class="conum">(4)</b>
+    fizz_buzz_date['values'] = [] <b class="conum">(5)</b>
+
+    for number in range(fizz_buzz_date['count']):
+        value = fizz_buzz(number) <b class="conum">(6)</b>
+        fizz_buzz_date['values'].append(value) <b class="conum">(7)</b>
+
+
+def print_values():
+    for value in fizz_buzz_date['values']: <b class="conum">(8)</b>
+        print(value)
+
+
+def print_error_message():
+    print(ERROR_MSG)
+
+
+def is_fizz(number):
+    return number % 3 == 0
+
+
+def is_buzz(number):
+    return number % 5 == 0
+
+
+def is_fizz_buzz(number):
+    return number % 3 == 0 and number % 5 == 0
+
+
+def fizz_buzz(number): <b class="conum">(9)</b>
+    value = number
+
+    if is_fizz_buzz(number):
+        value = FIZZ_BUZZ
+    elif is_fizz(number):
+        value = FIZZ
+    elif is_buzz(number):
+        value = BUZZ
+
+    return value</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>fizz_buzz</code> という関心ごとのモジュール無い <code>fizz_buzz</code> という単語は冗長というか <span class="red">抽出レベルに適切な名前を選ぶ</span> に即していない気がします。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 名前を変更しましょう。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>fizz_buzz_date</code> は・・・あ、これ <code>typo</code> ですね。 <code>fizz_buzz_data</code> は <code>fizz_buzz</code> モジュールの <code>data</code> だからこう。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">data = {
+    'values': [],
+    'count': 0
+}
+
+...
+
+def set_count(count):
+    # レンジは指定された値を範囲に含めないので1プラスする
+    data['count'] = count + 1
+
+
+def set_values_by_fizz_buzz():
+    data['values'] = []
+
+    for number in range(data['count']):
+        value = fizz_buzz(number)
+        data['values'].append(value)
+
+
+def print_values():
+    for value in data['values']:
+        print(value)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest fizz_buzz_test.MainTest -v
+test_100より多い場合はプリントしない (fizz_buzz_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (fizz_buzz_test.MainTest) ... ok
+test_1から10まで数をプリントする (fizz_buzz_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (fizz_buzz_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>fizz_buzz</code> 関数は <code>fizz_buzz</code> モジュール内で生成されているから。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=MAX_COUNT):
+    if within_max_count(count):
+        set_count(count)
+        set_values_by_generate()
+        print_values()
+    else:
+        print_error_message()
+
+...
+
+def set_count(count):
+    # レンジは指定された値を範囲に含めないので1プラスする
+    data['count'] = count + 1
+
+
+def set_values_by_generate():
+    data['values'] = []
+
+    for number in range(data['count']):
+        value = generate(number)
+        data['values'].append(value)
+
+...
+
+def generate(number):
+    value = number
+
+    if is_fizz_buzz(number):
+        value = FIZZ_BUZZ
+    elif is_fizz(number):
+        value = FIZZ
+    elif is_buzz(number):
+        value = BUZZ
+
+    return value</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest fizz_buzz_test.MainTest -v
+test_100より多い場合はプリントしない (fizz_buzz_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (fizz_buzz_test.MainTest) ... ok
+test_1から10まで数をプリントする (fizz_buzz_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (fizz_buzz_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>execute</code> 関数を見てください。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=MAX_COUNT):
+    if within_max_count(count):
+        set_count(count)
+        set_values_by_generate()
+        print_values()
+    else:
+        print_error_message()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>execute</code> 関数だけで処理の概要を読み上げる事ができますね。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>fizz_buzz</code> モジュールの</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>execute</code> 実行関数は</p>
+</li>
+<li>
+<p><code>if within_max_count</code> もし、最大カウント以内なら</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>set_count</code> カウントを設定して</p>
+</li>
+<li>
+<p><code>set_values_by_generate</code> 生成関数によって値を設定して</p>
+</li>
+<li>
+<p><code>print_values</code> 値をプリントします</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>else</code> そうでなければ</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>print_error_message</code> エラーメッセージをプリントします</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: あと、気になったのはテストメッセージですが。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest fizz_buzz_test.MainTest -v
+test_100より多い場合はプリントしない (fizz_buzz_test.MainTest) ... ok
+test_1から100まで数をプリントできるようにする (fizz_buzz_test.MainTest) ... ok (1)
+test_1から10まで数をプリントする (fizz_buzz_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (fizz_buzz_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>できるようにする</code> では要求になってしまうのでここは仕様だから。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">    def test_1から100まで数をプリントする(self):
+        self.assertEqual("1", self.lines[1])
+        self.assertEqual("Buzz", self.lines[MAX_COUNT])</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest fizz_buzz_test.MainTest -v
+test_100より多い場合はプリントしない (fizz_buzz_test.MainTest) ... ok
+test_1から100まで数をプリントする (fizz_buzz_test.MainTest) ... ok (2)
+test_1から10まで数をプリントする (fizz_buzz_test.MainTest) ... ok
+test_3と5両方の倍数の場合にはFizzBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+test_3の倍数のときは数の代わりにFizzをプリントする (fizz_buzz_test.MainTest) ... ok
+test_5の倍数のときはBuzzとプリントする (fizz_buzz_test.MainTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ですね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <a href="https://プログラマが知るべき97のこと.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81/">名前重要</a> です。</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -5637,7 +5935,7 @@ ERROR_MSG = f"回数は{MAX_COUNT}までです"
 BUZZ = "Buzz"
 FIZZ = "Fizz"
 FIZZ_BUZZ = "FizzBuzz"
-fizz_buzz_date = {
+data = {
     'values': [],
     'count': 0
 }
@@ -5646,7 +5944,7 @@ fizz_buzz_date = {
 def execute(count=MAX_COUNT):
     if within_max_count(count):
         set_count(count)
-        set_values_by_fizz_buzz()
+        set_values_by_generate()
         print_values()
     else:
         print_error_message()
@@ -5658,19 +5956,19 @@ def within_max_count(count):
 
 def set_count(count):
     # レンジは指定された値を範囲に含めないので1プラスする
-    fizz_buzz_date['count'] = count + 1
+    data['count'] = count + 1
 
 
-def set_values_by_fizz_buzz():
-    fizz_buzz_date['values'] = []
+def set_values_by_generate():
+    data['values'] = []
 
-    for number in range(fizz_buzz_date['count']):
-        value = fizz_buzz(number)
-        fizz_buzz_date['values'].append(value)
+    for number in range(data['count']):
+        value = generate(number)
+        data['values'].append(value)
 
 
 def print_values():
-    for value in fizz_buzz_date['values']:
+    for value in data['values']:
         print(value)
 
 
@@ -5690,7 +5988,7 @@ def is_fizz_buzz(number):
     return number % 3 == 0 and number % 5 == 0
 
 
-def fizz_buzz(number):
+def generate(number):
     value = number
 
     if is_fizz_buzz(number):
@@ -5722,7 +6020,7 @@ class MainTest(unittest.TestCase):
         self.assertNotIn("11", self.lines)
         self.assertEqual("Buzz", self.lines[10])
 
-    def test_1から100まで数をプリントできるようにする(self):
+    def test_1から100まで数をプリントする(self):
         self.assertEqual("1", self.lines[1])
         self.assertEqual("Buzz", self.lines[MAX_COUNT])
 
@@ -5821,7 +6119,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-20 12:24:20 JST
+Last updated 2018-11-20 13:19:20 JST
 </div>
 </div>
 </body>
