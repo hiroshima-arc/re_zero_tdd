@@ -4717,6 +4717,48 @@ def execute():
 
 *テストおじさん*: このコードはあらゆるプログラムを構築できる制御構造の最小セット [red]#順次# [red]#選択# [red]#反復# のすべてを含んています。
 
+順序構造
+
+[plantuml]
+----
+(*) --> "処理 1"
+"処理 1" --> "処理 2"
+"処理 2" --> (*)
+----
+
+選択構造
+
+[plantuml]
+----
+(*) --> "処理 1"
+
+if "選択" then
+  --> [OK] "処理 2"
+  --> "処理 4" as last
+else
+  -> [NG] "処理 3"
+  -left-> last
+endif
+
+--> (*)
+----
+
+反復構造
+
+[plantuml]
+----
+start
+repeat
+  :処理 1;
+repeat while (反復 1)
+
+while (反復 2) is (ループ必要)
+  :処理 2;
+  -> 文字列あり矢印;
+endwhile (ループ不要)
+stop
+----
+
 *テストおじさん*: さらに、 <<_リファクタリングから始める構造化プログラミング, リファクタリングから始める構造化プログラミング >> から以下の特徴をコードに見出すことができました。
 
 * 単純な文を組み合わせた文を1つの抽象文としてみなす
@@ -4859,3 +4901,4 @@ include::../../../dev/20181116/replay/fizz_buzz_test.py[]
 * https://globis.jp/article/2046[MBA経営辞書「製品アーキテクチャ」]
 * http://www.itmedia.co.jp/im/articles/1111/07/news183.html[テストドライバ（てすとどらいば）]
 * http://www.tatapa.org/~takuo/structured_programming/structured_programming.html[意外と知られていない構造化プログラミング、あるいは構造化プログラミングはデータも手続きと一緒に抽象化する、あるいはストロヴストルップのオブジェクト指向プログラミング史観]
+* https://eng-entrance.com/programming_flowchart[ざっくりわかる！プログラミングのためのフローチャートの書き方]
