@@ -2,6 +2,7 @@ import unittest
 from test.support import captured_stdout
 from fizz_buzz import execute, MAX_COUNT
 
+
 class MainTest(unittest.TestCase):
     def setUp(self):
         with captured_stdout() as stdout:

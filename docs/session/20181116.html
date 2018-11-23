@@ -472,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_コメント">2.4.9. コメント</a></li>
 <li><a href="#_抽象レベルが正しくないコード">2.4.10. 抽象レベルが正しくないコード</a></li>
 <li><a href="#_データの抽象化">2.4.11. データの抽象化</a></li>
-<li><a href="#_名前付き引数">2.4.12. 名前付き引数</a></li>
+<li><a href="#_キーワード引数とデフォルト値">2.4.12. キーワード引数とデフォルト値</a></li>
 <li><a href="#_エラーハンドリング">2.4.13. エラーハンドリング</a></li>
 <li><a href="#_条件記述の分解">2.4.14. 条件記述の分解</a></li>
 <li><a href="#_モジュール分割">2.4.15. モジュール分割</a></li>
@@ -1543,7 +1543,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 一番最初のリストの添字は0だから・・・</p>
+<p><strong>テストおじさん</strong>: 一番最初のリストのインデクスは0だから・・・</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2073,12 +2073,6 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: このように判断の順番によって結果が変わるコードは <span class="red">結合度</span> が高いコードと言われます。</p>
-</div>
-<div class="paragraph">
-<p><strong>テストおじさん</strong>: <span class="red">結合度</span> できだけ疎結合であることが理想なんですけどね。</p>
-</div>
-<div class="paragraph">
 <p><strong>テストおじさん</strong>: <span class="red">明白な実装</span> により最後の <span class="red">TODOリスト</span> も片付けることができました。</p>
 </div>
 <div class="ulist checklist">
@@ -2360,21 +2354,66 @@ OK</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: イエス! その前に <span class="red">リファクタリングのヒント</span> からチェックしてみましょう。</p>
 </div>
-<div class="paragraph">
-<p><strong>テストおじさん</strong>: テストに関してはどうですかね。</p>
-</div>
 <div class="quoteblock">
 <blockquote>
 <div class="paragraph">
 <p>リファクタリングのヒント</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
+</li>
+<li>
+<p>リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
+</li>
+<li>
+<p>リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。</p>
+</li>
+<li>
+<p>コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。</p>
+</li>
+<li>
+<p>リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。</p>
+</li>
+<li>
+<p>リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
+</li>
+<li>
+<p>３三度目になったらリファクタリング開始。</p>
+</li>
+<li>
+<p>あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
+</li>
+<li>
+<p>コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。</p>
+</li>
+<li>
+<p>テストを完全に自動化して、その結果もテストにチェックさせること。</p>
+</li>
+<li>
+<p>テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
+</li>
+</ul>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: チェックを入れていきましょう。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: まず、リファクタリングに入る前の条件は満たしていますか?</p>
+</div>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p>&#10003; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
+<p>&#10063; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
 </li>
 <li>
-<p>&#10003; リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
+<p>&#10003; <mark>リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</mark></p>
 </li>
 <li>
 <p>&#10063; リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。</p>
@@ -2401,14 +2440,12 @@ OK</code></pre>
 <p>&#10063; テストを完全に自動化して、その結果もテストにチェックさせること。</p>
 </li>
 <li>
-<p>&#10003; テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
+<p>&#10063; テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
 </li>
 </ul>
 </div>
-</blockquote>
-<div class="attribution">
-&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
-</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: テストは用意できていますね、ではリファクタリングに入りましょう。</p>
 </div>
 <div class="paragraph">
 <p>コードを眺めるテストおじさん。</p>
@@ -2445,6 +2482,19 @@ OK</code></pre>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: テストコードに <span class="red">重複したコード</span> がありますね。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>重複したコード</p>
+</div>
+<div class="paragraph">
+<p>はえある第1位は、「重複したコード」です。同じようなコードが2か所以上で見られたら、1か所にまとめることを考えると良いプログラムになります。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: <span class="red">メソッドの抽出</span> を実施して <span class="red">フィクスチャー</span> にまとめましょう。</p>
@@ -2520,21 +2570,10 @@ OK</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: 大丈夫ですね。</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_ベイビーステップ">2.4.2. ベイビーステップ</h4>
-<div class="paragraph">
-<p><strong>テストおじさん</strong>: 続いてプロダクトコードに関してはどうですかね。</p>
-</div>
-<div class="quoteblock">
-<blockquote>
-<div class="paragraph">
-<p>リファクタリングのヒント</p>
-</div>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p>&#10003; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
+<p>&#10063; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
 </li>
 <li>
 <p>&#10003; リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
@@ -2543,7 +2582,7 @@ OK</code></pre>
 <p>&#10063; リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。</p>
 </li>
 <li>
-<p>&#10003; コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。</p>
+<p>&#10063; コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。</p>
 </li>
 <li>
 <p>&#10063; リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。</p>
@@ -2552,7 +2591,7 @@ OK</code></pre>
 <p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
 </li>
 <li>
-<p>&#10003; ３三度目になったらリファクタリング開始。</p>
+<p>&#10003; <mark>３三度目になったらリファクタリング開始。</mark></p>
 </li>
 <li>
 <p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
@@ -2564,14 +2603,15 @@ OK</code></pre>
 <p>&#10063; テストを完全に自動化して、その結果もテストにチェックさせること。</p>
 </li>
 <li>
-<p>&#10003; テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
+<p>&#10063; テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
 </li>
 </ul>
 </div>
-</blockquote>
-<div class="attribution">
-&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
 </div>
+<div class="sect3">
+<h4 id="_ベイビーステップ">2.4.2. ベイビーステップ</h4>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 続いてプロダクトコードに関してはどうですかね。</p>
 </div>
 <div class="paragraph">
 <p>コードを眺めるテストおじさん。</p>
@@ -2603,7 +2643,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 結果をリストに保存していますが1に対応するリストの添字が99って分かりづらいですよね。</p>
+<p><strong>テストおじさん</strong>: 結果をリストに保存していますが1に対応するリストのインデクスが99って分かりづらいですよね。</p>
 </div>
 <div class="paragraph">
 <p><strong>テスト初めて書いたひと</strong>: たしかにそうですね。</p>
@@ -2741,53 +2781,6 @@ FAILED (failures=3, errors=1)</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: こういう時は落ち着いて一つづつ確認していきましょう。</p>
 </div>
-<div class="quoteblock">
-<blockquote>
-<div class="paragraph">
-<p>リファクタリングのヒント</p>
-</div>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p>&#10003; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
-</li>
-<li>
-<p>&#10003; リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
-</li>
-<li>
-<p>&#10003; リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。</p>
-</li>
-<li>
-<p>&#10003; コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。</p>
-</li>
-<li>
-<p>&#10063; リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。</p>
-</li>
-<li>
-<p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
-</li>
-<li>
-<p>&#10003; ３三度目になったらリファクタリング開始。</p>
-</li>
-<li>
-<p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
-</li>
-<li>
-<p>&#10063; コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。</p>
-</li>
-<li>
-<p>&#10063; テストを完全に自動化して、その結果もテストにチェックさせること。</p>
-</li>
-<li>
-<p>&#10003; テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</p>
-</li>
-</ul>
-</div>
-</blockquote>
-<div class="attribution">
-&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
-</div>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ python -m unittest main_test.MainTest.test_1から100まで数をプリントできるようにする
@@ -2901,7 +2894,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 残りのテストもリストの添字が原因のようなので修正しましょう。</p>
+<p><strong>テストおじさん</strong>: 残りのテストもリストのインデクスが原因のようなので修正しましょう。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2942,6 +2935,43 @@ Ran 4 tests in 0.001s
 OK</code></pre>
 </div>
 </div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10063; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
+</li>
+<li>
+<p>&#10003; リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
+</li>
+<li>
+<p>&#10003; <mark>リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。</mark></p>
+</li>
+<li>
+<p>&#10003; コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。</p>
+</li>
+<li>
+<p>&#10063; リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。</p>
+</li>
+<li>
+<p>&#10063; リファクタリングする（動詞）：一連のリファクタリングを適用して、外部から見た振る舞いの変更なしに、ソフトウェアを再構築すること。</p>
+</li>
+<li>
+<p>&#10003; ３三度目になったらリファクタリング開始。</p>
+</li>
+<li>
+<p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
+</li>
+<li>
+<p>&#10063; コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。</p>
+</li>
+<li>
+<p>&#10063; テストを完全に自動化して、その結果もテストにチェックさせること。</p>
+</li>
+<li>
+<p>&#10003; <mark>テストをひとそろいにしておくと、バグの検出に絶大な威力を発揮する。これによって、バグの発見にかかる時間は削除される。</mark></p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: このようにリファクタリングは <span class="red">ベイビーステップ</span> で進めて行くことに留意してください。</p>
 </div>
@@ -2970,8 +3000,69 @@ OK</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: 皆さん同様、私もPythonは詳しくないので <span class="red">学習用テスト</span> を使って <span class="red">for文</span> の振る舞いを確認して見ましょう。</p>
 </div>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 1から5まで <span class="red">for文</span> で出力するにはこんな感じかな。</p>
+<p>学習用テスト</p>
+</div>
+<div class="paragraph">
+<p>チーム外の誰かが書いたソフトウェアのテストを書くのはどのようなときか----そのソフトウェアの新機能を初めて使う際に書いてみよう。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2QtCA5b">テスト駆動開発</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>whileは、条件に設定した値がTrueの間、処理を繰り返し続ける。繰り返す処理部分は右にインデントすること。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>forは、コンテナから順に値を取り出して処理を行うための構文。繰り返し実行する部分は、右にインデントして書くこと。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: この場合はソフトウェアのテストと言うより言語仕様の確認テストといった感じですかね。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 1から5まで <span class="red">for文</span> で標準出力を <span class="red">リスト</span> に出力するにはこんな感じかな。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>データとリスト</p>
+</div>
+<div class="paragraph">
+<p>こんなとき、「多数の値をまとめて扱えるもの」があれば、ずいぶんとデータ処理もはかどります。
+Pythonには、こうした役割を果たすためのデータをまとめるデータ形式がいくつか用意されています。
+これらは「コンテナ」と呼ばれます。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>リストは、[]か、list()で作成する。作ったリストは、[]にインデクス番号を指定して操作できる。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2988,6 +3079,12 @@ class MainTest(unittest.TestCase):
         self.assertTrue(1, lines[0])
         self.assertTrue(4, lines[-1])</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p><strong>テスト鬼さん</strong>: <code>self.assertTrue(4, lines[-1])</code> は?</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: これは <span class="red">リスト</span> の最後値を指定する場合に使うインデクスです。</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: （学習用）テスト。</p>
@@ -3038,6 +3135,16 @@ FAILED (failures=1)</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: こういう時は <span class="red">タプル</span> を使います。</p>
 </div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>タプルは、複数の値をひとまとめにして扱うためのもの。()の中に値をカンマで区切って記述する。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-Python" data-lang="Python">def execute_for():
@@ -3071,6 +3178,22 @@ FAILED (errors=1)</code></pre>
 <p><strong>テストおじさん</strong>: <code>TypeError: 'tuple' object does not support item assignment</code> と怒られますね。</p>
 </div>
 <div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">リスト</span> はミュータブルなのに対して <span class="red">タプル</span> はイミュータブルなコンテナとなっています。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>ミュータブルは、変更可能。リストがこれに当たる。イミュータブルは、変更不可。タプルがこれに当たる。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="paragraph">
+<p>コードを修正するテストおじさん。</p>
+</div>
+<div class="paragraph">
 <p><strong>テストおじさん</strong>: これで、オッケー。</p>
 </div>
 <div class="listingblock">
@@ -3096,6 +3219,17 @@ OK</code></pre>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: そんな時は <span class="red">レンジ</span> を使います。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>レンジは、指定した範囲の数列を扱うもの。range()で作成する。
+保管されている値は、[]でインデクスで取り出せる。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3371,7 +3505,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <code>n = n + 1</code> の <span class="red">変数</span> への代入は不要なので削除して。</p>
+<p><strong>テストおじさん</strong>: <code>n = n + 1</code> の変数への代入は不要なので削除して。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3548,7 +3682,7 @@ AssertionError: '1' != '2'
 <p><strong>テストおじさん</strong>: <code>execute</code> 関数が <code>AssertionError: '1' != 'FizzBuzz'</code> で <code>execute_for</code> が <code>AssertionError: '1' != '2'</code> となってるということは・・・</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: また <span class="red">リスト</span> の添字の問題のようですね。</p>
+<p><strong>テストおじさん</strong>: また <span class="red">リスト</span> のインデクスが問題のようですね。</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: <code>execute_for</code> 関数はこうかな・・・よし!</p>
@@ -3710,18 +3844,10 @@ OK</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: コメントが必要になる <span class="red">長すぎるコード</span> ですね。</p>
 </div>
-<div class="paragraph">
-<p><strong>テストおじさん</strong>: どうやらリファクタリングの必要がありそうです。</p>
-</div>
-<div class="quoteblock">
-<blockquote>
-<div class="paragraph">
-<p>リファクタリングのヒント</p>
-</div>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p>&#10003; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
+<p>&#10063; 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。</p>
 </li>
 <li>
 <p>&#10003; リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。</p>
@@ -3745,7 +3871,7 @@ OK</code></pre>
 <p>&#10063; あまり早期にインタフェースを公開しないこと。スムーズなリファクタリングのために、時にはコードの所有権のポリシーを変えることも必要。</p>
 </li>
 <li>
-<p>&#10003; コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。</p>
+<p>&#10003; <mark>コメントの必要を感じたときにはリファクタリングを行って、コメントを書かなくとも内容がわかるようなコードを目指すこと。</mark></p>
 </li>
 <li>
 <p>&#10063; テストを完全に自動化して、その結果もテストにチェックさせること。</p>
@@ -3755,10 +3881,8 @@ OK</code></pre>
 </li>
 </ul>
 </div>
-</blockquote>
-<div class="attribution">
-&#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
-</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: どうやらリファクタリングの必要がありそうです。</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: まず、繰り返し内部の処理に対して <span class="red">メソッドの抽出</span> を実施します。</p>
@@ -3801,7 +3925,23 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 繰り返し部分も同様に。</p>
+<p><strong>テストおじさん</strong>: <code>execute</code> 関数は繰り返し処理と <code>fizz_buzz</code> 関数の実行しています。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ここは <span class="red">1つのことを行う</span> に従って繰り返し部分も <span class="red">メソッドの抽出</span> を実施しましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>1つのことを行う</p>
+</div>
+<div class="paragraph">
+<p>関数では1つのことを行うようにせよ。その1つのことをきちんと行い、それ以外のことを行ってはならない。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3878,7 +4018,7 @@ def fizz_buzz(n):
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <span class="red">関数</span> の間で <code>n</code> や <code>c</code> といった <span class="red">変数</span> を使っていますがパット見なにか分かりづらいですね。</p>
+<p><strong>テストおじさん</strong>: 関数の間で <code>n</code> や <code>c</code> といった変数を使っていますがぱっと見なにか分かりづらいですね。</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: <span class="red">説明変数の導入</span> を導入して読みやすいコードにしましょう。</p>
@@ -3950,6 +4090,16 @@ OK</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: <code>fizz_buzz</code> <span class="red">関数</span> を見てください。</p>
 </div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>関数には、名前・引数・戻り値といった要素がある。関数は名前と引数を使って定義する。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-Python" data-lang="Python">def fizz_buzz(number):
@@ -3965,6 +4115,16 @@ OK</code></pre>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: 一時 <span class="red">変数</span> を使って <code>print</code> <span class="red">関数</span> の呼び出しを一回にしてみましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>変数は、値を保管するための入れ物。＝演算子を使い、値を代入すると自動的に作成される。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3997,6 +4157,34 @@ OK</code></pre>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: 文字 <span class="red">リテラル</span> は <span class="red">定数</span> に抽出して変更箇所をわかりやすくしましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>リテラルについて</p>
+</div>
+<div class="paragraph">
+<p>Pythonの値は、さまざまな形で利用されます。もっとも多いのは、スクリプトの中に直接、値を記述する方法です。
+こうしたスクリプトに直接記述される値のことをリテラルと呼びます。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>すべて大文字は定数扱い</p>
+</div>
+<div class="paragraph">
+<p>これは基本的なマナーであって守らなければならないことではありませんが、Pythonでは、定数（後で値を変更したりしない特所な変数）として扱う変数は、すべて大文字の名前をつけるのが一般的です。
+例えば変数ABCは定数です。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4057,7 +4245,7 @@ OK</code></pre>
 <p><strong>テストおじさん</strong>: <code>execute</code> <span class="red">関数</span> で処理の概要が把握できるようにしましょう。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: まず、<code>fizz_buzz</code> <span class="red">関数</span> を値を返す関数に変更します。</p>
+<p><strong>テストおじさん</strong>: まず、<code>fizz_buzz</code> <span class="red">関数</span> を値を返す <span class="red">関数</span> に変更します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4098,7 +4286,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 次に、<span class="red">関数</span> 間で値を共有できるように <span class="red">グローバル変数</span> の <span class="red">リスト</span> を作ります。</p>
+<p><strong>テストおじさん</strong>: 次に、<span class="red">関数</span> 間で値を共有できるように グローバル <span class="red">変数</span> の <span class="red">リスト</span> を作ります。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4140,7 +4328,7 @@ OK</code></pre>
 <p><strong>リモートさん</strong>: <code>fizz_buzz</code> <span class="red">関数</span> から副作用の <code>print</code> が消えたっ!</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 副作用の無い <code>fizz_buzz</code> <span class="red">関数</span> の結果を 副作用のある <code>iterate</code> <span class="red">関数</span> が <span class="red">グローバル変数</span> に値を設定した結果 <code>execute</code> <span class="red">関数</span> で処理の概要を読み取れるようになりました。</p>
+<p><strong>テストおじさん</strong>: 副作用の無い <code>fizz_buzz</code> <span class="red">関数</span> の結果を 副作用のある <code>iterate</code> <span class="red">関数</span> が グローバル <span class="red">変数</span> に値を設定した結果 <code>execute</code> <span class="red">関数</span> で処理の概要を読み取れるようになりました。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4156,7 +4344,7 @@ OK</code></pre>
 <div class="sect3">
 <h4 id="_コメント">2.4.9. コメント</h4>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <code>execute</code> 関数の見通しは良くなりましたが・・・</p>
+<p><strong>テストおじさん</strong>: <code>execute</code> <span class="red">関数</span> の見通しは良くなりましたが・・・</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4205,7 +4393,21 @@ def iterate(count):
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: こーゆーのをコメントバグというのですがここは <span class="red">説明用変数の導入</span> を使ってコード自体に説明させましょう。</p>
+<p><strong>テストおじさん</strong>: こーゆーのをコメントバグというのですがここは <span class="red">説明用変数の導入</span> を使って <span class="red">自分自身をコードの中で説明する</span> ようにしましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>自分自身をコード中で説明する</p>
+</div>
+<div class="paragraph">
+<p>あなたの意図をコードに込めるのに必要なのは、たったの数秒の思考です。
+大抵の場合、それは単にコメントに書きたかった内容を実行する関数を作成するだけなのです。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4246,7 +4448,20 @@ OK</code></pre>
 <p><strong>テストおじさん</strong>: 100回繰り返すのに <code>count</code> 変数には101を代入している。これは <span class="red">レンジ</span> の仕様なのですがちょっと違和感ありますよね。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <span class="red">グローバル変数</span> を使って <code>count</code> を共有すると共に有益なコメントに書き換えましょう。</p>
+<p><strong>テストおじさん</strong>: グローバル <span class="red">変数</span> を使って <code>count</code> を共有すると共に有益なコメントに書き換えて <span class="red">意図の説明</span> をしましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>意図の説明</p>
+</div>
+<div class="paragraph">
+<p>時折、コメントは単に実装に対する有益な情報にとどまらず、決定の裏に隠された意図を伝える場合があります。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4286,7 +4501,7 @@ OK</code></pre>
 <div class="sect3">
 <h4 id="_抽象レベルが正しくないコード">2.4.10. 抽象レベルが正しくないコード</h4>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 次に <code>execute</code> 関数ですが・・・</p>
+<p><strong>テストおじさん</strong>: 次に <code>execute</code> <span class="red">関数</span> ですが・・・</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4302,11 +4517,49 @@ OK</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: <span class="red">変数</span> への代入、 <span class="red">関数</span> の呼び出し、 <span class="red">文</span> の実行と <span class="red">抽象レベルが正しくないコード</span> になっています。</p>
 </div>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <span class="red">メソッドの抽出</span> で処理の抽出レベルをあわせましょう。</p>
+<p>スクリプトは、実行する命令などを1つずつ順番に書いていきます。
+この実行する処理を書いたもののひとかたまりを文と呼びます。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>G6: 抽象レベルが正しくないコード</p>
+</div>
+<div class="paragraph">
+<p>抽象化を行うことは重要なことです。抽象化とは、高いレベルの概念と低いレベルの詳細な概念とを分離することです。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <span class="red">メソッドの抽出</span> を実施して処理の抽出レベルをあわせましょう。</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: 副作用のあるカウントの設定は <span class="red">名前で副作用を示すべき</span> に従って。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>N7: 名前で副作用を示すべき</p>
+</div>
+<div class="paragraph">
+<p>関数、変数、クラスが何であり、何をするかを名前で表現すべきです。副作用を名前の下に隠してはいけません。
+関数に1つの動詞を名前として付けたら、その関数の名前に書かれたこと以上のことを処理させるのは避けてください。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4370,6 +4623,19 @@ OK</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: 処理の抽出レベルは一致したのですが <code>iterate</code> 関数は <span class="red">関数名は体を表すべき</span> を満たしているとは言えませんね。</p>
 </div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>G20: 関数名は体を表すべき</p>
+</div>
+<div class="paragraph">
+<p>関数が何を行うかを知るために、実装（あるいはドキュメント）を見なければならないようなら、もっとよい名前を探すか、提供する機能を整理して、もっとよい名前を持った複数の関数に分けるべきです。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
+</div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: ここはこうして。</p>
 </div>
@@ -4414,6 +4680,19 @@ OK</code></pre>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: これで <span class="red">関数は1つの抽象レベルを担うべき</span> という条件をみたすことができました。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>G34: 関数は1つの抽象レベルを担うべき</p>
+</div>
+<div class="paragraph">
+<p>1つの関数の中の文は同じ抽象レベルで書かれるべきで、それらは関数の名前で表現された操作の1つ下のレベルとなるべきです。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -4602,11 +4881,32 @@ FAILED (failures=4)</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: このように <span class="red">グローバル変数</span> はいつ誰がどこかで書き換えるかわかりません。</p>
 </div>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: FizzBuzzの関数モジュールの範囲だけ共有できればいいのですが現状のコードではそれは難しい・・・</p>
+<p>関数内で定義した変数は、その関数の中でしか使えない。関数の外側で定義した変数は、関数の中でも使える。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: <code>execute</code> <span class="red">関数</span> スコープ範囲だけで共有できればいいのですが現状のコードではそれは難しい・・・</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: とりあえず <span class="red">辞書</span> を使ってFizzBuzzで使う抽象データであることをコードで表現しておきましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>辞書は、キーワードで値を管理する。{}を使うか、dict()で作成できる。
+値は、[]にキーワードを指定してやり取りする。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4648,11 +4948,11 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <span class="red">辞書</span> でも <span class="red">グローバル変数</span> であることに変わりありませんが読み手に意識させることはできますね。</p>
+<p><strong>テストおじさん</strong>: <span class="red">辞書</span> でも <span class="red">グローバル変数</span> であることに変わりありませんが読み手にスコープを意識させることはできますね。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_名前付き引数">2.4.12. 名前付き引数</h4>
+<h4 id="_キーワード引数とデフォルト値">2.4.12. キーワード引数とデフォルト値</h4>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: そういえば1から10まで出力する場合はどうしましょうかね。</p>
 </div>
@@ -4693,7 +4993,7 @@ FAILED (errors=1)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <code>execute</code> 関数に引数を追加しないといけませんね。</p>
+<p><strong>テストおじさん</strong>: <code>execute</code> <span class="red">関数</span> に引数を追加しないといけませんね。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4750,7 +5050,17 @@ FAILED (errors=1)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: あーここね。既存でも既存コードの影響もあるしここは <span class="red">名前つき引数</span> を使いましょう。</p>
+<p><strong>テストおじさん</strong>: あーここね。既存でも既存コードの影響もあるし、ここは <span class="red">キーワード引数とデフォルト値</span> を使いましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>キーワード引数は、呼び出す際には省略できる。その場合は、用意されたデフォルト値が引数として使われる。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4796,7 +5106,7 @@ FAILED (failures=1)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: あーあ、別のテストの結果も保持してるな。グローバル変数の初期化処理を追加しないといけませんね。</p>
+<p><strong>テストおじさん</strong>: あーあ、別のテストの結果も保持してるな。<span class="red">グローバル変数</span> の初期化処理を追加しないといけませんね。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4981,7 +5291,26 @@ OK</code></pre>
 <p><strong>テストおじさん</strong>: さてテストはパスしましたが <span class="red">抽象レベルが正しくないコード</span> を追加してしまいました。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: ここは <span class="red">メソッドの抽出</span> を実施して <span class="red">名前で副作用を示すべき</span> 関数にしましょう。</p>
+<p><strong>テストおじさん</strong>: ここは <span class="red">メソッドの抽出</span> を実施してします。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 関数名は <span class="red">抽象レベルに適切な名前を選ぶ</span> ようにしましょう。</p>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: この場合は <span class="red">名前で副作用を示すべき</span> 関数名が適切でしょうか。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>N2: 抽象レベルに適切な名前を選ぶ</p>
+</div>
+<div class="paragraph">
+<p>実装をそのまま表すような名前をつけないでください。今、作業しているクラス、関数の抽象レベルを反映した名前を選んでください。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4991,10 +5320,10 @@ OK</code></pre>
         set_values_by_fizz_buzz()
         print_values()
     else:
-        print_error_message()
+        print_error_message() <b class="conum">(1)</b>
 
 
-def print_error_message():
+def print_error_message(): <b class="conum">(2)</b>
     print("回数は100までです")</code></pre>
 </div>
 </div>
@@ -5042,7 +5371,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <span class="red">シンボリック定数によるマジックナンバーの置き換え</span> を実施して <span class="red">抽象レベルに適切な名前を選び</span> ましょう。</p>
+<p><strong>テストおじさん</strong>: <span class="red">シンボリック定数によるマジックナンバーの置き換え</span> を実施しましょう。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -5058,6 +5387,19 @@ OK</code></pre>
 </blockquote>
 <div class="attribution">
 &#8212; <a href="https://amzn.to/2T3Jek7">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>G25: マジックナンバーを名前付けした定数に置き換える</p>
+</div>
+<div class="paragraph">
+<p>「マジックナンバー」は、数字だけに限りません。それ自身では値の意味も表現できないものすべてに当てはまります。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
 </div>
 </div>
 <div class="listingblock">
@@ -5099,7 +5441,20 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: メッセージも定数から参照できるようしておきましょう。</p>
+<p><strong>テストおじさん</strong>: メッセージ内の回数も <span class="red">定数</span> から参照できるように <span class="red">フォーマット済み文字列リテラル</span> にしておきましょう。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>どれが変数でどれが文字列かも一目では判別できません。もう少し、わかりやすく整理された書き方ができれば、こうした問題を回避できます。</p>
+</div>
+<div class="paragraph">
+<p>このようなときに用いられるのがフォーマット済み文字列リテラルです。これは、文字列リテラルの中に、変数を埋め込んで記述したものです。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5157,7 +5512,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: まずは、 <code>fizz_buzz</code> 関数から</p>
+<p><strong>テストおじさん</strong>: まずは、 <code>fizz_buzz</code> 関数から。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5176,6 +5531,21 @@ OK</code></pre>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: <span class="red">クエリーメソッド</span> を <span class="red">メソッドの抽出</span> します。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>クエリーメソッド</p>
+</div>
+<div class="paragraph">
+<p>時には、あるオブジェクトが別のオブジェクトの状態に基づいて、決定をおこなわなくてはならないことがある。
+この別のオブジェクトは、おおむね自分自身のためだけに決定を行うはずなので、これは望ましくない。
+しかし、オブジェクトがプロトコルの一部として決定基準を提供しなければならないときは、そのメソッドには、"is","was","have"といった接頭辞を付けて、それをおこなう。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2KsVTct">実装パターン</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5332,7 +5702,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: お次は、 <code>execute</code> 関数です。</p>
+<p><strong>テストおじさん</strong>: おつぎは、 <code>execute</code> 関数です。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5346,7 +5716,7 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <span class="red">明白な実装</span> で <span class="red">クエリーメソッド</span> を <span class="red">メソッドの抽出</span> します。</p>
+<p><strong>テストおじさん</strong>: 先程と同様に <span class="red">明白な実装</span> で <span class="red">クエリーメソッド</span> を <span class="red">メソッドの抽出</span> を実施します。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5380,7 +5750,20 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>リモートさん</strong>: <code>MAX_COUNT</code> は含まれるから <span class="red">正確であれ</span> でないですね。</p>
+<p><strong>リモートさん</strong>: <code>MAX_COUNT</code> は含まれるから <span class="red">はっきりした名前</span> でないですね。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>N4: はっきりした名前</p>
+</div>
+<div class="paragraph">
+<p>関数や変数の働きを的確に表す名前を選びましょう。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: そうですね、ここは <code>MAX_COUNT</code> を含むので・・・</p>
@@ -5422,8 +5805,18 @@ OK</code></pre>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: リファクタリングも一段落つきました。いよいよ <span class="red">モジュール</span> 分割の時間です。</p>
 </div>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 今回は <code>fizz_buzz</code> モジュールとテスト用モジュールに分割しましょう。</p>
+<p>Pythonでは、ファイルに保存したプログラムを「モジュール」として他のプログラムファイルから読み込んで利用できる。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: 今回は <code>fizz_buzz</code> モジュールとテスト用モジュールに分割します。</p>
 </div>
 <div class="paragraph">
 <p><code>main_test.py</code> をコピーして <code>fizz_buzz.py</code> ファイルを作成して編集するテストをおじさん。</p>
@@ -5665,7 +6058,17 @@ FAILED (errors=7)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: まあ、そうでしょうね。なになに <code>NameError: name 'execute' is not defined</code> ・・・ 分離した <code>fizz_buzz</code> モジュールをインポートしてませんね。</p>
+<p><strong>テストおじさん</strong>: まあ、そうでしょうね。なになに <code>NameError: name 'execute' is not defined</code> ・・・ 分離した <code>fizz_buzz</code> モジュールを <span class="red">インポート</span> してませんね。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>importは、指定したモジュールを読み込み、使える状態にします。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5675,7 +6078,7 @@ from fizz_buzz import execute <b class="conum">(1)</b></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <code>fizz_buzz</code> モジュールから <code>execute</code> 関数をインポートすると・・・ありゃ?</p>
+<p><strong>テストおじさん</strong>: <code>fizz_buzz</code> モジュールから <code>execute</code> <span class="red">関数</span> を <span class="red">インポート</span> すると・・・ありゃ?</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5721,7 +6124,7 @@ FAILED (errors=3)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <code>NameError: name 'MAX_COUNT' is not defined</code> ・・・あー、 <code>fizz_buzz</code> モジュールから定数 <code>MAX_COUNT</code> をインポートしないとけないのね。</p>
+<p><strong>テストおじさん</strong>: <code>NameError: name 'MAX_COUNT' is not defined</code> ・・・あー、 <code>fizz_buzz</code> <span class="red">モジュール</span> から <span class="red">定数</span> <code>MAX_COUNT</code> を <span class="red">インポート</span> しないとけないのね。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5806,18 +6209,6 @@ def print_error_message():
     print(ERROR_MSG)
 
 
-def is_fizz(number):
-    return number % 3 == 0
-
-
-def is_buzz(number):
-    return number % 5 == 0
-
-
-def is_fizz_buzz(number):
-    return number % 3 == 0 and number % 5 == 0
-
-
 def fizz_buzz(number): <b class="conum">(9)</b>
     value = number
 
@@ -5828,11 +6219,23 @@ def fizz_buzz(number): <b class="conum">(9)</b>
     elif is_buzz(number):
         value = BUZZ
 
-    return value</code></pre>
+    return value
+
+
+def is_fizz(number):
+    return number % 3 == 0
+
+
+def is_buzz(number):
+    return number % 5 == 0
+
+
+def is_fizz_buzz(number):
+    return number % 3 == 0 and number % 5 == 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <code>fizz_buzz</code> という関心ごとのモジュール無い <code>fizz_buzz</code> という単語は冗長というか <span class="red">抽出レベルに適切な名前を選ぶ</span> に即していない気がします。</p>
+<p><strong>テストおじさん</strong>: <code>fizz_buzz</code> という関心事のモジュール内の <code>fizz_buzz</code> という単語は冗長というか <span class="red">抽出レベルに適切な名前を選ぶ</span> に即していない気がします。</p>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: 名前を変更しましょう。</p>
@@ -5842,7 +6245,7 @@ def fizz_buzz(number): <b class="conum">(9)</b>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-Python" data-lang="Python">data = {
+<pre class="highlight"><code class="language-Python" data-lang="Python">data = { <b class="conum">(1)</b>
     'values': [],
     'count': 0
 }
@@ -5851,19 +6254,19 @@ def fizz_buzz(number): <b class="conum">(9)</b>
 
 def set_count(count):
     # レンジは指定された値を範囲に含めないので1プラスする
-    data['count'] = count + 1
+    data['count'] = count + 1 <b class="conum">(3)</b>
 
 
 def set_values_by_fizz_buzz():
-    data['values'] = []
+    data['values'] = [] <b class="conum">(5)</b>
 
     for number in range(data['count']):
         value = fizz_buzz(number)
-        data['values'].append(value)
+        data['values'].append(value) <b class="conum">(7)</b>
 
 
 def print_values():
-    for value in data['values']:
+    for value in data['values']: <b class="conum">(8)</b>
         print(value)</code></pre>
 </div>
 </div>
@@ -5891,28 +6294,23 @@ OK</code></pre>
 <pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=MAX_COUNT):
     if within_max_count(count):
         set_count(count)
-        set_values_by_generate()
+        set_values_by_generate() <b class="conum">(2)</b>
         print_values()
     else:
         print_error_message()
 
 ...
 
-def set_count(count):
-    # レンジは指定された値を範囲に含めないので1プラスする
-    data['count'] = count + 1
-
-
-def set_values_by_generate():
+def set_values_by_generate(): <b class="conum">(4)</b>
     data['values'] = []
 
     for number in range(data['count']):
-        value = generate(number)
+        value = generate(number) <b class="conum">(6)</b>
         data['values'].append(value)
 
 ...
 
-def generate(number):
+def generate(number): <b class="conum">(9)</b>
     value = number
 
     if is_fizz_buzz(number):
@@ -5966,7 +6364,8 @@ OK</code></pre>
 <ul>
 <li>
 <p><code>execute</code> 実行関数は</p>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p><code>if within_max_count</code> もし、最大カウント以内なら</p>
 <div class="ulist">
@@ -5997,6 +6396,46 @@ OK</code></pre>
 </div>
 </li>
 </ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: コードの <span class="red">書式化</span> は大切です。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>書式化の目的</p>
+</div>
+<div class="paragraph">
+<p>最初にはっきりさせておきましょう。コードの書式化は重要なことです。
+大変重要なので無視してはいけませんし、宗教論争と片付けてもいけません。
+コードの書式化とは情報伝達を意味し、情報伝達はプロの開発者の仕事を進める上で最も重要なことなのです。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: ソースファイルを <span class="red">新聞にたとえる</span> メタファーがあります。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>新聞にたとえる</p>
+</div>
+<div class="paragraph">
+<p>ソースファイルも、新聞の記事のようにしたいものです。名前は単純でありながら、説明的でなければなりません。
+名前だけを見れば、そのモジュールが自分が見たいモジュールかどうか判断できなければなりません。
+ソースファイルの一番最初には、高レベルの概念とアルゴリズムが書かれているべきです。
+下へと読み進むに従い、詳細度は増していき、ソースファイルの一番下に達すると、最も低レベルの関数と詳細な記述を目にすることになります。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2Qu4QEK">Clean Code アジャイルソフトウェア達人の技</a>
+</div>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: あと、気になったのはテストメッセージですが。</p>
@@ -6047,13 +6486,27 @@ OK</code></pre>
 <p><strong>テストおじさん</strong>: ですね。</p>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: <a href="https://プログラマが知るべき97のこと.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81/">名前重要</a> です。</p>
+<p><strong>テストおじさん</strong>: <span class="red">名前重要</span> です。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>名前重要</p>
+</div>
+<div class="paragraph">
+<p>適切な名前をつけられると言うことは、その機能が正しく理解されて、設計されているということで、逆にふさわしい名前がつけられないということは、その機能が果たすべき役割を設計者自身も十分理解できていないということなのではないでしょうか。
+個人的には適切な名前をつけることができた機能については、その設計の8割が完成したと考えても言い過ぎでないことが多いように思います。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://プログラマが知るべき97のこと.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81/">プログラマが知るべき97のこと</a>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_構造化プログラミング">2.4.17. 構造化プログラミング</h4>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: さて、今回は3つのプログラミングパラダイムの一つである <span class="red">構造化プログラミング</span> アプローチで構築しました。</p>
+<p><strong>テストおじさん</strong>: さて、今回は3つのプログラミングパラダイムの一つである <span class="red">構造化プログラミング</span> アプローチで実装しました。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -6077,7 +6530,63 @@ Dijkstraは、制限のないジャンプ（goto文の使用）がプログラ�
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: まず、 <a href="#_テストファーストから始めるアーキテクチャ">テストファーストから始めるアーキテクチャ </a> からプログラミングの基本要素である <span class="red">基本のデータ</span> <span class="red">変数</span> <span class="red">演算</span> <span class="red">データ構造</span> <span class="red">制御構文</span> を使って以下のコードを実装しました。</p>
+<p><strong>テストおじさん</strong>: まず、 <a href="#_テストファーストから始めるアーキテクチャ">テストファーストから始めるアーキテクチャ </a> からプログラミングの基本要素である <span class="red">基本のデータ</span> <span class="red">変数</span> <span class="red">演算</span> <span class="red">制御構文</span> を使って以下のコードを実装しました。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>基本のデータ</p>
+</div>
+<div class="paragraph">
+<p>Pythonには多数の型（タイプ）がある。
+もっとも重要でよく使われるのは、「int」 「float」「bool」「str」の4つ。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>変数</p>
+</div>
+<div class="paragraph">
+<p>変数は、値を保管するための入れ物。=演算子を使い、値を代入すると自動的に作成される。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>演算</p>
+</div>
+<div class="paragraph">
+<p>算術演算は、+,-,*,/,//,%といった演算子を使って式を書き実行する。</p>
+</div>
+<div class="paragraph">
+<p>xや÷などは使えないので注意!</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>制御構文</p>
+</div>
+<div class="paragraph">
+<p>プログラムの処理の流れを制御するために用意されているのが「制御構文」です。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6096,7 +6605,38 @@ Dijkstraは、制限のないジャンプ（goto文の使用）がプログラ�
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: このコードはあらゆるプログラムを構築できる制御構造の最小セット <span class="red">順次</span> <span class="red">選択</span> <span class="red">反復</span> のすべてを含んています。</p>
+<p><strong>テストおじさん</strong>: 続いて、 <a href="#_学習用テスト">学習用テスト </a> から <span class="red">データ構造</span> の使い方を学習して以下のコードにリファクタリングしました。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>データ構造</p>
+</div>
+<div class="paragraph">
+<p>Pythonには多数の値をまとめて管理する「コンテナ」が用意されています。
+複雑なデータを扱うときに役立ちます。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2DTbZf3">かんたん Python (プログミングの教科書)</a>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-Python" data-lang="Python">def execute():
+    for n in range(101):
+        if n % 3 == 0 and n % 5 == 0:
+            print("FizzBuzz")
+        elif n % 3 == 0:
+            print("Fizz")
+        elif n % 5 == 0:
+            print("Buzz")
+        else:
+            print(n)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>テストおじさん</strong>: このコードにはあらゆるプログラムを構築できる制御構造の最小セット <span class="red">順次</span> <span class="red">選択</span> <span class="red">反復</span> が含まれています。</p>
 </div>
 <div class="paragraph">
 <p>順序構造</p>
@@ -6123,7 +6663,7 @@ Dijkstraは、制限のないジャンプ（goto文の使用）がプログラ�
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: さらに、 <a href="#_リファクタリングから始める構造化プログラミング">リファクタリングから始める構造化プログラミング </a> から以下の特徴をコードに見出すことができました。</p>
+<p><strong>テストおじさん</strong>: さらに、 <a href="#_条件記述の分解">条件記述の分解 </a> の結果、以下の特徴をコードに見出すことができました。</p>
 </div>
 <div class="ulist">
 <ul>
@@ -6134,7 +6674,7 @@ Dijkstraは、制限のないジャンプ（goto文の使用）がプログラ�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-Python" data-lang="Python">def generate(number):
+<pre class="highlight"><code class="language-Python" data-lang="Python">def fizz_buzz(number):
     value = number
 
     if is_fizz_buzz(number):
@@ -6159,7 +6699,7 @@ Dijkstraは、制限のないジャンプ（goto文の使用）がプログラ�
 <pre class="highlight"><code class="language-Python" data-lang="Python">def execute(count=MAX_COUNT):
     if within_max_count(count):
         set_count(count)
-        set_values_by_generate()
+        set_values_by_fizz_buzz()
         print_values()
     else:
         print_error_message()</code></pre>
@@ -6179,7 +6719,7 @@ ERROR_MSG = f"回数は{MAX_COUNT}までです"
 BUZZ = "Buzz"
 FIZZ = "Fizz"
 FIZZ_BUZZ = "FizzBuzz"
-data = {
+fizz_buzz_data = {
     'values': [],
     'count': 0
 }</code></pre>
@@ -6194,7 +6734,7 @@ data = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-Python" data-lang="Python">data = {
+<pre class="highlight"><code class="language-Python" data-lang="Python">fizz_buzz_data = {
     'values': [],
     'count': 0
 }
@@ -6202,15 +6742,15 @@ data = {
 ...
 
 def set_values_by_generate():
-    data['values'] = []
+    fizz_buzz_data['values'] = []
 
-    for number in range(data['count']):
-        value = generate(number)
-        data['values'].append(value)</code></pre>
+    for number in range(fizz_buzz_data['count']):
+        value = fizz_buzz(number)
+        fizz_buzz_data['values'].append(value)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: そして、モジュール分割により <span class="red">機能分割</span> を実現しました。</p>
+<p><strong>テストおじさん</strong>: そして、<a href="#_モジュール分割">モジュール分割 </a>により <span class="red">機能分割</span> を実現しました。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -6229,7 +6769,23 @@ def set_values_by_generate():
 </div>
 </div>
 <div class="paragraph">
-<p><strong>テストおじさん</strong>: 一方で <span class="red">データと手続きをひとかたまりにする</span> ことを <span class="red">構造化プログラミング</span> アプローチで実現するのは簡単ではなさそうです。</p>
+<p><strong>テストおじさん</strong>: 一方で <span class="red">ロジックとデータの一体化</span> を <span class="red">構造化プログラミング</span> アプローチで実現するのは簡単ではなさそうです。</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>ロジックとデータの一体化</p>
+</div>
+<div class="paragraph">
+<p>結果局所化の原則から必然的に導き出されるもう一つの原則は、ロジックとデータを一緒にするという原則だ。
+ロジックと、ロジックが操作するデータは互いに近くに置くようにしよう。可能であれば同じメソッドか同じオブジェクトに、少なくとも同じパッケージ内に置くようにしよう。
+変更を行う際には、ロジックとデータは同じタイミングで変更しなければならないことが多い。
+これらが同じ場所にあれば、変更の結果も局所化が保てるだろう。</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://amzn.to/2KsVTct">実装パターン</a>
+</div>
 </div>
 <div class="paragraph">
 <p><strong>テストおじさん</strong>: <span class="red">オブジェクト指向プログラミング</span> の出番が来たようです。</p>
@@ -6249,7 +6805,7 @@ def set_values_by_generate():
 <p>オブジェクト指向プログラミングのパラダイムは、以下のように要約できる。</p>
 </div>
 <div class="paragraph">
-<p>オブジェクト指向プログラミングは、間接的な制御の移行に規律を課すものである。</p>
+<p><strong>オブジェクト指向プログラミングは、間接的な制御の移行に規律を課すものである。</strong></p>
 </div>
 </blockquote>
 <div class="attribution">
@@ -6357,18 +6913,6 @@ def print_error_message():
     print(ERROR_MSG)
 
 
-def is_fizz(number):
-    return number % 3 == 0
-
-
-def is_buzz(number):
-    return number % 5 == 0
-
-
-def is_fizz_buzz(number):
-    return number % 3 == 0 and number % 5 == 0
-
-
 def generate(number):
     value = number
 
@@ -6379,7 +6923,19 @@ def generate(number):
     elif is_buzz(number):
         value = BUZZ
 
-    return value</code></pre>
+    return value
+
+
+def is_fizz(number):
+    return number % 3 == 0
+
+
+def is_buzz(number):
+    return number % 5 == 0
+
+
+def is_fizz_buzz(number):
+    return number % 3 == 0 and number % 5 == 0</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -6387,6 +6943,7 @@ def generate(number):
 <pre class="highlight"><code class="language-Python" data-lang="Python">import unittest
 from test.support import captured_stdout
 from fizz_buzz import execute, MAX_COUNT
+
 
 class MainTest(unittest.TestCase):
     def setUp(self):
@@ -6483,6 +7040,9 @@ if __name__ == "__main__":
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4798105538&linkId=12f5983ecb6ad915457406c2fd0d89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4274217620&linkId=59f5959cf4575e61b0eeb1afc17b1715&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=B07FSBHS2V&linkId=f45ebc5e48c84f7dde27434ae9fbdb9b&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4774195782&linkId=d91fbae477084f69338f7d86f043275d&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr" style="width:120px;height:240px;"></iframe>
+<iframe frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4048930591&linkId=c8b0dd9694e9fa1531b54c59a9ba89ed&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr" style="width:120px;height:240px;"></iframe>
+<iframe frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=k2works0c-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=4894712873&linkId=7368e1e2001bb85520f1f8b3e29442fd&bc1=000000&lt1=_top&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr" style="width:120px;height:240px;"></iframe>
 </div>
 <div class="sect2">
 <h3 id="_参考リンク">4.2. 参考リンク</h3>
@@ -6514,7 +7074,7 @@ if __name__ == "__main__":
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-21 12:56:41 JST
+Last updated 2018-11-23 18:10:50 JST
 </div>
 </div>
 </body>

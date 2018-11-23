@@ -44,18 +44,6 @@ def print_error_message():
     print(ERROR_MSG)
 
 
-def is_fizz(number):
-    return number % 3 == 0
-
-
-def is_buzz(number):
-    return number % 5 == 0
-
-
-def is_fizz_buzz(number):
-    return number % 3 == 0 and number % 5 == 0
-
-
 def generate(number):
     value = number
 
@@ -67,3 +55,15 @@ def generate(number):
         value = BUZZ
 
     return value
+
+
+def is_fizz(number):
+    return number % 3 == 0
+
+
+def is_buzz(number):
+    return number % 5 == 0
+
+
+def is_fizz_buzz(number):
+    return number % 3 == 0 and number % 5 == 0
