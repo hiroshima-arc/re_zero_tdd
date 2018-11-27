@@ -112,7 +112,7 @@ ____
 
 *テスト初めて書いたひと*: アジャイル?
 
-*テストおじさん*: えーとです、例えば今日のお題の仕様ですが。
+*テストおじさん*: えーと、例えば今日のお題の仕様ですが。
 
 > 1 から 100 までの数をプリントするプログラムを書け。
 > ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。
@@ -141,7 +141,7 @@ ____
 
 *テストおじさん*: みたいに仕様が確定した後もコロコロ変わっていくと従来型の開発アプローチでは対応が難しいですよね。
 
-*テストおじさん*: そういったビジネスとITの変化背景に生まれたのが [red]#アジャイルソフトウェア開発宣言# です。
+*テストおじさん*: そういったビジネスとITの変化を背景に生まれたのが [red]#アジャイルソフトウェア開発宣言# です。
 
 [quote, 'http://agilemanifesto.org/iso/ja/manifesto.html[アジャイルソフトウェア開発宣言]']
 ____
@@ -304,7 +304,7 @@ ____
 
 *テストおじさん*: では1つ目の [red]#TODOリスト# から片付けていきましょうか。
 
-ファイルを新規作成するテストおじさん。
+`main_test.py` ファイルを新規作成するテストおじさん。
 
 *テストおじさん*: まずは [red]#テストファースト# で。
 
@@ -1164,9 +1164,9 @@ def execute():
 def execute():
     n = 100
     while n != 0:
-        if n % 3 == 0 and n % 5 == 0:
+        if n % 3 == 0 and n % 5 == 0: <3>
             print("FizzBuzz")
-        elif n % 3 == 0:
+        elif n % 3 == 0: <4>
             print("Fizz")
         elif n % 5 == 0:
             print("Buzz")
@@ -1403,7 +1403,7 @@ ____
 ----
 class MainTest(unittest.TestCase):
     def test_1から100まで数をプリントできるようにする(self):
-        with captured_stdout() as stdout:
+        with captured_stdout() as stdout: <1>
             execute()
             lines = stdout.getvalue().splitlines()
 
@@ -1411,19 +1411,19 @@ class MainTest(unittest.TestCase):
         self.assertEqual("Buzz", lines[0])
 
     def test_3の倍数のときは数の代わりにFizzをプリントする(self):
-        with captured_stdout() as stdout:
+        with captured_stdout() as stdout: <2>
             execute()
             lines = stdout.getvalue().splitlines()
         self.assertEqual("Fizz", lines[97])
 
     def test_5の倍数のときはBuzzとプリントする(self):
-        with captured_stdout() as stdout:
+        with captured_stdout() as stdout: <3>
             execute()
             lines = stdout.getvalue().splitlines()
         self.assertEqual("Buzz", lines[95])
 
     def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
-        with captured_stdout() as stdout:
+        with captured_stdout() as stdout: <4>
             execute()
             lines = stdout.getvalue().splitlines()
         self.assertEqual("FizzBuzz", lines[85])
@@ -1459,7 +1459,7 @@ ____
 [source, Python]
 ----
 class MainTest(unittest.TestCase):
-    def setUp(self):
+    def setUp(self): <1>
         with captured_stdout() as stdout:
             execute()
             self.lines = stdout.getvalue().splitlines()
@@ -1725,7 +1725,7 @@ def execute():
 ----
 def execute():
     n = 1
-    while n != 101: <1>
+    while n != 101: <2>
         if n % 3 == 0 and n % 5 == 0:
             print("FizzBuzz")
         elif n % 3 == 0:
@@ -1767,8 +1767,8 @@ FAILED (failures=1)
 [source, Python]
 ----
     def test_1から100まで数をプリントできるようにする(self):
-        self.assertEqual("1", self.lines[0])
-        self.assertEqual("Buzz", self.lines[99])
+        self.assertEqual("1", self.lines[0]) <1>
+        self.assertEqual("Buzz", self.lines[99]) <2>
 ----
 
 *テストおじさん*: これでどうですかね・・・オッケー!
@@ -1794,17 +1794,17 @@ class MainTest(unittest.TestCase):
             self.lines = stdout.getvalue().splitlines()
 
     def test_1から100まで数をプリントできるようにする(self):
-        self.assertEqual("1", self.lines[0])
-        self.assertEqual("Buzz", self.lines[99])
+        self.assertEqual("1", self.lines[0]) <1>
+        self.assertEqual("Buzz", self.lines[99]) <2>
 
     def test_3の倍数のときは数の代わりにFizzをプリントする(self):
-        self.assertEqual("Fizz", self.lines[2])
+        self.assertEqual("Fizz", self.lines[2]) <3>
 
     def test_5の倍数のときはBuzzとプリントする(self):
-        self.assertEqual("Buzz", self.lines[4])
+        self.assertEqual("Buzz", self.lines[4]) <4>
 
     def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
-        self.assertEqual("FizzBuzz", self.lines[14])
+        self.assertEqual("FizzBuzz", self.lines[14]) <5>
 ----
 
 *テストおじさん*: 確認、確認。
@@ -1900,7 +1900,7 @@ ____
 [source, Python]
 ----
 def execute_for():
-    for n in [1, 2, 3, 4, 5]:
+    for n in [1, 2, 3, 4, 5]: <1>
         print(n)
 
 
@@ -1934,7 +1934,7 @@ OK
 [source, Python]
 ----
 def execute_for():
-    list = [1, 2, 3, 4, 5]
+    list = [1, 2, 3, 4, 5] <1>
     list[4] = 6
     for n in list:
         print(n)
@@ -1971,7 +1971,7 @@ ____
 [source, Python]
 ----
 def execute_for():
-    tuple = (1, 2, 3, 4, 5)
+    tuple = (1, 2, 3, 4, 5) <2>
     tuple[4] = 6
     for n in tuple:
         print(n)
@@ -2013,7 +2013,7 @@ ____
 [source, Python]
 ----
 def execute_for():
-    tuple = (1, 2, 3, 4, 5)
+    tuple = (1, 2, 3, 4, 5) <2>
     for n in tuple:
         print(n)
 ----
@@ -2041,7 +2041,7 @@ ____
 [source, Python]
 ----
 def execute_for():
-    for n in range(100):
+    for n in range(100): <3>
         print(n)
 
 class MainTest(unittest.TestCase):
@@ -2081,7 +2081,7 @@ FAILED (failures=1)
 [source, Python]
 ----
 def execute_for():
-    for n in range(100):
+    for n in range(100): <3>
         print(n)
 
 class MainTest(unittest.TestCase):
@@ -2089,7 +2089,7 @@ class MainTest(unittest.TestCase):
         with captured_stdout() as stdout:
             execute_for()
             lines = stdout.getvalue().splitlines()
-        self.assertEqual("1", lines[1])
+        self.assertEqual("1", lines[1]) <4>
         self.assertEqual("100", lines[-1])
 ----
 
@@ -2123,7 +2123,7 @@ FAILED (failures=1)
 [source, Python]
 ----
 def execute_for():
-    for n in range(101):
+    for n in range(101): <5>
         print(n)
 
 
@@ -2328,7 +2328,7 @@ OK
 
 [source, Python]
 ----
-def execute_for():
+def execute_for(): <2>
     n = 1
     while n != 101:
         if n % 3 == 0 and n % 5 == 0:
@@ -2342,7 +2342,7 @@ def execute_for():
         n = n + 1
 
 
-def execute():
+def execute(): <3>
     for n in range(101):
         if n % 3 == 0 and n % 5 == 0:
             print("FizzBuzz")
@@ -2468,7 +2468,7 @@ AssertionError: '1' != '2'
         with captured_stdout() as stdout:
             execute_for()
             lines = stdout.getvalue().splitlines()
-        self.assertEqual("1", lines[0]) <1>
+        self.assertEqual("1", lines[0]) <3>
         self.assertEqual("Buzz", lines[-1])
 ----
 
@@ -2487,8 +2487,8 @@ OK
 [source, Python]
 ----
     def test_1から100まで数をプリントできるようにする(self):
-        self.assertEqual("1", self.lines[1]) <1>
-        self.assertEqual("Buzz", self.lines[100]) <2>
+        self.assertEqual("1", self.lines[1]) <4>
+        self.assertEqual("Buzz", self.lines[100]) <5>
 ----
 
 [source, bash]
@@ -2506,13 +2506,13 @@ OK
 [source, Python]
 ----
     def test_3の倍数のときは数の代わりにFizzをプリントする(self):
-        self.assertEqual("Fizz", self.lines[3]) <1>
+        self.assertEqual("Fizz", self.lines[3]) <6>
 
     def test_5の倍数のときはBuzzとプリントする(self):
-        self.assertEqual("Buzz", self.lines[5]) <2>
+        self.assertEqual("Buzz", self.lines[5]) <7>
 
     def test_3と5両方の倍数の場合にはFizzBuzzとプリントする(self):
-        self.assertEqual("FizzBuzz", self.lines[15]) <3>
+        self.assertEqual("FizzBuzz", self.lines[15]) <8>
 ----
 
 [source, bash]
@@ -2561,7 +2561,7 @@ FAILED (errors=1)
 
 [source, Python]
 ----
-    def test_execute_for(self):
+    def test_execute_for(self): <9>
         with captured_stdout() as stdout:
             execute_for()
             lines = stdout.getvalue().splitlines()
@@ -2594,9 +2594,9 @@ OK
 [source, Python]
 ----
 def execute():
-    # 100回繰り返す
+    # 100回繰り返す <1>
     for n in range(101):
-        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする <2>
         if n % 3 == 0 and n % 5 == 0:
             print("FizzBuzz")
         elif n % 3 == 0:
@@ -2641,7 +2641,7 @@ def execute():
     # 100回繰り返す
     for n in range(101):
         # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
-        fizz_buzz(n)
+        fizz_buzz(n) <3>
 
 
 def fizz_buzz(n):
@@ -2686,7 +2686,7 @@ ____
 ----
 def execute():
     # 100回繰り返す
-    iterate(101)
+    iterate(101) <4>
 
 
 def iterate(c):
@@ -2735,13 +2735,13 @@ def execute():
     iterate(101)
 
 
-def iterate(c):
+def iterate(c): <1>
     for n in range(c):
         # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
         fizz_buzz(n)
 
 
-def fizz_buzz(n):
+def fizz_buzz(n): <2>
     if n % 3 == 0 and n % 5 == 0:
         print("FizzBuzz")
     elif n % 3 == 0:
@@ -2772,16 +2772,16 @@ ____
 def execute():
     # 100回繰り返す
     count = 101
-    iterate(count)
+    iterate(count) <3>
 
 
-def iterate(count):
+def iterate(count): <3>
     for number in range(count):
         # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
         fizz_buzz(number)
 
 
-def fizz_buzz(number):
+def fizz_buzz(number): <4>
     if number % 3 == 0 and number % 5 == 0:
         print("FizzBuzz")
     elif number % 3 == 0:
@@ -2821,16 +2821,16 @@ ____
 ----
 def fizz_buzz(number):
     if number % 3 == 0 and number % 5 == 0:
-        print("FizzBuzz")
+        print("FizzBuzz") <1>
     elif number % 3 == 0:
-        print("Fizz")
+        print("Fizz") <2>
     elif number % 5 == 0:
-        print("Buzz")
+        print("Buzz") <3>
     else:
-        print(number)
+        print(number) <4>
 ----
 
-*テストおじさん*: 一時 [red]#変数# を使って `print` [red]#関数# の呼び出しを一回にしてみましょう。
+*テストおじさん*: 一時 [red]#変数# を使って [red]#重複したコード# である `print` [red]#関数# の呼び出しを一回にしてみましょう。
 
 [quote, 'https://amzn.to/2DTbZf3[かんたん Python (プログミングの教科書)]']
 ____
@@ -2840,16 +2840,16 @@ ____
 [source, bash]
 ----
 def fizz_buzz(number):
-    value = number
+    value = number <5>
 
     if number % 3 == 0 and number % 5 == 0:
-        value = "FizzBuzz"
+        value = "FizzBuzz"  <5>
     elif number % 3 == 0:
-        value = "Fizz"
+        value = "Fizz" <5>
     elif number % 5 == 0:
-        value = "Buzz"
+        value = "Buzz" <5>
 
-    print(value)
+    print(value) <6>
 ----
 
 [source, bash]
@@ -2886,9 +2886,9 @@ ____
 
 [source, bash]
 ----
-BUZZ = "Buzz"
-FIZZ = "Fizz"
-FIZZ_BUZZ = "FizzBuzz"
+BUZZ = "Buzz" <7>
+FIZZ = "Fizz" <7>
+FIZZ_BUZZ = "FizzBuzz" <7>
 
 .....
 
@@ -2896,11 +2896,11 @@ def fizz_buzz(number):
     value = number
 
     if number % 3 == 0 and number % 5 == 0:
-        value = FIZZ_BUZZ
+        value = FIZZ_BUZZ <7>
     elif number % 3 == 0:
-        value = FIZZ
+        value = FIZZ <7>
     elif number % 5 == 0:
-        value = BUZZ
+        value = BUZZ <7>
 
     print(value)
 ----
@@ -2944,7 +2944,7 @@ def execute():
 def iterate(count):
     for number in range(count):
         # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
-        print(fizz_buzz(number))
+        print(fizz_buzz(number)) <2>
 
 
 def fizz_buzz(number):
@@ -2957,7 +2957,7 @@ def fizz_buzz(number):
     elif number % 5 == 0:
         value = BUZZ
 
-    return value
+    return value <1>
 ----
 
 *テストおじさん*: テストが壊れないように `iterate` [red]#関数# で `print` [red]#関数# を実行するようにします。
@@ -2980,21 +2980,21 @@ OK
 
 [source, Python]
 ----
-values = []
+values = [] <3>
 
 
 def execute():
     # 100回繰り返す
     count = 101
     iterate(count)
-    for value in values:
+    for value in values: <5>
         print(value)
 
 
 def iterate(count):
     for number in range(count):
         # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
-        values.append(fizz_buzz(number))
+        values.append(fizz_buzz(number)) <4>
 ----
 
 *テストおじさん*: テストが壊れないように `execute` [red]#関数# で `print` [red]#関数# を実行するようにします。
@@ -3023,7 +3023,7 @@ def execute():
     # 100回繰り返す
     count = 101
     iterate(count)
-    for value in values:
+    for value in values: <5>
         print(value)
 ----
 
@@ -3034,7 +3034,7 @@ def execute():
 [source, Python]
 ----
 def execute():
-    # 100回繰り返す
+    # 100回繰り返す <2>
     count = 101
     iterate(count)
     for value in values:
@@ -3043,7 +3043,7 @@ def execute():
 
 def iterate(count):
     for number in range(count):
-        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする
+        # 3で割り切れたらFizz 5で割り切れたらBuzz 3または5で割り切れたらFizzBuzzをプリントする <1>
         values.append(fizz_buzz(number))
 ----
 
@@ -3106,7 +3106,7 @@ OK
 [source, Python]
 ----
 def execute():
-    # 100回繰り返す
+    # 100回繰り返す <2>
     count = 101
     iterate(count)
     for value in values:
@@ -3131,7 +3131,7 @@ count = 100
 
 def execute():
     global count
-    # レンジは指定された値を範囲に含めないので1プラスする
+    # レンジは指定された値を範囲に含めないので1プラスする <3>
     count = count + 1
     iterate()
     for value in values:
@@ -3167,9 +3167,9 @@ OK
 def execute():
     global count
     # レンジは指定された値を範囲に含めないので1プラスする
-    count = count + 1
-    iterate()
-    for value in values:
+    count = count + 1 <1>
+    iterate() <2>
+    for value in values: <3>
         print(value)
 ----
 
@@ -3203,7 +3203,7 @@ ____
 [source, Python]
 ----
 def execute():
-    set_count()
+    set_count() <4>
     iterate()
     for value in values:
         print(value)
@@ -3236,7 +3236,7 @@ OK
 def execute():
     set_count()
     iterate()
-    print_values()
+    print_values() <5>
 
 
 def print_values():
@@ -3273,7 +3273,7 @@ ____
 ----
 def execute():
     set_count()
-    set_values_by_fizz_buzz()
+    set_values_by_fizz_buzz() <6>
     print_values()
 
 
@@ -3519,23 +3519,23 @@ ____
 fizz_buzz_date = {
     'values': [],
     'count': 100
-}
+} <3>
 
 ....
 
 def set_count():
     # レンジは指定された値を範囲に含めないので1プラスする
-    fizz_buzz_date['count'] = fizz_buzz_date['count'] + 1
+    fizz_buzz_date['count'] = fizz_buzz_date['count'] + 1 <4>
 
 
 def set_values_by_fizz_buzz():
-    for number in range(fizz_buzz_date['count']):
+    for number in range(fizz_buzz_date['count']): <5>
         value = fizz_buzz(number)
-        fizz_buzz_date['values'].append(value)
+        fizz_buzz_date['values'].append(value) <6>
 
 
 def print_values():
-    for value in fizz_buzz_date['values']:
+    for value in fizz_buzz_date['values']: <7>
         print(value)
 
 ----
@@ -3564,7 +3564,7 @@ OK
 
 [source, Python]
 ----
-    def test_1から10まで数をプリントする(self):
+    def test_1から10まで数をプリントする(self): <1>
         with captured_stdout() as stdout:
             execute(10)
             self.lines = stdout.getvalue().splitlines()
@@ -3605,7 +3605,7 @@ fizz_buzz_date = {
 }
 
 
-def execute(count):
+def execute(count): <2>
     set_count(count)
     set_values_by_fizz_buzz()
     print_values()
@@ -3644,7 +3644,7 @@ FAILED (errors=1)
 ----
     def setUp(self):
         with captured_stdout() as stdout:
-            execute() <1>
+            execute() <3>
             self.lines = stdout.getvalue().splitlines()
 ----
 
@@ -3657,7 +3657,7 @@ ____
 
 [source, Python]
 ----
-def execute(count=100): <1>
+def execute(count=100): <5>
     set_count(count)
     set_values_by_fizz_buzz()
     print_values()
@@ -3666,7 +3666,7 @@ def execute(count=100): <1>
 
     def test_1から10まで数をプリントする(self):
         with captured_stdout() as stdout:
-            execute(count=10) <2>
+            execute(count=10) <4>
             self.lines = stdout.getvalue().splitlines()
         self.assertNotIn("11", self.lines)
         self.assertEqual("Buzz", self.lines[10])
@@ -3702,7 +3702,7 @@ FAILED (failures=1)
 [source, Python]
 ----
 def set_values_by_fizz_buzz():
-    fizz_buzz_date['values'] = [] <1>
+    fizz_buzz_date['values'] = [] <6>
 
     for number in range(fizz_buzz_date['count']):
         value = fizz_buzz(number)
@@ -3734,7 +3734,7 @@ OK
 
 [source, Python]
 ----
-    def test_100より多い場合はプリントしない(self):
+    def test_100より多い場合はプリントしない(self): <1>
         with captured_stdout() as stdout:
             execute(count=101)
             self.lines = stdout.getvalue().splitlines()
@@ -3773,7 +3773,7 @@ FAILED (failures=1)
 [source, Python]
 ----
 def execute(count=100):
-    if count < 100:
+    if count < 100: <2>
         set_count(count)
         set_values_by_fizz_buzz()
         print_values()
@@ -3834,7 +3834,7 @@ FAILED (errors=4)
 [source, Python]
 ----
 def execute(count=100):
-    if count < 100: <1>
+    if count < 100: <2>
         set_count(count)
         set_values_by_fizz_buzz()
         print_values()
@@ -3847,7 +3847,7 @@ def execute(count=100):
 [source, Python]
 ----
 def execute(count=100):
-    if count <= 100: <2>
+    if count <= 100: <3>
         set_count(count)
         set_values_by_fizz_buzz()
         print_values()
@@ -3894,10 +3894,10 @@ def execute(count=100):
         set_values_by_fizz_buzz()
         print_values()
     else:
-        print_error_message() <1>
+        print_error_message() <4>
 
 
-def print_error_message(): <2>
+def print_error_message(): <5>
     print("回数は100までです")
 ----
 
@@ -3905,7 +3905,7 @@ def print_error_message(): <2>
 
 [source, Python]
 ----
-ERROR_MSG = "回数は100までです"
+ERROR_MSG = "回数は100までです" <6>
 
 ...
 
@@ -3933,8 +3933,8 @@ OK
 
 [source, Python]
 ----
-def execute(count=100): <1>
-    if count <= 100: <2>
+def execute(count=100): <7>
+    if count <= 100: <8>
         set_count(count)
         set_values_by_fizz_buzz()
         print_values()
@@ -3963,7 +3963,7 @@ ____
 
 [source, Python]
 ----
-MAX_COUNT = 100 <3>
+MAX_COUNT = 100 <9>
 ERROR_MSG = "回数は100までです"
 BUZZ = "Buzz"
 FIZZ = "Fizz"
@@ -3974,8 +3974,8 @@ fizz_buzz_date = {
 }
 
 
-def execute(count=MAX_COUNT): <1>
-    if count <= MAX_COUNT: <2>
+def execute(count=MAX_COUNT): <10>
+    if count <= MAX_COUNT: <11>
         set_count(count)
         set_values_by_fizz_buzz()
         print_values()
@@ -4011,7 +4011,7 @@ ____
 [source, Python]
 ----
 MAX_COUNT = 100
-ERROR_MSG = f"回数は{MAX_COUNT}までです" <1>
+ERROR_MSG = f"回数は{MAX_COUNT}までです" <12>
 
 ...
 
@@ -4019,7 +4019,7 @@ ERROR_MSG = f"回数は{MAX_COUNT}までです" <1>
         with captured_stdout() as stdout:
             execute(count=101)
             self.lines = stdout.getvalue().splitlines()
-        self.assertEqual(f"回数は{MAX_COUNT}までです", self.lines[0]) <2>
+        self.assertEqual(f"回数は{MAX_COUNT}までです", self.lines[0]) <13>
 
 ----
 
@@ -4084,7 +4084,7 @@ ____
 
 [source, Python]
 ----
-def is_fizz(number): <2>
+def is_fizz(number):
     number % 3 == 0
 
 
@@ -4137,7 +4137,7 @@ FAILED (failures=1)
 [source, Python]
 ----
 def is_fizz(number):
-    number % 3 == 0 <3>
+    number % 3 == 0 <2>
 
 
 def fizz_buzz(number):
@@ -4158,7 +4158,7 @@ def fizz_buzz(number):
 [source, Python]
 ----
 def is_fizz(number):
-    return number % 3 == 0 <4>
+    return number % 3 == 0 <3>
 
 
 def fizz_buzz(number):
@@ -4195,22 +4195,22 @@ OK
 
 [source, Python]
 ----
-def is_buzz(number): <2>
+def is_buzz(number):
     return number % 5 == 0
 
 
-def is_fizz_buzz(number): <3>
+def is_fizz_buzz(number):
     return number % 3 == 0 and number % 5 == 0
 
 
 def fizz_buzz(number):
     value = number
 
-    if is_fizz_buzz(number): <3>
+    if is_fizz_buzz(number): <5>
         value = FIZZ_BUZZ
     elif is_fizz(number):
         value = FIZZ
-    elif is_buzz(number): <1>
+    elif is_buzz(number): <4>
         value = BUZZ
 
     return value
@@ -4237,7 +4237,7 @@ OK
 [source, Python]
 ----
 def execute(count=MAX_COUNT):
-    if count <= MAX_COUNT: <1>
+    if count <= MAX_COUNT: <6>
         set_count(count)
         set_values_by_fizz_buzz()
         print_values()
@@ -4250,7 +4250,7 @@ def execute(count=MAX_COUNT):
 [source, Python]
 ----
 def execute(count=MAX_COUNT):
-    if is_not_max_count(count): <2>
+    if is_not_max_count(count): <7>
         set_count(count)
         set_values_by_fizz_buzz()
         print_values()
@@ -4258,7 +4258,7 @@ def execute(count=MAX_COUNT):
         print_error_message()
 
 
-def is_not_max_count(count): <2>
+def is_not_max_count(count):
     return count <= MAX_COUNT
 ----
 
@@ -4292,7 +4292,7 @@ ____
 [source, Python]
 ----
 def execute(count=MAX_COUNT):
-    if within_max_count(count): <3>
+    if within_max_count(count): <8>
         set_count(count)
         set_values_by_fizz_buzz()
         print_values()
@@ -4300,7 +4300,7 @@ def execute(count=MAX_COUNT):
         print_error_message()
 
 
-def within_max_count(count): <3>
+def within_max_count(count):
     return count <= MAX_COUNT
 ----
 
@@ -4853,7 +4853,7 @@ def execute(count=MAX_COUNT):
 *** `else` そうでなければ
 **** `print_error_message` エラーメッセージをプリントします
 
-*テストおじさん*: コードの [red]#書式化# は大切です。
+*テストおじさん*: コードの [red]#書式化# は重要です。
 
 [quote, 'https://amzn.to/2Qu4QEK[Clean Code アジャイルソフトウェア達人の技]']
 ____
@@ -4898,7 +4898,7 @@ OK
 
 [source, Python]
 ----
-    def test_1から100まで数をプリントする(self):
+    def test_1から100まで数をプリントする(self): <2>
         self.assertEqual("1", self.lines[1])
         self.assertEqual("Buzz", self.lines[MAX_COUNT])
 ----
@@ -5022,7 +5022,7 @@ def execute():
             print(n)
 ----
 
-*テストおじさん*: このコードにはあらゆるプログラムを構築できる制御構造の最小セット [red]#順次# [red]#選択# [red]#反復# が含まれています。
+*テストおじさん*: 上記の２つのコードにはあらゆるプログラムを構築できる制御構造の最小セット [red]#順次# [red]#選択# [red]#反復# が含まれています。
 
 順序構造
 
@@ -5192,13 +5192,13 @@ include::../../../dev/20181116/replay/fizz_buzz_test.py[]
 
 *テストおじさん*: リファクタリングのヒントからチェック内容を確認しましょう。
 
-*テストおじさん*: まず [red]#TODOリスト# を作成して [red]#テスファースト# [red]#アサートファースト# でリファクタリングに入る前の準備をするですね。
+*テストおじさん*: まず [red]#TODOリスト# を作成して [red]#テスファースト# [red]#アサートファースト# でリファクタリングに入る前の準備をしましょう。
 
 * [ ] 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。
 
 * [x] #リファクタリングに入る前に、しっかりとした一連のテスト群が用意できているかを確認すること。これらのテストには自己診断機能が不可欠である。#
 
-* [x] #リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。#
+* [x] リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。
 
 * [x] コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。
 
@@ -5220,6 +5220,8 @@ include::../../../dev/20181116/replay/fizz_buzz_test.py[]
 
 * [ ] 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。
 
+* [x] リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。
+
 * [x] コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。
 
 * [ ] リファクタリング（名詞）：外側から見たときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること。
@@ -5239,6 +5241,8 @@ include::../../../dev/20181116/replay/fizz_buzz_test.py[]
 *テストおじさん*: そして、[red]#ベイビーステップ# で人間にとってわかりやすいコードにリファクタリングしました。
 
 * [ ] 構造的に機能を付け加えにくいプログラムに、新規機能を追加しなければならない場合には、まず機能追加が簡単になるようにリファクタリングをしてから追加を行うこと。
+
+* [x] #リファクタリングでは小さなステップでプログラムを変更していく。そのため、誤ったことしても、バグを見つけるのは簡単である。#
 
 * [x] #コンパイラが理解出るコードは誰にでも書ける。すぐれたプログラマは、人間にとってわかりやすいコードを書く。#
 
