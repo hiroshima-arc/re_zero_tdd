@@ -27,10 +27,6 @@ asciidoctor {
     backends = ['html5']
     outputDir = file('docs')
     separateOutputDirs = false
-    attributes = [
-            "imagesoutdir": "./images",
-            "imagesdir"   : "./images"
-    ]
 }
 
 liveReload {
