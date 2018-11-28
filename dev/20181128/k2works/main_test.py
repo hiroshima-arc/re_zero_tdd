@@ -8,6 +8,8 @@ def execute():
 def fizz_buzz(n):
     if n % 3 == 0:
         return 'Fizz'
+    elif n % 5 == 0:
+        return 'Buzz'
     else:
         return n
 
@@ -18,7 +20,7 @@ class MainTest(unittest.TestCase):
             lines = stdout.getvalue().splitlines()
 
         self.assertEqual(lines[1], '1')
-        self.assertEqual(lines[100], '100')
+        self.assertEqual(lines[100], 'Buzz')
 
     def test値が3ならばFizzをプリントする(self):
         self.assertEqual('Fizz', fizz_buzz(3))
