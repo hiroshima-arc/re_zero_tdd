@@ -3,7 +3,7 @@
 ## 概要
 
 ### 参加メンバー
-
+https://insiders.liveshare.vsengsaas.visualstudio.com/join?CFBD3D849FEDD48F949402B64BC5283885D9
 
 ## 仕様
 
@@ -17,7 +17,7 @@
 - [x] カウントが1から100までプリントできるようにする
 - [x] 値が3の時はFizzをプリントできるようにする
 - [x] 値が5の時はBuzzをプリントできるようにする
-- [ ] 値が3と5で割り切れる時はFizzBuzzをプリントできるようにする
+- [x] 値が3と5で割り切れる時はFizzBuzzをプリントできるようにする
 
 ## 開発
 
