@@ -23,5 +23,8 @@ class MainTest(unittest.TestCase):
     def test値が3ならばFizzをプリントする(self):
         self.assertEqual('Fizz', fizz_buzz(3))
 
+    def test値が5ならばBuzzをプリントする(self):
+        self.assertEqual('Buzz', fizz_buzz(5))
+
 if __name__ == "__main__":
     unittest.main()
