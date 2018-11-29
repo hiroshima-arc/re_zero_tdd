@@ -59,5 +59,8 @@ ENV PATH ~/.pyenv/shims:$PATH
 # For vscode
 RUN code --user-data-dir --install-extension ms-ceintl.vscode-language-pack-ja
 RUN code --user-data-dir --install-extension ms-vsliveshare.vsliveshare
-RUN code --user-data-dir --install-extension ms-python.python
 RUN code --user-data-dir --install-extension shan.code-settings-sync
+RUN code --user-data-dir --install-extension davidanson.vscode-markdownlint
+RUN code --user-data-dir --install-extension eamodio.gitlens
+RUN code --user-data-dir --install-extension ms-python.python
+RUN code --user-data-dir --install-extension littlefoxteam.vscode-python-test-adapter
