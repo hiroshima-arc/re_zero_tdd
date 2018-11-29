@@ -252,6 +252,16 @@ npm run prettier
 
 ## 開発
 
+### Python 開発環境
+
+```
+vagrant ssh
+cd /vagrant
+docker-compose up env-python
+```
+
+http://127.0.0.1:6901/?password=guest
+
 **[⬆ back to top](#構成)**
 
 # 参照

@@ -65,6 +65,7 @@ fabric.properties
 re_zero_tdd.iml
 .vagrant
 docs/.asciidoctor
+docs/*/.asciidoctor
 .gradle
 .vscode
 .settings
@@ -77,3 +78,4 @@ node_modules
 .flooignore
 .pyc
 .asciidoctor
+.env
