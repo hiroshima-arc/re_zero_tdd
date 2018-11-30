@@ -1,7 +1,7 @@
 namespace :ci do
   desc 'CIイメージのビルド'
   task :build_image do
-    sh 'docker build -t re-zero-tdd . -f ops/Dockerfile'
+    sh 'docker build -t re-zero-tdd . -f ops/docker/repo/Dockerfile'
   end
 
   desc 'CIイメージのバージョン更新'

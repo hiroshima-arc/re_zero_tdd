@@ -48,7 +48,9 @@ RUN source  $HOME/.bash_profile && \
             rbenv install $RUBY_VER  && \
             rbenv global $RUBY_VER
 ENV PATH $HOME/.rbenv/shims:$PATH
-RUN gem install bundler rake
+RUN gem install bundler \
+                rake \
+                minitest-reporters
 
 # For NodeJs
 ENV NVM_DIR $HOME/.nvm
