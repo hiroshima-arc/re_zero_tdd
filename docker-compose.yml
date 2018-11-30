@@ -3,14 +3,15 @@ services:
   repo:
     image: re-zero-tdd
     build:
-      context: ./ops/repo
+      context: ops/docker/repo
     volumes:
       - .:/repo
     working_dir: "/repo"
+
   env-python:
     image: env-python
     build:
-      context: ./ops/env/python
+      context: ops/docker/env/python
     ports:
       - 5901:5901
       - 6901:6901
@@ -18,3 +19,16 @@ services:
       - ./dev:/headless/Desktop/dev
     environment:
       - VNC_PW=guest
+
+  env-ruby:
+    image: env-ruby
+    build:
+      context: ops/docker/env/ruby
+    ports:
+      - 5901:5901
+      - 6901:6901
+    volumes:
+      - ./dev:/headless/Desktop/dev
+    environment:
+      - VNC_PW=guest
+
