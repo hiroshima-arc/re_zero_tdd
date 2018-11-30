@@ -59,7 +59,18 @@ RUN . ~/.bash_profile && \
          rbenv install $RUBY_VER  && \
          rbenv global $RUBY_VER
 ENV PATH ~/.rbenv/shims:$PATH
-RUN ~/.rbenv/shims/gem install bundler rake solargraph rubocop test_launcher ruby-debug-ide debase byebug pry pry-byebug
+
+RUN ~/.rbenv/shims/gem install bundler \
+                               rake \
+                               solargraph \
+                               rubocop \
+                               test_launcher \
+                               ruby-debug-ide \
+                               debase \
+                               byebug \
+                               pry \
+                               pry-byebug \
+                               minitest-reporters
 
 ### For vscode
 RUN code --user-data-dir --install-extension ms-ceintl.vscode-language-pack-ja
