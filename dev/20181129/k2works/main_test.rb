@@ -2,9 +2,8 @@
 
 require 'minitest/autorun'
 require "minitest/reporters"
-Minitest::Reporters.use!
-require 'pry'
 require_relative './main.rb'
+Minitest::Reporters.use!
 
 class MainTest < Minitest::Test
   def test_print_1_to_100
