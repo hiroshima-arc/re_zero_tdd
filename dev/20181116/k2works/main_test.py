@@ -153,7 +153,7 @@ class RangeTest(unittest.TestCase):
 
 class SetTest(unittest.TestCase):
 
-    def test_セット値の利用(self):
+    def test_集合値の利用(self):
         st = {'hi', 'hello', 'ok'}
         st.add('welcome')
         st.remove('ok')
@@ -164,7 +164,7 @@ class SetTest(unittest.TestCase):
         self.assertEqual('welcome', max(st))
         self.assertEqual('hello', min(st))
 
-    def test_セットの演算(self):
+    def test_集合の演算(self):
         st1 = {10, 20, 30, 40, 50}
         st2 = {0, 20, 40, 60, 80}
         self.assertEqual({40, 20}, st1 & st2)
