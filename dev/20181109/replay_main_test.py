@@ -36,22 +36,22 @@ class FizzBuzz:
 
 
 class FizzBuzzTest(unittest.TestCase):
-    def test_値が３ならばFizzを返す(self):
+    def test_値が3ならばFizzを返す(self):
         self.assertEqual("Fizz", FizzBuzz.generate(3))
 
-    def test_値が５ならばBuzzを返す(self):
+    def test_値が5ならばBuzzを返す(self):
         self.assertEqual("Buzz", FizzBuzz.generate(5))
 
-    def test_値が１５ならばFizzBuzzを返す(self):
+    def test_値が15ならばFizzBuzzを返す(self):
         self.assertEqual("FizzBuzz", FizzBuzz.generate(15))
 
-    def test_値が１０１ならば１０１を返す(self):
+    def test_値が101ならば101を返す(self):
         self.assertEqual(101, FizzBuzz.generate(101))
 
-    def test_回数を５回実行すると配列を返す(self):
+    def test_回数を5回実行すると配列を返す(self):
         self.assertEqual([1, 2, "Fizz", 4, "Buzz"], FizzBuzz.iterate(5))
 
-    def test_回数を１５回実行すると配列を返す(self):
+    def test_回数を15回実行すると配列を返す(self):
         expect = [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"]
         self.assertEqual(expect, FizzBuzz.iterate(15))
 
