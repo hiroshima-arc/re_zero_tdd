@@ -3,6 +3,7 @@
 ## 概要
 
 ### 参加メンバー
+
 https://insiders.liveshare.vsengsaas.visualstudio.com/join?CFBD3D849FEDD48F949402B64BC5283885D9
 
 ## 仕様
@@ -14,10 +15,10 @@ https://insiders.liveshare.vsengsaas.visualstudio.com/join?CFBD3D849FEDD48F94940
 
 ### TODO リスト
 
-- [x] カウントが1から100までプリントできるようにする
-- [x] 値が3の時はFizzをプリントできるようにする
-- [x] 値が5の時はBuzzをプリントできるようにする
-- [x] 値が3と5で割り切れる時はFizzBuzzをプリントできるようにする
+- [x] カウントが 1 から 100 までプリントできるようにする
+- [x] 値が 3 の時は Fizz をプリントできるようにする
+- [x] 値が 5 の時は Buzz をプリントできるようにする
+- [x] 値が 3 と 5 で割り切れる時は FizzBuzz をプリントできるようにする
 
 ## 開発
 
@@ -38,7 +39,7 @@ The header is mandatory and the scope of the header is optional.
 ヘッダーは必須でヘッダーのスコープは任意です。
 
 Any line of the commit message cannot be longer 100 characters! This allows the message to be easier to read on GitHub as well as in various git tools.
-コミットメッセージの長さは５０文字までに！そうすることでその他のgitツールと同様にGitHub上で読みやすくなります。
+コミットメッセージの長さは５０文字までに！そうすることでその他の git ツールと同様に GitHub 上で読みやすくなります。
 
 ### タイプ
 
