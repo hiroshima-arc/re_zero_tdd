@@ -3,6 +3,8 @@ namespace :test do
   task :ruby do
     cd "dev" do
       sh "ruby 20181026/FizzBuzzTest.rb"
+      sh "ruby 20181129/k2works/main_test.rb"
+      sh "ruby 20181129/hiroshima_rb/main.rb"
     end
   end
 
@@ -15,6 +17,7 @@ namespace :test do
       sh "python 20181115/k2works/main_test.py"
       sh "python 20181116/session/main_test.py"
       sh "python 20181116/replay/fizz_buzz_test.py"
+      sh "python 20181116/session/main_test.py"
       sh "python 20181207/session/main_test.py"
     end
   end
