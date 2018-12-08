@@ -15,6 +15,7 @@ namespace :test do
       sh "python 20181115/k2works/main_test.py"
       sh "python 20181116/session/main_test.py"
       sh "python 20181116/replay/fizz_buzz_test.py"
+      sh "python 20181207/session/main_test.py"
     end
   end
 

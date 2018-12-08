@@ -26,7 +26,7 @@ class MainTest(unittest.TestCase):
             lines = stdout.getvalue().splitlines()
 
         self.assertEqual('1', lines[1])
-        self.assertEqual('Buzz', lines[100])
+        self.assertEqual('Buzz', lines[100])
 
     def test_3で割りきれる場合はFizzを返す(self):
         self.assertEqual('Fizz', fizz_buzz(3))
