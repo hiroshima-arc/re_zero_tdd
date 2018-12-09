@@ -4,8 +4,6 @@
 
 ### 参加メンバー
 
-https://insiders.liveshare.vsengsaas.visualstudio.com/join?CFBD3D849FEDD48F949402B64BC5283885D9
-
 ## 仕様
 
 > 1 から 100 までの数をプリントするプログラムを書け。
