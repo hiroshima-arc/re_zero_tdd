@@ -52,10 +52,12 @@
       var count = 1;
 
       while (count <= 100) {
-        array.push(fizzBuzz(count));
-        console.log(fizzBuzz(count));
+        var value = fizzBuzz(count);
+        array.push(value);
+        console.log(value);
         count = count + 1;
       }
+
       return array;
     }
 
