@@ -1,5 +1,6 @@
 # Re:ゼロから始めるテスト駆動開発
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3c37ad5daac84db2a6a545707318b24c)](https://app.codacy.com/app/kakimomokuri/re_zero_tdd?utm_source=github.com&utm_medium=referral&utm_content=hiroshima-arc/re_zero_tdd&utm_campaign=Badge_Grade_Dashboard)
 [![Floobits Status](https://floobits.com/k2work/re_zero_tdd.svg)](https://floobits.com/k2work/re_zero_tdd/redirect)
 [![CircleCI](https://circleci.com/gh/hiroshima-arc/re_zero_tdd.svg?style=svg)](https://circleci.com/gh/hiroshima-arc/re_zero_tdd)
 
