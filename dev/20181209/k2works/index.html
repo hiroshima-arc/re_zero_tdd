@@ -26,3 +26,19 @@
 </footer>
 </body>
 </html>
+
+<script>
+    // assert
+    function assert(expected, actual) {
+      console.log('.');
+      console.assert(expected === actual, `\nact:` + expected + `\nexp: ` + actual);
+    }
+
+    function TestSum() {
+      assert(3, 1+2);
+    }
+
+    // exec
+    TestSum();
+
+</script>
