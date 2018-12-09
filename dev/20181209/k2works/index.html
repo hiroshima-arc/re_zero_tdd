@@ -54,11 +54,17 @@
       while (count <= 100) {
         var value = fizzBuzz(count);
         array.push(value);
-        console.log(value);
         count = count + 1;
       }
 
       return array;
+    }
+
+    function execute() {
+      var arry = iterate();
+      for (var i = 0; i < 100; i++) {
+        console.log(arry[i])
+      }
     }
 
     function test1から100までプリントする() {
@@ -86,6 +92,7 @@
     test3ならばFizzをプリントする();
     test5ならばBuzzをプリントする();
     test3と5で割り切る場合はFizzBuzzをプリントする();
+    execute();
 
 
 </script>
