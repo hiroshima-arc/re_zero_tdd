@@ -38,6 +38,8 @@
     function fizzBuzz(number) {
       if (number % 3 === 0) {
         return 'Fizz';
+      } else {
+        return number;
       }
     }
 
@@ -57,6 +59,7 @@
 
     function test3ならばFizzをプリントする() {
       assert('Fizz', fizzBuzz(3));
+      assert(1, fizzBuzz(1));
     }
 
     // exec
