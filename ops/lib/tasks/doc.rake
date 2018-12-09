@@ -4,6 +4,11 @@ namespace :doc do
     sh 'npm run format'
   end
 
+  desc "マークダウンファイルのチェック"
+  task :check do
+    sh 'npm run check'
+  end
+
   desc "AsciiDocビルド"
   task :build do
     sh 'gradle asciidoctor'

@@ -156,7 +156,7 @@ asdf plugin-add elixir
 利用する Elixir と Erlang をインストール
 
 注意 利用する Elixir によって利用可能な Erlang のバージョンが違います。
-参考 [Compatibility between Elixir and Erlang/OTP ](https://hexdocs.pm/elixir/compatibility-and-deprecations.html#compatibility-between-elixir-and-erlang-otp)
+参考 [Compatibility between Elixir and Erlang/OTP](https://hexdocs.pm/elixir/compatibility-and-deprecations.html#compatibility-between-elixir-and-erlang-otp)
 
 ```
 cd /vagrant
@@ -245,7 +245,23 @@ npm install --save-dev --save-exact prettier
 実行
 
 ```
-npm run prettier
+npm run format
+```
+
+### remarklint
+
+マークダウンファイルのコードチェックをする
+
+インストール
+
+```
+npm install -g --save remark-cli remark-preset-lint-recommended
+```
+
+実行
+
+```
+npm run check
 ```
 
 **[⬆ back to top](#構成)**
@@ -260,7 +276,7 @@ cd /vagrant
 docker-compose up env-python
 ```
 
-http://127.0.0.1:6901/?password=guest
+[http://127.0.0.1:6901/?password=guest](http://127.0.0.1:6901/?password=guest)
 
 ### Ruby 開発環境
 
@@ -270,7 +286,7 @@ cd /vagrant
 docker-compose up env-ruby
 ```
 
-http://127.0.0.1:6901/?password=guest
+[http://127.0.0.1:6901/?password=guest](http://127.0.0.1:6901/?password=guest)
 
 **[⬆ back to top](#構成)**
 
@@ -281,3 +297,4 @@ http://127.0.0.1:6901/?password=guest
 - [circleci](https://circleci.com/)
 - [docker cloud](https://cloud.docker.com/u/hiroshimaarc/repository/docker/hiroshimaarc/re-zero-tdd)
 - [Prettier](https://prettier.io/)
+- [remarklint](https://github.com/remarkjs/remark-lint)
