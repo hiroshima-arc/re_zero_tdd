@@ -2,6 +2,8 @@
 
 [![Floobits Status](https://floobits.com/k2work/re_zero_tdd.svg)](https://floobits.com/k2work/re_zero_tdd/redirect)
 [![CircleCI](https://circleci.com/gh/hiroshima-arc/re_zero_tdd.svg?style=svg)](https://circleci.com/gh/hiroshima-arc/re_zero_tdd)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a48eae65dea4e0e8324bea2d79b5553)](https://www.codacy.com/app/kakimomokuri/re_zero_tdd?utm_source=github.com&utm_medium=referral&utm_content=hiroshima-arc/re_zero_tdd&utm_campaign=Badge_Grade)
+[![codebeat badge](https://codebeat.co/badges/af73d155-80e3-48f5-b820-b75a7b8303fb)](https://codebeat.co/projects/github-com-hiroshima-arc-re_zero_tdd-master)
 
 # 目的
 
