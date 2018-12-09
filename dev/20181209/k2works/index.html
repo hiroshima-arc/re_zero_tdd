@@ -38,13 +38,14 @@
       var array = [];
       var count = 1;
 
-      while (count < 100) {
+      while (count <= 100) {
         array.push(count);
         console.log(count);
         count = count + 1;
       }
 
       assert(1, array[0]);
+      assert(100, array[99]);
     }
 
     // exec
