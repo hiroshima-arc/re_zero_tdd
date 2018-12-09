@@ -31,7 +31,12 @@
     // assert
     function assert(expected, actual) {
       console.log('.');
-      console.assert(expected === actual, `\nact:` + expected + `\nexp: ` + actual);
+      console.assert(expected === actual, `\nexp:` + expected + `\nact: ` + actual);
+    }
+
+    // fizzBuzz
+    function fizzBuzz(number) {
+      return 'Fizz';
     }
 
     function test1から100までプリントする() {
@@ -49,7 +54,7 @@
     }
 
     function test3ならばFizzをプリントする() {
-      assert('Fizz', 3)
+      assert('Fizz', fizzBuzz(3));
     }
 
     // exec
