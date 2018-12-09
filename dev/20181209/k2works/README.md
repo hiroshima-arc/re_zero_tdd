@@ -28,10 +28,22 @@ JavaScript の最小テスト
 
 #### Keep
 
+- ブラウザとエディタだけでもテスト駆動開発環境を用意できるようにする
+- テストファースト
+- アサートファースト
+- リファクタリング
+
 #### Problem
 
+- 配列
+- 繰り返し制御構文
+
 #### Try
+
+- console.log ではなく Web インタフェースに結果を表示する
 
 ## 参照
 
 - [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)
+- [小さく始める JavaScript のテスト](https://qiita.com/Jxck_/items/0f5437dd3ab48f1ffd6e)
+- [JavaScript の色々な for 文｜ for・for-each・for-in・for-of](http://www.ituore.com/entry/javascript-for)
