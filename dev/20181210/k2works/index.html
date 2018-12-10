@@ -33,7 +33,7 @@
   // assert
   function assert(expected, actual) {
     console.log('.');
-    console.assert(expected === actual, `\nexp:` + expected + `\nact: + actual`);
+    console.assert(expected === actual, `\nexp:` + expected + `\nact:` + actual);
   }
 
   // Test
@@ -45,7 +45,12 @@
     }
   }
 
+  function test5で割り切れる場合はFizzを返す() {
+    assert('Fizz', 5);
+  }
+
   // exec test
   testPrint1To100();
+  test5で割り切れる場合はFizzを返す()
 
 </script>
