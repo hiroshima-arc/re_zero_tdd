@@ -49,17 +49,21 @@
     }
   }
 
-  // Test
-  function testPrint1To100() {
+  function iterate(count) {
     var count = 1;
     var array = [];
 
-    while (count <= 100) {
-      array.push(fizzBuzz(count));
+    while (count <= 100) {      
       console.log(fizzBuzz(count));
+      array.push(fizzBuzz(count));      
       count = count + 1
     }
+    return array;
+  }
 
+  // Test
+  function testPrint1To100() {
+    var array = iterate(100);
     assert(1, array[0]);
     assert('Buzz', array[99]);
   }
