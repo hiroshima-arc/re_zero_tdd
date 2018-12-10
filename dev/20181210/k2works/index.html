@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Re:ゼロから始めるテスト駆動開発</title>
-</head>
-<body>
-  <h1>Re:ゼロから始めるテスト駆動開発</h1>
-  <header>
-    <nav>
-      <h1>メニュー</h1>
-      <ul>
-        <li><a href="index.html">FizzBuzz</a></li>
-      </ul>
-    </nav>
-  </header>
-  <section>
-    <h1>コンテンツ</h1>
-    <article>
-      <h1>FizzBuzz</h1>
-    </article>
-  </section>
-  <footer>
-    <p>Copyrights</p>
-    <address><hiroshima class="arc@gmail com"></hiroshima></address>
-  </footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+  </head>
+  <body>
+    <h1>Re:ゼロから始めるテスト駆動開発</h1>
+    <header>
+      <nav>
+        <h1>メニュー</h1>
+        <ul>
+          <li><a href="index.html">FizzBuzz</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <h1>コンテンツ</h1>
+      <article><h1>FizzBuzz</h1></article>
+    </section>
+    <footer>
+      <p>Copyrights</p>
+      <address><hiroshima class="arc@gmail com"></hiroshima></address>
+    </footer>
+  </body>
 </html>
 
 <script>
   // assert
   function assert(expected, actual) {
-    console.log('.');
-    console.assert(expected === actual, `\nexp:` + expected + `\nact:` + actual);
+    console.log(".");
+    console.assert(
+      expected === actual,
+      `\nexp:` + expected + `\nact:` + actual
+    );
   }
 
   // FizzBuzz
@@ -41,11 +42,11 @@
 
   function fizzBuzz(count) {
     if (count % 3 == 0 && count % 5 === 0) {
-      return 'FizzBuzz';
+      return "FizzBuzz";
     } else if (count % 3 == 0) {
-      return 'Fizz';
+      return "Fizz";
     } else if (count % 5 == 0) {
-      return 'Buzz';
+      return "Buzz";
     } else {
       return count;
     }
@@ -55,9 +56,9 @@
     var number = 1;
     var array = [];
 
-    while (number <= 100) {            
-      array.push(fizzBuzz(number));      
-      number = number + 1
+    while (number <= 100) {
+      array.push(fizzBuzz(number));
+      number = number + 1;
     }
     return array;
   }
@@ -72,20 +73,20 @@
   function test1から100までプリントする() {
     var array = iterate(100);
     assert(1, array[0]);
-    assert('Buzz', array[99]);
+    assert("Buzz", array[99]);
   }
 
   function test3で割り切れる場合はFizzを返す() {
-    assert('Fizz', fizzBuzz(3));
+    assert("Fizz", fizzBuzz(3));
     assert(1, fizzBuzz(1));
   }
 
   function test5で割り切れる場合はBuzzを返す() {
-    assert('Buzz', fizzBuzz(5));
+    assert("Buzz", fizzBuzz(5));
   }
 
   function test3または5で割り切れる場合はFizzBuzzを返す() {
-    assert('FizzBuzz', fizzBuzz(15));
+    assert("FizzBuzz", fizzBuzz(15));
   }
 
   // exec test
@@ -96,5 +97,4 @@
 
   // exec program
   execute();
-
 </script>
