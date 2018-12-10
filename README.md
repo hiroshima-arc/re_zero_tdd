@@ -303,4 +303,4 @@ docker-compose up env-ruby
 
 # このリポジトリへの参加方法
 
-このリポジトリへコミットやプルリクエストを作成するには、[CONTRIBUTING.md] をお読み下さい。
+このリポジトリへコミットやプルリクエストを作成するには、[CONTRIBUTING.md](CONTRIBUTING.md) をお読み下さい。
