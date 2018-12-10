@@ -2,11 +2,16 @@
 
 ## 概要
 
+HTML5+CSS+JavaScript with TDD
+
 ### 参加メンバー
 
 - k2works
 
 ## 仕様
+
+> 1 から 100 までの数をプリントするプログラムを書け。
+> ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。
 
 ## 設計
 
@@ -23,3 +28,5 @@
 #### Try
 
 ## 参照
+
+- [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)
