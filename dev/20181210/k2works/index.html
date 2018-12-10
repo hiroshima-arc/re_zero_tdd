@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <style type="text/css">
       body {
-        width: 550px;
+        width: 650px;
         margin: 0 auto;
       }
       header {
@@ -17,7 +17,7 @@
         float: right;
       }
       nav {
-        width: 200px;
+        width: 300px;
         float: left;
       }
       footer {
@@ -44,33 +44,40 @@
       <nav>
         <h1>メニュー</h1>
         <ul>
-          <li><a href="index.html">FizzBuzz</a></li>
+          <li"><a href="index.html">FizzBuzz</a>
+            <ul id="sub-menu">
+              <li onclick="showFizzBuzzCall()"><a href="#">FizzBuzzCall</a></li>
+              <li onclick="showFizzBuzzPrint()"><a href="#">FizzBuzzPrint</a></li>
+              <li onclick="showFizzBuzzUpDown()"><a href="#">FizzBuzzUpDown</a></li>
+              <li onclick="showFizzBuzzIterate()"><a href="#">FizzBuzzIterate</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </header>
     <section>
       <h1>FizzBuzz</h1>
-      <article>
+      <article id="art-1">
         <h1>FizzBuzzCall</h1>
         <input id="call" type="text" />
         <input type="button" value="Call" onclick="fizzBuzzCall()" />
       </article>
 
-      <article>
+      <article id="art-2">
         <h1>FizzBuzzPrint</h1>
         <div id="print">Initialized</div>
         <input id="input" type="text" />
         <input type="button" value="Print" onclick="fizzBuzzPrint()" />
       </article>
 
-      <article>
+      <article id="art-3">
         <h1>FizzBuzzUpDown</h1>
         <div id="updown">Ready</div>
         <input id="down" type="button" value="-" onclick="fizzBuzzDown()" />
         <input id="up" type="button" value="+" onclick="fizzBuzzUp()" />
       </article>
 
-      <article>
+      <article id="art-4">
         <h1>FizzBuzzIterate</h1>
         <input id="iterate_input" type="text" />
         <input
@@ -101,6 +108,34 @@
 
   // FizzBuzz
   // Controller
+  function showFizzBuzzCall() {
+    document.getElementById("art-1").style.display = "block";
+    document.getElementById("art-2").style.display = "none";
+    document.getElementById("art-3").style.display = "none";
+    document.getElementById("art-4").style.display = "none";
+  }
+
+  function showFizzBuzzPrint() {
+    document.getElementById("art-1").style.display = "none";
+    document.getElementById("art-2").style.display = "block";
+    document.getElementById("art-3").style.display = "none";
+    document.getElementById("art-4").style.display = "none";
+  }
+
+  function showFizzBuzzUpDown() {
+    document.getElementById("art-1").style.display = "none";
+    document.getElementById("art-2").style.display = "none";
+    document.getElementById("art-3").style.display = "block";
+    document.getElementById("art-4").style.display = "none";
+  }
+
+  function showFizzBuzzIterate() {
+    document.getElementById("art-1").style.display = "none";
+    document.getElementById("art-2").style.display = "none";
+    document.getElementById("art-3").style.display = "none";
+    document.getElementById("art-4").style.display = "block";
+  }
+
   function fizzBuzzIterate() {
     var target = document.getElementById("result");
     var count = document.getElementById("iterate_input").value;
