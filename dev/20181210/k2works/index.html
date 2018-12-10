@@ -36,6 +36,11 @@
     console.assert(expected === actual, `\nexp:` + expected + `\nact:` + actual);
   }
 
+  // FizzBuzz
+  function fizzBuzz(count) {
+    return 'Fizz';
+  }
+
   // Test
   function testPrint1To100() {
     var count = 1
@@ -46,7 +51,7 @@
   }
 
   function test5で割り切れる場合はFizzを返す() {
-    assert('Fizz', 5);
+    assert('Fizz', fizzBuzz(5));
   }
 
   // exec test
