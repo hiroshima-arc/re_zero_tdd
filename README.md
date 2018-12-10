@@ -272,12 +272,10 @@ npm run check
 
 ### README.md ファイルのセットアップ
 
-`UserName`には任意のユーザー名(アルファベット)を指定する
-
 ```
 vagrant ssh
 cd /vagrant
-rake doc:setup[UserName]
+rake doc:setup
 ```
 
 ### Python 開発環境
