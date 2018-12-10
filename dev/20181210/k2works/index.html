@@ -37,6 +37,8 @@
   }
 
   // FizzBuzz
+  COUNT = 100;
+
   function fizzBuzz(count) {
     if (count % 3 == 0 && count % 5 === 0) {
       return 'FizzBuzz';
@@ -61,7 +63,7 @@
   }
 
   function execute() {
-    iterate(100).forEach(function(value) {
+    iterate(COUNT).forEach(function(value) {
       console.log(value);
     });
   }
