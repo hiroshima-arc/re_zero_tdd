@@ -36,10 +36,16 @@
     console.assert(expected === actual, `\nexp:` + expected + `\nact: + actual`);
   }
 
-  function TestSum() {
-    assert(3, 1+2);
+  // Test
+  function testPrint1To100() {
+    var count = 1
+    while (count < 100) {
+      console.log(count);
+      count = count + 1
+    }
   }
 
   // exec test
-  TestSum();
+  testPrint1To100();
+
 </script>
