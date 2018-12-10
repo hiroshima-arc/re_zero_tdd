@@ -38,7 +38,11 @@
 
   // FizzBuzz
   function fizzBuzz(count) {
-    return 'Fizz';
+    if (count % 3 == 0) {
+      return 'Fizz';
+    } else {
+      return count;
+    }
   }
 
   // Test
@@ -50,12 +54,13 @@
     }
   }
 
-  function test5で割り切れる場合はFizzを返す() {
-    assert('Fizz', fizzBuzz(5));
+  function test3で割り切れる場合はFizzを返す() {
+    assert('Fizz', fizzBuzz(3));
+    assert(1, fizzBuzz(1));
   }
 
   // exec test
   testPrint1To100();
-  test5で割り切れる場合はFizzを返す()
+  test3で割り切れる場合はFizzを返す()
 
 </script>
