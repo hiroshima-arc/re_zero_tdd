@@ -18,36 +18,41 @@
     </header>
     <section>
       <h1>FizzBuzz</h1>
-        <article>
-          <h1>FizzBuzzCall</h1>
-          <input id='call' type="text">
-          <input type="button" value="Call" onclick="fizzBuzzCall()">
-        </article>
+      <article>
+        <h1>FizzBuzzCall</h1>
+        <input id="call" type="text" />
+        <input type="button" value="Call" onclick="fizzBuzzCall()" />
+      </article>
 
-        <article>
-          <h1>FizzBuzzPrint</h1>
-          <div id='print'>Initialized</div>
-          <input id='input' type="text">
-          <input type="button" value="Print" onclick="fizzBuzzPrint()">
-        </article>
+      <article>
+        <h1>FizzBuzzPrint</h1>
+        <div id="print">Initialized</div>
+        <input id="input" type="text" />
+        <input type="button" value="Print" onclick="fizzBuzzPrint()" />
+      </article>
 
-        <article>
-          <h1>FizzBuzzUpDown</h1>
-          <div id='updown'>Ready</div>
-          <input id='down' type="button" value="-" onclick="fizzBuzzDown()">
-          <input id='up' type="button" value="+" onclick="fizzBuzzUp()">
-        </article>
+      <article>
+        <h1>FizzBuzzUpDown</h1>
+        <div id="updown">Ready</div>
+        <input id="down" type="button" value="-" onclick="fizzBuzzDown()" />
+        <input id="up" type="button" value="+" onclick="fizzBuzzUp()" />
+      </article>
 
-        <article>
-          <h1>FizzBuzzIterate</h1>
-          <input id='iterate_input' type="text">
-          <input id='iterate' type="button" value="execute" onclick="fizzBuzzIterate()">          
-          <div id='result'></div>
-        </article>
+      <article>
+        <h1>FizzBuzzIterate</h1>
+        <input id="iterate_input" type="text" />
+        <input
+          id="iterate"
+          type="button"
+          value="execute"
+          onclick="fizzBuzzIterate()"
+        />
+        <div id="result"></div>
+      </article>
     </section>
     <footer>
-        <p>Copyrights</p>
-        <address>hiroshima-arc@gmail.com</address>
+      <p>Copyrights</p>
+      <address>hiroshima-arc@gmail.com</address>
     </footer>
   </body>
 </html>
@@ -63,45 +68,46 @@
   }
 
   // FizzBuzz
-  function fizzBuzzIterate() {    
-    var target = document.getElementById('result');
-    var count = document.getElementById('iterate_input').value;
+  // Controller
+  function fizzBuzzIterate() {
+    var target = document.getElementById("result");
+    var count = document.getElementById("iterate_input").value;
     if (count > COUNT) {
-      return target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`;
+      return (target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`);
     }
 
     var array = iterate(count);
-    
+
     var rowCount = 1;
-    var html = '<table>';
+    var html = "<table>";
 
-    html = html + '<thead>';
+    html = html + "<thead>";
     [...Array(10).keys()].forEach(function(v) {
-      html = html + `<th>${v + 1}</th>`
+      html = html + `<th>${v + 1}</th>`;
     });
-    html = html + '</thead>'
+    html = html + "</thead>";
 
-    html = html + '<tbody>'
-    
-    html = html + '<tr>'
+    html = html + "<tbody>";
+
+    html = html + "<tr>";
     array.forEach(function(value) {
       if (rowCount > 10) {
-        html = html + '<tr>'
+        html = html + "<tr>";
       }
 
       value = `<td>${value}</td>`;
       html = html + value;
 
       if (rowCount == 10) {
-        html = html + '</tr>'
+        html = html + "</tr>";
         rowCount = 1;
       } else {
         rowCount += 1;
       }
     });
-    
-    html = html + '</tbody>'
-    html = html + '</table>'
+
+    html = html + "</tbody>";
+    html = html + "</table>";
 
     target.innerHTML = html;
   }
@@ -110,8 +116,8 @@
 
   function fizzBuzzUp() {
     fizzBuzzUpDownCount += 1;
-    var target = document.getElementById('updown')
-    var count = fizzBuzzUpDownCount
+    var target = document.getElementById("updown");
+    var count = fizzBuzzUpDownCount;
     var value = fizzBuzz(count);
     target.innerHTML = value;
   }
@@ -122,44 +128,32 @@
     } else {
       fizzBuzzUpDownCount -= 1;
     }
-    var target = document.getElementById('updown')
-    var count = fizzBuzzUpDownCount
+    var target = document.getElementById("updown");
+    var count = fizzBuzzUpDownCount;
     var value = fizzBuzz(count);
     target.innerHTML = value;
   }
 
   function fizzBuzzPrint() {
-    var value = document.getElementById('input').value;
-    var target = document.getElementById('print')
+    var value = document.getElementById("input").value;
+    var target = document.getElementById("print");
     if (isNaN(value)) {
-      target.innerHTML = '数字を入れてください。';
+      target.innerHTML = "数字を入れてください。";
     } else {
       target.innerHTML = fizzBuzz(value);
     }
   }
 
   function fizzBuzzCall() {
-    var value = document.getElementById('call').value;
+    var value = document.getElementById("call").value;
     if (isNaN(value)) {
-      alert('数字を入れてください。');
+      alert("数字を入れてください。");
     } else {
       alert(fizzBuzz(value));
     }
   }
 
   COUNT = 100;
-
-  function fizzBuzz(count) {
-    if (count % 3 == 0 && count % 5 === 0) {
-      return "FizzBuzz";
-    } else if (count % 3 == 0) {
-      return "Fizz";
-    } else if (count % 5 == 0) {
-      return "Buzz";
-    } else {
-      return count;
-    }
-  }
 
   function iterate(count) {
     var number = 1;
@@ -176,6 +170,19 @@
     iterate(COUNT).forEach(function(value) {
       console.log(value);
     });
+  }
+
+  // Domain
+  function fizzBuzz(count) {
+    if (count % 3 == 0 && count % 5 === 0) {
+      return "FizzBuzz";
+    } else if (count % 3 == 0) {
+      return "Fizz";
+    } else if (count % 5 == 0) {
+      return "Buzz";
+    } else {
+      return count;
+    }
   }
 
   // Test
@@ -205,5 +212,5 @@
   test3または5で割り切れる場合はFizzBuzzを返す();
 
   // exec program
-  //execute();
+  execute();
 </script>
