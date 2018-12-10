@@ -17,8 +17,12 @@
       </nav>
     </header>
     <section>
-      <h1>コンテンツ</h1>
-      <article><h1>FizzBuzz</h1></article>
+      <h1>FizzBuzz</h1>
+      <article>
+        <h1>FizzBuzzCall</h1>
+        <input id='call' type="text">
+        <input type="button" value="Call" onclick="fizzBuzzCall()">
+      </article>
     </section>
     <footer>
       <p>Copyrights</p>
@@ -38,6 +42,15 @@
   }
 
   // FizzBuzz
+  function fizzBuzzCall() {
+    var value = document.getElementById('call').value;
+    if (isNaN(value)) {
+      alert('数字を入れてください。');
+    } else {
+      alert(fizzBuzz(value));
+    }
+  }
+
   COUNT = 100;
 
   function fizzBuzz(count) {
@@ -51,7 +64,7 @@
       return count;
     }
   }
-
+/*
   function iterate(number) {
     var number = 1;
     var array = [];
@@ -97,4 +110,5 @@
 
   // exec program
   execute();
+*/  
 </script>
