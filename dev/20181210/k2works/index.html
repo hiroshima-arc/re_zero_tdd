@@ -18,15 +18,22 @@
     </header>
     <section>
       <h1>FizzBuzz</h1>
-      <article>
-        <h1>FizzBuzzCall</h1>
-        <input id='call' type="text">
-        <input type="button" value="Call" onclick="fizzBuzzCall()">
-      </article>
+        <article>
+          <h1>FizzBuzzCall</h1>
+          <input id='call' type="text">
+          <input type="button" value="Call" onclick="fizzBuzzCall()">
+        </article>
+
+        <article>
+          <h1>FizzBuzzPrint</h1>
+          <div id='print'>Initialized</div>
+          <input id='input' type="text">
+          <input type="button" value="Print" onclick="fizzBuzzPrint()">
+        </article>
     </section>
     <footer>
-      <p>Copyrights</p>
-      <address><hiroshima class="arc@gmail com"></hiroshima></address>
+        <p>Copyrights</p>
+        <address>hiroshima-arc@gmail.com</address>
     </footer>
   </body>
 </html>
@@ -42,6 +49,16 @@
   }
 
   // FizzBuzz
+  function fizzBuzzPrint() {
+    var value = document.getElementById('input').value;
+    var target = document.getElementById('print')
+    if (isNaN(value)) {
+      target.innerHTML = '数字を入れてください。';
+    } else {
+      target.innerHTML = fizzBuzz(value);
+    }
+  }
+
   function fizzBuzzCall() {
     var value = document.getElementById('call').value;
     if (isNaN(value)) {
