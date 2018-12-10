@@ -51,11 +51,17 @@
 
   // Test
   function testPrint1To100() {
-    var count = 1
-    while (count < 100) {
-      console.log(count);
+    var count = 1;
+    var array = [];
+
+    while (count <= 100) {
+      array.push(fizzBuzz(count));
+      console.log(fizzBuzz(count));
       count = count + 1
     }
+
+    assert(1, array[0]);
+    assert('Buzz', array[99]);
   }
 
   function test3で割り切れる場合はFizzを返す() {
