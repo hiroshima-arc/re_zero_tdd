@@ -153,7 +153,7 @@
     }
   }
 
-  COUNT = 100;
+  const COUNT = 100;
 
   function iterate(count) {
     var number = 1;
@@ -173,15 +173,15 @@
   }
 
   // Domain
-  function fizzBuzz(count) {
-    if (count % 3 == 0 && count % 5 === 0) {
+  function fizzBuzz(number) {
+    if (number % 3 == 0 && number % 5 === 0) {
       return "FizzBuzz";
-    } else if (count % 3 == 0) {
+    } else if (number % 3 == 0) {
       return "Fizz";
-    } else if (count % 5 == 0) {
+    } else if (number % 5 == 0) {
       return "Buzz";
     } else {
-      return count;
+      return number;
     }
   }
 
