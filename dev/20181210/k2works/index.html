@@ -53,12 +53,18 @@
     var count = 1;
     var array = [];
 
-    while (count <= 100) {      
-      console.log(fizzBuzz(count));
+    while (count <= 100) {            
       array.push(fizzBuzz(count));      
       count = count + 1
     }
     return array;
+  }
+
+  function execute() {
+    var array = iterate(100);
+    for (var i = 0; i <= 100; i++) {
+      console.log(array[i]);
+    };
   }
 
   // Test
@@ -86,5 +92,8 @@
   test3で割り切れる場合はFizzを返す();
   test5で割り切れる場合はBuzzを返す();
   test3または5で割り切れる場合はFizzBuzzを返す();
+
+  // exec program
+  execute();
 
 </script>
