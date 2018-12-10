@@ -62,9 +62,9 @@
 
   function execute() {
     var array = iterate(100);
-    for (value of array) {
+    array.forEach(function(value) {
       console.log(value);
-    }
+    });
   }
 
   // Test
