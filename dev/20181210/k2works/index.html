@@ -41,8 +41,8 @@
         <article>
           <h1>FizzBuzzIterate</h1>
           <input id='iterate_input' type="text">
+          <input id='iterate' type="button" value="execute" onclick="fizzBuzzIterate()">          
           <div id='result'></div>
-          <input id='iterate' type="button" value="execute" onclick="fizzBuzzIterate()">
         </article>
     </section>
     <footer>
@@ -63,11 +63,47 @@
   }
 
   // FizzBuzz
-  function fizzBuzzIterate() {
-    var count = document.getElementById('iterate_input').value;
+  function fizzBuzzIterate() {    
     var target = document.getElementById('result');
+    var count = document.getElementById('iterate_input').value;
+    if (count > COUNT) {
+      return target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`;
+    }
+
     var array = iterate(count);
-    target.innerHTML = array;
+    
+    var rowCount = 1;
+    var html = '<table>';
+
+    html = html + '<thead>';
+    [...Array(10).keys()].forEach(function(v) {
+      html = html + `<th>${v + 1}</th>`
+    });
+    html = html + '</thead>'
+
+    html = html + '<tbody>'
+    
+    html = html + '<tr>'
+    array.forEach(function(value) {
+      if (rowCount > 10) {
+        html = html + '<tr>'
+      }
+
+      value = `<td>${value}</td>`;
+      html = html + value;
+
+      if (rowCount == 10) {
+        html = html + '</tr>'
+        rowCount = 1;
+      } else {
+        rowCount += 1;
+      }
+    });
+    
+    html = html + '</tbody>'
+    html = html + '</table>'
+
+    target.innerHTML = html;
   }
 
   fizzBuzzUpDownCount = 0;
