@@ -37,6 +37,13 @@
           <input id='down' type="button" value="-" onclick="fizzBuzzDown()">
           <input id='up' type="button" value="+" onclick="fizzBuzzUp()">
         </article>
+
+        <article>
+          <h1>FizzBuzzIterate</h1>
+          <input id='iterate_input' type="text">
+          <div id='result'></div>
+          <input id='iterate' type="button" value="execute" onclick="fizzBuzzIterate()">
+        </article>
     </section>
     <footer>
         <p>Copyrights</p>
@@ -56,6 +63,13 @@
   }
 
   // FizzBuzz
+  function fizzBuzzIterate() {
+    var count = document.getElementById('iterate_input').value;
+    var target = document.getElementById('result');
+    var array = iterate(count);
+    target.innerHTML = array;
+  }
+
   fizzBuzzUpDownCount = 0;
 
   function fizzBuzzUp() {
@@ -110,12 +124,12 @@
       return count;
     }
   }
-/*
-  function iterate(number) {
+
+  function iterate(count) {
     var number = 1;
     var array = [];
 
-    while (number <= 100) {
+    while (number <= count) {
       array.push(fizzBuzz(number));
       number = number + 1;
     }
@@ -155,6 +169,5 @@
   test3または5で割り切れる場合はFizzBuzzを返す();
 
   // exec program
-  execute();
-*/  
+  //execute();
 </script>
