@@ -2,7 +2,7 @@
 
 ## 概要
 
-HTML5+CSS+JavaScript with TDD
+HTML5+CSS3+JavaScript with TDD
 
 ### 参加メンバー
 
