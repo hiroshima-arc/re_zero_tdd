@@ -174,7 +174,7 @@
       value = `<td>${value}</td>`;
       html = html + value;
 
-      if (rowCount == 10) {
+      if (rowCount === 10) {
         html = html + "</tr>";
         rowCount = 1;
       } else {
@@ -210,7 +210,7 @@
   }
 
   function fizzBuzzDown() {
-    if (fizzBuzzUpDownCount == 0) {
+    if (fizzBuzzUpDownCount === 0) {
       fizzBuzzUpDownCount = 0;
     } else {
       fizzBuzzUpDownCount -= 1;
@@ -261,11 +261,11 @@
 
   // Domain
   function fizzBuzz(number) {
-    if (number % 3 == 0 && number % 5 === 0) {
+    if (number % 3 === 0 && number % 5 === 0) {
       return "FizzBuzz";
-    } else if (number % 3 == 0) {
+    } else if (number % 3 === 0) {
       return "Fizz";
-    } else if (number % 5 == 0) {
+    } else if (number % 5 === 0) {
       return "Buzz";
     } else {
       return number;
