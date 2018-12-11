@@ -153,15 +153,7 @@
     document.getElementById("art-4").style.display = "block";
   }
 
-  function fizzBuzzIterate() {
-    let target = document.getElementById("result");
-    let count = document.getElementById("iterate_input").value;
-    if (count > COUNT) {
-      return (target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`);
-    }
-
-    let array = iterate(count);
-
+  function renderHtmlTable(array) {
     let rowCount = 1;
     let html = "<table>";
 
@@ -192,8 +184,19 @@
 
     html = html + "</tbody>";
     html = html + "</table>";
+    return html;
+  }
 
-    target.innerHTML = html;
+  function fizzBuzzIterate() {
+    let target = document.getElementById("result");
+    let count = document.getElementById("iterate_input").value;
+    if (count > COUNT) {
+      return (target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`);
+    }
+
+    let array = iterate(count);
+
+    target.innerHTML = renderHtmlTable(array);
   }
 
   fizzBuzzUpDownCount = 0;
