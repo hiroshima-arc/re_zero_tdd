@@ -154,16 +154,16 @@
   }
 
   function fizzBuzzIterate() {
-    var target = document.getElementById("result");
-    var count = document.getElementById("iterate_input").value;
+    let target = document.getElementById("result");
+    let count = document.getElementById("iterate_input").value;
     if (count > COUNT) {
       return (target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`);
     }
 
-    var array = iterate(count);
+    let array = iterate(count);
 
-    var rowCount = 1;
-    var html = "<table>";
+    let rowCount = 1;
+    let html = "<table>";
 
     html = html + "<thead>";
     [...Array(10).keys()].forEach(function(v) {
@@ -200,9 +200,9 @@
 
   function fizzBuzzUp() {
     fizzBuzzUpDownCount += 1;
-    var target = document.getElementById("updown");
-    var count = fizzBuzzUpDownCount;
-    var value = fizzBuzz(count);
+    let target = document.getElementById("updown");
+    let count = fizzBuzzUpDownCount;
+    let value = fizzBuzz(count);
     target.innerHTML = value;
   }
 
@@ -212,15 +212,15 @@
     } else {
       fizzBuzzUpDownCount -= 1;
     }
-    var target = document.getElementById("updown");
-    var count = fizzBuzzUpDownCount;
-    var value = fizzBuzz(count);
+    let target = document.getElementById("updown");
+    let count = fizzBuzzUpDownCount;
+    let value = fizzBuzz(count);
     target.innerHTML = value;
   }
 
   function fizzBuzzPrint() {
-    var value = document.getElementById("input").value;
-    var target = document.getElementById("print");
+    let value = document.getElementById("input").value;
+    let target = document.getElementById("print");
     if (isNaN(value)) {
       target.innerHTML = "数字を入れてください。";
     } else {
@@ -229,7 +229,7 @@
   }
 
   function fizzBuzzCall() {
-    var value = document.getElementById("call").value;
+    let value = document.getElementById("call").value;
     if (isNaN(value)) {
       alert("数字を入れてください。");
     } else {
@@ -240,8 +240,8 @@
   const COUNT = 100;
 
   function iterate(count) {
-    var number = 1;
-    var array = [];
+    let number = 1;
+    let array = [];
 
     while (number <= count) {
       array.push(fizzBuzz(number));
@@ -271,7 +271,7 @@
 
   // Test
   function test1から100までプリントする() {
-    var array = iterate(100);
+    let array = iterate(100);
     assert(1, array[0]);
     assert("Buzz", array[99]);
   }
