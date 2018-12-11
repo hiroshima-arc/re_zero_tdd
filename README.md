@@ -270,6 +270,14 @@ npm run check
 
 ## 開発
 
+### README.md ファイルのセットアップ
+
+```
+vagrant ssh
+cd /vagrant
+rake doc:setup
+```
+
 ### Python 開発環境
 
 ```

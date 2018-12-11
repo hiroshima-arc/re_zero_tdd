@@ -1,4 +1,28 @@
 namespace :doc do
+  desc "READMEファイルのセットアップ"
+  task :setup, [:member] do |_t, args|
+    require 'erb'
+    require 'fileutils'
+
+    title = (Time.now).strftime("%Y%m%d")
+    member = args.member || ENV['USER']
+    OUT_DIR = "dev/#{title}/#{member}"
+    OUT_FILE = "#{OUT_DIR}/README.md"
+    TEMPLATE_DIR = "ops/lib/tasks/templates".freeze
+
+    FileUtils.mkdir_p(OUT_DIR)
+
+    @title = title
+    @member = member
+    erb_str = File.read("#{TEMPLATE_DIR}/README.md.erb")
+    render = ERB.new(erb_str)
+    result = render.result
+
+    File.open(OUT_FILE, "w") do |f|
+      f.write(result)
+    end
+  end
+
   desc "マークダウンファイルのフォーマット"
   task :format do
     sh 'npm run format'
