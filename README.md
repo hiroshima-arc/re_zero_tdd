@@ -308,3 +308,7 @@ docker-compose up env-ruby
 - [docker cloud](https://cloud.docker.com/u/hiroshimaarc/repository/docker/hiroshimaarc/re-zero-tdd)
 - [Prettier](https://prettier.io/)
 - [remarklint](https://github.com/remarkjs/remark-lint)
+
+# このリポジトリへの参加方法
+
+このリポジトリへコミットやプルリクエストを作成するには、[CONTRIBUTING.md](CONTRIBUTING.md) をお読み下さい。
