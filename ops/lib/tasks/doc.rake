@@ -5,11 +5,7 @@ namespace :doc do
     require 'fileutils'
 
     title = (Time.now).strftime("%Y%m%d")
-    if args.member.nil?
-      member = ENV['USER']
-    else
-      member = args.member
-    end
+    member = args.member || ENV['USER']
     OUT_DIR = "dev/#{title}/#{member}"
     OUT_FILE = "#{OUT_DIR}/README.md"
     TEMPLATE_DIR = "ops/lib/tasks/templates".freeze
