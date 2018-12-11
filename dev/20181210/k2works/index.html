@@ -61,7 +61,7 @@
       <nav>
         <h1>メニュー</h1>
         <ul>
-          <li"><a href="index.html">FizzBuzz</a>
+            <li><a href="index.html">FizzBuzz</a>
             <ul id="sub-menu">
               <li onclick="showFizzBuzzCall()"><a href="#">FizzBuzzCall</a></li>
               <li onclick="showFizzBuzzPrint()"><a href="#">FizzBuzzPrint</a></li>
@@ -188,13 +188,13 @@
   }
 
   function fizzBuzzIterate() {
-    let target = document.getElementById("result");
+    const target = document.getElementById("result");
     let count = document.getElementById("iterate_input").value;
     if (count > COUNT) {
       return (target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`);
     }
 
-    let array = iterate(count);
+    const array = iterate(count);
 
     target.innerHTML = renderHtmlTable(array);
   }
@@ -203,9 +203,9 @@
 
   function fizzBuzzUp() {
     fizzBuzzUpDownCount += 1;
-    let target = document.getElementById("updown");
-    let count = fizzBuzzUpDownCount;
-    let value = fizzBuzz(count);
+    const target = document.getElementById("updown");
+    const count = fizzBuzzUpDownCount;
+    const value = fizzBuzz(count);
     target.innerHTML = value;
   }
 
@@ -215,15 +215,14 @@
     } else {
       fizzBuzzUpDownCount -= 1;
     }
-    let target = document.getElementById("updown");
-    let count = fizzBuzzUpDownCount;
-    let value = fizzBuzz(count);
-    target.innerHTML = value;
+    const target = document.getElementById("updown");
+    const count = fizzBuzzUpDownCount;
+    target.innerHTML = fizzBuzz(count);
   }
 
   function fizzBuzzPrint() {
-    let value = document.getElementById("input").value;
-    let target = document.getElementById("print");
+    const value = document.getElementById("input").value;
+    const target = document.getElementById("print");
     if (isNaN(value)) {
       target.innerHTML = "数字を入れてください。";
     } else {
@@ -232,7 +231,7 @@
   }
 
   function fizzBuzzCall() {
-    let value = document.getElementById("call").value;
+    const value = document.getElementById("call").value;
     if (isNaN(value)) {
       alert("数字を入れてください。");
     } else {
@@ -274,7 +273,7 @@
 
   // Test
   function test1から100までプリントする() {
-    let array = iterate(100);
+    const array = iterate(100);
     assert(1, array[0]);
     assert("Buzz", array[99]);
   }
