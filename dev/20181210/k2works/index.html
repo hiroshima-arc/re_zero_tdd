@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style type="text/css">
+      body {
+        width: 650px;
+        margin: 0 auto;
+        background-color: ivory;
+      }
+      header {
+        width: 350px;
+      }
+      article {
+        width: 350px;
+        float: right;
+      }
+      nav {
+        width: 300px;
+        float: left;
+      }
+      footer {
+        clear: both;
+        width: 500px;
+        text-align: center;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      th {
+        border: 1px solid black;
+        background-color: aqua;
+      }
+      td {
+        border: 1px solid black;
+      }
+      a {
+        text-decoration: none;
+        font-size: 15px;
+      }
+      a:link {
+        color: #FF0000;
+      }
+      a:visited {
+        color: #A0A0A0;
+      }
+      a:hover {
+        color: #80FF00;
+      }
+      a:active {
+        color: #0000Ff;
+      }
+    </style>
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+  </head>
+  <body>
+    <h1>HTML5+CSS3+JavaScript with TDD</h1>
+    <header>
+      <nav>
+        <h1>メニュー</h1>
+        <ul>
+            <li><a href="index.html">FizzBuzz</a>
+            <ul id="sub-menu">
+              <li onclick="showFizzBuzzCall()"><a href="#">FizzBuzzCall</a></li>
+              <li onclick="showFizzBuzzPrint()"><a href="#">FizzBuzzPrint</a></li>
+              <li onclick="showFizzBuzzUpDown()"><a href="#">FizzBuzzUpDown</a></li>
+              <li onclick="showFizzBuzzIterate()"><a href="#">FizzBuzzIterate</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <h1>FizzBuzz</h1>
+      <article id="art-1">
+        <h1>FizzBuzzCall</h1>
+        <input id="call" type="text" />
+        <input type="button" value="Call" onclick="fizzBuzzCall()" />
+      </article>
+
+      <article id="art-2">
+        <h1>FizzBuzzPrint</h1>
+        <div id="print">Initialized</div>
+        <input id="input" type="text" />
+        <input type="button" value="Print" onclick="fizzBuzzPrint()" />
+      </article>
+
+      <article id="art-3">
+        <h1>FizzBuzzUpDown</h1>
+        <div id="updown">Ready</div>
+        <input id="down" type="button" value="-" onclick="fizzBuzzDown()" />
+        <input id="up" type="button" value="+" onclick="fizzBuzzUp()" />
+      </article>
+
+      <article id="art-4">
+        <h1>FizzBuzzIterate</h1>
+        <input id="iterate_input" type="text" />
+        <input
+          id="iterate"
+          type="button"
+          value="execute"
+          onclick="fizzBuzzIterate()"
+        />
+        <div id="result"></div>
+      </article>
+    </section>
+    <footer>
+      <p>Copyrights</p>
+      <address>hiroshima-arc@gmail.com</address>
+    </footer>
+  </body>
+</html>
+
+<script>
+  // assert
+  function assert(expected, actual) {
+    console.log(".");
+    console.assert(
+      expected === actual,
+      `\nexp:` + expected + `\nact:` + actual
+    );
+  }
+
+  // FizzBuzz
+  // Controller
+  function showFizzBuzzCall() {
+    document.getElementById("art-1").style.display = "block";
+    document.getElementById("art-2").style.display = "none";
+    document.getElementById("art-3").style.display = "none";
+    document.getElementById("art-4").style.display = "none";
+  }
+
+  function showFizzBuzzPrint() {
+    document.getElementById("art-1").style.display = "none";
+    document.getElementById("art-2").style.display = "block";
+    document.getElementById("art-3").style.display = "none";
+    document.getElementById("art-4").style.display = "none";
+  }
+
+  function showFizzBuzzUpDown() {
+    document.getElementById("art-1").style.display = "none";
+    document.getElementById("art-2").style.display = "none";
+    document.getElementById("art-3").style.display = "block";
+    document.getElementById("art-4").style.display = "none";
+  }
+
+  function showFizzBuzzIterate() {
+    document.getElementById("art-1").style.display = "none";
+    document.getElementById("art-2").style.display = "none";
+    document.getElementById("art-3").style.display = "none";
+    document.getElementById("art-4").style.display = "block";
+  }
+
+  function renderHtmlTable(array) {
+    let rowCount = 1;
+    let html = "<table>";
+
+    html = html + "<thead>";
+    [...Array(10).keys()].forEach(function(v) {
+      html = html + `<th>${v + 1}</th>`;
+    });
+    html = html + "</thead>";
+
+    html = html + "<tbody>";
+
+    html = html + "<tr>";
+    array.forEach(function(value) {
+      if (rowCount > 10) {
+        html = html + "<tr>";
+      }
+
+      value = `<td>${value}</td>`;
+      html = html + value;
+
+      if (rowCount === 10) {
+        html = html + "</tr>";
+        rowCount = 1;
+      } else {
+        rowCount += 1;
+      }
+    });
+
+    html = html + "</tbody>";
+    html = html + "</table>";
+    return html;
+  }
+
+  function fizzBuzzIterate() {
+    const target = document.getElementById("result");
+    let count = document.getElementById("iterate_input").value;
+    if (count > COUNT) {
+      return (target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`);
+    }
+
+    const array = iterate(count);
+
+    target.innerHTML = renderHtmlTable(array);
+  }
+
+  fizzBuzzUpDownCount = 0;
+
+  function fizzBuzzUp() {
+    fizzBuzzUpDownCount += 1;
+    const target = document.getElementById("updown");
+    const count = fizzBuzzUpDownCount;
+    const value = fizzBuzz(count);
+    target.innerHTML = value;
+  }
+
+  function fizzBuzzDown() {
+    if (fizzBuzzUpDownCount === 0) {
+      fizzBuzzUpDownCount = 0;
+    } else {
+      fizzBuzzUpDownCount -= 1;
+    }
+    const target = document.getElementById("updown");
+    const count = fizzBuzzUpDownCount;
+    target.innerHTML = fizzBuzz(count);
+  }
+
+  function fizzBuzzPrint() {
+    const value = document.getElementById("input").value;
+    const target = document.getElementById("print");
+    if (isNaN(value)) {
+      target.innerHTML = "数字を入れてください。";
+    } else {
+      target.innerHTML = fizzBuzz(value);
+    }
+  }
+
+  function fizzBuzzCall() {
+    const value = document.getElementById("call").value;
+    if (isNaN(value)) {
+      alert("数字を入れてください。");
+    } else {
+      alert(fizzBuzz(value));
+    }
+  }
+
+  const COUNT = 100;
+
+  function iterate(count) {
+    let number = 1;
+    let array = [];
+
+    while (number <= count) {
+      array.push(fizzBuzz(number));
+      number++;
+    }
+    return array;
+  }
+
+  function execute() {
+    iterate(COUNT).forEach(function(value) {
+      console.log(value);
+    });
+  }
+
+  // Domain
+  function fizzBuzz(number) {
+    if (number % 3 === 0 && number % 5 === 0) {
+      return "FizzBuzz";
+    } else if (number % 3 === 0) {
+      return "Fizz";
+    } else if (number % 5 === 0) {
+      return "Buzz";
+    } else {
+      return number;
+    }
+  }
+
+  // Test
+  function test1から100までプリントする() {
+    const array = iterate(100);
+    assert(1, array[0]);
+    assert("Buzz", array[99]);
+  }
+
+  function test3で割り切れる場合はFizzを返す() {
+    assert("Fizz", fizzBuzz(3));
+    assert(1, fizzBuzz(1));
+  }
+
+  function test5で割り切れる場合はBuzzを返す() {
+    assert("Buzz", fizzBuzz(5));
+  }
+
+  function test3または5で割り切れる場合はFizzBuzzを返す() {
+    assert("FizzBuzz", fizzBuzz(15));
+  }
+
+  // exec test
+  test1から100までプリントする();
+  test3で割り切れる場合はFizzを返す();
+  test5で割り切れる場合はBuzzを返す();
+  test3または5で割り切れる場合はFizzBuzzを返す();
+
+  // exec program
+  execute();
+</script>
