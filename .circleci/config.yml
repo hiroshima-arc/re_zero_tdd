@@ -29,6 +29,10 @@ jobs:
             rake coverage:python
             ./tmp/cc-test-reporter format-coverage -t coverage.py -o tmp/codeclimate.python.json dev/coverage.xml
       - run:
+          name: Run elixir tests
+          command: |
+            rake test:elixir
+      - run:
           name: Upload coverage results to Code Climate
           command: |
             ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 2 -o tmp/codeclimate.total.json
