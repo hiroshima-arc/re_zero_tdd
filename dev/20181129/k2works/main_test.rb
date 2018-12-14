@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
+require "minitest/reporters"
+Minitest::Reporters.use!
 require 'simplecov'
 SimpleCov.start
 require 'minitest/autorun'
-require "minitest/reporters"
 require_relative './main.rb'
-Minitest::Reporters.use!
 
 class MainTest < Minitest::Test
   def test_print_1_to_100
