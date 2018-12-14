@@ -79,3 +79,8 @@ node_modules
 .pyc
 .asciidoctor
 .env
+
+coverage
+coverage.xml
+.coverage
+tmp

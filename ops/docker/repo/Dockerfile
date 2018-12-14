@@ -50,7 +50,8 @@ RUN source  $HOME/.bash_profile && \
 ENV PATH $HOME/.rbenv/shims:$PATH
 RUN gem install bundler \
                 rake \
-                minitest-reporters
+                minitest-reporters \
+                simplecov
 
 # For NodeJs
 ENV NVM_DIR $HOME/.nvm
@@ -72,7 +73,6 @@ ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # For Python
 ENV PYTHON_VER 3.6.0
-ENV AWS_SAM_VER 0.5.0
 RUN curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 RUN echo 'export PATH="/$HOME/.pyenv/bin:$PATH"' >> $HOME/.bash_profile
 RUN echo 'eval "$(pyenv init -)"' >> $HOME/.bash_profile
@@ -81,8 +81,8 @@ RUN source  $HOME/.bash_profile && \
             pyenv install $PYTHON_VER  && \
             pyenv global $PYTHON_VER
 ENV PATH $HOME/.pyenv/shims:$PATH
-RUN pip install awscli && \
-    pip install aws-sam-cli==$AWS_SAM_VER
+RUN pip install --upgrade pip && \
+    pip install coverage
 
 # For Elixir
 ENV ERLANG_VER 21.1.1
