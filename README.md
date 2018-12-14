@@ -3,7 +3,7 @@
 [![Floobits Status](https://floobits.com/k2work/re_zero_tdd.svg)](https://floobits.com/k2work/re_zero_tdd/redirect)
 [![CircleCI](https://circleci.com/gh/hiroshima-arc/re_zero_tdd.svg?style=svg)](https://circleci.com/gh/hiroshima-arc/re_zero_tdd)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/37c77902165bbea35337/test_coverage)](https://codeclimate.com/github/hiroshima-arc/re_zero_tdd/test_coverage)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1c152b0a3cb744a6adee5ed9fbcb1dba)](https://www.codacy.com/app/kakimomokuri/re_zero_tdd?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hiroshima-arc/re_zero_tdd&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0f501f7150dc4ffb9a6768847f074c7e)](https://www.codacy.com/app/kakimomokuri/re_zero_tdd?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hiroshima-arc/re_zero_tdd&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/af73d155-80e3-48f5-b820-b75a7b8303fb)](https://codebeat.co/projects/github-com-hiroshima-arc-re_zero_tdd-master)
 
 # 目的
