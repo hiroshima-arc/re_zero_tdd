@@ -81,7 +81,7 @@
           <ul>
             <li>
               <a href="index.html">FizzBuzz</a>
-              <ul id="sub-menu">
+              <ul id="nav-component__sub-menu--fizz-buzz">
                 <li onclick="showFizzBuzzCall()">
                   <a href="#">FizzBuzzCall</a>
                 </li>
@@ -104,36 +104,36 @@
       <section>
         <div class="fizz-buzz-component">
           <h1>FizzBuzz</h1>
-          <article id="art-1">
+          <article id="fizz-buzz-component__article--call">
             <h1>FizzBuzzCall</h1>
-            <input id="call" type="text" />
+            <input id="fizz-buzz-component__input--call" type="text" />
             <input onclick="fizzBuzzCall()" type="button" value="Call" />
           </article>
 
-          <article id="art-2">
+          <article id="fizz-buzz-component__article--print">
             <h1>FizzBuzzPrint</h1>
-            <div id="print">Initialized</div>
-            <input id="input" type="text" />
+            <div id="fizz-buzz-component__print--message">Initialized</div>
+            <input id="fizz-buzz-component__input--print" type="text" />
             <input onclick="fizzBuzzPrint()" type="button" value="Print" />
           </article>
 
-          <article id="art-3">
+          <article id="fizz-buzz-component__article--up-down">
             <h1>FizzBuzzUpDown</h1>
-            <div id="updown">Ready</div>
-            <input id="down" onclick="fizzBuzzDown()" type="button" value="-" />
-            <input id="up" onclick="fizzBuzzUp()" type="button" value="+" />
+            <div id="fizz-buzz-component__up-down--message">Ready</div>
+            <input id="fizz-buzz-component__input--down" onclick="fizzBuzzDown()" type="button" value="-" />
+            <input id="fizz-buzz-component__input--up" onclick="fizzBuzzUp()" type="button" value="+" />
           </article>
 
-          <article id="art-4">
+          <article id="fizz-buzz-component__article--iterate">
             <h1>FizzBuzzIterate</h1>
-            <input id="iterate_input" type="text" />
+            <input id="fizz-buzz-component__input--iterate" type="text" />
             <input
-              id="iterate"
+              id="fizz-buzz-component__button--iterate"
               onclick="fizzBuzzIterate()"
               type="button"
               value="execute"
             />
-            <div id="result"></div>
+            <div id="fizz-buzz-component__iterate--result"></div>
           </article>
         </div>
       </section>
@@ -158,31 +158,31 @@
   // FizzBuzz
   // Controller
   function showFizzBuzzCall() {
-    document.getElementById("art-1").style.display = "block";
-    document.getElementById("art-2").style.display = "none";
-    document.getElementById("art-3").style.display = "none";
-    document.getElementById("art-4").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--call").style.display = "block";
+    document.getElementById("fizz-buzz-component__article--print").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--up-down").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--iterate").style.display = "none";
   }
 
   function showFizzBuzzPrint() {
-    document.getElementById("art-1").style.display = "none";
-    document.getElementById("art-2").style.display = "block";
-    document.getElementById("art-3").style.display = "none";
-    document.getElementById("art-4").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--call").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--print").style.display = "block";
+    document.getElementById("fizz-buzz-component__article--up-down").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--iterate").style.display = "none";
   }
 
   function showFizzBuzzUpDown() {
-    document.getElementById("art-1").style.display = "none";
-    document.getElementById("art-2").style.display = "none";
-    document.getElementById("art-3").style.display = "block";
-    document.getElementById("art-4").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--call").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--print").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--up-down").style.display = "block";
+    document.getElementById("fizz-buzz-component__article--iterate").style.display = "none";
   }
 
   function showFizzBuzzIterate() {
-    document.getElementById("art-1").style.display = "none";
-    document.getElementById("art-2").style.display = "none";
-    document.getElementById("art-3").style.display = "none";
-    document.getElementById("art-4").style.display = "block";
+    document.getElementById("fizz-buzz-component__article--call").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--print").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--up-down").style.display = "none";
+    document.getElementById("fizz-buzz-component__article--iterate").style.display = "block";
   }
 
   function renderHtmlTable(array) {
@@ -220,8 +220,8 @@
   }
 
   function fizzBuzzIterate() {
-    const target = document.getElementById("result");
-    let count = document.getElementById("iterate_input").value;
+    const target = document.getElementById("fizz-buzz-component__iterate--result");
+    let count = document.getElementById("fizz-buzz-component__input--iterate").value;
     if (count > COUNT) {
       return (target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`);
     }
@@ -235,7 +235,7 @@
 
   function fizzBuzzUp() {
     fizzBuzzUpDownCount += 1;
-    const target = document.getElementById("updown");
+    const target = document.getElementById("fizz-buzz-component__up-down--message");
     const count = fizzBuzzUpDownCount;
     const value = fizzBuzz(count);
     target.innerHTML = value;
@@ -247,14 +247,14 @@
     } else {
       fizzBuzzUpDownCount -= 1;
     }
-    const target = document.getElementById("updown");
+    const target = document.getElementById("fizz-buzz-component__up-down--message");
     const count = fizzBuzzUpDownCount;
     target.innerHTML = fizzBuzz(count);
   }
 
   function fizzBuzzPrint() {
-    const value = document.getElementById("input").value;
-    const target = document.getElementById("print");
+    const value = document.getElementById("fizz-buzz-component__input--print").value;
+    const target = document.getElementById("fizz-buzz-component__print--message");
     if (isNaN(value)) {
       target.innerHTML = "数字を入れてください。";
     } else {
@@ -263,7 +263,7 @@
   }
 
   function fizzBuzzCall() {
-    const value = document.getElementById("call").value;
+    const value = document.getElementById("fizz-buzz-component__input--call").value;
     if (isNaN(value)) {
       alert("数字を入れてください。");
     } else {
