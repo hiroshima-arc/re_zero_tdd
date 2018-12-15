@@ -1,163 +1,163 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
     <style type="text/css">
-      body {
-        width: 650px;
-        margin: 0 auto;
-        background-color: ivory;
-      }
+        body {
+            width: 650px;
+            margin: 0 auto;
+            background-color: ivory;
+        }
 
-      header {
-        width: 350px;
-      }
+        header {
+            width: 350px;
+        }
 
-      .nav-component {
-        width: 290px;
-        float: left;
-        padding: 5px;
-        margin-bottom: 5px;
-      }
+        .nav-component {
+            width: 290px;
+            float: left;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
 
-      .nav-component a {
-        text-decoration: none;
-        font-size: 15px;
-      }
+        .nav-component a {
+            text-decoration: none;
+            font-size: 15px;
+        }
 
-      .nav-component a:link {
-        color: #ff0000;
-      }
+        .nav-component a:link {
+            color: #ff0000;
+        }
 
-      .nav-component a:visited {
-        color: #a0a0a0;
-      }
+        .nav-component a:visited {
+            color: #a0a0a0;
+        }
 
-      .nav-component a:hover {
-        color: #80ff00;
-      }
+        .nav-component a:hover {
+            color: #80ff00;
+        }
 
-      .nav-component a:active {
-        color: #0000ff;
-      }
+        .nav-component a:active {
+            color: #0000ff;
+        }
 
-      .fizz-buzz-component {
-        width: 340px;
-        float: right;
-        padding-left: 5px;
-        padding-bottom: 10px;
-        margin-bottom: 5px;
-      }
+        .fizz-buzz-component {
+            width: 340px;
+            float: right;
+            padding-left: 5px;
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+        }
 
-      .fizz-buzz-component table {
-        border-collapse: collapse;
-      }
+        .fizz-buzz-component table {
+            border-collapse: collapse;
+        }
 
-      .fizz-buzz-component th {
-        border: 1px solid black;
-        background-color: aqua;
-      }
+        .fizz-buzz-component th {
+            border: 1px solid black;
+            background-color: aqua;
+        }
 
-      .fizz-buzz-component td {
-        border: 1px solid black;
-      }
+        .fizz-buzz-component td {
+            border: 1px solid black;
+        }
 
-      footer {
-        clear: both;
-        width: auto;
-        text-align: center;
-      }
+        footer {
+            clear: both;
+            width: auto;
+            text-align: center;
+        }
     </style>
     <title>Re:ゼロから始めるテスト駆動開発</title>
-  </head>
-  <body>
-    <h1>HTML5+CSS3+JavaScript with TDD</h1>
-    <header>
-      <div class="nav-component">
+</head>
+<body>
+<h1>HTML5+CSS3+JavaScript with TDD</h1>
+<header>
+    <div class="nav-component">
         <nav>
-          <h1>メニュー</h1>
-          <ul>
-            <li>
-              <a href="index.html">FizzBuzz</a>
-              <ul id="nav-component__sub-menu--fizz-buzz">
-                <li id="nav-component__sub-menu--call">
-                  <a href="#">FizzBuzzCall</a>
+            <h1>メニュー</h1>
+            <ul>
+                <li>
+                    <a href="index.html">FizzBuzz</a>
+                    <ul id="nav-component__sub-menu--fizz-buzz">
+                        <li id="nav-component__sub-menu--call">
+                            <a href="#">FizzBuzzCall</a>
+                        </li>
+                        <li id="nav-component__sub-menu--print">
+                            <a href="#">FizzBuzzPrint</a>
+                        </li>
+                        <li id="nav-component__sub-menu--up-down">
+                            <a href="#">FizzBuzzUpDown</a>
+                        </li>
+                        <li id="nav-component__sub-menu--iterate">
+                            <a href="#">FizzBuzzIterate</a>
+                        </li>
+                    </ul>
                 </li>
-                <li id="nav-component__sub-menu--print">
-                  <a href="#">FizzBuzzPrint</a>
-                </li>
-                <li id="nav-component__sub-menu--up-down">
-                  <a href="#">FizzBuzzUpDown</a>
-                </li>
-                <li id="nav-component__sub-menu--iterate">
-                  <a href="#">FizzBuzzIterate</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+            </ul>
         </nav>
-      </div>
-    </header>
-    <div class="components">
-      <section>
-        <div class="fizz-buzz-component">
-          <h1>FizzBuzz</h1>
-          <article id="fizz-buzz-component__article--call">
-            <h1>FizzBuzzCall</h1>
-            <input id="fizz-buzz-component__input--call" type="text" />
-            <input
-              id="fizz-buzz-component__button--call"
-              type="button"
-              value="Call"
-            />
-          </article>
-
-          <article id="fizz-buzz-component__article--print">
-            <h1>FizzBuzzPrint</h1>
-            <div id="fizz-buzz-component__print--message">Initialized</div>
-            <input id="fizz-buzz-component__input--print" type="text" />
-            <input
-              id="fizz-buzz-component__button--print"
-              type="button"
-              value="Print"
-            />
-          </article>
-
-          <article id="fizz-buzz-component__article--up-down">
-            <h1>FizzBuzzUpDown</h1>
-            <div id="fizz-buzz-component__up-down--message">Ready</div>
-            <input
-              id="fizz-buzz-component__button--down"
-              type="button"
-              value="-"
-            />
-            <input
-              id="fizz-buzz-component__button--up"
-              type="button"
-              value="+"
-            />
-          </article>
-
-          <article id="fizz-buzz-component__article--iterate">
-            <h1>FizzBuzzIterate</h1>
-            <input id="fizz-buzz-component__input--iterate" type="text" />
-            <input
-              id="fizz-buzz-component__button--iterate"
-              type="button"
-              value="execute"
-            />
-            <div id="fizz-buzz-component__iterate--result"></div>
-          </article>
-        </div>
-      </section>
     </div>
-    <footer>
-      <p>Copyrights</p>
-      <address>hiroshima-arc@gmail.com</address>
-    </footer>
-  </body>
+</header>
+<div class="components">
+    <section>
+        <div class="fizz-buzz-component">
+            <h1>FizzBuzz</h1>
+            <article id="fizz-buzz-component__article--call">
+                <h1>FizzBuzzCall</h1>
+                <input id="fizz-buzz-component__input--call" type="text"/>
+                <input
+                        id="fizz-buzz-component__button--call"
+                        type="button"
+                        value="Call"
+                />
+            </article>
+
+            <article id="fizz-buzz-component__article--print">
+                <h1>FizzBuzzPrint</h1>
+                <div id="fizz-buzz-component__print--message">Initialized</div>
+                <input id="fizz-buzz-component__input--print" type="text"/>
+                <input
+                        id="fizz-buzz-component__button--print"
+                        type="button"
+                        value="Print"
+                />
+            </article>
+
+            <article id="fizz-buzz-component__article--up-down">
+                <h1>FizzBuzzUpDown</h1>
+                <div id="fizz-buzz-component__up-down--message">Ready</div>
+                <input
+                        id="fizz-buzz-component__button--down"
+                        type="button"
+                        value="-"
+                />
+                <input
+                        id="fizz-buzz-component__button--up"
+                        type="button"
+                        value="+"
+                />
+            </article>
+
+            <article id="fizz-buzz-component__article--iterate">
+                <h1>FizzBuzzIterate</h1>
+                <input id="fizz-buzz-component__input--iterate" type="text"/>
+                <input
+                        id="fizz-buzz-component__button--iterate"
+                        type="button"
+                        value="execute"
+                />
+                <div id="fizz-buzz-component__iterate--result"></div>
+            </article>
+        </div>
+    </section>
+</div>
+<footer>
+    <p>Copyrights</p>
+    <address>hiroshima-arc@gmail.com</address>
+</footer>
+</body>
 </html>
 
 <script>
@@ -173,15 +173,15 @@
   // FizzBuzz
   // Controller
   [
-    { "nav-component__sub-menu--call": showFizzBuzzCall },
-    { "nav-component__sub-menu--print": showFizzBuzzPrint },
-    { "nav-component__sub-menu--up-down": showFizzBuzzUpDown },
-    { "nav-component__sub-menu--iterate": showFizzBuzzIterate },
-    { "fizz-buzz-component__button--call": fizzBuzzCall },
-    { "fizz-buzz-component__button--print": fizzBuzzPrint },
-    { "fizz-buzz-component__button--down": fizzBuzzDown },
-    { "fizz-buzz-component__button--up": fizzBuzzUp },
-    { "fizz-buzz-component__button--iterate": fizzBuzzIterate }
+    {"nav-component__sub-menu--call": showFizzBuzzCall},
+    {"nav-component__sub-menu--print": showFizzBuzzPrint},
+    {"nav-component__sub-menu--up-down": showFizzBuzzUpDown},
+    {"nav-component__sub-menu--iterate": showFizzBuzzIterate},
+    {"fizz-buzz-component__button--call": fizzBuzzCall},
+    {"fizz-buzz-component__button--print": fizzBuzzPrint},
+    {"fizz-buzz-component__button--down": fizzBuzzDown},
+    {"fizz-buzz-component__button--up": fizzBuzzUp},
+    {"fizz-buzz-component__button--iterate": fizzBuzzIterate}
   ].forEach(hash => {
     Object.keys(hash).forEach(key => {
       let menu = document.getElementById(key);
@@ -254,7 +254,7 @@
     let html = "<table>";
 
     html = html + "<thead>";
-    [...Array(10).keys()].forEach(function(v) {
+    [...Array(10).keys()].forEach(function (v) {
       html = html + `<th>${v + 1}</th>`;
     });
     html = html + "</thead>";
@@ -262,7 +262,7 @@
     html = html + "<tbody>";
 
     html = html + "<tr>";
-    array.forEach(function(value) {
+    array.forEach(function (value) {
       if (rowCount > 10) {
         html = html + "<tr>";
       }
@@ -360,7 +360,7 @@
   }
 
   function execute() {
-    iterate(COUNT).forEach(function(value) {
+    iterate(COUNT).forEach(function (value) {
       console.log(value);
     });
   }
