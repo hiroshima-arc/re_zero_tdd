@@ -6,11 +6,11 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0f501f7150dc4ffb9a6768847f074c7e)](https://www.codacy.com/app/kakimomokuri/re_zero_tdd?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hiroshima-arc/re_zero_tdd&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/af73d155-80e3-48f5-b820-b75a7b8303fb)](https://codebeat.co/projects/github-com-hiroshima-arc-re_zero_tdd-master)
 
-# 目的
+## 目的
 
 実践テスト駆動開発
 
-# 前提
+## 前提
 
 | ソフトウェア       | バージョン | 備考 |
 | :----------------- | :--------- | :--- |
@@ -22,28 +22,28 @@
 | Elixir             | 1.7.4      |      |
 | Erlang             | 21.1.1     |      |
 
-# 構成
+## 構成
 
 1. [構築](#構築)
 1. [配置](#配置)
 1. [運用](#運用)
 1. [開発](#開発)
 
-## 構築
+### 構築
 
-### エディタの用意
+#### エディタの用意
 
 - [Visual Studio Code のインストール](https://code.visualstudio.com/)
 - [VS Live Share Extension Pack のセットアップ](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack)
 
-### 開発用仮想マシンの起動・プロビジョニング
+#### 開発用仮想マシンの起動・プロビジョニング
 
 ```bash
 vagrant up
 vagrant ssh
 ```
 
-### ドキュメント環境構築セットアップ
+#### ドキュメント環境構築セットアップ
 
 ```bash
 curl -s api.sdkman.io | bash
@@ -56,9 +56,9 @@ sdk list gradle
 sdk use gradle 4.10
 ```
 
-### 開発パッケージのセットアップ
+#### 開発パッケージのセットアップ
 
-#### 共通ライブラリのセットアップ
+##### 共通ライブラリのセットアップ
 
 ```
 sudo yum update -y
@@ -77,7 +77,7 @@ sudo yum install -y build-essential \
                    ncurses-devel
 ```
 
-#### Ruby のセットアップ
+##### Ruby のセットアップ
 
 - rbenv のインストール
 - ruby-build のインストール
@@ -96,7 +96,7 @@ rbenv install 2.5.3
 rbenv local 2.5.3
 ```
 
-#### Node.js のセットアップ
+##### Node.js のセットアップ
 
 - nvm のインストール
 - Node.js のインストール
@@ -109,7 +109,7 @@ nvm install v8.10
 nvm alias default v8.10
 ```
 
-#### Python のセットアップ
+##### Python のセットアップ
 
 - pyenv のインストール
 - Python のインストール
@@ -135,7 +135,7 @@ pyenv install 3.6.0
 pyenv local 3.6.0
 ```
 
-#### Elixir のセットアップ
+##### Elixir のセットアップ
 
 - asdf のインストール
 - Erlang のインストール
@@ -171,9 +171,9 @@ asdf install elixir 1.7.4
 asdf local elixir 1.7.4
 ```
 
-### CI 環境のセットアップ
+#### CI 環境のセットアップ
 
-#### CI 用イメージのビルド
+##### CI 用イメージのビルド
 
 ```
 vagrant up
@@ -183,21 +183,21 @@ docker build -t re-zero-tdd . -f ops/Dockerfile
 docker tag re-zero-tdd:latest hiroshimaarc/re-zero-tdd:1.0.0
 ```
 
-#### イメージのプッシュ
+##### イメージのプッシュ
 
 ```
 docker login
 docker push hiroshimaarc/re-zero-tdd:1.0.0
 ```
 
-#### circleci コマンドのインストール
+##### circleci コマンドのインストール
 
 ```
 sudo curl -fLSs https://circle.ci/cli | bash
 circleci update
 ```
 
-#### circleci 設定ファイルの作成
+##### circleci 設定ファイルの作成
 
 ```
 mkdir .circleci
@@ -206,7 +206,7 @@ touch .circleci/config.yml
 
 **[⬆ back to top](#構成)**
 
-## 配置
+### 配置
 
 ドキュメントの生成
 
@@ -221,11 +221,11 @@ gradle livereload
 
 **[⬆ back to top](#構成)**
 
-## 運用
+### 運用
 
-### circleci
+#### circleci
 
-#### local 環境で circleci を動かす
+##### local 環境で circleci を動かす
 
 ```
 vagrant up
@@ -235,7 +235,7 @@ circleci config validate -c .circleci/config.yml
 circleci build .circleci/config.yml
 ```
 
-### Prettier
+#### Prettier
 
 マークダウンファイルのフォーマットをする
 
@@ -251,7 +251,7 @@ npm install --save-dev --save-exact prettier
 npm run format
 ```
 
-### remarklint
+#### remarklint
 
 マークダウンファイルのコードチェックをする
 
@@ -269,9 +269,9 @@ npm run check
 
 **[⬆ back to top](#構成)**
 
-## 開発
+### 開発
 
-### README.md ファイルのセットアップ
+#### README.md ファイルのセットアップ
 
 ```
 vagrant ssh
@@ -279,7 +279,7 @@ cd /vagrant
 rake doc:setup
 ```
 
-### Python 開発環境
+#### Python 開発環境
 
 ```
 vagrant ssh
@@ -289,7 +289,7 @@ docker-compose up env-python
 
 [http://127.0.0.1:6901/?password=guest](http://127.0.0.1:6901/?password=guest)
 
-### Ruby 開発環境
+#### Ruby 開発環境
 
 ```
 vagrant ssh
@@ -301,7 +301,7 @@ docker-compose up env-ruby
 
 **[⬆ back to top](#構成)**
 
-# 参照
+## 参照
 
 - [AWS SAM Node.js Hands-on](https://github.com/hiroshima-arc/aws_sam_nodejs_hands-on)
 - [AWS SAM Python Hands-on](https://github.com/hiroshima-arc/aws_sam_python_hands-on)
@@ -310,6 +310,6 @@ docker-compose up env-ruby
 - [Prettier](https://prettier.io/)
 - [remarklint](https://github.com/remarkjs/remark-lint)
 
-# このリポジトリへの参加方法
+## このリポジトリへの参加方法
 
 このリポジトリへコミットやプルリクエストを作成するには、[CONTRIBUTING.md](CONTRIBUTING.md) をお読み下さい。
