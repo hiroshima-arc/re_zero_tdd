@@ -1,128 +1,148 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
     <style type="text/css">
-        body {
-            width: 650px;
-            margin: 0 auto;
-            background-color: ivory;
-        }
+      body {
+        width: 650px;
+        margin: 0 auto;
+        background-color: ivory;
+      }
 
-        header {
-            width: 350px;
-        }
+      header {
+        width: 350px;
+      }
 
-        article {
-            width: 350px;
-            float: right;
-        }
+      .nav-component {
+        width: 290px;
+        float: left;
+        padding: 5px;
+        margin-bottom: 5px;
+      }
 
-        nav {
-            width: 300px;
-            float: left;
-        }
+      .nav-component a {
+        text-decoration: none;
+        font-size: 15px;
+      }
 
-        footer {
-            clear: both;
-            width: 500px;
-            text-align: center;
-        }
+      .nav-component a:link {
+        color: #ff0000;
+      }
 
-        table {
-            border-collapse: collapse;
-        }
+      .nav-component a:visited {
+        color: #a0a0a0;
+      }
 
-        th {
-            border: 1px solid black;
-            background-color: aqua;
-        }
+      .nav-component a:hover {
+        color: #80ff00;
+      }
 
-        td {
-            border: 1px solid black;
-        }
+      .nav-component a:active {
+        color: #0000ff;
+      }
 
-        a {
-            text-decoration: none;
-            font-size: 15px;
-        }
+      .fizz-buzz-component {
+        width: 340px;
+        float: right;
+        padding-left: 5px;
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+      }
 
-        a:link {
-            color: #FF0000;
-        }
+      .fizz-buzz-component table {
+        border-collapse: collapse;
+      }
 
-        a:visited {
-            color: #A0A0A0;
-        }
+      .fizz-buzz-component th {
+        border: 1px solid black;
+        background-color: aqua;
+      }
 
-        a:hover {
-            color: #80FF00;
-        }
+      .fizz-buzz-component td {
+        border: 1px solid black;
+      }
 
-        a:active {
-            color: #0000Ff;
-        }
+      footer {
+        clear: both;
+        width: auto;
+        text-align: center;
+      }
     </style>
     <title>Re:ゼロから始めるテスト駆動開発</title>
-</head>
-<body>
-<h1>HTML5+CSS3+JavaScript with TDD</h1>
-<header>
-    <nav>
-        <h1>メニュー</h1>
-        <ul>
-            <li><a href="index.html">FizzBuzz</a>
-                <ul id="sub-menu">
-                    <li onclick="showFizzBuzzCall()"><a href="#">FizzBuzzCall</a></li>
-                    <li onclick="showFizzBuzzPrint()"><a href="#">FizzBuzzPrint</a></li>
-                    <li onclick="showFizzBuzzUpDown()"><a href="#">FizzBuzzUpDown</a></li>
-                    <li onclick="showFizzBuzzIterate()"><a href="#">FizzBuzzIterate</a></li>
-                </ul>
+  </head>
+  <body>
+    <h1>HTML5+CSS3+JavaScript with TDD</h1>
+    <header>
+      <div class="nav-component">
+        <nav>
+          <h1>メニュー</h1>
+          <ul>
+            <li>
+              <a href="index.html">FizzBuzz</a>
+              <ul id="sub-menu">
+                <li onclick="showFizzBuzzCall()">
+                  <a href="#">FizzBuzzCall</a>
+                </li>
+                <li onclick="showFizzBuzzPrint()">
+                  <a href="#">FizzBuzzPrint</a>
+                </li>
+                <li onclick="showFizzBuzzUpDown()">
+                  <a href="#">FizzBuzzUpDown</a>
+                </li>
+                <li onclick="showFizzBuzzIterate()">
+                  <a href="#">FizzBuzzIterate</a>
+                </li>
+              </ul>
             </li>
-        </ul>
-    </nav>
-</header>
-<section>
-    <h1>FizzBuzz</h1>
-    <article id="art-1">
-        <h1>FizzBuzzCall</h1>
-        <input id="call" type="text"/>
-        <input onclick="fizzBuzzCall()" type="button" value="Call"/>
-    </article>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="components">
+      <section>
+        <div class="fizz-buzz-component">
+          <h1>FizzBuzz</h1>
+          <article id="art-1">
+            <h1>FizzBuzzCall</h1>
+            <input id="call" type="text" />
+            <input onclick="fizzBuzzCall()" type="button" value="Call" />
+          </article>
 
-    <article id="art-2">
-        <h1>FizzBuzzPrint</h1>
-        <div id="print">Initialized</div>
-        <input id="input" type="text"/>
-        <input onclick="fizzBuzzPrint()" type="button" value="Print"/>
-    </article>
+          <article id="art-2">
+            <h1>FizzBuzzPrint</h1>
+            <div id="print">Initialized</div>
+            <input id="input" type="text" />
+            <input onclick="fizzBuzzPrint()" type="button" value="Print" />
+          </article>
 
-    <article id="art-3">
-        <h1>FizzBuzzUpDown</h1>
-        <div id="updown">Ready</div>
-        <input id="down" onclick="fizzBuzzDown()" type="button" value="-"/>
-        <input id="up" onclick="fizzBuzzUp()" type="button" value="+"/>
-    </article>
+          <article id="art-3">
+            <h1>FizzBuzzUpDown</h1>
+            <div id="updown">Ready</div>
+            <input id="down" onclick="fizzBuzzDown()" type="button" value="-" />
+            <input id="up" onclick="fizzBuzzUp()" type="button" value="+" />
+          </article>
 
-    <article id="art-4">
-        <h1>FizzBuzzIterate</h1>
-        <input id="iterate_input" type="text"/>
-        <input
-                id="iterate"
-                onclick="fizzBuzzIterate()"
-                type="button"
-                value="execute"
-        />
-        <div id="result"></div>
-    </article>
-</section>
-<footer>
-    <p>Copyrights</p>
-    <address>hiroshima-arc@gmail.com</address>
-</footer>
-</body>
+          <article id="art-4">
+            <h1>FizzBuzzIterate</h1>
+            <input id="iterate_input" type="text" />
+            <input
+              id="iterate"
+              onclick="fizzBuzzIterate()"
+              type="button"
+              value="execute"
+            />
+            <div id="result"></div>
+          </article>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <p>Copyrights</p>
+      <address>hiroshima-arc@gmail.com</address>
+    </footer>
+  </body>
 </html>
 
 <script>
@@ -170,7 +190,7 @@
     let html = "<table>";
 
     html = html + "<thead>";
-    [...Array(10).keys()].forEach(function (v) {
+    [...Array(10).keys()].forEach(function(v) {
       html = html + `<th>${v + 1}</th>`;
     });
     html = html + "</thead>";
@@ -178,7 +198,7 @@
     html = html + "<tbody>";
 
     html = html + "<tr>";
-    array.forEach(function (value) {
+    array.forEach(function(value) {
       if (rowCount > 10) {
         html = html + "<tr>";
       }
@@ -265,7 +285,7 @@
   }
 
   function execute() {
-    iterate(COUNT).forEach(function (value) {
+    iterate(COUNT).forEach(function(value) {
       console.log(value);
     });
   }
