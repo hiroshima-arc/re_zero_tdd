@@ -156,25 +156,22 @@
 
   // FizzBuzz
   // Controller
-  let menu = document.getElementById("nav-component__sub-menu--call");
-  menu.addEventListener('click', showFizzBuzzCall);
-  menu = document.getElementById("nav-component__sub-menu--print");
-  menu.addEventListener('click', showFizzBuzzPrint);
-  menu = document.getElementById("nav-component__sub-menu--up-down");
-  menu.addEventListener('click', showFizzBuzzUpDown);
-  menu = document.getElementById("nav-component__sub-menu--iterate");
-  menu.addEventListener('click', showFizzBuzzIterate);
-
-  menu = document.getElementById("fizz-buzz-component__button--call");
-  menu.addEventListener('click', fizzBuzzCall);
-  menu = document.getElementById("fizz-buzz-component__button--print");
-  menu.addEventListener('click', fizzBuzzPrint);
-  menu = document.getElementById("fizz-buzz-component__button--down");
-  menu.addEventListener('click', fizzBuzzDown);
-  menu = document.getElementById("fizz-buzz-component__button--up");
-  menu.addEventListener('click', fizzBuzzUp);
-  menu = document.getElementById("fizz-buzz-component__button--iterate");
-  menu.addEventListener('click', fizzBuzzIterate);
+  [
+    {"nav-component__sub-menu--call" : showFizzBuzzCall},
+    {"nav-component__sub-menu--print" : showFizzBuzzPrint},
+    {"nav-component__sub-menu--up-down": showFizzBuzzUpDown},
+    {"nav-component__sub-menu--iterate": showFizzBuzzIterate},
+    {"fizz-buzz-component__button--call": fizzBuzzCall},
+    {"fizz-buzz-component__button--print": fizzBuzzPrint},
+    {"fizz-buzz-component__button--down": fizzBuzzDown},
+    {"fizz-buzz-component__button--up": fizzBuzzUp},
+    {"fizz-buzz-component__button--iterate": fizzBuzzIterate}
+  ].forEach( (hash) => {
+    Object.keys(hash).forEach((key) =>{
+      let menu = document.getElementById(key);
+      menu.addEventListener('click', hash[key]);
+    });
+  });
 
   function showFizzBuzzCall() {
     document.getElementById("fizz-buzz-component__article--call").style.display = "block";
