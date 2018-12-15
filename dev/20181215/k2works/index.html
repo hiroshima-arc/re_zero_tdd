@@ -82,16 +82,16 @@
             <li>
               <a href="index.html">FizzBuzz</a>
               <ul id="nav-component__sub-menu--fizz-buzz">
-                <li onclick="showFizzBuzzCall()">
+                <li id="nav-component__sub-menu--call">
                   <a href="#">FizzBuzzCall</a>
                 </li>
-                <li onclick="showFizzBuzzPrint()">
+                <li id="nav-component__sub-menu--print">
                   <a href="#">FizzBuzzPrint</a>
                 </li>
-                <li onclick="showFizzBuzzUpDown()">
+                <li id="nav-component__sub-menu--up-down">
                   <a href="#">FizzBuzzUpDown</a>
                 </li>
-                <li onclick="showFizzBuzzIterate()">
+                <li id="nav-component__sub-menu--iterate">
                   <a href="#">FizzBuzzIterate</a>
                 </li>
               </ul>
@@ -107,21 +107,21 @@
           <article id="fizz-buzz-component__article--call">
             <h1>FizzBuzzCall</h1>
             <input id="fizz-buzz-component__input--call" type="text" />
-            <input onclick="fizzBuzzCall()" type="button" value="Call" />
+            <input id="fizz-buzz-component__button--call" type="button" value="Call" />
           </article>
 
           <article id="fizz-buzz-component__article--print">
             <h1>FizzBuzzPrint</h1>
             <div id="fizz-buzz-component__print--message">Initialized</div>
             <input id="fizz-buzz-component__input--print" type="text" />
-            <input onclick="fizzBuzzPrint()" type="button" value="Print" />
+            <input id="fizz-buzz-component__button--print" type="button" value="Print" />
           </article>
 
           <article id="fizz-buzz-component__article--up-down">
             <h1>FizzBuzzUpDown</h1>
             <div id="fizz-buzz-component__up-down--message">Ready</div>
-            <input id="fizz-buzz-component__input--down" onclick="fizzBuzzDown()" type="button" value="-" />
-            <input id="fizz-buzz-component__input--up" onclick="fizzBuzzUp()" type="button" value="+" />
+            <input id="fizz-buzz-component__button--down" type="button" value="-" />
+            <input id="fizz-buzz-component__button--up" type="button" value="+" />
           </article>
 
           <article id="fizz-buzz-component__article--iterate">
@@ -129,7 +129,6 @@
             <input id="fizz-buzz-component__input--iterate" type="text" />
             <input
               id="fizz-buzz-component__button--iterate"
-              onclick="fizzBuzzIterate()"
               type="button"
               value="execute"
             />
@@ -157,6 +156,26 @@
 
   // FizzBuzz
   // Controller
+  let menu = document.getElementById("nav-component__sub-menu--call");
+  menu.addEventListener('click', showFizzBuzzCall);
+  menu = document.getElementById("nav-component__sub-menu--print");
+  menu.addEventListener('click', showFizzBuzzPrint);
+  menu = document.getElementById("nav-component__sub-menu--up-down");
+  menu.addEventListener('click', showFizzBuzzUpDown);
+  menu = document.getElementById("nav-component__sub-menu--iterate");
+  menu.addEventListener('click', showFizzBuzzIterate);
+
+  menu = document.getElementById("fizz-buzz-component__button--call");
+  menu.addEventListener('click', fizzBuzzCall);
+  menu = document.getElementById("fizz-buzz-component__button--print");
+  menu.addEventListener('click', fizzBuzzPrint);
+  menu = document.getElementById("fizz-buzz-component__button--down");
+  menu.addEventListener('click', fizzBuzzDown);
+  menu = document.getElementById("fizz-buzz-component__button--up");
+  menu.addEventListener('click', fizzBuzzUp);
+  menu = document.getElementById("fizz-buzz-component__button--iterate");
+  menu.addEventListener('click', fizzBuzzIterate);
+
   function showFizzBuzzCall() {
     document.getElementById("fizz-buzz-component__article--call").style.display = "block";
     document.getElementById("fizz-buzz-component__article--print").style.display = "none";
