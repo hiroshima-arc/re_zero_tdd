@@ -192,31 +192,26 @@
   });
 
   function showFizzBuzzCall() {
-    $("#fizz-buzz-component__article--call").css("display", "block");
-    $("#fizz-buzz-component__article--print").css("display", "none");
-    $("#fizz-buzz-component__article--up-down").css("display", "none");
-    $("#fizz-buzz-component__article--iterate").css("display", "none");
+    showFizzBuzz(call="block", print="none", updown="none", iterate="none");
   }
 
   function showFizzBuzzPrint() {
-    $("#fizz-buzz-component__article--call").css("display", "none");
-    $("#fizz-buzz-component__article--print").css("display", "block");
-    $("#fizz-buzz-component__article--up-down").css("display", "none");
-    $("#fizz-buzz-component__article--iterate").css("display", "none");
+    showFizzBuzz(call="none", print="block", updown="none", iterate="none");
   }
 
   function showFizzBuzzUpDown() {
-    $("#fizz-buzz-component__article--call").css("display", "none");
-    $("#fizz-buzz-component__article--print").css("display", "none");
-    $("#fizz-buzz-component__article--up-down").css("display", "block");
-    $("#fizz-buzz-component__article--iterate").css("display", "none");
+    showFizzBuzz(call="none", print="none", updown="block", iterate="none");
   }
 
   function showFizzBuzzIterate() {
-    $("#fizz-buzz-component__article--call").css("display", "none");
-    $("#fizz-buzz-component__article--print").css("display", "none");
-    $("#fizz-buzz-component__article--up-down").css("display", "none");
-    $("#fizz-buzz-component__article--iterate").css("display", "block");
+    showFizzBuzz(call="none", print="none", updown="none", iterate="block");
+  }
+
+  function showFizzBuzz(call="none", print="none", updown="none", iterate="none") {
+    $("#fizz-buzz-component__article--call").css("display", call);
+    $("#fizz-buzz-component__article--print").css("display", print);
+    $("#fizz-buzz-component__article--up-down").css("display", updown);
+    $("#fizz-buzz-component__article--iterate").css("display", iterate);
   }
 
   function renderHtmlTable(array) {
