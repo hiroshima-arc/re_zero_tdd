@@ -186,69 +186,37 @@
     {"fizz-buzz-component__button--iterate": fizzBuzzIterate}
   ].forEach(hash => {
     Object.keys(hash).forEach(key => {
-      let menu = document.getElementById(key);
-      menu.addEventListener("click", hash[key]);
+      let menu = $(`#${key}`);
+      menu.on("click", hash[key]);
     });
   });
 
   function showFizzBuzzCall() {
-    document.getElementById(
-      "fizz-buzz-component__article--call"
-    ).style.display = "block";
-    document.getElementById(
-      "fizz-buzz-component__article--print"
-    ).style.display = "none";
-    document.getElementById(
-      "fizz-buzz-component__article--up-down"
-    ).style.display = "none";
-    document.getElementById(
-      "fizz-buzz-component__article--iterate"
-    ).style.display = "none";
+    $("#fizz-buzz-component__article--call").css("display", "block");
+    $("#fizz-buzz-component__article--print").css("display", "none");
+    $("#fizz-buzz-component__article--up-down").css("display", "none");
+    $("#fizz-buzz-component__article--iterate").css("display", "none");
   }
 
   function showFizzBuzzPrint() {
-    document.getElementById(
-      "fizz-buzz-component__article--call"
-    ).style.display = "none";
-    document.getElementById(
-      "fizz-buzz-component__article--print"
-    ).style.display = "block";
-    document.getElementById(
-      "fizz-buzz-component__article--up-down"
-    ).style.display = "none";
-    document.getElementById(
-      "fizz-buzz-component__article--iterate"
-    ).style.display = "none";
+    $("#fizz-buzz-component__article--call").css("display", "none");
+    $("#fizz-buzz-component__article--print").css("display", "block");
+    $("#fizz-buzz-component__article--up-down").css("display", "none");
+    $("#fizz-buzz-component__article--iterate").css("display", "none");
   }
 
   function showFizzBuzzUpDown() {
-    document.getElementById(
-      "fizz-buzz-component__article--call"
-    ).style.display = "none";
-    document.getElementById(
-      "fizz-buzz-component__article--print"
-    ).style.display = "none";
-    document.getElementById(
-      "fizz-buzz-component__article--up-down"
-    ).style.display = "block";
-    document.getElementById(
-      "fizz-buzz-component__article--iterate"
-    ).style.display = "none";
+    $("#fizz-buzz-component__article--call").css("display", "none");
+    $("#fizz-buzz-component__article--print").css("display", "none");
+    $("#fizz-buzz-component__article--up-down").css("display", "block");
+    $("#fizz-buzz-component__article--iterate").css("display", "none");
   }
 
   function showFizzBuzzIterate() {
-    document.getElementById(
-      "fizz-buzz-component__article--call"
-    ).style.display = "none";
-    document.getElementById(
-      "fizz-buzz-component__article--print"
-    ).style.display = "none";
-    document.getElementById(
-      "fizz-buzz-component__article--up-down"
-    ).style.display = "none";
-    document.getElementById(
-      "fizz-buzz-component__article--iterate"
-    ).style.display = "block";
+    $("#fizz-buzz-component__article--call").css("display", "none");
+    $("#fizz-buzz-component__article--print").css("display", "none");
+    $("#fizz-buzz-component__article--up-down").css("display", "none");
+    $("#fizz-buzz-component__article--iterate").css("display", "block");
   }
 
   function renderHtmlTable(array) {
@@ -286,30 +254,25 @@
   }
 
   function fizzBuzzIterate() {
-    const target = document.getElementById(
-      "fizz-buzz-component__iterate--result"
-    );
-    let count = document.getElementById("fizz-buzz-component__input--iterate")
-      .value;
+    const target = $("#fizz-buzz-component__iterate--result");
+    let count = $("#fizz-buzz-component__input--iterate").val();
     if (count > COUNT) {
-      return (target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`);
+      return (target.html(`<strong>件数は${COUNT}までです。</strong>`));
     }
 
     const array = iterate(count);
 
-    target.innerHTML = renderHtmlTable(array);
+    target.html(renderHtmlTable(array));
   }
 
   fizzBuzzUpDownCount = 0;
 
   function fizzBuzzUp() {
     fizzBuzzUpDownCount += 1;
-    const target = document.getElementById(
-      "fizz-buzz-component__up-down--message"
-    );
+    const target = $("#fizz-buzz-component__up-down--message");
     const count = fizzBuzzUpDownCount;
     const value = fizzBuzz(count);
-    target.innerHTML = value;
+    target.html(value);
   }
 
   function fizzBuzzDown() {
@@ -318,29 +281,23 @@
     } else {
       fizzBuzzUpDownCount -= 1;
     }
-    const target = document.getElementById(
-      "fizz-buzz-component__up-down--message"
-    );
+    const target = $("#fizz-buzz-component__up-down--message");
     const count = fizzBuzzUpDownCount;
-    target.innerHTML = fizzBuzz(count);
+    target.html(fizzBuzz(count));
   }
 
   function fizzBuzzPrint() {
-    const value = document.getElementById("fizz-buzz-component__input--print")
-      .value;
-    const target = document.getElementById(
-      "fizz-buzz-component__print--message"
-    );
+    const value = $("#fizz-buzz-component__input--print").val();
+    const target = $("#fizz-buzz-component__print--message");
     if (isNaN(value)) {
-      target.innerHTML = "数字を入れてください。";
+      target.html("数字を入れてください。");
     } else {
-      target.innerHTML = fizzBuzz(value);
+      target.html(fizzBuzz(value));
     }
   }
 
   function fizzBuzzCall() {
-    const value = document.getElementById("fizz-buzz-component__input--call")
-      .value;
+    const value = $("#fizz-buzz-component__input--call").val();
     if (isNaN(value)) {
       alert("数字を入れてください。");
     } else {
