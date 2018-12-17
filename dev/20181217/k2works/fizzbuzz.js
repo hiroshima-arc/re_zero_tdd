@@ -19,50 +19,60 @@
 
 function showFizzBuzzCall() {
   showFizzBuzz(
-    (call = "block"),
-    (print = "none"),
-    (updown = "none"),
-    (iterate = "none")
+    {
+      "call": "block",
+      "print": "none",
+      "updown": "none",
+      "iterate": "none"
+    }
   );
 }
 
 function showFizzBuzzPrint() {
   showFizzBuzz(
-    (call = "none"),
-    (print = "block"),
-    (updown = "none"),
-    (iterate = "none")
+    {
+      "call": "none",
+      "print": "block",
+      "updown": "none",
+      "iterate": "none"
+    }
   );
 }
 
 function showFizzBuzzUpDown() {
   showFizzBuzz(
-    (call = "none"),
-    (print = "none"),
-    (updown = "block"),
-    (iterate = "none")
+    {
+      "call": "none",
+      "print": "none",
+      "updown": "block",
+      "iterate": "none"
+    }
   );
 }
 
 function showFizzBuzzIterate() {
   showFizzBuzz(
-    (call = "none"),
-    (print = "none"),
-    (updown = "none"),
-    (iterate = "block")
+    {
+      "call": "none",
+      "print": "none",
+      "updown": "none",
+      "iterate": "block"
+    }
   );
 }
 
 function showFizzBuzz(
-  call = "none",
-  print = "none",
-  updown = "none",
-  iterate = "none"
+  state = {
+    "call": "none",
+    "print": "none",
+    "updown": "none",
+    "iterate": "none"
+  }
 ) {
-  $("#fizz-buzz-component__article--call").css("display", call);
-  $("#fizz-buzz-component__article--print").css("display", print);
-  $("#fizz-buzz-component__article--up-down").css("display", updown);
-  $("#fizz-buzz-component__article--iterate").css("display", iterate);
+  $("#fizz-buzz-component__article--call").css("display", state["call"]);
+  $("#fizz-buzz-component__article--print").css("display", state["print"]);
+  $("#fizz-buzz-component__article--up-down").css("display", state["updown"]);
+  $("#fizz-buzz-component__article--iterate").css("display", state["iterate"]);
 }
 
 function renderHtmlTable(array) {
