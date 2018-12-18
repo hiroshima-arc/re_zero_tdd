@@ -267,6 +267,24 @@ npm install -g --save remark-cli remark-preset-lint-recommended
 npm run check
 ```
 
+#### ESlint
+
+マークダウンファイルのコードチェックをする
+
+インストール
+
+```
+npm install -g eslint-cli
+npm install --save-dev eslint
+npx eslint --init 
+```
+
+実行
+
+```
+npm run lint
+```
+
 **[⬆ back to top](#構成)**
 
 ## 開発
@@ -309,6 +327,8 @@ docker-compose up env-ruby
 - [docker cloud](https://cloud.docker.com/u/hiroshimaarc/repository/docker/hiroshimaarc/re-zero-tdd)
 - [Prettier](https://prettier.io/)
 - [remarklint](https://github.com/remarkjs/remark-lint)
+- [ESLint 最初の一歩](https://qiita.com/mysticatea/items/f523dab04a25f617c87d)
+- [新しくなった eslint --init を試す](https://qiita.com/mysticatea/items/e2cd8b2c9879b3b0f561)
 
 # このリポジトリへの参加方法
 
