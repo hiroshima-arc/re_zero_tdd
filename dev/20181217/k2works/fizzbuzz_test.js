@@ -1,8 +1,10 @@
+import {fizzBuzz, iterate} from "fizzbuzz";
+
 function assert(expected, actual) {
   console.log(".");
   console.assert(
     expected === actual,
-    `\nexp:` + expected + `\nact:` + actual
+    "\nexp:" + expected + "\nact:" + actual
   );
 }
 

@@ -1,15 +1,15 @@
 // FizzBuzz
 // Controller
 [
-  { "nav-component__sub-menu--call": showFizzBuzzCall },
-  { "nav-component__sub-menu--print": showFizzBuzzPrint },
-  { "nav-component__sub-menu--up-down": showFizzBuzzUpDown },
-  { "nav-component__sub-menu--iterate": showFizzBuzzIterate },
-  { "fizz-buzz-component__button--call": fizzBuzzCall },
-  { "fizz-buzz-component__button--print": fizzBuzzPrint },
-  { "fizz-buzz-component__button--down": fizzBuzzDown },
-  { "fizz-buzz-component__button--up": fizzBuzzUp },
-  { "fizz-buzz-component__button--iterate": fizzBuzzIterate }
+  {"nav-component__sub-menu--call": showFizzBuzzCall},
+  {"nav-component__sub-menu--print": showFizzBuzzPrint},
+  {"nav-component__sub-menu--up-down": showFizzBuzzUpDown},
+  {"nav-component__sub-menu--iterate": showFizzBuzzIterate},
+  {"fizz-buzz-component__button--call": fizzBuzzCall},
+  {"fizz-buzz-component__button--print": fizzBuzzPrint},
+  {"fizz-buzz-component__button--down": fizzBuzzDown},
+  {"fizz-buzz-component__button--up": fizzBuzzUp},
+  {"fizz-buzz-component__button--iterate": fizzBuzzIterate}
 ].forEach(hash => {
   Object.keys(hash).forEach(key => {
     let menu = $(`#${key}`);
@@ -80,7 +80,7 @@ function renderHtmlTable(array) {
   let html = "<table>";
 
   html = html + "<thead>";
-  [...Array(10).keys()].forEach(function(v) {
+  [...Array(10).keys()].forEach(function (v) {
     html = html + `<th>${v + 1}</th>`;
   });
   html = html + "</thead>";
@@ -88,7 +88,7 @@ function renderHtmlTable(array) {
   html = html + "<tbody>";
 
   html = html + "<tr>";
-  array.forEach(function(value) {
+  array.forEach(function (value) {
     if (rowCount > 10) {
       html = html + "<tr>";
     }
@@ -121,7 +121,7 @@ function fizzBuzzIterate() {
   target.html(renderHtmlTable(array));
 }
 
-fizzBuzzUpDownCount = 0;
+let fizzBuzzUpDownCount = 0;
 
 function fizzBuzzUp() {
   fizzBuzzUpDownCount += 1;
@@ -175,7 +175,7 @@ function iterate(count) {
 }
 
 function execute() {
-  iterate(COUNT).forEach(function(value) {
+  iterate(COUNT).forEach(function (value) {
     console.log(value);
   });
 }
