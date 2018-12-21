@@ -70,7 +70,8 @@ RUN ~/.rbenv/shims/gem install bundler \
                                byebug \
                                pry \
                                pry-byebug \
-                               minitest-reporters
+                               minitest-reporters \
+                               simplecov
 
 ### For vscode
 RUN code --user-data-dir --install-extension ms-ceintl.vscode-language-pack-ja

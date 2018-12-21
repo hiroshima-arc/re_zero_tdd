@@ -1,8 +1,6 @@
-FROM amazonlinux:latest
+FROM amazonlinux:1
 
 ENV HOME /root
-ENV LC_ALL C.UTF-8
-ENV LANG C.UTF-8
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN yum update -y && \
@@ -32,10 +30,7 @@ RUN yum update -y && \
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
     python get-pip.py && \
-    pip install awscli  && \
-    pip install aws-sam-cli==0.5.0
-RUN  export LC_ALL=C.UTF-8 && \
-     export LANG=C.UTF-8
+    pip install awscli
 
 # For Ruby
 ENV RUBY_VER 2.5.3
