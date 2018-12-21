@@ -1,5 +1,6 @@
-// FizzBuzz
-// Controller
+import {fizzBuzz} from "./fizzbuzz_model";
+import {execute, iterate, COUNT} from "./fizzbuzz_controller";
+
 [
   {"nav-component__sub-menu--call": showFizzBuzzCall},
   {"nav-component__sub-menu--print": showFizzBuzzPrint},
@@ -158,38 +159,6 @@ function fizzBuzzCall() {
     alert("数字を入れてください。");
   } else {
     alert(fizzBuzz(value));
-  }
-}
-
-const COUNT = 100;
-
-function iterate(count) {
-  let number = 1;
-  let array = [];
-
-  while (number <= count) {
-    array.push(fizzBuzz(number));
-    number++;
-  }
-  return array;
-}
-
-function execute() {
-  iterate(COUNT).forEach(function (value) {
-    console.log(value);
-  });
-}
-
-// Domain
-function fizzBuzz(number) {
-  if (number % 3 === 0 && number % 5 === 0) {
-    return "FizzBuzz";
-  } else if (number % 3 === 0) {
-    return "Fizz";
-  } else if (number % 5 === 0) {
-    return "Buzz";
-  } else {
-    return number;
   }
 }
 
