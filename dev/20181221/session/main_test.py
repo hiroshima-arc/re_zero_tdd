@@ -27,14 +27,27 @@ FIZZ = 'Fizz'
 BUZZ = 'Buzz'
 
 def fizzBuzz(num):
-  if (num % 3 == 0) and (num % 5 == 0):
+  if isFizz(num) and isBuzz(num):
     return FIZZ_BUZZ
-  elif (num % 3) == 0:
+  elif isFizz(num):
     return FIZZ
-  elif (num % 5) == 0:
+  elif isBuzz(num):
     return BUZZ
   else: 
     return num
+
+def isFizz(num):
+  if (num % 3 == 0):
+    return True
+  else:
+    return False
+
+def isBuzz(num):
+  if (num % 5 == 0):
+    return True
+  else:
+    return False
+
 
 if __name__ == '__main__':
     unittest.main()
