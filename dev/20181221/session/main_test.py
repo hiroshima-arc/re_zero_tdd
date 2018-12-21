@@ -5,7 +5,7 @@ class TestMain(unittest.TestCase):
       actual = []
       actual = print1from100()
       self.assertEqual(1 , actual[1])
-      self.assertEqual(100, actual[-1])
+      self.assertEqual('Buzz', actual[-1])
 
     def test_3で割り切れたらFizzを返す(self):
         self.assertEqual('Fizz',fizzBuzz(3))
@@ -18,7 +18,7 @@ class TestMain(unittest.TestCase):
 def print1from100():
     array = []
     for i in range(101):
-        array.append(i)
+        array.append(fizzBuzz(i))
 
     return array
 
@@ -29,6 +29,8 @@ def fizzBuzz(num):
     return 'Fizz'
   elif (num % 5) == 0:
     return 'Buzz'
+  else: 
+    return num
 
 if __name__ == '__main__':
     unittest.main()
