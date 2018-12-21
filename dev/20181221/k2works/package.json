@@ -1,0 +1,16 @@
+{
+  "name": "k2works",
+  "version": "1.0.0",
+  "description": "## 概要",
+  "main": "src/fizzbuzz.js",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3"
+  }
+}

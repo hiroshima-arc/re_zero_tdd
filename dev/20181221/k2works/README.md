@@ -14,11 +14,30 @@ ES6モジュールの分割とテストフレームワークの導入
 
 ### TODO リスト
 
-- [ ] トランスパイラのセットアップ
+- [x] トランスパイラのセットアップ
 - [ ] テストフレームワークのセットアップ
 - [ ] テストの作成
 
 ## 開発
+
+npmセットアップ
+
+```
+npm init
+```
+
+Babel CLIセットアップ
+
+```
+npm install --save-dev @babel/core @babel/cli
+npm install @babel/preset-env --save-dev
+```
+
+トランスパイラの実行
+
+```
+npm run build
+```
 
 ### ふりかえり
 
@@ -29,3 +48,5 @@ ES6モジュールの分割とテストフレームワークの導入
 #### Try
 
 ## 参照
+
+- [BABEL](https://babeljs.io/)
