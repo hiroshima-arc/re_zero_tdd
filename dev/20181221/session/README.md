@@ -8,6 +8,7 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 
 - [k2works](https://github.com/k2works)
 - [hi6sasa](https://github.com/hi6sasa)
+- K-yamashi
 
 ## 仕様
 
@@ -31,12 +32,12 @@ FizzBuzz をクラスを使わずにテスト駆動で実装する。
 
 - テストファースト
 - アサートファースト
-- リファクタリング
+-  リファクタリング
 
 #### Problem
 
 #### Try
 
-- JavaScriptをやってみる
+- JavaScript をやってみる
 
 ## 参照
