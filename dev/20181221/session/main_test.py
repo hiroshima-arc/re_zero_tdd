@@ -22,13 +22,17 @@ def print1from100():
 
     return array
 
+FIZZ_BUZZ = 'FizzBuzz'
+FIZZ = 'Fizz'
+BUZZ = 'Buzz'
+
 def fizzBuzz(num):
   if (num % 3 == 0) and (num % 5 == 0):
-    return 'FizzBuzz'
+    return FIZZ_BUZZ
   elif (num % 3) == 0:
-    return 'Fizz'
+    return FIZZ
   elif (num % 5) == 0:
-    return 'Buzz'
+    return BUZZ
   else: 
     return num
 
