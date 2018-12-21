@@ -12,6 +12,7 @@ class TestMain(unittest.TestCase):
     
     def test_5で割り切れたらBuzzを返す(self):
         self.assertEqual('Buzz',fizzBuzz(5))
+        
     def test_3かつ5で割り切れたらFizzBuzzを返す(self):
         self.assertEqual('FizzBuzz',fizzBuzz(15))
 
