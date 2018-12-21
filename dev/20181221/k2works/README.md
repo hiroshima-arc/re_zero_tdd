@@ -15,10 +15,12 @@ ES6モジュールの分割とテストフレームワークの導入
 ### TODO リスト
 
 - [x] トランスパイラのセットアップ
-- [ ] テストフレームワークのセットアップ
+- [x] テストフレームワークのセットアップ
 - [ ] テストの作成
 
 ## 開発
+
+### トランスパイラのセットアップ
 
 npmセットアップ
 
@@ -37,6 +39,14 @@ npm install @babel/preset-env --save-dev
 
 ```
 npm run build
+```
+
+### テストフレームワークのセットアップ
+
+```
+npm install --save-dev mocha
+npm install --save-dev @babel/register
+npm install --save-dev @babel/polyfill
 ```
 
 ### ふりかえり
