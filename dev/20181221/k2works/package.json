@@ -15,6 +15,7 @@
     "@babel/polyfill": "^7.2.3",
     "@babel/preset-env": "^7.2.3",
     "@babel/register": "^7.0.0",
+    "jsdom": "^13.1.0",
     "mocha": "^5.2.0"
   }
 }

@@ -16,7 +16,7 @@ ES6モジュールの分割とテストフレームワークの導入
 
 - [x] トランスパイラのセットアップ
 - [x] テストフレームワークのセットアップ
-- [ ] テストの作成
+- [x] テストの作成
 
 ## 開発
 
@@ -60,3 +60,4 @@ npm install --save-dev @babel/polyfill
 ## 参照
 
 - [BABEL](https://babeljs.io/)
+- [jsdom](https://github.com/jsdom/jsdom)
