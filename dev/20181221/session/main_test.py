@@ -8,12 +8,12 @@ class TestMain(unittest.TestCase):
       self.assertEqual(100, actual[-1])
 
     def test_3で割り切れたらFizzを返す(self):
-        self.assertEqual('Fizz',executeFizz(3))
+        self.assertEqual('Fizz',fizzBuzz(3))
     
     def test_5で割り切れたらBuzzを返す(self):
-        self.assertEqual('Buzz',executeFizz(5))
+        self.assertEqual('Buzz',fizzBuzz(5))
     def test_3かつ5で割り切れたらFizzBuzzを返す(self):
-        self.assertEqual('FizzBuzz',executeFizzBuzz(15))
+        self.assertEqual('FizzBuzz',fizzBuzz(15))
 
 def print1from100():
     array = []
@@ -22,15 +22,13 @@ def print1from100():
 
     return array
 
-def executeFizz(num):
-    if (num % 3) == 0:
-        return 'Fizz'
-    elif (num % 5) == 0:
-        return 'Buzz'
-
-def executeFizzBuzz(num):
-    if(num % 15) == 0:
-        return 'FizzBuzz'
+def fizzBuzz(num):
+  if (num % 3 == 0) and (num % 5 == 0):
+    return 'FizzBuzz'
+  elif (num % 3) == 0:
+    return 'Fizz'
+  elif (num % 5) == 0:
+    return 'Buzz'
 
 if __name__ == '__main__':
     unittest.main()
