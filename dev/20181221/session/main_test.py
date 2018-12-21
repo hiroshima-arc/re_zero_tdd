@@ -12,6 +12,8 @@ class TestMain(unittest.TestCase):
     
     def test_5で割り切れたらBuzzを返す(self):
         self.assertEqual('Buzz',executeFizz(5))
+    def test_3かつ5で割り切れたらFizzBuzzを返す(self):
+        self.assertEqual('FizzBuzz',executeFizzBuzz(15))
 
 def print1from100():
     array = []
@@ -26,5 +28,10 @@ def executeFizz(num):
     elif (num % 5) == 0:
         return 'Buzz'
 
+def executeFizzBuzz(num):
+    if(num % 15) == 0:
+        return 'FizzBuzz'
+
 if __name__ == '__main__':
     unittest.main()
+  
