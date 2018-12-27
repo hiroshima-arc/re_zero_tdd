@@ -28,6 +28,19 @@ namespace :test do
     end
   end
 
+  desc 'JavaScriptテスト'
+  task :nodejs do
+    cd work do
+      ['20181221/k2works'].each do |dir|
+        cd dir do
+          sh "npm install;npm test"
+          sh "mv coverage/lcov.info ../../coverage/"
+        end
+      end
+    end
+  end
+
+
   desc 'Test all task'
   task all: %i[ruby python elixir]
 end
