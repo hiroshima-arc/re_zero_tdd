@@ -1,3 +1,5 @@
+/* eslint-env mocha */
+
 import {iterate} from "../src/fizzbuzz_controller";
 import assert from "assert";
 import {fizzBuzz} from "../src/fizzbuzz_model";

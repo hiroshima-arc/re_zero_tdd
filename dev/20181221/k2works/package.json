@@ -5,7 +5,7 @@
   "main": "src/fizzbuzz.js",
   "scripts": {
     "build": "babel src -d lib",
-    "test": "mocha --require @babel/register"
+    "test": "mocha --require @babel/register test/**"
   },
   "author": "",
   "license": "ISC",
