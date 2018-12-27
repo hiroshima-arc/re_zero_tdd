@@ -60,7 +60,13 @@ npm install jquery
 
 #### Keep
 
+- ES6
+- Babel & webpack
+
 #### Problem
+
+- jQueryとテストの相性が悪い
+- domのテストがうまく行かなかった
 
 #### Try
 
