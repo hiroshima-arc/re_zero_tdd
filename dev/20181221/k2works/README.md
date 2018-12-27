@@ -49,6 +49,13 @@ npm install --save-dev @babel/register
 npm install --save-dev @babel/polyfill
 ```
 
+### パッケージバンドラーのセットアップ
+
+```
+npm i -D webpack webpack-cli webpack-dev-server babel-loader
+npm install jquery
+```
+
 ### ふりかえり
 
 #### Keep
@@ -58,6 +65,9 @@ npm install --save-dev @babel/polyfill
 #### Try
 
 ## 参照
+
+- [最新版で学ぶwebpack 4入門 – JavaScriptのモジュールバンドラ](https://ics.media/entry/12140/3)
+- [ES6モジュールのインポートとエクスポート](https://qiita.com/dondoko-susumu/items/55f54582d31b0f0fd687)
 
 - [BABEL](https://babeljs.io/)
 - [jsdom](https://github.com/jsdom/jsdom)

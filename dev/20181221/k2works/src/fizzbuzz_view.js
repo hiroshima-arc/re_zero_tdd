@@ -1,16 +1,6 @@
 import {fizzBuzz} from "./fizzbuzz_model";
 import {execute, iterate, COUNT} from "./fizzbuzz_controller";
 
-const jsdom = require("jsdom");
-const {JSDOM} = jsdom;
-const {window} = new JSDOM("", {
-  url: "http://localhost"
-});
-const {document} = new JSDOM("", {
-  url: "http://localhost"
-}).window;
-const $ = require("jquery")(window);
-
 [
   {"nav-component__sub-menu--call": showFizzBuzzCall},
   {"nav-component__sub-menu--print": showFizzBuzzPrint},

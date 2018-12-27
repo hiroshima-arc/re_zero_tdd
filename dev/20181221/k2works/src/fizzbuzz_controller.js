@@ -19,4 +19,4 @@ function execute() {
   });
 }
 
-export {iterate, execute};
+export {iterate, execute, COUNT};

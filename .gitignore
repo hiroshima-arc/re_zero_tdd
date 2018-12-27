@@ -84,3 +84,5 @@ coverage
 coverage.xml
 .coverage
 tmp
+
+dist
