@@ -94,3 +94,6 @@ RUN source  $HOME/.bash_profile && \
             asdf install elixir $ELIXIR_VER  && \
             asdf global elixir $ELIXIR_VER
 ENV PATH $HOME/.asdf/shims:$PATH
+
+# For PHP
+RUN yum -y install php72

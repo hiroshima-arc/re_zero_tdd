@@ -12,7 +12,8 @@ ENV LANGUAGE ja_JP:ja
 ENV LC_ALL ja_JP.UTF-8
 
 RUN apt-get update && \
-    apt-get install -y language-pack-ja-base \
+    apt-get install -y --no-install-recommends \
+                       language-pack-ja-base \
                        language-pack-ja \
                        ibus-mozc
 
@@ -40,7 +41,9 @@ RUN apt-get update && \
     zlib1g-dev \
     libasound2-dev \
     libxss1 \
-    libxtst6
+    libxtst6 \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN chmod 0777 /usr/local/share
 RUN chmod 0777 /usr/local/bin

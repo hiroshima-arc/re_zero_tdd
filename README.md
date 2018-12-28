@@ -108,7 +108,6 @@ source ~/.bashrc
 nvm install v8.10
 nvm alias default v8.10
 ```
-
 ##### Python のセットアップ
 
 - pyenv のインストール
@@ -170,6 +169,38 @@ asdf list-all elixir
 asdf install elixir 1.7.4
 asdf local elixir 1.7.4
 ```
+
+##### PHP のセットアップ
+
+- phpenv のインストール
+- PHP のインストール
+
+```bash
+export PHP_VER=7.3.0
+git clone https://github.com/CHH/phpenv.git
+phpenv/bin/phpenv-install.sh
+git clone git://github.com/CHH/php-build.git $HOME/.phpenv/plugins/php-build
+sudo yum --enablerepo=epel install re2c libmcrypt libmcrypt-devel
+sudo yum install libxml2-devel bison bison-devel openssl-devel curl-devel libjpeg-devel libpng-devel libmcrypt-devel readline-devel libtidy-devel libxslt-devel httpd-devel enchant-devel libXpm libXpm-devel freetype-devel t1lib t1lib-devel gmp-devel libc-client-devel libicu-devel oniguruma-devel net-snmp net-snmp-devel bzip2-devel
+```
+
+`~/.bashrc`に以下を追加して`source ~/.bashrc`
+
+```
+echo 'export PATH="/$HOME/.phpenv/bin:$PATH"' >> $HOME/.bash_profile
+echo 'eval "$(phpenv init -)"' >> $HOME/.bash_profile
+```
+
+利用する PHP のバージョンをインストールする
+
+```
+cd /vagrant
+phpenv install -l
+phpenv install $PHP_VER
+phpenv global $PHP_VER
+```
+
+
 
 #### CI 環境のセットアップ
 
