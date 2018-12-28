@@ -1,8 +1,15 @@
+function execute() {
+  iterate(100).forEach((value) => {
+    console.log(value);
+  });
+}
+
 function iterate(count) {
   let array = [];
-  [...Array(count + 1).keys()].forEach(function (n) {
+  [...Array(count + 1).keys()].forEach((n) => {
     array.push(fizzBuzz(n));
   });
+  array.shift();
   return array;
 }
 
@@ -20,5 +27,6 @@ function fizzBuzz(number) {
   return value;
 }
 
+module.exports.execute = execute;
 module.exports.iterate = iterate;
 module.exports.fizzBuzz = fizzBuzz;
