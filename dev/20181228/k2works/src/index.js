@@ -1,4 +1,2 @@
-import {execute} from "./fizzbuzz";
+import "./fizzbuzz_controller";
 import "./fizzbuzz_view";
-
-execute();

@@ -1,10 +1,11 @@
 import $ from "jquery";
+import * as constants from "./constants";
 import {
   fizzBuzz,
   iterate
-} from "./fizzbuzz";
+} from "./fizzbuzz_model";
 
-const MAX_COUNT = 100;
+const MAX_COUNT = constants.FIZZ_BUZZ_MAX_COUNT;
 let fizzBuzzUpDownCount = 0;
 
 [{

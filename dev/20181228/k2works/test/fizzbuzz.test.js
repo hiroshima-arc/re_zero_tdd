@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 const assert = require("assert");
-const fizzbuzz = require("../src/fizzbuzz");
+const fizzbuzz = require("../src/fizzbuzz_model");
 const iterate = fizzbuzz.iterate;
 const fizzBuzz = fizzbuzz.fizzBuzz;
 
