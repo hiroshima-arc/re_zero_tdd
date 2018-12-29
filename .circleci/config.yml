@@ -33,7 +33,12 @@ jobs:
           command: |
             rake test:elixir
       - run:
+          name: Run nodejs tests
+          command: |
+            rake test:nodejs
+            ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.nodjs.json dev/coverage/lcov.info
+      - run:
           name: Upload coverage results to Code Climate
           command: |
-            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 2 -o tmp/codeclimate.total.json
+            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 3 -o tmp/codeclimate.total.json
             ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.total.json

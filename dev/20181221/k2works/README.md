@@ -56,6 +56,12 @@ npm i -D webpack webpack-cli webpack-dev-server babel-loader
 npm install jquery
 ```
 
+### コードカバレッジのセットアップ
+
+```
+npm i babel-plugin-istanbul cross-env nyc --save-de
+```
+
 ### ふりかえり
 
 #### Keep
@@ -72,8 +78,7 @@ npm install jquery
 
 ## 参照
 
+- [BABEL](https://babeljs.io/)
+- [istanbul](https://istanbul.js.org/docs/tutorials/es2015/)
 - [最新版で学ぶwebpack 4入門 – JavaScriptのモジュールバンドラ](https://ics.media/entry/12140/3)
 - [ES6モジュールのインポートとエクスポート](https://qiita.com/dondoko-susumu/items/55f54582d31b0f0fd687)
-
-- [BABEL](https://babeljs.io/)
-- [jsdom](https://github.com/jsdom/jsdom)

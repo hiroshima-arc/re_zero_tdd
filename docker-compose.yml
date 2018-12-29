@@ -32,3 +32,15 @@ services:
     environment:
       - VNC_PW=guest
 
+  env-nodejs:
+    image: env-nodejs
+    build:
+      context: ops/docker/env/nodejs
+    ports:
+      - 5901:5901
+      - 6901:6901
+    volumes:
+      - ./dev:/headless/Desktop/dev
+    environment:
+      - VNC_PW=guest
+
