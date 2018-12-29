@@ -14,11 +14,18 @@
 
 ### TODO リスト
 
-- [ ] npmパッケージのセットアップ
+- [x] npmパッケージのセットアップ
 - [ ] reactのセットアップ
 - [ ] テスト
 
 ## 開発
+
+### npmパッケージのセットアップ
+
+```
+npm init
+npm install --save-dev @babel/core @babel/cli @babel/preset-env mocha @babel/register @babel/polyfill babel-plugin-istanbul cross-env nyc webpack webpack-cli webpack-dev-server babel-loader 
+```
 
 ### ふりかえり
 
