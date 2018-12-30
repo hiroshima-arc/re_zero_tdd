@@ -1,13 +1,10 @@
-const constants = require("./constants");
-const MAX_COUNT = constants.FIZZ_BUZZ_MAX_COUNT;
-
-function execute() {
-  iterate(MAX_COUNT).forEach((value) => {
+export function execute(max_count) {
+  iterate(max_count).forEach((value) => {
     console.log(value);
   });
 }
 
-function iterate(count) {
+export function iterate(count) {
   let array = [];
   [...Array(count + 1).keys()].forEach((n) => {
     array.push(fizzBuzz(n));
@@ -16,7 +13,7 @@ function iterate(count) {
   return array;
 }
 
-function fizzBuzz(number) {
+export function fizzBuzz(number) {
   let value = number;
 
   if ((number % 3 === 0) && (number % 5 === 0)) {
@@ -29,7 +26,3 @@ function fizzBuzz(number) {
 
   return value;
 }
-
-module.exports.execute = execute;
-module.exports.iterate = iterate;
-module.exports.fizzBuzz = fizzBuzz;

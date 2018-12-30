@@ -1,3 +1,1 @@
-const FIZZ_BUZZ_MAX_COUNT = 100;
-
-module.exports.FIZZ_BUZZ_MAX_COUNT = FIZZ_BUZZ_MAX_COUNT;
+export const FIZZ_BUZZ_MAX_COUNT = 100;
