@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./FizzBuzz.css";
 
 export class FizzBuzz extends React.Component {
   render() {
@@ -6,7 +7,7 @@ export class FizzBuzz extends React.Component {
       <div>
         <h1>HTML5+CSS+JavaScript with TDD</h1>
         <header>
-          <div className="nav-component">
+          <div className={styles["nav-component"]}>
             <nav>
               <h1>Menu</h1>
               <ul>
@@ -29,9 +30,9 @@ export class FizzBuzz extends React.Component {
             </nav>
           </div>
         </header>
-        <div className="components">
+        <div className={styles["component"]}>
           <section>
-            <div className="fizz-buzz-component">
+            <div className={styles["fizz-buzz-component"]}>
               <h1>FizzBuzz</h1>
               <article id="fizz-buzz-component__article--call">
                 <h2>FizzBuzzCall</h2>

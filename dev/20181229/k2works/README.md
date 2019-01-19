@@ -34,6 +34,12 @@ npm install react react-dom @babel/preset-react
 npm i -D webpack-dev-server html-webpack-plugin
 ```
 
+### CSS Moduleのセットアップ
+
+```
+npm install --save-dev css-loader style-loader
+```
+
 ### ふりかえり
 
 #### Keep

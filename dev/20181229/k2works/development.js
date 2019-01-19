@@ -36,14 +36,17 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        loaders: ["style-loader", "css-loader?modules"],
       }
     ]
   },
 
   resolve: {
-    extensions: [
-      ".jsx"
-    ],
+    extensions: [".js", ".jsx", ".scss", ".css", ".html"],
+    modules: ["node_modules"]
   },
 
   plugins: [
