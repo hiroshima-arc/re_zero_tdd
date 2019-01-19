@@ -40,6 +40,12 @@ module.exports = {
     ]
   },
 
+  resolve: {
+    extensions: [
+      ".jsx"
+    ],
+  },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: src + "/index.html",
