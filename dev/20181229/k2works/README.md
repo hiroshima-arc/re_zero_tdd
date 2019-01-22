@@ -46,6 +46,12 @@ npm install --save-dev css-loader style-loader
 npm install --save-dev jest babel-jest regenerator-runtime babel-core@^7.0.0-bridge.0
 ```
 
+### enzymeのセットアップ
+
+```
+npm install --save-dev enzyme enzyme-adapter-react-16 identity-obj-proxy
+```
+
 ### ふりかえり
 
 #### Keep
@@ -60,3 +66,4 @@ npm install --save-dev jest babel-jest regenerator-runtime babel-core@^7.0.0-bri
 - [新版で学ぶwebpack 4入門 – Babel 7でES2018環境の構築(React, Vue, Three.js, jQueryのサンプル付き)](https://ics.media/entry/16028)
 - [Babelとwebpackを使ってES6でReactを動かすまでのチュートリアル](https://qiita.com/akirakudo/items/77c3cd49e2bf39da79dd)
 - [Jest](https://jestjs.io/ja/)
+- [Jest + enzymeで行うReactのユニットテスト（単体テスト）について](https://mae.chab.in/archives/60066)
