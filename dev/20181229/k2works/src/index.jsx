@@ -7,7 +7,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <FizzBuzz/>
+        <FizzBuzz fizzBuzzUpDownCount={0}/>
       </div>
     );
   }
