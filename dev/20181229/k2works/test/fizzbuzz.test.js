@@ -1,8 +1,6 @@
-/* eslint-env mocha */
-const assert = require("assert");
-const fizzbuzz = require("../src/fizzbuzz_model");
-const iterate = fizzbuzz.iterate;
-const fizzBuzz = fizzbuzz.fizzBuzz;
+/* eslint-env jest */
+import assert from "assert";
+import {iterate, fizzBuzz} from "../src/fizzbuzz_model";
 
 describe("FizzBuzz", () => {
   describe("FizzBuzzController", () => {
