@@ -67,3 +67,6 @@ npm install --save-dev enzyme enzyme-adapter-react-16 identity-obj-proxy
 - [Babelとwebpackを使ってES6でReactを動かすまでのチュートリアル](https://qiita.com/akirakudo/items/77c3cd49e2bf39da79dd)
 - [Jest](https://jestjs.io/ja/)
 - [Jest + enzymeで行うReactのユニットテスト（単体テスト）について](https://mae.chab.in/archives/60066)
+- [Testing React with Jest and Enzyme I](https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675)
+- [マルチカーソルを使わないVSCodeはただのVSCodeだ！〜解説編〜](http://mugi1.hateblo.jp/entry/2018/12/11/215808)
+- [Enzyme cheatsheet](https://devhints.io/enzyme)
