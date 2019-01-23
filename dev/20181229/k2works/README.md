@@ -31,7 +31,7 @@ npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/register 
 
 ```
 npm install react react-dom @babel/preset-react jquery
-npm i --save-dev webpack-dev-server html-webpack-plugin
+npm i --save-dev webpack-dev-server html-webpack-plugin prop-types
 ```
 
 ### CSS Moduleのセットアップ
@@ -71,3 +71,4 @@ npm install --save-dev enzyme enzyme-adapter-react-16 identity-obj-proxy react-a
 - [マルチカーソルを使わないVSCodeはただのVSCodeだ！〜解説編〜](http://mugi1.hateblo.jp/entry/2018/12/11/215808)
 - [Enzyme cheatsheet](https://devhints.io/enzyme)
 - [6. Testing react components using Jest and Enzyme](https://medium.com/@aghh1504/6-testing-react-components-using-jest-and-enzyme-b85db96fa1e3)
+- [Jest( >23.0.0 )、enzymeでReactのテーブル駆動テストを行う #react #test](https://budougumi0617.github.io/2018/09/28/react-table-driven-test-by-jest-enzyme/)
