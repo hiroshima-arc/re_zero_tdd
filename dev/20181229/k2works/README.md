@@ -49,7 +49,7 @@ npm install --save-dev jest babel-jest regenerator-runtime babel-core@^7.0.0-bri
 ### enzymeのセットアップ
 
 ```
-npm install --save-dev enzyme enzyme-adapter-react-16 identity-obj-proxy
+npm install --save-dev enzyme enzyme-adapter-react-16 identity-obj-proxy react-addons-test-utils react-test-renderer
 ```
 
 ### ふりかえり
@@ -70,3 +70,4 @@ npm install --save-dev enzyme enzyme-adapter-react-16 identity-obj-proxy
 - [Testing React with Jest and Enzyme I](https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675)
 - [マルチカーソルを使わないVSCodeはただのVSCodeだ！〜解説編〜](http://mugi1.hateblo.jp/entry/2018/12/11/215808)
 - [Enzyme cheatsheet](https://devhints.io/enzyme)
+- [6. Testing react components using Jest and Enzyme](https://medium.com/@aghh1504/6-testing-react-components-using-jest-and-enzyme-b85db96fa1e3)
