@@ -1361,7 +1361,7 @@ ShallowWrapper {
 exports[`FizzBuzzコンポーネント FizzBuzzIterateを実行する 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <FizzBuzz />,
+  Symbol(enzyme.__unrendered__): <FizzBuzzIterate />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -1375,423 +1375,50 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": Array [
-        <h1>
-          HTML5+CSS+JavaScript with TDD
-        </h1>,
-        <header>
-          <FizzBuzzMenu />
-        </header>,
+      "children": <article
+        id="fizz-buzz-component__article--iterate"
+      >
+        <h2>
+          FizzBuzzIterate
+        </h2>
+        <input
+          id="fizz-buzz-component__input--iterate"
+          type="text"
+        />
+        <input
+          id="fizz-buzz-component__button--iterate"
+          type="button"
+          value="execute"
+        />
         <div
-          className="component"
-        >
-          <section>
-            <div
-              className="fizz-buzz-component"
-            >
-              <h1>
-                FizzBuzz
-              </h1>
-              <FizzBuzzCall />
-              <FizzBuzzPrint />
-              <FizzBuzzUpDown />
-              <article
-                id="fizz-buzz-component__article--iterate"
-              >
-                <h2>
-                  FizzBuzzIterate
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--iterate"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--iterate"
-                  type="button"
-                  value="execute"
-                />
-                <div
-                  id="fizz-buzz-component__iterate--result"
-                />
-              </article>
-            </div>
-          </section>
-        </div>,
-        <footer>
-          <p>
-            Copyrights
-          </p>
-          <address>
-            hiroshima-arc@gmail.com
-          </address>
-        </footer>,
-      ],
+          id="fizz-buzz-component__iterate--result"
+        />
+      </article>,
     },
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "HTML5+CSS+JavaScript with TDD",
-        },
-        "ref": null,
-        "rendered": "HTML5+CSS+JavaScript with TDD",
-        "type": "h1",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": <FizzBuzzMenu />,
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        "type": "header",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": <section>
-            <div
-              className="fizz-buzz-component"
-            >
-              <h1>
-                FizzBuzz
-              </h1>
-              <FizzBuzzCall />
-              <FizzBuzzPrint />
-              <FizzBuzzUpDown />
-              <article
-                id="fizz-buzz-component__article--iterate"
-              >
-                <h2>
-                  FizzBuzzIterate
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--iterate"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--iterate"
-                  type="button"
-                  value="execute"
-                />
-                <div
-                  id="fizz-buzz-component__iterate--result"
-                />
-              </article>
-            </div>
-          </section>,
-          "className": "component",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": <div
-              className="fizz-buzz-component"
-            >
-              <h1>
-                FizzBuzz
-              </h1>
-              <FizzBuzzCall />
-              <FizzBuzzPrint />
-              <FizzBuzzUpDown />
-              <article
-                id="fizz-buzz-component__article--iterate"
-              >
-                <h2>
-                  FizzBuzzIterate
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--iterate"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--iterate"
-                  type="button"
-                  value="execute"
-                />
-                <div
-                  id="fizz-buzz-component__iterate--result"
-                />
-              </article>
-            </div>,
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <h1>
-                  FizzBuzz
-                </h1>,
-                <FizzBuzzCall />,
-                <FizzBuzzPrint />,
-                <FizzBuzzUpDown />,
-                <article
-                  id="fizz-buzz-component__article--iterate"
-                >
-                  <h2>
-                    FizzBuzzIterate
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--iterate"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--iterate"
-                    type="button"
-                    value="execute"
-                  />
-                  <div
-                    id="fizz-buzz-component__iterate--result"
-                  />
-                </article>,
-              ],
-              "className": "fizz-buzz-component",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "FizzBuzz",
-                },
-                "ref": null,
-                "rendered": "FizzBuzz",
-                "type": "h1",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      FizzBuzzIterate
-                    </h2>,
-                    <input
-                      id="fizz-buzz-component__input--iterate"
-                      type="text"
-                    />,
-                    <input
-                      id="fizz-buzz-component__button--iterate"
-                      type="button"
-                      value="execute"
-                    />,
-                    <div
-                      id="fizz-buzz-component__iterate--result"
-                    />,
-                  ],
-                  "id": "fizz-buzz-component__article--iterate",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "FizzBuzzIterate",
-                    },
-                    "ref": null,
-                    "rendered": "FizzBuzzIterate",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__input--iterate",
-                      "type": "text",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__button--iterate",
-                      "type": "button",
-                      "value": "execute",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__iterate--result",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "div",
-                  },
-                ],
-                "type": "article",
-              },
-            ],
-            "type": "div",
-          },
-          "type": "section",
-        },
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <p>
-              Copyrights
-            </p>,
-            <address>
-              hiroshima-arc@gmail.com
-            </address>,
-          ],
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Copyrights",
-            },
-            "ref": null,
-            "rendered": "Copyrights",
-            "type": "p",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "hiroshima-arc@gmail.com",
-            },
-            "ref": null,
-            "rendered": "hiroshima-arc@gmail.com",
-            "type": "address",
-          },
-        ],
-        "type": "footer",
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
+    "rendered": Object {
       "instance": null,
       "key": undefined,
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <h1>
-            HTML5+CSS+JavaScript with TDD
-          </h1>,
-          <header>
-            <FizzBuzzMenu />
-          </header>,
+          <h2>
+            FizzBuzzIterate
+          </h2>,
+          <input
+            id="fizz-buzz-component__input--iterate"
+            type="text"
+          />,
+          <input
+            id="fizz-buzz-component__button--iterate"
+            type="button"
+            value="execute"
+          />,
           <div
-            className="component"
-          >
-            <section>
-              <div
-                className="fizz-buzz-component"
-              >
-                <h1>
-                  FizzBuzz
-                </h1>
-                <FizzBuzzCall />
-                <FizzBuzzPrint />
-                <FizzBuzzUpDown />
-                <article
-                  id="fizz-buzz-component__article--iterate"
-                >
-                  <h2>
-                    FizzBuzzIterate
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--iterate"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--iterate"
-                    type="button"
-                    value="execute"
-                  />
-                  <div
-                    id="fizz-buzz-component__iterate--result"
-                  />
-                </article>
-              </div>
-            </section>
-          </div>,
-          <footer>
-            <p>
-              Copyrights
-            </p>
-            <address>
-              hiroshima-arc@gmail.com
-            </address>
-          </footer>,
+            id="fizz-buzz-component__iterate--result"
+          />,
         ],
+        "id": "fizz-buzz-component__article--iterate",
       },
       "ref": null,
       "rendered": Array [
@@ -1800,305 +1427,156 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "HTML5+CSS+JavaScript with TDD",
+            "children": "FizzBuzzIterate",
           },
           "ref": null,
-          "rendered": "HTML5+CSS+JavaScript with TDD",
-          "type": "h1",
+          "rendered": "FizzBuzzIterate",
+          "type": "h2",
         },
         Object {
           "instance": null,
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <FizzBuzzMenu />,
+            "id": "fizz-buzz-component__input--iterate",
+            "type": "text",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {},
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          "type": "header",
+          "rendered": null,
+          "type": "input",
         },
         Object {
           "instance": null,
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <section>
-              <div
-                className="fizz-buzz-component"
-              >
-                <h1>
-                  FizzBuzz
-                </h1>
-                <FizzBuzzCall />
-                <FizzBuzzPrint />
-                <FizzBuzzUpDown />
-                <article
-                  id="fizz-buzz-component__article--iterate"
-                >
-                  <h2>
-                    FizzBuzzIterate
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--iterate"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--iterate"
-                    type="button"
-                    value="execute"
-                  />
-                  <div
-                    id="fizz-buzz-component__iterate--result"
-                  />
-                </article>
-              </div>
-            </section>,
-            "className": "component",
+            "id": "fizz-buzz-component__button--iterate",
+            "type": "button",
+            "value": "execute",
           },
           "ref": null,
-          "rendered": Object {
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "id": "fizz-buzz-component__iterate--result",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+      ],
+      "type": "article",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <article
+          id="fizz-buzz-component__article--iterate"
+        >
+          <h2>
+            FizzBuzzIterate
+          </h2>
+          <input
+            id="fizz-buzz-component__input--iterate"
+            type="text"
+          />
+          <input
+            id="fizz-buzz-component__button--iterate"
+            type="button"
+            value="execute"
+          />
+          <div
+            id="fizz-buzz-component__iterate--result"
+          />
+        </article>,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h2>
+              FizzBuzzIterate
+            </h2>,
+            <input
+              id="fizz-buzz-component__input--iterate"
+              type="text"
+            />,
+            <input
+              id="fizz-buzz-component__button--iterate"
+              type="button"
+              value="execute"
+            />,
+            <div
+              id="fizz-buzz-component__iterate--result"
+            />,
+          ],
+          "id": "fizz-buzz-component__article--iterate",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
             "instance": null,
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <div
-                className="fizz-buzz-component"
-              >
-                <h1>
-                  FizzBuzz
-                </h1>
-                <FizzBuzzCall />
-                <FizzBuzzPrint />
-                <FizzBuzzUpDown />
-                <article
-                  id="fizz-buzz-component__article--iterate"
-                >
-                  <h2>
-                    FizzBuzzIterate
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--iterate"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--iterate"
-                    type="button"
-                    value="execute"
-                  />
-                  <div
-                    id="fizz-buzz-component__iterate--result"
-                  />
-                </article>
-              </div>,
+              "children": "FizzBuzzIterate",
             },
             "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <h1>
-                    FizzBuzz
-                  </h1>,
-                  <FizzBuzzCall />,
-                  <FizzBuzzPrint />,
-                  <FizzBuzzUpDown />,
-                  <article
-                    id="fizz-buzz-component__article--iterate"
-                  >
-                    <h2>
-                      FizzBuzzIterate
-                    </h2>
-                    <input
-                      id="fizz-buzz-component__input--iterate"
-                      type="text"
-                    />
-                    <input
-                      id="fizz-buzz-component__button--iterate"
-                      type="button"
-                      value="execute"
-                    />
-                    <div
-                      id="fizz-buzz-component__iterate--result"
-                    />
-                  </article>,
-                ],
-                "className": "fizz-buzz-component",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "FizzBuzz",
-                  },
-                  "ref": null,
-                  "rendered": "FizzBuzz",
-                  "type": "h1",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <h2>
-                        FizzBuzzIterate
-                      </h2>,
-                      <input
-                        id="fizz-buzz-component__input--iterate"
-                        type="text"
-                      />,
-                      <input
-                        id="fizz-buzz-component__button--iterate"
-                        type="button"
-                        value="execute"
-                      />,
-                      <div
-                        id="fizz-buzz-component__iterate--result"
-                      />,
-                    ],
-                    "id": "fizz-buzz-component__article--iterate",
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "FizzBuzzIterate",
-                      },
-                      "ref": null,
-                      "rendered": "FizzBuzzIterate",
-                      "type": "h2",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__input--iterate",
-                        "type": "text",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__button--iterate",
-                        "type": "button",
-                        "value": "execute",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__iterate--result",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "div",
-                    },
-                  ],
-                  "type": "article",
-                },
-              ],
-              "type": "div",
-            },
-            "type": "section",
+            "rendered": "FizzBuzzIterate",
+            "type": "h2",
           },
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <p>
-                Copyrights
-              </p>,
-              <address>
-                hiroshima-arc@gmail.com
-              </address>,
-            ],
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "fizz-buzz-component__input--iterate",
+              "type": "text",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
           },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Copyrights",
-              },
-              "ref": null,
-              "rendered": "Copyrights",
-              "type": "p",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "fizz-buzz-component__button--iterate",
+              "type": "button",
+              "value": "execute",
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "hiroshima-arc@gmail.com",
-              },
-              "ref": null,
-              "rendered": "hiroshima-arc@gmail.com",
-              "type": "address",
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "fizz-buzz-component__iterate--result",
             },
-          ],
-          "type": "footer",
-        },
-      ],
+            "ref": null,
+            "rendered": null,
+            "type": "div",
+          },
+        ],
+        "type": "article",
+      },
       "type": "div",
     },
   ],
@@ -5448,25 +4926,27 @@ exports[`FizzBuzzコンポーネント コンポーネントが存在するこ�
             />
           </article>
         </div>
-        <article
-          id="fizz-buzz-component__article--iterate"
-        >
-          <h2>
-            FizzBuzzIterate
-          </h2>
-          <input
-            id="fizz-buzz-component__input--iterate"
-            type="text"
-          />
-          <input
-            id="fizz-buzz-component__button--iterate"
-            type="button"
-            value="execute"
-          />
-          <div
-            id="fizz-buzz-component__iterate--result"
-          />
-        </article>
+        <div>
+          <article
+            id="fizz-buzz-component__article--iterate"
+          >
+            <h2>
+              FizzBuzzIterate
+            </h2>
+            <input
+              id="fizz-buzz-component__input--iterate"
+              type="text"
+            />
+            <input
+              id="fizz-buzz-component__button--iterate"
+              type="button"
+              value="execute"
+            />
+            <div
+              id="fizz-buzz-component__iterate--result"
+            />
+          </article>
+        </div>
       </div>
     </section>
   </div>

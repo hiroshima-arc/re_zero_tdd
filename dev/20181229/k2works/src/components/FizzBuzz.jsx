@@ -9,6 +9,7 @@ import {FizzBuzzMenu} from "./FizzBuzzMenu";
 import {FizzBuzzCall} from "./FizzBuzzCall";
 import {FizzBuzzPrint} from "./FizzBuzzPrint";
 import {FizzBuzzUpDown} from "./FizzBuzzUpDown";
+import {FizzBuzzIterate} from "./FizzBuzzIterate";
 
 const MAX_COUNT = constants.FIZZ_BUZZ_MAX_COUNT;
 
@@ -220,16 +221,7 @@ export class FizzBuzz extends React.Component {
               <FizzBuzzCall/>
               <FizzBuzzPrint/>
               <FizzBuzzUpDown/>
-              <article id="fizz-buzz-component__article--iterate">
-                <h2>FizzBuzzIterate</h2>
-                <input id="fizz-buzz-component__input--iterate" type="text"/>
-                <input
-                  id="fizz-buzz-component__button--iterate"
-                  type="button"
-                  value="execute"
-                />
-                <div id="fizz-buzz-component__iterate--result"></div>
-              </article>
+              <FizzBuzzIterate/>
             </div>
           </section>
         </div>
