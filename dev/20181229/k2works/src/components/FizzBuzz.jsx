@@ -4,6 +4,8 @@ import $ from "jquery";
 import * as constants from "../constants";
 import {fizzBuzz} from "../fizzbuzz_model";
 import {iterate} from "../fizzbuzz_model";
+import "./FizzBuzzMenu";
+import {FizzBuzzMenu} from "./FizzBuzzMenu";
 
 const MAX_COUNT = constants.FIZZ_BUZZ_MAX_COUNT;
 
@@ -206,28 +208,7 @@ export class FizzBuzz extends React.Component {
       <div>
         <h1>HTML5+CSS+JavaScript with TDD</h1>
         <header>
-          <div className={styles["nav-component"]}>
-            <nav>
-              <h1>Menu</h1>
-              <ul>
-                <a href="#">FizzBuzz</a>
-                <ul id="nav-component__sub-menu--fizz-buzz">
-                  <li id="nav-component__sub-menu--fizz-buzz-call">
-                    <a href="#">FizzBuzzCall</a>
-                  </li>
-                  <li id="nav-component__sub-menu--fizz-buzz-print">
-                    <a href="#">FizzBuzzPrint</a>
-                  </li>
-                  <li id="nav-component__sub-menu--fizz-buzz-up-down">
-                    <a href="#">FizzBuzzUpDown</a>
-                  </li>
-                  <li id="nav-component__sub-menu--fizz-buzz-iterate">
-                    <a href="#">FizzBuzzIterate</a>
-                  </li>
-                </ul>
-              </ul>
-            </nav>
-          </div>
+          <FizzBuzzMenu/>
         </header>
         <div className={styles["component"]}>
           <section>
