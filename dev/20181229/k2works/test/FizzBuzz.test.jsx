@@ -4,6 +4,7 @@ import {shallow} from "enzyme";
 import renderer from "react-test-renderer";
 import {FizzBuzz} from "../src/components/FizzBuzz";
 import {FizzBuzzMenu} from "../src/components/FizzBuzzMenu";
+import {FizzBuzzCall} from "../src/components/FizzBuzzCall";
 
 describe("FizzBuzzコンポーネント", () => {
   test("コンポーネントが存在すること", () => {
@@ -51,7 +52,7 @@ describe("FizzBuzzコンポーネント", () => {
   });
 
   test("FizzBuzzCallを実行する", () => {
-    const component = shallow(<FizzBuzz/>);
+    const component = shallow(<FizzBuzzCall/>);
     component
       .find("#fizz-buzz-component__button--call")
       .simulate("click");

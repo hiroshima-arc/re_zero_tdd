@@ -6,6 +6,7 @@ import {fizzBuzz} from "../fizzbuzz_model";
 import {iterate} from "../fizzbuzz_model";
 import "./FizzBuzzMenu";
 import {FizzBuzzMenu} from "./FizzBuzzMenu";
+import {FizzBuzzCall} from "./FizzBuzzCall";
 
 const MAX_COUNT = constants.FIZZ_BUZZ_MAX_COUNT;
 
@@ -214,16 +215,7 @@ export class FizzBuzz extends React.Component {
           <section>
             <div className={styles["fizz-buzz-component"]}>
               <h1>FizzBuzz</h1>
-              <article id="fizz-buzz-component__article--call">
-                <h2>FizzBuzzCall</h2>
-                <input id="fizz-buzz-component__input--call" type="text"/>
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
-
+              <FizzBuzzCall/>
               <article id="fizz-buzz-component__article--print">
                 <h2>FizzBuzzPrint</h2>
                 <div id="fizz-buzz-component__print--message">Initialized</div>

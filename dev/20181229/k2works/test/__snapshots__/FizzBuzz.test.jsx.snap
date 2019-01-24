@@ -3,7 +3,7 @@
 exports[`FizzBuzzコンポーネント FizzBuzzCallを実行する 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <FizzBuzz />,
+  Symbol(enzyme.__unrendered__): <FizzBuzzCall />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -17,898 +17,44 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": Array [
-        <h1>
-          HTML5+CSS+JavaScript with TDD
-        </h1>,
-        <header>
-          <FizzBuzzMenu />
-        </header>,
-        <div
-          className="component"
-        >
-          <section>
-            <div
-              className="fizz-buzz-component"
-            >
-              <h1>
-                FizzBuzz
-              </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
-              <article
-                id="fizz-buzz-component__article--print"
-              >
-                <h2>
-                  FizzBuzzPrint
-                </h2>
-                <div
-                  id="fizz-buzz-component__print--message"
-                >
-                  Initialized
-                </div>
-                <input
-                  id="fizz-buzz-component__input--print"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--print"
-                  type="button"
-                  value="Print"
-                />
-              </article>
-              <article
-                id="fizz-buzz-component__article--up-down"
-              >
-                <h2>
-                  FizzBuzzUpDown
-                </h2>
-                <div
-                  id="fizz-buzz-component__up-down--message"
-                >
-                  Ready
-                </div>
-                <input
-                  id="fizz-buzz-component__button--down"
-                  type="button"
-                  value="-"
-                />
-                <input
-                  id="fizz-buzz-component__button--up"
-                  type="button"
-                  value="+"
-                />
-              </article>
-              <article
-                id="fizz-buzz-component__article--iterate"
-              >
-                <h2>
-                  FizzBuzzIterate
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--iterate"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--iterate"
-                  type="button"
-                  value="execute"
-                />
-                <div
-                  id="fizz-buzz-component__iterate--result"
-                />
-              </article>
-            </div>
-          </section>
-        </div>,
-        <footer>
-          <p>
-            Copyrights
-          </p>
-          <address>
-            hiroshima-arc@gmail.com
-          </address>
-        </footer>,
-      ],
+      "children": <article
+        id="fizz-buzz-component__article--call"
+      >
+        <h2>
+          FizzBuzzCall
+        </h2>
+        <input
+          id="fizz-buzz-component__input--call"
+          type="text"
+        />
+        <input
+          id="fizz-buzz-component__button--call"
+          type="button"
+          value="Call"
+        />
+      </article>,
     },
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "HTML5+CSS+JavaScript with TDD",
-        },
-        "ref": null,
-        "rendered": "HTML5+CSS+JavaScript with TDD",
-        "type": "h1",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": <FizzBuzzMenu />,
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        "type": "header",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": <section>
-            <div
-              className="fizz-buzz-component"
-            >
-              <h1>
-                FizzBuzz
-              </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
-              <article
-                id="fizz-buzz-component__article--print"
-              >
-                <h2>
-                  FizzBuzzPrint
-                </h2>
-                <div
-                  id="fizz-buzz-component__print--message"
-                >
-                  Initialized
-                </div>
-                <input
-                  id="fizz-buzz-component__input--print"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--print"
-                  type="button"
-                  value="Print"
-                />
-              </article>
-              <article
-                id="fizz-buzz-component__article--up-down"
-              >
-                <h2>
-                  FizzBuzzUpDown
-                </h2>
-                <div
-                  id="fizz-buzz-component__up-down--message"
-                >
-                  Ready
-                </div>
-                <input
-                  id="fizz-buzz-component__button--down"
-                  type="button"
-                  value="-"
-                />
-                <input
-                  id="fizz-buzz-component__button--up"
-                  type="button"
-                  value="+"
-                />
-              </article>
-              <article
-                id="fizz-buzz-component__article--iterate"
-              >
-                <h2>
-                  FizzBuzzIterate
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--iterate"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--iterate"
-                  type="button"
-                  value="execute"
-                />
-                <div
-                  id="fizz-buzz-component__iterate--result"
-                />
-              </article>
-            </div>
-          </section>,
-          "className": "component",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": <div
-              className="fizz-buzz-component"
-            >
-              <h1>
-                FizzBuzz
-              </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
-              <article
-                id="fizz-buzz-component__article--print"
-              >
-                <h2>
-                  FizzBuzzPrint
-                </h2>
-                <div
-                  id="fizz-buzz-component__print--message"
-                >
-                  Initialized
-                </div>
-                <input
-                  id="fizz-buzz-component__input--print"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--print"
-                  type="button"
-                  value="Print"
-                />
-              </article>
-              <article
-                id="fizz-buzz-component__article--up-down"
-              >
-                <h2>
-                  FizzBuzzUpDown
-                </h2>
-                <div
-                  id="fizz-buzz-component__up-down--message"
-                >
-                  Ready
-                </div>
-                <input
-                  id="fizz-buzz-component__button--down"
-                  type="button"
-                  value="-"
-                />
-                <input
-                  id="fizz-buzz-component__button--up"
-                  type="button"
-                  value="+"
-                />
-              </article>
-              <article
-                id="fizz-buzz-component__article--iterate"
-              >
-                <h2>
-                  FizzBuzzIterate
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--iterate"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--iterate"
-                  type="button"
-                  value="execute"
-                />
-                <div
-                  id="fizz-buzz-component__iterate--result"
-                />
-              </article>
-            </div>,
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <h1>
-                  FizzBuzz
-                </h1>,
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>,
-                <article
-                  id="fizz-buzz-component__article--print"
-                >
-                  <h2>
-                    FizzBuzzPrint
-                  </h2>
-                  <div
-                    id="fizz-buzz-component__print--message"
-                  >
-                    Initialized
-                  </div>
-                  <input
-                    id="fizz-buzz-component__input--print"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--print"
-                    type="button"
-                    value="Print"
-                  />
-                </article>,
-                <article
-                  id="fizz-buzz-component__article--up-down"
-                >
-                  <h2>
-                    FizzBuzzUpDown
-                  </h2>
-                  <div
-                    id="fizz-buzz-component__up-down--message"
-                  >
-                    Ready
-                  </div>
-                  <input
-                    id="fizz-buzz-component__button--down"
-                    type="button"
-                    value="-"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--up"
-                    type="button"
-                    value="+"
-                  />
-                </article>,
-                <article
-                  id="fizz-buzz-component__article--iterate"
-                >
-                  <h2>
-                    FizzBuzzIterate
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--iterate"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--iterate"
-                    type="button"
-                    value="execute"
-                  />
-                  <div
-                    id="fizz-buzz-component__iterate--result"
-                  />
-                </article>,
-              ],
-              "className": "fizz-buzz-component",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "FizzBuzz",
-                },
-                "ref": null,
-                "rendered": "FizzBuzz",
-                "type": "h1",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      FizzBuzzCall
-                    </h2>,
-                    <input
-                      id="fizz-buzz-component__input--call"
-                      type="text"
-                    />,
-                    <input
-                      id="fizz-buzz-component__button--call"
-                      type="button"
-                      value="Call"
-                    />,
-                  ],
-                  "id": "fizz-buzz-component__article--call",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "FizzBuzzCall",
-                    },
-                    "ref": null,
-                    "rendered": "FizzBuzzCall",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__input--call",
-                      "type": "text",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__button--call",
-                      "type": "button",
-                      "value": "Call",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                ],
-                "type": "article",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      FizzBuzzPrint
-                    </h2>,
-                    <div
-                      id="fizz-buzz-component__print--message"
-                    >
-                      Initialized
-                    </div>,
-                    <input
-                      id="fizz-buzz-component__input--print"
-                      type="text"
-                    />,
-                    <input
-                      id="fizz-buzz-component__button--print"
-                      type="button"
-                      value="Print"
-                    />,
-                  ],
-                  "id": "fizz-buzz-component__article--print",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "FizzBuzzPrint",
-                    },
-                    "ref": null,
-                    "rendered": "FizzBuzzPrint",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Initialized",
-                      "id": "fizz-buzz-component__print--message",
-                    },
-                    "ref": null,
-                    "rendered": "Initialized",
-                    "type": "div",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__input--print",
-                      "type": "text",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__button--print",
-                      "type": "button",
-                      "value": "Print",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                ],
-                "type": "article",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      FizzBuzzUpDown
-                    </h2>,
-                    <div
-                      id="fizz-buzz-component__up-down--message"
-                    >
-                      Ready
-                    </div>,
-                    <input
-                      id="fizz-buzz-component__button--down"
-                      type="button"
-                      value="-"
-                    />,
-                    <input
-                      id="fizz-buzz-component__button--up"
-                      type="button"
-                      value="+"
-                    />,
-                  ],
-                  "id": "fizz-buzz-component__article--up-down",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "FizzBuzzUpDown",
-                    },
-                    "ref": null,
-                    "rendered": "FizzBuzzUpDown",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Ready",
-                      "id": "fizz-buzz-component__up-down--message",
-                    },
-                    "ref": null,
-                    "rendered": "Ready",
-                    "type": "div",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__button--down",
-                      "type": "button",
-                      "value": "-",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__button--up",
-                      "type": "button",
-                      "value": "+",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                ],
-                "type": "article",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      FizzBuzzIterate
-                    </h2>,
-                    <input
-                      id="fizz-buzz-component__input--iterate"
-                      type="text"
-                    />,
-                    <input
-                      id="fizz-buzz-component__button--iterate"
-                      type="button"
-                      value="execute"
-                    />,
-                    <div
-                      id="fizz-buzz-component__iterate--result"
-                    />,
-                  ],
-                  "id": "fizz-buzz-component__article--iterate",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "FizzBuzzIterate",
-                    },
-                    "ref": null,
-                    "rendered": "FizzBuzzIterate",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__input--iterate",
-                      "type": "text",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__button--iterate",
-                      "type": "button",
-                      "value": "execute",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__iterate--result",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "div",
-                  },
-                ],
-                "type": "article",
-              },
-            ],
-            "type": "div",
-          },
-          "type": "section",
-        },
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <p>
-              Copyrights
-            </p>,
-            <address>
-              hiroshima-arc@gmail.com
-            </address>,
-          ],
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Copyrights",
-            },
-            "ref": null,
-            "rendered": "Copyrights",
-            "type": "p",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "hiroshima-arc@gmail.com",
-            },
-            "ref": null,
-            "rendered": "hiroshima-arc@gmail.com",
-            "type": "address",
-          },
-        ],
-        "type": "footer",
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
+    "rendered": Object {
       "instance": null,
       "key": undefined,
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <h1>
-            HTML5+CSS+JavaScript with TDD
-          </h1>,
-          <header>
-            <FizzBuzzMenu />
-          </header>,
-          <div
-            className="component"
-          >
-            <section>
-              <div
-                className="fizz-buzz-component"
-              >
-                <h1>
-                  FizzBuzz
-                </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
-                <article
-                  id="fizz-buzz-component__article--print"
-                >
-                  <h2>
-                    FizzBuzzPrint
-                  </h2>
-                  <div
-                    id="fizz-buzz-component__print--message"
-                  >
-                    Initialized
-                  </div>
-                  <input
-                    id="fizz-buzz-component__input--print"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--print"
-                    type="button"
-                    value="Print"
-                  />
-                </article>
-                <article
-                  id="fizz-buzz-component__article--up-down"
-                >
-                  <h2>
-                    FizzBuzzUpDown
-                  </h2>
-                  <div
-                    id="fizz-buzz-component__up-down--message"
-                  >
-                    Ready
-                  </div>
-                  <input
-                    id="fizz-buzz-component__button--down"
-                    type="button"
-                    value="-"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--up"
-                    type="button"
-                    value="+"
-                  />
-                </article>
-                <article
-                  id="fizz-buzz-component__article--iterate"
-                >
-                  <h2>
-                    FizzBuzzIterate
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--iterate"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--iterate"
-                    type="button"
-                    value="execute"
-                  />
-                  <div
-                    id="fizz-buzz-component__iterate--result"
-                  />
-                </article>
-              </div>
-            </section>
-          </div>,
-          <footer>
-            <p>
-              Copyrights
-            </p>
-            <address>
-              hiroshima-arc@gmail.com
-            </address>
-          </footer>,
+          <h2>
+            FizzBuzzCall
+          </h2>,
+          <input
+            id="fizz-buzz-component__input--call"
+            type="text"
+          />,
+          <input
+            id="fizz-buzz-component__button--call"
+            type="button"
+            value="Call"
+          />,
         ],
+        "id": "fizz-buzz-component__article--call",
       },
       "ref": null,
       "rendered": Array [
@@ -917,668 +63,128 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "HTML5+CSS+JavaScript with TDD",
+            "children": "FizzBuzzCall",
           },
           "ref": null,
-          "rendered": "HTML5+CSS+JavaScript with TDD",
-          "type": "h1",
+          "rendered": "FizzBuzzCall",
+          "type": "h2",
         },
         Object {
           "instance": null,
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <FizzBuzzMenu />,
+            "id": "fizz-buzz-component__input--call",
+            "type": "text",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {},
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          "type": "header",
+          "rendered": null,
+          "type": "input",
         },
         Object {
           "instance": null,
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <section>
-              <div
-                className="fizz-buzz-component"
-              >
-                <h1>
-                  FizzBuzz
-                </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
-                <article
-                  id="fizz-buzz-component__article--print"
-                >
-                  <h2>
-                    FizzBuzzPrint
-                  </h2>
-                  <div
-                    id="fizz-buzz-component__print--message"
-                  >
-                    Initialized
-                  </div>
-                  <input
-                    id="fizz-buzz-component__input--print"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--print"
-                    type="button"
-                    value="Print"
-                  />
-                </article>
-                <article
-                  id="fizz-buzz-component__article--up-down"
-                >
-                  <h2>
-                    FizzBuzzUpDown
-                  </h2>
-                  <div
-                    id="fizz-buzz-component__up-down--message"
-                  >
-                    Ready
-                  </div>
-                  <input
-                    id="fizz-buzz-component__button--down"
-                    type="button"
-                    value="-"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--up"
-                    type="button"
-                    value="+"
-                  />
-                </article>
-                <article
-                  id="fizz-buzz-component__article--iterate"
-                >
-                  <h2>
-                    FizzBuzzIterate
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--iterate"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--iterate"
-                    type="button"
-                    value="execute"
-                  />
-                  <div
-                    id="fizz-buzz-component__iterate--result"
-                  />
-                </article>
-              </div>
-            </section>,
-            "className": "component",
+            "id": "fizz-buzz-component__button--call",
+            "type": "button",
+            "value": "Call",
           },
           "ref": null,
-          "rendered": Object {
+          "rendered": null,
+          "type": "input",
+        },
+      ],
+      "type": "article",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <article
+          id="fizz-buzz-component__article--call"
+        >
+          <h2>
+            FizzBuzzCall
+          </h2>
+          <input
+            id="fizz-buzz-component__input--call"
+            type="text"
+          />
+          <input
+            id="fizz-buzz-component__button--call"
+            type="button"
+            value="Call"
+          />
+        </article>,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h2>
+              FizzBuzzCall
+            </h2>,
+            <input
+              id="fizz-buzz-component__input--call"
+              type="text"
+            />,
+            <input
+              id="fizz-buzz-component__button--call"
+              type="button"
+              value="Call"
+            />,
+          ],
+          "id": "fizz-buzz-component__article--call",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
             "instance": null,
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <div
-                className="fizz-buzz-component"
-              >
-                <h1>
-                  FizzBuzz
-                </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
-                <article
-                  id="fizz-buzz-component__article--print"
-                >
-                  <h2>
-                    FizzBuzzPrint
-                  </h2>
-                  <div
-                    id="fizz-buzz-component__print--message"
-                  >
-                    Initialized
-                  </div>
-                  <input
-                    id="fizz-buzz-component__input--print"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--print"
-                    type="button"
-                    value="Print"
-                  />
-                </article>
-                <article
-                  id="fizz-buzz-component__article--up-down"
-                >
-                  <h2>
-                    FizzBuzzUpDown
-                  </h2>
-                  <div
-                    id="fizz-buzz-component__up-down--message"
-                  >
-                    Ready
-                  </div>
-                  <input
-                    id="fizz-buzz-component__button--down"
-                    type="button"
-                    value="-"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--up"
-                    type="button"
-                    value="+"
-                  />
-                </article>
-                <article
-                  id="fizz-buzz-component__article--iterate"
-                >
-                  <h2>
-                    FizzBuzzIterate
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--iterate"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--iterate"
-                    type="button"
-                    value="execute"
-                  />
-                  <div
-                    id="fizz-buzz-component__iterate--result"
-                  />
-                </article>
-              </div>,
+              "children": "FizzBuzzCall",
             },
             "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <h1>
-                    FizzBuzz
-                  </h1>,
-                  <article
-                    id="fizz-buzz-component__article--call"
-                  >
-                    <h2>
-                      FizzBuzzCall
-                    </h2>
-                    <input
-                      id="fizz-buzz-component__input--call"
-                      type="text"
-                    />
-                    <input
-                      id="fizz-buzz-component__button--call"
-                      type="button"
-                      value="Call"
-                    />
-                  </article>,
-                  <article
-                    id="fizz-buzz-component__article--print"
-                  >
-                    <h2>
-                      FizzBuzzPrint
-                    </h2>
-                    <div
-                      id="fizz-buzz-component__print--message"
-                    >
-                      Initialized
-                    </div>
-                    <input
-                      id="fizz-buzz-component__input--print"
-                      type="text"
-                    />
-                    <input
-                      id="fizz-buzz-component__button--print"
-                      type="button"
-                      value="Print"
-                    />
-                  </article>,
-                  <article
-                    id="fizz-buzz-component__article--up-down"
-                  >
-                    <h2>
-                      FizzBuzzUpDown
-                    </h2>
-                    <div
-                      id="fizz-buzz-component__up-down--message"
-                    >
-                      Ready
-                    </div>
-                    <input
-                      id="fizz-buzz-component__button--down"
-                      type="button"
-                      value="-"
-                    />
-                    <input
-                      id="fizz-buzz-component__button--up"
-                      type="button"
-                      value="+"
-                    />
-                  </article>,
-                  <article
-                    id="fizz-buzz-component__article--iterate"
-                  >
-                    <h2>
-                      FizzBuzzIterate
-                    </h2>
-                    <input
-                      id="fizz-buzz-component__input--iterate"
-                      type="text"
-                    />
-                    <input
-                      id="fizz-buzz-component__button--iterate"
-                      type="button"
-                      value="execute"
-                    />
-                    <div
-                      id="fizz-buzz-component__iterate--result"
-                    />
-                  </article>,
-                ],
-                "className": "fizz-buzz-component",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "FizzBuzz",
-                  },
-                  "ref": null,
-                  "rendered": "FizzBuzz",
-                  "type": "h1",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <h2>
-                        FizzBuzzCall
-                      </h2>,
-                      <input
-                        id="fizz-buzz-component__input--call"
-                        type="text"
-                      />,
-                      <input
-                        id="fizz-buzz-component__button--call"
-                        type="button"
-                        value="Call"
-                      />,
-                    ],
-                    "id": "fizz-buzz-component__article--call",
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "FizzBuzzCall",
-                      },
-                      "ref": null,
-                      "rendered": "FizzBuzzCall",
-                      "type": "h2",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__input--call",
-                        "type": "text",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__button--call",
-                        "type": "button",
-                        "value": "Call",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                  ],
-                  "type": "article",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <h2>
-                        FizzBuzzPrint
-                      </h2>,
-                      <div
-                        id="fizz-buzz-component__print--message"
-                      >
-                        Initialized
-                      </div>,
-                      <input
-                        id="fizz-buzz-component__input--print"
-                        type="text"
-                      />,
-                      <input
-                        id="fizz-buzz-component__button--print"
-                        type="button"
-                        value="Print"
-                      />,
-                    ],
-                    "id": "fizz-buzz-component__article--print",
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "FizzBuzzPrint",
-                      },
-                      "ref": null,
-                      "rendered": "FizzBuzzPrint",
-                      "type": "h2",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "Initialized",
-                        "id": "fizz-buzz-component__print--message",
-                      },
-                      "ref": null,
-                      "rendered": "Initialized",
-                      "type": "div",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__input--print",
-                        "type": "text",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__button--print",
-                        "type": "button",
-                        "value": "Print",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                  ],
-                  "type": "article",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <h2>
-                        FizzBuzzUpDown
-                      </h2>,
-                      <div
-                        id="fizz-buzz-component__up-down--message"
-                      >
-                        Ready
-                      </div>,
-                      <input
-                        id="fizz-buzz-component__button--down"
-                        type="button"
-                        value="-"
-                      />,
-                      <input
-                        id="fizz-buzz-component__button--up"
-                        type="button"
-                        value="+"
-                      />,
-                    ],
-                    "id": "fizz-buzz-component__article--up-down",
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "FizzBuzzUpDown",
-                      },
-                      "ref": null,
-                      "rendered": "FizzBuzzUpDown",
-                      "type": "h2",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "Ready",
-                        "id": "fizz-buzz-component__up-down--message",
-                      },
-                      "ref": null,
-                      "rendered": "Ready",
-                      "type": "div",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__button--down",
-                        "type": "button",
-                        "value": "-",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__button--up",
-                        "type": "button",
-                        "value": "+",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                  ],
-                  "type": "article",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <h2>
-                        FizzBuzzIterate
-                      </h2>,
-                      <input
-                        id="fizz-buzz-component__input--iterate"
-                        type="text"
-                      />,
-                      <input
-                        id="fizz-buzz-component__button--iterate"
-                        type="button"
-                        value="execute"
-                      />,
-                      <div
-                        id="fizz-buzz-component__iterate--result"
-                      />,
-                    ],
-                    "id": "fizz-buzz-component__article--iterate",
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "FizzBuzzIterate",
-                      },
-                      "ref": null,
-                      "rendered": "FizzBuzzIterate",
-                      "type": "h2",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__input--iterate",
-                        "type": "text",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__button--iterate",
-                        "type": "button",
-                        "value": "execute",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__iterate--result",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "div",
-                    },
-                  ],
-                  "type": "article",
-                },
-              ],
-              "type": "div",
-            },
-            "type": "section",
+            "rendered": "FizzBuzzCall",
+            "type": "h2",
           },
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <p>
-                Copyrights
-              </p>,
-              <address>
-                hiroshima-arc@gmail.com
-              </address>,
-            ],
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "fizz-buzz-component__input--call",
+              "type": "text",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
           },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Copyrights",
-              },
-              "ref": null,
-              "rendered": "Copyrights",
-              "type": "p",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "fizz-buzz-component__button--call",
+              "type": "button",
+              "value": "Call",
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "hiroshima-arc@gmail.com",
-              },
-              "ref": null,
-              "rendered": "hiroshima-arc@gmail.com",
-              "type": "address",
-            },
-          ],
-          "type": "footer",
-        },
-      ],
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+        ],
+        "type": "article",
+      },
       "type": "div",
     },
   ],
@@ -2528,22 +1134,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -2663,22 +1254,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -2757,22 +1333,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -2847,22 +1408,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>,
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>,
+                <FizzBuzzCall />,
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -2944,64 +1490,11 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      FizzBuzzCall
-                    </h2>,
-                    <input
-                      id="fizz-buzz-component__input--call"
-                      type="text"
-                    />,
-                    <input
-                      id="fizz-buzz-component__button--call"
-                      type="button"
-                      value="Call"
-                    />,
-                  ],
-                  "id": "fizz-buzz-component__article--call",
-                },
+                "nodeType": "class",
+                "props": Object {},
                 "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "FizzBuzzCall",
-                    },
-                    "ref": null,
-                    "rendered": "FizzBuzzCall",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__input--call",
-                      "type": "text",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__button--call",
-                      "type": "button",
-                      "value": "Call",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                ],
-                "type": "article",
+                "rendered": null,
+                "type": [Function],
               },
               Object {
                 "instance": null,
@@ -3313,22 +1806,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -3448,22 +1926,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -3542,22 +2005,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -3632,22 +2080,7 @@ ShallowWrapper {
                   <h1>
                     FizzBuzz
                   </h1>,
-                  <article
-                    id="fizz-buzz-component__article--call"
-                  >
-                    <h2>
-                      FizzBuzzCall
-                    </h2>
-                    <input
-                      id="fizz-buzz-component__input--call"
-                      type="text"
-                    />
-                    <input
-                      id="fizz-buzz-component__button--call"
-                      type="button"
-                      value="Call"
-                    />
-                  </article>,
+                  <FizzBuzzCall />,
                   <article
                     id="fizz-buzz-component__article--print"
                   >
@@ -3729,64 +2162,11 @@ ShallowWrapper {
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <h2>
-                        FizzBuzzCall
-                      </h2>,
-                      <input
-                        id="fizz-buzz-component__input--call"
-                        type="text"
-                      />,
-                      <input
-                        id="fizz-buzz-component__button--call"
-                        type="button"
-                        value="Call"
-                      />,
-                    ],
-                    "id": "fizz-buzz-component__article--call",
-                  },
+                  "nodeType": "class",
+                  "props": Object {},
                   "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "FizzBuzzCall",
-                      },
-                      "ref": null,
-                      "rendered": "FizzBuzzCall",
-                      "type": "h2",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__input--call",
-                        "type": "text",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__button--call",
-                        "type": "button",
-                        "value": "Call",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                  ],
-                  "type": "article",
+                  "rendered": null,
+                  "type": [Function],
                 },
                 Object {
                   "instance": null,
@@ -4130,22 +2510,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -4265,22 +2630,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -4359,22 +2709,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -4449,22 +2784,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>,
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>,
+                <FizzBuzzCall />,
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -4546,64 +2866,11 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      FizzBuzzCall
-                    </h2>,
-                    <input
-                      id="fizz-buzz-component__input--call"
-                      type="text"
-                    />,
-                    <input
-                      id="fizz-buzz-component__button--call"
-                      type="button"
-                      value="Call"
-                    />,
-                  ],
-                  "id": "fizz-buzz-component__article--call",
-                },
+                "nodeType": "class",
+                "props": Object {},
                 "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "FizzBuzzCall",
-                    },
-                    "ref": null,
-                    "rendered": "FizzBuzzCall",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__input--call",
-                      "type": "text",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__button--call",
-                      "type": "button",
-                      "value": "Call",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                ],
-                "type": "article",
+                "rendered": null,
+                "type": [Function],
               },
               Object {
                 "instance": null,
@@ -4915,22 +3182,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -5050,22 +3302,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -5144,22 +3381,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -5234,22 +3456,7 @@ ShallowWrapper {
                   <h1>
                     FizzBuzz
                   </h1>,
-                  <article
-                    id="fizz-buzz-component__article--call"
-                  >
-                    <h2>
-                      FizzBuzzCall
-                    </h2>
-                    <input
-                      id="fizz-buzz-component__input--call"
-                      type="text"
-                    />
-                    <input
-                      id="fizz-buzz-component__button--call"
-                      type="button"
-                      value="Call"
-                    />
-                  </article>,
+                  <FizzBuzzCall />,
                   <article
                     id="fizz-buzz-component__article--print"
                   >
@@ -5331,64 +3538,11 @@ ShallowWrapper {
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <h2>
-                        FizzBuzzCall
-                      </h2>,
-                      <input
-                        id="fizz-buzz-component__input--call"
-                        type="text"
-                      />,
-                      <input
-                        id="fizz-buzz-component__button--call"
-                        type="button"
-                        value="Call"
-                      />,
-                    ],
-                    "id": "fizz-buzz-component__article--call",
-                  },
+                  "nodeType": "class",
+                  "props": Object {},
                   "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "FizzBuzzCall",
-                      },
-                      "ref": null,
-                      "rendered": "FizzBuzzCall",
-                      "type": "h2",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__input--call",
-                        "type": "text",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__button--call",
-                        "type": "button",
-                        "value": "Call",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                  ],
-                  "type": "article",
+                  "rendered": null,
+                  "type": [Function],
                 },
                 Object {
                   "instance": null,
@@ -6624,22 +4778,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -6759,22 +4898,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -6853,22 +4977,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -6943,22 +5052,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>,
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>,
+                <FizzBuzzCall />,
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -7040,64 +5134,11 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      FizzBuzzCall
-                    </h2>,
-                    <input
-                      id="fizz-buzz-component__input--call"
-                      type="text"
-                    />,
-                    <input
-                      id="fizz-buzz-component__button--call"
-                      type="button"
-                      value="Call"
-                    />,
-                  ],
-                  "id": "fizz-buzz-component__article--call",
-                },
+                "nodeType": "class",
+                "props": Object {},
                 "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "FizzBuzzCall",
-                    },
-                    "ref": null,
-                    "rendered": "FizzBuzzCall",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__input--call",
-                      "type": "text",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__button--call",
-                      "type": "button",
-                      "value": "Call",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                ],
-                "type": "article",
+                "rendered": null,
+                "type": [Function],
               },
               Object {
                 "instance": null,
@@ -7409,22 +5450,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -7544,22 +5570,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -7638,22 +5649,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -7728,22 +5724,7 @@ ShallowWrapper {
                   <h1>
                     FizzBuzz
                   </h1>,
-                  <article
-                    id="fizz-buzz-component__article--call"
-                  >
-                    <h2>
-                      FizzBuzzCall
-                    </h2>
-                    <input
-                      id="fizz-buzz-component__input--call"
-                      type="text"
-                    />
-                    <input
-                      id="fizz-buzz-component__button--call"
-                      type="button"
-                      value="Call"
-                    />
-                  </article>,
+                  <FizzBuzzCall />,
                   <article
                     id="fizz-buzz-component__article--print"
                   >
@@ -7825,64 +5806,11 @@ ShallowWrapper {
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <h2>
-                        FizzBuzzCall
-                      </h2>,
-                      <input
-                        id="fizz-buzz-component__input--call"
-                        type="text"
-                      />,
-                      <input
-                        id="fizz-buzz-component__button--call"
-                        type="button"
-                        value="Call"
-                      />,
-                    ],
-                    "id": "fizz-buzz-component__article--call",
-                  },
+                  "nodeType": "class",
+                  "props": Object {},
                   "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "FizzBuzzCall",
-                      },
-                      "ref": null,
-                      "rendered": "FizzBuzzCall",
-                      "type": "h2",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__input--call",
-                        "type": "text",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__button--call",
-                        "type": "button",
-                        "value": "Call",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                  ],
-                  "type": "article",
+                  "rendered": null,
+                  "type": [Function],
                 },
                 Object {
                   "instance": null,
@@ -10010,22 +7938,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -10145,22 +8058,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -10239,22 +8137,7 @@ ShallowWrapper {
               <h1>
                 FizzBuzz
               </h1>
-              <article
-                id="fizz-buzz-component__article--call"
-              >
-                <h2>
-                  FizzBuzzCall
-                </h2>
-                <input
-                  id="fizz-buzz-component__input--call"
-                  type="text"
-                />
-                <input
-                  id="fizz-buzz-component__button--call"
-                  type="button"
-                  value="Call"
-                />
-              </article>
+              <FizzBuzzCall />
               <article
                 id="fizz-buzz-component__article--print"
               >
@@ -10329,22 +8212,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>,
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>,
+                <FizzBuzzCall />,
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -10426,64 +8294,11 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      FizzBuzzCall
-                    </h2>,
-                    <input
-                      id="fizz-buzz-component__input--call"
-                      type="text"
-                    />,
-                    <input
-                      id="fizz-buzz-component__button--call"
-                      type="button"
-                      value="Call"
-                    />,
-                  ],
-                  "id": "fizz-buzz-component__article--call",
-                },
+                "nodeType": "class",
+                "props": Object {},
                 "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "FizzBuzzCall",
-                    },
-                    "ref": null,
-                    "rendered": "FizzBuzzCall",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__input--call",
-                      "type": "text",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "id": "fizz-buzz-component__button--call",
-                      "type": "button",
-                      "value": "Call",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": "input",
-                  },
-                ],
-                "type": "article",
+                "rendered": null,
+                "type": [Function],
               },
               Object {
                 "instance": null,
@@ -10795,22 +8610,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -10930,22 +8730,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -11024,22 +8809,7 @@ ShallowWrapper {
                 <h1>
                   FizzBuzz
                 </h1>
-                <article
-                  id="fizz-buzz-component__article--call"
-                >
-                  <h2>
-                    FizzBuzzCall
-                  </h2>
-                  <input
-                    id="fizz-buzz-component__input--call"
-                    type="text"
-                  />
-                  <input
-                    id="fizz-buzz-component__button--call"
-                    type="button"
-                    value="Call"
-                  />
-                </article>
+                <FizzBuzzCall />
                 <article
                   id="fizz-buzz-component__article--print"
                 >
@@ -11114,22 +8884,7 @@ ShallowWrapper {
                   <h1>
                     FizzBuzz
                   </h1>,
-                  <article
-                    id="fizz-buzz-component__article--call"
-                  >
-                    <h2>
-                      FizzBuzzCall
-                    </h2>
-                    <input
-                      id="fizz-buzz-component__input--call"
-                      type="text"
-                    />
-                    <input
-                      id="fizz-buzz-component__button--call"
-                      type="button"
-                      value="Call"
-                    />
-                  </article>,
+                  <FizzBuzzCall />,
                   <article
                     id="fizz-buzz-component__article--print"
                   >
@@ -11211,64 +8966,11 @@ ShallowWrapper {
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": Array [
-                      <h2>
-                        FizzBuzzCall
-                      </h2>,
-                      <input
-                        id="fizz-buzz-component__input--call"
-                        type="text"
-                      />,
-                      <input
-                        id="fizz-buzz-component__button--call"
-                        type="button"
-                        value="Call"
-                      />,
-                    ],
-                    "id": "fizz-buzz-component__article--call",
-                  },
+                  "nodeType": "class",
+                  "props": Object {},
                   "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "FizzBuzzCall",
-                      },
-                      "ref": null,
-                      "rendered": "FizzBuzzCall",
-                      "type": "h2",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__input--call",
-                        "type": "text",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "id": "fizz-buzz-component__button--call",
-                        "type": "button",
-                        "value": "Call",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "input",
-                    },
-                  ],
-                  "type": "article",
+                  "rendered": null,
+                  "type": [Function],
                 },
                 Object {
                   "instance": null,
@@ -11653,22 +9355,24 @@ exports[`FizzBuzzコンポーネント コンポーネントが存在するこ�
         <h1>
           FizzBuzz
         </h1>
-        <article
-          id="fizz-buzz-component__article--call"
-        >
-          <h2>
-            FizzBuzzCall
-          </h2>
-          <input
-            id="fizz-buzz-component__input--call"
-            type="text"
-          />
-          <input
-            id="fizz-buzz-component__button--call"
-            type="button"
-            value="Call"
-          />
-        </article>
+        <div>
+          <article
+            id="fizz-buzz-component__article--call"
+          >
+            <h2>
+              FizzBuzzCall
+            </h2>
+            <input
+              id="fizz-buzz-component__input--call"
+              type="text"
+            />
+            <input
+              id="fizz-buzz-component__button--call"
+              type="button"
+              value="Call"
+            />
+          </article>
+        </div>
         <article
           id="fizz-buzz-component__article--print"
         >
