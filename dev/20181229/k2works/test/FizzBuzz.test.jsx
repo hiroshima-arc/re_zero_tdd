@@ -5,6 +5,7 @@ import renderer from "react-test-renderer";
 import {FizzBuzz} from "../src/components/FizzBuzz";
 import {FizzBuzzMenu} from "../src/components/FizzBuzzMenu";
 import {FizzBuzzCall} from "../src/components/FizzBuzzCall";
+import {FizzBuzzPrint} from "../src/components/FizzBuzzPrint";
 
 describe("FizzBuzzコンポーネント", () => {
   test("コンポーネントが存在すること", () => {
@@ -61,7 +62,7 @@ describe("FizzBuzzコンポーネント", () => {
   });
 
   test("FizzBuzzPrintを実行する", () => {
-    const component = shallow(<FizzBuzz/>);
+    const component = shallow(<FizzBuzzPrint/>);
     component
       .find("#fizz-buzz-component__button--print")
       .simulate("click");
