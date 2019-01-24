@@ -6,6 +6,7 @@ import {FizzBuzz} from "../src/components/FizzBuzz";
 import {FizzBuzzMenu} from "../src/components/FizzBuzzMenu";
 import {FizzBuzzCall} from "../src/components/FizzBuzzCall";
 import {FizzBuzzPrint} from "../src/components/FizzBuzzPrint";
+import {FizzBuzzUpDown} from "../src/components/FizzBuzzUpDown";
 
 describe("FizzBuzzコンポーネント", () => {
   test("コンポーネントが存在すること", () => {
@@ -71,7 +72,7 @@ describe("FizzBuzzコンポーネント", () => {
   });
 
   test("FizzBuzzUpを実行する", () => {
-    const component = shallow(<FizzBuzz/>);
+    const component = shallow(<FizzBuzzUpDown/>);
     component
       .find("#fizz-buzz-component__button--up")
       .simulate("click");
@@ -80,7 +81,7 @@ describe("FizzBuzzコンポーネント", () => {
   });
 
   test("FizzBuzzDownを実行する", () => {
-    const component = shallow(<FizzBuzz/>);
+    const component = shallow(<FizzBuzzUpDown/>);
     component
       .find("#fizz-buzz-component__button--down")
       .simulate("click");
