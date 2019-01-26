@@ -23,8 +23,6 @@ export class FizzBuzz extends React.Component {
     this.showFizzBuzzUpDown = this.showFizzBuzzUpDown.bind(this);
     this.showFizzBuzzIterate = this.showFizzBuzzIterate.bind(this);
     this.fizzBuzzIterate = this.fizzBuzzIterate.bind(this);
-    this.fizzBuzzDown = this.fizzBuzzDown.bind(this);
-    this.fizzBuzzUp = this.fizzBuzzUp.bind(this);
   }
 
   componentDidMount() {
@@ -115,29 +113,6 @@ export class FizzBuzz extends React.Component {
     $("#fizz-buzz-component__article--print").css("display", state["print"]);
     $("#fizz-buzz-component__article--up-down").css("display", state["updown"]);
     $("#fizz-buzz-component__article--iterate").css("display", state["iterate"]);
-  }
-
-  fizzBuzzDown() {
-    let fizzBuzzUpDownCount = this.state.fizzBuzzUpDownCount;
-    if (fizzBuzzUpDownCount === 0) {
-      fizzBuzzUpDownCount = 0;
-    } else {
-      fizzBuzzUpDownCount -= 1;
-    }
-    const target = $("#fizz-buzz-component__up-down--message");
-    const count = fizzBuzzUpDownCount;
-    target.html(fizzBuzz(count));
-    this.state.fizzBuzzUpDownCount = count;
-  }
-
-  fizzBuzzUp() {
-    let fizzBuzzUpDownCount = this.state.fizzBuzzUpDownCount;
-    fizzBuzzUpDownCount += 1;
-    const target = $("#fizz-buzz-component__up-down--message");
-    const count = fizzBuzzUpDownCount;
-    const value = fizzBuzz(count);
-    target.html(value);
-    this.state.fizzBuzzUpDownCount = count;
   }
 
   fizzBuzzIterate() {

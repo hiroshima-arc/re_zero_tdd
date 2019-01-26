@@ -94,22 +94,25 @@ describe("FizzBuzzコンポーネント", () => {
       expect(component.find("#fizz-buzz-component__print--message").text()).toEqual("FizzBuzz");
     });
   });
-  test("FizzBuzzUpを実行する", () => {
-    const component = shallow(<FizzBuzzUpDown/>);
-    component
-      .find("#fizz-buzz-component__button--up")
-      .simulate("click");
 
-    expect(component).toMatchSnapshot();
-  });
+  describe("FizzBuzzUpDown", () => {
+    test("FizzBuzzUpコンポーネントが存在する", () => {
+      const component = shallow(<FizzBuzzUpDown/>);
+      component
+        .find("#fizz-buzz-component__button--up")
+        .simulate("click");
 
-  test("FizzBuzzDownを実行する", () => {
-    const component = shallow(<FizzBuzzUpDown/>);
-    component
-      .find("#fizz-buzz-component__button--down")
-      .simulate("click");
+      expect(component).toMatchSnapshot();
+    });
 
-    expect(component).toMatchSnapshot();
+    test("FizzBuzzDownコンポーネントが存在する", () => {
+      const component = shallow(<FizzBuzzUpDown/>);
+      component
+        .find("#fizz-buzz-component__button--down")
+        .simulate("click");
+
+      expect(component).toMatchSnapshot();
+    });
   });
 
   test("FizzBuzzIterateを実行する", () => {
