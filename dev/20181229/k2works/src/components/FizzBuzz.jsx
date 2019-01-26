@@ -117,15 +117,6 @@ export class FizzBuzz extends React.Component {
     $("#fizz-buzz-component__article--iterate").css("display", state["iterate"]);
   }
 
-  fizzBuzzCall() {
-    const value = $("#fizz-buzz-component__input--call").val();
-    if (isNaN(value)) {
-      alert("数字を入力してください。");
-    } else {
-      alert(fizzBuzz(value));
-    }
-  }
-
   fizzBuzzPrint() {
     const value = $("#fizz-buzz-component__input--print").val();
     const target = $("#fizz-buzz-component__print--message");

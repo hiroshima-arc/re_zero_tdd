@@ -54,13 +54,25 @@ describe("FizzBuzzコンポーネント", () => {
     expect(component).toMatchSnapshot();
   });
 
-  test("FizzBuzzCallを実行する", () => {
-    const component = shallow(<FizzBuzzCall/>);
-    component
-      .find("#fizz-buzz-component__button--call")
-      .simulate("click");
+  describe("FizzBuzzCallコンポーネント", () => {
+    test("コンポーネントが存在すること", () => {
+      const component = shallow(<FizzBuzzCall/>);
+      component
+        .find("#fizz-buzz-component__button--call")
+        .simulate("click");
 
-    expect(component).toMatchSnapshot();
+      expect(component).toMatchSnapshot();
+    });
+
+    test("3を入力したらFizzを表示する", () => {
+      window.alert = jest.fn();
+      const component = shallow(<FizzBuzzCall/>);
+      component.find("#fizz-buzz-component__input--call").simulate("change", {
+        target: {value: "3"}
+      });
+      component.find("#fizz-buzz-component__button--call").simulate("click");
+      expect(window.alert).toHaveBeenCalledWith("Fizz");
+    });
   });
 
   test("FizzBuzzPrintを実行する", () => {

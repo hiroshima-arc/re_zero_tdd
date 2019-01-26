@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FizzBuzzコンポーネント FizzBuzzCallを実行する 1`] = `
+exports[`FizzBuzzコンポーネント FizzBuzzCallコンポーネント コンポーネントが存在すること 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <FizzBuzzCall />,
@@ -25,10 +25,13 @@ ShallowWrapper {
         </h2>
         <input
           id="fizz-buzz-component__input--call"
+          onChange={[Function]}
           type="text"
+          value=""
         />
         <input
           id="fizz-buzz-component__button--call"
+          onClick={[Function]}
           type="button"
           value="Call"
         />
@@ -46,10 +49,13 @@ ShallowWrapper {
           </h2>,
           <input
             id="fizz-buzz-component__input--call"
+            onChange={[Function]}
             type="text"
+            value=""
           />,
           <input
             id="fizz-buzz-component__button--call"
+            onClick={[Function]}
             type="button"
             value="Call"
           />,
@@ -75,7 +81,9 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "id": "fizz-buzz-component__input--call",
+            "onChange": [Function],
             "type": "text",
+            "value": "",
           },
           "ref": null,
           "rendered": null,
@@ -87,6 +95,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "id": "fizz-buzz-component__button--call",
+            "onClick": [Function],
             "type": "button",
             "value": "Call",
           },
@@ -113,10 +122,13 @@ ShallowWrapper {
           </h2>
           <input
             id="fizz-buzz-component__input--call"
+            onChange={[Function]}
             type="text"
+            value=""
           />
           <input
             id="fizz-buzz-component__button--call"
+            onClick={[Function]}
             type="button"
             value="Call"
           />
@@ -134,10 +146,13 @@ ShallowWrapper {
             </h2>,
             <input
               id="fizz-buzz-component__input--call"
+              onChange={[Function]}
               type="text"
+              value=""
             />,
             <input
               id="fizz-buzz-component__button--call"
+              onClick={[Function]}
               type="button"
               value="Call"
             />,
@@ -163,7 +178,9 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "id": "fizz-buzz-component__input--call",
+              "onChange": [Function],
               "type": "text",
+              "value": "",
             },
             "ref": null,
             "rendered": null,
@@ -175,6 +192,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "id": "fizz-buzz-component__button--call",
+              "onClick": [Function],
               "type": "button",
               "value": "Call",
             },
@@ -4870,10 +4888,13 @@ exports[`FizzBuzzコンポーネント コンポーネントが存在するこ�
             </h2>
             <input
               id="fizz-buzz-component__input--call"
+              onChange={[Function]}
               type="text"
+              value=""
             />
             <input
               id="fizz-buzz-component__button--call"
+              onClick={[Function]}
               type="button"
               value="Call"
             />
