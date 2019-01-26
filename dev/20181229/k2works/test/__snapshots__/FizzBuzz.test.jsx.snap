@@ -1118,7 +1118,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`FizzBuzzコンポーネント FizzBuzzIterateを実行する 1`] = `
+exports[`FizzBuzzコンポーネント FizzBuzzIterate 100を入力したらテーブルを表示する 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <FizzBuzzIterate />,
@@ -1143,14 +1143,21 @@ ShallowWrapper {
         </h2>
         <input
           id="fizz-buzz-component__input--iterate"
+          onChange={[Function]}
           type="text"
         />
         <input
           id="fizz-buzz-component__button--iterate"
+          onClick={[Function]}
           type="button"
           value="execute"
         />
         <div
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "<table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead><tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr><td>11</td><td>Fizz</td><td>13</td><td>14</td><td>FizzBuzz</td><td>16</td><td>17</td><td>Fizz</td><td>19</td><td>Buzz</td></tr><td>Fizz</td><td>22</td><td>23</td><td>Fizz</td><td>Buzz</td><td>26</td><td>Fizz</td><td>28</td><td>29</td><td>FizzBuzz</td></tr><td>31</td><td>32</td><td>Fizz</td><td>34</td><td>Buzz</td><td>Fizz</td><td>37</td><td>38</td><td>Fizz</td><td>Buzz</td></tr><td>41</td><td>Fizz</td><td>43</td><td>44</td><td>FizzBuzz</td><td>46</td><td>47</td><td>Fizz</td><td>49</td><td>Buzz</td></tr><td>Fizz</td><td>52</td><td>53</td><td>Fizz</td><td>Buzz</td><td>56</td><td>Fizz</td><td>58</td><td>59</td><td>FizzBuzz</td></tr><td>61</td><td>62</td><td>Fizz</td><td>64</td><td>Buzz</td><td>Fizz</td><td>67</td><td>68</td><td>Fizz</td><td>Buzz</td></tr><td>71</td><td>Fizz</td><td>73</td><td>74</td><td>FizzBuzz</td><td>76</td><td>77</td><td>Fizz</td><td>79</td><td>Buzz</td></tr><td>Fizz</td><td>82</td><td>83</td><td>Fizz</td><td>Buzz</td><td>86</td><td>Fizz</td><td>88</td><td>89</td><td>FizzBuzz</td></tr><td>91</td><td>92</td><td>Fizz</td><td>94</td><td>Buzz</td><td>Fizz</td><td>97</td><td>98</td><td>Fizz</td><td>Buzz</td></tr></tbody></table>",
+            }
+          }
           id="fizz-buzz-component__iterate--result"
         />
       </article>,
@@ -1167,14 +1174,21 @@ ShallowWrapper {
           </h2>,
           <input
             id="fizz-buzz-component__input--iterate"
+            onChange={[Function]}
             type="text"
           />,
           <input
             id="fizz-buzz-component__button--iterate"
+            onClick={[Function]}
             type="button"
             value="execute"
           />,
           <div
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead><tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr><td>11</td><td>Fizz</td><td>13</td><td>14</td><td>FizzBuzz</td><td>16</td><td>17</td><td>Fizz</td><td>19</td><td>Buzz</td></tr><td>Fizz</td><td>22</td><td>23</td><td>Fizz</td><td>Buzz</td><td>26</td><td>Fizz</td><td>28</td><td>29</td><td>FizzBuzz</td></tr><td>31</td><td>32</td><td>Fizz</td><td>34</td><td>Buzz</td><td>Fizz</td><td>37</td><td>38</td><td>Fizz</td><td>Buzz</td></tr><td>41</td><td>Fizz</td><td>43</td><td>44</td><td>FizzBuzz</td><td>46</td><td>47</td><td>Fizz</td><td>49</td><td>Buzz</td></tr><td>Fizz</td><td>52</td><td>53</td><td>Fizz</td><td>Buzz</td><td>56</td><td>Fizz</td><td>58</td><td>59</td><td>FizzBuzz</td></tr><td>61</td><td>62</td><td>Fizz</td><td>64</td><td>Buzz</td><td>Fizz</td><td>67</td><td>68</td><td>Fizz</td><td>Buzz</td></tr><td>71</td><td>Fizz</td><td>73</td><td>74</td><td>FizzBuzz</td><td>76</td><td>77</td><td>Fizz</td><td>79</td><td>Buzz</td></tr><td>Fizz</td><td>82</td><td>83</td><td>Fizz</td><td>Buzz</td><td>86</td><td>Fizz</td><td>88</td><td>89</td><td>FizzBuzz</td></tr><td>91</td><td>92</td><td>Fizz</td><td>94</td><td>Buzz</td><td>Fizz</td><td>97</td><td>98</td><td>Fizz</td><td>Buzz</td></tr></tbody></table>",
+              }
+            }
             id="fizz-buzz-component__iterate--result"
           />,
         ],
@@ -1199,6 +1213,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "id": "fizz-buzz-component__input--iterate",
+            "onChange": [Function],
             "type": "text",
           },
           "ref": null,
@@ -1211,6 +1226,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "id": "fizz-buzz-component__button--iterate",
+            "onClick": [Function],
             "type": "button",
             "value": "execute",
           },
@@ -1223,6 +1239,9 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
+            "dangerouslySetInnerHTML": Object {
+              "__html": "<table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead><tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr><td>11</td><td>Fizz</td><td>13</td><td>14</td><td>FizzBuzz</td><td>16</td><td>17</td><td>Fizz</td><td>19</td><td>Buzz</td></tr><td>Fizz</td><td>22</td><td>23</td><td>Fizz</td><td>Buzz</td><td>26</td><td>Fizz</td><td>28</td><td>29</td><td>FizzBuzz</td></tr><td>31</td><td>32</td><td>Fizz</td><td>34</td><td>Buzz</td><td>Fizz</td><td>37</td><td>38</td><td>Fizz</td><td>Buzz</td></tr><td>41</td><td>Fizz</td><td>43</td><td>44</td><td>FizzBuzz</td><td>46</td><td>47</td><td>Fizz</td><td>49</td><td>Buzz</td></tr><td>Fizz</td><td>52</td><td>53</td><td>Fizz</td><td>Buzz</td><td>56</td><td>Fizz</td><td>58</td><td>59</td><td>FizzBuzz</td></tr><td>61</td><td>62</td><td>Fizz</td><td>64</td><td>Buzz</td><td>Fizz</td><td>67</td><td>68</td><td>Fizz</td><td>Buzz</td></tr><td>71</td><td>Fizz</td><td>73</td><td>74</td><td>FizzBuzz</td><td>76</td><td>77</td><td>Fizz</td><td>79</td><td>Buzz</td></tr><td>Fizz</td><td>82</td><td>83</td><td>Fizz</td><td>Buzz</td><td>86</td><td>Fizz</td><td>88</td><td>89</td><td>FizzBuzz</td></tr><td>91</td><td>92</td><td>Fizz</td><td>94</td><td>Buzz</td><td>Fizz</td><td>97</td><td>98</td><td>Fizz</td><td>Buzz</td></tr></tbody></table>",
+            },
             "id": "fizz-buzz-component__iterate--result",
           },
           "ref": null,
@@ -1248,14 +1267,21 @@ ShallowWrapper {
           </h2>
           <input
             id="fizz-buzz-component__input--iterate"
+            onChange={[Function]}
             type="text"
           />
           <input
             id="fizz-buzz-component__button--iterate"
+            onClick={[Function]}
             type="button"
             value="execute"
           />
           <div
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead><tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr><td>11</td><td>Fizz</td><td>13</td><td>14</td><td>FizzBuzz</td><td>16</td><td>17</td><td>Fizz</td><td>19</td><td>Buzz</td></tr><td>Fizz</td><td>22</td><td>23</td><td>Fizz</td><td>Buzz</td><td>26</td><td>Fizz</td><td>28</td><td>29</td><td>FizzBuzz</td></tr><td>31</td><td>32</td><td>Fizz</td><td>34</td><td>Buzz</td><td>Fizz</td><td>37</td><td>38</td><td>Fizz</td><td>Buzz</td></tr><td>41</td><td>Fizz</td><td>43</td><td>44</td><td>FizzBuzz</td><td>46</td><td>47</td><td>Fizz</td><td>49</td><td>Buzz</td></tr><td>Fizz</td><td>52</td><td>53</td><td>Fizz</td><td>Buzz</td><td>56</td><td>Fizz</td><td>58</td><td>59</td><td>FizzBuzz</td></tr><td>61</td><td>62</td><td>Fizz</td><td>64</td><td>Buzz</td><td>Fizz</td><td>67</td><td>68</td><td>Fizz</td><td>Buzz</td></tr><td>71</td><td>Fizz</td><td>73</td><td>74</td><td>FizzBuzz</td><td>76</td><td>77</td><td>Fizz</td><td>79</td><td>Buzz</td></tr><td>Fizz</td><td>82</td><td>83</td><td>Fizz</td><td>Buzz</td><td>86</td><td>Fizz</td><td>88</td><td>89</td><td>FizzBuzz</td></tr><td>91</td><td>92</td><td>Fizz</td><td>94</td><td>Buzz</td><td>Fizz</td><td>97</td><td>98</td><td>Fizz</td><td>Buzz</td></tr></tbody></table>",
+              }
+            }
             id="fizz-buzz-component__iterate--result"
           />
         </article>,
@@ -1272,14 +1298,21 @@ ShallowWrapper {
             </h2>,
             <input
               id="fizz-buzz-component__input--iterate"
+              onChange={[Function]}
               type="text"
             />,
             <input
               id="fizz-buzz-component__button--iterate"
+              onClick={[Function]}
               type="button"
               value="execute"
             />,
             <div
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "<table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead><tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr><td>11</td><td>Fizz</td><td>13</td><td>14</td><td>FizzBuzz</td><td>16</td><td>17</td><td>Fizz</td><td>19</td><td>Buzz</td></tr><td>Fizz</td><td>22</td><td>23</td><td>Fizz</td><td>Buzz</td><td>26</td><td>Fizz</td><td>28</td><td>29</td><td>FizzBuzz</td></tr><td>31</td><td>32</td><td>Fizz</td><td>34</td><td>Buzz</td><td>Fizz</td><td>37</td><td>38</td><td>Fizz</td><td>Buzz</td></tr><td>41</td><td>Fizz</td><td>43</td><td>44</td><td>FizzBuzz</td><td>46</td><td>47</td><td>Fizz</td><td>49</td><td>Buzz</td></tr><td>Fizz</td><td>52</td><td>53</td><td>Fizz</td><td>Buzz</td><td>56</td><td>Fizz</td><td>58</td><td>59</td><td>FizzBuzz</td></tr><td>61</td><td>62</td><td>Fizz</td><td>64</td><td>Buzz</td><td>Fizz</td><td>67</td><td>68</td><td>Fizz</td><td>Buzz</td></tr><td>71</td><td>Fizz</td><td>73</td><td>74</td><td>FizzBuzz</td><td>76</td><td>77</td><td>Fizz</td><td>79</td><td>Buzz</td></tr><td>Fizz</td><td>82</td><td>83</td><td>Fizz</td><td>Buzz</td><td>86</td><td>Fizz</td><td>88</td><td>89</td><td>FizzBuzz</td></tr><td>91</td><td>92</td><td>Fizz</td><td>94</td><td>Buzz</td><td>Fizz</td><td>97</td><td>98</td><td>Fizz</td><td>Buzz</td></tr></tbody></table>",
+                }
+              }
               id="fizz-buzz-component__iterate--result"
             />,
           ],
@@ -1304,6 +1337,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "id": "fizz-buzz-component__input--iterate",
+              "onChange": [Function],
               "type": "text",
             },
             "ref": null,
@@ -1316,6 +1350,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "id": "fizz-buzz-component__button--iterate",
+              "onClick": [Function],
               "type": "button",
               "value": "execute",
             },
@@ -1328,6 +1363,289 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
+              "dangerouslySetInnerHTML": Object {
+                "__html": "<table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead><tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr><td>11</td><td>Fizz</td><td>13</td><td>14</td><td>FizzBuzz</td><td>16</td><td>17</td><td>Fizz</td><td>19</td><td>Buzz</td></tr><td>Fizz</td><td>22</td><td>23</td><td>Fizz</td><td>Buzz</td><td>26</td><td>Fizz</td><td>28</td><td>29</td><td>FizzBuzz</td></tr><td>31</td><td>32</td><td>Fizz</td><td>34</td><td>Buzz</td><td>Fizz</td><td>37</td><td>38</td><td>Fizz</td><td>Buzz</td></tr><td>41</td><td>Fizz</td><td>43</td><td>44</td><td>FizzBuzz</td><td>46</td><td>47</td><td>Fizz</td><td>49</td><td>Buzz</td></tr><td>Fizz</td><td>52</td><td>53</td><td>Fizz</td><td>Buzz</td><td>56</td><td>Fizz</td><td>58</td><td>59</td><td>FizzBuzz</td></tr><td>61</td><td>62</td><td>Fizz</td><td>64</td><td>Buzz</td><td>Fizz</td><td>67</td><td>68</td><td>Fizz</td><td>Buzz</td></tr><td>71</td><td>Fizz</td><td>73</td><td>74</td><td>FizzBuzz</td><td>76</td><td>77</td><td>Fizz</td><td>79</td><td>Buzz</td></tr><td>Fizz</td><td>82</td><td>83</td><td>Fizz</td><td>Buzz</td><td>86</td><td>Fizz</td><td>88</td><td>89</td><td>FizzBuzz</td></tr><td>91</td><td>92</td><td>Fizz</td><td>94</td><td>Buzz</td><td>Fizz</td><td>97</td><td>98</td><td>Fizz</td><td>Buzz</td></tr></tbody></table>",
+              },
+              "id": "fizz-buzz-component__iterate--result",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "div",
+          },
+        ],
+        "type": "article",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`FizzBuzzコンポーネント FizzBuzzIterate コンポーネントが存在する 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <FizzBuzzIterate />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <article
+        id="fizz-buzz-component__article--iterate"
+      >
+        <h2>
+          FizzBuzzIterate
+        </h2>
+        <input
+          id="fizz-buzz-component__input--iterate"
+          onChange={[Function]}
+          type="text"
+        />
+        <input
+          id="fizz-buzz-component__button--iterate"
+          onClick={[Function]}
+          type="button"
+          value="execute"
+        />
+        <div
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "数字を入力してください。",
+            }
+          }
+          id="fizz-buzz-component__iterate--result"
+        />
+      </article>,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h2>
+            FizzBuzzIterate
+          </h2>,
+          <input
+            id="fizz-buzz-component__input--iterate"
+            onChange={[Function]}
+            type="text"
+          />,
+          <input
+            id="fizz-buzz-component__button--iterate"
+            onClick={[Function]}
+            type="button"
+            value="execute"
+          />,
+          <div
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "数字を入力してください。",
+              }
+            }
+            id="fizz-buzz-component__iterate--result"
+          />,
+        ],
+        "id": "fizz-buzz-component__article--iterate",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "FizzBuzzIterate",
+          },
+          "ref": null,
+          "rendered": "FizzBuzzIterate",
+          "type": "h2",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "id": "fizz-buzz-component__input--iterate",
+            "onChange": [Function],
+            "type": "text",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "id": "fizz-buzz-component__button--iterate",
+            "onClick": [Function],
+            "type": "button",
+            "value": "execute",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "input",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "dangerouslySetInnerHTML": Object {
+              "__html": "数字を入力してください。",
+            },
+            "id": "fizz-buzz-component__iterate--result",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+      ],
+      "type": "article",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <article
+          id="fizz-buzz-component__article--iterate"
+        >
+          <h2>
+            FizzBuzzIterate
+          </h2>
+          <input
+            id="fizz-buzz-component__input--iterate"
+            onChange={[Function]}
+            type="text"
+          />
+          <input
+            id="fizz-buzz-component__button--iterate"
+            onClick={[Function]}
+            type="button"
+            value="execute"
+          />
+          <div
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "数字を入力してください。",
+              }
+            }
+            id="fizz-buzz-component__iterate--result"
+          />
+        </article>,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h2>
+              FizzBuzzIterate
+            </h2>,
+            <input
+              id="fizz-buzz-component__input--iterate"
+              onChange={[Function]}
+              type="text"
+            />,
+            <input
+              id="fizz-buzz-component__button--iterate"
+              onClick={[Function]}
+              type="button"
+              value="execute"
+            />,
+            <div
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "数字を入力してください。",
+                }
+              }
+              id="fizz-buzz-component__iterate--result"
+            />,
+          ],
+          "id": "fizz-buzz-component__article--iterate",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "FizzBuzzIterate",
+            },
+            "ref": null,
+            "rendered": "FizzBuzzIterate",
+            "type": "h2",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "fizz-buzz-component__input--iterate",
+              "onChange": [Function],
+              "type": "text",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "fizz-buzz-component__button--iterate",
+              "onClick": [Function],
+              "type": "button",
+              "value": "execute",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "dangerouslySetInnerHTML": Object {
+                "__html": "数字を入力してください。",
+              },
               "id": "fizz-buzz-component__iterate--result",
             },
             "ref": null,
@@ -5003,14 +5321,21 @@ exports[`FizzBuzzコンポーネント コンポーネントが存在するこ�
             </h2>
             <input
               id="fizz-buzz-component__input--iterate"
+              onChange={[Function]}
               type="text"
             />
             <input
               id="fizz-buzz-component__button--iterate"
+              onClick={[Function]}
               type="button"
               value="execute"
             />
             <div
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "",
+                }
+              }
               id="fizz-buzz-component__iterate--result"
             />
           </article>

@@ -22,7 +22,6 @@ export class FizzBuzz extends React.Component {
     this.showFizzBuzzPrint = this.showFizzBuzzPrint.bind(this);
     this.showFizzBuzzUpDown = this.showFizzBuzzUpDown.bind(this);
     this.showFizzBuzzIterate = this.showFizzBuzzIterate.bind(this);
-    this.fizzBuzzIterate = this.fizzBuzzIterate.bind(this);
   }
 
   componentDidMount() {
@@ -113,53 +112,6 @@ export class FizzBuzz extends React.Component {
     $("#fizz-buzz-component__article--print").css("display", state["print"]);
     $("#fizz-buzz-component__article--up-down").css("display", state["updown"]);
     $("#fizz-buzz-component__article--iterate").css("display", state["iterate"]);
-  }
-
-  fizzBuzzIterate() {
-    const target = $("#fizz-buzz-component__iterate--result");
-    let count = $("#fizz-buzz-component__input--iterate").val();
-    if (isNaN(count)) {
-      return target.html("数字を入力してください。");
-    }
-    if (count > MAX_COUNT) {
-      return target.html(`<strong>件数は${MAX_COUNT}までです。</strong>`);
-    }
-    let array = iterate(parseInt(count));
-    target.html(this.renderHtmlTable(array));
-  }
-
-  renderHtmlTable(array) {
-    let rowCount = 1;
-    let html = "<table>";
-
-    html = html + "<thead>";
-    [...Array(10).keys()].forEach((v) => {
-      html = html + `<th>${v + 1}</th>`;
-    });
-    html = html + "</thead>";
-
-    html = html + "<tbody>";
-
-    html = html + "<tr>";
-    array.forEach((value) => {
-      if (rowCount > 10) {
-        html = html + "<tr>";
-      }
-
-      value = `<td>${value}</td>`;
-      html = html + value;
-
-      if (rowCount === 10) {
-        html = html + "</tr>";
-        rowCount = 1;
-      } else {
-        rowCount += 1;
-      }
-    });
-
-    html = html + "</tbody>";
-    html = html + "</table>";
-    return html;
   }
 
   render() {

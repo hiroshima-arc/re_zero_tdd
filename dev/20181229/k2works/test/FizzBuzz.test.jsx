@@ -115,13 +115,25 @@ describe("FizzBuzzコンポーネント", () => {
     });
   });
 
-  test("FizzBuzzIterateを実行する", () => {
-    const component = shallow(<FizzBuzzIterate/>);
+  describe("FizzBuzzIterate", () => {
+    test("コンポーネントが存在する", () => {
+      const component = shallow(<FizzBuzzIterate/>);
 
-    component
-      .find("#fizz-buzz-component__button--iterate")
-      .simulate("click");
+      component
+        .find("#fizz-buzz-component__button--iterate")
+        .simulate("click");
 
-    expect(component).toMatchSnapshot();
+      expect(component).toMatchSnapshot();
+    });
+
+    test("100を入力したらテーブルを表示する", () => {
+      const component = shallow(<FizzBuzzIterate/>);
+      component.find("#fizz-buzz-component__input--iterate").simulate("change", {
+        target: {value: "100"}
+      });
+      component.find("#fizz-buzz-component__button--iterate").simulate("click");
+
+      expect(component).toMatchSnapshot();
+    });
   });
 });
