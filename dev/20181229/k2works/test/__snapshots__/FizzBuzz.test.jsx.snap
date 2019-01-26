@@ -2510,7 +2510,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`FizzBuzzコンポーネント FizzBuzzPrintを実行する 1`] = `
+exports[`FizzBuzzコンポーネント FizzBuzzPrint コンポーネントが存在すること 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <FizzBuzzPrint />,
@@ -2536,14 +2536,17 @@ ShallowWrapper {
         <div
           id="fizz-buzz-component__print--message"
         >
-          Initialized
+          FizzBuzz
         </div>
         <input
           id="fizz-buzz-component__input--print"
+          onChange={[Function]}
           type="text"
+          value=""
         />
         <input
           id="fizz-buzz-component__button--print"
+          onClick={[Function]}
           type="button"
           value="Print"
         />
@@ -2562,14 +2565,17 @@ ShallowWrapper {
           <div
             id="fizz-buzz-component__print--message"
           >
-            Initialized
+            FizzBuzz
           </div>,
           <input
             id="fizz-buzz-component__input--print"
+            onChange={[Function]}
             type="text"
+            value=""
           />,
           <input
             id="fizz-buzz-component__button--print"
+            onClick={[Function]}
             type="button"
             value="Print"
           />,
@@ -2594,11 +2600,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Initialized",
+            "children": "FizzBuzz",
             "id": "fizz-buzz-component__print--message",
           },
           "ref": null,
-          "rendered": "Initialized",
+          "rendered": "FizzBuzz",
           "type": "div",
         },
         Object {
@@ -2607,7 +2613,9 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "id": "fizz-buzz-component__input--print",
+            "onChange": [Function],
             "type": "text",
+            "value": "",
           },
           "ref": null,
           "rendered": null,
@@ -2619,6 +2627,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "id": "fizz-buzz-component__button--print",
+            "onClick": [Function],
             "type": "button",
             "value": "Print",
           },
@@ -2646,14 +2655,17 @@ ShallowWrapper {
           <div
             id="fizz-buzz-component__print--message"
           >
-            Initialized
+            FizzBuzz
           </div>
           <input
             id="fizz-buzz-component__input--print"
+            onChange={[Function]}
             type="text"
+            value=""
           />
           <input
             id="fizz-buzz-component__button--print"
+            onClick={[Function]}
             type="button"
             value="Print"
           />
@@ -2672,14 +2684,17 @@ ShallowWrapper {
             <div
               id="fizz-buzz-component__print--message"
             >
-              Initialized
+              FizzBuzz
             </div>,
             <input
               id="fizz-buzz-component__input--print"
+              onChange={[Function]}
               type="text"
+              value=""
             />,
             <input
               id="fizz-buzz-component__button--print"
+              onClick={[Function]}
               type="button"
               value="Print"
             />,
@@ -2704,11 +2719,11 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "Initialized",
+              "children": "FizzBuzz",
               "id": "fizz-buzz-component__print--message",
             },
             "ref": null,
-            "rendered": "Initialized",
+            "rendered": "FizzBuzz",
             "type": "div",
           },
           Object {
@@ -2717,7 +2732,9 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "id": "fizz-buzz-component__input--print",
+              "onChange": [Function],
               "type": "text",
+              "value": "",
             },
             "ref": null,
             "rendered": null,
@@ -2729,6 +2746,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "id": "fizz-buzz-component__button--print",
+              "onClick": [Function],
               "type": "button",
               "value": "Print",
             },
@@ -4914,10 +4932,13 @@ exports[`FizzBuzzコンポーネント コンポーネントが存在するこ�
             </div>
             <input
               id="fizz-buzz-component__input--print"
+              onChange={[Function]}
               type="text"
+              value=""
             />
             <input
               id="fizz-buzz-component__button--print"
+              onClick={[Function]}
               type="button"
               value="Print"
             />

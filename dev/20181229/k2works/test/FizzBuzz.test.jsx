@@ -75,15 +75,25 @@ describe("FizzBuzzコンポーネント", () => {
     });
   });
 
-  test("FizzBuzzPrintを実行する", () => {
-    const component = shallow(<FizzBuzzPrint/>);
-    component
-      .find("#fizz-buzz-component__button--print")
-      .simulate("click");
+  describe("FizzBuzzPrint", () => {
+    test("コンポーネントが存在すること", () => {
+      const component = shallow(<FizzBuzzPrint/>);
+      component
+        .find("#fizz-buzz-component__button--print")
+        .simulate("click");
 
-    expect(component).toMatchSnapshot();
+      expect(component).toMatchSnapshot();
+    });
+
+    test("15を入力したらFizzBuzzを表示する", () => {
+      const component = shallow(<FizzBuzzPrint/>);
+      component.find("#fizz-buzz-component__input--print").simulate("change", {
+        target: {value: "15"}
+      });
+      component.find("#fizz-buzz-component__button--print").simulate("click");
+      expect(component.find("#fizz-buzz-component__print--message").text()).toEqual("FizzBuzz");
+    });
   });
-
   test("FizzBuzzUpを実行する", () => {
     const component = shallow(<FizzBuzzUpDown/>);
     component
