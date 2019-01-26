@@ -3,7 +3,6 @@ import React from "react";
 import {shallow} from "enzyme";
 import renderer from "react-test-renderer";
 import {FizzBuzz} from "../src/components/FizzBuzz";
-import {FizzBuzzMenu} from "../src/components/FizzBuzzMenu";
 import {FizzBuzzCall} from "../src/components/FizzBuzzCall";
 import {FizzBuzzPrint} from "../src/components/FizzBuzzPrint";
 import {FizzBuzzUpDown} from "../src/components/FizzBuzzUpDown";
@@ -18,42 +17,40 @@ describe("FizzBuzzコンポーネント", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  describe("FizzBuzzMenu", () => {
-    test("FizzBuzzCallメニューを選択する", () => {
-      const component = shallow(<FizzBuzzMenu/>);
-      component
-        .find("#nav-component__sub-menu--fizz-buzz-call")
-        .simulate("click");
+  test("FizzBuzzCallメニューを選択する", () => {
+    const component = shallow(<FizzBuzz/>);
+    component
+      .find("#nav-component__sub-menu--fizz-buzz-call")
+      .simulate("click");
 
-      expect(component).toMatchSnapshot();
-    });
+    expect(component).toMatchSnapshot();
+  });
 
-    test("FizzBuzzPrintメニューを選択する", () => {
-      const component = shallow(<FizzBuzzMenu/>);
-      component
-        .find("#nav-component__sub-menu--fizz-buzz-print")
-        .simulate("click");
+  test("FizzBuzzPrintメニューを選択する", () => {
+    const component = shallow(<FizzBuzz/>);
+    component
+      .find("#nav-component__sub-menu--fizz-buzz-print")
+      .simulate("click");
 
-      expect(component).toMatchSnapshot();
-    });
+    expect(component).toMatchSnapshot();
+  });
 
-    test("FizzBuzzUpDownメニューを選択する", () => {
-      const component = shallow(<FizzBuzzMenu/>);
-      component
-        .find("#nav-component__sub-menu--fizz-buzz-up-down")
-        .simulate("click");
+  test("FizzBuzzUpDownメニューを選択する", () => {
+    const component = shallow(<FizzBuzz/>);
+    component
+      .find("#nav-component__sub-menu--fizz-buzz-up-down")
+      .simulate("click");
 
-      expect(component).toMatchSnapshot();
-    });
+    expect(component).toMatchSnapshot();
+  });
 
-    test("FizzBuzzIterateメニューを選択する", () => {
-      const component = shallow(<FizzBuzzMenu/>);
-      component
-        .find("#nav-component__sub-menu--fizz-buzz-iterate")
-        .simulate("click");
+  test("FizzBuzzIterateメニューを選択する", () => {
+    const component = shallow(<FizzBuzz/>);
+    component
+      .find("#nav-component__sub-menu--fizz-buzz-iterate")
+      .simulate("click");
 
-      expect(component).toMatchSnapshot();
-    });
+    expect(component).toMatchSnapshot();
   });
 
   describe("FizzBuzzCallコンポーネント", () => {
