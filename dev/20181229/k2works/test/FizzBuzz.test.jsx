@@ -18,40 +18,42 @@ describe("FizzBuzzコンポーネント", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  test("FizzBuzzCallメニューを選択する", () => {
-    const component = shallow(<FizzBuzzMenu/>);
-    component
-      .find("#nav-component__sub-menu--fizz-buzz-call")
-      .simulate("click");
+  describe("FizzBuzzMenu", () => {
+    test("FizzBuzzCallメニューを選択する", () => {
+      const component = shallow(<FizzBuzzMenu/>);
+      component
+        .find("#nav-component__sub-menu--fizz-buzz-call")
+        .simulate("click");
 
-    expect(component).toMatchSnapshot();
-  });
+      expect(component).toMatchSnapshot();
+    });
 
-  test("FizzBuzzPrintメニューを選択する", () => {
-    const component = shallow(<FizzBuzzMenu/>);
-    component
-      .find("#nav-component__sub-menu--fizz-buzz-print")
-      .simulate("click");
+    test("FizzBuzzPrintメニューを選択する", () => {
+      const component = shallow(<FizzBuzzMenu/>);
+      component
+        .find("#nav-component__sub-menu--fizz-buzz-print")
+        .simulate("click");
 
-    expect(component).toMatchSnapshot();
-  });
+      expect(component).toMatchSnapshot();
+    });
 
-  test("FizzBuzzUpDownメニューを選択する", () => {
-    const component = shallow(<FizzBuzzMenu/>);
-    component
-      .find("#nav-component__sub-menu--fizz-buzz-up-down")
-      .simulate("click");
+    test("FizzBuzzUpDownメニューを選択する", () => {
+      const component = shallow(<FizzBuzzMenu/>);
+      component
+        .find("#nav-component__sub-menu--fizz-buzz-up-down")
+        .simulate("click");
 
-    expect(component).toMatchSnapshot();
-  });
+      expect(component).toMatchSnapshot();
+    });
 
-  test("FizzBuzzIterateメニューを選択する", () => {
-    const component = shallow(<FizzBuzzMenu/>);
-    component
-      .find("#nav-component__sub-menu--fizz-buzz-iterate")
-      .simulate("click");
+    test("FizzBuzzIterateメニューを選択する", () => {
+      const component = shallow(<FizzBuzzMenu/>);
+      component
+        .find("#nav-component__sub-menu--fizz-buzz-iterate")
+        .simulate("click");
 
-    expect(component).toMatchSnapshot();
+      expect(component).toMatchSnapshot();
+    });
   });
 
   describe("FizzBuzzCallコンポーネント", () => {
