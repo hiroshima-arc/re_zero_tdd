@@ -5,103 +5,61 @@ import $ from "jquery";
 export class FizzBuzzMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {fizzBuzzUpDownCount: props.fizzBuzzUpDownCount};
-    this.handleLoad = this.handleLoad.bind(this);
-    this.showFizzBuzzCall = this.showFizzBuzzCall.bind(this);
-    this.showFizzBuzzPrint = this.showFizzBuzzPrint.bind(this);
-    this.showFizzBuzzUpDown = this.showFizzBuzzUpDown.bind(this);
-    this.showFizzBuzzIterate = this.showFizzBuzzIterate.bind(this);
+    this.state = {
+      call: "none",
+      print: "none",
+      updown: "none",
+      iterate: "none"
+    };
   }
 
-  componentDidMount() {
-    window.addEventListener("load", this.handleLoad);
-  }
-
-  handleLoad() {
-    [{
-      "nav-component__sub-menu--fizz-buzz-call": this.showFizzBuzzCall
-    },
-      {
-        "nav-component__sub-menu--fizz-buzz-print": this.showFizzBuzzPrint
-      },
-      {
-        "nav-component__sub-menu--fizz-buzz-up-down": this.showFizzBuzzUpDown
-      },
-      {
-        "nav-component__sub-menu--fizz-buzz-iterate": this.showFizzBuzzIterate
-      },
-      {
-        "fizz-buzz-component__button--call": this.fizzBuzzCall
-      },
-      {
-        "fizz-buzz-component__button--print": this.fizzBuzzPrint
-      },
-      {
-        "fizz-buzz-component__button--down": this.fizzBuzzDown
-      },
-      {
-        "fizz-buzz-component__button--up": this.fizzBuzzUp
-      },
-      {
-        "fizz-buzz-component__button--iterate": this.fizzBuzzIterate
-      }
-    ].forEach(hash => {
-      Object.keys(hash).forEach(key => {
-        let menu = $(`#${key}`);
-        menu.on("click", hash[key]);
-      });
+  showFizzBuzzCall = () => {
+    const state = ({
+      call: "block",
+      print: "none",
+      updown: "none",
+      iterate: "none"
     });
-  }
+    this.showFizzBuzz(state);
+  };
 
-  showFizzBuzzCall() {
-    this.showFizzBuzz({
-      "call": "block",
-      "print": "none",
-      "updown": "none",
-      "iterate": "none"
+  showFizzBuzzPrint = () => {
+    const state = ({
+      call: "none",
+      print: "block",
+      updown: "none",
+      iterate: "none"
     });
-  }
+    this.showFizzBuzz(state);
+  };
 
-  showFizzBuzzPrint() {
-    this.showFizzBuzz({
-      "call": "none",
-      "print": "block",
-      "updown": "none",
-      "iterate": "none"
+  showFizzBuzzUpDown = () => {
+    const state = ({
+      call: "none",
+      print: "none",
+      updown: "block",
+      iterate: "none"
     });
-  }
+    this.showFizzBuzz(state);
+  };
 
-  showFizzBuzzUpDown() {
-    this.showFizzBuzz({
-      "call": "none",
-      "print": "none",
-      "updown": "block",
-      "iterate": "none"
+  showFizzBuzzIterate = () => {
+    const state = ({
+      call: "none",
+      print: "none",
+      updown: "none",
+      iterate: "block"
     });
-  }
+    this.showFizzBuzz(state);
+  };
 
-  showFizzBuzzIterate() {
-    this.showFizzBuzz({
-      "call": "none",
-      "print": "none",
-      "updown": "none",
-      "iterate": "block"
-    });
-  }
-
-  showFizzBuzz(
-    state = {
-      "call": "none",
-      "print": "none",
-      "updown": "none",
-      "iterate": "none"
-    }
-  ) {
+  showFizzBuzz = (state) => {
     $("#fizz-buzz-component__article--call").css("display", state["call"]);
     $("#fizz-buzz-component__article--print").css("display", state["print"]);
     $("#fizz-buzz-component__article--up-down").css("display", state["updown"]);
     $("#fizz-buzz-component__article--iterate").css("display", state["iterate"]);
-  }
+    this.setState(state);
+  };
 
   render() {
     return (
@@ -112,16 +70,16 @@ export class FizzBuzzMenu extends React.Component {
             <ul>
               <a href="#">FizzBuzz</a>
               <ul id="nav-component__sub-menu--fizz-buzz">
-                <li id="nav-component__sub-menu--fizz-buzz-call">
+                <li id="nav-component__sub-menu--fizz-buzz-call" onClick={this.showFizzBuzzCall}>
                   <a href="#">FizzBuzzCall</a>
                 </li>
-                <li id="nav-component__sub-menu--fizz-buzz-print">
+                <li id="nav-component__sub-menu--fizz-buzz-print" onClick={this.showFizzBuzzPrint}>
                   <a href="#">FizzBuzzPrint</a>
                 </li>
-                <li id="nav-component__sub-menu--fizz-buzz-up-down">
+                <li id="nav-component__sub-menu--fizz-buzz-up-down" onClick={this.showFizzBuzzUpDown}>
                   <a href="#">FizzBuzzUpDown</a>
                 </li>
-                <li id="nav-component__sub-menu--fizz-buzz-iterate">
+                <li id="nav-component__sub-menu--fizz-buzz-iterate" onClick={this.showFizzBuzzIterate}>
                   <a href="#">FizzBuzzIterate</a>
                 </li>
               </ul>
