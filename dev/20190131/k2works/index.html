@@ -49,7 +49,8 @@
     });
 
     it("3で割り切れる場合はFizzをプリントする", () => {
-        assert(3, 'Fizz');
+        var value = fizzBuzz(3);
+        assert(value, 'Fizz');
     });
   });
 
@@ -72,6 +73,10 @@
     array.forEach(value => {
       console.log(value);
     });
+  }
+
+  function fizzBuzz(number) {
+      return 'Fizz';
   }
 
   print();
