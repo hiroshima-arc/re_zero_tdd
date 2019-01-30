@@ -9,7 +9,7 @@ export class FizzBuzzCall extends React.Component {
     };
   }
 
-  onClick = (event) => {
+  onClick = () => {
     const value = this.state.input;
     if (isNaN(value)) {
       alert("数字を入力してください。");
