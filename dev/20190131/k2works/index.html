@@ -52,6 +52,10 @@
         assert(fizzBuzz(3), 'Fizz');
         assert(fizzBuzz(1), 1);
     });
+
+    it("5で割り切れる場合はBuzzをプリントする", () => {
+        assert(fizzBuzz(5), 'Buzz');
+    })
   });
 
   mocha.run();
