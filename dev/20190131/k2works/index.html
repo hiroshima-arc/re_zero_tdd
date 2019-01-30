@@ -49,6 +49,8 @@
     });
   });
 
+  mocha.run();
+
   function execute() {
     var array = [];
     var count = 1;
@@ -61,7 +63,14 @@
     return array;
   }
 
-  mocha.run();
+  function print() {
+    var array = execute();
+    array.forEach(value => {
+      console.log(value);
+    });
+  }
+
+  print();
 </script>
 
 </body>
