@@ -42,18 +42,24 @@
 
   describe("FizzBuzzTest", () => {
     it("1から100までプリントする", () => {
-      var array = [];
-      var count = 1;
-
-      while (count <= 100) {
-        array.push(count);
-        count = count + 1;
-      }
+      var array = execute();
 
       assert(1, array[0]);
       assert(100, array[99]);
     });
   });
+
+  function execute() {
+    var array = [];
+    var count = 1;
+
+    while (count <= 100) {
+      array.push(count);
+      count = count + 1;
+    }
+
+    return array;
+  }
 
   mocha.run();
 </script>
