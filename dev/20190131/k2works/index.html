@@ -45,7 +45,7 @@
       var array = execute();
 
       assert(1, array[0]);
-      assert(100, array[99]);
+      assert('Buzz', array[99]);
     });
 
     it("3で割り切れる場合はFizzをプリントする", () => {
@@ -84,6 +84,8 @@
 
       if (number % 3 === 0) {
           result = 'Fizz'
+      } else if(number % 5 === 0) {
+          result = 'Buzz'
       }
 
       return result;
