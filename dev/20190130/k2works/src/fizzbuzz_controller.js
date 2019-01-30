@@ -94,15 +94,14 @@ export function createFizzBuzzUpDown(target) {
   };
 }
 
-export function fizzBuzzIterate(target, input, max_count) {
+export function fizzBuzzIterate(target, input, max_count, columns_number) {
   const count = parseInt(input.val());
   if (count > max_count) {
     return target.html(`<strong>件数は${max_count}までです。</strong>`);
   }
   const array = iterate(count);
-  const number = 10;
-  const splitArray = splitArrayNumberOfColumnsPerLine(array, number);
-  const html = htmlTable(splitArray, number);
+  const splitArray = splitArrayNumberOfColumnsPerLine(array, columns_number);
+  const html = htmlTable(splitArray, columns_number);
   target.html(html);
 }
 

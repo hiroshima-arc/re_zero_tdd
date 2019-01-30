@@ -3,7 +3,10 @@ import "./fizzbuzz_controller";
 import "./fizzbuzz_view";
 import $ from "jquery";
 import {execute} from "./fizzbuzz_model";
-import {FIZZ_BUZZ_MAX_COUNT as MAX_COUNT} from "./constants";
+import {
+  FIZZ_BUZZ_MAX_COUNT as MAX_COUNT,
+  FIZZ_BUZZ_ITERATE_COLUMNS_NUMBER as COLUMNS_NUMBER
+} from "./constants";
 import {
   createFizzBuzzUpDown,
   fizzBuzzCall, fizzBuzzIterate, fizzBuzzPrint, showFizzBuzz,
@@ -61,7 +64,7 @@ function bindActions() {
     },
     {
       key: "fizz-buzz-component__button--iterate",
-      onClick: () => fizzBuzzIterate($("#fizz-buzz-component__iterate--result"), $("#fizz-buzz-component__input--iterate"), MAX_COUNT)
+      onClick: () => fizzBuzzIterate($("#fizz-buzz-component__iterate--result"), $("#fizz-buzz-component__input--iterate"), MAX_COUNT, COLUMNS_NUMBER)
     }
   ].forEach(({key, onClick}) => {
     const menu = $(`#${key}`);

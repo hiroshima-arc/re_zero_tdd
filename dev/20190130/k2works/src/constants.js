@@ -1,1 +1,2 @@
 export const FIZZ_BUZZ_MAX_COUNT = 100;
+export const FIZZ_BUZZ_ITERATE_COLUMNS_NUMBER = 10;
