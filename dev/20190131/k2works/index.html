@@ -42,7 +42,14 @@
 
   describe("FizzBuzzTest", () => {
     it("1から100までプリントする", () => {
-      var array = [1];
+      var array = [];
+      var count = 1;
+
+      while (count < 100) {
+        array.push(count);
+        count = count + 1;
+      }
+
       assert(1, array[0]);
     });
   });
