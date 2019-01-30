@@ -9,7 +9,7 @@ const dist = path.resolve(__dirname, "dist");
 
 module.exports = {
   mode: "development",
-  entry: ["./src/index.js", "./src/index.jsx"],
+  entry: ["./src/index.jsx"],
 
   output: {
     path: dist,
