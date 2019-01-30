@@ -1,7 +1,7 @@
 import $ from "jquery";
 import {fizzBuzz, iterate} from "./fizzbuzz_model";
 import {FIZZ_BUZZ_MAX_COUNT as MAX_COUNT} from "./constants";
-import {renderHtmlTable} from "./fizzbuzz_view";
+import {htmlTable, renderHtmlTable} from "./fizzbuzz_view";
 
 export function showFizzBuzzCall() {
   return {
@@ -101,6 +101,17 @@ export function fizzBuzzIterate(target, input, max_count) {
   if (count > max_count) {
     return target.html(`<strong>件数は${max_count}までです。</strong>`);
   }
-  let array = iterate(count);
-  target.html(renderHtmlTable(array));
+  const array = iterate(count);
+  const splitArray = split10(array);
+  const html = htmlTable(splitArray);
+  target.html(html);
+}
+
+function split10(array) {
+  const head = array.slice(0, 10);
+  const tail = array.slice(10);
+  if (tail.length > 0) {
+    return [head].concat(split10(tail, 10));
+  }
+  return [head];
 }

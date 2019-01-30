@@ -1,33 +1,27 @@
-export function renderHtmlTable(array) {
-  let rowCount = 1;
-  let html = "<table>";
+export function htmlTable(array) {
+  const serial = [...Array(10).keys()].map(n => n + 1);
+  return `<table>
+            <thead>
+              ${serial.map(th).join("")}
+            </thead>
+            <tbody>
+             ${array.map(row => tr(row.map(td).join(""))).join("")}
+            </tbody>
+          </table>`;
+}
 
-  html = html + "<thead>";
-  [...Array(10).keys()].forEach((v) => {
-    html = html + `<th>${v + 1}</th>`;
-  });
-  html = html + "</thead>";
+function tag(name, children) {
+  return `<${name}>${children}</${name}>`;
+}
 
-  html = html + "<tbody>";
+function th(children) {
+  return tag("th", children);
+}
 
-  html = html + "<tr>";
-  array.forEach((value) => {
-    if (rowCount > 10) {
-      html = html + "<tr>";
-    }
+function tr(children) {
+  return tag("tr", children);
+}
 
-    value = `<td>${value}</td>`;
-    html = html + value;
-
-    if (rowCount === 10) {
-      html = html + "</tr>";
-      rowCount = 1;
-    } else {
-      rowCount += 1;
-    }
-  });
-
-  html = html + "</tbody>";
-  html = html + "</table>";
-  return html;
+function td(children) {
+  return tag("td", children);
 }
