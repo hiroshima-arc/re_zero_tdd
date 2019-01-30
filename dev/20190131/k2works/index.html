@@ -41,11 +41,13 @@
   }
 
   describe("FizzBuzzTest", () => {
-    it("1から100までプリントする", () => {
+    it("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
       var array = execute();
 
-      assert(1, array[0]);
-      assert('Buzz', array[99]);
+      assert(array[0], 1);
+      assert(array[2], 'Fizz');
+      assert(array[4], 'Buzz');
+      assert(array[14], 'FizzBuzz');
     });
 
     it("3で割り切れる場合はFizzをプリントする", () => {
