@@ -16,7 +16,7 @@
 
 - [x] npmパッケージのセットアップ
 - [x] reactのセットアップ
-- [ ] テスト
+- [x] テスト
 
 ## 開発
 
@@ -56,9 +56,16 @@ npm install --save-dev enzyme enzyme-adapter-react-16 identity-obj-proxy react-a
 
 #### Keep
 
+- コンポーネントはテストファーストではなくUIファーストwithテスト
+
 #### Problem
 
+- IDセレクタは無くせそうにない
+- 構成を作るのは初心者にはハードルが高い
+
 #### Try
+
+- Vue.jsの実装と比較する
 
 ## 参照
 
