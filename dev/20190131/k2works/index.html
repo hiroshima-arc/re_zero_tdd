@@ -47,6 +47,10 @@
       assert(1, array[0]);
       assert(100, array[99]);
     });
+
+    it("3で割り切れる場合はFizzをプリントする", () => {
+        assert(3, 'Fizz');
+    });
   });
 
   mocha.run();
