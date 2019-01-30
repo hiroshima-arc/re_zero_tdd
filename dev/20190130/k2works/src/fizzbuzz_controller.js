@@ -3,60 +3,64 @@ import {fizzBuzz, iterate} from "./fizzbuzz_model";
 import {FIZZ_BUZZ_MAX_COUNT as MAX_COUNT} from "./constants";
 import {renderHtmlTable} from "./fizzbuzz_view";
 
-let fizzBuzzUpDownCount = 0;
-
 export function showFizzBuzzCall() {
-  showFizzBuzz({
+  return {
     "call": "block",
     "print": "none",
     "updown": "none",
     "iterate": "none"
-  });
+  };
 }
 
 export function showFizzBuzzPrint() {
-  showFizzBuzz({
+  return {
     "call": "none",
     "print": "block",
     "updown": "none",
     "iterate": "none"
-  });
+  };
 }
 
 export function showFizzBuzzUpDown() {
-  showFizzBuzz({
+  return {
     "call": "none",
     "print": "none",
     "updown": "block",
     "iterate": "none"
-  });
+  };
 }
 
 export function showFizzBuzzIterate() {
-  showFizzBuzz({
+  return {
     "call": "none",
     "print": "none",
     "updown": "none",
     "iterate": "block"
-  });
+  };
 }
 
 export function showFizzBuzz(
-  state = {
-    "call": "none",
-    "print": "none",
-    "updown": "none",
-    "iterate": "none"
-  }
-) {
-  $("#fizz-buzz-component__article--call").css("display", state["call"]);
-  $("#fizz-buzz-component__article--print").css("display", state["print"]);
-  $("#fizz-buzz-component__article--up-down").css("display", state["updown"]);
-  $("#fizz-buzz-component__article--iterate").css("display", state["iterate"]);
+  $call,
+  $print,
+  $updown,
+  $iterate) {
+  return (
+    state = {
+      "call": "none",
+      "print": "none",
+      "updown": "none",
+      "iterate": "none"
+    }
+  ) => {
+    $call.css("display", state.call);
+    $print.css("display", state.print);
+    $updown.css("display", state.updown);
+    $iterate.css("display", state.iterate);
+  };
 }
 
-export function fizzBuzzCall() {
-  const value = $("#fizz-buzz-component__input--call").val();
+export function fizzBuzzCall(target) {
+  const value = target.val();
   if (isNaN(value)) {
     alert("数字を入力してください。");
   } else {
@@ -64,9 +68,8 @@ export function fizzBuzzCall() {
   }
 }
 
-export function fizzBuzzPrint() {
-  const value = $("#fizz-buzz-component__input--print").val();
-  const target = $("#fizz-buzz-component__print--message");
+export function fizzBuzzPrint(target, input) {
+  const value = input.val();
   if (isNaN(value)) {
     target.html("数字を入力してください。");
   } else {
@@ -74,31 +77,30 @@ export function fizzBuzzPrint() {
   }
 }
 
-export function fizzBuzzDown() {
-  if (fizzBuzzUpDownCount === 0) {
-    fizzBuzzUpDownCount = 0;
-  } else {
-    fizzBuzzUpDownCount -= 1;
-  }
-  const target = $("#fizz-buzz-component__up-down--message");
-  const count = fizzBuzzUpDownCount;
-  target.html(fizzBuzz(count));
+export function createFizzBuzzUpDown(target) {
+  let counter = 0;
+  return {
+    up() {
+      counter++;
+      const value = fizzBuzz(counter);
+      target.html(value);
+    },
+    down() {
+      if (counter === 0) {
+        counter = 0;
+      } else {
+        counter -= 1;
+      }
+      target.html(fizzBuzz(counter));
+    }
+  };
 }
 
-export function fizzBuzzUp() {
-  fizzBuzzUpDownCount += 1;
-  const target = $("#fizz-buzz-component__up-down--message");
-  const count = fizzBuzzUpDownCount;
-  const value = fizzBuzz(count);
-  target.html(value);
-}
-
-export function fizzBuzzIterate() {
-  const target = $("#fizz-buzz-component__iterate--result");
-  let count = $("#fizz-buzz-component__input--iterate").val();
-  if (count > MAX_COUNT) {
-    return target.html(`<strong>件数は${MAX_COUNT}までです。</strong>`);
+export function fizzBuzzIterate(target, input, max_count) {
+  const count = parseInt(input.val());
+  if (count > max_count) {
+    return target.html(`<strong>件数は${max_count}までです。</strong>`);
   }
-  let array = iterate(parseInt(count));
+  let array = iterate(count);
   target.html(renderHtmlTable(array));
 }

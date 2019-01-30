@@ -5,7 +5,8 @@ import $ from "jquery";
 import {execute} from "./fizzbuzz_model";
 import {FIZZ_BUZZ_MAX_COUNT as MAX_COUNT} from "./constants";
 import {
-  fizzBuzzCall, fizzBuzzDown, fizzBuzzIterate, fizzBuzzPrint, fizzBuzzUp,
+  createFizzBuzzUpDown,
+  fizzBuzzCall, fizzBuzzIterate, fizzBuzzPrint, showFizzBuzz,
   showFizzBuzzCall,
   showFizzBuzzIterate,
   showFizzBuzzPrint,
@@ -16,38 +17,54 @@ execute(MAX_COUNT);
 bindActions();
 
 function bindActions() {
+  const upDown = createFizzBuzzUpDown(
+    $("#fizz-buzz-component__up-down--message")
+  );
+  const show = showFizzBuzz(
+    $("#fizz-buzz-component__article--call"),
+    $("#fizz-buzz-component__article--print"),
+    $("#fizz-buzz-component__article--up-down"),
+    $("#fizz-buzz-component__article--iterate")
+  );
   [
     {
-      "nav-component__sub-menu--fizz-buzz-call": showFizzBuzzCall
+      key: "nav-component__sub-menu--fizz-buzz-call",
+      onClick: () => show(showFizzBuzzCall())
     },
     {
-      "nav-component__sub-menu--fizz-buzz-print": showFizzBuzzPrint
+      key: "nav-component__sub-menu--fizz-buzz-print",
+      onClick: () => show(showFizzBuzzPrint())
     },
     {
-      "nav-component__sub-menu--fizz-buzz-up-down": showFizzBuzzUpDown
+      key: "nav-component__sub-menu--fizz-buzz-up-down",
+      onClick: () => show(showFizzBuzzUpDown())
     },
     {
-      "nav-component__sub-menu--fizz-buzz-iterate": showFizzBuzzIterate
+      key: "nav-component__sub-menu--fizz-buzz-iterate",
+      onClick: () => show(showFizzBuzzIterate())
     },
     {
-      "fizz-buzz-component__button--call": fizzBuzzCall
+      key: "fizz-buzz-component__button--call",
+      onClick: () => fizzBuzzCall($("#fizz-buzz-component__input--call"))
     },
     {
-      "fizz-buzz-component__button--print": fizzBuzzPrint
+      key: "fizz-buzz-component__button--print",
+      onClick: () => fizzBuzzPrint($("#fizz-buzz-component__print--message"), $("#fizz-buzz-component__input--print"))
     },
     {
-      "fizz-buzz-component__button--down": fizzBuzzDown
+      key: "fizz-buzz-component__button--down",
+      onClick: () => upDown.down()
     },
     {
-      "fizz-buzz-component__button--up": fizzBuzzUp
+      key: "fizz-buzz-component__button--up",
+      onClick: () => upDown.up()
     },
     {
-      "fizz-buzz-component__button--iterate": fizzBuzzIterate
+      key: "fizz-buzz-component__button--iterate",
+      onClick: () => fizzBuzzIterate($("#fizz-buzz-component__iterate--result"), $("#fizz-buzz-component__input--iterate"), MAX_COUNT)
     }
-  ].forEach(hash => {
-    Object.keys(hash).forEach(key => {
-      let menu = $(`#${key}`);
-      menu.on("click", hash[key]);
-    });
+  ].forEach(({key, onClick}) => {
+    const menu = $(`#${key}`);
+    menu.on("click", onClick);
   });
 }
