@@ -36,6 +36,7 @@ jobs:
           name: Run nodejs tests
           command: |
             rake test:nodejs
+            rake coverage:nodejs
             ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.nodjs.json dev/coverage/lcov.info
       - run:
           name: Upload coverage results to Code Climate

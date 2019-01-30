@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="contents.css">
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+  </head>
+  <body>
+    <h1>HTML5+CSS+JavaScript with TDD</h1>
+    <header>
+      <div class="nav-component">
+        <nav>
+          <h1>Menu</h1>
+          <ul>
+            <a href="index.html">FizzBuzz</a>
+            <ul id="nav-component__sub-menu--fizz-buzz">
+              <li id="nav-component__sub-menu--fizz-buzz-call">
+                <a href="#">FizzBuzzCall</a>
+              </li>
+              <li id="nav-component__sub-menu--fizz-buzz-print">
+                <a href="#">FizzBuzzPrint</a>
+              </li>
+              <li id="nav-component__sub-menu--fizz-buzz-up-down">
+                <a href="#">FizzBuzzUpDown</a>
+              </li>
+              <li id="nav-component__sub-menu--fizz-buzz-iterate">
+                <a href="#">FizzBuzzIterate</a>
+              </li>
+            </ul>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="components">
+      <section>
+        <div class="fizz-buzz-component">
+          <h1>FizzBuzz</h1>
+          <article id="fizz-buzz-component__article--call">
+            <h2>FizzBuzzCall</h2>
+            <input type="text" id="fizz-buzz-component__input--call" />
+            <input
+              type="button"
+              id="fizz-buzz-component__button--call"
+              value="Call"
+            />
+          </article>
+
+          <article id="fizz-buzz-component__article--print">
+            <h2>FizzBuzzPrint</h2>
+            <div id="fizz-buzz-component__print--message">Initialized</div>
+            <input type="text" id="fizz-buzz-component__input--print" />
+            <input
+              type="button"
+              id="fizz-buzz-component__button--print"
+              value="Print"
+            />
+          </article>
+
+          <article id="fizz-buzz-component__article--up-down">
+            <h2>FizzBuzzUpDown</h2>
+            <div id="fizz-buzz-component__up-down--message">Ready</div>
+            <input
+              type="button"
+              id="fizz-buzz-component__button--down"
+              value="-"
+            />
+            <input
+              type="button"
+              id="fizz-buzz-component__button--up"
+              value="+"
+            />
+          </article>
+
+          <article id="fizz-buzz-component__article--iterate">
+            <h2>FizzBuzzIterate</h2>
+            <input type="text" id="fizz-buzz-component__input--iterate" />
+            <input
+              type="button"
+              id="fizz-buzz-component__button--iterate"
+              value="execute"
+            />
+            <div id="fizz-buzz-component__iterate--result"></div>
+          </article>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <p>Copyrights</p>
+      <address>hiroshima-arc@gmail.com</address>
+    </footer>
+    <script src="lib/main.js"></script>
+  </body>
+</html>

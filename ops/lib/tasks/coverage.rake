@@ -11,15 +11,18 @@ namespace :coverage do
     end
   end
 
-  desc 'Elixirテスト'
-  task :elixir do
+  desc 'JavaScriptカバレージ'
+  task :nodejs do
     cd work do
-      Dir.glob("**/**/*.exs").each do |test|
-        sh "elixir #{test}"
+      %w(20181221/k2works
+         20181228/k2works).each do |dir|
+        cd dir do
+          sh "mv coverage/lcov.info ../../coverage/"
+        end
       end
     end
   end
 
-  desc 'Test all task'
-  task all: %i[ruby python elixir]
+  desc 'Test all coverage'
+  task all: %i[python nodejs]
 end
