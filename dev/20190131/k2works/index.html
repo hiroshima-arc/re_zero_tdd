@@ -6,6 +6,9 @@
           name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet"/>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script>mocha.setup("bdd");</script>
 </head>
 <body>
 <h1>HTML5+CSS+JavaScript with TDD</h1>
@@ -20,11 +23,35 @@
 <section>
     <h1>FizzBuzz</h1>
     <article>
+        <div id="mocha"></div>
     </article>
 </section>
 <footer>
     <p>Copyright</p>
     <address>hiroshima.arc@gmail.com</address>
 </footer>
+<script>
+  function assert(actual, expected) {
+    const message = `\nactual:` + actual + `\nexpected: ` + expected;
+    console.log(".");
+    console.assert(expected === actual, message);
+    if (expected !== actual) {
+      throw Error(message);
+    }
+  }
+
+  describe("FizzBuzzTest", () => {
+    it("成功する", () => {
+      assert(1, 1);
+    });
+
+    it("失敗する", () => {
+      assert(1, 2);
+    });
+  });
+
+  mocha.run();
+</script>
+
 </body>
 </html>
