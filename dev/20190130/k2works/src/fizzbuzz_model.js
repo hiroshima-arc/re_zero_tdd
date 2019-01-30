@@ -1,8 +1,5 @@
-const constants = require("./constants");
-const MAX_COUNT = constants.FIZZ_BUZZ_MAX_COUNT;
-
-export function execute() {
-  iterate(MAX_COUNT).forEach((value) => {
+export function execute(max_count) {
+  iterate(max_count).forEach((value) => {
     console.log(value);
   });
 }
