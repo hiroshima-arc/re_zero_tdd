@@ -282,32 +282,47 @@
             }
         }
 
+        function showFizzBuzz(state) {
+            document.getElementById("fizz-buzz-component__article--call").style.display = state.call;
+            document.getElementById("fizz-buzz-component__article--print").style.display = state.print;
+            document.getElementById("fizz-buzz-component__article--up-down").style.display = state.upDown;
+            document.getElementById("fizz-buzz-component__article--iterate").style.display = state.iterate;
+        }
+
         function showFizzBuzzCall() {
-            document.getElementById("fizz-buzz-component__article--call").style.display = "block";
-            document.getElementById("fizz-buzz-component__article--print").style.display = "none";
-            document.getElementById("fizz-buzz-component__article--up-down").style.display = "none";
-            document.getElementById("fizz-buzz-component__article--iterate").style.display = "none";
+            showFizzBuzz({
+                "call": "block",
+                "print": "none",
+                "upDown": "none",
+                "iterate": "none"
+            });
         }
 
         function showFizzBuzzPrint() {
-            document.getElementById("fizz-buzz-component__article--call").style.display = "none";
-            document.getElementById("fizz-buzz-component__article--print").style.display = "block";
-            document.getElementById("fizz-buzz-component__article--up-down").style.display = "none";
-            document.getElementById("fizz-buzz-component__article--iterate").style.display = "none";
+            showFizzBuzz({
+                "call": "none",
+                "print": "block",
+                "upDown": "none",
+                "iterate": "none"
+            });
         }
 
         function showFizzBuzzUpDown() {
-            document.getElementById("fizz-buzz-component__article--call").style.display = "none";
-            document.getElementById("fizz-buzz-component__article--print").style.display = "none";
-            document.getElementById("fizz-buzz-component__article--up-down").style.display = "block";
-            document.getElementById("fizz-buzz-component__article--iterate").style.display = "none";
+            showFizzBuzz({
+                "call": "none",
+                "print": "none",
+                "upDown": "block",
+                "iterate": "none"
+            });
         }
 
         function showFizzBuzzIterate() {
-            document.getElementById("fizz-buzz-component__article--call").style.display = "none";
-            document.getElementById("fizz-buzz-component__article--print").style.display = "none";
-            document.getElementById("fizz-buzz-component__article--up-down").style.display = "none";
-            document.getElementById("fizz-buzz-component__article--iterate").style.display = "block";
+            showFizzBuzz({
+                "call": "none",
+                "print": "none",
+                "upDown": "none",
+                "iterate": "block"
+            });
         }
     </script>
 
