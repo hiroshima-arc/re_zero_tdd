@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-const List = props => (
+const List = (props) => (
   <ul>
     {
       props.items.map((item, index) => <li key={index}>{item}</li>)
