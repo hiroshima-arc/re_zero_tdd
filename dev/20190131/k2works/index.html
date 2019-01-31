@@ -111,25 +111,25 @@
             <h1>FizzBuzz</h1>
             <article id="fizz-buzz-component__article--call">
                 <h1>FizzBuzzCall</h1>
-                <input type="text" id="fizz-buzz-component__input--call" onchange=fizzBuzzCall()>
-                <input type="button" id="fizz-buzz-component__button--call" value="Call" onclick=fizzBuzzCall()>
+                <input type="text" id="fizz-buzz-component__input--call">
+                <input type="button" id="fizz-buzz-component__button--call" value="Call">
             </article>
             <article id="fizz-buzz-component__article--print">
                 <h1>FizzBuzzPrint</h1>
                 <div id="fizz-buzz-component__print--message">Initialized</div>
-                <input type="text" id="fizz-buzz-component__input--print" onchange=fizzBuzzPrint()>
-                <input type="button" id="fizz-buzz-component__button--print" value="Print" onclick=fizzBuzzPrint()>
+                <input type="text" id="fizz-buzz-component__input--print">
+                <input type="button" id="fizz-buzz-component__button--print" value="Print">
             </article>
             <article id="fizz-buzz-component__article--up-down">
                 <h1>FizzBuzzUpDown</h1>
                 <div id="fizz-buzz-component__up-down--message">Ready</div>
-                <input type="button" id="fizz-buzz-component__button--down" value="-" onclick=fizzBuzzUpDown.down()>
-                <input type="button" id="fizz-buzz-component__button--up" value="+" onclick=fizzBuzzUpDown.up()>
+                <input type="button" id="fizz-buzz-component__button--down" value="-">
+                <input type="button" id="fizz-buzz-component__button--up" value="+">
             </article>
             <article id="fizz-buzz-component__article--iterate">
                 <h1>FizzBuzzIterate</h1>
-                <input type="text" id="fizz-buzz-component__input--iterate" onchange=fizzBuzzIterate()>
-                <input type="button" id="fizz-buzz-component__button--iterate" value="execute" onclick=fizzBuzzIterate()>
+                <input type="text" id="fizz-buzz-component__input--iterate">
+                <input type="button" id="fizz-buzz-component__button--iterate" value="execute">
                 <div id="fizz-buzz-component__iterate--result"></div>
             </article>
             <article id="fizz-buzz-component__article--test">
@@ -245,8 +245,6 @@
             }
         }
 
-        const fizzBuzzUpDown = createFizzBuzzUpDown(document.getElementById("fizz-buzz-component__up-down--message"));
-
         function renderHtmlTable(array) {
             const maxColumn = 10;
             let columnCount = 1;
@@ -323,6 +321,55 @@
                 "iterate": "block"
             });
         }
+
+        function bindActionToElement() {
+            const fizzBuzzUpDown = createFizzBuzzUpDown(document.getElementById("fizz-buzz-component__up-down--message"));
+            [
+                {
+                    key: "fizz-buzz-component__button--call",
+                    action: () => fizzBuzzCall()
+                },
+                {
+                    key: "fizz-buzz-component__button--print",
+                    action: () => fizzBuzzPrint()
+                },
+                {
+                    key: "fizz-buzz-component__button--down",
+                    action: () => fizzBuzzUpDown.down()
+                },
+                {
+                    key: "fizz-buzz-component__button--up",
+                    action: () => fizzBuzzUpDown.up()
+                },
+                {
+                    key: "fizz-buzz-component__button--iterate",
+                    action: () => fizzBuzzIterate()
+                }
+            ].forEach(({key, action}) => {
+                const element = document.getElementById(key);
+                element.addEventListener("click", action);
+            });
+
+            [
+                {
+                    key: "fizz-buzz-component__input--call",
+                    action: () => fizzBuzzCall()
+                },
+                {
+                    key: "fizz-buzz-component__input--print",
+                    action: () => fizzBuzzPrint()
+                },
+                {
+                    key: "fizz-buzz-component__input--iterate",
+                    action: () => fizzBuzzIterate()
+                }
+            ].forEach(({key, action}) => {
+                const element = document.getElementById(key);
+                element.addEventListener("change", action);
+            });
+        }
+
+        bindActionToElement();
     </script>
 
 </body>
