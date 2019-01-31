@@ -89,16 +89,16 @@
                 <ul>
                     <li><a href="index.html">FizzBuzz</a></li>
                     <ul id="nav-component__sub-menu--fizz-buzz">
-                        <li id="nav-component__sub-menu--call">
+                        <li id="nav-component__sub-menu--call" onclick=showFizzBuzzCall()>
                             <a href="#">FizzBuzzCall</a>
                         </li>
-                        <li id="nav-component__sub-menu--print">
+                        <li id="nav-component__sub-menu--print" onclick=showFizzBuzzPrint()>
                             <a href="#">FizzBuzzPrint</a>
                         </li>
-                        <li id="nav-component__sub-menu--up-down">
+                        <li id="nav-component__sub-menu--up-down" onclick=showFizzBuzzUpDown()>
                             <a href="#">FizzBuzzUpDown</a>
                         </li>
-                        <li id="nav-component__sub-menu--iterate">
+                        <li id="nav-component__sub-menu--iterate" onclick=showFizzBuzzIterate()>
                             <a href="#">FizzBuzzIterate</a>
                         </li>
                     </ul>
@@ -280,6 +280,34 @@
             } else {
                 target.innerHTML = renderHtmlTable(iterate(value));
             }
+        }
+
+        function showFizzBuzzCall() {
+            document.getElementById("fizz-buzz-component__article--call").style.display = "block";
+            document.getElementById("fizz-buzz-component__article--print").style.display = "none";
+            document.getElementById("fizz-buzz-component__article--up-down").style.display = "none";
+            document.getElementById("fizz-buzz-component__article--iterate").style.display = "none";
+        }
+
+        function showFizzBuzzPrint() {
+            document.getElementById("fizz-buzz-component__article--call").style.display = "none";
+            document.getElementById("fizz-buzz-component__article--print").style.display = "block";
+            document.getElementById("fizz-buzz-component__article--up-down").style.display = "none";
+            document.getElementById("fizz-buzz-component__article--iterate").style.display = "none";
+        }
+
+        function showFizzBuzzUpDown() {
+            document.getElementById("fizz-buzz-component__article--call").style.display = "none";
+            document.getElementById("fizz-buzz-component__article--print").style.display = "none";
+            document.getElementById("fizz-buzz-component__article--up-down").style.display = "block";
+            document.getElementById("fizz-buzz-component__article--iterate").style.display = "none";
+        }
+
+        function showFizzBuzzIterate() {
+            document.getElementById("fizz-buzz-component__article--call").style.display = "none";
+            document.getElementById("fizz-buzz-component__article--print").style.display = "none";
+            document.getElementById("fizz-buzz-component__article--up-down").style.display = "none";
+            document.getElementById("fizz-buzz-component__article--iterate").style.display = "block";
         }
     </script>
 
