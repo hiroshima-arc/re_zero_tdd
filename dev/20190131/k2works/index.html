@@ -68,14 +68,7 @@
 
   function iterate() {
     var array = [];
-    var count = 1;
-
-    while (count <= 100) {
-      var value = fizzBuzz(count);
-      array.push(value);
-      count += 1;
-    }
-
+    [...Array(100).keys()].map((count) => {array.push(fizzBuzz(count + 1))});
     return array;
   }
 
