@@ -88,8 +88,8 @@
             <h1>FizzBuzz</h1>
             <article id="fizz-buzz-component__article--call">
                 <h1>FizzBuzzCall</h1>
-                <input type="text" id="fizz-buzz-component__input--call">
-                <input type="button" id="fizz-buzz-component__button--call" value="Call">
+                <input type="text" id="fizz-buzz-component__input--call" onchange=fizzBuzzCall() >
+                <input type="button" id="fizz-buzz-component__button--call" value="Call" onclick=fizzBuzzCall() >
             </article>
             <article id="fizz-buzz-component__article--test">
                 <div id="mocha"></div>
@@ -166,6 +166,15 @@
         }
 
         print();
+
+        function fizzBuzzCall() {
+            const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--call").value);
+            if (isNaN(value)) {
+                alert("数字を入力してください");
+            } else {
+                alert(fizzBuzz(value));
+            }
+        }
     </script>
 
 </body>
