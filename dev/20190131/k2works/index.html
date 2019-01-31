@@ -78,6 +78,9 @@
                         <li id="nav-component__sub-menu--call">
                             <a href="#">FizzBuzzCall</a>
                         </li>
+                        <li id="nav-component__sub-menu--print">
+                            <a href="#">FizzBuzzPrint</a>
+                        </li>
                     </ul>
                 </ul>
             </nav>
@@ -88,8 +91,14 @@
             <h1>FizzBuzz</h1>
             <article id="fizz-buzz-component__article--call">
                 <h1>FizzBuzzCall</h1>
-                <input type="text" id="fizz-buzz-component__input--call" onchange=fizzBuzzCall() >
-                <input type="button" id="fizz-buzz-component__button--call" value="Call" onclick=fizzBuzzCall() >
+                <input type="text" id="fizz-buzz-component__input--call" onchange=fizzBuzzCall()>
+                <input type="button" id="fizz-buzz-component__button--call" value="Call" onclick=fizzBuzzCall()>
+            </article>
+            <article id="fizz-buzz-component__article--print">
+                <h1>FizzBuzzPrint</h1>
+                <div id="fizz-buzz-component__print--message">Initialized</div>
+                <input type="text" id="fizz-buzz-component__input--print">
+                <input type="button" id="fizz-buzz-component__button--print" value="Print">
             </article>
             <article id="fizz-buzz-component__article--test">
                 <div id="mocha"></div>
