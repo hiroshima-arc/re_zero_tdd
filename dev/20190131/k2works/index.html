@@ -81,6 +81,9 @@
                         <li id="nav-component__sub-menu--print">
                             <a href="#">FizzBuzzPrint</a>
                         </li>
+                        <li id="nav-component__sub-menu--up-down">
+                            <a href="#">FizzBuzzUpDown</a>
+                        </li>
                     </ul>
                 </ul>
             </nav>
@@ -99,6 +102,12 @@
                 <div id="fizz-buzz-component__print--message">Initialized</div>
                 <input type="text" id="fizz-buzz-component__input--print" onchange=fizzBuzzPrint()>
                 <input type="button" id="fizz-buzz-component__button--print" value="Print" onclick=fizzBuzzPrint()>
+            </article>
+            <article id="fizz-buzz-component__article--up-down">
+                <h1>FizzBuzzUpDown</h1>
+                <div id="fizz-buzz-component__up-down--message">Ready</div>
+                <input type="button" id="fizz-buzz-component__button--down" value="-">
+                <input type="button" id="fizz-buzz-component__button--up" value="+">
             </article>
             <article id="fizz-buzz-component__article--test">
                 <div id="mocha"></div>
