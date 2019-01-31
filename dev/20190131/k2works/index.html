@@ -210,22 +210,17 @@
 
         function fizzBuzzCall() {
             const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--call").value);
-            if (isNaN(value)) {
-                alert("数字を入力してください");
-            } else {
-                alert(fizzBuzz(value));
-            }
+
+            if (isNaN(value)) return alert("数字を入力してください");
+            alert(fizzBuzz(value));
         }
 
         function fizzBuzzPrint() {
             const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--print").value);
             const target = document.getElementById("fizz-buzz-component__print--message");
 
-            if (isNaN(value)) {
-                target.innerHTML = "数字を入力してください";
-            } else {
-                target.innerHTML = fizzBuzz(value);
-            }
+            if (isNaN(value)) return target.innerHTML = "数字を入力してください";
+            target.innerHTML = fizzBuzz(value);
         }
 
         let count = 0;
@@ -274,13 +269,9 @@
         function fizzBuzzIterate() {
             const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--iterate").value);
             const target = document.getElementById("fizz-buzz-component__iterate--result");
-            if (isNaN(value)) {
-                target.innerHTML = "数字を入力してください";
-            } else if (value > 100) {
-                target.innerHTML = "100を超える数字は入力できません";
-            } else {
-                target.innerHTML = renderHtmlTable(iterate(value));
-            }
+            if (isNaN(value)) return target.innerHTML = "数字を入力してください";
+            if (value > 100) return target.innerHTML = "100を超える数字は入力できません";
+            target.innerHTML = renderHtmlTable(iterate(value));
         }
 
         function showFizzBuzz(state) {
