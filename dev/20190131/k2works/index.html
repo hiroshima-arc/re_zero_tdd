@@ -230,6 +230,17 @@
             count += 1;
         }
 
+        function renderHtmlTable(array) {
+            let html = "<table>";
+            html += "</thead>";
+            html += "<tbody>";
+            html += "<tr>";
+            html += "</tr>";
+            html += "</tbody>";
+            html += "</table>";
+            return html;
+        }
+
 
         function fizzBuzzIterate() {
             const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--iterate").value);
@@ -239,7 +250,7 @@
             } else if (value > 100) {
                 target.innerHTML = "100を超える数字は入力できません";
             } else {
-                target.innerHTML = iterate(value);
+                target.innerHTML = renderHtmlTable(iterate(value));
             }
         }
     </script>
