@@ -97,8 +97,8 @@
             <article id="fizz-buzz-component__article--print">
                 <h1>FizzBuzzPrint</h1>
                 <div id="fizz-buzz-component__print--message">Initialized</div>
-                <input type="text" id="fizz-buzz-component__input--print">
-                <input type="button" id="fizz-buzz-component__button--print" value="Print">
+                <input type="text" id="fizz-buzz-component__input--print" onchange=fizzBuzzPrint()>
+                <input type="button" id="fizz-buzz-component__button--print" value="Print" onclick=fizzBuzzPrint()>
             </article>
             <article id="fizz-buzz-component__article--test">
                 <div id="mocha"></div>
@@ -182,6 +182,17 @@
                 alert("数字を入力してください");
             } else {
                 alert(fizzBuzz(value));
+            }
+        }
+
+        function fizzBuzzPrint() {
+            const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--print").value);
+            const target = document.getElementById("fizz-buzz-component__print--message");
+
+            if (isNaN(value)) {
+                target.innerHTML = "数字を入力してください";
+            } else {
+                target.innerHTML = fizzBuzz(value);
             }
         }
     </script>
