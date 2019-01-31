@@ -106,8 +106,8 @@
             <article id="fizz-buzz-component__article--up-down">
                 <h1>FizzBuzzUpDown</h1>
                 <div id="fizz-buzz-component__up-down--message">Ready</div>
-                <input type="button" id="fizz-buzz-component__button--down" value="-">
-                <input type="button" id="fizz-buzz-component__button--up" value="+">
+                <input type="button" id="fizz-buzz-component__button--down" value="-" onclick=fizzBuzzDown()>
+                <input type="button" id="fizz-buzz-component__button--up" value="+" onclick=fizzBuzzUp()>
             </article>
             <article id="fizz-buzz-component__article--test">
                 <div id="mocha"></div>
@@ -203,6 +203,22 @@
             } else {
                 target.innerHTML = fizzBuzz(value);
             }
+        }
+
+        let count = 0;
+
+        function fizzBuzzDown() {
+            const target = document.getElementById("fizz-buzz-component__up-down--message");
+            target.innerHTML = fizzBuzz(count);
+            if (count > 0) {
+                count -= 1;
+            }
+        }
+
+        function fizzBuzzUp() {
+            const target = document.getElementById("fizz-buzz-component__up-down--message");
+            target.innerHTML = fizzBuzz(count);
+            count += 1;
         }
     </script>
 
