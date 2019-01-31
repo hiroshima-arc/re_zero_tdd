@@ -231,11 +231,25 @@
         }
 
         function renderHtmlTable(array) {
+            let columnCount = 1;
             let html = "<table>";
+            html += "<thead>";
+            [...Array(10).keys()].forEach((v) => {
+                html += `<th>${v + 1}</th>`;
+            });
             html += "</thead>";
             html += "<tbody>";
             html += "<tr>";
-            html += "</tr>";
+            array.forEach((v) => {
+                if (columnCount < 10) {
+                    html += `<td>${v}</td>`
+                    columnCount += 1;
+                } else {
+                    html += `<td>${v}</td>`
+                    html += "</tr>";
+                    columnCount = 1;
+                }
+            });
             html += "</tbody>";
             html += "</table>";
             return html;
