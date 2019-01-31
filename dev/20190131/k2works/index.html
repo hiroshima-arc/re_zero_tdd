@@ -245,17 +245,18 @@
         }
 
         function renderHtmlTable(array) {
+            const maxColumn = 10;
             let columnCount = 1;
             let html = "<table>";
             html += "<thead>";
-            [...Array(10).keys()].forEach((v) => {
+            [...Array(maxColumn).keys()].forEach((v) => {
                 html += `<th>${v + 1}</th>`;
             });
             html += "</thead>";
             html += "<tbody>";
             html += "<tr>";
             array.forEach((v) => {
-                if (columnCount < 10) {
+                if (columnCount < maxColumn) {
                     html += `<td>${v}</td>`
                     columnCount += 1;
                 } else {
