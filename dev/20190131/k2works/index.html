@@ -1,98 +1,106 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-          name="viewport">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Re:ゼロから始めるテスト駆動開発</title>
-    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet"/>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-    <script>mocha.setup("bdd");</script>
+    <script>
+        mocha.setup("bdd");
+    </script>
 </head>
+
 <body>
-<h1>HTML5+CSS+JavaScript with TDD</h1>
-<header>
-    <nav>
-        <h1>Menu</h1>
-        <ul>
-            <li><a href="index.html">FizzBuzz</a></li>
-        </ul>
-    </nav>
-</header>
-<section>
-    <h1>FizzBuzz</h1>
-    <article>
-        <div id="mocha"></div>
-    </article>
-</section>
-<footer>
-    <p>Copyright</p>
-    <address>hiroshima.arc@gmail.com</address>
-</footer>
-<script>
-  function assert(actual, expected) {
-    const message = `\nactual:` + actual + `\nexpected: ` + expected;
-    console.log(".");
-    console.assert(expected === actual, message);
-    if (expected !== actual) {
-      throw Error(message);
-    }
-  }
+    <h1>HTML5+CSS+JavaScript with TDD</h1>
+    <header>
+        <nav>
+            <h1>Menu</h1>
+            <ul>
+                <li><a href="index.html">FizzBuzz</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h1>FizzBuzz</h1>
+        <article>
+            <div id="mocha"></div>
+        </article>
+    </section>
+    <footer>
+        <p>Copyright</p>
+        <address>hiroshima.arc@gmail.com</address>
+    </footer>
+    <script>
+        function assert(actual, expected) {
+            const message = `\nactual:` + actual + `\nexpected: ` + expected;
+            console.log(".");
+            console.assert(expected === actual, message);
+            if (expected !== actual) {
+                throw Error(message);
+            }
+        }
 
-  describe("FizzBuzzTest", () => {
-    it("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
-      var array = iterate();
+        describe("FizzBuzzTest", () => {
+            it("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
+                var array = iterate();
 
-      assert(array[0], 1);
-      assert(array[2], 'Fizz');
-      assert(array[4], 'Buzz');
-      assert(array[14], 'FizzBuzz');
-    });
+                assert(array[0], 1);
+                assert(array[2], 'Fizz');
+                assert(array[4], 'Buzz');
+                assert(array[14], 'FizzBuzz');
+            });
 
-    it("3で割り切れる場合はFizzをプリントする", () => {
-        assert(fizzBuzz(3), 'Fizz');
-        assert(fizzBuzz(1), 1);
-    });
+            it("3で割り切れる場合はFizzをプリントする", () => {
+                assert(fizzBuzz(3), 'Fizz');
+                assert(fizzBuzz(1), 1);
+            });
 
-    it("5で割り切れる場合はBuzzをプリントする", () => {
-        assert(fizzBuzz(5), 'Buzz');
-    });
+            it("5で割り切れる場合はBuzzをプリントする", () => {
+                assert(fizzBuzz(5), 'Buzz');
+            });
 
-    it("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-        assert(fizzBuzz(15), 'FizzBuzz');
-    });
-  });
+            it("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+                assert(fizzBuzz(15), 'FizzBuzz');
+            });
+        });
 
-  mocha.run();
+        mocha.run();
 
-  function iterate() {
-    var array = [];
-    [...Array(100).keys()].map((count) => {array.push(fizzBuzz(count + 1))});
-    return array;
-  }
+        function iterate() {
+            var array = [];
+            [...Array(100).keys()].map((count) => {
+                array.push(fizzBuzz(count + 1))
+            });
+            return array;
+        }
 
-  function print() {    
-    iterate().forEach((each) => {console.log(each)});
-  }
+        function print() {
+            iterate().forEach((each) => {
+                console.log(each)
+            });
+        }
 
-  function isFizz(number) {
-    return number % 3 === 0;
-  }
+        function isFizz(number) {
+            return number % 3 === 0;
+        }
 
-  function isBuzz(number) {
-    return number % 5 === 0;
-  }
+        function isBuzz(number) {
+            return number % 5 === 0;
+        }
 
-  function fizzBuzz(number) {      
-      if (isFizz(number) && isBuzz(number)) return 'FizzBuzz';
-      if (isFizz(number)) return 'Fizz';
-      if(isBuzz(number)) return 'Buzz';
-      return number;
-  }
+        function fizzBuzz(number) {
+            if (isFizz(number) && isBuzz(number)) return 'FizzBuzz';
+            if (isFizz(number)) return 'Fizz';
+            if (isBuzz(number)) return 'Buzz';
+            return number;
+        }
 
-  print();
-</script>
+        print();
+    </script>
 
 </body>
+
 </html>
