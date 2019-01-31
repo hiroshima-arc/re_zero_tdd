@@ -208,10 +208,13 @@
 
         print();
 
+        const MESSAGE_ERROR_NUMBER = "数字を入力してください";
+        const MESSAGE_ERROR_MAX_NUMBER = "100を超える数字は入力できません";
+
         function fizzBuzzCall() {
             const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--call").value);
 
-            if (isNaN(value)) return alert("数字を入力してください");
+            if (isNaN(value)) return alert(MESSAGE_ERROR_NUMBER);
             alert(fizzBuzz(value));
         }
 
@@ -219,7 +222,7 @@
             const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--print").value);
             const target = document.getElementById("fizz-buzz-component__print--message");
 
-            if (isNaN(value)) return target.innerHTML = "数字を入力してください";
+            if (isNaN(value)) return target.innerHTML = MESSAGE_ERROR_NUMBER;
             target.innerHTML = fizzBuzz(value);
         }
 
@@ -265,12 +268,11 @@
             return html;
         }
 
-
         function fizzBuzzIterate() {
             const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--iterate").value);
             const target = document.getElementById("fizz-buzz-component__iterate--result");
-            if (isNaN(value)) return target.innerHTML = "数字を入力してください";
-            if (value > 100) return target.innerHTML = "100を超える数字は入力できません";
+            if (isNaN(value)) return target.innerHTML = MESSAGE_ERROR_NUMBER;
+            if (value > 100) return target.innerHTML = MESSAGE_ERROR_MAX_NUMBER;
             target.innerHTML = renderHtmlTable(iterate(value));
         }
 
