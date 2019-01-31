@@ -11,23 +11,80 @@
     <script>
         mocha.setup("bdd");
     </script>
+    <style type="text/css">
+        body {
+            width: 650px;
+            margin: 0 auto;
+            background-color: ivory;
+        }
+
+        header {
+            width: 350px;
+        }
+
+        .nav-componet {
+            width: 290px;
+            float: left;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        .nav-componet a {
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-componet a:link {
+            color: #ff0000;
+        }
+
+        .nav-componet a:visited {
+            color: #a0a0a0;
+        }
+
+        .nav-componet a:hover {
+            color: #80ff00;
+        }
+
+        .nav-componet a:active {
+            color: #0000ff;
+        }
+
+        .fizz-buzz-component {
+            width: 340px;
+            float: right;
+            padding-left: 5px;
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            clear: both;
+            width: auto;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
     <h1>HTML5+CSS+JavaScript with TDD</h1>
-    <header>
-        <nav>
-            <h1>Menu</h1>
-            <ul>
-                <li><a href="index.html">FizzBuzz</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="nav-componet">
+        <header>
+            <nav>
+                <h1>Menu</h1>
+                <ul>
+                    <li><a href="index.html">FizzBuzz</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
     <section>
-        <h1>FizzBuzz</h1>
-        <article>
-            <div id="mocha"></div>
-        </article>
+        <div class="fizz-buzz-component">
+            <h1>FizzBuzz</h1>
+            <article id="fizz-buzz-component__article--test">
+                <div id="mocha"></div>
+            </article>
+        </div>
     </section>
     <footer>
         <p>Copyright</p>
