@@ -1,7 +1,15 @@
+function isFizz(number) {
+  return number % 3 === 0;
+}
+
+function isBuzz(number) {
+  return number % 5 === 0;
+}
+
 export function fizzBuzz(number) {
-  if ((number % 3 === 0) && (number % 5 === 0)) return "FizzBuzz";
-  if (number % 3 === 0) return "Fizz";
-  if (number % 5 === 0) return "Buzz";
+  if ((isFizz(number)) && (isBuzz(number))) return "FizzBuzz";
+  if (isFizz(number)) return "Fizz";
+  if (isBuzz(number)) return "Buzz";
   return number;
 }
 
