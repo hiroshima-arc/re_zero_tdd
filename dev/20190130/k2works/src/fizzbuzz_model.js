@@ -1,15 +1,8 @@
 export function fizzBuzz(number) {
-  let value = number;
-
-  if ((number % 3 === 0) && (number % 5 === 0)) {
-    value = "FizzBuzz";
-  } else if (number % 3 === 0) {
-    value = "Fizz";
-  } else if (number % 5 === 0) {
-    value = "Buzz";
-  }
-
-  return value;
+  if ((number % 3 === 0) && (number % 5 === 0)) return "FizzBuzz";
+  if (number % 3 === 0) return "Fizz";
+  if (number % 5 === 0) return "Buzz";
+  return number;
 }
 
 export function iterate(count) {
