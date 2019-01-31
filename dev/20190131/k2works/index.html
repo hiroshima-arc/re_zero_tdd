@@ -81,9 +81,7 @@
 
   function print() {
     var array = iterate();
-    for(var each of array) {
-        console.log(each);
-    }
+    array.forEach((each) => {console.log(each)});
   }
 
   function fizzBuzz(number) {
