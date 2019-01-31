@@ -114,8 +114,9 @@
             </article>
             <article id="fizz-buzz-component__article--iterate">
                 <h1>FizzBuzzIterate</h1>
-                <input type="text" id="fizz-buzz-component__input--iterate">
-                <input type="button" id="fizz-buzz-component__button--iterate" value="execute">
+                <input type="text" id="fizz-buzz-component__input--iterate" onchange=fizzBuzzIterate()>
+                <input type="button" id="fizz-buzz-component__button--iterate" value="execute" onclick=fizzBuzzIterate()>
+                <div id="fizz-buzz-component__iterate--result"></div>
             </article>
             <article id="fizz-buzz-component__article--test">
                 <div id="mocha"></div>
@@ -138,7 +139,7 @@
 
         describe("FizzBuzzTest", () => {
             it("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
-                const array = iterate();
+                const array = iterate(100);
 
                 assert(array[0], 1);
                 assert(array[2], 'Fizz');
@@ -162,16 +163,16 @@
 
         mocha.run();
 
-        function iterate() {
+        function iterate(number) {
             const array = [];
-            [...Array(100).keys()].map((count) => {
+            [...Array(number).keys()].map((count) => {
                 array.push(fizzBuzz(count + 1))
             });
             return array;
         }
 
         function print() {
-            iterate().forEach((each) => {
+            iterate(100).forEach((each) => {
                 console.log(each)
             });
         }
@@ -227,6 +228,19 @@
             const target = document.getElementById("fizz-buzz-component__up-down--message");
             target.innerHTML = fizzBuzz(count);
             count += 1;
+        }
+
+
+        function fizzBuzzIterate() {
+            const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--iterate").value);
+            const target = document.getElementById("fizz-buzz-component__iterate--result");
+            if (isNaN(value)) {
+                target.innerHTML = "数字を入力してください";
+            } else if (value > 100) {
+                target.innerHTML = "100を超える数字は入力できません";
+            } else {
+                target.innerHTML = iterate(value);
+            }
         }
     </script>
 
