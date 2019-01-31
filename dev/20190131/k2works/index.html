@@ -112,7 +112,7 @@
 
         describe("FizzBuzzTest", () => {
             it("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
-                var array = iterate();
+                const array = iterate();
 
                 assert(array[0], 1);
                 assert(array[2], 'Fizz');
@@ -137,7 +137,7 @@
         mocha.run();
 
         function iterate() {
-            var array = [];
+            const array = [];
             [...Array(100).keys()].map((count) => {
                 array.push(fizzBuzz(count + 1))
             });
