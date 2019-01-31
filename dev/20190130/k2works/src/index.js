@@ -16,9 +16,6 @@ import {
   showFizzBuzzUpDown
 } from "./fizzbuzz_controller";
 
-execute(MAX_COUNT);
-bindActions();
-
 function bindActions() {
   const upDown = createFizzBuzzUpDown(
     $("#fizz-buzz-component__up-down--message")
@@ -71,3 +68,6 @@ function bindActions() {
     menu.on("click", onClick);
   });
 }
+
+execute(MAX_COUNT);
+bindActions();

@@ -94,17 +94,6 @@ export function createFizzBuzzUpDown(target) {
   };
 }
 
-export function fizzBuzzIterate(target, input, max_count, columns_number) {
-  const count = parseInt(input.val());
-  if (count > max_count) {
-    return target.html(`<strong>件数は${max_count}までです。</strong>`);
-  }
-  const array = iterate(count);
-  const splitArray = splitArrayNumberOfColumnsPerLine(array, columns_number);
-  const html = htmlTable(splitArray, columns_number);
-  target.html(html);
-}
-
 function splitArrayNumberOfColumnsPerLine(array, number) {
   const head = array.slice(0, number);
   const tail = array.slice(number);
@@ -112,4 +101,15 @@ function splitArrayNumberOfColumnsPerLine(array, number) {
     return [head].concat(splitArrayNumberOfColumnsPerLine(tail, number));
   }
   return [head];
+}
+
+export function fizzBuzzIterate(target, input, maxCount, columnsNumber) {
+  const count = parseInt(input.val());
+  if (count > maxCount) {
+    return target.html(`<strong>件数は${maxCount}までです。</strong>`);
+  }
+  const array = iterate(count);
+  const splitArray = splitArrayNumberOfColumnsPerLine(array, columnsNumber);
+  const html = htmlTable(splitArray, columnsNumber);
+  target.html(html);
 }

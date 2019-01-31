@@ -1,18 +1,3 @@
-export function execute(max_count) {
-  iterate(max_count).forEach((value) => {
-    console.log(value);
-  });
-}
-
-export function iterate(count) {
-  let array = [];
-  [...Array(count + 1).keys()].forEach((n) => {
-    array.push(fizzBuzz(n));
-  });
-  array.shift();
-  return array;
-}
-
 export function fizzBuzz(number) {
   let value = number;
 
@@ -26,3 +11,19 @@ export function fizzBuzz(number) {
 
   return value;
 }
+
+export function iterate(count) {
+  let array = [];
+  [...Array(count + 1).keys()].forEach((n) => {
+    array.push(fizzBuzz(n));
+  });
+  array.shift();
+  return array;
+}
+
+export function execute(maxCount) {
+  iterate(maxCount).forEach((value) => {
+    console.log(value);
+  });
+}
+
