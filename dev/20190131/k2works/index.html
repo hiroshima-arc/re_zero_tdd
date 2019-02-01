@@ -8,6 +8,7 @@
     <title>Re:ゼロから始めるテスト駆動開発</title>
     <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         mocha.setup("bdd");
     </script>
@@ -212,18 +213,18 @@
         const MESSAGE_ERROR_MAX_NUMBER = "100を超える数字は入力できません";
 
         function fizzBuzzCall() {
-            const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--call").value);
+            const value = Number.parseInt($("#fizz-buzz-component__input--call").val());
 
             if (isNaN(value)) return alert(MESSAGE_ERROR_NUMBER);
             alert(fizzBuzz(value));
         }
 
         function fizzBuzzPrint() {
-            const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--print").value);
-            const target = document.getElementById("fizz-buzz-component__print--message");
+            const value = Number.parseInt($("#fizz-buzz-component__input--print").val());
+            const target = $("#fizz-buzz-component__print--message");
 
-            if (isNaN(value)) return target.innerHTML = MESSAGE_ERROR_NUMBER;
-            target.innerHTML = fizzBuzz(value);
+            if (isNaN(value)) return target.html(MESSAGE_ERROR_NUMBER);
+            target.html(fizzBuzz(value));
         }
 
         function createFizzBuzzUpDown(target) {
@@ -232,7 +233,7 @@
                 up() {
                     count++;
                     const value = fizzBuzz(count);
-                    target.innerHTML = value;
+                    target.html(value);
                 },
                 down() {
                     if (count === 0) {
@@ -240,7 +241,7 @@
                     } else {
                         count -= 1;
                     }
-                    target.innerHTML = fizzBuzz(count);
+                    target.html(fizzBuzz(count));
                 }
             }
         }
@@ -258,10 +259,10 @@
             html += "<tr>";
             array.forEach((v) => {
                 if (columnCount < maxColumn) {
-                    html += `<td>${v}</td>`
+                    html += `<td>${v}</td>`;
                     columnCount += 1;
                 } else {
-                    html += `<td>${v}</td>`
+                    html += `<td>${v}</td>`;
                     html += "</tr>";
                     columnCount = 1;
                 }
@@ -272,18 +273,18 @@
         }
 
         function fizzBuzzIterate() {
-            const value = Number.parseInt(document.getElementById("fizz-buzz-component__input--iterate").value);
-            const target = document.getElementById("fizz-buzz-component__iterate--result");
-            if (isNaN(value)) return target.innerHTML = MESSAGE_ERROR_NUMBER;
-            if (value > 100) return target.innerHTML = MESSAGE_ERROR_MAX_NUMBER;
-            target.innerHTML = renderHtmlTable(iterate(value));
+            const value = Number.parseInt($("#fizz-buzz-component__input--iterate").val());
+            const target = $("#fizz-buzz-component__iterate--result");
+            if (isNaN(value)) return target.html(MESSAGE_ERROR_NUMBER);
+            if (value > 100) return target.html(MESSAGE_ERROR_MAX_NUMBER);
+            target.html(renderHtmlTable(iterate(value)));
         }
 
         function showFizzBuzz(
-            call,
-            print,
-            updown,
-            iterate
+            $call,
+            $print,
+            $updown,
+            $iterate
         ) {
             return (
                 state = {
@@ -293,10 +294,10 @@
                     "iterate": "none"
                 }
             ) => {
-                call.style.display = state.call;
-                print.style.display = state.print;
-                updown.style.display = state.upDown;
-                iterate.style.display = state.iterate;
+                $call.css("display", state.call);
+                $print.css("display", state.print);
+                $updown.css("display", state.upDown);
+                $iterate.css("display", state.iterate);
             };
         }
 
@@ -338,12 +339,14 @@
 
         function bindActionToElement() {
             const show = showFizzBuzz(
-                document.getElementById("fizz-buzz-component__article--call"),
-                document.getElementById("fizz-buzz-component__article--print"),
-                document.getElementById("fizz-buzz-component__article--up-down"),
-                document.getElementById("fizz-buzz-component__article--iterate"),
+                $("#fizz-buzz-component__article--call"),
+                $("#fizz-buzz-component__article--print"),
+                $("#fizz-buzz-component__article--up-down"),
+                $("#fizz-buzz-component__article--iterate"),
             );
-            const fizzBuzzUpDown = createFizzBuzzUpDown(document.getElementById("fizz-buzz-component__up-down--message"));
+            const fizzBuzzUpDown = createFizzBuzzUpDown(
+              $("#fizz-buzz-component__up-down--message")
+            );
 
             [{
                     key: "nav-component__sub-menu--call",
@@ -385,8 +388,8 @@
                 key,
                 action
             }) => {
-                const element = document.getElementById(key);
-                element.addEventListener("click", action);
+                const element = $(`#${key}`);
+                element.on("click", action);
             });
 
             [{
@@ -405,8 +408,8 @@
                 key,
                 action
             }) => {
-                const element = document.getElementById(key);
-                element.addEventListener("change", action);
+                const element = $(`#${key}`);
+                element.on("change", action);
             });
         }
 
