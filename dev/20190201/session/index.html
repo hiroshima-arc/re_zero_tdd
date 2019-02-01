@@ -47,7 +47,11 @@
         it("3で割り切れる場合はFizzをプリントする", () => {
             assert(fizzBuzz(3), 'Fizz');
             assert(fizzBuzz(15), 'Fizz');
-        })
+        });
+
+        it("5で割り切れる場合はBuzzをプリントする", () => {
+            assert(fizzBuzz(5), 'Buzz');
+        });
     });
 
     function print() {
@@ -62,7 +66,9 @@
     function fizzBuzz(number) {
         var result = number;
         if (number % 3 === 0) {
-            result = 'Fizz'
+            result = 'Fizz';
+        } else if (number % 5 === 0) {
+            result = 'Buzz';
         }
         return result;
     }
