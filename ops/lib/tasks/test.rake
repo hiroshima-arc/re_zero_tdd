@@ -33,8 +33,8 @@ namespace :test do
     cd work do
       %w(20181221/k2works
          20181228/k2works
-         20190130/k2works
-      ).each do |dir|
+         20190129/k2works
+         20181230/k2works).each do |dir|
         cd dir do
           sh "npm install;npm test"
         end
