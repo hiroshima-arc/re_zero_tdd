@@ -32,7 +32,8 @@ namespace :test do
   task :nodejs do
     cd work do
       %w(20181221/k2works
-         20181228/k2works).each do |dir|
+         20181228/k2works
+         20181229/k2works).each do |dir|
         cd dir do
           sh "npm install;npm test"
         end
