@@ -212,19 +212,27 @@
         const MESSAGE_ERROR_NUMBER = "数字を入力してください";
         const MESSAGE_ERROR_MAX_NUMBER = "100を超える数字は入力できません";
 
-        function fizzBuzzCall() {
-            const value = Number.parseInt($("#fizz-buzz-component__input--call").val());
+        function createFizzBuzzCall(input) {
+            return {
+                exec() {
+                    const value = Number.parseInt(input.val());
 
-            if (isNaN(value)) return alert(MESSAGE_ERROR_NUMBER);
-            alert(fizzBuzz(value));
+                    if (isNaN(value)) return alert(MESSAGE_ERROR_NUMBER);
+                    alert(fizzBuzz(value));
+                }
+            }
         }
 
-        function fizzBuzzPrint() {
-            const value = Number.parseInt($("#fizz-buzz-component__input--print").val());
-            const target = $("#fizz-buzz-component__print--message");
+        function createFizzBuzzPrint(input, output) {
+            return {
+                exec() {
+                    const value = Number.parseInt(input.val());
+                    const target = output;
 
-            if (isNaN(value)) return target.html(MESSAGE_ERROR_NUMBER);
-            target.html(fizzBuzz(value));
+                    if (isNaN(value)) return target.html(MESSAGE_ERROR_NUMBER);
+                    target.html(fizzBuzz(value));
+                }
+            }
         }
 
         function createFizzBuzzUpDown(target) {
@@ -272,12 +280,16 @@
             return html;
         }
 
-        function fizzBuzzIterate() {
-            const value = Number.parseInt($("#fizz-buzz-component__input--iterate").val());
-            const target = $("#fizz-buzz-component__iterate--result");
-            if (isNaN(value)) return target.html(MESSAGE_ERROR_NUMBER);
-            if (value > 100) return target.html(MESSAGE_ERROR_MAX_NUMBER);
-            target.html(renderHtmlTable(iterate(value)));
+        function createFizzBuzzIterate(input, output) {
+            return {
+                exec() {
+                    const value = Number.parseInt(input.val());
+                    const target = output;
+                    if (isNaN(value)) return target.html(MESSAGE_ERROR_NUMBER);
+                    if (value > 100) return target.html(MESSAGE_ERROR_MAX_NUMBER);
+                    target.html(renderHtmlTable(iterate(value)));
+                }
+            }
         }
 
         function showFizzBuzz(
@@ -344,8 +356,17 @@
                 $("#fizz-buzz-component__article--up-down"),
                 $("#fizz-buzz-component__article--iterate"),
             );
+            const fizzBuzzCall = createFizzBuzzCall($("#fizz-buzz-component__input--call"));
+            const fizzBuzzPrint = createFizzBuzzPrint(
+                input = $("#fizz-buzz-component__input--print"),
+                output = $("#fizz-buzz-component__print--message")
+            );
             const fizzBuzzUpDown = createFizzBuzzUpDown(
-              $("#fizz-buzz-component__up-down--message")
+                $("#fizz-buzz-component__up-down--message")
+            );
+            const fizzBuzzIterate = createFizzBuzzIterate(
+                input = $("#fizz-buzz-component__input--iterate"),
+                output = $("#fizz-buzz-component__iterate--result")
             );
 
             [{
@@ -366,11 +387,11 @@
                 },
                 {
                     key: "fizz-buzz-component__button--call",
-                    action: () => fizzBuzzCall()
+                    action: () => fizzBuzzCall.exec()
                 },
                 {
                     key: "fizz-buzz-component__button--print",
-                    action: () => fizzBuzzPrint()
+                    action: () => fizzBuzzPrint.exec()
                 },
                 {
                     key: "fizz-buzz-component__button--down",
@@ -382,7 +403,7 @@
                 },
                 {
                     key: "fizz-buzz-component__button--iterate",
-                    action: () => fizzBuzzIterate()
+                    action: () => fizzBuzzIterate.exec()
                 }
             ].forEach(({
                 key,
@@ -394,15 +415,15 @@
 
             [{
                     key: "fizz-buzz-component__input--call",
-                    action: () => fizzBuzzCall()
+                    action: () => fizzBuzzCall.exec()
                 },
                 {
                     key: "fizz-buzz-component__input--print",
-                    action: () => fizzBuzzPrint()
+                    action: () => fizzBuzzPrint.exec()
                 },
                 {
                     key: "fizz-buzz-component__input--iterate",
-                    action: () => fizzBuzzIterate()
+                    action: () => fizzBuzzIterate.exec()
                 }
             ].forEach(({
                 key,
