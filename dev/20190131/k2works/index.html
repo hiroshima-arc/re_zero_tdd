@@ -292,6 +292,21 @@
             }
         }
 
+        function fizzBuzzFunctionFactory(type, input, output) {
+            switch (type) {
+                case 1:
+                    return createFizzBuzzCall(input);
+                case 2:
+                    return createFizzBuzzPrint(input, output);
+                case 3:
+                    return createFizzBuzzUpDown(output);
+                case 4:
+                    return createFizzBuzzIterate(input, output);
+                default:
+                    break;
+            }
+        }
+
         function showFizzBuzz(
             $call,
             $print,
@@ -356,15 +371,22 @@
                 $("#fizz-buzz-component__article--up-down"),
                 $("#fizz-buzz-component__article--iterate"),
             );
-            const fizzBuzzCall = createFizzBuzzCall($("#fizz-buzz-component__input--call"));
-            const fizzBuzzPrint = createFizzBuzzPrint(
+            const fizzBuzzCall = fizzBuzzFunctionFactory(
+                type = 1,
+                input = $("#fizz-buzz-component__input--call")
+            );
+            const fizzBuzzPrint = fizzBuzzFunctionFactory(
+                type = 2,
                 input = $("#fizz-buzz-component__input--print"),
                 output = $("#fizz-buzz-component__print--message")
             );
-            const fizzBuzzUpDown = createFizzBuzzUpDown(
-                $("#fizz-buzz-component__up-down--message")
+            const fizzBuzzUpDown = fizzBuzzFunctionFactory(
+                type = 3,
+                input = '',
+                output = $("#fizz-buzz-component__up-down--message")
             );
-            const fizzBuzzIterate = createFizzBuzzIterate(
+            const fizzBuzzIterate = fizzBuzzFunctionFactory(
+                type = 4,
                 input = $("#fizz-buzz-component__input--iterate"),
                 output = $("#fizz-buzz-component__iterate--result")
             );
