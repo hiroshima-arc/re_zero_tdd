@@ -211,6 +211,10 @@
 
         const MESSAGE_ERROR_NUMBER = "数字を入力してください";
         const MESSAGE_ERROR_MAX_NUMBER = "100を超える数字は入力できません";
+        const FIZZ_BUZZ_CALL_FUNC = 1;
+        const FIZZ_BUZZ_PRINT_FUNC = 2;
+        const FIZZ_BUZZ_UPDOWN_FUNC = 3;
+        const FIZZ_BUZZ_ITERATE_FUNC = 4;
 
         function createFizzBuzzCall(input) {
             return {
@@ -294,16 +298,18 @@
 
         function fizzBuzzFunctionFactory(type, input, output) {
             switch (type) {
-                case 1:
+                case FIZZ_BUZZ_CALL_FUNC:
                     return createFizzBuzzCall(input);
-                case 2:
+                case FIZZ_BUZZ_PRINT_FUNC:
                     return createFizzBuzzPrint(input, output);
-                case 3:
+                case FIZZ_BUZZ_UPDOWN_FUNC:
                     return createFizzBuzzUpDown(output);
-                case 4:
+                case FIZZ_BUZZ_ITERATE_FUNC:
                     return createFizzBuzzIterate(input, output);
                 default:
-                    break;
+                    const message = "定義されていない関数を呼び出そうとしています";
+                    const error = new Error(message);
+                    console.log(error);
             }
         }
 
@@ -372,21 +378,21 @@
                 $("#fizz-buzz-component__article--iterate"),
             );
             const fizzBuzzCall = fizzBuzzFunctionFactory(
-                type = 1,
-                input = $("#fizz-buzz-component__input--call")
+                type = FIZZ_BUZZ_CALL_FUNC,
+                input = $("#fizz-buzz-component__input--call"),
             );
             const fizzBuzzPrint = fizzBuzzFunctionFactory(
-                type = 2,
+                type = FIZZ_BUZZ_PRINT_FUNC,
                 input = $("#fizz-buzz-component__input--print"),
                 output = $("#fizz-buzz-component__print--message")
             );
             const fizzBuzzUpDown = fizzBuzzFunctionFactory(
-                type = 3,
+                type = FIZZ_BUZZ_UPDOWN_FUNC,
                 input = '',
                 output = $("#fizz-buzz-component__up-down--message")
             );
             const fizzBuzzIterate = fizzBuzzFunctionFactory(
-                type = 4,
+                type = FIZZ_BUZZ_ITERATE_FUNC,
                 input = $("#fizz-buzz-component__input--iterate"),
                 output = $("#fizz-buzz-component__iterate--result")
             );
