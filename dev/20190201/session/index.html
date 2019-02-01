@@ -63,14 +63,14 @@
     mocha.run();
 
     function print() {
-        var array = createArray();
+        const array = createArray();
         for(each of array) {
             console.log(each);
         }
     }
 
     function createArray() {
-        var array = [];
+        const array = [];
         [...Array(101).keys()].map((v) => {array.push(fizzBuzz(v))});
         return array;
     }
