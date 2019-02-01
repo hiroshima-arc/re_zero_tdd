@@ -45,7 +45,7 @@
         });
 
         it("3で割り切れる場合はFizzをプリントする", () => {
-            assert(3, 'Fizz');
+            assert(fizzBuzz(3), 'Fizz');
         })
     });
 
@@ -56,6 +56,10 @@
             console.log(i);
         }
         return array;
+    }
+
+    function fizzBuzz(number) {
+        return 'Fizz';
     }
 
     mocha.run();
