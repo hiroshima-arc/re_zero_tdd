@@ -39,7 +39,7 @@
 
     describe("FizzBuzzTest", () => {
         it("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzz", () => {
-            var array = print()
+            var array = createArray()
             assert(array[0], 1);
             assert(array[2], 'Fizz');
             assert(array[4], 'Buzz');
@@ -60,14 +60,22 @@
         });
     });
 
+    mocha.run();
+
     function print() {
+        var array = createArray();
+        for(each of array) {
+            console.log(each);
+        }
+    }
+
+    function createArray() {
         var array = [];
         var count = 1;
         while(count <= 100) {
             var value = fizzBuzz(count);
             array.push(value);
             count = count + 1;
-            console.log(value);
         }
         return array;
     }
@@ -86,7 +94,7 @@
         return result;
     }
 
-    mocha.run();
+    print();
 </script>
 <footer>
     <p>Copyright</p>
