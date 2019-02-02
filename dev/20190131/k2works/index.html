@@ -114,12 +114,6 @@
     <section>
         <div class="fizz-buzz-component">
             <h1>FizzBuzz</h1>
-            <article id="fizz-buzz-component__article--print">
-                <h1>FizzBuzzPrint</h1>
-                <div id="fizz-buzz-component__print--message">Initialized</div>
-                <input type="text" id="fizz-buzz-component__input--print">
-                <input type="button" id="fizz-buzz-component__button--print" value="Print">
-            </article>
             <article id="fizz-buzz-component__article--up-down">
                 <h1>FizzBuzzUpDown</h1>
                 <div id="fizz-buzz-component__up-down--message">Ready</div>
@@ -189,6 +183,19 @@
                 }
               });
               wrapper.find("#fizz-buzz-component__button--call").trigger('click');
+              assert(wrapper.props().output, 'Fizz');
+            });
+          });
+
+          describe("FizzBuzzPrintTest", () => {
+            it("5を入力したらBuzzを表示する", () => {
+              const wrapper = shallowMount(FizzBuzzPrint, {
+                propsData: {
+                  input: 5
+                }
+              });
+              wrapper.find("#fizz-buzz-component__button--print").trigger('click');
+              assert(wrapper.props().message, 'Buzz');
             });
           });
         });
@@ -486,15 +493,22 @@
             input: {
               type: Number,
               require: true
+            },
+            output: {
+              type: String,
+              require: true
             }
           },
+
           methods: {
             fizzBuzzCallOnClick: function () {
               const value = Number.parseInt(this.input);
               if (isNaN(value)) {
-                alert("数字を入力してください。");
+                this.output = "数字を入力してください。";
+                alert(this.output);
               } else {
-                alert(fizzBuzz(value));
+                this.output = fizzBuzz(value);
+                alert(this.output);
               }
             },
             fizzBuzzCallOnChange: function (event) {
@@ -508,7 +522,7 @@
           <input
             id="fizz-buzz-component__input--call"
             type="text"
-            v-bind:value="name"
+            v-bind:value="input"
             v-on:change="fizzBuzzCallOnChange"
             v-on:keyup.enter="fizzBuzzCallOnClick"
           />
@@ -522,12 +536,60 @@
           `
         });
 
+        const FizzBuzzPrint = Vue.component('fizz-buzz-print', {
+          props: {
+            input: {
+              type: Number,
+              require: true
+            },
+            message: {
+              type: String,
+              require: true
+            }
+          },
+
+          methods: {
+            fizzBuzzPrintOnClick: function () {
+              const value = Number.parseInt(this.input);
+              if (isNaN(value)) {
+                this.message = "数字を入力してください。";
+              } else {
+                this.message = fizzBuzz(value);
+              }
+            },
+            fizzBuzzPrintOnChange: function (event) {
+              this.input = event.target.value;
+            }
+          },
+
+          template:`
+        <article id="fizz-buzz-component__article--print">
+          <h1>FizzBuzzPrint</h1>
+          <div id="fizz-buzz-component__print--message">{{message}}</div>
+          <input
+            id="fizz-buzz-component__input--print"
+            type="text"
+            v-bind:value="input"
+            v-on:change="fizzBuzzPrintOnChange"
+            v-on:keyup.enter="fizzBuzzPrintOnClick"
+          />
+          <input
+            id="fizz-buzz-component__button--print"
+            type="button"
+            value="Print"
+            v-on:click="fizzBuzzPrintOnClick"
+          />
+        </article>
+          `
+        });
+
         document.addEventListener("DOMContentLoaded", () => {
           new Vue({
             el: "#app",
             template:`
             <div>
             <fizz-buzz-call/>
+            <fizz-buzz-print/>
             </div>
             `
           })
