@@ -114,11 +114,6 @@
     <section>
         <div class="fizz-buzz-component">
             <h1>FizzBuzz</h1>
-            <article id="fizz-buzz-component__article--call">
-                <h1>FizzBuzzCall</h1>
-                <input type="text" id="fizz-buzz-component__input--call">
-                <input type="button" id="fizz-buzz-component__button--call" value="Call">
-            </article>
             <article id="fizz-buzz-component__article--print">
                 <h1>FizzBuzzPrint</h1>
                 <div id="fizz-buzz-component__print--message">Initialized</div>
@@ -138,7 +133,6 @@
                 <div id="fizz-buzz-component__iterate--result"></div>
             </article>
             <article>
-                <h1>Vue Sample</h1>
                 <div id="app"></div>
             </article>
             <article id="fizz-buzz-component__article--test">
@@ -187,36 +181,16 @@
         describe("FizzBuzzComponentTest", () => {
           const { shallowMount } = VueTestUtils;
 
-          describe("MustDoItem", () => {
-            it("idとtextをレンダーする", () => {
-              const wrapper = shallowMount(MustDoItem,{
+          describe("FizzBuzzCallTest", () => {
+            it("3を入力したらFizzを表示する", () => {
+              const wrapper = shallowMount(FizzBuzzCall, {
                 propsData: {
-                  id: 1,
-                  text: "テストを書く"
+                  input: 3
                 }
               });
-              assert(wrapper.find(".id").text(),"1");
-              assert(wrapper.find(".text").text(), "テストを書く");
+              wrapper.find("#fizz-buzz-component__button--call").trigger('click');
             });
           });
-
-          describe("MustDoList", () => {
-            it("MustdoItemを3つレンダーする", () => {
-              const wrapper = shallowMount(MustDoList, {
-                data() {
-                  return {
-                    mustdos: [
-                      {id: 1, text: "テストを書く"},
-                      {id: 2, text: "コードを書く"},
-                      {id: 3, text: "Qiitaに投稿する"}
-                    ]
-                  }
-                }
-              });
-
-              assert(wrapper.findAll(".must-do").length, 3);
-            });
-          })
         });
 
         mocha.run();
@@ -507,56 +481,54 @@
 
         bindActionToElement();
 
-        const MustDoList = Vue.component('must-do-list', {
-          data() {
-            return {
-              mustdos: mustdos
-            }
-          },
-          template: `
-          <div>
-            <must-do-item
-              v-for="mustdo in mustdos"
-              :key="mustdo.id"
-              :text="mustdo.text"
-              :id="mustdo.id"
-              class="must-do"
-            >
-            </must-do-item>
-          </div>
-          `
-        });
-
-        const MustDoItem = Vue.component('must-do-item', {
+        const FizzBuzzCall = Vue.component('fizz-buzz-call', {
           props: {
-            id: {
+            input: {
               type: Number,
               require: true
-            },
-            text: {
-              type: String,
-              require: true
             }
           },
-          template: `
-          <div>
-            <div class="id">{{id}}</div>
-            <div class="text">{{text}}</div>
-          </div>`
-        });
+          methods: {
+            fizzBuzzCallOnClick: function () {
+              const value = Number.parseInt(this.input);
+              if (isNaN(value)) {
+                alert("数字を入力してください。");
+              } else {
+                alert(fizzBuzz(value));
+              }
+            },
+            fizzBuzzCallOnChange: function (event) {
+              this.input = event.target.value;
+            }
+          },
 
-        const mustdos =  [
-          { id: 1, text: "テストを書く" },
-          { id: 2, text: "コードを書く" },
-          { id: 3, text: "Qiitaに投稿する" },
-        ];
+          template:`
+          <article id="fizz-buzz-component__article--call">
+          <h1>FizzBuzzCall</h1>
+          <input
+            id="fizz-buzz-component__input--call"
+            type="text"
+            v-bind:value="name"
+            v-on:change="fizzBuzzCallOnChange"
+            v-on:keyup.enter="fizzBuzzCallOnClick"
+          />
+          <input
+            id="fizz-buzz-component__button--call"
+            type="button"
+            value="Call"
+            v-on:click="fizzBuzzCallOnClick"
+          />
+          </article>
+          `
+        });
 
         document.addEventListener("DOMContentLoaded", () => {
           new Vue({
             el: "#app",
             template:`
-            <must-do-list>
-            </must-do-list>
+            <div>
+            <fizz-buzz-call/>
+            </div>
             `
           })
         });
