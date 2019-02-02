@@ -114,15 +114,7 @@
     <section>
         <div class="fizz-buzz-component">
             <h1>FizzBuzz</h1>
-            <article id="fizz-buzz-component__article--iterate">
-                <h1>FizzBuzzIterate</h1>
-                <input type="text" id="fizz-buzz-component__input--iterate">
-                <input type="button" id="fizz-buzz-component__button--iterate" value="execute">
-                <div id="fizz-buzz-component__iterate--result"></div>
-            </article>
-            <article>
-                <div id="app"></div>
-            </article>
+            <div id="app"></div>
             <article id="fizz-buzz-component__article--test">
                 <div id="mocha"></div>
             </article>
@@ -211,6 +203,18 @@
               });
               wrapper.find("#fizz-buzz-component__button--down").trigger('click');
               assert(wrapper.props().message, 'FizzBuzz');
+            });
+          });
+
+          describe("FizzBuzzIterateTest", () => {
+            it("10を入力したらテーブルを表示する", () => {
+              const wrapper = shallowMount(FizzBuzzIterate, {
+                propsData: {
+                  input: 10
+                }
+              });
+              wrapper.find("#fizz-buzz-component__button--iterate").trigger('click');
+              assert(wrapper.props().output, "<table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead><tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr></tbody></table>");
             });
           });
         });
@@ -652,6 +656,49 @@
           `
         });
 
+        const FizzBuzzIterate = Vue.component("fizz-buzz-iterate", {
+          props: {
+            input: {
+              type: Number,
+              require: true
+            },
+            output: {
+              type: String
+            }
+          },
+
+          methods: {
+            fizzBuzzIterateOnChange: function () {
+              this.input = event.target.value;
+            },
+            fizzBuzzIterateOnClick: function (event) {
+              const value = Number.parseInt(this.input);
+              if (isNaN(value)) return this.output = MESSAGE_ERROR_NUMBER;
+              if (value > 100) return this.output = MESSAGE_ERROR_MAX_NUMBER;
+              this.output = renderHtmlTable(iterate(value));
+            }
+          },
+
+          template:`
+        <article id="fizz-buzz-component__article--iterate">
+          <h1>FizzBuzzIterate</h1>
+          <input
+            id="fizz-buzz-component__input--iterate"
+            type="text"
+            v-on:change="fizzBuzzIterateOnChange"
+            v-on:keyup.enter="fizzBuzzIterateOnClick"
+          />
+          <input
+            id="fizz-buzz-component__button--iterate"
+            type="button"
+            value="execute"
+            v-on:click="fizzBuzzIterateOnClick"
+          />
+          <div id="fizz-buzz-component__iterate--result" v-html="output"/>
+        </article>
+          `
+        });
+
         document.addEventListener("DOMContentLoaded", () => {
           new Vue({
             el: "#app",
@@ -660,6 +707,7 @@
             <fizz-buzz-call/>
             <fizz-buzz-print/>
             <fizz-buzz-up-down count=0 message="Ready"/>
+            <fizz-buzz-iterate/>
             </div>
             `
           })
