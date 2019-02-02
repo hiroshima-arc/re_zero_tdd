@@ -114,12 +114,6 @@
     <section>
         <div class="fizz-buzz-component">
             <h1>FizzBuzz</h1>
-            <article id="fizz-buzz-component__article--up-down">
-                <h1>FizzBuzzUpDown</h1>
-                <div id="fizz-buzz-component__up-down--message">Ready</div>
-                <input type="button" id="fizz-buzz-component__button--down" value="-">
-                <input type="button" id="fizz-buzz-component__button--up" value="+">
-            </article>
             <article id="fizz-buzz-component__article--iterate">
                 <h1>FizzBuzzIterate</h1>
                 <input type="text" id="fizz-buzz-component__input--iterate">
@@ -196,6 +190,27 @@
               });
               wrapper.find("#fizz-buzz-component__button--print").trigger('click');
               assert(wrapper.props().message, 'Buzz');
+            });
+          });
+
+          describe("FizzBuzzUpDownTest", () => {
+            it("+を押したら1を表示する", () => {
+              const wrapper = shallowMount(FizzBuzzUpDown, {
+                propsData: {
+                  count: 0
+                }
+              });
+              wrapper.find("#fizz-buzz-component__button--up").trigger('click');
+              assert(wrapper.props().message, 1);
+            });
+            it("-を押したらFizzBuzzを表示する", () => {
+              const wrapper = shallowMount(FizzBuzzUpDown, {
+                propsData: {
+                  count: 0
+                }
+              });
+              wrapper.find("#fizz-buzz-component__button--down").trigger('click');
+              assert(wrapper.props().message, 'FizzBuzz');
             });
           });
         });
@@ -583,6 +598,60 @@
           `
         });
 
+        const FizzBuzzUpDown = Vue.component("fizz-buzz-up-down", {
+          props: {
+            count: {
+              type: Number,
+              require: true
+            },
+            message: {
+              type: String,
+              require: true
+            }
+          },
+
+          methods: {
+            fizzBuzzUpDownUp: function () {
+              let fizzBuzzUpDownCount = Number.parseInt(this.count);
+              fizzBuzzUpDownCount += 1;
+              const count = fizzBuzzUpDownCount;
+              this.message = fizzBuzz(count);
+              this.count = count;
+            },
+            fizzBuzzUpDownDown: function () {
+              let fizzBuzzUpDownCount = Number.parseInt(this.count);
+              if (fizzBuzzUpDownCount === 0) {
+                this.count = 0;
+              } else {
+                fizzBuzzUpDownCount -= 1;
+              }
+              const count = fizzBuzzUpDownCount;
+              this.message = fizzBuzz(count);
+              this.count = count;
+            }
+
+          },
+
+          template:`
+        <article id="fizz-buzz-component__article--up-down">
+          <h1>FizzBuzzUpDown</h1>
+          <div id="fizz-buzz-component__up-down--message">{{this.message}}</div>
+          <input
+            id="fizz-buzz-component__button--down"
+            type="button"
+            value="-"
+            v-on:click="fizzBuzzUpDownDown"
+          />
+          <input
+            id="fizz-buzz-component__button--up"
+            type="button"
+            value="+"
+            v-on:click="fizzBuzzUpDownUp"
+          />
+        </article>
+          `
+        });
+
         document.addEventListener("DOMContentLoaded", () => {
           new Vue({
             el: "#app",
@@ -590,6 +659,7 @@
             <div>
             <fizz-buzz-call/>
             <fizz-buzz-print/>
+            <fizz-buzz-up-down count=0 message="Ready"/>
             </div>
             `
           })
