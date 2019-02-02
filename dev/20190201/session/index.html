@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet"/>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-    <script>mocha.setup("bdd");</script>
+    <script>
+        mocha.setup("bdd");
+    </script>
     <title>Re:ゼロから始めるテスト駆動開発</title>
 </head>
+
 <body>
     <h1>HTML5+CSS+JavaScript with TDD</h1>
     <header>
@@ -44,7 +48,7 @@
             assert(array[3], 'Fizz');
             assert(array[5], 'Buzz');
             assert(array[15], 'FizzBuzz');
-            assert(array[100],'Buzz');
+            assert(array[100], 'Buzz');
         });
 
         it("3で割り切れる場合はFizzをプリントする", () => {
@@ -64,14 +68,16 @@
 
     function print() {
         const array = createArray();
-        for(each of array) {
+        for (each of array) {
             console.log(each);
         }
     }
 
     function createArray() {
         const array = [];
-        [...Array(101).keys()].map((v) => {array.push(fizzBuzz(v))});
+        [...Array(101).keys()].map((v) => {
+            array.push(fizzBuzz(v))
+        });
         return array;
     }
 
@@ -84,7 +90,7 @@
     }
 
     function fizzBuzz(number) {
-        if (isFizz(number) && isBuzz(number)) return 'FizzBuzz'; 
+        if (isFizz(number) && isBuzz(number)) return 'FizzBuzz';
         if (isFizz(number)) return 'Fizz';
         if (isBuzz(number)) return 'Buzz'
         return number;
@@ -96,4 +102,5 @@
     <p>Copyright</p>
     <address>hiroshima.arc@gmail.com</address>
 </footer>
+
 </html>
