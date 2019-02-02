@@ -24,6 +24,12 @@ JavaScript の最小テスト
 
 ## 開発
 
+```
+npm install -g livereloadx
+livereloadx -s
+```
+http://localhost:35729/
+
 ### ふりかえり
 
 #### Keep
@@ -35,3 +41,4 @@ JavaScript の最小テスト
 ## 参照
 - [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)
 - [【Vue.js】【TDD】ブラウザだけでVueテストを書きましょう](https://qiita.com/webpack_master/items/1219b61eb0dd924cb1b8)
+- [ブラウザのリロードを自動化するLiveReloadの導入方法](https://blog.nzakr.com/use-livereload/)
