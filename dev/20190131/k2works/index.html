@@ -155,6 +155,15 @@
               wrapper.find("#fizz-buzz-component__button--call").trigger('click');
               assert(wrapper.props().output, 'Fizz');
             });
+            it("数字以外を入力したらエラーメッセージを表示する", () => {
+              const wrapper = shallowMount(FizzBuzzCall, {
+                propsData: {
+                  input: "a"
+                }
+              });
+              wrapper.find("#fizz-buzz-component__button--call").trigger('click');
+              assert(wrapper.props().output, "数字を入力してください");
+            });
           });
 
           describe("FizzBuzzPrintTest", () => {
@@ -166,6 +175,15 @@
               });
               wrapper.find("#fizz-buzz-component__button--print").trigger('click');
               assert(wrapper.props().message, 'Buzz');
+            });
+            it("数字以外を入力したらエラーメッセージを表示する", () => {
+              const wrapper = shallowMount(FizzBuzzPrint, {
+                propsData: {
+                  input: "a"
+                }
+              });
+              wrapper.find("#fizz-buzz-component__button--print").trigger('click');
+              assert(wrapper.props().message, "数字を入力してください");
             });
           });
 
@@ -199,6 +217,15 @@
               });
               wrapper.find("#fizz-buzz-component__button--iterate").trigger('click');
               assert(wrapper.props().output, "<table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead><tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr></tbody></table>");
+            });
+            it("数字以外を入力したらエラーメッセージを表示する", () => {
+              const wrapper = shallowMount(FizzBuzzIterate, {
+                propsData: {
+                  input: "a"
+                }
+              });
+              wrapper.find("#fizz-buzz-component__button--iterate").trigger('click');
+              assert(wrapper.props().output, "数字を入力してください");
             });
           });
         });
@@ -238,52 +265,6 @@
 
         const MESSAGE_ERROR_NUMBER = "数字を入力してください";
         const MESSAGE_ERROR_MAX_NUMBER = "100を超える数字は入力できません";
-        const FIZZ_BUZZ_CALL_FUNC = 1;
-        const FIZZ_BUZZ_PRINT_FUNC = 2;
-        const FIZZ_BUZZ_UPDOWN_FUNC = 3;
-        const FIZZ_BUZZ_ITERATE_FUNC = 4;
-
-        function createFizzBuzzCall(input) {
-            return {
-                exec() {
-                    const value = Number.parseInt(input.val());
-
-                    if (isNaN(value)) return alert(MESSAGE_ERROR_NUMBER);
-                    alert(fizzBuzz(value));
-                }
-            }
-        }
-
-        function createFizzBuzzPrint(input, output) {
-            return {
-                exec() {
-                    const value = Number.parseInt(input.val());
-                    const target = output;
-
-                    if (isNaN(value)) return target.html(MESSAGE_ERROR_NUMBER);
-                    target.html(fizzBuzz(value));
-                }
-            }
-        }
-
-        function createFizzBuzzUpDown(target) {
-            let count = 0;
-            return {
-                up() {
-                    count++;
-                    const value = fizzBuzz(count);
-                    target.html(value);
-                },
-                down() {
-                    if (count === 0) {
-                        count = 0;
-                    } else {
-                        count -= 1;
-                    }
-                    target.html(fizzBuzz(count));
-                }
-            }
-        }
 
         function renderHtmlTable(array) {
             const maxColumn = 10;
@@ -310,186 +291,6 @@
             html += "</table>";
             return html;
         }
-
-        function createFizzBuzzIterate(input, output) {
-            return {
-                exec() {
-                    const value = Number.parseInt(input.val());
-                    const target = output;
-                    if (isNaN(value)) return target.html(MESSAGE_ERROR_NUMBER);
-                    if (value > 100) return target.html(MESSAGE_ERROR_MAX_NUMBER);
-                    target.html(renderHtmlTable(iterate(value)));
-                }
-            }
-        }
-
-        function fizzBuzzFunctionFactory(type, input, output) {
-            switch (type) {
-                case FIZZ_BUZZ_CALL_FUNC:
-                    return createFizzBuzzCall(input);
-                case FIZZ_BUZZ_PRINT_FUNC:
-                    return createFizzBuzzPrint(input, output);
-                case FIZZ_BUZZ_UPDOWN_FUNC:
-                    return createFizzBuzzUpDown(output);
-                case FIZZ_BUZZ_ITERATE_FUNC:
-                    return createFizzBuzzIterate(input, output);
-                default:
-                    const message = "定義されていない関数を呼び出そうとしています";
-                    const error = new Error(message);
-                    console.log(error);
-            }
-        }
-
-        function showFizzBuzz(
-            $call,
-            $print,
-            $updown,
-            $iterate
-        ) {
-            return (
-                state = {
-                    "call": "none",
-                    "print": "none",
-                    "updown": "none",
-                    "iterate": "none"
-                }
-            ) => {
-                $call.css("display", state.call);
-                $print.css("display", state.print);
-                $updown.css("display", state.upDown);
-                $iterate.css("display", state.iterate);
-            };
-        }
-
-        function showFizzBuzzCall() {
-            return {
-                "call": "block",
-                "print": "none",
-                "upDown": "none",
-                "iterate": "none"
-            };
-        }
-
-        function showFizzBuzzPrint() {
-            return {
-                "call": "none",
-                "print": "block",
-                "upDown": "none",
-                "iterate": "none"
-            };
-        }
-
-        function showFizzBuzzUpDown() {
-            return {
-                "call": "none",
-                "print": "none",
-                "upDown": "block",
-                "iterate": "none"
-            };
-        }
-
-        function showFizzBuzzIterate() {
-            return {
-                "call": "none",
-                "print": "none",
-                "upDown": "none",
-                "iterate": "block"
-            };
-        }
-
-        function bindActionToElement() {
-            const show = showFizzBuzz(
-                $("#fizz-buzz-component__article--call"),
-                $("#fizz-buzz-component__article--print"),
-                $("#fizz-buzz-component__article--up-down"),
-                $("#fizz-buzz-component__article--iterate"),
-            );
-            const fizzBuzzCall = fizzBuzzFunctionFactory(
-                type = FIZZ_BUZZ_CALL_FUNC,
-                input = $("#fizz-buzz-component__input--call"),
-            );
-            const fizzBuzzPrint = fizzBuzzFunctionFactory(
-                type = FIZZ_BUZZ_PRINT_FUNC,
-                input = $("#fizz-buzz-component__input--print"),
-                output = $("#fizz-buzz-component__print--message")
-            );
-            const fizzBuzzUpDown = fizzBuzzFunctionFactory(
-                type = FIZZ_BUZZ_UPDOWN_FUNC,
-                input = '',
-                output = $("#fizz-buzz-component__up-down--message")
-            );
-            const fizzBuzzIterate = fizzBuzzFunctionFactory(
-                type = FIZZ_BUZZ_ITERATE_FUNC,
-                input = $("#fizz-buzz-component__input--iterate"),
-                output = $("#fizz-buzz-component__iterate--result")
-            );
-
-            [{
-                    key: "nav-component__sub-menu--call",
-                    action: () => show(showFizzBuzzCall())
-                },
-                {
-                    key: "nav-component__sub-menu--print",
-                    action: () => show(showFizzBuzzPrint())
-                },
-                {
-                    key: "nav-component__sub-menu--up-down",
-                    action: () => show(showFizzBuzzUpDown())
-                },
-                {
-                    key: "nav-component__sub-menu--iterate",
-                    action: () => show(showFizzBuzzIterate())
-                },
-                {
-                    key: "fizz-buzz-component__button--call",
-                    action: () => fizzBuzzCall.exec()
-                },
-                {
-                    key: "fizz-buzz-component__button--print",
-                    action: () => fizzBuzzPrint.exec()
-                },
-                {
-                    key: "fizz-buzz-component__button--down",
-                    action: () => fizzBuzzUpDown.down()
-                },
-                {
-                    key: "fizz-buzz-component__button--up",
-                    action: () => fizzBuzzUpDown.up()
-                },
-                {
-                    key: "fizz-buzz-component__button--iterate",
-                    action: () => fizzBuzzIterate.exec()
-                }
-            ].forEach(({
-                key,
-                action
-            }) => {
-                const element = $(`#${key}`);
-                element.on("click", action);
-            });
-
-            [{
-                    key: "fizz-buzz-component__input--call",
-                    action: () => fizzBuzzCall.exec()
-                },
-                {
-                    key: "fizz-buzz-component__input--print",
-                    action: () => fizzBuzzPrint.exec()
-                },
-                {
-                    key: "fizz-buzz-component__input--iterate",
-                    action: () => fizzBuzzIterate.exec()
-                }
-            ].forEach(({
-                key,
-                action
-            }) => {
-                const element = $(`#${key}`);
-                element.on("change", action);
-            });
-        }
-
-        bindActionToElement();
 
         const FizzBuzzMenu = Vue.component('fizz-buzz-menu', {
           data() {
@@ -547,7 +348,7 @@
             fizzBuzzCallOnClick: function () {
               const value = Number.parseInt(this.input);
               if (isNaN(value)) {
-                this.output = "数字を入力してください。";
+                this.output = MESSAGE_ERROR_NUMBER;
                 alert(this.output);
               } else {
                 this.output = fizzBuzz(value);
@@ -595,7 +396,7 @@
             fizzBuzzPrintOnClick: function () {
               const value = Number.parseInt(this.input);
               if (isNaN(value)) {
-                this.message = "数字を入力してください。";
+                this.message = MESSAGE_ERROR_NUMBER;
               } else {
                 this.message = fizzBuzz(value);
               }
