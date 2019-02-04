@@ -91,23 +91,7 @@
         <header>
             <nav>
                 <h1>Menu</h1>
-                <ul>
-                    <li><a href="index.html">FizzBuzz</a></li>
-                    <ul id="nav-component__sub-menu--fizz-buzz">
-                        <li id="nav-component__sub-menu--call">
-                            <a href="#">FizzBuzzCall</a>
-                        </li>
-                        <li id="nav-component__sub-menu--print">
-                            <a href="#">FizzBuzzPrint</a>
-                        </li>
-                        <li id="nav-component__sub-menu--up-down">
-                            <a href="#">FizzBuzzUpDown</a>
-                        </li>
-                        <li id="nav-component__sub-menu--iterate">
-                            <a href="#">FizzBuzzIterate</a>
-                        </li>
-                    </ul>
-                </ul>
+                <div id="menu"></div>
             </nav>
         </header>
     </div>
@@ -507,6 +491,46 @@
 
         bindActionToElement();
 
+        const FizzBuzzMenu = Vue.component('fizz-buzz-menu', {
+          data() {
+            return {
+              callParams: {"call":"block","print":"none", "updown":"none", "iterate":"none"},
+              printParams: {"call":"none","print":"block", "updown":"none", "iterate":"none"},
+              updownParams: {"call":"none","print":"none", "updown":"block", "iterate":"none"},
+              iterateParams: {"call":"none","print":"none", "updown":"none", "iterate":"block"}
+            }
+          },
+
+          methods: {
+            fizzBuzzMenuOnClick: function (params) {
+              document.querySelector("#fizz-buzz-component__article--call").style.display = params.call;
+              document.querySelector("#fizz-buzz-component__article--print").style.display = params.print;
+              document.querySelector("#fizz-buzz-component__article--up-down").style.display = params.updown;
+              document.querySelector("#fizz-buzz-component__article--iterate").style.display = params.iterate;
+            }
+          },
+
+          template:`
+                <ul>
+                    <li><a href="index.html">FizzBuzz</a></li>
+                    <ul id="nav-component__sub-menu--fizz-buzz">
+                        <li id="nav-component__sub-menu--call" v-on:click="fizzBuzzMenuOnClick(callParams)">
+                            <a href="#">FizzBuzzCall</a>
+                        </li>
+                        <li id="nav-component__sub-menu--print" v-on:click="fizzBuzzMenuOnClick(printParams)">
+                            <a href="#">FizzBuzzPrint</a>
+                        </li>
+                        <li id="nav-component__sub-menu--up-down" v-on:click="fizzBuzzMenuOnClick(updownParams)">
+                            <a href="#">FizzBuzzUpDown</a>
+                        </li>
+                        <li id="nav-component__sub-menu--iterate" v-on:click="fizzBuzzMenuOnClick(iterateParams)">
+                            <a href="#">FizzBuzzIterate</a>
+                        </li>
+                    </ul>
+                </ul>
+          `
+        });
+
         const FizzBuzzCall = Vue.component('fizz-buzz-call', {
           props: {
             input: {
@@ -536,7 +560,7 @@
           },
 
           template:`
-          <article id="fizz-buzz-component__article--call">
+          <article>
           <h1>FizzBuzzCall</h1>
           <input
             id="fizz-buzz-component__input--call"
@@ -582,7 +606,7 @@
           },
 
           template:`
-        <article id="fizz-buzz-component__article--print">
+        <article>
           <h1>FizzBuzzPrint</h1>
           <div id="fizz-buzz-component__print--message">{{message}}</div>
           <input
@@ -637,7 +661,7 @@
           },
 
           template:`
-        <article id="fizz-buzz-component__article--up-down">
+        <article>
           <h1>FizzBuzzUpDown</h1>
           <div id="fizz-buzz-component__up-down--message">{{this.message}}</div>
           <input
@@ -680,7 +704,7 @@
           },
 
           template:`
-        <article id="fizz-buzz-component__article--iterate">
+        <article>
           <h1>FizzBuzzIterate</h1>
           <input
             id="fizz-buzz-component__input--iterate"
@@ -701,13 +725,19 @@
 
         document.addEventListener("DOMContentLoaded", () => {
           new Vue({
+            el: "#menu",
+            template:`
+            <fizz-buzz-menu/>
+            `
+          });
+          new Vue({
             el: "#app",
             template:`
             <div>
-            <fizz-buzz-call/>
-            <fizz-buzz-print/>
-            <fizz-buzz-up-down count=0 message="Ready"/>
-            <fizz-buzz-iterate/>
+            <fizz-buzz-call id="fizz-buzz-component__article--call"/>
+            <fizz-buzz-print id="fizz-buzz-component__article--print"/>
+            <fizz-buzz-up-down id="fizz-buzz-component__article--up-down" count=0 message="Ready"/>
+            <fizz-buzz-iterate id="fizz-buzz-component__article--iterate"/>
             </div>
             `
           })
