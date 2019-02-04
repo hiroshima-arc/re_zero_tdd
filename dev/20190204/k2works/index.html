@@ -11,19 +11,63 @@
     />
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+    <style type="text/css">
+      body {
+          width: 810px;
+          margin: 0 auto;
+          background-color: ivory;
+      }
+      header {
+        width: 350px;
+      }
+      .nav-component {
+        width: 290px;
+        float: left;
+        padding: 5px;
+        margin-bottom: 5px;
+      }
+      .nav-component a {
+        text-decoration: none;
+        font-size: 15px;
+      }
+      .nav-component a:link {
+        color: #ff0000;
+      }
+      .nav-component a:visited {
+        color: #a0a0a0;
+      }
+      .nav-component a:hover {
+        color: #80ff00;
+      }
+      .nav-component a:active {
+        color: #0000ff;
+      }
+      .fizz-buzz-component {
+        width: 500px;
+        float: right;
+        padding-left: 5px;
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+      }
+      footer {
+        clear: both;
+        width: auto;
+        text-align: center;
+      }
+      </style>
   </head>
 
   <body>
     <h1>HTML5+CSS+JavaScript with TDD</h1>
     <header>
-      <nav>
+      <nav class="nav-component">
         <h1>Menu</h1>
         <ul>
           <li><a href="index.html">FizzBuzz</a></li>
         </ul>
       </nav>
     </header>
-    <section>
+    <section class="fizz-buzz-component">
       <h1>FizzBuzz</h1>
       <article></article>
       <div id="mocha"></div>
