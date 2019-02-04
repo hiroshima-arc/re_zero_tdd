@@ -64,12 +64,94 @@
         <h1>Menu</h1>
         <ul>
           <li><a href="index.html">FizzBuzz</a></li>
+          <ul id="nav-component__sub-menu--fizz-buzz">
+            <li id="nav-component__sub-menu-form">
+              <a href="#">FizzBuzzForm</a>
+            </li>
+          </ul>
         </ul>
       </nav>
     </header>
     <section class="fizz-buzz-component">
       <h1>FizzBuzz</h1>
-      <article></article>
+      <article>
+        <h1>FizzBuzzForm</h1>
+        <form name="myForm">
+          <fieldset>
+            <p>テキスト：<input type="text" size="20" name="inputText" />
+
+            <p>
+              ラジオボタン：
+              <input
+                type="radio"
+                name="inputRadio"
+                id="inputRadio1"
+                value="1"
+                checked
+              /><label for="inputRadio1">選択1</label>
+              <input
+                type="radio"
+                name="inputRadio"
+                id="inputRadio2"
+                value="2"
+              /><label for="inputRadio2">選択2</label>
+            </p>
+
+            <p>
+              チェックボックス：
+              <input
+                type="checkbox"
+                name="inputCheck"
+                id="inputCheck1"
+                value="1"
+                checked
+              /><label for="inputCheck1">選択1</label>
+              <input
+                type="checkbox"
+                name="inputCheck"
+                id="inputCheck2"
+                value="2"
+              /><label for="inputCheck2">選択2</label>
+            </p>
+
+            <p>
+              パスワード：<input
+                type="password"
+                size="20"
+                name="inputPassword"
+              />
+            </p>
+
+            <p>
+              セレクト：<select size="1" name="selectbox">
+                <option>選択1</option>
+                <option>選択2</option>
+                <option>選択3</option>
+              </select>
+            </p>
+
+            <p>
+              テキストエリア：<textarea
+                rows="4"
+                cols="40"
+                name="textarea"
+              ></textarea>
+            </p>
+
+            <p>ボタン：<button type="button" name="button">ボタン</button></p>
+            <p>
+              リセットボタン：<button type="reset" name="buttonSubmit">
+                リセット
+              </button>
+            </p>
+            <p>
+              送信ボタン：<button type="submit" name="buttonSubmit">
+                送信
+              </button>
+            </p>
+          </fieldset>
+        </form>
+      </article>
       <div id="mocha"></div>
     </section>
     <footer>
