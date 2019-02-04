@@ -32,16 +32,6 @@
     </footer>
 
     <script>
-        function generateArray() {
-            var array = [];
-            for (var i = 1; i <= 100; i++) {
-                var value = fizzBuzz(i);
-                console.log(value);
-                array[i] = value;
-            }
-            return array;
-        }
-
         function fizzBuzz(number) {
             var result = number;
 
@@ -55,6 +45,24 @@
 
             return result;
         }
+
+        function generateArray() {
+            var array = [];
+            for (var i = 1; i <= 100; i++) {
+                var value = fizzBuzz(i);
+                array[i] = value;
+            }
+            return array;
+        }
+
+        function printFizzBuzz() {
+            var array = generateArray();
+            for(value of array) {
+                console.log(value);
+            }
+        }
+
+        printFizzBuzz();
     </script>
 
     <script>
