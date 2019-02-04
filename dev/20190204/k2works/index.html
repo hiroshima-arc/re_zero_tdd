@@ -1,93 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Re:ゼロから始めるテスト駆動開発</title>
-    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <link
+      href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>HTML5+CSS+JavaScript with TDD</h1>
     <header>
-        <nav>
-            <h1>Menu</h1>
-            <ul>
-                <li><a href="index.html">FizzBuzz</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <h1>Menu</h1>
+        <ul>
+          <li><a href="index.html">FizzBuzz</a></li>
+        </ul>
+      </nav>
     </header>
     <section>
-        <h1>FizzBuzz</h1>
-        <article></article>
-        <div id="mocha"></div>
+      <h1>FizzBuzz</h1>
+      <article></article>
+      <div id="mocha"></div>
     </section>
     <footer>
-        <p>Copyright</p>
-        <address>hiroshiam.arc@gmail.com</address>
+      <p>Copyright</p>
+      <address>hiroshiam.arc@gmail.com</address>
     </footer>
 
     <script>
-        function isFizz(number) {
-            return number % 3 === 0;
-        }
+      function isFizz(number) {
+        return number % 3 === 0;
+      }
 
-        function isBuzz(number) {
-            return number % 5 === 0;
-        }
+      function isBuzz(number) {
+        return number % 5 === 0;
+      }
 
-        function fizzBuzz(number) {
-            if (isFizz(number) && isBuzz(number)) return "FizzBuzz";
-            if (isFizz(number)) return "Fizz";
-            if (isBuzz(number)) return "Buzz";
-            return number;
-        }
+      function fizzBuzz(number) {
+        if (isFizz(number) && isBuzz(number)) return "FizzBuzz";
+        if (isFizz(number)) return "Fizz";
+        if (isBuzz(number)) return "Buzz";
+        return number;
+      }
 
-        function generateArray(count) {
-            const array = [];
-            [...Array(count).keys()].map((number) => {array.push(fizzBuzz(number))});
-            return array;
-        }
+      function generateArray(count) {
+        const array = [];
+        [...Array(count).keys()].map(number => {
+          array.push(fizzBuzz(number));
+        });
+        return array;
+      }
 
-        function printFizzBuzz() {
-            generateArray(101).forEach((value) => {console.log(value)});
-        }
+      function printFizzBuzz() {
+        generateArray(101).forEach(value => {
+          console.log(value);
+        });
+      }
 
-        printFizzBuzz();
+      printFizzBuzz();
     </script>
 
     <script>
-        mocha.setup("tdd");
+      mocha.setup("tdd");
 
-        const assert = chai.assert;
+      const assert = chai.assert;
 
-        suite("FizzBuzzTest", () => {
-            test("1から100までをプリントする、ただし3で割り切れる場合はFizzを5で割り切れる場合はBuzzを3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-                var array = generateArray(101);
-                assert.equal(1, array[1]);
-                assert.equal("Buzz", array[100]);
-            })
-
-            test("3で割り切れる場合はFizzをプリントする", ()=> {
-                assert.equal("Fizz", fizzBuzz(3));
-                assert.equal(1, fizzBuzz(1));
-            })
-
-            test("5で割り切れる場合はBuzzをプリントする", () => {
-                assert.equal("Buzz", fizzBuzz(5));
-            })
-
-            test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-                assert.equal("FizzBuzz", fizzBuzz(15));
-            })
+      suite("FizzBuzzTest", () => {
+        test("1から100までをプリントする、ただし3で割り切れる場合はFizzを5で割り切れる場合はBuzzを3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+          var array = generateArray(101);
+          assert.equal(1, array[1]);
+          assert.equal("Buzz", array[100]);
         });
 
-        mocha.run();
-    </script>
-</body>
+        test("3で割り切れる場合はFizzをプリントする", () => {
+          assert.equal("Fizz", fizzBuzz(3));
+          assert.equal(1, fizzBuzz(1));
+        });
 
+        test("5で割り切れる場合はBuzzをプリントする", () => {
+          assert.equal("Buzz", fizzBuzz(5));
+        });
+
+        test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+          assert.equal("FizzBuzz", fizzBuzz(15));
+        });
+      });
+
+      mocha.run();
+    </script>
+  </body>
 </html>
