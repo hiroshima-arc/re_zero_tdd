@@ -1,302 +1,548 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
-    <style type="text/css">
-      body {
-        width: 650px;
-        margin: 0 auto;
-        background-color: ivory;
-      }
-      header {
-        width: 350px;
-      }
-      article {
-        width: 350px;
-        float: right;
-      }
-      nav {
-        width: 300px;
-        float: left;
-      }
-      footer {
-        clear: both;
-        width: 500px;
-        text-align: center;
-      }
-      table {
-        border-collapse: collapse;
-      }
-      th {
-        border: 1px solid black;
-        background-color: aqua;
-      }
-      td {
-        border: 1px solid black;
-      }
-      a {
-        text-decoration: none;
-        font-size: 15px;
-      }
-      a:link {
-        color: #FF0000;
-      }
-      a:visited {
-        color: #A0A0A0;
-      }
-      a:hover {
-        color: #80FF00;
-      }
-      a:active {
-        color: #0000Ff;
-      }
-    </style>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Re:ゼロから始めるテスト駆動開発</title>
-  </head>
-  <body>
-  <h1>HTML5+CSS3+JavaScript with TDD</h1>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet"/>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+    <script>document.write("<script src=\"http://" + (location.host || "localhost").split(":")[0] + ":35729/livereload.js?snipver=2\"></" + "script>");</script>
+    <script src="https://cdn.rawgit.com/vuejs/vue/dev/dist/vue.min.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue/dev/packages/vue-template-compiler/browser.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue-test-utils/dev/packages/test-utils/dist/vue-test-utils.iife.js"></script>
+    <script>
+      mocha.setup("tdd");
+    </script>
+    <style type="text/css">
+        body {
+            width: 810px;
+            margin: 0 auto;
+            background-color: ivory;
+        }
+
+        header {
+            width: 350px;
+        }
+
+        .nav-component {
+            width: 290px;
+            float: left;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        .nav-component a {
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-component a:link {
+            color: #ff0000;
+        }
+
+        .nav-component a:visited {
+            color: #a0a0a0;
+        }
+
+        .nav-component a:hover {
+            color: #80ff00;
+        }
+
+        .nav-component a:active {
+            color: #0000ff;
+        }
+
+        .fizz-buzz-component {
+            width: 500px;
+            float: right;
+            padding-left: 5px;
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+        }
+
+        .fizz-buzz-component table {
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .fizz-buzz-component th {
+            border: 1px solid black;
+            background-color: aqua;
+        }
+
+        .fizz-buzz-component td {
+            border: 1px solid black;
+        }
+
+        footer {
+            clear: both;
+            width: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<h1>HTML5+CSS+JavaScript with TDD</h1>
+<div class="nav-component">
     <header>
-      <nav>
-        <h1>メニュー</h1>
-        <ul>
-          <li><a href="index.html">FizzBuzz</a>
-            <ul id="sub-menu">
-              <li onclick="showFizzBuzzCall()"><a href="#">FizzBuzzCall</a></li>
-              <li onclick="showFizzBuzzPrint()"><a href="#">FizzBuzzPrint</a></li>
-              <li onclick="showFizzBuzzUpDown()"><a href="#">FizzBuzzUpDown</a></li>
-              <li onclick="showFizzBuzzIterate()"><a href="#">FizzBuzzIterate</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+        <nav>
+            <h1>Menu</h1>
+            <div id="menu"></div>
+        </nav>
     </header>
-    <section>
-      <h1>FizzBuzz</h1>
-      <article id="art-1">
-        <h1>FizzBuzzCall</h1>
-        <input id="call" type="text" />
-        <input onclick="fizzBuzzCall()" type="button" value="Call" />
-      </article>
-
-      <article id="art-2">
-        <h1>FizzBuzzPrint</h1>
-        <div id="print">Initialized</div>
-        <input id="input" type="text" />
-        <input onclick="fizzBuzzPrint()" type="button" value="Print" />
-      </article>
-
-      <article id="art-3">
-        <h1>FizzBuzzUpDown</h1>
-        <div id="updown">Ready</div>
-        <input id="down" onclick="fizzBuzzDown()" type="button" value="-" />
-        <input id="up" onclick="fizzBuzzUp()" type="button" value="+" />
-      </article>
-
-      <article id="art-4">
-        <h1>FizzBuzzIterate</h1>
-        <input id="iterate_input" type="text" />
-        <input
-                id="iterate"
-                type="button"
-                value="execute"
-                onclick="fizzBuzzIterate()"
-        />
-        <div id="result"></div>
-      </article>
-    </section>
-    <footer>
-      <p>Copyrights</p>
-      <address>hiroshima-arc@gmail.com</address>
-    </footer>
-  </body>
-</html>
+</div>
+<section>
+    <div class="fizz-buzz-component">
+        <h1>FizzBuzz</h1>
+        <div id="app"></div>
+        <article id="fizz-buzz-component__article--test">
+            <div id="mocha"></div>
+        </article>
+    </div>
+</section>
+<footer>
+    <p>Copyright</p>
+    <address>hiroshima.arc@gmail.com</address>
+</footer>
 
 <script>
-  // assert
-  function assert(expected, actual) {
-    console.log(".");
-    console.assert(
-      expected === actual,
-      `\nexp:` + expected + `\nact:` + actual
-    );
-  }
+  // Test
+  const assert = chai.assert;
 
-  // FizzBuzz
-  // Controller
-  function showFizzBuzzCall() {
-    document.getElementById("art-1").style.display = "block";
-    document.getElementById("art-2").style.display = "none";
-    document.getElementById("art-3").style.display = "none";
-    document.getElementById("art-4").style.display = "none";
-  }
+  suite("FizzBuzzTest", () => {
+    test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
+      const array = iterate(100);
 
-  function showFizzBuzzPrint() {
-    document.getElementById("art-1").style.display = "none";
-    document.getElementById("art-2").style.display = "block";
-    document.getElementById("art-3").style.display = "none";
-    document.getElementById("art-4").style.display = "none";
-  }
-
-  function showFizzBuzzUpDown() {
-    document.getElementById("art-1").style.display = "none";
-    document.getElementById("art-2").style.display = "none";
-    document.getElementById("art-3").style.display = "block";
-    document.getElementById("art-4").style.display = "none";
-  }
-
-  function showFizzBuzzIterate() {
-    document.getElementById("art-1").style.display = "none";
-    document.getElementById("art-2").style.display = "none";
-    document.getElementById("art-3").style.display = "none";
-    document.getElementById("art-4").style.display = "block";
-  }
-
-  function renderHtmlTable(array) {
-    let rowCount = 1;
-    let html = "<table>";
-
-    html = html + "<thead>";
-    [...Array(10).keys()].forEach(function(v) {
-      html = html + `<th>${v + 1}</th>`;
-    });
-    html = html + "</thead>";
-
-    html = html + "<tbody>";
-
-    html = html + "<tr>";
-    array.forEach(function(value) {
-      if (rowCount > 10) {
-        html = html + "<tr>";
-      }
-
-      value = `<td>${value}</td>`;
-      html = html + value;
-
-      if (rowCount === 10) {
-        html = html + "</tr>";
-        rowCount = 1;
-      } else {
-        rowCount += 1;
-      }
+      assert(array[0], 1);
+      assert(array[2], "Fizz");
+      assert(array[4], "Buzz");
+      assert(array[14], "FizzBuzz");
     });
 
-    html = html + "</tbody>";
-    html = html + "</table>";
-    return html;
-  }
+    test("3で割り切れる場合はFizzをプリントする", () => {
+      assert(fizzBuzz(3), "Fizz");
+      assert(fizzBuzz(1), 1);
+    });
 
-  function fizzBuzzIterate() {
-    const target = document.getElementById("result");
-    let count = document.getElementById("iterate_input").value;
-    if (count > COUNT) {
-      return (target.innerHTML = `<strong>件数は${COUNT}までです。</strong>`);
-    }
+    test("5で割り切れる場合はBuzzをプリントする", () => {
+      assert(fizzBuzz(5), "Buzz");
+    });
 
-    const array = iterate(count);
+    test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+      assert(fizzBuzz(15), "FizzBuzz");
+    });
+  });
 
-    target.innerHTML = renderHtmlTable(array);
-  }
+  suite("FizzBuzzComponentTest", () => {
+    const {shallowMount} = VueTestUtils;
 
-  fizzBuzzUpDownCount = 0;
+    suite("FizzBuzzCallTest", () => {
+      test("3を入力したらFizzを表示する", () => {
+        const wrapper = shallowMount(FizzBuzzCall, {
+          propsData: {
+            input: 3
+          }
+        });
+        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
+        assert(wrapper.props().output, "Fizz");
+      });
+      test("数字以外を入力したらエラーメッセージを表示する", () => {
+        const wrapper = shallowMount(FizzBuzzCall, {
+          propsData: {
+            input: "a"
+          }
+        });
+        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
+        assert(wrapper.props().output, "数字を入力してください");
+      });
+    });
 
-  function fizzBuzzUp() {
-    fizzBuzzUpDownCount += 1;
-    const target = document.getElementById("updown");
-    const count = fizzBuzzUpDownCount;
-    const value = fizzBuzz(count);
-    target.innerHTML = value;
-  }
+    suite("FizzBuzzPrintTest", () => {
+      test("5を入力したらBuzzを表示する", () => {
+        const wrapper = shallowMount(FizzBuzzPrint, {
+          propsData: {
+            input: 5
+          }
+        });
+        wrapper.find("#fizz-buzz-component__button--print").trigger("click");
+        assert(wrapper.props().message, "Buzz");
+      });
+      test("数字以外を入力したらエラーメッセージを表示する", () => {
+        const wrapper = shallowMount(FizzBuzzPrint, {
+          propsData: {
+            input: "a"
+          }
+        });
+        wrapper.find("#fizz-buzz-component__button--print").trigger("click");
+        assert(wrapper.props().message, "数字を入力してください");
+      });
+    });
 
-  function fizzBuzzDown() {
-    if (fizzBuzzUpDownCount === 0) {
-      fizzBuzzUpDownCount = 0;
-    } else {
-      fizzBuzzUpDownCount -= 1;
-    }
-    const target = document.getElementById("updown");
-    const count = fizzBuzzUpDownCount;
-    target.innerHTML = fizzBuzz(count);
-  }
+    suite("FizzBuzzUpDownTest", () => {
+      test("+を押したら1を表示する", () => {
+        const wrapper = shallowMount(FizzBuzzUpDown, {
+          propsData: {
+            count: 0
+          }
+        });
+        wrapper.find("#fizz-buzz-component__button--up").trigger("click");
+        assert(wrapper.props().message, 1);
+      });
+      test("-を押したらFizzBuzzを表示する", () => {
+        const wrapper = shallowMount(FizzBuzzUpDown, {
+          propsData: {
+            count: 0
+          }
+        });
+        wrapper.find("#fizz-buzz-component__button--down").trigger("click");
+        assert(wrapper.props().message, "FizzBuzz");
+      });
+    });
 
-  function fizzBuzzPrint() {
-    const value = document.getElementById("input").value;
-    const target = document.getElementById("print");
-    if (isNaN(value)) {
-      target.innerHTML = "数字を入れてください。";
-    } else {
-      target.innerHTML = fizzBuzz(value);
-    }
-  }
+    suite("FizzBuzzIterateTest", () => {
+      test("10を入力したらテーブルを表示する", () => {
+        const wrapper = shallowMount(FizzBuzzIterate, {
+          propsData: {
+            input: 10
+          }
+        });
+        wrapper.find("#fizz-buzz-component__button--iterate").trigger("click");
+        assert(wrapper.props().output, "<table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead><tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr></tbody></table>");
+      });
+      test("数字以外を入力したらエラーメッセージを表示する", () => {
+        const wrapper = shallowMount(FizzBuzzIterate, {
+          propsData: {
+            input: "a"
+          }
+        });
+        wrapper.find("#fizz-buzz-component__button--iterate").trigger("click");
+        assert(wrapper.props().output, "数字を入力してください");
+      });
+    });
+  });
 
-  function fizzBuzzCall() {
-    const value = document.getElementById("call").value;
-    if (isNaN(value)) {
-      alert("数字を入れてください。");
-    } else {
-      alert(fizzBuzz(value));
-    }
-  }
+  mocha.run();
 
-  const COUNT = 100;
-
-  function iterate(count) {
-    let number = 1;
-    let array = [];
-
-    while (number <= count) {
-      array.push(fizzBuzz(number));
-      number++;
-    }
+  // Model
+  function iterate(number) {
+    const array = [];
+    [...Array(number).keys()].map((count) => {
+      array.push(fizzBuzz(count + 1));
+    });
     return array;
   }
 
-  function execute() {
-    iterate(COUNT).forEach(function(value) {
-      console.log(value);
+  function print() {
+    iterate(100).forEach((each) => {
+      console.log(each);
     });
   }
 
-  // Domain
+  function isFizz(number) {
+    return number % 3 === 0;
+  }
+
+  function isBuzz(number) {
+    return number % 5 === 0;
+  }
+
   function fizzBuzz(number) {
-    if (number % 3 === 0 && number % 5 === 0) {
-      return "FizzBuzz";
-    } else if (number % 3 === 0) {
-      return "Fizz";
-    } else if (number % 5 === 0) {
-      return "Buzz";
-    } else {
-      return number;
-    }
+    if (isFizz(number) && isBuzz(number)) return "FizzBuzz";
+    if (isFizz(number)) return "Fizz";
+    if (isBuzz(number)) return "Buzz";
+    return number;
   }
 
-  // Test
-  function test1から100までプリントする() {
-    const array = iterate(100);
-    assert(1, array[0]);
-    assert("Buzz", array[99]);
+  print();
+
+  // ViewModel
+  const MESSAGE_ERROR_NUMBER = "数字を入力してください";
+  const MESSAGE_ERROR_MAX_NUMBER = "100を超える数字は入力できません";
+
+  function renderHtmlTable(array) {
+    const maxColumn = 10;
+    let columnCount = 1;
+    let html = "<table>";
+    html += "<thead>";
+    [...Array(maxColumn).keys()].forEach((v) => {
+      html += `<th>${v + 1}</th>`;
+    });
+    html += "</thead>";
+    html += "<tbody>";
+    html += "<tr>";
+    array.forEach((v) => {
+      if (columnCount < maxColumn) {
+        html += `<td>${v}</td>`;
+        columnCount += 1;
+      } else {
+        html += `<td>${v}</td>`;
+        html += "</tr>";
+        columnCount = 1;
+      }
+    });
+    html += "</tbody>";
+    html += "</table>";
+    return html;
   }
 
-  function test3で割り切れる場合はFizzを返す() {
-    assert("Fizz", fizzBuzz(3));
-    assert(1, fizzBuzz(1));
-  }
+  const FizzBuzzMenu = Vue.component("fizz-buzz-menu", {
+    data() {
+      return {
+        callParams: {"call": "block", "print": "none", "updown": "none", "iterate": "none"},
+        printParams: {"call": "none", "print": "block", "updown": "none", "iterate": "none"},
+        updownParams: {"call": "none", "print": "none", "updown": "block", "iterate": "none"},
+        iterateParams: {"call": "none", "print": "none", "updown": "none", "iterate": "block"}
+      };
+    },
 
-  function test5で割り切れる場合はBuzzを返す() {
-    assert("Buzz", fizzBuzz(5));
-  }
+    methods: {
+      fizzBuzzMenuOnClick: function (params) {
+        document.querySelector("#fizz-buzz-component__article--call").style.display = params.call;
+        document.querySelector("#fizz-buzz-component__article--print").style.display = params.print;
+        document.querySelector("#fizz-buzz-component__article--up-down").style.display = params.updown;
+        document.querySelector("#fizz-buzz-component__article--iterate").style.display = params.iterate;
+      }
+    },
 
-  function test3または5で割り切れる場合はFizzBuzzを返す() {
-    assert("FizzBuzz", fizzBuzz(15));
-  }
+    template: `
+                <ul>
+                    <li><a href="index.html">FizzBuzz</a></li>
+                    <ul id="nav-component__sub-menu--fizz-buzz">
+                        <li id="nav-component__sub-menu--call" v-on:click="fizzBuzzMenuOnClick(callParams)">
+                            <a href="#">FizzBuzzCall</a>
+                        </li>
+                        <li id="nav-component__sub-menu--print" v-on:click="fizzBuzzMenuOnClick(printParams)">
+                            <a href="#">FizzBuzzPrint</a>
+                        </li>
+                        <li id="nav-component__sub-menu--up-down" v-on:click="fizzBuzzMenuOnClick(updownParams)">
+                            <a href="#">FizzBuzzUpDown</a>
+                        </li>
+                        <li id="nav-component__sub-menu--iterate" v-on:click="fizzBuzzMenuOnClick(iterateParams)">
+                            <a href="#">FizzBuzzIterate</a>
+                        </li>
+                    </ul>
+                </ul>
+          `
+  });
 
-  // exec test
-  test1から100までプリントする();
-  test3で割り切れる場合はFizzを返す();
-  test5で割り切れる場合はBuzzを返す();
-  test3または5で割り切れる場合はFizzBuzzを返す();
+  const FizzBuzzCall = Vue.component("fizz-buzz-call", {
+    props: {
+      input: {
+        type: Number,
+        require: true
+      },
+      output: {
+        type: String,
+        require: true
+      }
+    },
 
-  // exec program
-  execute();
+    methods: {
+      fizzBuzzCallOnClick: function () {
+        const value = Number.parseInt(this.input);
+        if (isNaN(value)) {
+          this.output = MESSAGE_ERROR_NUMBER;
+          alert(this.output);
+        } else {
+          this.output = fizzBuzz(value);
+          alert(this.output);
+        }
+      },
+      fizzBuzzCallOnChange: function (event) {
+        this.input = event.target.value;
+      }
+    },
+
+    template: `
+          <article>
+          <h1>FizzBuzzCall</h1>
+          <input
+            id="fizz-buzz-component__input--call"
+            type="text"
+            v-bind:value="input"
+            v-on:change="fizzBuzzCallOnChange"
+            v-on:keyup.enter="fizzBuzzCallOnClick"
+          />
+          <input
+            id="fizz-buzz-component__button--call"
+            type="button"
+            value="Call"
+            v-on:click="fizzBuzzCallOnClick"
+          />
+          </article>
+          `
+  });
+
+  const FizzBuzzPrint = Vue.component("fizz-buzz-print", {
+    props: {
+      input: {
+        type: Number,
+        require: true
+      },
+      message: {
+        type: String,
+        require: true
+      }
+    },
+
+    methods: {
+      fizzBuzzPrintOnClick: function () {
+        const value = Number.parseInt(this.input);
+        if (isNaN(value)) {
+          this.message = MESSAGE_ERROR_NUMBER;
+        } else {
+          this.message = fizzBuzz(value);
+        }
+      },
+      fizzBuzzPrintOnChange: function (event) {
+        this.input = event.target.value;
+      }
+    },
+
+    template: `
+        <article>
+          <h1>FizzBuzzPrint</h1>
+          <div id="fizz-buzz-component__print--message">{{message}}</div>
+          <input
+            id="fizz-buzz-component__input--print"
+            type="text"
+            v-bind:value="input"
+            v-on:change="fizzBuzzPrintOnChange"
+            v-on:keyup.enter="fizzBuzzPrintOnClick"
+          />
+          <input
+            id="fizz-buzz-component__button--print"
+            type="button"
+            value="Print"
+            v-on:click="fizzBuzzPrintOnClick"
+          />
+        </article>
+          `
+  });
+
+  const FizzBuzzUpDown = Vue.component("fizz-buzz-up-down", {
+    props: {
+      count: {
+        type: Number,
+        require: true
+      },
+      message: {
+        type: String,
+        require: true
+      }
+    },
+
+    methods: {
+      fizzBuzzUpDownUp: function () {
+        let fizzBuzzUpDownCount = Number.parseInt(this.count);
+        fizzBuzzUpDownCount += 1;
+        const count = fizzBuzzUpDownCount;
+        this.message = fizzBuzz(count);
+        this.count = count;
+      },
+      fizzBuzzUpDownDown: function () {
+        let fizzBuzzUpDownCount = Number.parseInt(this.count);
+        if (fizzBuzzUpDownCount === 0) {
+          this.count = 0;
+        } else {
+          fizzBuzzUpDownCount -= 1;
+        }
+        const count = fizzBuzzUpDownCount;
+        this.message = fizzBuzz(count);
+        this.count = count;
+      }
+
+    },
+
+    template: `
+        <article>
+          <h1>FizzBuzzUpDown</h1>
+          <div id="fizz-buzz-component__up-down--message">{{this.message}}</div>
+          <input
+            id="fizz-buzz-component__button--down"
+            type="button"
+            value="-"
+            v-on:click="fizzBuzzUpDownDown"
+          />
+          <input
+            id="fizz-buzz-component__button--up"
+            type="button"
+            value="+"
+            v-on:click="fizzBuzzUpDownUp"
+          />
+        </article>
+          `
+  });
+
+  const FizzBuzzIterate = Vue.component("fizz-buzz-iterate", {
+    props: {
+      input: {
+        type: Number,
+        require: true
+      },
+      output: {
+        type: String
+      }
+    },
+
+    methods: {
+      fizzBuzzIterateOnChange: function () {
+        this.input = event.target.value;
+      },
+      fizzBuzzIterateOnClick: function (event) {
+        const value = Number.parseInt(this.input);
+        if (isNaN(value)) return this.output = MESSAGE_ERROR_NUMBER;
+        if (value > 100) return this.output = MESSAGE_ERROR_MAX_NUMBER;
+        this.output = renderHtmlTable(iterate(value));
+      }
+    },
+
+    template: `
+        <article>
+          <h1>FizzBuzzIterate</h1>
+          <input
+            id="fizz-buzz-component__input--iterate"
+            type="text"
+            v-on:change="fizzBuzzIterateOnChange"
+            v-on:keyup.enter="fizzBuzzIterateOnClick"
+          />
+          <input
+            id="fizz-buzz-component__button--iterate"
+            type="button"
+            value="execute"
+            v-on:click="fizzBuzzIterateOnClick"
+          />
+          <div id="fizz-buzz-component__iterate--result" v-html="output"/>
+        </article>
+          `
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    new Vue({
+      el: "#menu",
+      template: `
+            <fizz-buzz-menu/>
+            `
+    });
+    new Vue({
+      el: "#app",
+      template: `
+            <div>
+            <fizz-buzz-call id="fizz-buzz-component__article--call"/>
+            <fizz-buzz-print id="fizz-buzz-component__article--print"/>
+            <fizz-buzz-up-down id="fizz-buzz-component__article--up-down" count=0 message="Ready"/>
+            <fizz-buzz-iterate id="fizz-buzz-component__article--iterate"/>
+            </div>
+            `
+    });
+  });
 </script>
+
+</body>
+
+</html>
