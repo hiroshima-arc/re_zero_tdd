@@ -39,13 +39,17 @@
                 array[i] = i;
             }
             return array;
-        };
+        }
 
         function fizzBuzz(number) {
             var result = number;
-            if (result % 3 === 0) {
+
+            if (number % 3 === 0) {
                 result = "Fizz";
+            } else if (number % 5 === 0) {
+                result = "Buzz";
             }
+
             return result;
         }
     </script>
@@ -60,11 +64,15 @@
                 var array = printNumber();
                 assert.equal(1, array[1]);
                 assert.equal(100, array[100]);
-            });
+            })
 
             test("3で割り切れる場合はFizzをプリントする", ()=> {
                 assert.equal("Fizz", fizzBuzz(3));
                 assert.equal(1, fizzBuzz(1));
+            })
+
+            test("5で割り切れる場合はBuzzをプリントする", () => {
+                assert.equal("Buzz", fizzBuzz(5));
             })
         });
 
