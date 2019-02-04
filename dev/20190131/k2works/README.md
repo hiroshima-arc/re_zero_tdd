@@ -2,7 +2,7 @@
 
 ## 概要
 
-JavaScript の最小テスト
+トランスパイラ・バンドラを使わずブラウザとテキストエディタのみで実装するSPAテスト駆動開発
 
 ### 参加メンバー
 
@@ -32,6 +32,9 @@ http://localhost:35729/
 
 ### ふりかえり
 
+- モダンブラウザならコンポーネントのテストまでできることがわかった。
+- フロントエンドにはReactよりVueのほうが理解しやすいかもしれない。
+
 #### Keep
 
 #### Problem
@@ -42,3 +45,7 @@ http://localhost:35729/
 - [どうしてプログラマに・・・プログラムが書けないのか?](http://www.aoky.net/articles/jeff_atwood/why_cant_programmers_program.htm)
 - [【Vue.js】【TDD】ブラウザだけでVueテストを書きましょう](https://qiita.com/webpack_master/items/1219b61eb0dd924cb1b8)
 - [ブラウザのリロードを自動化するLiveReloadの導入方法](https://blog.nzakr.com/use-livereload/)
+- [Vue.js](https://jp.vuejs.org/)
+- [Vue Test Utils](https://vue-test-utils.vuejs.org/ja/)
+- [Mocha](https://mochajs.org/)
+- [Chai](https://www.chaijs.com/)
