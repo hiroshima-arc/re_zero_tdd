@@ -28,7 +28,7 @@
 npm install -g livereloadx
 livereloadx -s
 ```
-http://localhost:35729/
+[http://localhost:35729/](http://localhost:35729/)
 
 ### ふりかえり
 
