@@ -14,7 +14,7 @@
     <script src="https://cdn.rawgit.com/vuejs/vue/dev/packages/vue-template-compiler/browser.js"></script>
     <script src="https://cdn.rawgit.com/vuejs/vue-test-utils/dev/packages/test-utils/dist/vue-test-utils.iife.js"></script>
     <script>
-        mocha.setup("bdd");
+        mocha.setup("tdd");
     </script>
     <style type="text/css">
         body {
@@ -118,8 +118,8 @@
             }
         }
 
-        describe("FizzBuzzTest", () => {
-            it("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
+        suite("FizzBuzzTest", () => {
+            test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
                 const array = iterate(100);
 
                 assert(array[0], 1);
@@ -128,25 +128,25 @@
                 assert(array[14], 'FizzBuzz');
             });
 
-            it("3で割り切れる場合はFizzをプリントする", () => {
+            test("3で割り切れる場合はFizzをプリントする", () => {
                 assert(fizzBuzz(3), 'Fizz');
                 assert(fizzBuzz(1), 1);
             });
 
-            it("5で割り切れる場合はBuzzをプリントする", () => {
+            test("5で割り切れる場合はBuzzをプリントする", () => {
                 assert(fizzBuzz(5), 'Buzz');
             });
 
-            it("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+            test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
                 assert(fizzBuzz(15), 'FizzBuzz');
             });
         });
 
-        describe("FizzBuzzComponentTest", () => {
+        suite("FizzBuzzComponentTest", () => {
           const { shallowMount } = VueTestUtils;
 
-          describe("FizzBuzzCallTest", () => {
-            it("3を入力したらFizzを表示する", () => {
+          suite("FizzBuzzCallTest", () => {
+            test("3を入力したらFizzを表示する", () => {
               const wrapper = shallowMount(FizzBuzzCall, {
                 propsData: {
                   input: 3
@@ -155,7 +155,7 @@
               wrapper.find("#fizz-buzz-component__button--call").trigger('click');
               assert(wrapper.props().output, 'Fizz');
             });
-            it("数字以外を入力したらエラーメッセージを表示する", () => {
+            test("数字以外を入力したらエラーメッセージを表示する", () => {
               const wrapper = shallowMount(FizzBuzzCall, {
                 propsData: {
                   input: "a"
@@ -166,8 +166,8 @@
             });
           });
 
-          describe("FizzBuzzPrintTest", () => {
-            it("5を入力したらBuzzを表示する", () => {
+          suite("FizzBuzzPrintTest", () => {
+            test("5を入力したらBuzzを表示する", () => {
               const wrapper = shallowMount(FizzBuzzPrint, {
                 propsData: {
                   input: 5
@@ -176,7 +176,7 @@
               wrapper.find("#fizz-buzz-component__button--print").trigger('click');
               assert(wrapper.props().message, 'Buzz');
             });
-            it("数字以外を入力したらエラーメッセージを表示する", () => {
+            test("数字以外を入力したらエラーメッセージを表示する", () => {
               const wrapper = shallowMount(FizzBuzzPrint, {
                 propsData: {
                   input: "a"
@@ -187,8 +187,8 @@
             });
           });
 
-          describe("FizzBuzzUpDownTest", () => {
-            it("+を押したら1を表示する", () => {
+          suite("FizzBuzzUpDownTest", () => {
+            test("+を押したら1を表示する", () => {
               const wrapper = shallowMount(FizzBuzzUpDown, {
                 propsData: {
                   count: 0
@@ -197,7 +197,7 @@
               wrapper.find("#fizz-buzz-component__button--up").trigger('click');
               assert(wrapper.props().message, 1);
             });
-            it("-を押したらFizzBuzzを表示する", () => {
+            test("-を押したらFizzBuzzを表示する", () => {
               const wrapper = shallowMount(FizzBuzzUpDown, {
                 propsData: {
                   count: 0
@@ -208,8 +208,8 @@
             });
           });
 
-          describe("FizzBuzzIterateTest", () => {
-            it("10を入力したらテーブルを表示する", () => {
+          suite("FizzBuzzIterateTest", () => {
+            test("10を入力したらテーブルを表示する", () => {
               const wrapper = shallowMount(FizzBuzzIterate, {
                 propsData: {
                   input: 10
@@ -218,7 +218,7 @@
               wrapper.find("#fizz-buzz-component__button--iterate").trigger('click');
               assert(wrapper.props().output, "<table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead><tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr></tbody></table>");
             });
-            it("数字以外を入力したらエラーメッセージを表示する", () => {
+            test("数字以外を入力したらエラーメッセージを表示する", () => {
               const wrapper = shallowMount(FizzBuzzIterate, {
                 propsData: {
                   input: "a"
