@@ -35,8 +35,8 @@
         function printNumber() {
             var array = [];
             for (var i = 1; i <= 100; i++) {
-                console.log(i);
-                array[i] = i;
+                console.log(fizzBuzz(i));
+                array[i] = fizzBuzz(i);
             }
             return array;
         }
@@ -62,10 +62,10 @@
         const assert = chai.assert;
 
         suite("FizzBuzzTest", () => {
-            test("1から100までをプリントする", () => {
+            test("1から100までをプリントする、ただし3で割り切れる場合はFizzを5で割り切れる場合はBuzzを3と5で割り切れる場合はFizzBuzzをプリントする", () => {
                 var array = printNumber();
                 assert.equal(1, array[1]);
-                assert.equal(100, array[100]);
+                assert.equal("Buzz", array[100]);
             })
 
             test("3で割り切れる場合はFizzをプリントする", ()=> {
