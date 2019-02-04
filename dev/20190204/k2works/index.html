@@ -33,7 +33,7 @@
 
     <script>
         function fizzBuzz(number) {
-            var result = number;
+            let result = number;
 
             if (number % 3 === 0 && number % 5 === 0) {
                 result = "FizzBuzz"
@@ -47,7 +47,7 @@
         }
 
         function generateArray(count) {
-            var array = [];
+            const array = [];
             [...Array(count).keys()].map((number) => {array.push(fizzBuzz(number))});
             return array;
         }
