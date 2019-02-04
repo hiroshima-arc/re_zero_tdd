@@ -32,17 +32,19 @@
     </footer>
 
     <script>
+        function printNumber() {
+            return 100
+        };
+    </script>
+
+    <script>
         mocha.setup("tdd");
 
         const assert = chai.assert;
 
         suite("FizzBuzzTest", () => {
-            test("成功する", () => {
-                assert.equal(1, 1);
-            });
-
-            test("失敗する", () => {
-                assert.equal(1, 2);
+            test("1から100までをプリントする", () => {
+                assert.equal(100, printNumber());
             });
         });
 
