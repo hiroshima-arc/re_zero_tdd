@@ -40,6 +40,10 @@
             }
             return array;
         };
+
+        function fizzBuzz(number) {
+            return "Fizz";
+        }
     </script>
 
     <script>
@@ -53,6 +57,10 @@
                 assert.equal(1, array[1]);
                 assert.equal(100, array[100]);
             });
+
+            test("3で割り切れる場合はFizzをプリントする", ()=> {
+                assert.equal("Fizz", fizzBuzz(3));
+            })
         });
 
         mocha.run();
