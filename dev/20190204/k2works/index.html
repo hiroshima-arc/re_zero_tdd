@@ -32,12 +32,18 @@
     </footer>
 
     <script>
+        function isFizz(number) {
+            return number % 3 === 0;
+        }
+
+        function isBuzz(number) {
+            return number % 5 === 0;
+        }
+
         function fizzBuzz(number) {
-            const fizz = number % 3 === 0;
-            const buzz = number % 5 === 0;
-            if (fizz && buzz) return "FizzBuzz";
-            if (fizz) return "Fizz";
-            if (buzz) return "Buzz";
+            if (isFizz(number) && isBuzz(number)) return "FizzBuzz";
+            if (isFizz(number)) return "Fizz";
+            if (isBuzz(number)) return "Buzz";
             return number;
         }
 
