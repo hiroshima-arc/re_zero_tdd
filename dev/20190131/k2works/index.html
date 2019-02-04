@@ -8,6 +8,7 @@
     <title>Re:ゼロから始めるテスト駆動開発</title>
     <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
     <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=2"></' + 'script>')</script>
     <script src="https://cdn.rawgit.com/vuejs/vue/dev/dist/vue.min.js"></script>
     <script src="https://cdn.rawgit.com/vuejs/vue/dev/packages/vue-template-compiler/browser.js"></script>
@@ -108,14 +109,7 @@
         <address>hiroshima.arc@gmail.com</address>
     </footer>
     <script>
-        function assert(actual, expected) {
-            const message = `\nactual:` + actual + `\nexpected: ` + expected;
-            console.log(".");
-            console.assert(expected === actual, message);
-            if (expected !== actual) {
-                throw Error(message);
-            }
-        }
+        const assert = chai.assert;
 
         suite("FizzBuzzTest", () => {
             test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
