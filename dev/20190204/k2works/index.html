@@ -33,7 +33,9 @@
 
     <script>
         function printNumber() {
-            return 100
+            var array = [];
+            array[100] = 100;
+            return array;
         };
     </script>
 
@@ -44,7 +46,8 @@
 
         suite("FizzBuzzTest", () => {
             test("1から100までをプリントする", () => {
-                assert.equal(100, printNumber());
+                var array = printNumber();
+                assert.equal(100, array[100]);
             });
         });
 
