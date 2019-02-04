@@ -42,7 +42,11 @@
         };
 
         function fizzBuzz(number) {
-            return "Fizz";
+            var result = number;
+            if (result % 3 === 0) {
+                result = "Fizz";
+            }
+            return result;
         }
     </script>
 
