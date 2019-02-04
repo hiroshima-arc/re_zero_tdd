@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script>
+        mocha.setup("bdd");
+    </script>
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+</head>
+
+<body>
+    <h1>HTML5+CSS+JavaScript with TDD</h1>
+    <header>
+        <nav>
+            <h1>Menu</h1>
+            <ul>
+                <li><a href="index.html">FizzBuzz</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h1>FizzBuzz</h1>
+        <article>
+            <div id="mocha"></div>
+        </article>
+    </section>
+</body>
+
+<script>
+    function assert(actual, expected) {
+        const message = `\nacutual:` + actual + `\nexpected:` + expected;
+        console.log(".");
+        console.assert(expected === actual, message);
+        if (expected !== actual) {
+            throw Error(message);
+        }
+    }
+
+    describe("FizzBuzzTest", () => {
+        it("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzz", () => {
+            var array = createArray();
+            assert(array[1], 1);
+            assert(array[3], 'Fizz');
+            assert(array[5], 'Buzz');
+            assert(array[15], 'FizzBuzz');
+            assert(array[100], 'Buzz');
+        });
+
+        it("3で割り切れる場合はFizzをプリントする", () => {
+            assert(fizzBuzz(3), 'Fizz');
+        });
+
+        it("5で割り切れる場合はBuzzをプリントする", () => {
+            assert(fizzBuzz(5), 'Buzz');
+        });
+
+        it("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+            assert(fizzBuzz(15), 'FizzBuzz');
+        });
+    });
+
+    mocha.run();
+
+    function print() {
+        const array = createArray();
+        for (each of array) {
+            console.log(each);
+        }
+    }
+
+    function createArray() {
+        const array = [];
+        [...Array(101).keys()].map((v) => {
+            array.push(fizzBuzz(v))
+        });
+        return array;
+    }
+
+    function isFizz(number) {
+        return number % 3 === 0
+    }
+
+    function isBuzz(number) {
+        return number % 5 === 0
+    }
+
+    function fizzBuzz(number) {
+        if (isFizz(number) && isBuzz(number)) return 'FizzBuzz';
+        if (isFizz(number)) return 'Fizz';
+        if (isBuzz(number)) return 'Buzz';
+        return number;
+    }
+
+    print();
+</script>
+<footer>
+    <p>Copyright</p>
+    <address>hiroshima.arc@gmail.com</address>
+</footer>
+
+</html>
