@@ -87,23 +87,10 @@
 
 <body>
 <h1>HTML5+CSS+JavaScript with TDD</h1>
-<div class="nav-component">
-    <header>
-        <nav>
-            <h1>Menu</h1>
-            <div id="menu"></div>
-        </nav>
-    </header>
-</div>
-<section>
-    <div class="fizz-buzz-component">
-        <h1>FizzBuzz</h1>
-        <div id="app"></div>
-        <article id="fizz-buzz-component__article--test">
-            <div id="mocha"></div>
-        </article>
-    </div>
-</section>
+<article id="fizz-buzz-component__article--test">
+    <div id="app"></div>
+    <div id="mocha"></div>
+</article>
 <footer>
     <p>Copyright</p>
     <address>hiroshima.arc@gmail.com</address>
@@ -263,6 +250,33 @@
   const MESSAGE_ERROR_NUMBER = "数字を入力してください";
   const MESSAGE_ERROR_MAX_NUMBER = "100を超える数字は入力できません";
 
+  const FizzBuzzTable = Vue.component("fizz-buzz-table", {
+    props: {
+      maxColumn: {
+        type: Number,
+        default: 10,
+      },
+      array: {
+        default: [],
+      }
+    },
+    computed: {
+      header() { return [...Array(this.maxColumn).keys()]; }
+    },
+    template: `
+    <table>
+      <thead>
+         <th v-for="i in header" :key="i">{{i}}</th>
+      </thead>
+        <tr v-for="row in array">
+         <td v-for="column in row">{{ column }}</td>
+       </tr>
+      <tbody>
+      </tbody>
+    </table>
+    `
+  });
+
   function renderHtmlTable(array) {
     const maxColumn = 10;
     let columnCount = 1;
@@ -290,38 +304,26 @@
   }
 
   const FizzBuzzMenu = Vue.component("fizz-buzz-menu", {
-    data() {
-      return {
-        callParams: {"call": "block", "print": "none", "updown": "none", "iterate": "none"},
-        printParams: {"call": "none", "print": "block", "updown": "none", "iterate": "none"},
-        updownParams: {"call": "none", "print": "none", "updown": "block", "iterate": "none"},
-        iterateParams: {"call": "none", "print": "none", "updown": "none", "iterate": "block"}
-      };
-    },
-
-    methods: {
-      fizzBuzzMenuOnClick: function (params) {
-        document.querySelector("#fizz-buzz-component__article--call").style.display = params.call;
-        document.querySelector("#fizz-buzz-component__article--print").style.display = params.print;
-        document.querySelector("#fizz-buzz-component__article--up-down").style.display = params.updown;
-        document.querySelector("#fizz-buzz-component__article--iterate").style.display = params.iterate;
-      }
+    props: {
+      onClick: {
+        type: Function,
+      },
     },
 
     template: `
                 <ul>
                     <li><a href="index.html">FizzBuzz</a></li>
                     <ul id="nav-component__sub-menu--fizz-buzz">
-                        <li id="nav-component__sub-menu--call" v-on:click="fizzBuzzMenuOnClick(callParams)">
+                        <li id="nav-component__sub-menu--call" v-on:click="onClick('call')">
                             <a href="#">FizzBuzzCall</a>
                         </li>
-                        <li id="nav-component__sub-menu--print" v-on:click="fizzBuzzMenuOnClick(printParams)">
+                        <li id="nav-component__sub-menu--print" v-on:click="onClick('print')">
                             <a href="#">FizzBuzzPrint</a>
                         </li>
-                        <li id="nav-component__sub-menu--up-down" v-on:click="fizzBuzzMenuOnClick(updownParams)">
+                        <li id="nav-component__sub-menu--up-down" v-on:click="onClick('up-down')">
                             <a href="#">FizzBuzzUpDown</a>
                         </li>
-                        <li id="nav-component__sub-menu--iterate" v-on:click="fizzBuzzMenuOnClick(iterateParams)">
+                        <li id="nav-component__sub-menu--iterate" v-on:click="onClick('iterate')">
                             <a href="#">FizzBuzzIterate</a>
                         </li>
                     </ul>
@@ -333,7 +335,8 @@
     props: {
       input: {
         type: Number,
-        require: true
+        require: true,
+        default: 0,
       },
       output: {
         type: String,
@@ -342,18 +345,15 @@
     },
 
     methods: {
-      fizzBuzzCallOnClick: function () {
-        const value = Number.parseInt(this.input);
-        if (isNaN(value)) {
+      fizzBuzzCallOnClick() {
+        console.log(this.input)
+        if (!this.input) {
           this.output = MESSAGE_ERROR_NUMBER;
           alert(this.output);
         } else {
-          this.output = fizzBuzz(value);
+          this.output = fizzBuzz(this.input);
           alert(this.output);
         }
-      },
-      fizzBuzzCallOnChange: function (event) {
-        this.input = event.target.value;
       }
     },
 
@@ -362,9 +362,8 @@
           <h1>FizzBuzzCall</h1>
           <input
             id="fizz-buzz-component__input--call"
-            type="text"
-            v-bind:value="input"
-            v-on:change="fizzBuzzCallOnChange"
+            type="number"
+            v-model.number="input"
             v-on:keyup.enter="fizzBuzzCallOnClick"
           />
           <input
@@ -390,17 +389,13 @@
     },
 
     methods: {
-      fizzBuzzPrintOnClick: function () {
-        const value = Number.parseInt(this.input);
-        if (isNaN(value)) {
+      fizzBuzzPrintOnClick () {
+        if (!this.input) {
           this.message = MESSAGE_ERROR_NUMBER;
         } else {
-          this.message = fizzBuzz(value);
+          this.message = fizzBuzz(this.input);
         }
       },
-      fizzBuzzPrintOnChange: function (event) {
-        this.input = event.target.value;
-      }
     },
 
     template: `
@@ -409,9 +404,8 @@
           <div id="fizz-buzz-component__print--message">{{message}}</div>
           <input
             id="fizz-buzz-component__input--print"
-            type="text"
-            v-bind:value="input"
-            v-on:change="fizzBuzzPrintOnChange"
+            type="number"
+            v-model.number="input"
             v-on:keyup.enter="fizzBuzzPrintOnClick"
           />
           <input
@@ -437,25 +431,18 @@
     },
 
     methods: {
-      fizzBuzzUpDownUp: function () {
-        let fizzBuzzUpDownCount = Number.parseInt(this.count);
-        fizzBuzzUpDownCount += 1;
-        const count = fizzBuzzUpDownCount;
-        this.message = fizzBuzz(count);
-        this.count = count;
+      fizzBuzzUpDownUp() {
+        this.count = this.count + 1;
+        this.message = fizzBuzz(this.count);
       },
-      fizzBuzzUpDownDown: function () {
-        let fizzBuzzUpDownCount = Number.parseInt(this.count);
-        if (fizzBuzzUpDownCount === 0) {
+      fizzBuzzUpDownDown() {
+        if (this.count <= 0) {
           this.count = 0;
         } else {
-          fizzBuzzUpDownCount -= 1;
+          this.count = this.count - 1;
         }
-        const count = fizzBuzzUpDownCount;
-        this.message = fizzBuzz(count);
-        this.count = count;
+        this.message = fizzBuzz(this.count);
       }
-
     },
 
     template: `
@@ -478,6 +465,15 @@
           `
   });
 
+  function split10(array)
+  {
+    const head = array.slice(0, 10);
+    const tail = array.slice(10);
+    if (tail.length > 0) {
+      return [head].concat(split10(tail));
+    }
+    return [head];
+  }
   const FizzBuzzIterate = Vue.component("fizz-buzz-iterate", {
     props: {
       input: {
@@ -488,16 +484,16 @@
         type: String
       }
     },
-
+    computed: {
+      array() {
+        return split10(iterate(this.input));
+      }
+    },
     methods: {
-      fizzBuzzIterateOnChange: function () {
-        this.input = event.target.value;
-      },
-      fizzBuzzIterateOnClick: function (event) {
-        const value = Number.parseInt(this.input);
-        if (isNaN(value)) return this.output = MESSAGE_ERROR_NUMBER;
-        if (value > 100) return this.output = MESSAGE_ERROR_MAX_NUMBER;
-        this.output = renderHtmlTable(iterate(value));
+      fizzBuzzIterateOnClick() {
+        if (!this.input) return this.output = MESSAGE_ERROR_NUMBER;
+        if (this.input > 100) return this.output = MESSAGE_ERROR_MAX_NUMBER;
+        this.output = renderHtmlTable(iterate(this.input));
       }
     },
 
@@ -506,8 +502,8 @@
           <h1>FizzBuzzIterate</h1>
           <input
             id="fizz-buzz-component__input--iterate"
-            type="text"
-            v-on:change="fizzBuzzIterateOnChange"
+            type="number"
+            v-model.number="input"
             v-on:keyup.enter="fizzBuzzIterateOnClick"
           />
           <input
@@ -516,6 +512,7 @@
             value="execute"
             v-on:click="fizzBuzzIterateOnClick"
           />
+          <fizz-buzz-table v-bind:array="array"/>
           <div id="fizz-buzz-component__iterate--result" v-html="output"/>
         </article>
           `
@@ -523,23 +520,39 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     new Vue({
-      el: "#menu",
-      template: `
-            <fizz-buzz-menu/>
-            `
-    });
-    new Vue({
       el: "#app",
+      data: {
+        menu: 'all',
+      },
+      methods: {
+        changeMenu(menu) {
+          this.menu = menu;
+        }
+      },
       template: `
-            <div>
-            <fizz-buzz-call id="fizz-buzz-component__article--call"/>
-            <fizz-buzz-print id="fizz-buzz-component__article--print"/>
-            <fizz-buzz-up-down id="fizz-buzz-component__article--up-down" count=0 message="Ready"/>
-            <fizz-buzz-iterate id="fizz-buzz-component__article--iterate"/>
+          <div>
+            <div class="nav-component">
+                <header>
+                    <nav>
+                        <h1>Menu</h1>
+                        <fizz-buzz-menu v-bind:onClick="changeMenu">
+                    </nav>
+                </header>
             </div>
-            `
+            <div>
+                 <h1>FizzBuzz</h1>
+                <div class="fizz-buzz-component">
+                        <fizz-buzz-call id="fizz-buzz-component__article--call" v-bind:input="0" v-if="menu == 'all' || menu == 'call'"/>
+                        <fizz-buzz-print id="fizz-buzz-component__article--print" v-bind:input="0" v-if="menu == 'all' || menu == 'print'"/>
+                        <fizz-buzz-up-down id="fizz-buzz-component__article--up-down" v-bind:count="0" message="Ready" v-if="menu == 'all' || menu == 'up-down'" />
+                        <fizz-buzz-iterate id="fizz-buzz-component__article--iterate" v-bind:input="0" v-if="menu == 'all' || menu == 'iterate'"/>
+                </div>
+            </div>
+          </div>
+        `,
     });
   });
+
 </script>
 
 </body>
