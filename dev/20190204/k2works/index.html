@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -76,11 +76,24 @@
       <h1>FizzBuzz</h1>
       <article>
         <h1>FizzBuzzForm</h1>
-        <form name="myForm">
+        <dvi class="__message"></dvi>
+        <form
+          class="__form"
+          onsubmit="return fizzBuzzFormSubmit(event)"
+          name="fizzBuzzForm"
+        >
           <fieldset>
-            <p>テキスト：<input type="text" size="20" name="inputText" />
+            <p class="__input--text">
+              テキスト：<input
+                type="text"
+                size="20"
+                name="inputText"
+                onchange="fizzBuzzFormText(event)"
+              />
+              <label class="--label"></label>
+            </p>
 
-            <p>
+            <p class="__input--radio">
               ラジオボタン：
               <input
                 type="radio"
@@ -88,46 +101,87 @@
                 id="inputRadio1"
                 value="1"
                 checked
-              /><label for="inputRadio1">選択1</label>
+                onclick="fizzBuzzFormRadio(event)"
+              /><label for="inputRadio1">1</label>
               <input
                 type="radio"
                 name="inputRadio"
                 id="inputRadio2"
-                value="2"
-              /><label for="inputRadio2">選択2</label>
+                value="3"
+                onclick="fizzBuzzFormRadio(event)"
+              /><label for="inputRadio2">3</label>
+              <input
+                type="radio"
+                name="inputRadio"
+                id="inputRadio3"
+                value="5"
+                onclick="fizzBuzzFormRadio(event)"
+              /><label for="inputRadio3">5</label>
+              <input
+                type="radio"
+                name="inputRadio"
+                id="inputRadio4"
+                value="15"
+                onclick="fizzBuzzFormRadio(event)"
+              /><label for="inputRadio4">15</label>
+              <label class="--label"></label>
             </p>
 
-            <p>
+            <p class="__input--checkbox">
               チェックボックス：
               <input
                 type="checkbox"
                 name="inputCheck"
                 id="inputCheck1"
                 value="1"
-                checked
-              /><label for="inputCheck1">選択1</label>
+                onclick="fizzBuzzFormCheckBox.onClick(event)"
+              /><label for="inputCheck1">1</label>
               <input
                 type="checkbox"
                 name="inputCheck"
                 id="inputCheck2"
-                value="2"
-              /><label for="inputCheck2">選択2</label>
+                value="3"
+                onclick="fizzBuzzFormCheckBox.onClick(event)"
+              /><label for="inputCheck2">3</label>
+              <input
+                type="checkbox"
+                name="inputCheck"
+                id="inputCheck3"
+                value="5"
+                onclick="fizzBuzzFormCheckBox.onClick(event)"
+              /><label for="inputCheck2">5</label>
+              <input
+                type="checkbox"
+                name="inputCheck"
+                id="inputCheck4"
+                value="15"
+                onclick="fizzBuzzFormCheckBox.onClick(event)"
+              /><label for="inputCheck2">15</label>
+              <label class="--label"></label>
             </p>
 
-            <p>
+            <p class="__input--password-text">
               パスワード：<input
                 type="password"
                 size="20"
                 name="inputPassword"
+                onchange="fizzBuzzFormPasswordText(event)"
               />
+              <label class="--label"></label>
             </p>
 
-            <p>
-              セレクト：<select size="1" name="selectbox">
-                <option>選択1</option>
-                <option>選択2</option>
-                <option>選択3</option>
+            <p class="__input--select">
+              セレクト：<select
+                size="1"
+                name="selectbox"
+                onchange="fizzBuzzFormSelect.onChange(event)"
+              >
+                <option>1</option>
+                <option>3</option>
+                <option>5</option>
+                <option>15</option>
               </select>
+              <label class="--label"></label>
             </p>
 
             <p>
@@ -135,12 +189,25 @@
                 rows="4"
                 cols="40"
                 name="textarea"
+                class="__input--text-area"
               ></textarea>
             </p>
 
-            <p>ボタン：<button type="button" name="button">ボタン</button></p>
             <p>
-              リセットボタン：<button type="reset" name="buttonSubmit">
+              ボタン：<button
+                type="button"
+                name="button"
+                onclick="fizzBuzzFormTextArea()"
+              >
+                ボタン
+              </button>
+            </p>
+            <p>
+              リセットボタン：<button
+                type="reset"
+                name="buttonSubmit"
+                onclick="fizzBuzzFormReset()"
+              >
                 リセット
               </button>
             </p>
@@ -219,6 +286,156 @@
       });
 
       mocha.run();
+    </script>
+
+    <script>
+      function fizzBuzzFormText(event) {
+        const value = event.target.value;
+        const label = document.querySelector(
+          ".fizz-buzz-component .__input--text .--label"
+        );
+        label.innerHTML = fizzBuzz(value);
+      }
+
+      function fizzBuzzFormRadio(event) {
+        const value = event.target.value;
+        const label = document.querySelector(
+          ".fizz-buzz-component .__input--radio .--label"
+        );
+        label.innerHTML = fizzBuzz(value);
+      }
+
+      function createFizzBuzzFormCheckBox() {
+        let value = 0;
+        return {
+          onClick(event) {
+            if (event.target.checked) {
+              value += Number.parseInt(event.target.value);
+            } else {
+              value -= Number.parseInt(event.target.value);
+            }
+            const label = document.querySelector(
+              ".fizz-buzz-component .__input--checkbox .--label"
+            );
+            label.innerHTML = fizzBuzz(value);
+          }
+        };
+      }
+      const fizzBuzzFormCheckBox = createFizzBuzzFormCheckBox();
+
+      function fizzBuzzFormPasswordText(event) {
+        const value = event.target.value;
+        const label = document.querySelector(
+          ".fizz-buzz-component .__input--password-text .--label"
+        );
+        label.innerHTML = fizzBuzz(value);
+      }
+
+      function createFizzBuzzFormSelect() {
+        let value = 0;
+        return {
+          onChange(event) {
+            value = event.target.value;
+            const label = document.querySelector(
+              ".fizz-buzz-component .__input--select .--label"
+            );
+            label.innerHTML = fizzBuzz(value);
+          }
+        };
+      }
+      const fizzBuzzFormSelect = createFizzBuzzFormSelect();
+
+      function fizzBuzzFormTextArea() {
+        const array = document
+          .querySelector(".fizz-buzz-component .__input--text-area")
+          .value.split("\n");
+        const convertArray = [];
+        array.map(v => {
+          convertArray.push(fizzBuzz(v));
+        });
+        alert(convertArray);
+      }
+
+      function fizzBuzzFormReset(event) {
+        const label1 = document.querySelector(
+          ".fizz-buzz-component .__input--text .--label"
+        );
+        const label2 = document.querySelector(
+          ".fizz-buzz-component .__input--radio .--label"
+        );
+        const label3 = document.querySelector(
+          ".fizz-buzz-component .__input--checkbox .--label"
+        );
+        const label4 = document.querySelector(
+          ".fizz-buzz-component .__input--password-text .--label"
+        );
+        const label5 = document.querySelector(
+          ".fizz-buzz-component .__input--select .--label"
+        );
+        const message = document.querySelector(
+          ".fizz-buzz-component .__message"
+        );
+
+        label1.innerHTML = "";
+        label2.innerHTML = "";
+        label3.innerHTML = "";
+        label4.innerHTML = "";
+        label5.innerHTML = "";
+        message.innerHTML = "";
+      }
+
+      function fizzBuzzFormSubmit(event) {
+        if (window.confirm("送信してよろしいですか?")) {
+          let params = {};
+          let textParams;
+          let checkParams;
+          let checkBoxParams = [];
+          let passwordParams;
+          let textAreaParams;
+
+          const forms = document.forms["fizzBuzzForm"];
+          for (var i = 0; i < forms.length; i++) {
+            let element = forms.elements[i];
+            if (element.type === "text") {
+              textParams = element.value;
+            }
+            if (element.type === "radio") {
+              if (element.checked) {
+                checkParams = element.value;
+              }
+            }
+            if (element.type === "checkbox") {
+              if (element.checked) {
+                checkBoxParams.push(element.value);
+              }
+            }
+            if (element.type === "password") {
+              passwordParams = element.value;
+            }
+            if (element.type === "textarea") {
+              textAreaParams = element.value;
+            }
+          }
+
+          params = {
+            text: textParams,
+            check: checkParams,
+            checkBox: checkBoxParams,
+            passwordText: passwordParams,
+            textArea: textAreaParams
+          };
+
+          console.log(params);
+          alert(JSON.stringify(params));
+          document.querySelector(".fizz-buzz-component .__message").innerHTML =
+            '<strong style="color:green">送信しました</strong>';
+          return event.preventDefault();
+        } else {
+          document.querySelector(".fizz-buzz-component .__message").innerHTML =
+            '<strong style="color:red">送信をキャンセルしました</strong>';
+          return false;
+        }
+      }
     </script>
   </body>
 </html>
