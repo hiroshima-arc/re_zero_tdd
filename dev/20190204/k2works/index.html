@@ -315,9 +315,15 @@
       document.addEventListener("DOMContentLoaded", () => {
         new Vue({
           el: "#app",
+          data: {
+            styleObject: {
+              color: 'red',
+              fontSize: '50px'
+            }
+          },
           template: `
                 <div>
-                  <counter>
+                  <counter v-bind:style="styleObject">
                 </div>
               `
         });
