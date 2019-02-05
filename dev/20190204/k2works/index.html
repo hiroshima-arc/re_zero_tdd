@@ -458,6 +458,7 @@
           let checkParams;
           let checkBoxParams = [];
           let passwordParams;
+          let selectParams;
           let textAreaParams;
 
           const forms = document.forms["fizzBuzzForm"];
@@ -476,6 +477,10 @@
                 checkBoxParams.push(element.value);
               }
             }
+            if (element.name === "selectbox") {
+              let index = element.selectedIndex;
+              selectParams = element.options[index].value;
+            }
             if (element.type === "password") {
               passwordParams = element.value;
             }
@@ -489,6 +494,7 @@
             check: checkParams,
             checkBox: checkBoxParams,
             passwordText: passwordParams,
+            select: selectParams,
             textArea: textAreaParams
           };
 
