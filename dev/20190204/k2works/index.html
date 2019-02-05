@@ -11,6 +11,9 @@
     />
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue/dev/dist/vue.min.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue/dev/packages/vue-template-compiler/browser.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue-test-utils/dev/packages/test-utils/dist/vue-test-utils.iife.js"></script>
     <style type="text/css">
       body {
         width: 810px;
@@ -219,6 +222,7 @@
           </fieldset>
         </form>
       </article>
+      <div id="app"></div>
       <div id="mocha"></div>
     </section>
     <footer>
@@ -284,7 +288,70 @@
           assert.equal("FizzBuzz", fizzBuzz(15));
         });
       });
+    </script>
 
+    <script>
+      const Counter = Vue.component("counter", {
+        template: `
+              <div>
+                <span class="count">{{ count }}</span>
+                <button @click="increment">Increment</button>
+              </div>
+              `,
+
+        data() {
+          return {
+            count: 0
+          };
+        },
+
+        methods: {
+          increment() {
+            this.count++;
+          }
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        new Vue({
+          el: "#app",
+          template: `
+                <div>
+                  <counter>
+                </div>
+              `
+        });
+      });
+    </script>
+
+    <script>
+      mocha.setup("bdd");
+
+      const expect = chai.expect;
+
+      const { mount } = VueTestUtils;
+
+      describe("Counter", () => {
+        const wrapper = mount(Counter);
+
+        it("renders the correct markup", () => {
+          expect(wrapper.html()).contains('<span class="count">0</span>');
+        });
+
+        it("has a button", () => {
+          expect(wrapper.contains("button")).to.be.true;
+        });
+
+        it("button click should increment the count", () => {
+          expect(wrapper.vm.count).to.equal(0);
+          const button = wrapper.find("button");
+          button.trigger("click");
+          expect(wrapper.vm.count).to.equal(1);
+        });
+      });
+    </script>
+
+    <script>
       mocha.run();
     </script>
 
