@@ -76,8 +76,101 @@
       </nav>
     </header>
     <section class="fizz-buzz-component">
-      <h1>FizzBuzz</h1>
-      <article>
+      <div id="app"></div>
+      <div id="mocha"></div>
+    </section>
+    <footer>
+      <p>Copyright</p>
+      <address>hiroshiam.arc@gmail.com</address>
+    </footer>
+
+    <script>
+      function isFizz(number) {
+        return number % 3 === 0;
+      }
+
+      function isBuzz(number) {
+        return number % 5 === 0;
+      }
+
+      function fizzBuzz(number) {
+        if (isFizz(number) && isBuzz(number)) return "FizzBuzz";
+        if (isFizz(number)) return "Fizz";
+        if (isBuzz(number)) return "Buzz";
+        return number;
+      }
+
+      function generateArray(count) {
+        const array = [];
+        [...Array(count).keys()].map(number => {
+          array.push(fizzBuzz(number));
+        });
+        return array;
+      }
+
+      function printFizzBuzz() {
+        generateArray(101).forEach(value => {
+          console.log(value);
+        });
+      }
+
+      printFizzBuzz();
+    </script>
+
+    <script>
+      mocha.setup("tdd");
+
+      const assert = chai.assert;
+
+      suite("FizzBuzzTest", () => {
+        test("1から100までをプリントする、ただし3で割り切れる場合はFizzを5で割り切れる場合はBuzzを3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+          var array = generateArray(101);
+          assert.equal(1, array[1]);
+          assert.equal("Buzz", array[100]);
+        });
+
+        test("3で割り切れる場合はFizzをプリントする", () => {
+          assert.equal("Fizz", fizzBuzz(3));
+          assert.equal(1, fizzBuzz(1));
+        });
+
+        test("5で割り切れる場合はBuzzをプリントする", () => {
+          assert.equal("Buzz", fizzBuzz(5));
+        });
+
+        test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+          assert.equal("FizzBuzz", fizzBuzz(15));
+        });
+      });
+    </script>
+
+    <script>
+      const Counter = Vue.component("counter", {
+        template: `
+              <div>
+                <span class="count">{{ count }}</span>
+                <button @click="increment">Increment</button>
+              </div>
+              `,
+
+        data() {
+          return {
+            count: 0
+          };
+        },
+
+        methods: {
+          increment() {
+            this.count++;
+          }
+        }
+      });
+
+      const FizzBuzzForm = Vue.component("fizz-buzz-form", {
+        template:`
+        <div>
+        <h1>FizzBuzz</h1>
+        <article>
         <h1>FizzBuzzForm</h1>
         <dvi class="__message"></dvi>
         <form
@@ -222,108 +315,16 @@
           </fieldset>
         </form>
       </article>
-      <div id="app"></div>
-      <div id="mocha"></div>
-    </section>
-    <footer>
-      <p>Copyright</p>
-      <address>hiroshiam.arc@gmail.com</address>
-    </footer>
-
-    <script>
-      function isFizz(number) {
-        return number % 3 === 0;
-      }
-
-      function isBuzz(number) {
-        return number % 5 === 0;
-      }
-
-      function fizzBuzz(number) {
-        if (isFizz(number) && isBuzz(number)) return "FizzBuzz";
-        if (isFizz(number)) return "Fizz";
-        if (isBuzz(number)) return "Buzz";
-        return number;
-      }
-
-      function generateArray(count) {
-        const array = [];
-        [...Array(count).keys()].map(number => {
-          array.push(fizzBuzz(number));
-        });
-        return array;
-      }
-
-      function printFizzBuzz() {
-        generateArray(101).forEach(value => {
-          console.log(value);
-        });
-      }
-
-      printFizzBuzz();
-    </script>
-
-    <script>
-      mocha.setup("tdd");
-
-      const assert = chai.assert;
-
-      suite("FizzBuzzTest", () => {
-        test("1から100までをプリントする、ただし3で割り切れる場合はFizzを5で割り切れる場合はBuzzを3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-          var array = generateArray(101);
-          assert.equal(1, array[1]);
-          assert.equal("Buzz", array[100]);
-        });
-
-        test("3で割り切れる場合はFizzをプリントする", () => {
-          assert.equal("Fizz", fizzBuzz(3));
-          assert.equal(1, fizzBuzz(1));
-        });
-
-        test("5で割り切れる場合はBuzzをプリントする", () => {
-          assert.equal("Buzz", fizzBuzz(5));
-        });
-
-        test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-          assert.equal("FizzBuzz", fizzBuzz(15));
-        });
-      });
-    </script>
-
-    <script>
-      const Counter = Vue.component("counter", {
-        template: `
-              <div>
-                <span class="count">{{ count }}</span>
-                <button @click="increment">Increment</button>
-              </div>
-              `,
-
-        data() {
-          return {
-            count: 0
-          };
-        },
-
-        methods: {
-          increment() {
-            this.count++;
-          }
-        }
-      });
+      </div>
+        `
+      })
 
       document.addEventListener("DOMContentLoaded", () => {
         new Vue({
           el: "#app",
-          data: {
-            styleObject: {
-              color: 'red',
-              fontSize: '50px'
-            }
-          },
           template: `
                 <div>
-                  <counter v-bind:style="styleObject">
+                  <fizz-buzz-form>
                 </div>
               `
         });
@@ -335,7 +336,15 @@
 
       const expect = chai.expect;
 
-      const { mount } = VueTestUtils;
+      const { mount, shallowMount} = VueTestUtils;
+
+      describe("FizzBuzzFormComponent", () => {
+        const wrapper = shallowMount(FizzBuzzForm);
+
+        it("マークアップをレンダリングする", () => {
+          expect(wrapper.html()).contains('<h1>FizzBuzzForm</h1>');
+        });
+      });
 
       describe("Counter", () => {
         const wrapper = mount(Counter);
