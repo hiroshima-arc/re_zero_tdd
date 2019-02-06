@@ -178,9 +178,9 @@
         },
 
         methods: {
-          fizzBuzzFormText2: function(event) {
-            this.textInput = 3;
-            this.textInputValue = 'Fizz';
+          fizzBuzzFormText(event) {
+            this.textInput = event.target.value;
+            this.textInputValue = fizzBuzz(this.textInput);
           }
         },
 
@@ -201,8 +201,9 @@
                 type="text"
                 size="20"
                 name="inputText"
-                v-on:change="fizzBuzzFormText2(event)"
                 v-bind:value="textInput"
+                v-on:input="textInput = $event.target.value"
+                v-on:change="fizzBuzzFormText($event)"
               />
               <label class="--label">{{ this.textInputValue }}</label>
             </p>
@@ -396,14 +397,6 @@
     </script>
 
     <script>
-      function fizzBuzzFormText(event) {
-        const value = event.target.value;
-        const label = document.querySelector(
-          ".fizz-buzz-component .__input--text .--label"
-        );
-        label.innerHTML = fizzBuzz(value);
-      }
-
       function fizzBuzzFormRadio(event) {
         const value = event.target.value;
         const label = document.querySelector(
