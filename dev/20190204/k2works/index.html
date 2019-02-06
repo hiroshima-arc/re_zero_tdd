@@ -157,18 +157,18 @@
 
         data() {
           return {
-            textInput: '',
-            radioInput: '',
+            textInput: "",
+            radioInput: "",
             checkBoxInput: 0,
-            passwordTextInput: '',
+            passwordTextInput: "",
             selectInput: 0,
-            textAreaInput: '',
+            textAreaInput: "",
             styleObject: {
-              color: 'black',
-              'font-weight': 'bold'
+              color: "black",
+              "font-weight": "bold"
             },
-            message: ''
-          }
+            message: ""
+          };
         },
 
         methods: {
@@ -192,7 +192,7 @@
             this.passwordTextInput = event.target.value;
             this.passwordTextInputValue = fizzBuzz(this.passwordTextInput);
           },
-          fizzBuzzFormSelect(event){
+          fizzBuzzFormSelect(event) {
             this.selectInput = event.target.value;
             this.selectInputValue = fizzBuzz(this.selectInput);
           },
@@ -205,21 +205,21 @@
             alert(this.textAreaInputValue);
           },
           fizzBuzzFormReset(event) {
-            this.textInputValue = '';
-            this.radioInputValue = '';
-            this.checkBoxInputValue = '';
-            this.passwordTextInputValue = '';
-            this.selectInputValue = '';
+            this.textInputValue = "";
+            this.radioInputValue = "";
+            this.checkBoxInputValue = "";
+            this.passwordTextInputValue = "";
+            this.selectInputValue = "";
             this.textAreaInputValue = [];
-            this.textInput = '';
-            this.radioInput = '';
+            this.textInput = "";
+            this.radioInput = "";
             this.checkBoxInput = 0;
-            this.passwordTextInput = '';
+            this.passwordTextInput = "";
             this.selectInput = 0;
-            this.textAreaInput = '';
-            this.message = ''
+            this.textAreaInput = "";
+            this.message = "";
           },
-          fizzBuzzFormSubmit(){
+          fizzBuzzFormSubmit() {
             if (confirm("送信してよろしいですか?")) {
               const params = {
                 text: this.textInput,
@@ -232,182 +232,182 @@
 
               console.log(params);
               alert(JSON.stringify(params));
-              this.styleObject.color = 'green';
-              this.message = '送信しました';
+              this.styleObject.color = "green";
+              this.message = "送信しました";
             } else {
-              this.styleObject.color = 'red';
-              this.message = '送信をキャンセルしました';
+              this.styleObject.color = "red";
+              this.message = "送信をキャンセルしました";
               return false;
             }
-          },
+          }
         },
 
-        template:`
-        <div>
-        <h1>FizzBuzz</h1>
-        <article>
-        <h1>FizzBuzzForm</h1>
-        <div v-bind:style="styleObject">{{ this.message }}</div>
-        <form
-          class="__form"
-          v-on:submit.prevent="fizzBuzzFormSubmit()"
-          name="fizzBuzzForm"
-        >
-          <fieldset>
-            <p class="__input--text">
-              テキスト：<input
-                type="text"
-                size="20"
-                name="inputText"
-                v-bind:value="textInput"
-                v-on:input="textInput = $event.target.value"
-                v-on:change="fizzBuzzFormText($event)"
-              />
-              <label class="--label">{{ this.textInputValue }}</label>
-            </p>
-
-            <p class="__input--radio">
-              ラジオボタン：
-              <input
-                type="radio"
-                name="inputRadio"
-                id="inputRadio1"
-                v-bind:value="1"
-                v-on:click="fizzBuzzFormRadio(event)"
-              /><label for="inputRadio1">1</label>
-              <input
-                type="radio"
-                name="inputRadio"
-                id="inputRadio2"
-                v-bind:value="3"
-                v-on:click="fizzBuzzFormRadio(event)"
-              /><label for="inputRadio2">3</label>
-              <input
-                type="radio"
-                name="inputRadio"
-                id="inputRadio3"
-                v-bind:value="5"
-                v-on:click="fizzBuzzFormRadio(event)"
-              /><label for="inputRadio3">5</label>
-              <input
-                type="radio"
-                name="inputRadio"
-                id="inputRadio4"
-                v-bind:value="15"
-                v-on:click="fizzBuzzFormRadio(event)"
-              /><label for="inputRadio4">15</label>
-              <label class="--label">{{ this.radioInputValue }}</label>
-            </p>
-
-            <p class="__input--checkbox">
-              チェックボックス：
-              <input
-                type="checkbox"
-                name="inputCheck"
-                id="inputCheck1"
-                value="1"
-                v-on:click="fizzBuzzFormCheckBox($event)"
-              /><label for="inputCheck1">1</label>
-              <input
-                type="checkbox"
-                name="inputCheck"
-                id="inputCheck2"
-                value="3"
-                v-on:click="fizzBuzzFormCheckBox($event)"
-              /><label for="inputCheck2">3</label>
-              <input
-                type="checkbox"
-                name="inputCheck"
-                id="inputCheck3"
-                value="5"
-                v-on:click="fizzBuzzFormCheckBox($event)"
-              /><label for="inputCheck2">5</label>
-              <input
-                type="checkbox"
-                name="inputCheck"
-                id="inputCheck4"
-                value="15"
-                v-on:click="fizzBuzzFormCheckBox($event)"
-              /><label for="inputCheck2">15</label>
-              <label class="--label">{{ this.checkBoxInputValue }}</label>
-            </p>
-
-            <p class="__input--password-text">
-              パスワード：<input
-                type="password"
-                size="20"
-                name="inputPassword"
-                v-bind:value="passwordTextInput"
-                v-on:input="passwordTextInput = $event.target.value"
-                v-on:change="fizzBuzzFormPasswordText($event)"
-              />
-              <label class="--label">{{ this.passwordTextInputValue }}</label>
-            </p>
-
-            <p class="__input--select">
-              セレクト：<select
-                size="1"
-                name="selectbox"
-                v-on:change="fizzBuzzFormSelect(event)"
+        template: `
+              <div>
+              <h1>FizzBuzz</h1>
+              <article>
+              <h1>FizzBuzzForm</h1>
+              <div v-bind:style="styleObject">{{ this.message }}</div>
+              <form
+                class="__form"
+                v-on:submit.prevent="fizzBuzzFormSubmit()"
+                name="fizzBuzzForm"
               >
-                <option>1</option>
-                <option>3</option>
-                <option>5</option>
-                <option>15</option>
-              </select>
-              <label class="--label">{{ this.selectInputValue }}</label>
-            </p>
-
-            <p>
-              テキストエリア：<textarea
-                rows="4"
-                cols="40"
-                name="textarea"
-                class="__input--text-area"
-                v-bind:value="textAreaInput"
-                v-on:input="textAreaInput = $event.target.value"
-              ></textarea>
-            </p>
-
-            <p>
-              ボタン：<button
-                type="button"
-                name="button"
-                v-on:click="fizzBuzzFormTextArea()"
-              >
-                ボタン
-              </button>
-            </p>
-
-            <p>
-              リセットボタン：<button
-                type="reset"
-                name="buttonSubmit"
-                v-on:click="fizzBuzzFormReset()"
-              >
-                リセット
-              </button>
-            </p>
-            <p>
-              送信ボタン：<button type="submit" name="buttonSubmit">
-                送信
-              </button>
-            </p>
-          </fieldset>
-        </form>
-      </article>
-      </div>
-        `
-      })
+                <fieldset>
+                  <p class="__input--text">
+                    テキスト：<input
+                      type="text"
+                      size="20"
+                      name="inputText"
+                      v-bind:value="textInput"
+                      v-on:input="textInput = $event.target.value"
+                      v-on:change="fizzBuzzFormText($event)"
+                    />
+                    <label class="--label">{{ this.textInputValue }}</label>
+                  </p>
+      
+                  <p class="__input--radio">
+                    ラジオボタン：
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio1"
+                      v-bind:value="1"
+                      v-on:click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio1">1</label>
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio2"
+                      v-bind:value="3"
+                      v-on:click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio2">3</label>
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio3"
+                      v-bind:value="5"
+                      v-on:click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio3">5</label>
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio4"
+                      v-bind:value="15"
+                      v-on:click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio4">15</label>
+                    <label class="--label">{{ this.radioInputValue }}</label>
+                  </p>
+      
+                  <p class="__input--checkbox">
+                    チェックボックス：
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck1"
+                      value="1"
+                      v-on:click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck1">1</label>
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck2"
+                      value="3"
+                      v-on:click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck2">3</label>
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck3"
+                      value="5"
+                      v-on:click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck2">5</label>
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck4"
+                      value="15"
+                      v-on:click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck2">15</label>
+                    <label class="--label">{{ this.checkBoxInputValue }}</label>
+                  </p>
+      
+                  <p class="__input--password-text">
+                    パスワード：<input
+                      type="password"
+                      size="20"
+                      name="inputPassword"
+                      v-bind:value="passwordTextInput"
+                      v-on:input="passwordTextInput = $event.target.value"
+                      v-on:change="fizzBuzzFormPasswordText($event)"
+                    />
+                    <label class="--label">{{ this.passwordTextInputValue }}</label>
+                  </p>
+      
+                  <p class="__input--select">
+                    セレクト：<select
+                      size="1"
+                      name="selectbox"
+                      v-on:change="fizzBuzzFormSelect(event)"
+                    >
+                      <option>1</option>
+                      <option>3</option>
+                      <option>5</option>
+                      <option>15</option>
+                    </select>
+                    <label class="--label">{{ this.selectInputValue }}</label>
+                  </p>
+      
+                  <p>
+                    テキストエリア：<textarea
+                      rows="4"
+                      cols="40"
+                      name="textarea"
+                      class="__input--text-area"
+                      v-bind:value="textAreaInput"
+                      v-on:input="textAreaInput = $event.target.value"
+                    ></textarea>
+                  </p>
+      
+                  <p>
+                    ボタン：<button
+                      type="button"
+                      name="button"
+                      v-on:click="fizzBuzzFormTextArea()"
+                    >
+                      ボタン
+                    </button>
+                  </p>
+      
+                  <p>
+                    リセットボタン：<button
+                      type="reset"
+                      name="buttonSubmit"
+                      v-on:click="fizzBuzzFormReset()"
+                    >
+                      リセット
+                    </button>
+                  </p>
+                  <p>
+                    送信ボタン：<button type="submit" name="buttonSubmit">
+                      送信
+                    </button>
+                  </p>
+                </fieldset>
+              </form>
+            </article>
+            </div>
+              `
+      });
 
       document.addEventListener("DOMContentLoaded", () => {
         new Vue({
           el: "#app",
           template: `
-                <div>
-                  <fizz-buzz-form>
-                </div>
-              `
+                      <div>
+                        <fizz-buzz-form>
+                      </div>
+                    `
         });
       });
     </script>
@@ -417,41 +417,41 @@
 
       const expect = chai.expect;
 
-      const { mount, shallowMount} = VueTestUtils;
+      const { mount, shallowMount } = VueTestUtils;
 
       describe("FizzBuzzFormComponent", () => {
         const wrapper = shallowMount(FizzBuzzForm);
 
         it("マークアップをレンダリングする", () => {
-          expect(wrapper.html()).contains('<h1>FizzBuzzForm</h1>');
+          expect(wrapper.html()).contains("<h1>FizzBuzzForm</h1>");
         });
 
         it("テキストに3を入力したらFizzを表示する", () => {
           const textInput = wrapper.find('input[type="text"]');
           textInput.setValue(3);
           textInput.trigger("change");
-          expect(wrapper.vm.textInputValue).to.equal('Fizz');
+          expect(wrapper.vm.textInputValue).to.equal("Fizz");
         });
 
-        it("ラジオボタンの5を選択したらBuzzを表示する", ()=> {
-          const radioInput = wrapper.find('#inputRadio3');
+        it("ラジオボタンの5を選択したらBuzzを表示する", () => {
+          const radioInput = wrapper.find("#inputRadio3");
           radioInput.setChecked();
-          radioInput.trigger('click');
-          expect(wrapper.vm.radioInputValue).to.equal('Buzz');
+          radioInput.trigger("click");
+          expect(wrapper.vm.radioInputValue).to.equal("Buzz");
         });
 
         it("チェックボックスの15を選択したらFizzBuzzを表示する", () => {
-          const checkBoxInput = wrapper.findAll('input[type="checkbox"]')
+          const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
           checkBoxInput.at(3).setChecked();
-          checkBoxInput.at(3).trigger('click');
-          expect(wrapper.vm.checkBoxInputValue).to.equal('FizzBuzz');
+          checkBoxInput.at(3).trigger("click");
+          expect(wrapper.vm.checkBoxInputValue).to.equal("FizzBuzz");
         });
 
         xit("チェックボックスの1と15を選択したら16を表示する", () => {
-          const checkBoxInput = wrapper.findAll('input[type="checkbox"]')
+          const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
           checkBoxInput.at(0).setChecked();
           checkBoxInput.at(3).setChecked();
-          checkBoxInput.at(0).trigger('click');
+          checkBoxInput.at(0).trigger("click");
           expect(wrapper.vm.checkBoxInputValue).to.equal(-16);
         });
 
@@ -459,23 +459,28 @@
           const passwordTextInput = wrapper.find('input[type="password"]');
           passwordTextInput.setValue(15);
           passwordTextInput.trigger("change");
-          expect(wrapper.vm.passwordTextInputValue).to.equal('FizzBuzz');
+          expect(wrapper.vm.passwordTextInputValue).to.equal("FizzBuzz");
         });
 
         it("セレクトの5を選択したらBuzzを表示する", () => {
-          const select = wrapper.find('select');
+          const select = wrapper.find("select");
           select.setValue(5);
-          select.trigger('change');
-          expect(wrapper.vm.selectInputValue).to.equal('Buzz');
+          select.trigger("change");
+          expect(wrapper.vm.selectInputValue).to.equal("Buzz");
         });
 
         it("テキストエリアに1\n3\n5\n15を入力したら1\nFizz\nBuzz\nFizzBuzzを表示する", () => {
-          const textArea = wrapper.find('textarea');
-          textArea.setValue('1\n3\n5\n15');
-          textArea.trigger('change');
-          const button = wrapper.find('button[type="button"]')
-          button.trigger('click');
-          expect(wrapper.vm.textAreaInputValue).to.eql(['1', 'Fizz', 'Buzz', 'FizzBuzz']);
+          const textArea = wrapper.find("textarea");
+          textArea.setValue("1\n3\n5\n15");
+          textArea.trigger("change");
+          const button = wrapper.find('button[type="button"]');
+          button.trigger("click");
+          expect(wrapper.vm.textAreaInputValue).to.eql([
+            "1",
+            "Fizz",
+            "Buzz",
+            "FizzBuzz"
+          ]);
         });
 
         it("リセットボタンを押すと入力した値が消去される", () => {
@@ -484,39 +489,39 @@
           textInput.trigger("change");
           const radioInput = wrapper.findAll('input[type="radio"]');
           radioInput.at(0).setChecked();
-          const checkBoxInput = wrapper.findAll('input[type="checkbox"]')
+          const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
           checkBoxInput.at(3).setChecked();
-          checkBoxInput.at(3).trigger('click');
+          checkBoxInput.at(3).trigger("click");
           const passwordTextInput = wrapper.find('input[type="password"]');
           passwordTextInput.setValue(15);
           passwordTextInput.trigger("change");
-          const select = wrapper.find('select');
+          const select = wrapper.find("select");
           select.setValue(5);
-          select.trigger('change');
-          const textArea = wrapper.find('textarea');
-          textArea.setValue('1\n3\n5\n15');
-          textArea.trigger('change');
+          select.trigger("change");
+          const textArea = wrapper.find("textarea");
+          textArea.setValue("1\n3\n5\n15");
+          textArea.trigger("change");
 
           const button = wrapper.find('button[type="reset"]');
-          button.trigger('click');
+          button.trigger("click");
 
-          expect(wrapper.vm.textInput).to.equal('');
-          expect(wrapper.vm.textInputValue).to.equal('');
-          expect(wrapper.vm.radioInput).to.equal('');
-          expect(wrapper.vm.radioInputValue).to.equal('');
+          expect(wrapper.vm.textInput).to.equal("");
+          expect(wrapper.vm.textInputValue).to.equal("");
+          expect(wrapper.vm.radioInput).to.equal("");
+          expect(wrapper.vm.radioInputValue).to.equal("");
           expect(wrapper.vm.checkBoxInput).to.equal(0);
-          expect(wrapper.vm.checkBoxInputValue).to.equal('');
-          expect(wrapper.vm.passwordTextInput).to.equal('');
-          expect(wrapper.vm.passwordTextInputValue).to.equal('');
+          expect(wrapper.vm.checkBoxInputValue).to.equal("");
+          expect(wrapper.vm.passwordTextInput).to.equal("");
+          expect(wrapper.vm.passwordTextInputValue).to.equal("");
           expect(wrapper.vm.selectInput).to.equal(0);
-          expect(wrapper.vm.selectInputValue).to.equal('');
-          expect(wrapper.vm.textAreaInput).to.equal('');
+          expect(wrapper.vm.selectInputValue).to.equal("");
+          expect(wrapper.vm.textAreaInput).to.equal("");
           expect(wrapper.vm.textAreaInputValue).to.eql([]);
         });
 
         xit("送信ボタンを押すと確認ダイアログが表示される", () => {
           const button = wrapper.find('button[type="submit"]');
-          button.trigger('click');
+          button.trigger("click");
         });
       });
     </script>
