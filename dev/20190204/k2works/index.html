@@ -145,27 +145,6 @@
     </script>
 
     <script>
-      const Counter = Vue.component("counter", {
-        template: `
-              <div>
-                <span class="count">{{ count }}</span>
-                <button @click="increment">Increment</button>
-              </div>
-              `,
-
-        data() {
-          return {
-            count: 0
-          };
-        },
-
-        methods: {
-          increment() {
-            this.count++;
-          }
-        }
-      });
-
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
         props: {
           textInputValue: String,
@@ -540,32 +519,10 @@
           button.trigger('click');
         });
       });
-
-      describe("Counter", () => {
-        const wrapper = mount(Counter);
-
-        it("renders the correct markup", () => {
-          expect(wrapper.html()).contains('<span class="count">0</span>');
-        });
-
-        it("has a button", () => {
-          expect(wrapper.contains("button")).to.be.true;
-        });
-
-        it("button click should increment the count", () => {
-          expect(wrapper.vm.count).to.equal(0);
-          const button = wrapper.find("button");
-          button.trigger("click");
-          expect(wrapper.vm.count).to.equal(1);
-        });
-      });
     </script>
 
     <script>
       mocha.run();
-    </script>
-
-    <script>
     </script>
   </body>
 </html>
