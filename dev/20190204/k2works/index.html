@@ -171,7 +171,8 @@
           textInputValue: String,
           radioInputValue: String,
           checkBoxInputValue: String,
-          passwordTextInputValue: String
+          passwordTextInputValue: String,
+          selectInputValue: String
         },
 
         data() {
@@ -179,7 +180,8 @@
             textInput: '',
             radioInput: '',
             checkBoxInput: 0,
-            passwordTextInput: ''
+            passwordTextInput: '',
+            selectInput: 0
           }
         },
 
@@ -203,6 +205,10 @@
           fizzBuzzFormPasswordText(event) {
             this.passwordTextInput = event.target.value;
             this.passwordTextInputValue = fizzBuzz(this.passwordTextInput);
+          },
+          fizzBuzzFormSelect(event){
+            this.selectInput = event.target.value;
+            this.selectInputValue = fizzBuzz(this.selectInput);
           }
         },
 
@@ -312,14 +318,14 @@
               セレクト：<select
                 size="1"
                 name="selectbox"
-                onchange="fizzBuzzFormSelect.onChange(event)"
+                v-on:change="fizzBuzzFormSelect(event)"
               >
                 <option>1</option>
                 <option>3</option>
                 <option>5</option>
                 <option>15</option>
               </select>
-              <label class="--label"></label>
+              <label class="--label">{{ this.selectInputValue }}</label>
             </p>
 
             <p>
@@ -423,6 +429,13 @@
           expect(wrapper.vm.passwordTextInputValue).to.equal('FizzBuzz');
         });
 
+        it("セレクトの5を選択したらBuzzを表示する", () => {
+          const select = wrapper.find('select');
+          select.setValue(5);
+          select.trigger('change');
+          expect(wrapper.vm.selectInputValue).to.equal('Buzz');
+        });
+
       });
 
       describe("Counter", () => {
@@ -450,20 +463,6 @@
     </script>
 
     <script>
-      function createFizzBuzzFormSelect() {
-        let value = 0;
-        return {
-          onChange(event) {
-            value = event.target.value;
-            const label = document.querySelector(
-              ".fizz-buzz-component .__input--select .--label"
-            );
-            label.innerHTML = fizzBuzz(value);
-          }
-        };
-      }
-      const fizzBuzzFormSelect = createFizzBuzzFormSelect();
-
       function fizzBuzzFormTextArea() {
         const array = document
           .querySelector(".fizz-buzz-component .__input--text-area")
