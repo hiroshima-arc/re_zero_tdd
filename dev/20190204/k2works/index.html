@@ -170,14 +170,16 @@
         props: {
           textInputValue: String,
           radioInputValue: String,
-          checkBoxInputValue: String
+          checkBoxInputValue: String,
+          passwordTextInputValue: String
         },
 
         data() {
           return {
             textInput: '',
             radioInput: '',
-            checkBoxInput: 0
+            checkBoxInput: 0,
+            passwordTextInput: ''
           }
         },
 
@@ -197,6 +199,10 @@
               this.checkBoxInput -= Number.parseInt(event.target.value);
             }
             this.checkBoxInputValue = fizzBuzz(this.checkBoxInput);
+          },
+          fizzBuzzFormPasswordText(event) {
+            this.passwordTextInput = event.target.value;
+            this.passwordTextInputValue = fizzBuzz(this.passwordTextInput);
           }
         },
 
@@ -295,9 +301,11 @@
                 type="password"
                 size="20"
                 name="inputPassword"
-                onchange="fizzBuzzFormPasswordText(event)"
+                v-bind:value="passwordTextInput"
+                v-on:input="passwordTextInput = $event.target.value"
+                v-on:change="fizzBuzzFormPasswordText($event)"
               />
-              <label class="--label"></label>
+              <label class="--label">{{ this.passwordTextInputValue }}</label>
             </p>
 
             <p class="__input--select">
@@ -406,7 +414,15 @@
           checkBoxInput.at(3).setChecked();
           checkBoxInput.at(0).trigger('click');
           expect(wrapper.vm.checkBoxInputValue).to.equal(-16);
-        })
+        });
+
+        it("パスワードに15を入力したらFizzBuzzを表示する", () => {
+          const passwordTextInput = wrapper.find('input[type="password"]');
+          passwordTextInput.setValue(15);
+          passwordTextInput.trigger("change");
+          expect(wrapper.vm.passwordTextInputValue).to.equal('FizzBuzz');
+        });
+
       });
 
       describe("Counter", () => {
@@ -434,32 +450,6 @@
     </script>
 
     <script>
-      function createFizzBuzzFormCheckBox() {
-        let value = 0;
-        return {
-          onClick(event) {
-            if (event.target.checked) {
-              value += Number.parseInt(event.target.value);
-            } else {
-              value -= Number.parseInt(event.target.value);
-            }
-            const label = document.querySelector(
-              ".fizz-buzz-component .__input--checkbox .--label"
-            );
-            label.innerHTML = fizzBuzz(value);
-          }
-        };
-      }
-      //const fizzBuzzFormCheckBox = createFizzBuzzFormCheckBox();
-
-      function fizzBuzzFormPasswordText(event) {
-        const value = event.target.value;
-        const label = document.querySelector(
-          ".fizz-buzz-component .__input--password-text .--label"
-        );
-        label.innerHTML = fizzBuzz(value);
-      }
-
       function createFizzBuzzFormSelect() {
         let value = 0;
         return {
