@@ -183,7 +183,8 @@
             checkBoxInput: 0,
             passwordTextInput: '',
             selectInput: 0,
-            textAreaInput: ''
+            textAreaInput: '',
+            message: ''
           }
         },
 
@@ -219,6 +220,21 @@
               this.textAreaInputValue.push(fizzBuzz(v));
             });
             alert(this.textAreaInputValue);
+          },
+          fizzBuzzFormReset(event) {
+            this.textInputValue = '';
+            this.radioInputValue = '';
+            this.checkBoxInputValue = '';
+            this.passwordTextInputValue = '';
+            this.selectInputValue = '';
+            this.textAreaInputValue = [];
+            this.textInput = '';
+            this.radioInput = '';
+            this.checkBoxInput = 0;
+            this.passwordTextInput = '';
+            this.selectInput = 0;
+            this.textAreaInput = '';
+            this.message = ''
           }
         },
 
@@ -358,11 +374,12 @@
                 ボタン
               </button>
             </p>
+
             <p>
               リセットボタン：<button
                 type="reset"
                 name="buttonSubmit"
-                onclick="fizzBuzzFormReset()"
+                v-on:click="fizzBuzzFormReset()"
               >
                 リセット
               </button>
@@ -456,6 +473,42 @@
           button.trigger('click');
           expect(wrapper.vm.textAreaInputValue).to.eql(['1', 'Fizz', 'Buzz', 'FizzBuzz']);
         });
+
+        it("リセットボタンを押すと入力した値が消去される", () => {
+          const textInput = wrapper.find('input[type="text"]');
+          textInput.setValue(3);
+          textInput.trigger("change");
+          const radioInput = wrapper.findAll('input[type="radio"]');
+          radioInput.at(0).setChecked();
+          const checkBoxInput = wrapper.findAll('input[type="checkbox"]')
+          checkBoxInput.at(3).setChecked();
+          checkBoxInput.at(3).trigger('click');
+          const passwordTextInput = wrapper.find('input[type="password"]');
+          passwordTextInput.setValue(15);
+          passwordTextInput.trigger("change");
+          const select = wrapper.find('select');
+          select.setValue(5);
+          select.trigger('change');
+          const textArea = wrapper.find('textarea');
+          textArea.setValue('1\n3\n5\n15');
+          textArea.trigger('change');
+
+          const button = wrapper.find('button[type="reset"]');
+          button.trigger('click');
+
+          expect(wrapper.vm.textInput).to.equal('');
+          expect(wrapper.vm.textInputValue).to.equal('');
+          expect(wrapper.vm.radioInput).to.equal('');
+          expect(wrapper.vm.radioInputValue).to.equal('');
+          expect(wrapper.vm.checkBoxInput).to.equal(0);
+          expect(wrapper.vm.checkBoxInputValue).to.equal('');
+          expect(wrapper.vm.passwordTextInput).to.equal('');
+          expect(wrapper.vm.passwordTextInputValue).to.equal('');
+          expect(wrapper.vm.selectInput).to.equal(0);
+          expect(wrapper.vm.selectInputValue).to.equal('');
+          expect(wrapper.vm.textAreaInput).to.equal('');
+          expect(wrapper.vm.textAreaInputValue).to.eql([]);
+        });
       });
 
       describe("Counter", () => {
@@ -483,34 +536,6 @@
     </script>
 
     <script>
-      function fizzBuzzFormReset(event) {
-        const label1 = document.querySelector(
-          ".fizz-buzz-component .__input--text .--label"
-        );
-        const label2 = document.querySelector(
-          ".fizz-buzz-component .__input--radio .--label"
-        );
-        const label3 = document.querySelector(
-          ".fizz-buzz-component .__input--checkbox .--label"
-        );
-        const label4 = document.querySelector(
-          ".fizz-buzz-component .__input--password-text .--label"
-        );
-        const label5 = document.querySelector(
-          ".fizz-buzz-component .__input--select .--label"
-        );
-        const message = document.querySelector(
-          ".fizz-buzz-component .__message"
-        );
-
-        label1.innerHTML = "";
-        label2.innerHTML = "";
-        label3.innerHTML = "";
-        label4.innerHTML = "";
-        label5.innerHTML = "";
-        message.innerHTML = "";
-      }
-
       function fizzBuzzFormSubmit(event) {
         if (window.confirm("送信してよろしいですか?")) {
           let params = {};
