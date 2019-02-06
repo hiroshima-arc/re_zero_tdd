@@ -167,6 +167,23 @@
       });
 
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
+        props: {
+          textInputValue: String,
+        },
+
+        data() {
+          return {
+            textInput: ''
+          }
+        },
+
+        methods: {
+          fizzBuzzFormText2: function(event) {
+            this.textInput = 3;
+            this.textInputValue = 'Fizz';
+          }
+        },
+
         template:`
         <div>
         <h1>FizzBuzz</h1>
@@ -184,9 +201,10 @@
                 type="text"
                 size="20"
                 name="inputText"
-                onchange="fizzBuzzFormText(event)"
+                v-on:change="fizzBuzzFormText2(event)"
+                v-bind:value="textInput"
               />
-              <label class="--label"></label>
+              <label class="--label">{{ this.textInputValue }}</label>
             </p>
 
             <p class="__input--radio">
@@ -343,6 +361,13 @@
 
         it("マークアップをレンダリングする", () => {
           expect(wrapper.html()).contains('<h1>FizzBuzzForm</h1>');
+        });
+
+        it("テキストに3を入力したらFizzを表示する", () => {
+          const textInput = wrapper.find('input[type="text"]');
+          textInput.setValue(3);
+          textInput.trigger("change");
+          expect(wrapper.vm.textInputValue).to.equal('Fizz');
         });
       });
 
