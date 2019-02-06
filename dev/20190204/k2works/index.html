@@ -184,6 +184,10 @@
             passwordTextInput: '',
             selectInput: 0,
             textAreaInput: '',
+            styleObject: {
+              color: 'black',
+              'font-weight': 'bold'
+            },
             message: ''
           }
         },
@@ -235,7 +239,28 @@
             this.selectInput = 0;
             this.textAreaInput = '';
             this.message = ''
-          }
+          },
+          fizzBuzzFormSubmit(){
+            if (confirm("送信してよろしいですか?")) {
+              const params = {
+                text: this.textInput,
+                radio: this.radioInput,
+                checkBox: this.checkBoxInput,
+                passwordText: this.passwordTextInput,
+                select: this.selectInput,
+                textArea: this.textAreaInput
+              };
+
+              console.log(params);
+              alert(JSON.stringify(params));
+              this.styleObject.color = 'green';
+              this.message = '送信しました';
+            } else {
+              this.styleObject.color = 'red';
+              this.message = '送信をキャンセルしました';
+              return false;
+            }
+          },
         },
 
         template:`
@@ -243,10 +268,10 @@
         <h1>FizzBuzz</h1>
         <article>
         <h1>FizzBuzzForm</h1>
-        <dvi class="__message"></dvi>
+        <div v-bind:style="styleObject">{{ this.message }}</div>
         <form
           class="__form"
-          onsubmit="return fizzBuzzFormSubmit(event)"
+          v-on:submit.prevent="fizzBuzzFormSubmit()"
           name="fizzBuzzForm"
         >
           <fieldset>
@@ -509,6 +534,11 @@
           expect(wrapper.vm.textAreaInput).to.equal('');
           expect(wrapper.vm.textAreaInputValue).to.eql([]);
         });
+
+        xit("送信ボタンを押すと確認ダイアログが表示される", () => {
+          const button = wrapper.find('button[type="submit"]');
+          button.trigger('click');
+        });
       });
 
       describe("Counter", () => {
@@ -536,64 +566,6 @@
     </script>
 
     <script>
-      function fizzBuzzFormSubmit(event) {
-        if (window.confirm("送信してよろしいですか?")) {
-          let params = {};
-          let textParams;
-          let checkParams;
-          let checkBoxParams = [];
-          let passwordParams;
-          let selectParams;
-          let textAreaParams;
-
-          const forms = document.forms["fizzBuzzForm"];
-          for (var i = 0; i < forms.length; i++) {
-            let element = forms.elements[i];
-            if (element.type === "text") {
-              textParams = element.value;
-            }
-            if (element.type === "radio") {
-              if (element.checked) {
-                checkParams = element.value;
-              }
-            }
-            if (element.type === "checkbox") {
-              if (element.checked) {
-                checkBoxParams.push(element.value);
-              }
-            }
-            if (element.name === "selectbox") {
-              let index = element.selectedIndex;
-              selectParams = element.options[index].value;
-            }
-            if (element.type === "password") {
-              passwordParams = element.value;
-            }
-            if (element.type === "textarea") {
-              textAreaParams = element.value;
-            }
-          }
-
-          params = {
-            text: textParams,
-            check: checkParams,
-            checkBox: checkBoxParams,
-            passwordText: passwordParams,
-            select: selectParams,
-            textArea: textAreaParams
-          };
-
-          console.log(params);
-          alert(JSON.stringify(params));
-          document.querySelector(".fizz-buzz-component .__message").innerHTML =
-            '<strong style="color:green">送信しました</strong>';
-          return event.preventDefault();
-        } else {
-          document.querySelector(".fizz-buzz-component .__message").innerHTML =
-            '<strong style="color:red">送信をキャンセルしました</strong>';
-          return false;
-        }
-      }
     </script>
   </body>
 </html>
