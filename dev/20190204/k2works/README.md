@@ -36,8 +36,14 @@ livereloadx -s
 
 #### Problem
 
+- チェックボックスの1と15を選択したら16を表示するで-16が計算される
+- Formのsubmitを使ったテストが実行されない
+
 #### Try
 
 ## 参照
 
 - [入門JavaScript フロントエンドエンジニアになるための基本と実践スキル](https://rfs.jp/sb/javascript/jsbook/codepen-list.html)
+- [Vue.js](https://jp.vuejs.org/)
+- [Vue Test Utils](https://vue-test-utils.vuejs.org/ja/)
+- [Vuejs formをサブミットするときのポイント](https://qiita.com/kimullaa/items/c60a5a229b9060177a48)
