@@ -162,6 +162,13 @@
             checkBoxInput: 0,
             passwordTextInput: "",
             selectInput: 0,
+            selectOptions: [
+              { text: '',  value: 0},
+              { text: '1', value: 1},
+              { text: '3', value: 3},
+              { text: '5', value: 5},
+              { text: '15', value: 15},
+            ],
             textAreaInput: "",
             styleObject: {
               color: "black",
@@ -247,10 +254,10 @@
               <h1>FizzBuzz</h1>
               <article>
               <h1>FizzBuzzForm</h1>
-              <div v-bind:style="styleObject">{{ this.message }}</div>
+              <div :style="styleObject">{{ this.message }}</div>
               <form
                 class="__form"
-                v-on:submit.prevent="fizzBuzzFormSubmit()"
+                @submit.prevent="fizzBuzzFormSubmit()"
                 name="fizzBuzzForm"
               >
                 <fieldset>
@@ -259,9 +266,8 @@
                       type="text"
                       size="20"
                       name="inputText"
-                      v-bind:value="textInput"
-                      v-on:input="textInput = $event.target.value"
-                      v-on:change="fizzBuzzFormText($event)"
+                      v-model="textInput"
+                      @change="fizzBuzzFormText($event)"
                     />
                     <label class="--label">{{ this.textInputValue }}</label>
                   </p>
@@ -272,29 +278,32 @@
                       type="radio"
                       name="inputRadio"
                       id="inputRadio1"
-                      v-bind:value="1"
-                      v-on:click="fizzBuzzFormRadio(event)"
+                      value="1"
+                      v-model="radioInput"
+                      @click="fizzBuzzFormRadio(event)"
                     /><label for="inputRadio1">1</label>
                     <input
                       type="radio"
                       name="inputRadio"
                       id="inputRadio2"
-                      v-bind:value="3"
-                      v-on:click="fizzBuzzFormRadio(event)"
+                      value="3"
+                      v-model="radioInput"
+                      @click="fizzBuzzFormRadio(event)"
                     /><label for="inputRadio2">3</label>
                     <input
                       type="radio"
                       name="inputRadio"
                       id="inputRadio3"
-                      v-bind:value="5"
-                      v-on:click="fizzBuzzFormRadio(event)"
+                      value="5"
+                      @click="fizzBuzzFormRadio(event)"
                     /><label for="inputRadio3">5</label>
                     <input
                       type="radio"
                       name="inputRadio"
                       id="inputRadio4"
-                      v-bind:value="15"
-                      v-on:click="fizzBuzzFormRadio(event)"
+                      value="15"
+                      v-model="radioInput"
+                      @click="fizzBuzzFormRadio(event)"
                     /><label for="inputRadio4">15</label>
                     <label class="--label">{{ this.radioInputValue }}</label>
                   </p>
@@ -306,7 +315,8 @@
                       name="inputCheck"
                       id="inputCheck1"
                       value="1"
-                      v-on:click="fizzBuzzFormCheckBox($event)"
+                      v-model="checkBoxInput"
+                      @click="fizzBuzzFormCheckBox($event)"
                     /><label for="inputCheck1">1</label>
                     <input
                       type="checkbox"
@@ -320,14 +330,15 @@
                       name="inputCheck"
                       id="inputCheck3"
                       value="5"
-                      v-on:click="fizzBuzzFormCheckBox($event)"
+                      v-model="checkBoxInput"
+                      @click="fizzBuzzFormCheckBox($event)"
                     /><label for="inputCheck2">5</label>
                     <input
                       type="checkbox"
                       name="inputCheck"
                       id="inputCheck4"
                       value="15"
-                      v-on:click="fizzBuzzFormCheckBox($event)"
+                      @click="fizzBuzzFormCheckBox($event)"
                     /><label for="inputCheck2">15</label>
                     <label class="--label">{{ this.checkBoxInputValue }}</label>
                   </p>
@@ -346,14 +357,14 @@
       
                   <p class="__input--select">
                     セレクト：<select
+                      v-model="selectInput"
                       size="1"
                       name="selectbox"
-                      v-on:change="fizzBuzzFormSelect(event)"
+                      @change="fizzBuzzFormSelect($event)"
                     >
-                      <option>1</option>
-                      <option>3</option>
-                      <option>5</option>
-                      <option>15</option>
+                      <option v-for="option in selectOptions" v-bind:value="option.value">
+                       {{option.text}}
+                      </option>
                     </select>
                     <label class="--label">{{ this.selectInputValue }}</label>
                   </p>
@@ -364,8 +375,7 @@
                       cols="40"
                       name="textarea"
                       class="__input--text-area"
-                      v-bind:value="textAreaInput"
-                      v-on:input="textAreaInput = $event.target.value"
+                      v-model="textAreaInput"
                     ></textarea>
                   </p>
       
@@ -373,7 +383,7 @@
                     ボタン：<button
                       type="button"
                       name="button"
-                      v-on:click="fizzBuzzFormTextArea()"
+                      @click="fizzBuzzFormTextArea()"
                     >
                       ボタン
                     </button>
@@ -383,7 +393,7 @@
                     リセットボタン：<button
                       type="reset"
                       name="buttonSubmit"
-                      v-on:click="fizzBuzzFormReset()"
+                      @click="fizzBuzzFormReset()"
                     >
                       リセット
                     </button>
