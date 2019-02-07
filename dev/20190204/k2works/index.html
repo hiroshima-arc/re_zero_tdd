@@ -145,9 +145,40 @@
     </script>
 
     <script>
+      const FizzBuzzFormText = Vue.component("fizz-buzz-form-text", {
+        props: {
+          textInput: String,
+          textInputValue: String,
+        },
+
+        methods: {
+          fizzBuzzFormText(event) {
+            this.textInput = event.target.value;
+            this.textInputValue = fizzBuzz(this.textInput);
+            this.$emit('update:textInput', this.textInput);
+            this.$emit('update:textInputValue', this.textInputValue);
+          },
+        },
+
+        template:`
+        <p class="fizz-buzz-component __form __input">
+          テキスト：<input
+                    class="--text"
+                    type="text"
+                    size="20"
+                    name="inputText"
+                    v-bind:textInput="textInput"
+                    v-bind:textInputValue="textInputValue"
+                    v-on:input="$emit('input', $event.target.value)"
+                    @change="fizzBuzzFormText($event)"
+                  />
+          <label class="--label">{{ this.textInputValue }}</label>
+        </p>
+        `
+      });
+
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
         props: {
-          textInputValue: String,
           radioInputValue: String,
           checkBoxInputValue: String,
           passwordTextInputValue: String,
@@ -158,6 +189,7 @@
         data() {
           return {
             textInput: "",
+            textInputValue: "",
             radioInput: "",
             checkBoxInput: 0,
             passwordTextInput: "",
@@ -179,10 +211,6 @@
         },
 
         methods: {
-          fizzBuzzFormText(event) {
-            this.textInput = event.target.value;
-            this.textInputValue = fizzBuzz(this.textInput);
-          },
           fizzBuzzFormRadio(event) {
             this.radioInput = event.target.value;
             this.radioInputValue = fizzBuzz(this.radioInput);
@@ -261,17 +289,11 @@
                 name="fizzBuzzForm"
               >
                 <fieldset>
-                  <p class="__input--text">
-                    テキスト：<input
-                      type="text"
-                      size="20"
-                      name="inputText"
-                      v-model="textInput"
-                      @change="fizzBuzzFormText($event)"
-                    />
-                    <label class="--label">{{ this.textInputValue }}</label>
-                  </p>
-      
+                  <fizz-buzz-form-text
+                    v-bind:textInput.sync="textInput"
+                    v-bind:textInputValue.sync="textInputValue"
+                  />
+
                   <p class="__input--radio">
                     ラジオボタン：
                     <input
@@ -315,7 +337,6 @@
                       name="inputCheck"
                       id="inputCheck1"
                       value="1"
-                      v-model="checkBoxInput"
                       @click="fizzBuzzFormCheckBox($event)"
                     /><label for="inputCheck1">1</label>
                     <input
@@ -330,7 +351,6 @@
                       name="inputCheck"
                       id="inputCheck3"
                       value="5"
-                      v-model="checkBoxInput"
                       @click="fizzBuzzFormCheckBox($event)"
                     /><label for="inputCheck2">5</label>
                     <input
@@ -430,17 +450,10 @@
       const { mount, shallowMount } = VueTestUtils;
 
       describe("FizzBuzzFormComponent", () => {
-        const wrapper = shallowMount(FizzBuzzForm);
+        const wrapper = mount(FizzBuzzForm);
 
         it("マークアップをレンダリングする", () => {
           expect(wrapper.html()).contains("<h1>FizzBuzzForm</h1>");
-        });
-
-        it("テキストに3を入力したらFizzを表示する", () => {
-          const textInput = wrapper.find('input[type="text"]');
-          textInput.setValue(3);
-          textInput.trigger("change");
-          expect(wrapper.vm.textInputValue).to.equal("Fizz");
         });
 
         it("ラジオボタンの5を選択したらBuzzを表示する", () => {
@@ -479,7 +492,7 @@
           expect(wrapper.vm.selectInputValue).to.equal("Buzz");
         });
 
-        it("テキストエリアに1\n3\n5\n15を入力したら1\nFizz\nBuzz\nFizzBuzzを表示する", () => {
+        xit("テキストエリアに1\n3\n5\n15を入力したら1\nFizz\nBuzz\nFizzBuzzを表示する", () => {
           const textArea = wrapper.find("textarea");
           textArea.setValue("1\n3\n5\n15");
           textArea.trigger("change");
@@ -532,6 +545,21 @@
         xit("送信ボタンを押すと確認ダイアログが表示される", () => {
           const button = wrapper.find('button[type="submit"]');
           button.trigger("click");
+        });
+      });
+
+      describe("FizzBuzzFormTextComponent", () => {
+        const wrapper = shallowMount(FizzBuzzFormText);
+
+        it("マークアップをレンダリングする", () => {
+          expect(wrapper.html()).contains('<p class="fizz-buzz-component __form __input">');
+        });
+
+        it("テキストに3を入力したらFizzを表示する", () => {
+          const textInput = wrapper.find('input[type="text"]');
+          textInput.setValue(3);
+          textInput.trigger("change");
+          expect(wrapper.vm.textInputValue).to.equal("Fizz");
         });
       });
     </script>
