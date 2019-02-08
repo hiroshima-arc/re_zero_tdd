@@ -40,6 +40,10 @@
             }
             return array;
         }
+
+        function fizzBuzz() {
+            return 'Fizz';
+        }
     </script>
 
     <script>
@@ -52,6 +56,10 @@
                 var array = fizzBuzzPrint();
                 assert.equal(1, array[0]);
                 assert.equal(100, array[99]);
+            });
+
+            test("3で割り切れる場合はFizzをプリントする", () => {
+                assert.equal('Fizz', fizzBuzz(3));
             });
         });
 
