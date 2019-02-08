@@ -34,11 +34,16 @@
         FIZZ = 'Fizz';
         BUZZ = 'Buzz';
 
-        function fizzBuzzPrint() {
+        function geneateArray() {
             var array = [];
             for(var i = 1; i <= 100; i++) {
                 array.push(i);
             }
+            return array;
+        }
+
+        function fizzBuzzPrint() {
+            var array = geneateArray();
             for(each in array) {
                 console.log(each);
             }
