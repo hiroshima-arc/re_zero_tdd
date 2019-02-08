@@ -31,7 +31,7 @@
 
     <script>
         function fizzBuzzPrint() {
-            var array = [1]
+            var array = [1];
             return array;
         }
     </script>
@@ -45,6 +45,7 @@
             test("1から100までの数をプリントする", () => {
                 var array = fizzBuzzPrint();
                 assert.equal(1, array[0]);
+                assert.equal(100, array[100]);
             });
         });
 
