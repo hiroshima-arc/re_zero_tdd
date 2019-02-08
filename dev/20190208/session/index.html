@@ -36,7 +36,7 @@
 
         function geneateArray() {
             var array = [];
-            [...Array(101).keys()].map((number) => {array.push(number)});
+            [...Array(101).keys()].map((number) => {array.push(fizzBuzz(number))});
             return array;
         }
 
@@ -67,10 +67,13 @@
         const assert = chai.assert;
 
         suite("FizzBuzzTest", () => {
-            test("1から100までの数をプリントする", () => {
+            test("1から100までの数をプリントするただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする", () => {
                 var array = geneateArray();
                 assert.equal(1, array[1]);
-                assert.equal(100, array[100]);
+                assert.equal('Fizz', array[3]);
+                assert.equal('Buzz', array[5]);
+                assert.equal('FizzBuzz', array[15]);
+                assert.equal('Buzz', array[100]);
             });
 
             test("3で割り切れる場合はFizzをプリントする", () => {
