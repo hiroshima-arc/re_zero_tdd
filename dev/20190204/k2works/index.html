@@ -246,7 +246,6 @@
             }
             this.checkBoxInputValue = fizzBuzz(this.checkBoxInput);
             if (this.checkBoxInput === 0) this.checkBoxInputValue = "";
-            //alert(this.checkBoxInputValue);
             this.$emit('update:checkBoxInput', this.checkBoxInput);
             this.$emit('update:checkBoxInputValue', this.checkBoxInputValue);
           }
@@ -318,6 +317,40 @@
         `
       });
 
+      const fizzBuzzFormSelect = Vue.component("fizz-buzz-form-select", {
+        props: {
+          selectInput: Number,
+          selectInputValue: String,
+          selectOptions: [],
+        },
+
+        methods: {
+          fizzBuzzFormSelect(event) {
+            this.selectInput = event.target.value;
+            this.selectInputValue = fizzBuzz(this.selectInput);
+            if (this.selectInput === '0') this.selectInputValue = "";
+            this.$emit('update:selectInput', this.selectInput);
+            this.$emit('update:selectInputValue', this.selectInputValue);
+          }
+        },
+
+        template: `
+        <p class="fizz-buzz-component __form __select">
+                    セレクト：<select
+                      v-model="selectInput"
+                      size="1"
+                      name="selectbox"
+                      @change="fizzBuzzFormSelect($event)"
+                    >
+                      <option v-for="option in selectOptions" v-bind:value="option.value">
+                       {{option.text}}
+                      </option>
+                    </select>
+                    <label class="--label">{{ this.selectInputValue }}</label>
+                  </p>
+        `
+      });
+
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
         props: {
           radioInputValue: String,
@@ -352,10 +385,6 @@
         },
 
         methods: {
-          fizzBuzzFormSelect(event) {
-            this.selectInput = event.target.value;
-            this.selectInputValue = fizzBuzz(this.selectInput);
-          },
           fizzBuzzFormTextArea() {
             const array = this.textAreaInput.split("\n");
             this.textAreaInputValue = [];
@@ -433,21 +462,13 @@
                     v-bind:passwordTextInput.sync="passwordTextInput"
                     v-bind:passwordTextInputValue.sync="passwordTextInputValue"
                   />
-      
-                  <p class="__input--select">
-                    セレクト：<select
-                      v-model="selectInput"
-                      size="1"
-                      name="selectbox"
-                      @change="fizzBuzzFormSelect($event)"
-                    >
-                      <option v-for="option in selectOptions" v-bind:value="option.value">
-                       {{option.text}}
-                      </option>
-                    </select>
-                    <label class="--label">{{ this.selectInputValue }}</label>
-                  </p>
-      
+
+                  <fizz-buzz-form-select
+                    v-bind:selectInput.sync="selectInput"
+                    v-bind:selectOptions="selectOptions"
+                    v-bind:selectInputValue.sync="selectInputValue"
+                  />
+
                   <p>
                     テキストエリア：<textarea
                       rows="4"
@@ -513,13 +534,6 @@
 
         it("マークアップをレンダリングする", () => {
           expect(wrapper.html()).contains("<h1>FizzBuzzForm</h1>");
-        });
-
-        it("セレクトの5を選択したらBuzzを表示する", () => {
-          const select = wrapper.find("select");
-          select.setValue(5);
-          select.trigger("change");
-          expect(wrapper.vm.selectInputValue).to.equal("Buzz");
         });
 
         xit("テキストエリアに1\n3\n5\n15を入力したら1\nFizz\nBuzz\nFizzBuzzを表示する", () => {
@@ -648,6 +662,32 @@
           passwordTextInput.setValue(15);
           passwordTextInput.trigger("change");
           expect(wrapper.vm.passwordTextInputValue).to.equal("FizzBuzz");
+        });
+      });
+
+      describe("FizzBuzzFormSelectComponent", () => {
+        const wrapper = shallowMount(fizzBuzzFormSelect, {
+          propsData: {
+            selectInput: 0,
+            selectOptions: [
+              { text: '',  value: 0},
+              { text: '1', value: 1},
+              { text: '3', value: 3},
+              { text: '5', value: 5},
+              { text: '15', value: 15},
+            ],
+          }
+        });
+
+        it("マークアップをレンダリングする", () => {
+          expect(wrapper.html()).contains('<p class="fizz-buzz-component __form __select">');
+        });
+
+        it("セレクトの5を選択したらBuzzを表示する", () => {
+          const select = wrapper.find("select");
+          select.setValue(5);
+          select.trigger("change");
+          expect(wrapper.vm.selectInputValue).to.equal("Buzz");
         });
       });
     </script>
