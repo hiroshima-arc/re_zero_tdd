@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
 </head>
 <body>
     <h1>HTML5+CSS+JavaScript with TDD</h1>
@@ -19,10 +22,29 @@
     <section>
         <h1>FizzBuzz</h1>
         <article></article>
+        <div id="mocha"></div>
     </section>
     <footer>
         <p>Copyright</p>
         <address>hiroshima.arc@gmail.com</address>
     </footer>
+
+    <script>
+        mocha.setup("tdd");
+
+        const assert = chai.assert;
+
+        suite("FizzBuzzTest", () => {
+            test("成功する", () => {
+                assert.equal(1, 1);
+            });
+
+            test("失敗する", () => {
+                assert.equal(1, 2);
+            });
+        });
+
+        mocha.run();
+    </script>
 </body>
 </html>
