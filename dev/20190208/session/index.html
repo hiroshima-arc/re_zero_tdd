@@ -41,11 +41,7 @@
         }
 
         function fizzBuzzPrint() {
-            var array = geneateArray();
-            for(each in array) {
-                console.log(each);
-            }
-            return array;
+            geneateArray().forEach((v) => {console.log(v)});
         }
 
         function isFizz(number) {
@@ -72,7 +68,7 @@
 
         suite("FizzBuzzTest", () => {
             test("1から100までの数をプリントする", () => {
-                var array = fizzBuzzPrint();
+                var array = geneateArray();
                 assert.equal(1, array[1]);
                 assert.equal(100, array[100]);
             });
