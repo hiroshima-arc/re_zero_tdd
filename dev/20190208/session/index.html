@@ -30,6 +30,10 @@
     </footer>
 
     <script>
+        FIZZ_BUZZ = 'FizzBuzz';
+        FIZZ = 'Fizz';
+        BUZZ = 'Buzz';
+
         function fizzBuzzPrint() {
             var array = [];
             for(var i = 1; i <= 100; i++) {
@@ -50,9 +54,9 @@
         }
 
         function fizzBuzz(number) {
-            if(isFizz(number) && isBuzz(number)) return 'FizzBuzz';
-            if(isFizz(number)) return 'Fizz';
-            if(isBuzz(number)) return 'Buzz';
+            if(isFizz(number) && isBuzz(number)) return FIZZ_BUZZ;
+            if(isFizz(number)) return FIZZ;
+            if(isBuzz(number)) return BUZZ;
 
             return number;
         }
