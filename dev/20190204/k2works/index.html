@@ -177,6 +177,60 @@
         `
       });
 
+      const FizzBuzzFormRadio = Vue.component("fizz-buzz-form-radio", {
+        props: {
+          radioInput: String,
+          radioInputValue: String,
+        },
+
+        methods: {
+          fizzBuzzFormRadio(event) {
+            this.radioInput = event.target.value;
+            this.radioInputValue = fizzBuzz(this.radioInput);
+            this.$emit('update:radioInput', this.radioInput);
+            this.$emit('update:radioInputValue', this.radioInputValue);
+          }
+        },
+
+        template: `
+        <p class="fizz-buzz-component __form __radio">
+                    ラジオボタン：
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio1"
+                      value="1"
+                      v-bind:raidoInput="radioInput"
+                      @click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio1">1</label>
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio2"
+                      value="3"
+                      v-bind:raidoInput="radioInput"
+                      @click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio2">3</label>
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio3"
+                      value="5"
+                      @click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio3">5</label>
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio4"
+                      value="15"
+                      v-bind:raidoInput="radioInput"
+                      @click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio4">15</label>
+                    <label class="--label">{{ this.radioInputValue }}</label>
+                  </p>
+        `
+      });
+
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
         props: {
           radioInputValue: String,
@@ -211,10 +265,6 @@
         },
 
         methods: {
-          fizzBuzzFormRadio(event) {
-            this.radioInput = event.target.value;
-            this.radioInputValue = fizzBuzz(this.radioInput);
-          },
           fizzBuzzFormCheckBox(event) {
             if (event.target.checked) {
               this.checkBoxInput += Number.parseInt(event.target.value);
@@ -294,41 +344,10 @@
                     v-bind:textInputValue.sync="textInputValue"
                   />
 
-                  <p class="__input--radio">
-                    ラジオボタン：
-                    <input
-                      type="radio"
-                      name="inputRadio"
-                      id="inputRadio1"
-                      value="1"
-                      v-model="radioInput"
-                      @click="fizzBuzzFormRadio(event)"
-                    /><label for="inputRadio1">1</label>
-                    <input
-                      type="radio"
-                      name="inputRadio"
-                      id="inputRadio2"
-                      value="3"
-                      v-model="radioInput"
-                      @click="fizzBuzzFormRadio(event)"
-                    /><label for="inputRadio2">3</label>
-                    <input
-                      type="radio"
-                      name="inputRadio"
-                      id="inputRadio3"
-                      value="5"
-                      @click="fizzBuzzFormRadio(event)"
-                    /><label for="inputRadio3">5</label>
-                    <input
-                      type="radio"
-                      name="inputRadio"
-                      id="inputRadio4"
-                      value="15"
-                      v-model="radioInput"
-                      @click="fizzBuzzFormRadio(event)"
-                    /><label for="inputRadio4">15</label>
-                    <label class="--label">{{ this.radioInputValue }}</label>
-                  </p>
+                  <fizz-buzz-form-radio
+                    v-bind:radioInput.sync="radioInput"
+                    v-bind:radioInputValue.sync="radioInputValue"
+                  />
       
                   <p class="__input--checkbox">
                     チェックボックス：
@@ -456,13 +475,6 @@
           expect(wrapper.html()).contains("<h1>FizzBuzzForm</h1>");
         });
 
-        it("ラジオボタンの5を選択したらBuzzを表示する", () => {
-          const radioInput = wrapper.find("#inputRadio3");
-          radioInput.setChecked();
-          radioInput.trigger("click");
-          expect(wrapper.vm.radioInputValue).to.equal("Buzz");
-        });
-
         it("チェックボックスの15を選択したらFizzBuzzを表示する", () => {
           const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
           checkBoxInput.at(3).setChecked();
@@ -562,6 +574,20 @@
           expect(wrapper.vm.textInputValue).to.equal("Fizz");
         });
       });
+
+      describe("FizzBuzzFormRadioComponent", () => {
+        const wrapper = shallowMount(FizzBuzzFormRadio);
+
+        it("マークアップをレンダリングする", () => {
+          expect(wrapper.html()).contains('<p class="fizz-buzz-component __form __radio">');
+        });
+
+        it("ラジオボタンの5を選択したらBuzzを表示する", () => {
+          const radioInput = wrapper.findAll('input[type="radio"]');
+          radioInput.at(2).trigger("click");
+          expect(wrapper.vm.radioInputValue).to.equal("Buzz");
+        });
+      })
     </script>
 
     <script>
