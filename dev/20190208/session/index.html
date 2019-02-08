@@ -36,9 +36,7 @@
 
         function geneateArray() {
             var array = [];
-            for(var i = 1; i <= 100; i++) {
-                array.push(i);
-            }
+            [...Array(101).keys()].map((number) => {array.push(number)});
             return array;
         }
 
@@ -75,8 +73,8 @@
         suite("FizzBuzzTest", () => {
             test("1から100までの数をプリントする", () => {
                 var array = fizzBuzzPrint();
-                assert.equal(1, array[0]);
-                assert.equal(100, array[99]);
+                assert.equal(1, array[1]);
+                assert.equal(100, array[100]);
             });
 
             test("3で割り切れる場合はFizzをプリントする", () => {
