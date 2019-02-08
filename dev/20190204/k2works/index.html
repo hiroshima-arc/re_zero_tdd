@@ -288,6 +288,36 @@
         `
       });
 
+      const FizzBuzzFormPasswordText = Vue.component("fizz-buzz-form-password-text", {
+        props: {
+          passwordTextInput: String,
+          passwordTextInputValue: String,
+        },
+
+        methods: {
+          fizzBuzzFormPasswordText(event) {
+            this.passwordTextInput = event.target.value;
+            this.passwordTextInputValue = fizzBuzz(this.passwordTextInput);
+            this.$emit('update:passwordTextInput', this.passwordTextInput);
+            this.$emit('update:passwordTextInputValue', this.passwordTextInput);
+          }
+        },
+
+        template: `
+        <p class="fizz-buzz-component __form __password-text">
+                    パスワード：<input
+                      type="password"
+                      size="20"
+                      name="inputPassword"
+                      v-bind:value="passwordTextInput"
+                      v-on:input="$emit('input', $event.target.value)"
+                      v-on:change="fizzBuzzFormPasswordText($event)"
+                    />
+                    <label class="--label">{{ this.passwordTextInputValue }}</label>
+                  </p>
+        `
+      });
+
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
         props: {
           radioInputValue: String,
@@ -322,10 +352,6 @@
         },
 
         methods: {
-          fizzBuzzFormPasswordText(event) {
-            this.passwordTextInput = event.target.value;
-            this.passwordTextInputValue = fizzBuzz(this.passwordTextInput);
-          },
           fizzBuzzFormSelect(event) {
             this.selectInput = event.target.value;
             this.selectInputValue = fizzBuzz(this.selectInput);
@@ -402,18 +428,11 @@
                     v-bind:checkBoxInput.sync="checkBoxInput"
                     v-bind:checkBoxInputValue.sync="checkBoxInputValue"
                   />
-            
-                  <p class="__input--password-text">
-                    パスワード：<input
-                      type="password"
-                      size="20"
-                      name="inputPassword"
-                      v-bind:value="passwordTextInput"
-                      v-on:input="passwordTextInput = $event.target.value"
-                      v-on:change="fizzBuzzFormPasswordText($event)"
-                    />
-                    <label class="--label">{{ this.passwordTextInputValue }}</label>
-                  </p>
+
+                  <fizz-buzz-form-password-text
+                    v-bind:passwordTextInput.sync="passwordTextInput"
+                    v-bind:passwordTextInputValue.sync="passwordTextInputValue"
+                  />
       
                   <p class="__input--select">
                     セレクト：<select
@@ -494,13 +513,6 @@
 
         it("マークアップをレンダリングする", () => {
           expect(wrapper.html()).contains("<h1>FizzBuzzForm</h1>");
-        });
-
-        it("パスワードに15を入力したらFizzBuzzを表示する", () => {
-          const passwordTextInput = wrapper.find('input[type="password"]');
-          passwordTextInput.setValue(15);
-          passwordTextInput.trigger("change");
-          expect(wrapper.vm.passwordTextInputValue).to.equal("FizzBuzz");
         });
 
         it("セレクトの5を選択したらBuzzを表示する", () => {
@@ -621,6 +633,21 @@
           const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
           checkBoxInput.at(3).trigger("click");
           expect(wrapper.vm.checkBoxInputValue).to.equal("FizzBuzz");
+        });
+      });
+
+      describe("FizzBuzzFormPasswordTextComponent", () => {
+        const wrapper = shallowMount(FizzBuzzFormPasswordText);
+
+        it("マークアップをレンダリングする", () => {
+          expect(wrapper.html()).contains('<p class="fizz-buzz-component __form __password-text">');
+        });
+
+        it("パスワードに15を入力したらFizzBuzzを表示する", () => {
+          const passwordTextInput = wrapper.find('input[type="password"]');
+          passwordTextInput.setValue(15);
+          passwordTextInput.trigger("change");
+          expect(wrapper.vm.passwordTextInputValue).to.equal("FizzBuzz");
         });
       });
     </script>
