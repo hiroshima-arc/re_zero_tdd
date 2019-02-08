@@ -231,6 +231,63 @@
         `
       });
 
+      const FizzBuzzFormCheckBox = Vue.component("fizz-buzz-form-check-box", {
+        props: {
+          checkBoxInput: String,
+          checkBoxInputValue: String,
+        },
+
+        methods: {
+          fizzBuzzFormCheckBox(event) {
+            if (event.target.checked) {
+              this.checkBoxInput += Number.parseInt(event.target.value);
+            } else {
+              this.checkBoxInput -= Number.parseInt(event.target.value);
+            }
+            this.checkBoxInputValue = fizzBuzz(this.checkBoxInput);
+            if (this.checkBoxInput === 0) this.checkBoxInputValue = "";
+            //alert(this.checkBoxInputValue);
+            this.$emit('update:checkBoxInput', this.checkBoxInput);
+            this.$emit('update:checkBoxInputValue', this.checkBoxInputValue);
+          }
+        },
+
+        template: `
+        <p class="fizz-buzz-component __form __check-box">
+                    チェックボックス：
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck1"
+                      value="1"
+                      @click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck1">1</label>
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck2"
+                      value="3"
+                      v-on:click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck2">3</label>
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck3"
+                      value="5"
+                      @click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck2">5</label>
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck4"
+                      value="15"
+                      @click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck2">15</label>
+                    <label class="--label">{{ this.checkBoxInputValue }}</label>
+                  </p>
+        `
+      });
+
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
         props: {
           radioInputValue: String,
@@ -265,14 +322,6 @@
         },
 
         methods: {
-          fizzBuzzFormCheckBox(event) {
-            if (event.target.checked) {
-              this.checkBoxInput += Number.parseInt(event.target.value);
-            } else {
-              this.checkBoxInput -= Number.parseInt(event.target.value);
-            }
-            this.checkBoxInputValue = fizzBuzz(this.checkBoxInput);
-          },
           fizzBuzzFormPasswordText(event) {
             this.passwordTextInput = event.target.value;
             this.passwordTextInputValue = fizzBuzz(this.passwordTextInput);
@@ -348,40 +397,12 @@
                     v-bind:radioInput.sync="radioInput"
                     v-bind:radioInputValue.sync="radioInputValue"
                   />
-      
-                  <p class="__input--checkbox">
-                    チェックボックス：
-                    <input
-                      type="checkbox"
-                      name="inputCheck"
-                      id="inputCheck1"
-                      value="1"
-                      @click="fizzBuzzFormCheckBox($event)"
-                    /><label for="inputCheck1">1</label>
-                    <input
-                      type="checkbox"
-                      name="inputCheck"
-                      id="inputCheck2"
-                      value="3"
-                      v-on:click="fizzBuzzFormCheckBox($event)"
-                    /><label for="inputCheck2">3</label>
-                    <input
-                      type="checkbox"
-                      name="inputCheck"
-                      id="inputCheck3"
-                      value="5"
-                      @click="fizzBuzzFormCheckBox($event)"
-                    /><label for="inputCheck2">5</label>
-                    <input
-                      type="checkbox"
-                      name="inputCheck"
-                      id="inputCheck4"
-                      value="15"
-                      @click="fizzBuzzFormCheckBox($event)"
-                    /><label for="inputCheck2">15</label>
-                    <label class="--label">{{ this.checkBoxInputValue }}</label>
-                  </p>
-      
+
+                  <fizz-buzz-form-check-box
+                    v-bind:checkBoxInput.sync="checkBoxInput"
+                    v-bind:checkBoxInputValue.sync="checkBoxInputValue"
+                  />
+            
                   <p class="__input--password-text">
                     パスワード：<input
                       type="password"
@@ -473,21 +494,6 @@
 
         it("マークアップをレンダリングする", () => {
           expect(wrapper.html()).contains("<h1>FizzBuzzForm</h1>");
-        });
-
-        it("チェックボックスの15を選択したらFizzBuzzを表示する", () => {
-          const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
-          checkBoxInput.at(3).setChecked();
-          checkBoxInput.at(3).trigger("click");
-          expect(wrapper.vm.checkBoxInputValue).to.equal("FizzBuzz");
-        });
-
-        xit("チェックボックスの1と15を選択したら16を表示する", () => {
-          const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
-          checkBoxInput.at(0).setChecked();
-          checkBoxInput.at(3).setChecked();
-          checkBoxInput.at(0).trigger("click");
-          expect(wrapper.vm.checkBoxInputValue).to.equal(-16);
         });
 
         it("パスワードに15を入力したらFizzBuzzを表示する", () => {
@@ -587,7 +593,36 @@
           radioInput.at(2).trigger("click");
           expect(wrapper.vm.radioInputValue).to.equal("Buzz");
         });
-      })
+      });
+
+      describe("FizzBuzzFormCheckBoxComponent", () => {
+        const wrapper = shallowMount(FizzBuzzFormCheckBox, {
+          propsData: {
+            checkBoxInput: 0
+          }
+        });
+
+        it("マークアップをレンダリングする", () => {
+          expect(wrapper.html()).contains('<p class="fizz-buzz-component __form __check-box">');
+        });
+
+        it("チェックボックスの1と15を選択したら16を表示する", () => {
+          wrapper.setProps({checkBoxInput: 0});
+
+          const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
+          checkBoxInput.at(0).trigger("click");
+          checkBoxInput.at(3).trigger("click");
+          expect(wrapper.vm.checkBoxInputValue).to.equal(16);
+        });
+
+        it("チェックボックスの15を選択したらFizzBuzzを表示する", () => {
+          wrapper.setProps({checkBoxInput: 0});
+
+          const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
+          checkBoxInput.at(3).trigger("click");
+          expect(wrapper.vm.checkBoxInputValue).to.equal("FizzBuzz");
+        });
+      });
     </script>
 
     <script>
