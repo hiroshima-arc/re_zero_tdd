@@ -397,7 +397,40 @@
                   </p>
                   </div>
                   `
-      })
+      });
+
+      const FizzBuzzFormRestButton = Vue.component("fizz-buzz-form-reset-button", {
+        methods: {
+          fizzBuzzFormReset() {
+            this.textInputValue = "";
+            this.radioInputValue = "";
+            this.checkBoxInputValue = "";
+            this.passwordTextInputValue = "";
+            this.selectInputValue = "";
+            this.textAreaInputValue = [];
+            this.message = "";
+
+            this.$emit('update:textInputValue', this.textInputValue);
+            this.$emit('update:radioInputValue', this.radioInputValue);
+            this.$emit('update:checkBoxInputValue', this.checkBoxInputValue);
+            this.$emit('update:passwordTextInputValue', this.passwordTextInputValue);
+            this.$emit('update:selectInputValue', this.selectInputValue);
+            this.$emit('update:textAreaInputValue', this.textAreaInputValue);
+            this.$emit('update:message', this.message);
+          }
+        },
+        template:`
+        <p>
+                    リセットボタン：<button
+                      type="reset"
+                      name="buttonSubmit"
+                      @click="fizzBuzzFormReset"
+                    >
+                      リセット
+                    </button>
+                  </p>
+        `
+      });
 
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
         props: {
@@ -433,21 +466,6 @@
         },
 
         methods: {
-          fizzBuzzFormReset(event) {
-            this.textInputValue = "";
-            this.radioInputValue = "";
-            this.checkBoxInputValue = "";
-            this.passwordTextInputValue = "";
-            this.selectInputValue = "";
-            this.textAreaInputValue = [];
-            this.textInput = "";
-            this.radioInput = "";
-            this.checkBoxInput = 0;
-            this.passwordTextInput = "";
-            this.selectInput = 0;
-            this.textAreaInput = "";
-            this.message = "";
-          },
           fizzBuzzFormSubmit() {
             if (confirm("送信してよろしいですか?")) {
               const params = {
@@ -514,17 +532,21 @@
                     v-bind:textAreaInputValue.sync="textAreaInputValue"
                   />
 
+                  <fizz-buzz-form-reset-button
+                    v-bind:textInputValue.sync="textInputValue"
+                    v-bind:radioInputValue.sync="radioInputValue"
+                    v-bind:checkBoxInputValue.sync="checkBoxInputValue"
+                    v-bind:passwordTextInputValue.sync="passwordTextInputValue"
+                    v-bind:selectInputValue.sync="selectInputValue"
+                    v-bind:textAreaInputValue.sync="textAreaInputValue"
+                    v-bind:message.sync="message"
+                  />
+
                   <p>
-                    リセットボタン：<button
-                      type="reset"
+                    送信ボタン：<button
+                      type="submit"
                       name="buttonSubmit"
-                      @click="fizzBuzzFormReset"
                     >
-                      リセット
-                    </button>
-                  </p>
-                  <p>
-                    送信ボタン：<button type="submit" name="buttonSubmit">
                       送信
                     </button>
                   </p>
@@ -559,42 +581,6 @@
 
         it("マークアップをレンダリングする", () => {
           expect(wrapper.html()).contains("<h1>FizzBuzzForm</h1>");
-        });
-
-        it("リセットボタンを押すと入力した値が消去される", () => {
-          const textInput = wrapper.find('input[type="text"]');
-          textInput.setValue(3);
-          textInput.trigger("change");
-          const radioInput = wrapper.findAll('input[type="radio"]');
-          radioInput.at(0).setChecked();
-          const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
-          checkBoxInput.at(3).setChecked();
-          checkBoxInput.at(3).trigger("click");
-          const passwordTextInput = wrapper.find('input[type="password"]');
-          passwordTextInput.setValue(15);
-          passwordTextInput.trigger("change");
-          const select = wrapper.find("select");
-          select.setValue(5);
-          select.trigger("change");
-          const textArea = wrapper.find("textarea");
-          textArea.setValue("1\n3\n5\n15");
-          textArea.trigger("change");
-
-          const button = wrapper.find('button[type="reset"]');
-          button.trigger("click");
-
-          expect(wrapper.vm.textInput).to.equal("");
-          expect(wrapper.vm.textInputValue).to.equal("");
-          expect(wrapper.vm.radioInput).to.equal("");
-          expect(wrapper.vm.radioInputValue).to.equal("");
-          expect(wrapper.vm.checkBoxInput).to.equal(0);
-          expect(wrapper.vm.checkBoxInputValue).to.equal("");
-          expect(wrapper.vm.passwordTextInput).to.equal("");
-          expect(wrapper.vm.passwordTextInputValue).to.equal("");
-          expect(wrapper.vm.selectInput).to.equal(0);
-          expect(wrapper.vm.selectInputValue).to.equal("");
-          expect(wrapper.vm.textAreaInput).to.equal("");
-          expect(wrapper.vm.textAreaInputValue).to.eql([]);
         });
 
         xit("送信ボタンを押すと確認ダイアログが表示される", () => {
@@ -721,6 +707,36 @@
             "Buzz",
             "FizzBuzz"
           ]);
+        });
+
+        describe("FizzBuzzFormResetButton", () => {
+          const wrapper = shallowMount(FizzBuzzFormRestButton,{
+            propsData: {
+              textInputValue: "Fizz",
+              radioInputValue: "1",
+              checkBoxInputValue: "Buzz",
+              passwordTextInputValue: "FizzBuzz",
+              selectInputValue: "5",
+              textAreaInputValue: ["1","3","5","15"],
+              message: "処理を実行しました",
+            }
+          });
+
+          it("ボタンが存在する", () => {
+            expect(wrapper.contains('button')).to.be.true;
+          });
+
+          it("リセットボタンを押すと入力した値が消去される", () => {
+            const button = wrapper.find('button[type="reset"]');
+            button.trigger("click");
+
+            expect(wrapper.vm.textInputValue).to.equal("");
+            expect(wrapper.vm.radioInputValue).to.equal("");
+            expect(wrapper.vm.checkBoxInputValue).to.equal("");
+            expect(wrapper.vm.passwordTextInputValue).to.equal("");
+            expect(wrapper.vm.selectInputValue).to.equal("");
+            expect(wrapper.vm.textAreaInputValue).to.eql([]);
+          });
         });
       });
     </script>
