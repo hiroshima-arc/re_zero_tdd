@@ -351,6 +351,54 @@
         `
       });
 
+      const FizzBuzzFormTextArea = Vue.component("fizz-buzz-form-text-area", {
+        props: {
+          textAreaInput: String,
+          textAreaInputValue: [],
+        },
+
+        methods: {
+          onChange(event) {
+            this.textAreaInput = event.target.value;
+            this.$emit('update:textAreaInput', this.textAreaInput);
+          },
+          fizzBuzzFormTextArea() {
+            const array = this.textAreaInput.split("\n");
+            this.textAreaInputValue = [];
+            array.map(v => {
+              this.textAreaInputValue.push(fizzBuzz(v));
+            });
+            alert(this.textAreaInputValue);
+          },
+        },
+
+        template:`
+        <div>
+        <p class="fizz-buzz-component __form __text-area">
+                    テキストエリア：<textarea
+                      rows="4"
+                      cols="40"
+                      name="textarea"
+                      class="__input--text-area"
+                      v-bind:value="textAreaInput"
+                      v-on:input="$emit('input', $event.target.value)"
+                      @change="onChange($event)"
+                    ></textarea>
+                  </p>
+
+                  <p>
+                    ボタン：<button
+                      type="button"
+                      name="button"
+                      @click="fizzBuzzFormTextArea()"
+                    >
+                      ボタン
+                    </button>
+                  </p>
+                  </div>
+                  `
+      })
+
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
         props: {
           radioInputValue: String,
@@ -385,14 +433,6 @@
         },
 
         methods: {
-          fizzBuzzFormTextArea() {
-            const array = this.textAreaInput.split("\n");
-            this.textAreaInputValue = [];
-            array.map(v => {
-              this.textAreaInputValue.push(fizzBuzz(v));
-            });
-            alert(this.textAreaInputValue);
-          },
           fizzBuzzFormReset(event) {
             this.textInputValue = "";
             this.radioInputValue = "";
@@ -469,31 +509,16 @@
                     v-bind:selectInputValue.sync="selectInputValue"
                   />
 
-                  <p>
-                    テキストエリア：<textarea
-                      rows="4"
-                      cols="40"
-                      name="textarea"
-                      class="__input--text-area"
-                      v-model="textAreaInput"
-                    ></textarea>
-                  </p>
-      
-                  <p>
-                    ボタン：<button
-                      type="button"
-                      name="button"
-                      @click="fizzBuzzFormTextArea()"
-                    >
-                      ボタン
-                    </button>
-                  </p>
-      
+                  <fizz-buzz-form-text-area
+                    v-bind:textAreaInput.sync="textAreaInput"
+                    v-bind:textAreaInputValue.sync="textAreaInputValue"
+                  />
+
                   <p>
                     リセットボタン：<button
                       type="reset"
                       name="buttonSubmit"
-                      @click="fizzBuzzFormReset()"
+                      @click="fizzBuzzFormReset"
                     >
                       リセット
                     </button>
@@ -534,20 +559,6 @@
 
         it("マークアップをレンダリングする", () => {
           expect(wrapper.html()).contains("<h1>FizzBuzzForm</h1>");
-        });
-
-        xit("テキストエリアに1\n3\n5\n15を入力したら1\nFizz\nBuzz\nFizzBuzzを表示する", () => {
-          const textArea = wrapper.find("textarea");
-          textArea.setValue("1\n3\n5\n15");
-          textArea.trigger("change");
-          const button = wrapper.find('button[type="button"]');
-          button.trigger("click");
-          expect(wrapper.vm.textAreaInputValue).to.eql([
-            "1",
-            "Fizz",
-            "Buzz",
-            "FizzBuzz"
-          ]);
         });
 
         it("リセットボタンを押すと入力した値が消去される", () => {
@@ -688,6 +699,28 @@
           select.setValue(5);
           select.trigger("change");
           expect(wrapper.vm.selectInputValue).to.equal("Buzz");
+        });
+      });
+
+      describe("FizzBuzzFormTextAreaComponent", () => {
+        const wrapper = shallowMount(FizzBuzzFormTextArea)
+
+        it("マークアップをレンダリングする", () => {
+          expect(wrapper.html()).contains('<p class="fizz-buzz-component __form __text-area">');
+        });
+
+        xit("テキストエリアに1\n3\n5\n15を入力したら1\nFizz\nBuzz\nFizzBuzzを表示する", () => {
+          const textArea = wrapper.find("textarea");
+          textArea.setValue("1\n3\n5\n15");
+          textArea.trigger("change");
+          const button = wrapper.find('button[type="button"]');
+          button.trigger("click");
+          expect(wrapper.vm.textAreaInputValue).to.eql([
+            "1",
+            "Fizz",
+            "Buzz",
+            "FizzBuzz"
+          ]);
         });
       });
     </script>
