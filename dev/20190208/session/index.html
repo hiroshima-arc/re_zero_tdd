@@ -41,8 +41,14 @@
             return array;
         }
 
-        function fizzBuzz() {
-            return 'Fizz';
+        function fizzBuzz(number) {
+            var result = number;
+
+            if (number % 3 === 0) {
+                result = 'Fizz';
+            }
+
+            return result;
         }
     </script>
 
