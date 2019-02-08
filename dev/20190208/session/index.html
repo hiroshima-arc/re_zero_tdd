@@ -46,6 +46,8 @@
 
             if (number % 3 === 0) {
                 result = 'Fizz';
+            } else if(number % 5 === 0) {
+                result = 'Buzz';
             }
 
             return result;
@@ -67,6 +69,10 @@
             test("3で割り切れる場合はFizzをプリントする", () => {
                 assert.equal('Fizz', fizzBuzz(3));
                 assert.equal(1, fizzBuzz(1));
+            });
+
+            test("5で割り切れる場合はBuzzをプリントする", () => {
+                assert.equal('Buzz', fizzBuzz(5));
             });
         });
 
