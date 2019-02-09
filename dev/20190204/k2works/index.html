@@ -777,6 +777,14 @@
             expect(wrapper.vm.textAreaInputValue).to.eql([]);
           });
         });
+
+        describe("FizzBuzzFormSubmitButton", () => {
+          const wrapper = shallowMount(FizzBuzzFormSubmitButton);
+
+          it("ボタンが存在する", () => {
+            expect(wrapper.contains('button')).to.be.true;
+          });
+        });
     </script>
 
     <script>
