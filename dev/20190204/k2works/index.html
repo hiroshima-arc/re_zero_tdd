@@ -738,7 +738,7 @@
       });
 
       describe("FizzBuzzFormTextAreaComponent", () => {
-        const wrapper = shallowMount(FizzBuzzFormTextArea)
+        const wrapper = mount(FizzBuzzFormTextArea)
 
         it("マークアップをレンダリングする", () => {
           expect(wrapper.html()).contains('<p class="fizz-buzz-component __form __text-area">');
@@ -808,6 +808,15 @@
             expect(wrapper.vm.textAreaInputValue).to.eql([]);
           });
         });
+
+        describe("FizzBuzzFormSubmitButton", () => {
+          const wrapper = shallowMount(FizzBuzzFormSubmitButton);
+
+          it("ボタンが存在する", () => {
+            expect(wrapper.contains('button')).to.be.true;
+          });
+        });
+
     </script>
 
     <script>
