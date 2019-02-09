@@ -352,6 +352,23 @@
         `
       });
 
+      const FizzBuzzFormButton = Vue.component("fizz-buzz-form-button", {
+        props: {
+          onClick: Function,
+        },
+        template:`
+        <p>
+                    ボタン：<button
+                      type="button"
+                      name="button"
+                      @click="onClick"
+                    >
+                      ボタン
+                    </button>
+                  </p>
+        `
+      });
+
       const FizzBuzzFormTextArea = Vue.component("fizz-buzz-form-text-area", {
         props: {
           textAreaInput: String,
@@ -386,16 +403,9 @@
                       @change="onChange($event)"
                     ></textarea>
                   </p>
-
-                  <p>
-                    ボタン：<button
-                      type="button"
-                      name="button"
-                      @click="fizzBuzzFormTextArea()"
-                    >
-                      ボタン
-                    </button>
-                  </p>
+                  <fizz-buzz-form-button
+                   v-bind:onClick="fizzBuzzFormTextArea"
+                  />
                   </div>
                   `
       });
@@ -434,16 +444,11 @@
       });
 
       const FizzBuzzFormSubmitButton = Vue.component("fizz-buzz-form-submit-button", {
-        props: {
-          onClick: Function,
-        },
-
         template:`
         <p>
                     送信ボタン：<button
                       type="submit"
                       name="buttonSubmit"
-                      @click="onClick"
                     >
                       送信
                     </button>
@@ -562,7 +567,6 @@
                   />
 
                   <fizz-buzz-form-submit-button
-                    onClick="fizzBuzzFormSubmit"
                   />
                 </fieldset>
               </form>
@@ -755,6 +759,26 @@
         });
       });
 
+      describe("FizzBuzzFormButton", () => {
+          const stub = sinon.stub();
+          const wrapper = shallowMount(FizzBuzzFormButton, {
+            propsData: {
+              onClick: stub
+            }
+          });
+
+          it("ボタンが存在する", () => {
+            expect(wrapper.contains('button')).to.be.true;
+          });
+
+          it("ボタンを押すコールバック関数が実行される", () => {
+            const button = wrapper.find('button');
+            button.trigger("click");
+
+            expect(stub.called).to.be.true;
+          });
+        });
+
       describe("FizzBuzzFormResetButton", () => {
           const wrapper = shallowMount(FizzBuzzFormRestButton,{
             propsData: {
@@ -782,26 +806,6 @@
             expect(wrapper.vm.passwordTextInputValue).to.equal("");
             expect(wrapper.vm.selectInputValue).to.equal("");
             expect(wrapper.vm.textAreaInputValue).to.eql([]);
-          });
-        });
-
-        describe("FizzBuzzFormSubmitButton", () => {
-          const stub = sinon.stub();
-          const wrapper = shallowMount(FizzBuzzFormSubmitButton, {
-            propsData: {
-              onClick: stub
-            }
-          });
-
-          it("ボタンが存在する", () => {
-            expect(wrapper.contains('button')).to.be.true;
-          });
-
-          it("ボタンを押すコールバック関数が実行される", () => {
-            const button = wrapper.find('button');
-            button.trigger("click");
-
-            expect(stub.called).to.be.true;
           });
         });
     </script>
