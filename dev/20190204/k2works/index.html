@@ -458,34 +458,28 @@
 
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
         props: {
+          textInput: String,
+          textInputValue: String,
+          radioInput: String,
           radioInputValue: String,
+          checkBoxInput: Number,
           checkBoxInputValue: String,
+          passwordTextInput: String,
           passwordTextInputValue: String,
+          selectInput: Number,
+          selectOptions: [],
           selectInputValue: String,
-          textAreaInputValue: []
+          textAreaInput: String,
+          textAreaInputValue: [],
+          message: String,
         },
 
         data() {
           return {
-            textInput: "",
-            textInputValue: "",
-            radioInput: "",
-            checkBoxInput: 0,
-            passwordTextInput: "",
-            selectInput: 0,
-            selectOptions: [
-              { text: '',  value: 0},
-              { text: '1', value: 1},
-              { text: '3', value: 3},
-              { text: '5', value: 5},
-              { text: '15', value: 15},
-            ],
-            textAreaInput: "",
             styleObject: {
               color: "black",
               "font-weight": "bold"
             },
-            message: ""
           };
         },
 
@@ -580,7 +574,22 @@
           el: "#app",
           template: `
                       <div>
-                        <fizz-buzz-form>
+                        <fizz-buzz-form
+                         textInput=""
+                         radioInput=""
+                         :checkBoxInput="0"
+                         passwordTextInput=""
+                         :selectInput="0"
+                         :selectOptions="[
+                          { text: '',  value: 0},
+                          { text: '1', value: 1},
+                          { text: '3', value: 3},
+                          { text: '5', value: 5},
+                          { text: '15', value: 15},
+                         ]"
+                         textAreaInput=""
+                         message=""
+                        />
                       </div>
                     `
         });
