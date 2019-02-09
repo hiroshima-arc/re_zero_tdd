@@ -432,6 +432,19 @@
         `
       });
 
+      const FizzBuzzFormSubmitButton = Vue.component("fizz-buzz-form-submit-button", {
+        template:`
+        <p>
+                    送信ボタン：<button
+                      type="submit"
+                      name="buttonSubmit"
+                    >
+                      送信
+                    </button>
+                  </p>
+        `
+      })
+
       const FizzBuzzForm = Vue.component("fizz-buzz-form", {
         props: {
           radioInputValue: String,
@@ -542,14 +555,8 @@
                     v-bind:message.sync="message"
                   />
 
-                  <p>
-                    送信ボタン：<button
-                      type="submit"
-                      name="buttonSubmit"
-                    >
-                      送信
-                    </button>
-                  </p>
+                  <fizz-buzz-form-submit-button
+                  />
                 </fieldset>
               </form>
             </article>
@@ -583,9 +590,40 @@
           expect(wrapper.html()).contains("<h1>FizzBuzzForm</h1>");
         });
 
-        xit("送信ボタンを押すと確認ダイアログが表示される", () => {
-          const button = wrapper.find('button[type="submit"]');
-          button.trigger("click");
+        it("テキストが存在する", () => {
+          expect(wrapper.contains('input[type="text"]')).to.be.true;
+        });
+
+        it("ラジオボタンが存在する", () => {
+          expect(wrapper.contains('input[type="radio"]')).to.be.true;
+        });
+
+        it("チェックボックスが存在する", () => {
+          expect(wrapper.contains('input[type="checkbox"]')).to.be.true;
+        });
+
+        it("パスワードが存在する", () => {
+          expect(wrapper.contains('input[type="password"]')).to.be.true;
+        });
+
+        it("セレクトが存在する", () => {
+          expect(wrapper.contains('select')).to.be.true;
+        });
+
+        it("テキストエリアが存在する", () => {
+          expect(wrapper.contains('textarea')).to.be.true;
+        });
+
+        it("ボタンが存在する", () => {
+          expect(wrapper.contains('button')).to.be.true;
+        });
+
+        it("リセットボタンが存在する", () => {
+          expect(wrapper.contains('button[type="reset"]')).to.be.true;
+        });
+
+        it("送信ボタンが存在する", () => {
+          expect(wrapper.contains('button[type="submit"]')).to.be.true;
         });
       });
 
@@ -708,8 +746,9 @@
             "FizzBuzz"
           ]);
         });
+      });
 
-        describe("FizzBuzzFormResetButton", () => {
+      describe("FizzBuzzFormResetButton", () => {
           const wrapper = shallowMount(FizzBuzzFormRestButton,{
             propsData: {
               textInputValue: "Fizz",
@@ -738,7 +777,6 @@
             expect(wrapper.vm.textAreaInputValue).to.eql([]);
           });
         });
-      });
     </script>
 
     <script>
