@@ -780,7 +780,7 @@
           );
         });
 
-        xit("テキストエリアに1\n3\n5\n15を入力したら1\nFizz\nBuzz\nFizzBuzzを表示する", () => {
+        it("テキストエリアに1\n3\n5\n15を入力したら1\nFizz\nBuzz\nFizzBuzzを表示する", () => {
           const textArea = wrapper.find("textarea");
           textArea.setValue("1\n3\n5\n15");
           textArea.trigger("change");
