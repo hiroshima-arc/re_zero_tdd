@@ -11,6 +11,7 @@
     />
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/7.2.3/sinon.min.js"></script>
     <script src="https://cdn.rawgit.com/vuejs/vue/dev/dist/vue.min.js"></script>
     <script src="https://cdn.rawgit.com/vuejs/vue/dev/packages/vue-template-compiler/browser.js"></script>
     <script src="https://cdn.rawgit.com/vuejs/vue-test-utils/dev/packages/test-utils/dist/vue-test-utils.iife.js"></script>
@@ -433,11 +434,16 @@
       });
 
       const FizzBuzzFormSubmitButton = Vue.component("fizz-buzz-form-submit-button", {
+        props: {
+          onClick: Function,
+        },
+
         template:`
         <p>
                     送信ボタン：<button
                       type="submit"
                       name="buttonSubmit"
+                      @click="onClick"
                     >
                       送信
                     </button>
@@ -556,6 +562,7 @@
                   />
 
                   <fizz-buzz-form-submit-button
+                    onClick="fizzBuzzFormSubmit"
                   />
                 </fieldset>
               </form>
@@ -779,10 +786,22 @@
         });
 
         describe("FizzBuzzFormSubmitButton", () => {
-          const wrapper = shallowMount(FizzBuzzFormSubmitButton);
+          const stub = sinon.stub();
+          const wrapper = shallowMount(FizzBuzzFormSubmitButton, {
+            propsData: {
+              onClick: stub
+            }
+          });
 
           it("ボタンが存在する", () => {
             expect(wrapper.contains('button')).to.be.true;
+          });
+
+          it("ボタンを押すコールバック関数が実行される", () => {
+            const button = wrapper.find('button');
+            button.trigger("click");
+
+            expect(stub.called).to.be.true;
           });
         });
     </script>

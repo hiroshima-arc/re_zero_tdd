@@ -52,3 +52,5 @@ livereloadx -s
 - [ンポーネントで v-model を使う](https://jp.vuejs.org/v2/guide/components.html#%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%81%A7-v-model-%E3%82%92%E4%BD%BF%E3%81%86)
 - [.sync 修飾子](https://jp.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A3%BE%E5%AD%90)
 - [親コンポーネントと子コンポーネントで双方向バインディングする](https://qiita.com/Sa2Knight/items/544b3f157108b96033fe)
+- [SINON.JS](https://sinonjs.org/)
+- [Sinon.JS でテストダブルを理解する](https://qiita.com/ringtail003/items/7c16b85e7031bd1979ef#%E3%82%B9%E3%82%BF%E3%83%96%E3%81%A7-order-%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%92%E6%A4%9C%E8%A8%BC%E3%81%99%E3%82%8B)
