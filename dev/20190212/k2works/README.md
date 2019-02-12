@@ -1,5 +1,7 @@
 # 20190212
 
+[リファクタリングPowerByひむひむ](https://github.com/hiroshima-arc/re_zero_tdd/pull/57)
+
 ## 概要
 
 ### 参加メンバー
