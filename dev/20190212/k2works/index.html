@@ -429,22 +429,16 @@
 
     methods: {
       fizzBuzzUpDownUp: function () {
-        let fizzBuzzUpDownCount = Number.parseInt(this.count);
-        fizzBuzzUpDownCount += 1;
-        const count = fizzBuzzUpDownCount;
-        this.message = fizzBuzz(count);
-        this.count = count;
+        this.count = this.count + 1;
+        this.message = fizzBuzz(this.count);
       },
       fizzBuzzUpDownDown: function () {
-        let fizzBuzzUpDownCount = Number.parseInt(this.count);
-        if (fizzBuzzUpDownCount === 0) {
+        if (this.count <= 0) {
           this.count = 0;
         } else {
-          fizzBuzzUpDownCount -= 1;
+          this.count = this.count - 1;
         }
-        const count = fizzBuzzUpDownCount;
-        this.message = fizzBuzz(count);
-        this.count = count;
+        this.message = fizzBuzz(this.count);
       }
 
     },
@@ -521,7 +515,7 @@
             <div>
             <fizz-buzz-call id="fizz-buzz-component__article--call"/>
             <fizz-buzz-print id="fizz-buzz-component__article--print"/>
-            <fizz-buzz-up-down id="fizz-buzz-component__article--up-down" count=0 message="Ready"/>
+            <fizz-buzz-up-down id="fizz-buzz-component__article--up-down" v-bind:count="0" message="Ready"/>
             <fizz-buzz-iterate id="fizz-buzz-component__article--iterate"/>
             </div>
             `
