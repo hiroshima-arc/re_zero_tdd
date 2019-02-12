@@ -491,10 +491,8 @@
 
         data() {
           return {
-            styleObject: {
-              color: "black",
-              "font-weight": "bold"
-            }
+            isSend: false,
+            isCanceled: false,
           };
         },
 
@@ -512,11 +510,13 @@
 
               console.log(params);
               alert(JSON.stringify(params));
-              this.styleObject.color = "green";
               this.message = "送信しました";
+              this.isSend = true;
+              this.isCanceled = false;
             } else {
-              this.styleObject.color = "red";
               this.message = "送信をキャンセルしました";
+              this.isSend = false;
+              this.isCanceled = true;
               return false;
             }
           }
@@ -527,7 +527,8 @@
            <h1>FizzBuzz</h1>
               <article>
               <h1>FizzBuzzForm</h1>
-              <div :style="styleObject">{{ this.message }}</div>
+              <div v-if="isSend" :style="{'color': 'green', 'font-weight': 'bold'}">{{ this.message }}</div>
+              <div v-if="isCanceled" :style="{'color': 'red', 'font-weight': 'bold'}">{{ this.message }}</div>
               <form
                 class="__form"
                 @submit.prevent="fizzBuzzFormSubmit()"
