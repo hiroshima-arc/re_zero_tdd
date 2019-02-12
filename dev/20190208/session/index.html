@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+</head>
+<body>
+    <h1>HTML5+CSS+JavaScript with TDD</h1>
+    <header>
+        <nav>
+            <h1>Menu</h1>
+            <ul>
+                <li><a href="index.html"></a>FizzBuzz</li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h1>FizzBuzz</h1>
+        <article></article>
+        <div id="mocha"></div>
+    </section>
+    <footer>
+        <p>Copyright</p>
+        <address>hiroshima.arc@gmail.com</address>
+    </footer>
+
+    <script>
+        FIZZ_BUZZ = 'FizzBuzz';
+        FIZZ = 'Fizz';
+        BUZZ = 'Buzz';
+
+        function geneateArray() {
+            var array = [];
+            [...Array(101).keys()].map((number) => {array.push(fizzBuzz(number))});
+            return array;
+        }
+
+        function fizzBuzzPrint() {
+            geneateArray().forEach((v) => {console.log(v)});
+        }
+
+        function isFizz(number) {
+            return number % 3 === 0;
+        }
+
+        function isBuzz(number) {
+            return number % 5 === 0;
+        }
+
+        function fizzBuzz(number) {
+            if(isFizz(number) && isBuzz(number)) return FIZZ_BUZZ;
+            if(isFizz(number)) return FIZZ;
+            if(isBuzz(number)) return BUZZ;
+
+            return number;
+        }
+    </script>
+
+    <script>
+        mocha.setup("tdd");
+
+        const assert = chai.assert;
+
+        suite("FizzBuzzTest", () => {
+            test("1から100までの数をプリントするただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+                var array = geneateArray();
+                assert.equal(1, array[1]);
+                assert.equal('Fizz', array[3]);
+                assert.equal('Buzz', array[5]);
+                assert.equal('FizzBuzz', array[15]);
+                assert.equal('Buzz', array[100]);
+            });
+
+            test("3で割り切れる場合はFizzをプリントする", () => {
+                assert.equal('Fizz', fizzBuzz(3));
+                assert.equal(1, fizzBuzz(1));
+            });
+
+            test("5で割り切れる場合はBuzzをプリントする", () => {
+                assert.equal('Buzz', fizzBuzz(5));
+            });
+
+            test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+                assert.equal('FizzBuzz', fizzBuzz(15));
+            });
+        });
+
+        mocha.run();
+    </script>
+</body>
+</html>
