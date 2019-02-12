@@ -344,17 +344,13 @@
 
     methods: {
       fizzBuzzCallOnClick: function () {
-        const value = Number.parseInt(this.input);
-        if (isNaN(value)) {
+        if (!this.input) {
           this.output = MESSAGE_ERROR_NUMBER;
           alert(this.output);
         } else {
-          this.output = fizzBuzz(value);
+          this.output = fizzBuzz(this.input);
           alert(this.output);
         }
-      },
-      fizzBuzzCallOnChange: function (event) {
-        this.input = event.target.value;
       }
     },
 
@@ -363,9 +359,8 @@
           <h1>FizzBuzzCall</h1>
           <input
             id="fizz-buzz-component__input--call"
-            type="text"
-            v-bind:value="input"
-            v-on:change="fizzBuzzCallOnChange"
+            type="number"
+            v-model.number="input"
             v-on:keyup.enter="fizzBuzzCallOnClick"
           />
           <input
@@ -392,15 +387,11 @@
 
     methods: {
       fizzBuzzPrintOnClick: function () {
-        const value = Number.parseInt(this.input);
-        if (isNaN(value)) {
+        if (!this.input) {
           this.message = MESSAGE_ERROR_NUMBER;
         } else {
-          this.message = fizzBuzz(value);
+          this.message = fizzBuzz(this.input);
         }
-      },
-      fizzBuzzPrintOnChange: function (event) {
-        this.input = event.target.value;
       }
     },
 
@@ -410,9 +401,8 @@
           <div id="fizz-buzz-component__print--message">{{message}}</div>
           <input
             id="fizz-buzz-component__input--print"
-            type="text"
-            v-bind:value="input"
-            v-on:change="fizzBuzzPrintOnChange"
+            type="number"
+            v-model.number="input"
             v-on:keyup.enter="fizzBuzzPrintOnClick"
           />
           <input
@@ -491,14 +481,10 @@
     },
 
     methods: {
-      fizzBuzzIterateOnChange: function () {
-        this.input = event.target.value;
-      },
       fizzBuzzIterateOnClick: function (event) {
-        const value = Number.parseInt(this.input);
-        if (isNaN(value)) return this.output = MESSAGE_ERROR_NUMBER;
-        if (value > 100) return this.output = MESSAGE_ERROR_MAX_NUMBER;
-        this.output = renderHtmlTable(iterate(value));
+        if (!this.input) return this.output = MESSAGE_ERROR_NUMBER;
+        if (this.input > 100) return this.output = MESSAGE_ERROR_MAX_NUMBER;
+        this.output = renderHtmlTable(iterate(this.input));
       }
     },
 
@@ -507,8 +493,8 @@
           <h1>FizzBuzzIterate</h1>
           <input
             id="fizz-buzz-component__input--iterate"
-            type="text"
-            v-on:change="fizzBuzzIterateOnChange"
+            type="number"
+            v-model.number="input"
             v-on:keyup.enter="fizzBuzzIterateOnClick"
           />
           <input
