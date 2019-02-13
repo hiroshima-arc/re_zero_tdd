@@ -88,22 +88,13 @@
 
 <body>
 <h1>HTML5+CSS+JavaScript with TDD</h1>
-<div class="nav-component">
-    <header>
-        <nav>
-            <h1>Menu</h1>
-            <div id="menu"></div>
-        </nav>
-    </header>
-</div>
+<div id="app"></div>
 <section>
-    <div class="fizz-buzz-component">
-        <h1>FizzBuzz</h1>
-        <div id="app"></div>
-        <article id="fizz-buzz-component__article--test">
-            <div id="mocha"></div>
-        </article>
-    </div>
+  <div class="fizz-buzz-component">
+    <article id="fizz-buzz-component__article--test">
+      <div id="mocha"></div>
+    </article>
+  </div>
 </section>
 <footer>
     <p>Copyright</p>
@@ -259,38 +250,26 @@
   const MESSAGE_ERROR_MAX_NUMBER = "100を超える数字は入力できません";
 
   const FizzBuzzMenu = Vue.component("fizz-buzz-menu", {
-    data() {
-      return {
-        callParams: {"call": "block", "print": "none", "updown": "none", "iterate": "none"},
-        printParams: {"call": "none", "print": "block", "updown": "none", "iterate": "none"},
-        updownParams: {"call": "none", "print": "none", "updown": "block", "iterate": "none"},
-        iterateParams: {"call": "none", "print": "none", "updown": "none", "iterate": "block"}
-      };
-    },
-
-    methods: {
-      fizzBuzzMenuOnClick: function (params) {
-        document.querySelector("#fizz-buzz-component__article--call").style.display = params.call;
-        document.querySelector("#fizz-buzz-component__article--print").style.display = params.print;
-        document.querySelector("#fizz-buzz-component__article--up-down").style.display = params.updown;
-        document.querySelector("#fizz-buzz-component__article--iterate").style.display = params.iterate;
-      }
+    props: {
+      onClick: {
+        type: Function,
+      },
     },
 
     template: `
                 <ul>
                     <li><a href="index.html">FizzBuzz</a></li>
                     <ul id="nav-component__sub-menu--fizz-buzz">
-                        <li id="nav-component__sub-menu--call" v-on:click="fizzBuzzMenuOnClick(callParams)">
+                        <li id="nav-component__sub-menu--call" v-on:click="onClick('call')">
                             <a href="#">FizzBuzzCall</a>
                         </li>
-                        <li id="nav-component__sub-menu--print" v-on:click="fizzBuzzMenuOnClick(printParams)">
+                        <li id="nav-component__sub-menu--print" v-on:click="onClick('print')">
                             <a href="#">FizzBuzzPrint</a>
                         </li>
-                        <li id="nav-component__sub-menu--up-down" v-on:click="fizzBuzzMenuOnClick(updownParams)">
+                        <li id="nav-component__sub-menu--up-down" v-on:click="onClick('up-down')">
                             <a href="#">FizzBuzzUpDown</a>
                         </li>
-                        <li id="nav-component__sub-menu--iterate" v-on:click="fizzBuzzMenuOnClick(iterateParams)">
+                        <li id="nav-component__sub-menu--iterate" v-on:click="onClick('iterate')">
                             <a href="#">FizzBuzzIterate</a>
                         </li>
                     </ul>
@@ -508,23 +487,43 @@
           `
   });
 
+
   document.addEventListener("DOMContentLoaded", () => {
     new Vue({
-      el: "#menu",
-      template: `
-            <fizz-buzz-menu/>
-            `
-    });
-    new Vue({
       el: "#app",
+
+      data: {
+        menu: 'all',
+      },
+
+      methods: {
+        changeMenu(menu) {
+          this.menu = menu;
+        }
+      },
+
       template: `
-            <div>
-            <fizz-buzz-call id="fizz-buzz-component__article--call"/>
-            <fizz-buzz-print id="fizz-buzz-component__article--print"/>
-            <fizz-buzz-up-down id="fizz-buzz-component__article--up-down" v-bind:count="0" message="Ready"/>
-            <fizz-buzz-iterate id="fizz-buzz-component__article--iterate" v-bind:input="0"/>
-            </div>
-            `
+        <div>
+          <div class="nav-component">
+            <header>
+              <nav>
+                <h1>Menu</h1>
+                <fizz-buzz-menu v-bind:onClick="changeMenu">
+              </nav>
+            </header>
+          </div>
+
+           <div>
+             <h1>FizzBuzz</h1>
+             <div class="fizz-buzz-component">
+                <fizz-buzz-call id="fizz-buzz-component__article--call" v-bind:input="0" v-if="menu == 'all' || menu == 'call'"/>
+                <fizz-buzz-print id="fizz-buzz-component__article--print" v-bind:input="0" v-if="menu == 'all' || menu == 'print'"/>
+                <fizz-buzz-up-down id="fizz-buzz-component__article--up-down" v-bind:count="0" message="Ready" v-if="menu == 'all' || menu == 'up-down'"/>
+                <fizz-buzz-iterate id="fizz-buzz-component__article--iterate" v-bind:input="0" v-if="menu == 'all' || menu == 'iterate'"/>
+             </div>
+           </div>
+          </div>
+       `
     });
   });
 </script>
