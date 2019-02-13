@@ -262,16 +262,16 @@
                 <ul>
                     <li><a href="index.html">FizzBuzz</a></li>
                     <ul id="nav-component__sub-menu--fizz-buzz">
-                        <li v-on:click="onClick('call')">
+                        <li @click="onClick('call')">
                             <a href="#">FizzBuzzCall</a>
                         </li>
-                        <li v-on:click="onClick('print')">
+                        <li @click="onClick('print')">
                             <a href="#">FizzBuzzPrint</a>
                         </li>
-                        <li v-on:click="onClick('up-down')">
+                        <li @click="onClick('up-down')">
                             <a href="#">FizzBuzzUpDown</a>
                         </li>
-                        <li v-on:click="onClick('iterate')">
+                        <li @click="onClick('iterate')">
                             <a href="#">FizzBuzzIterate</a>
                         </li>
                     </ul>
@@ -309,12 +309,12 @@
           <input
             type="number"
             v-model.number="input"
-            v-on:keyup.enter="fizzBuzzCallOnClick"
+            @keyup.enter="fizzBuzzCallOnClick"
           />
           <input
             type="button"
             value="Call"
-            v-on:click="fizzBuzzCallOnClick"
+            @click="fizzBuzzCallOnClick"
           />
           </article>
           `
@@ -349,12 +349,12 @@
           <input
             type="number"
             v-model.number="input"
-            v-on:keyup.enter="fizzBuzzPrintOnClick"
+            @keyup.enter="fizzBuzzPrintOnClick"
           />
           <input
             type="button"
             value="Print"
-            v-on:click="fizzBuzzPrintOnClick"
+            @click="fizzBuzzPrintOnClick"
           />
         </article>
           `
@@ -395,12 +395,12 @@
           <input
             type="button"
             value="-"
-            v-on:click="fizzBuzzUpDownDown"
+            @click="fizzBuzzUpDownDown"
           />
           <input
             type="button"
             value="+"
-            v-on:click="fizzBuzzUpDownUp"
+            @click="fizzBuzzUpDownUp"
           />
         </article>
           `
@@ -477,9 +477,9 @@
           <input
             type="number"
             v-model.number="input"
-            v-on:change="fizzBuzzIterateOnChange"
+            @change="fizzBuzzIterateOnChange"
           />
-          <fizz-buzz-table v-bind:array="array" />
+          <fizz-buzz-table :array="array" />
         </article>
           `
   });
@@ -505,7 +505,7 @@
             <header>
               <nav>
                 <h1>Menu</h1>
-                <fizz-buzz-menu v-bind:onClick="changeMenu">
+                <fizz-buzz-menu :onClick="changeMenu">
               </nav>
             </header>
           </div>
@@ -513,10 +513,10 @@
           <h1>FizzBuzz</h1>
           <section>
              <div class="fizz-buzz-component">
-                <fizz-buzz-call id="fizz-buzz-component__article--call" v-bind:input="0" v-if="menu == 'all' || menu == 'call'"/>
-                <fizz-buzz-print id="fizz-buzz-component__article--print" v-bind:input="0" v-if="menu == 'all' || menu == 'print'"/>
-                <fizz-buzz-up-down id="fizz-buzz-component__article--up-down" v-bind:count="0" message="Ready" v-if="menu == 'all' || menu == 'up-down'"/>
-                <fizz-buzz-iterate id="fizz-buzz-component__article--iterate" v-bind:input="0" v-if="menu == 'all' || menu == 'iterate'"/>
+                <fizz-buzz-call id="fizz-buzz-component__article--call" :input="0" v-if="menu == 'all' || menu == 'call'"/>
+                <fizz-buzz-print id="fizz-buzz-component__article--print" :input="0" v-if="menu == 'all' || menu == 'print'"/>
+                <fizz-buzz-up-down id="fizz-buzz-component__article--up-down" :count="0" message="Ready" v-if="menu == 'all' || menu == 'up-down'"/>
+                <fizz-buzz-iterate id="fizz-buzz-component__article--iterate" :input="0" v-if="menu == 'all' || menu == 'iterate'"/>
              </div>
           </section>
         </div>
