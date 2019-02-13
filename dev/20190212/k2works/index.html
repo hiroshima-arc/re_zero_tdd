@@ -90,11 +90,11 @@
 <h1>HTML5+CSS+JavaScript with TDD</h1>
 <div id="app"></div>
 <section>
-  <div class="fizz-buzz-component">
-    <article id="fizz-buzz-component__article--test">
-      <div id="mocha"></div>
-    </article>
-  </div>
+    <div class="fizz-buzz-component">
+        <article id="fizz-buzz-component__article--test">
+            <div id="mocha"></div>
+        </article>
+    </div>
 </section>
 <footer>
     <p>Copyright</p>
@@ -184,7 +184,7 @@
             input: 10
           }
         });
-        assert.equal(wrapper.html(), '<article><h1>FizzBuzzIterate</h1> <div></div> <input id="fizz-buzz-component__input--iterate" type="number"> <table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead> <tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr></tbody></table></article>');
+        assert.equal(wrapper.html(), "<article><h1>FizzBuzzIterate</h1> <div></div> <input id=\"fizz-buzz-component__input--iterate\" type=\"number\"> <table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead> <tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr></tbody></table></article>");
       });
       test("マイナス数字を入力したらエラーメッセージを表示する", () => {
         const wrapper = mount(FizzBuzzIterate, {
@@ -192,7 +192,7 @@
             input: 0
           }
         });
-        const input = wrapper.find('input');
+        const input = wrapper.find("input");
         input.setValue(-10);
         input.trigger("change");
         assert.equal(wrapper.props().message, "プラスの数字を入力してください");
@@ -203,7 +203,7 @@
             input: 0
           }
         });
-        const input = wrapper.find('input');
+        const input = wrapper.find("input");
         input.setValue(101);
         input.trigger("change");
         assert.equal(wrapper.props().message, "100を超える数字は入力できません");
@@ -422,10 +422,12 @@
     },
 
     computed: {
-      header() { return [...Array(this.maxColumn).keys()];}
+      header() {
+        return [...Array(this.maxColumn).keys()];
+      }
     },
 
-    template:`
+    template: `
     <table>
       <thead>
         <th v-for="i in header" :key="i">{{i + 1}}</th>
@@ -493,7 +495,7 @@
       el: "#app",
 
       data: {
-        menu: 'all',
+        menu: "all",
       },
 
       methods: {
