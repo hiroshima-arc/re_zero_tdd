@@ -118,23 +118,23 @@
     test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
       const array = iterate(100);
 
-      assert(array[0], 1);
-      assert(array[2], "Fizz");
-      assert(array[4], "Buzz");
-      assert(array[14], "FizzBuzz");
+      assert.equal(array[0], 1);
+      assert.equal(array[2], "Fizz");
+      assert.equal(array[4], "Buzz");
+      assert.equal(array[14], "FizzBuzz");
     });
 
     test("3で割り切れる場合はFizzをプリントする", () => {
-      assert(fizzBuzz(3), "Fizz");
-      assert(fizzBuzz(1), 1);
+      assert.equal(fizzBuzz(3), "Fizz");
+      assert.equal(fizzBuzz(1), 1);
     });
 
     test("5で割り切れる場合はBuzzをプリントする", () => {
-      assert(fizzBuzz(5), "Buzz");
+      assert.equal(fizzBuzz(5), "Buzz");
     });
 
     test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-      assert(fizzBuzz(15), "FizzBuzz");
+      assert.equal(fizzBuzz(15), "FizzBuzz");
     });
   });
 
@@ -149,7 +149,7 @@
           }
         });
         wrapper.find("#fizz-buzz-component__button--call").trigger("click");
-        assert(wrapper.props().output, "Fizz");
+        assert.equal(wrapper.props().output, "Fizz");
       });
     });
 
@@ -161,16 +161,7 @@
           }
         });
         wrapper.find("#fizz-buzz-component__button--print").trigger("click");
-        assert(wrapper.props().message, "Buzz");
-      });
-      test("数字以外を入力したらエラーメッセージを表示する", () => {
-        const wrapper = shallowMount(FizzBuzzPrint, {
-          propsData: {
-            input: "a"
-          }
-        });
-        wrapper.find("#fizz-buzz-component__button--print").trigger("click");
-        assert(wrapper.props().message, "数字を入力してください");
+        assert.equal(wrapper.props().message, "Buzz");
       });
     });
 
@@ -182,7 +173,7 @@
           }
         });
         wrapper.find("#fizz-buzz-component__button--up").trigger("click");
-        assert(wrapper.props().message, 1);
+        assert.equal(wrapper.props().message, 1);
       });
       test("-を押したらFizzBuzzを表示する", () => {
         const wrapper = shallowMount(FizzBuzzUpDown, {
@@ -191,7 +182,7 @@
           }
         });
         wrapper.find("#fizz-buzz-component__button--down").trigger("click");
-        assert(wrapper.props().message, "FizzBuzz");
+        assert.equal(wrapper.props().message, "FizzBuzz");
       });
     });
 
