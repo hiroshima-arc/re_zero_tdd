@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -132,6 +132,37 @@
 
   print();
 </script>
+<!-- ModelTest -->
+<script>
+  // Test
+  const assert = chai.assert;
+  mocha.setup("tdd");
+
+  suite("FizzBuzzTest", () => {
+    test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
+      const array = iterate(100);
+
+      assert.equal(array[0], 1);
+      assert.equal(array[2], "Fizz");
+      assert.equal(array[4], "Buzz");
+      assert.equal(array[14], "FizzBuzz");
+    });
+
+    test("3で割り切れる場合はFizzをプリントする", () => {
+      assert.equal(fizzBuzz(3), "Fizz");
+      assert.equal(fizzBuzz(1), 1);
+    });
+
+    test("5で割り切れる場合はBuzzをプリントする", () => {
+      assert.equal(fizzBuzz(5), "Buzz");
+    });
+
+    test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+      assert.equal(fizzBuzz(15), "FizzBuzz");
+    });
+  });
+</script>
+
 <!-- ViewModel -->
 <script>
   const MESSAGE_ERROR_NUMBER = "プラスの数字を入力してください";
@@ -813,95 +844,7 @@
               `
   });
 </script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    new Vue({
-      el: "#app",
-
-      data: {
-        menu: "all",
-      },
-
-      methods: {
-        changeMenu(menu) {
-          this.menu = menu;
-        }
-      },
-
-      template: `
-        <div>
-          <div class="nav-component">
-            <header>
-              <nav>
-                <h1>Menu</h1>
-                <fizz-buzz-menu :onClick="changeMenu">
-              </nav>
-            </header>
-          </div>
-
-          <h1>FizzBuzz</h1>
-          <section>
-             <div class="fizz-buzz-component">
-                <fizz-buzz-call :input="0" v-if="menu == 'all' || menu == 'call'"/>
-                <fizz-buzz-print :input="0" v-if="menu == 'all' || menu == 'print'"/>
-                <fizz-buzz-up-down :count="0" message="Ready" v-if="menu == 'all' || menu == 'up-down'"/>
-                <fizz-buzz-iterate :input="0" v-if="menu == 'all' || menu == 'iterate'"/>
-                <fizz-buzz-form
-                 textInput=""
-                 radioInput=""
-                 :checkBoxInput="0"
-                 passwordTextInput=""
-                 :selectInput="0"
-                 :selectOptions="[
-                  { text: '',  value: 0},
-                  { text: '1', value: 1},
-                  { text: '3', value: 3},
-                  { text: '5', value: 5},
-                  { text: '15', value: 15},
-                 ]"
-                 textAreaInput=""
-                 message=""
-                 v-if="menu == 'all' || menu == 'form'"
-                />
-             </div>
-          </section>
-        </div>
-       `
-    });
-  });
-</script>
-<!-- Test -->
-<script>
-  // Test
-  const assert = chai.assert;
-  mocha.setup("tdd");
-
-  suite("FizzBuzzTest", () => {
-    test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
-      const array = iterate(100);
-
-      assert.equal(array[0], 1);
-      assert.equal(array[2], "Fizz");
-      assert.equal(array[4], "Buzz");
-      assert.equal(array[14], "FizzBuzz");
-    });
-
-    test("3で割り切れる場合はFizzをプリントする", () => {
-      assert.equal(fizzBuzz(3), "Fizz");
-      assert.equal(fizzBuzz(1), 1);
-    });
-
-    test("5で割り切れる場合はBuzzをプリントする", () => {
-      assert.equal(fizzBuzz(5), "Buzz");
-    });
-
-    test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-      assert.equal(fizzBuzz(15), "FizzBuzz");
-    });
-  });
-</script>
-
+<!-- ViewModelTest -->
 <script>
   suite("FizzBuzzComponentTest", () => {
     const {shallowMount, mount} = VueTestUtils;
@@ -1229,6 +1172,65 @@
 
     it("ボタンが存在する", () => {
       expect(wrapper.contains("button")).to.be.true;
+    });
+  });
+</script>
+
+<!-- Execute -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    new Vue({
+      el: "#app",
+
+      data: {
+        menu: "all",
+      },
+
+      methods: {
+        changeMenu(menu) {
+          this.menu = menu;
+        }
+      },
+
+      template: `
+        <div>
+          <div class="nav-component">
+            <header>
+              <nav>
+                <h1>Menu</h1>
+                <fizz-buzz-menu :onClick="changeMenu">
+              </nav>
+            </header>
+          </div>
+
+          <h1>FizzBuzz</h1>
+          <section>
+             <div class="fizz-buzz-component">
+                <fizz-buzz-call :input="0" v-if="menu == 'all' || menu == 'call'"/>
+                <fizz-buzz-print :input="0" v-if="menu == 'all' || menu == 'print'"/>
+                <fizz-buzz-up-down :count="0" message="Ready" v-if="menu == 'all' || menu == 'up-down'"/>
+                <fizz-buzz-iterate :input="0" v-if="menu == 'all' || menu == 'iterate'"/>
+                <fizz-buzz-form
+                 textInput=""
+                 radioInput=""
+                 :checkBoxInput="0"
+                 passwordTextInput=""
+                 :selectInput="0"
+                 :selectOptions="[
+                  { text: '',  value: 0},
+                  { text: '1', value: 1},
+                  { text: '3', value: 3},
+                  { text: '5', value: 5},
+                  { text: '15', value: 15},
+                 ]"
+                 textAreaInput=""
+                 message=""
+                 v-if="menu == 'all' || menu == 'form'"
+                />
+             </div>
+          </section>
+        </div>
+       `
     });
   });
 </script>
