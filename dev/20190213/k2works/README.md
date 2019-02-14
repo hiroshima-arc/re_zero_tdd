@@ -16,13 +16,36 @@ Bootstrap 4 フロントエンド開発の教科書写経
 
 ## 開発
 
-開発サーバーの起動
+開発サーバーのセットアップ
 
 ```
-npm install -g livereloadx
-livereloadx -s
+npm init
+npm install --save-dev livereloadx
+```
+
+開発サーバーの起動
+```
+npm run server
 ```
 [http://localhost:35729/](http://localhost:35729/)
+
+E2Eテストのセットアップ
+
+```
+npm install --save-dev nightwatch
+npm install --save-dev webdriver-manager
+./node_modules/.bin/webdriver-manager update
+./node_modules/.bin/webdriver-manager update --chrome
+mkdir test
+mkdir test/logs
+mkdir test/reports
+mkdir test/screenshots
+```
+
+E2Eテストの実行
+```
+npm run test
+```
 
 ### ふりかえり
 
@@ -38,3 +61,6 @@ livereloadx -s
 - [Bootstrap](https://getbootstrap.com/)
 - [Placehold.jp](http://placehold.jp/)
 - [Emmet cheat sheet](https://docs.emmet.io/cheat-sheet/)
+- [Nightwatch.js](http://nightwatchjs.org/)
+- [Nightwatch.jsをE2Eテストフレームワークとして実プロジェクトに適用する時のtipsまとめ](https://blog.mmmcorp.co.jp/blog/2015/09/24/use-nightwatch/)
+
