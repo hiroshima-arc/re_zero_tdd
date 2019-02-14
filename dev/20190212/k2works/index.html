@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet"/>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/7.2.3/sinon.min.js"></script>
+    <script>document.write("<script src=\"http://" + (location.host || "localhost").split(":")[0] + ":35729/livereload.js?snipver=2\"></" + "script>");</script>
+    <script src="https://cdn.rawgit.com/vuejs/vue/dev/dist/vue.min.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue/dev/packages/vue-template-compiler/browser.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue-test-utils/dev/packages/test-utils/dist/vue-test-utils.iife.js"></script>
+    <script>
+      mocha.setup("tdd");
+    </script>
+    <style type="text/css">
+        body {
+            width: 810px;
+            margin: 0 auto;
+            background-color: ivory;
+        }
+
+        header {
+            width: 350px;
+        }
+
+        .nav-component {
+            width: 290px;
+            float: left;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        .nav-component a {
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-component a:link {
+            color: #ff0000;
+        }
+
+        .nav-component a:visited {
+            color: #a0a0a0;
+        }
+
+        .nav-component a:hover {
+            color: #80ff00;
+        }
+
+        .nav-component a:active {
+            color: #0000ff;
+        }
+
+        .fizz-buzz-component {
+            width: 500px;
+            float: right;
+            padding-left: 5px;
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+        }
+
+        .fizz-buzz-component table {
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .fizz-buzz-component th {
+            border: 1px solid black;
+            background-color: aqua;
+        }
+
+        .fizz-buzz-component td {
+            border: 1px solid black;
+        }
+
+        footer {
+            clear: both;
+            width: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<h1>HTML5+CSS+JavaScript with TDD</h1>
+<div id="app"></div>
+<section>
+    <div class="fizz-buzz-component">
+        <div id="mocha"></div>
+    </div>
+</section>
+<footer>
+    <p>Copyright</p>
+    <address>hiroshima.arc@gmail.com</address>
+</footer>
+<!-- Model -->
+<script>
+  function iterate(number) {
+    const array = [];
+    [...Array(number).keys()].map((count) => {
+      array.push(fizzBuzz(count + 1));
+    });
+    return array;
+  }
+
+  function print() {
+    iterate(100).forEach((each) => {
+      console.log(each);
+    });
+  }
+
+  function isFizz(number) {
+    return number % 3 === 0;
+  }
+
+  function isBuzz(number) {
+    return number % 5 === 0;
+  }
+
+  function fizzBuzz(number) {
+    if (isFizz(number) && isBuzz(number)) return "FizzBuzz";
+    if (isFizz(number)) return "Fizz";
+    if (isBuzz(number)) return "Buzz";
+    return number;
+  }
+
+  print();
+</script>
+<!-- ModelTest -->
+<script>
+  // Test
+  const assert = chai.assert;
+  mocha.setup("tdd");
+
+  suite("FizzBuzzTest", () => {
+    test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
+      const array = iterate(100);
+
+      assert.equal(array[0], 1);
+      assert.equal(array[2], "Fizz");
+      assert.equal(array[4], "Buzz");
+      assert.equal(array[14], "FizzBuzz");
+    });
+
+    test("3で割り切れる場合はFizzをプリントする", () => {
+      assert.equal(fizzBuzz(3), "Fizz");
+      assert.equal(fizzBuzz(1), 1);
+    });
+
+    test("5で割り切れる場合はBuzzをプリントする", () => {
+      assert.equal(fizzBuzz(5), "Buzz");
+    });
+
+    test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+      assert.equal(fizzBuzz(15), "FizzBuzz");
+    });
+  });
+</script>
+
+<!-- ViewModel -->
+<script>
+  const MESSAGE_ERROR_NUMBER = "プラスの数字を入力してください";
+  const MESSAGE_ERROR_MAX_NUMBER = "100を超える数字は入力できません";
+
+  const FizzBuzzMenu = Vue.component("fizz-buzz-menu", {
+    props: {
+      onClick: {
+        type: Function,
+      },
+    },
+
+    template: `
+                <ul>
+                    <li><a href="index.html">FizzBuzz</a></li>
+                    <ul id="nav-component__sub-menu--fizz-buzz">
+                        <li @click="onClick('call')">
+                            <a href="#">FizzBuzzCall</a>
+                        </li>
+                        <li @click="onClick('print')">
+                            <a href="#">FizzBuzzPrint</a>
+                        </li>
+                        <li @click="onClick('up-down')">
+                            <a href="#">FizzBuzzUpDown</a>
+                        </li>
+                        <li @click="onClick('iterate')">
+                            <a href="#">FizzBuzzIterate</a>
+                        </li>
+                         <li @click="onClick('form')">
+                            <a href="#">FizzBuzzForm</a>
+                        </li>
+                    </ul>
+                </ul>
+          `
+  });
+
+  const FizzBuzzCall = Vue.component("fizz-buzz-call", {
+    props: {
+      input: {
+        type: Number,
+        require: true
+      },
+      output: {
+        type: String,
+        require: true
+      }
+    },
+
+    methods: {
+      fizzBuzzCallOnClick: function () {
+        if (!this.input) {
+          this.output = MESSAGE_ERROR_NUMBER;
+          alert(this.output);
+        } else {
+          this.output = fizzBuzz(this.input);
+          alert(this.output);
+        }
+      }
+    },
+
+    template: `
+          <article>
+          <h1>FizzBuzzCall</h1>
+          <input
+            type="number"
+            v-model.number="input"
+            @keyup.enter="fizzBuzzCallOnClick"
+          />
+          <input
+            type="button"
+            value="Call"
+            @click="fizzBuzzCallOnClick"
+          />
+          </article>
+          `
+  });
+
+  const FizzBuzzPrint = Vue.component("fizz-buzz-print", {
+    props: {
+      input: {
+        type: Number,
+        require: true
+      },
+      message: {
+        type: String,
+        require: true
+      }
+    },
+
+    methods: {
+      fizzBuzzPrintOnClick: function () {
+        if (!this.input) {
+          this.message = MESSAGE_ERROR_NUMBER;
+        } else {
+          this.message = fizzBuzz(this.input);
+        }
+      }
+    },
+
+    template: `
+        <article>
+          <h1>FizzBuzzPrint</h1>
+          <div>{{message}}</div>
+          <input
+            type="number"
+            v-model.number="input"
+            @keyup.enter="fizzBuzzPrintOnClick"
+          />
+          <input
+            type="button"
+            value="Print"
+            @click="fizzBuzzPrintOnClick"
+          />
+        </article>
+          `
+  });
+
+  const FizzBuzzUpDown = Vue.component("fizz-buzz-up-down", {
+    props: {
+      count: {
+        type: Number,
+        require: true
+      },
+      message: {
+        type: String,
+        require: true
+      }
+    },
+
+    methods: {
+      fizzBuzzUpDownUp: function () {
+        this.count = this.count + 1;
+        this.message = fizzBuzz(this.count);
+      },
+      fizzBuzzUpDownDown: function () {
+        if (this.count <= 0) {
+          this.count = 0;
+        } else {
+          this.count = this.count - 1;
+        }
+        this.message = fizzBuzz(this.count);
+      }
+
+    },
+
+    template: `
+        <article>
+          <h1>FizzBuzzUpDown</h1>
+          <div>{{this.message}}</div>
+          <input
+            type="button"
+            value="-"
+            @click="fizzBuzzUpDownDown"
+          />
+          <input
+            type="button"
+            value="+"
+            @click="fizzBuzzUpDownUp"
+          />
+        </article>
+          `
+  });
+
+  const FizzBuzzTable = Vue.component("fizz-buzz-table", {
+    props: {
+      maxColumn: {
+        type: Number,
+        default: 10,
+      },
+      array: {
+        default: [],
+      }
+    },
+
+    computed: {
+      header() {
+        return [...Array(this.maxColumn).keys()];
+      }
+    },
+
+    template: `
+    <table>
+      <thead>
+        <th v-for="i in header" :key="i">{{i + 1}}</th>
+      </thead>
+        <tbody>
+          <tr v-for="row in array">
+            <td v-for="column in row">{{ column }}</td>
+          </tr>
+        </tbody>
+    </table>
+    `
+  });
+
+  function splitArrayBy10(array) {
+    const head = array.slice(0, 10);
+    const tail = array.slice(10);
+    if (tail.length > 0) return [head].concat(splitArrayBy10(tail));
+    return [head];
+  }
+
+  const FizzBuzzIterate = Vue.component("fizz-buzz-iterate", {
+    props: {
+      input: {
+        type: Number,
+        require: true
+      },
+      message: {
+        type: String
+      }
+    },
+
+    computed: {
+      array() {
+        if (this.input < 0 || this.input > 100) return;
+        return splitArrayBy10(iterate(this.input));
+      }
+    },
+
+    methods: {
+      fizzBuzzIterateOnChange: function (event) {
+        if (this.input < 0) return this.message = MESSAGE_ERROR_NUMBER;
+        if (this.input > 100) return this.message = MESSAGE_ERROR_MAX_NUMBER;
+        return this.message = "";
+      }
+    },
+
+    template: `
+        <article>
+          <h1>FizzBuzzIterate</h1>
+          <div>{{this.message}}</div>
+          <input
+            type="number"
+            v-model.number="input"
+            @change="fizzBuzzIterateOnChange"
+          />
+          <fizz-buzz-table :array="array" />
+        </article>
+          `
+  });
+</script>
+
+<script>
+  const FizzBuzzFormText = Vue.component("fizz-buzz-form-text", {
+    props: {
+      textInput: String,
+      textInputValue: String
+    },
+
+    methods: {
+      fizzBuzzFormText(event) {
+        this.textInput = event.target.value;
+        this.textInputValue = fizzBuzz(this.textInput);
+        this.$emit("update:textInput", this.textInput);
+        this.$emit("update:textInputValue", this.textInputValue);
+      }
+    },
+
+    template: `
+        <p class="fizz-buzz-component __form __input">
+          テキスト：<input
+                    class="--text"
+                    type="text"
+                    size="20"
+                    name="inputText"
+                    :textInput="textInput"
+                    :textInputValue="textInputValue"
+                    @input="$emit('input', $event.target.value)"
+                    @change="fizzBuzzFormText($event)"
+                  />
+          <label class="--label">{{ this.textInputValue }}</label>
+        </p>
+        `
+  });
+
+  const FizzBuzzFormRadio = Vue.component("fizz-buzz-form-radio", {
+    props: {
+      radioInput: String,
+      radioInputValue: String
+    },
+
+    methods: {
+      fizzBuzzFormRadio(event) {
+        this.radioInput = event.target.value;
+        this.radioInputValue = fizzBuzz(this.radioInput);
+        this.$emit("update:radioInput", this.radioInput);
+        this.$emit("update:radioInputValue", this.radioInputValue);
+      }
+    },
+
+    template: `
+        <p class="fizz-buzz-component __form __radio">
+                    ラジオボタン：
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio1"
+                      value="1"
+                      :raidoInput="radioInput"
+                      @click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio1">1</label>
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio2"
+                      value="3"
+                      :raidoInput="radioInput"
+                      @click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio2">3</label>
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio3"
+                      value="5"
+                      @click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio3">5</label>
+                    <input
+                      type="radio"
+                      name="inputRadio"
+                      id="inputRadio4"
+                      value="15"
+                      :raidoInput="radioInput"
+                      @click="fizzBuzzFormRadio(event)"
+                    /><label for="inputRadio4">15</label>
+                    <label class="--label">{{ this.radioInputValue }}</label>
+                  </p>
+                  `
+  });
+
+  const FizzBuzzFormCheckBox = Vue.component("fizz-buzz-form-check-box", {
+    props: {
+      checkBoxInput: String,
+      checkBoxInputValue: String
+    },
+
+    methods: {
+      fizzBuzzFormCheckBox(event) {
+        if (event.target.checked) {
+          this.checkBoxInput += Number.parseInt(event.target.value);
+        } else {
+          this.checkBoxInput -= Number.parseInt(event.target.value);
+        }
+        this.checkBoxInputValue = fizzBuzz(this.checkBoxInput);
+        if (this.checkBoxInput === 0) this.checkBoxInputValue = "";
+        this.$emit("update:checkBoxInput", this.checkBoxInput);
+        this.$emit("update:checkBoxInputValue", this.checkBoxInputValue);
+      }
+    },
+
+    template: `
+                  <p class="fizz-buzz-component __form __check-box">
+                    チェックボックス：
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck1"
+                      value="1"
+                      @click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck1">1</label>
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck2"
+                      value="3"
+                      @click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck2">3</label>
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck3"
+                      value="5"
+                      @click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck2">5</label>
+                    <input
+                      type="checkbox"
+                      name="inputCheck"
+                      id="inputCheck4"
+                      value="15"
+                      @click="fizzBuzzFormCheckBox($event)"
+                    /><label for="inputCheck2">15</label>
+                    <label class="--label">{{ this.checkBoxInputValue }}</label>
+                  </p>
+            `
+  });
+
+  const FizzBuzzFormPasswordText = Vue.component(
+    "fizz-buzz-form-password-text",
+    {
+      props: {
+        passwordTextInput: String,
+        passwordTextInputValue: String
+      },
+
+      methods: {
+        fizzBuzzFormPasswordText(event) {
+          this.passwordTextInput = event.target.value;
+          this.passwordTextInputValue = fizzBuzz(this.passwordTextInput);
+          this.$emit("update:passwordTextInput", this.passwordTextInput);
+          this.$emit(
+            "update:passwordTextInputValue",
+            this.passwordTextInput
+          );
+        }
+      },
+
+      template: `
+        <p class="fizz-buzz-component __form __password-text">
+                    パスワード：<input
+                      type="password"
+                      size="20"
+                      name="inputPassword"
+                      v-bind:value="passwordTextInput"
+                      v-on:input="$emit('input', $event.target.value)"
+                      v-on:change="fizzBuzzFormPasswordText($event)"
+                    />
+                    <label class="--label">{{ this.passwordTextInputValue }}</label>
+                  </p>
+        `
+    }
+  );
+
+  const fizzBuzzFormSelect = Vue.component("fizz-buzz-form-select", {
+    props: {
+      selectInput: Number,
+      selectInputValue: String,
+      selectOptions: []
+    },
+
+    methods: {
+      fizzBuzzFormSelect(event) {
+        this.selectInput = event.target.value;
+        this.selectInputValue = fizzBuzz(this.selectInput);
+        if (this.selectInput === "0") this.selectInputValue = "";
+        this.$emit("update:selectInput", this.selectInput);
+        this.$emit("update:selectInputValue", this.selectInputValue);
+      }
+    },
+
+    template: `
+        <p class="fizz-buzz-component __form __select">
+                    セレクト：<select
+                      v-model="selectInput"
+                      size="1"
+                      name="selectbox"
+                      @change="fizzBuzzFormSelect($event)"
+                    >
+                      <option v-for="option in selectOptions" :value="option.value">
+                       {{option.text}}
+                      </option>
+                    </select>
+                    <label class="--label">{{ this.selectInputValue }}</label>
+                  </p>
+        `
+  });
+
+  const FizzBuzzFormButton = Vue.component("fizz-buzz-form-button", {
+    props: {
+      onClick: Function
+    },
+    template: `
+        <p>
+                    ボタン：<button
+                      type="button"
+                      name="button"
+                      @click="onClick"
+                    >
+                      ボタン
+                    </button>
+                  </p>
+        `
+  });
+
+  const FizzBuzzFormTextArea = Vue.component("fizz-buzz-form-text-area", {
+    props: {
+      textAreaInput: String,
+      textAreaInputValue: []
+    },
+
+    methods: {
+      onChange(event) {
+        this.textAreaInput = event.target.value;
+        this.$emit("update:textAreaInput", this.textAreaInput);
+      },
+      fizzBuzzFormTextArea() {
+        const array = this.textAreaInput.split("\n");
+        this.textAreaInputValue = [];
+        array.map(v => {
+          this.textAreaInputValue.push(fizzBuzz(v));
+        });
+        alert(this.textAreaInputValue);
+      }
+    },
+
+    template: `
+        <div>
+        <p class="fizz-buzz-component __form __text-area">
+                    テキストエリア：<textarea
+                      rows="4"
+                      cols="40"
+                      name="textarea"
+                      class="__input--text-area"
+                      :value="textAreaInput"
+                      @input="$emit('input', $event.target.value)"
+                      @change="onChange($event)"
+                    ></textarea>
+                  </p>
+                  <fizz-buzz-form-button
+                   v-bind:onClick="fizzBuzzFormTextArea"
+                  />
+                  </div>
+                  `
+  });
+
+  const FizzBuzzFormRestButton = Vue.component(
+    "fizz-buzz-form-reset-button",
+    {
+      methods: {
+        fizzBuzzFormReset() {
+          this.textInputValue = "";
+          this.radioInputValue = "";
+          this.checkBoxInputValue = "";
+          this.passwordTextInputValue = "";
+          this.selectInputValue = "";
+          this.textAreaInputValue = [];
+          this.message = "";
+
+          this.$emit("update:textInputValue", this.textInputValue);
+          this.$emit("update:radioInputValue", this.radioInputValue);
+          this.$emit("update:checkBoxInputValue", this.checkBoxInputValue);
+          this.$emit(
+            "update:passwordTextInputValue",
+            this.passwordTextInputValue
+          );
+          this.$emit("update:selectInputValue", this.selectInputValue);
+          this.$emit("update:textAreaInputValue", this.textAreaInputValue);
+          this.$emit("update:message", this.message);
+        }
+      },
+      template: `
+        <p>
+                    リセットボタン：<button
+                      type="reset"
+                      name="buttonSubmit"
+                      @click="fizzBuzzFormReset"
+                    >
+                      リセット
+                    </button>
+                  </p>
+        `
+    }
+  );
+
+  const FizzBuzzFormSubmitButton = Vue.component(
+    "fizz-buzz-form-submit-button",
+    {
+      template: `
+        <p>
+                    送信ボタン：<button
+                      type="submit"
+                      name="buttonSubmit"
+                    >
+                      送信
+                    </button>
+                  </p>
+        `
+    }
+  );
+
+  const FizzBuzzForm = Vue.component("fizz-buzz-form", {
+    props: {
+      textInput: String,
+      textInputValue: String,
+      radioInput: String,
+      radioInputValue: String,
+      checkBoxInput: Number,
+      checkBoxInputValue: String,
+      passwordTextInput: String,
+      passwordTextInputValue: String,
+      selectInput: Number,
+      selectOptions: [],
+      selectInputValue: String,
+      textAreaInput: String,
+      textAreaInputValue: [],
+      message: String
+    },
+
+    data() {
+      return {
+        isSend: false,
+        isCanceled: false,
+      };
+    },
+
+    methods: {
+      fizzBuzzFormSubmit() {
+        if (confirm("送信してよろしいですか?")) {
+          const params = {
+            text: this.textInput,
+            radio: this.radioInput,
+            checkBox: this.checkBoxInput,
+            passwordText: this.passwordTextInput,
+            select: this.selectInput,
+            textArea: this.textAreaInput
+          };
+
+          console.log(params);
+          alert(JSON.stringify(params));
+          this.message = "送信しました";
+          this.isSend = true;
+          this.isCanceled = false;
+        } else {
+          this.message = "送信をキャンセルしました";
+          this.isSend = false;
+          this.isCanceled = true;
+          return false;
+        }
+      }
+    },
+
+    template: `
+        <div>
+              <article>
+              <h1>FizzBuzzForm</h1>
+              <div v-if="isSend" :style="{'color': 'green', 'font-weight': 'bold'}">{{ this.message }}</div>
+              <div v-if="isCanceled" :style="{'color': 'red', 'font-weight': 'bold'}">{{ this.message }}</div>
+              <form
+                class="__form"
+                @submit.prevent="fizzBuzzFormSubmit()"
+                name="fizzBuzzForm"
+              >
+                <fieldset>
+                  <fizz-buzz-form-text
+                    :textInput.sync="textInput"
+                    :textInputValue.sync="textInputValue"
+                  />
+
+                  <fizz-buzz-form-radio
+                    :radioInput.sync="radioInput"
+                    :radioInputValue.sync="radioInputValue"
+                  />
+
+                  <fizz-buzz-form-check-box
+                    :checkBoxInput.sync="checkBoxInput"
+                    :checkBoxInputValue.sync="checkBoxInputValue"
+                  />
+
+                  <fizz-buzz-form-password-text
+                    :passwordTextInput.sync="passwordTextInput"
+                    :passwordTextInputValue.sync="passwordTextInputValue"
+                  />
+
+                  <fizz-buzz-form-select
+                    :selectInput.sync="selectInput"
+                    :selectOptions="selectOptions"
+                    :selectInputValue.sync="selectInputValue"
+                  />
+
+                  <fizz-buzz-form-text-area
+                    :textAreaInput.sync="textAreaInput"
+                    :textAreaInputValue.sync="textAreaInputValue"
+                  />
+
+                  <fizz-buzz-form-reset-button
+                    :textInputValue.sync="textInputValue"
+                    :radioInputValue.sync="radioInputValue"
+                    :checkBoxInputValue.sync="checkBoxInputValue"
+                    :passwordTextInputValue.sync="passwordTextInputValue"
+                    :selectInputValue.sync="selectInputValue"
+                    :textAreaInputValue.sync="textAreaInputValue"
+                    :message.sync="message"
+                  />
+
+                  <fizz-buzz-form-submit-button
+                  />
+                </fieldset>
+              </form>
+            </article>
+            </div>
+              `
+  });
+</script>
+<!-- ViewModelTest -->
+<script>
+  suite("FizzBuzzComponentTest", () => {
+    const {shallowMount, mount} = VueTestUtils;
+
+    suite("FizzBuzzCallTest", () => {
+      test("3を入力したらFizzを表示する", () => {
+        const wrapper = shallowMount(FizzBuzzCall, {
+          propsData: {
+            input: 3
+          }
+        });
+        const buttonInput = wrapper.find('input[type="button"]');
+        buttonInput.trigger("click");
+        assert.equal(wrapper.props().output,"Fizz");
+      });
+    });
+
+    suite("FizzBuzzPrintTest", () => {
+      test("5を入力したらBuzzを表示する", () => {
+        const wrapper = shallowMount(FizzBuzzPrint, {
+          propsData: {
+            input: 5
+          }
+        });
+        const buttonInput = wrapper.find('input[type="button"]');
+        buttonInput.trigger("click");
+        assert.equal(wrapper.props().message,"Buzz");
+      });
+    });
+
+    suite("FizzBuzzUpDownTest", () => {
+      test("+を押したら1を表示する", () => {
+        const wrapper = shallowMount(FizzBuzzUpDown, {
+          propsData: {
+            count: 0
+          }
+        });
+        const buttonInput = wrapper.findAll('input[type="button"]');
+        buttonInput.at(1).trigger("click");
+        assert.equal(wrapper.props().message, 1);
+      });
+      test("-を押したらFizzBuzzを表示する", () => {
+        const wrapper = shallowMount(FizzBuzzUpDown, {
+          propsData: {
+            count: 0
+          }
+        });
+        const buttonInput = wrapper.findAll('input[type="button"]');
+        buttonInput.at(0).trigger("click");
+        assert.equal(wrapper.props().message, "FizzBuzz");
+      });
+    });
+
+    suite("FizzBuzzIterateTest", () => {
+      test("10を入力したらテーブルを表示する", () => {
+        const wrapper = mount(FizzBuzzIterate, {
+          propsData: {
+            input: 10
+          }
+        });
+        assert.equal(wrapper.html(), "<article><h1>FizzBuzzIterate</h1> <div></div> <input type=\"number\"> <table><thead><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></thead> <tbody><tr><td>1</td><td>2</td><td>Fizz</td><td>4</td><td>Buzz</td><td>Fizz</td><td>7</td><td>8</td><td>Fizz</td><td>Buzz</td></tr></tbody></table></article>");
+      });
+      test("マイナス数字を入力したらエラーメッセージを表示する", () => {
+        const wrapper = mount(FizzBuzzIterate, {
+          propsData: {
+            input: 0
+          }
+        });
+        const input = wrapper.find("input");
+        input.setValue(-10);
+        input.trigger("change");
+        assert.equal(wrapper.props().message, "プラスの数字を入力してください");
+      });
+      test("100以上を入力したらエラーメッセージを表示する", () => {
+        const wrapper = mount(FizzBuzzIterate, {
+          propsData: {
+            input: 0
+          }
+        });
+        const input = wrapper.find("input");
+        input.setValue(101);
+        input.trigger("change");
+        assert.equal(wrapper.props().message, "100を超える数字は入力できません");
+      });
+    });
+  });
+</script>
+
+<script>
+  mocha.setup("bdd");
+
+  const expect = chai.expect;
+
+  const { mount, shallowMount } = VueTestUtils;
+
+  describe("FizzBuzzFormComponent", () => {
+    const wrapper = mount(FizzBuzzForm);
+
+    it("マークアップをレンダリングする", () => {
+      expect(wrapper.html()).contains("<h1>FizzBuzzForm</h1>");
+    });
+
+    it("テキストが存在する", () => {
+      expect(wrapper.contains('input[type="text"]')).to.be.true;
+    });
+
+    it("ラジオボタンが存在する", () => {
+      expect(wrapper.contains('input[type="radio"]')).to.be.true;
+    });
+
+    it("チェックボックスが存在する", () => {
+      expect(wrapper.contains('input[type="checkbox"]')).to.be.true;
+    });
+
+    it("パスワードが存在する", () => {
+      expect(wrapper.contains('input[type="password"]')).to.be.true;
+    });
+
+    it("セレクトが存在する", () => {
+      expect(wrapper.contains("select")).to.be.true;
+    });
+
+    it("テキストエリアが存在する", () => {
+      expect(wrapper.contains("textarea")).to.be.true;
+    });
+
+    it("ボタンが存在する", () => {
+      expect(wrapper.contains("button")).to.be.true;
+    });
+
+    it("リセットボタンが存在する", () => {
+      expect(wrapper.contains('button[type="reset"]')).to.be.true;
+    });
+
+    it("送信ボタンが存在する", () => {
+      expect(wrapper.contains('button[type="submit"]')).to.be.true;
+    });
+  });
+
+  describe("FizzBuzzFormTextComponent", () => {
+    const wrapper = shallowMount(FizzBuzzFormText);
+
+    it("マークアップをレンダリングする", () => {
+      expect(wrapper.html()).contains(
+        '<p class="fizz-buzz-component __form __input">'
+      );
+    });
+
+    it("テキストに3を入力したらFizzを表示する", () => {
+      const textInput = wrapper.find('input[type="text"]');
+      textInput.setValue(3);
+      textInput.trigger("change");
+      expect(wrapper.vm.textInputValue).to.equal("Fizz");
+    });
+  });
+
+  describe("FizzBuzzFormRadioComponent", () => {
+    const wrapper = shallowMount(FizzBuzzFormRadio);
+
+    it("マークアップをレンダリングする", () => {
+      expect(wrapper.html()).contains(
+        '<p class="fizz-buzz-component __form __radio">'
+      );
+    });
+
+    it("ラジオボタンの5を選択したらBuzzを表示する", () => {
+      const radioInput = wrapper.findAll('input[type="radio"]');
+      radioInput.at(2).trigger("click");
+      expect(wrapper.vm.radioInputValue).to.equal("Buzz");
+    });
+  });
+
+  describe("FizzBuzzFormCheckBoxComponent", () => {
+    const wrapper = shallowMount(FizzBuzzFormCheckBox, {
+      propsData: {
+        checkBoxInput: 0
+      }
+    });
+
+    it("マークアップをレンダリングする", () => {
+      expect(wrapper.html()).contains(
+        '<p class="fizz-buzz-component __form __check-box">'
+      );
+    });
+
+    it("チェックボックスの1と15を選択したら16を表示する", () => {
+      wrapper.setProps({ checkBoxInput: 0 });
+
+      const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
+      checkBoxInput.at(0).trigger("click");
+      checkBoxInput.at(3).trigger("click");
+      expect(wrapper.vm.checkBoxInputValue).to.equal(16);
+    });
+
+    it("チェックボックスの15を選択したらFizzBuzzを表示する", () => {
+      wrapper.setProps({ checkBoxInput: 0 });
+
+      const checkBoxInput = wrapper.findAll('input[type="checkbox"]');
+      checkBoxInput.at(3).trigger("click");
+      expect(wrapper.vm.checkBoxInputValue).to.equal("FizzBuzz");
+    });
+  });
+
+  describe("FizzBuzzFormPasswordTextComponent", () => {
+    const wrapper = shallowMount(FizzBuzzFormPasswordText);
+
+    it("マークアップをレンダリングする", () => {
+      expect(wrapper.html()).contains(
+        '<p class="fizz-buzz-component __form __password-text">'
+      );
+    });
+
+    it("パスワードに15を入力したらFizzBuzzを表示する", () => {
+      const passwordTextInput = wrapper.find('input[type="password"]');
+      passwordTextInput.setValue(15);
+      passwordTextInput.trigger("change");
+      expect(wrapper.vm.passwordTextInputValue).to.equal("FizzBuzz");
+    });
+  });
+
+  describe("FizzBuzzFormSelectComponent", () => {
+    const wrapper = shallowMount(fizzBuzzFormSelect, {
+      propsData: {
+        selectInput: 0,
+        selectOptions: [
+          { text: "", value: 0 },
+          { text: "1", value: 1 },
+          { text: "3", value: 3 },
+          { text: "5", value: 5 },
+          { text: "15", value: 15 }
+        ]
+      }
+    });
+
+    it("マークアップをレンダリングする", () => {
+      expect(wrapper.html()).contains(
+        '<p class="fizz-buzz-component __form __select">'
+      );
+    });
+
+    it("セレクトの5を選択したらBuzzを表示する", () => {
+      const select = wrapper.find("select");
+      select.setValue(5);
+      select.trigger("change");
+      expect(wrapper.vm.selectInputValue).to.equal("Buzz");
+    });
+  });
+
+  describe("FizzBuzzFormTextAreaComponent", () => {
+    const wrapper = mount(FizzBuzzFormTextArea);
+
+    it("マークアップをレンダリングする", () => {
+      expect(wrapper.html()).contains(
+        '<p class="fizz-buzz-component __form __text-area">'
+      );
+    });
+
+    it("テキストエリアに1\n3\n5\n15を入力したら1\nFizz\nBuzz\nFizzBuzzを表示する", () => {
+      const textArea = wrapper.find("textarea");
+      textArea.setValue("1\n3\n5\n15");
+      textArea.trigger("change");
+      const button = wrapper.find('button[type="button"]');
+      button.trigger("click");
+      expect(wrapper.vm.textAreaInputValue).to.eql([
+        "1",
+        "Fizz",
+        "Buzz",
+        "FizzBuzz"
+      ]);
+    });
+  });
+
+  describe("FizzBuzzFormButton", () => {
+    const stub = sinon.stub();
+    const wrapper = shallowMount(FizzBuzzFormButton, {
+      propsData: {
+        onClick: stub
+      }
+    });
+
+    it("ボタンが存在する", () => {
+      expect(wrapper.contains("button")).to.be.true;
+    });
+
+    it("ボタンを押すコールバック関数が実行される", () => {
+      const button = wrapper.find("button");
+      button.trigger("click");
+
+      expect(stub.called).to.be.true;
+    });
+  });
+
+  describe("FizzBuzzFormResetButton", () => {
+    const wrapper = shallowMount(FizzBuzzFormRestButton, {
+      propsData: {
+        textInputValue: "Fizz",
+        radioInputValue: "1",
+        checkBoxInputValue: "Buzz",
+        passwordTextInputValue: "FizzBuzz",
+        selectInputValue: "5",
+        textAreaInputValue: ["1", "3", "5", "15"],
+        message: "処理を実行しました"
+      }
+    });
+
+    it("ボタンが存在する", () => {
+      expect(wrapper.contains("button")).to.be.true;
+    });
+
+    it("リセットボタンを押すと入力した値が消去される", () => {
+      const button = wrapper.find('button[type="reset"]');
+      button.trigger("click");
+
+      expect(wrapper.vm.textInputValue).to.equal("");
+      expect(wrapper.vm.radioInputValue).to.equal("");
+      expect(wrapper.vm.checkBoxInputValue).to.equal("");
+      expect(wrapper.vm.passwordTextInputValue).to.equal("");
+      expect(wrapper.vm.selectInputValue).to.equal("");
+      expect(wrapper.vm.textAreaInputValue).to.eql([]);
+    });
+  });
+
+  describe("FizzBuzzFormSubmitButton", () => {
+    const wrapper = shallowMount(FizzBuzzFormSubmitButton);
+
+    it("ボタンが存在する", () => {
+      expect(wrapper.contains("button")).to.be.true;
+    });
+  });
+</script>
+
+<!-- Execute -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    new Vue({
+      el: "#app",
+
+      data: {
+        menu: "all",
+      },
+
+      methods: {
+        changeMenu(menu) {
+          this.menu = menu;
+        }
+      },
+
+      template: `
+        <div>
+          <div class="nav-component">
+            <header>
+              <nav>
+                <h1>Menu</h1>
+                <fizz-buzz-menu :onClick="changeMenu">
+              </nav>
+            </header>
+          </div>
+
+          <h1>FizzBuzz</h1>
+          <section>
+             <div class="fizz-buzz-component">
+                <fizz-buzz-call :input="0" v-if="menu == 'all' || menu == 'call'"/>
+                <fizz-buzz-print :input="0" v-if="menu == 'all' || menu == 'print'"/>
+                <fizz-buzz-up-down :count="0" message="Ready" v-if="menu == 'all' || menu == 'up-down'"/>
+                <fizz-buzz-iterate :input="0" v-if="menu == 'all' || menu == 'iterate'"/>
+                <fizz-buzz-form
+                 textInput=""
+                 radioInput=""
+                 :checkBoxInput="0"
+                 passwordTextInput=""
+                 :selectInput="0"
+                 :selectOptions="[
+                  { text: '',  value: 0},
+                  { text: '1', value: 1},
+                  { text: '3', value: 3},
+                  { text: '5', value: 5},
+                  { text: '15', value: 15},
+                 ]"
+                 textAreaInput=""
+                 message=""
+                 v-if="menu == 'all' || menu == 'form'"
+                />
+             </div>
+          </section>
+        </div>
+       `
+    });
+  });
+</script>
+
+<script>
+  mocha.run();
+</script>
+
+</body>
+
+</html>
