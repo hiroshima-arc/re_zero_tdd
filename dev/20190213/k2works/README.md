@@ -37,3 +37,4 @@ livereloadx -s
 - [本書掲載サンプルコード](https://wings.msn.to/index.php/-/A-07/978-4-297-10020-9/)
 - [Bootstrap](https://getbootstrap.com/)
 - [Placehold.jp](http://placehold.jp/)
+- [Emmet cheat sheet](https://docs.emmet.io/cheat-sheet/)
