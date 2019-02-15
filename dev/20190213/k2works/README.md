@@ -32,6 +32,7 @@ npm run server
 E2Eテストのセットアップ
 
 ```
+npm install --save-dev express
 npm install --save-dev nightwatch
 npm install --save-dev webdriver-manager
 ./node_modules/.bin/webdriver-manager update
