@@ -26,6 +26,11 @@ module.exports = {
       .click("#raido3")
       .click("#category option[value='category2']")
       .setValue("#message", "あああ\nいいい\nううう")
+      .assert.value("#name", "お名前")
+      .assert.value("#email", "mail@hoge.com")
+      .assert.value("#raido3", "answer3")
+      .assert.value("#category", "category2")
+      .assert.value("#message","あああ\nいいい\nううう")
       .click("body > main > div.py-3 > div > form > div.form-group.row.justify-content-end > div > button")
       .end();
   },
