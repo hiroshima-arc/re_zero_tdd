@@ -63,4 +63,6 @@ npm run test
 - [Emmet cheat sheet](https://docs.emmet.io/cheat-sheet/)
 - [Nightwatch.js](http://nightwatchjs.org/)
 - [Nightwatch.jsをE2Eテストフレームワークとして実プロジェクトに適用する時のtipsまとめ](https://blog.mmmcorp.co.jp/blog/2015/09/24/use-nightwatch/)
+- [Learn Nightwatch: Complete Beginners Tutorial](https://github.com/dwyl/learn-nightwatch)
+
 
