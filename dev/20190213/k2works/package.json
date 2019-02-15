@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "livereloadx -s",
-    "test": "nightwatch test/index.js"
+    "test": "nightwatch"
   },
   "author": "",
   "license": "ISC",
