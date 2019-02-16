@@ -2,10 +2,13 @@ import unittest
 
 
 class TestFizzBuzz(unittest.TestCase):
-    def test_1から100までの数をプリントする(self):
+    def test_1から100までの数をプリントする_ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方割り切れる場合はFizzBuzzをプリントする(self):
         array = FizzBuzz.generate_array()
         self.assertEqual(1, array[0])
-        self.assertEqual(100, array[-1])
+        self.assertEqual('Fizz', array[2])
+        self.assertEqual('Buzz', array[4])
+        self.assertEqual('FizzBuzz', array[14])
+        self.assertEqual('Buzz', array[-1])
         FizzBuzz.print()
 
     def test_3で割り切れる場合はFizzをプリントする(self):
@@ -25,7 +28,7 @@ class FizzBuzz:
         array = []
 
         for i in range(100):
-            array.append(i + 1)
+            array.append(FizzBuzz.execute(i + 1))
 
         return array
 
