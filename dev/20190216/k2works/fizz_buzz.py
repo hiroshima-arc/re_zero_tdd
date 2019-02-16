@@ -12,6 +12,9 @@ class TestFizzBuzz(unittest.TestCase):
         self.assertEqual('Fizz', FizzBuzz.execute(3))
         self.assertEqual(1, FizzBuzz.execute(1))
 
+    def test_5で割り切れる場合はBuzzをプリントする(self):
+        self.assertEquals('Buzz', FizzBuzz.execute(5))
+
 
 class FizzBuzz:
     @staticmethod
@@ -34,6 +37,8 @@ class FizzBuzz:
 
         if number % 3 == 0:
             result = 'Fizz'
+        elif number % 5 == 0:
+            result = 'Buzz'
 
         return result
 
