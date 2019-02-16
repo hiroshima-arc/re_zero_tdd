@@ -35,11 +35,11 @@
   suite("FizzBuzzTest", () => {
     test("1から100までの数をプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方割り切れる場合はFizzBuzzをプリントする", () => {
       array = FizzBuzz.generateArray()
-      assert.equal(1, array[0])
-      assert.equal('Fizz', array[2])
-      assert.equal('Buzz', array[4])
-      assert.equal('FizzBuzz', array[14])
-      assert.equal('Buzz', array[99])
+      assert.equal(1, array[1])
+      assert.equal('Fizz', array[3])
+      assert.equal('Buzz', array[5])
+      assert.equal('FizzBuzz', array[15])
+      assert.equal('Buzz', array[100])
       FizzBuzz.print();
     });
 
@@ -60,11 +60,9 @@
 
   const FizzBuzz = {
     generateArray: function() {
-      array = []
-      for(let i = 1; i <= 100; i++) {
-        array.push(this.execute(i))
-      }
-      return array
+      let array = [];
+      [...Array(101).keys()].map((number) => {array.push(this.execute(number))});
+      return array;
     },
     print: function() {
       this.generateArray().forEach(element => {
