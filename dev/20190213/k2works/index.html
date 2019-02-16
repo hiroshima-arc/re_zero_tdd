@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <title>カフェ Mr.M COFFEE（ミスターエムコーヒー）</title>
+</head>
+<body>
+<script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<header class="py-4">
+    <div class="container text-center">
+        <h1><a href="index.html"><img alt="カフェ Mr.M COFFEE" src="https://placehold.jp/244x47.png"></a></h1>
+    </div>
+</header>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Mr. M COFFEE</a>
+
+        <button aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar-content" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-content">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Top <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#menu">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#coupon">Coupon</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+                        Information
+                    </a>
+                    <div aria-labelledby="navbarDropdown" class="dropdown-menu">
+                        <a class="dropdown-item" href="#shop">Shop</a>
+                        <a class="dropdown-item" href="#access">Access</a>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-info" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <div class="py-4">
+        <div class="container">
+            <div class="carousel slide" data-ride="carousel" id="main_visual">
+                <ol class="carousel-indicators">
+                    <li class="active" data-slide-to="0" data-target="#main_visual"></li>
+                    <li data-slide-to="1" data-target="#main_visual"></li>
+                    <li data-slide-to="2" data-target="#main_visual"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img alt="コーヒー写真" class="img-fluid" src="https://placehold.jp/1440x488.png">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2>Mr.M COFFEEのこだわり</h2>
+                            <p>店主が世界中のコーヒー豆を厳選し、コーヒー豆の種類にあわせ、心を込めて焙煎、抽出しております。</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img alt="ランチ写真" class="img-fluid" src="https://placehold.jp/1440x488.png">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2>Mr.M COFFEEのメニュー</h2>
+                            <p>コーヒーはもちろん、モーニングやワンプレートランチ、季節のスイーツなどもご好評いただいております</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img alt="店内写真" class="img-fluid" src="https://placehold.jp/1440x488.png">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2>Mr.M COFFEEの空間</h2>
+                            <p>座り心地の良いソファと丁度良い高さのテーブル。くつろぎの空間を満喫してください。</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" data-slide="prev" href="#main_visual" role="button">
+                    <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+                    <span class="sr-only">前に戻る</span>
+                </a>
+                <a class="carousel-control-next" data-slide="next" href="#main_visual" role="button">
+                    <span aria-hidden="true" class="carousel-control-next-icon"></span>
+                    <span class="sr-only">次に進む</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-4">
+        <section id="news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h3>News</h3>
+                    </div>
+                    <div class="col-md-10">
+                        <dl class="row">
+                            <dt class="col-md-3">2017年○月○日</dt>
+                            <dd class="col-md-9">ランチクーポン配布中です</dd>
+                            <dt class="col-md-3">2017年○月○日</dt>
+                            <dd class="col-md-9">季節限定メニューを追加しました</dd>
+                            <dt class="col-md-3">2017年○月○日</dt>
+                            <dd class="col-md-9">新しい雑貨さん入荷しました</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="py-4 bg-light">
+        <section id="about">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col-md-8 mb-3">
+                        <h3 class="mb-3">Mr. M COFFEEについて</h3>
+                        <p>Mr. M COFFEE（ミスターエムコーヒー）は、店主が焙煎したこだわりのコーヒーを最高の空間とおもてなしで提供する自家焙煎のカフェです。店主が世界中のコーヒー豆を厳選し、コーヒー豆の種類にあわせ、心を込めて焙煎、抽出しております。また、女性に丁度よいボリュームのワンプレートランチ、季節のスイーツなどもご好評いただいております。</p>
+                        <p>最高に美味しい一杯のコーヒーを、最高に心地良い空間で。美味しいコーヒーを飲みながら、ゆったりとした素敵な時間を過ごしに、ぜひMr. M COFFEEに起こしください。</p>
+                        <a class="btn btn-info" href="#menu">メニューを見る</a>
+                        <a class="btn btn-info" href="#shop">店舗情報を見る</a>
+                    </div>
+                    <div class="col-md-4">
+                        <img alt="店主が焙煎したこだわりのコーヒー" class="img-fluid" src="https://placehold.jp/400x400.png">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <img alt="" class="img-fluid" src="https://placehold.jp/380x160.png">
+                            <div class="card-body d-flex justify-content-between">
+                                <h4 class="card-title">くつろぎの空間</h4>
+                                <button class="btn btn-secondary" data-target="#modal01" data-toggle="modal">
+                                    詳しく見る
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <img alt="" class="img-fluid" src="https://placehold.jp/380x160.png">
+                            <div class="card-body d-flex justify-content-between">
+                                <h4 class="card-title">雑貨コーナー</h4>
+                                <button class="btn btn-secondary" data-target="#modal02" data-toggle="modal">
+                                    詳しく見る
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <img alt="" class="img-fluid" src="https://placehold.jp/380x160.png">
+                            <div class="card-body d-flex justify-content-between">
+                                <h4 class="card-title">キッズドリンク</h4>
+                                <button class="btn btn-secondary" data-target="#modal03" data-toggle="modal">
+                                    詳しく見る
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div aria-hidden="true" aria-labelledby="modal01-label" class="modal fade" id="modal01" role="dialog" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal01-label">くつろぎの空間</h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-center"><img alt="#" class="img-fluid" src="https://placehold.jp/380x300.png"></p>
+                                <p>店主がこだわった家具たちです。座り心地の良いソファと丁度良い高さのテーブル。くつろぎの空間を満喫してください。</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div aria-hidden="true" aria-labelledby="modal01-label" class="modal fade" id="modal02" role="dialog" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal02-label">雑貨コーナー</h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-center">
+                                    <img alt="#" class="img-fluid" src="https://placehold.jp/380x300.png">
+                                </p>
+                                <p>店内には作家さんの手作り雑貨を展示、販売しております。委託販売をご希望の作家さんは お問合せフォームより お問合せください。</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div aria-hidden="true" aria-labelledby="modal01-label" class="modal fade" id="modal03" role="dialog" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal03-label">キッズドリンク</h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-center">
+                                    <img alt="#" class="img-fluid" src="https://placehold.jp/380x300.png">
+                                </p>
+                                <p>オレンジやアップル、好きなジュースを選んで自分でグラスに注ぐ、子どもたちに大人気のキッズドリンクコーナーです。</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="py-4">
+        <section id="menu">
+            <div class="container">
+                <h3 class="mb-3">Menu</h3>
+                <p>カフェ Mr. M COFFEEのメニューです。掲載していない季節限定メニューはMr. M COFFEEの<a href="#">ブログ</a>にて紹介しています。</p>
+
+                <div class="nav nav-tabs" id="tab-menus" role="tablist">
+                    <a aria-controls="panel-menu01" aria-selected="true" class="nav-item nav-link active" data-toggle="tab" href="#panel-menu01" id="tab-menu01" role="tab">コーヒー</a>
+                    <a aria-controls="panel-menu02" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#panel-menu02" id="tab-menu02" role="tab">モーニング</a>
+                    <a aria-controls="panel-menu03" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#panel-menu03" id="tab-menu03" role="tab">ランチ</a>
+                    <a aria-controls="panel-menu04" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#panel-menu04" id="tab-menu04" role="tab">ケーキ</a>
+                </div>
+
+                <div class="tab-content" id="panel-menus">
+                    <div aria-labelledby="tab-menu01" class="tab-pane fade show active border border-top-0" id="panel-menu01" role="tabpanel">
+                        <div class="row p-3">
+                            <div class="col-md-7 order-md-2">
+                                <h4>COFFEE</h4>
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <th>M ブレンド</th>
+                                        <td>390円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>アイスコーヒー</th>
+                                        <td>430円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>ブラジルシングル</th>
+                                        <td>430円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>エスプレッソ</th>
+                                        <td>300円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>カプチーノ</th>
+                                        <td>430円（税別）</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-5">
+                                <img alt="" src="https://placehold.jp/380x300.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-labelledby="tab-menu02" class="tab-pane fade border border-top-0" id="panel-menu02" role="tabpanel">
+                        <div class="row p-3">
+                            <div class="col-md-7 order-md-2">
+                                <h4>MORNING</h4>
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <th>トーストセット</th>
+                                        <td>450円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>トーストゆで卵セット</th>
+                                        <td>500円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>フレンチトーストセット</th>
+                                        <td>600円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>野菜たっぷりスープセット</th>
+                                        <td>650円（税別）</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-5">
+                                <img alt="" src="https://placehold.jp/380x300.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-labelledby="tab-menu03" class="tab-pane fade border border-top-0" id="panel-menu03" role="tabpanel">
+                        <div class="row p-3">
+                            <div class="col-md-7 order-md-2">
+                                <h4>LUNCH</h4>
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <th>ワンプレートランチ</th>
+                                        <td>1,000円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mixサンド</th>
+                                        <td>650円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>ハンバーグサンド</th>
+                                        <td>750円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>野菜たっぷりスープ</th>
+                                        <td>650円（税別）</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-5">
+                                <img alt="" src="https://placehold.jp/380x300.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-labelledby="tab-menu04" class="tab-pane fade border border-top-0" id="panel-menu04" role="tabpanel">
+                        <div class="row p-3">
+                            <div class="col-md-7 order-md-2">
+                                <h4>CAKE</h4>
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <th>シフォンケーキ</th>
+                                        <td>400円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>チーズケーキ</th>
+                                        <td>350円（税別）</td>
+                                    </tr>
+                                    <tr>
+                                        <th>本日のケーキ</th>
+                                        <td>400円（税別）〜</td>
+                                    </tr>
+                                    <tr>
+                                        <th>季節のパウンドケーキ</th>
+                                        <td>400円（税別）〜</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-5">
+                                <img alt="" src="https://placehold.jp/380x300.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="py-4 bg-light">
+        <section id="coupon">
+            <div class="container">
+                <h3 class="text-center mb-3">Coupon</h3>
+                <div class="card text-center text-dark w-75 mx-auto">
+                    <div class="card-header bg-success text-white">
+                        Mr. M COFFEE ランチクーポン
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">食後のコーヒープラス100円にてご提供</h5>
+                        <p class="card-text text-justify">ワンプレートランチ（限定数２０食）ご注文のお客様に、プラス100円で食後のコーヒーをご提供。お会計の際に、このクーポン画面をスタッフに見せてください。</p>
+                    </div>
+                    <div class="card-footer bg-success text-white">
+                        クーポンコード : HAPPYLUNCH
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="py-4">
+        <section id="information">
+            <div class="container">
+                <h3 class="mb-3">Information</h3>
+                <p>カフェ Mr. M COFFEE（ミスターエムコーヒー）は、○○県の○○市の山の中にあります。大自然に囲まれて、こだわりのコーヒーを飲みながら、美味しい空気と美しい景色をご堪能ください。</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <section id="shop">
+                            <h4 class="mb-3">Shop</h4>
+                            <table class="table table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>店名</th>
+                                    <td>Mr.M COFFEE</td>
+                                </tr>
+                                <tr>
+                                    <th>住所</th>
+                                    <td>〒000-0000 ○○県○○市○○町1-2-3</td>
+                                </tr>
+                                <tr>
+                                    <th>電話番号</th>
+                                    <td>000-000-0000</td>
+                                </tr>
+                                <tr>
+                                    <th>営業時間</th>
+                                    <td>8:00〜18:00</td>
+                                </tr>
+                                <tr>
+                                    <th>モーニング</th>
+                                    <td>8:00〜11:00</td>
+                                </tr>
+                                <tr>
+                                    <th>ランチタイム</th>
+                                    <td>11:30〜14:00</td>
+                                </tr>
+                                <tr>
+                                    <th>ラストオーダー</th>
+                                    <td>17:30</td>
+                                </tr>
+                                <tr>
+                                    <th>定休日</th>
+                                    <td>水曜日、不定休</td>
+                                </tr>
+                                <tr>
+                                    <th>クレジットカード</th>
+                                    <td>利用不可</td>
+                                </tr>
+                                <tr>
+                                    <th>禁煙席</th>
+                                    <td>喫煙席あり</td>
+                                </tr>
+                                <tr>
+                                    <th>駐車場</th>
+                                    <td>駐車場あり</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    </div>
+                    <div class="col-md-6">
+                        <section id="access">
+                            <h4 class="mb-3">Access</h4>
+                            <div class="embed-responsive embed-responsive-4by3">
+                                <iframe allowfullscreen frameborder="0" height="600" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d186388.59636361315!2d132.4437437859338!3d34.509526698363146!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355078449f8a6cf5%3A0x6dc3194d7e999b85!2z55m95pyo5bGx!5e0!3m2!1sja!2sjp!4v1550115896010" style="border:0" width="800"></iframe>
+                            </div>
+                            <p>○○駅から徒歩12分（950m）、駐車場あり</p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="py-4 bg-dark text-light">
+    <div class="container text-center">
+        <ul class="nav justify-content-center mb-3">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Top</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#news">News</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#menu">Menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#coupon">Coupon</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#shop">Information</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+        </ul>
+        <p><small>Copyright &copy;2017 Mr. M COFFEE, All Rights Reserved.</small></p>
+    </div>
+</footer>
+
+</body>
+
+</html>
