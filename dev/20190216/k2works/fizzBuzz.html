@@ -38,7 +38,12 @@
       assert.equal(1, array[0])
       assert.equal(100, array[99])
       FizzBuzz.print();
-    })
+    });
+
+    test("3で割り切れる場合はFizzをプリントする", () => {
+      assert.equal('Fizz', FizzBuzz.execute(3))
+      assert.equal(1, FizzBuzz.execute(1))
+    });
   });
   mocha.run();
 
@@ -53,7 +58,14 @@
     print: function() {
       this.generateArray().forEach(element => {
         console.log(element)
-      });
+      })
+    },
+    execute: function(number) {
+      let result = number
+      if (number % 3 === 0) {
+        result = 'Fizz'
+      }
+      return result
     }
   }
 </script>

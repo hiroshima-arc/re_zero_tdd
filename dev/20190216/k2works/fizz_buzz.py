@@ -8,6 +8,10 @@ class TestFizzBuzz(unittest.TestCase):
         self.assertEqual(100, array[-1])
         FizzBuzz.print()
 
+    def test_3で割り切れる場合はFizzをプリントする(self):
+        self.assertEqual('Fizz', FizzBuzz.execute(3))
+        self.assertEqual(1, FizzBuzz.execute(1))
+
 
 class FizzBuzz:
     @staticmethod
@@ -23,6 +27,16 @@ class FizzBuzz:
     def print():
         for i in FizzBuzz.generate_array():
             print(i)
+
+    @staticmethod
+    def execute(number):
+        result = number
+
+        if number % 3 == 0:
+            result = 'Fizz'
+
+        return result
+
 
 
 if __name__ == "__main__":

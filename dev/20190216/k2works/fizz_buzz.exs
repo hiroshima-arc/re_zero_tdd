@@ -9,6 +9,11 @@ defmodule FizzBuzzTest do
     assert List.last(array) == 100
     FizzBuzz.print()
   end
+
+  test "3で割り切れる場合はFizzをプリントする" do
+    assert "Fizz" == FizzBuzz.execute(3)
+    assert 1 == FizzBuzz.execute(1)
+  end
 end
 
 defmodule FizzBuzz do
@@ -19,5 +24,9 @@ defmodule FizzBuzz do
 
   def print() do
     Enum.map(generate_array(), fn(x) -> IO.puts x end)
+  end
+
+  def execute(number) do
+    if rem(number, 3) == 0, do: "Fizz", else: number
   end
 end
