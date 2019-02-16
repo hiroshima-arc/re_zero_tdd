@@ -25,6 +25,10 @@ defmodule FizzBuzzTest do
 end
 
 defmodule FizzBuzz do
+  @fizz_buzz "FizzBuzz"
+  @fizz "Fizz"
+  @buzz "Buzz"
+
   def generate_array() do
     range = 1..100
     Enum.map(Enum.to_list(range), fn(x) -> execute(x) end)
@@ -36,9 +40,9 @@ defmodule FizzBuzz do
 
   def execute(number) do
     cond do
-      _isFizz(number) and _isBuzz(number) -> "FizzBuzz"
-      _isFizz(number) -> "Fizz"
-      _isBuzz(number) -> "Buzz"
+      _isFizz(number) and _isBuzz(number) -> @fizz_buzz
+      _isFizz(number) -> @fizz
+      _isBuzz(number) -> @buzz
       true -> number
     end
   end

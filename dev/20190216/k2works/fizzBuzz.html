@@ -58,6 +58,10 @@
   });
   mocha.run();
 
+  const FIZZ_BUZZ = 'FizzBuzz'
+  const FIZZ = 'Fizz'
+  const BUZZ = 'Buzz'
+
   const FizzBuzz = {
     generateArray: function() {
       let array = [];
@@ -70,9 +74,9 @@
       })
     },
     execute: function(number) {
-      if (this._isFizz(number) && this._isBuzz(number)) return 'FizzBuzz'
-      if (this._isFizz(number)) return 'Fizz'
-      if (this._isBuzz(number)) return 'Buzz'
+      if (this._isFizz(number) && this._isBuzz(number)) return FIZZ_BUZZ
+      if (this._isFizz(number)) return FIZZ
+      if (this._isBuzz(number)) return BUZZ
       return number
     },
     _isFizz: function(number) {

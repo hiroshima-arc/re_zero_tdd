@@ -28,6 +28,10 @@ class TestFizzBuzz < Test::Unit::TestCase
 end
 
 class FizzBuzz
+  FIZZ_BUZZ = 'FizzBuzz'
+  FIZZ = 'Fizz'
+  BUZZ = 'Buzz'
+
   def self.generate_array
     array = []
     (1..100).each do |i|
@@ -43,9 +47,9 @@ class FizzBuzz
   end
 
   def self.execute(number)
-    return 'FizzBuzz' if fizz?(number) && buzz?(number)
-    return 'Fizz' if fizz?(number)
-    return 'Buzz' if buzz?(number)
+    return FIZZ_BUZZ if fizz?(number) && buzz?(number)
+    return FIZZ if fizz?(number)
+    return BUZZ if buzz?(number)
     number
   end
 
