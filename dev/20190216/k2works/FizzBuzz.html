@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+</head>
+<body>
+<h1>HTML5+CSS+JavaScript with TDD</h1>
+<header>
+    <nav>
+        <h1>Menu</h1>
+        <ul>
+            <li><a href="index.html"></a>FizzBuzz</li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <h1>FizzBuzz</h1>
+    <article></article>
+    <div id="mocha"></div>
+</section>
+<footer>
+    <p>Copyright</p>
+    <address>hiroshima.arc@gmail.com</address>
+</footer>
+
+<script>
+  mocha.setup("tdd");
+  const assert = chai.assert;
+  suite("FizzBuzzTest", () => {
+    test("greeting", () => {
+      assert.equal('Hello, World!', FizzBuzz.greeting());
+    });
+  });
+  mocha.run();
+
+  const FizzBuzz = {
+    greeting: function() {
+      return 'Hello, World!';
+    }
+  }
+</script>
+
+</body>
+</html>
