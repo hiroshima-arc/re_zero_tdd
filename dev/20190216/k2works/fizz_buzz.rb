@@ -3,13 +3,18 @@
 require 'test/unit'
 
 class TestFizzBuzz < Test::Unit::TestCase
-  test 'greeting' do
-    assert_equal 'Hello, world!', FizzBuzz.greeting
+  test '1から100までの数をプリントする' do
+    array = FizzBuzz.generate_array
+    assert_equal 1, array.first
+    assert_equal 100, array.last
   end
 end
 
 class FizzBuzz
-  def self.greeting
-    'Hello, world!'
+  def self.generate_array
+    array = []
+    (1..100).each do |i|
+      array.push(i)
+    end
   end
 end
