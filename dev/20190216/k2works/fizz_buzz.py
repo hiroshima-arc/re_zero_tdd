@@ -2,9 +2,6 @@ import unittest
 
 
 class TestFizzBuzz(unittest.TestCase):
-    def testGreeting(self):
-        self.assertEqual('Hello, World!', FizzBuzz.greeting())
-
     def test_1から100までの数をプリントする(self):
         array = FizzBuzz.generate_array()
         self.assertEqual(1, array[0])
@@ -12,10 +9,6 @@ class TestFizzBuzz(unittest.TestCase):
 
 
 class FizzBuzz:
-    @staticmethod
-    def greeting():
-        return 'Hello, World!'
-
     @staticmethod
     def generate_array():
         array = []
