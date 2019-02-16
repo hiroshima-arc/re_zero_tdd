@@ -37,6 +37,7 @@
       array = FizzBuzz.generateArray()
       assert.equal(1, array[0])
       assert.equal(100, array[99])
+      FizzBuzz.print();
     })
   });
   mocha.run();
@@ -48,6 +49,11 @@
         array.push(i)
       }
       return array
+    },
+    print: function() {
+      this.generateArray().forEach(element => {
+        console.log(element)
+      });
     }
   }
 </script>
