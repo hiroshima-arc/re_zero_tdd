@@ -3,16 +3,13 @@ ExUnit.start()
 defmodule FizzBuzzTest do
   use ExUnit.Case, async: true
 
-  test "Hello world" do
-    assert FizzBuzz.hello() == "Hello world"
+  test "greeting" do
+    assert FizzBuzz.greeting() == "Hello, world!"
   end
 end
 
 defmodule FizzBuzz do
-  def hello do
-    "Hello world"
+  def greeting do
+    "Hello, world!"
   end
 end
-
-
-
