@@ -9,6 +9,11 @@ class TestFizzBuzz < Test::Unit::TestCase
     assert_equal 100, array.last
     FizzBuzz.print
   end
+
+  test "3で割り切れる場合はFizzをプリントする" do
+    assert_equal 'Fizz', FizzBuzz.execute(3)
+    assert_equal 1, FizzBuzz.execute(1)
+  end
 end
 
 class FizzBuzz
@@ -23,5 +28,13 @@ class FizzBuzz
     generate_array.each do |i|
       puts i
     end
+  end
+
+  def self.execute(number)
+    result = number
+    if (number % 3).zero?
+      result = 'Fizz'
+    end
+    result
   end
 end
