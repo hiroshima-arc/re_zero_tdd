@@ -46,11 +46,7 @@ defmodule FizzBuzz do
     end
   end
 
-  def _isFizz(number) do
-    rem(number, 3) == 0
-  end
+  def _isFizz(number), do: rem(number, 3) == 0
 
-  def _isBuzz(number) do
-    rem(number, 5) == 0
-  end
+  def _isBuzz(number), do: rem(number, 5) == 0
 end
