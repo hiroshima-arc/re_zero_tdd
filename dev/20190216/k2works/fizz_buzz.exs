@@ -30,11 +30,11 @@ defmodule FizzBuzz do
   @buzz "Buzz"
 
   def generate_array() do
-    Enum.map(Enum.to_list(1..100), fn(x) -> execute(x) end)
+    Enum.map(Enum.to_list(1..100), &(execute(&1)))
   end
 
   def print() do
-    Enum.map(generate_array(), fn(x) -> IO.puts x end)
+    Enum.map(generate_array(), &(IO.puts(&1)))
   end
 
   def execute(number) do
