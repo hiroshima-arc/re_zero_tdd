@@ -70,12 +70,16 @@
       })
     },
     execute: function(number) {
-      const fizz = number % 3 === 0;
-      const buzz = number % 5 === 0;
-      if (fizz && buzz) return 'FizzBuzz'
-      if (fizz) return 'Fizz'
-      if (buzz) return 'Buzz'
+      if (this._isFizz(number) && this._isBuzz(number)) return 'FizzBuzz'
+      if (this._isFizz(number)) return 'Fizz'
+      if (this._isBuzz(number)) return 'Buzz'
       return number
+    },
+    _isFizz: function(number) {
+      return number % 3 === 0;
+    },
+    _isBuzz: function(number) {
+      return number % 5 === 0;
     }
   }
 </script>

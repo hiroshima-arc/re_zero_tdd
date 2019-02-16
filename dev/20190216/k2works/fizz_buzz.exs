@@ -36,10 +36,18 @@ defmodule FizzBuzz do
 
   def execute(number) do
     cond do
-      rem(number, 3) == 0 and rem(number, 5) == 0 -> "FizzBuzz"
-      rem(number, 3) == 0 -> "Fizz"
-      rem(number, 5) == 0 -> "Buzz"
+      _isFizz(number) and _isBuzz(number) -> "FizzBuzz"
+      _isFizz(number) -> "Fizz"
+      _isBuzz(number) -> "Buzz"
       true -> number
     end
+  end
+
+  def _isFizz(number) do
+    rem(number, 3) == 0
+  end
+
+  def _isBuzz(number) do
+    rem(number, 5) == 0
   end
 end

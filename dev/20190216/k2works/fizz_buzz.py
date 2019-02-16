@@ -39,17 +39,22 @@ class FizzBuzz:
 
     @staticmethod
     def execute(number):
-        fizz = number % 3 == 0
-        buzz = number % 5 == 0
-        if (fizz) and (buzz):
+        if (FizzBuzz.__is_fizz(number)) and (FizzBuzz.__is_buzz(number)):
             return 'FizzBuzz'
-        if fizz:
+        if FizzBuzz.__is_fizz(number):
             return 'Fizz'
-        if buzz:
+        if FizzBuzz.__is_buzz(number):
             return 'Buzz'
 
         return number
 
+    @staticmethod
+    def __is_buzz(number):
+        return number % 5 == 0
+
+    @staticmethod
+    def __is_fizz(number):
+        return number % 3 == 0
 
 
 if __name__ == "__main__":
