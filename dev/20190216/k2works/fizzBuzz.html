@@ -69,9 +69,7 @@
       return array;
     },
     print: function() {
-      this.generateArray().forEach(element => {
-        console.log(element)
-      })
+      this.generateArray().map((i) => { console.log(i) });
     },
     execute: function(number) {
       if (this._isFizz(number) && this._isBuzz(number)) return FIZZ_BUZZ
