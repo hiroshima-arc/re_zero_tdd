@@ -53,8 +53,6 @@ class FizzBuzz
     number
   end
 
-  private
-
   def self.buzz?(number)
     (number % 5).zero?
   end
@@ -62,4 +60,5 @@ class FizzBuzz
   def self.fizz?(number)
     (number % 3).zero?
   end
+  private_class_method :buzz?, :fizz?
 end
