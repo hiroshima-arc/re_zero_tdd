@@ -33,7 +33,7 @@ class FizzBuzz:
 
     @staticmethod
     def print():
-        [print(i) for i in FizzBuzz.generate_array()]
+        return [print(i) for i in FizzBuzz.generate_array()]
 
     @staticmethod
     def execute(number):
