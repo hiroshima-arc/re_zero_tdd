@@ -33,17 +33,11 @@ class FizzBuzz
   BUZZ = 'Buzz'
 
   def self.generate_array
-    array = []
-    (1..100).each do |i|
-      array.push(execute(i))
-    end
-    array
+    (1..100).map(&method(:execute))
   end
 
   def self.print
-    generate_array.each do |i|
-      puts i
-    end
+    generate_array.each(&method(:puts))
   end
 
   def self.execute(number)
