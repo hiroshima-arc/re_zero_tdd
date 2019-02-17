@@ -29,17 +29,11 @@ FIZZ_BUZZ = 'FizzBuzz'
 class FizzBuzz:
     @staticmethod
     def generate_array():
-        array = []
-
-        for i in range(100):
-            array.append(FizzBuzz.execute(i + 1))
-
-        return array
+        return [FizzBuzz.execute(i + 1) for i in range(100)]
 
     @staticmethod
     def print():
-        for i in FizzBuzz.generate_array():
-            print(i)
+        [print(i) for i in FizzBuzz.generate_array()]
 
     @staticmethod
     def execute(number):
