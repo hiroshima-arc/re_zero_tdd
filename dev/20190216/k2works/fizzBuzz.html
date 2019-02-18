@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+</head>
+<body>
+<h1>HTML5+CSS+JavaScript with TDD</h1>
+<header>
+    <nav>
+        <h1>Menu</h1>
+        <ul>
+            <li><a href="index.html"></a>FizzBuzz</li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <h1>FizzBuzz</h1>
+    <article></article>
+    <div id="mocha"></div>
+</section>
+<footer>
+    <p>Copyright</p>
+    <address>hiroshima.arc@gmail.com</address>
+</footer>
+
+<script>
+  mocha.setup("tdd");
+  const assert = chai.assert;
+  suite("FizzBuzzTest", () => {
+    test("1から100までの数をプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方割り切れる場合はFizzBuzzをプリントする", () => {
+      array = FizzBuzz.generateArray()
+      assert.equal(1, array[1])
+      assert.equal('Fizz', array[3])
+      assert.equal('Buzz', array[5])
+      assert.equal('FizzBuzz', array[15])
+      assert.equal('Buzz', array[100])
+      FizzBuzz.print();
+    });
+
+    test("3で割り切れる場合はFizzをプリントする", () => {
+      assert.equal('Fizz', FizzBuzz.execute(3))
+      assert.equal(1, FizzBuzz.execute(1))
+    });
+
+    test("5で割り切れる場合はBuzzをプリントする", () => {
+      assert.equal('Buzz', FizzBuzz.execute(5))
+    });
+
+    test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+      assert.equal('FizzBuzz', FizzBuzz.execute(15))
+    });
+  });
+  mocha.run();
+
+  const FIZZ_BUZZ = 'FizzBuzz'
+  const FIZZ = 'Fizz'
+  const BUZZ = 'Buzz'
+
+  const FizzBuzz = {
+    generateArray: function() {
+      let array = [];
+      [...Array(101).keys()].map((number) => {array.push(this.execute(number))});
+      return array;
+    },
+    print: function() {
+      this.generateArray().map((i) => { console.log(i) });
+    },
+    execute: function(number) {
+      if (this._isFizz(number) && this._isBuzz(number)) return FIZZ_BUZZ
+      if (this._isFizz(number)) return FIZZ
+      if (this._isBuzz(number)) return BUZZ
+      return number
+    },
+    _isFizz: function(number) {
+      return number % 3 === 0;
+    },
+    _isBuzz: function(number) {
+      return number % 5 === 0;
+    }
+  }
+</script>
+
+</body>
+</html>
