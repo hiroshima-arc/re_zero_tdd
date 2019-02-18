@@ -1,8 +1,12 @@
 const assert = chai.assert;
 suite("FizzBuzzTest", () => {
-  test("1から100までの数をプリントする", () => {
+  test("1から100までの数をプリントする,ただし3で割り切れる場合はFizz,5で割り切れる場合はBuzz,両方で割り切れる場合はFizzBuzzをプリントする", () => {
     const list = FizzBuzz.print();
     assert.equal(1, list[0]);
+    assert.equal("Fizz", list[2]);
+    assert.equal("Buzz", list[4]);
+    assert.equal("FizzBuzz", list[14]);
+    assert.equal("Buzz", list[99]);
   });
 
   test("3で割り切れる場合はFizzを返す", () => {
@@ -22,7 +26,7 @@ const FizzBuzz = {
   print() {
     let list = [];
     for (let i = 1; i <= 100; i++) {
-      list.push(i);
+      list.push(this.exec(i));
     }
 
     let columnCount = 1;
