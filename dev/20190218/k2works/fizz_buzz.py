@@ -2,14 +2,21 @@ import unittest
 
 
 class FizzBuzzTest(unittest.TestCase):
-    def test_hello_world(self):
-        self.assertEqual('Hello, world!', FizzBuzz.greeting())
+    def test_1から100までの数をプリントする(self):
+        list = FizzBuzz.print()
+        self.assertEqual(1, list[0])
+        self.assertEqual(100, list[-1])
 
 
 class FizzBuzz:
     @staticmethod
-    def greeting():
-        return 'Hello, world!'
+    def print():
+        list = []
+
+        for i in range(100):
+            list.append(i + 1)
+
+        return list
 
 
 if __name__ == "__main__":
