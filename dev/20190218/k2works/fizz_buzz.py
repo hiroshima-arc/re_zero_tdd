@@ -14,6 +14,7 @@ class FizzBuzz:
         list = []
 
         for i in range(100):
+            print(i)
             list.append(i + 1)
 
         return list
