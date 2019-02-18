@@ -13,6 +13,10 @@ class TestFizzBuzz < Test::Unit::TestCase
     assert_equal 'Fizz', FizzBuzz.exec(3)
     assert_equal 1, FizzBuzz.exec(1)
   end
+
+  test '5で割り切れる場合はBuzzを返す' do
+    assert_equal 'Buzz', FizzBuzz.exec(5)
+  end
 end
 
 class FizzBuzz
@@ -32,6 +36,8 @@ class FizzBuzz
 
     if (number % 3).zero?
       result = 'Fizz'
+    elsif (number % 5).zero?
+      result = 'Buzz'
     end
 
     result
