@@ -17,6 +17,10 @@ class TestFizzBuzz < Test::Unit::TestCase
   test '5で割り切れる場合はBuzzを返す' do
     assert_equal 'Buzz', FizzBuzz.exec(5)
   end
+
+  test '3と5で割り切れる場合はFizzBuzzを返す' do
+    assert_equal 'FizzBuzz', FizzBuzz.exec(15)
+  end
 end
 
 class FizzBuzz
@@ -34,7 +38,9 @@ class FizzBuzz
   def self.exec(number)
     result = number
 
-    if (number % 3).zero?
+    if (number % 3).zero? && (number % 5).zero?
+      result = 'FizzBuzz'
+    elsif (number % 3).zero?
       result = 'Fizz'
     elsif (number % 5).zero?
       result = 'Buzz'
