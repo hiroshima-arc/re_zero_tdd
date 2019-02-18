@@ -1,3 +1,5 @@
+/* eslint-env mocha */
+// eslint-disable-next-line no-undef
 const assert = chai.assert;
 suite("FizzBuzzTest", () => {
   test("1から100までの数をプリントする,ただし3で割り切れる場合はFizz,5で割り切れる場合はBuzz,両方で割り切れる場合はFizzBuzzをプリントする", () => {
