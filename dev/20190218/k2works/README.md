@@ -50,3 +50,5 @@
 
 - [elixir](https://elixir-lang.org/)
 - [プログラミングElixir](https://www.amazon.co.jp/dp/B01KFCXP04/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1)
+- [[翻訳] The Elixir Style Guide　](https://qiita.com/kenichirow/items/7cd33bc07f9445548aab)
+
