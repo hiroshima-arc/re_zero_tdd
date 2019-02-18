@@ -8,6 +8,10 @@ suite("FizzBuzzTest", () => {
   test("3で割り切れる場合はFizzを返す", () => {
     assert.equal("Fizz", FizzBuzz.exec(3));
   });
+
+  test("5で割り切れる場合はBuzzを返す", () => {
+    assert.equal("Buzz", FizzBuzz.exec(5));
+  });
 });
 
 const FizzBuzz = {
@@ -48,6 +52,8 @@ const FizzBuzz = {
 
     if (number % 3 === 0) {
       result = "Fizz";
+    } else if (number % 5 === 0) {
+      result = "Buzz";
     }
 
     return result;
