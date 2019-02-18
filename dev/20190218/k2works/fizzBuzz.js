@@ -4,6 +4,10 @@ suite("FizzBuzzTest", () => {
     const list = FizzBuzz.print();
     assert.equal(1, list[0]);
   });
+
+  test("3で割り切れる場合はFizzを返す", () => {
+    assert.equal("Fizz", FizzBuzz.exec(3));
+  });
 });
 
 const FizzBuzz = {
@@ -38,5 +42,14 @@ const FizzBuzz = {
     app.innerHTML = html;
 
     return list;
+  },
+  exec(number) {
+    let result = number;
+
+    if (number % 3 === 0) {
+      result = "Fizz";
+    }
+
+    return result;
   }
 };
