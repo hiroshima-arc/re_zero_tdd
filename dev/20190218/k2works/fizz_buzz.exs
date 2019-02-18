@@ -17,6 +17,10 @@ defmodule FizzBuzzTest do
   test "5で割り切れる場合はBuzzを返す" do
     assert FizzBuzz.exec(5) == "Buzz"
   end
+
+  test "3と5で割り切れる場合はFizzBuzzを返す" do
+    assert FizzBuzz.exec(15) == "FizzBuzz"
+  end
 end
 
 defmodule FizzBuzz do
@@ -31,6 +35,10 @@ defmodule FizzBuzz do
   defp _print(current, left, result) do
     IO.puts(current)
     _print(current+1, left-1, [ current | result])
+  end
+
+  def exec(number) when rem(number,3) == 0 and rem(number,5) == 0 do
+    "FizzBuzz"
   end
 
   def exec(number) when rem(number,3) == 0 do
