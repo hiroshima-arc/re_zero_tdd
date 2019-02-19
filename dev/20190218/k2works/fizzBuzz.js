@@ -27,6 +27,18 @@ suite("FizzBuzzTest", () => {
 const FizzBuzz = {
   print() {
     const list = this.generate_list();
+    this._renderTable(list);
+  },
+  generate_list() {
+    return [...Array(101).keys()].map(this.exec.bind(this)).slice(1);
+  },
+  exec(number) {
+    if ((this._isFizz(number)) && (this._isBuzz(number))) return "FizzBuzz";
+    if (this._isFizz(number)) return "Fizz";
+    if (this._isBuzz(number)) return "Buzz";
+    return number;
+  },
+  _renderTable: function(list) {
     let columnCount = 1;
     let html = "<table>";
     html += "<thead>";
@@ -50,22 +62,11 @@ const FizzBuzz = {
     html += "</table>";
     const app = document.querySelector("#app");
     app.innerHTML = html;
-
-    return list;
-  },
-  generate_list() {
-    return [...Array(101).keys()].map(this.exec.bind(this)).slice(1);
   },
   _isFizz(number) {
     return number % 3 === 0;
   },
   _isBuzz(number) {
     return number % 5 === 0;
-  },
-  exec(number) {
-    if ((this._isFizz(number)) && (this._isBuzz(number))) return "FizzBuzz";
-    if (this._isFizz(number)) return "Fizz";
-    if (this._isBuzz(number)) return "Buzz";
-    return number;
   }
 };
