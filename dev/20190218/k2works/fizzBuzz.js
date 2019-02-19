@@ -26,8 +26,7 @@ suite("FizzBuzzTest", () => {
 
 const FizzBuzz = {
   print() {
-    const list = this.generate_list();
-    this._renderTable(list);
+    this._renderTable(this.generate_list());
   },
   generate_list() {
     return [...Array(101).keys()].map(this.exec.bind(this)).slice(1);
