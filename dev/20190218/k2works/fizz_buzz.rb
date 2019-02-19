@@ -13,16 +13,16 @@ class TestFizzBuzz < Test::Unit::TestCase
   end
 
   test '3で割り切れる場合はFizzを返す' do
-    assert_equal 'Fizz', FizzBuzz.exec(3)
-    assert_equal 1, FizzBuzz.exec(1)
+    assert_equal 'Fizz', FizzBuzz.generate(3)
+    assert_equal 1, FizzBuzz.generate(1)
   end
 
   test '5で割り切れる場合はBuzzを返す' do
-    assert_equal 'Buzz', FizzBuzz.exec(5)
+    assert_equal 'Buzz', FizzBuzz.generate(5)
   end
 
   test '3と5で割り切れる場合はFizzBuzzを返す' do
-    assert_equal 'FizzBuzz', FizzBuzz.exec(15)
+    assert_equal 'FizzBuzz', FizzBuzz.generate(15)
   end
 end
 
@@ -37,10 +37,10 @@ class FizzBuzz
   end
 
   def self.generate_list
-    (1..MAX_RANGE).map(&method(:exec))
+    (1..MAX_RANGE).map(&method(:generate))
   end
 
-  def self.exec(number)
+  def self.generate(number)
     return FIZZ_BUZZ if (fizz?(number)).zero? && (buzz?(number)).zero?
     return FIZZ if (fizz?(number)).zero?
     return BUZZ if (buzz?(number)).zero?
