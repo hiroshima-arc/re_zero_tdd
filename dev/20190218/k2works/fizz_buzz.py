@@ -21,6 +21,12 @@ class FizzBuzzTest(unittest.TestCase):
         self.assertEqual('FizzBuzz', FizzBuzz.exec(15))
 
 
+MAX_RANGE = 101
+BUZZ = 'Buzz'
+FIZZ = 'Fizz'
+FIZZ_BUZZ = 'FizzBuzz'
+
+
 class FizzBuzz:
     @staticmethod
     def print():
@@ -28,16 +34,16 @@ class FizzBuzz:
 
     @staticmethod
     def generate_list():
-        return list(map(FizzBuzz.exec, range(101)))
+        return list(map(FizzBuzz.exec, range(MAX_RANGE)))
 
     @staticmethod
     def exec(number):
         if (FizzBuzz.is_fizz(number)) and (FizzBuzz.is_buzz(number)):
-            return 'FizzBuzz'
+            return FIZZ_BUZZ
         if FizzBuzz.is_fizz(number):
-            return 'Fizz'
+            return FIZZ
         if FizzBuzz.is_buzz(number):
-            return 'Buzz'
+            return BUZZ
         return number
 
     @staticmethod
