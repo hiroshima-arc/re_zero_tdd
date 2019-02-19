@@ -26,11 +26,7 @@ suite("FizzBuzzTest", () => {
 
 const FizzBuzz = {
   print() {
-    let list = [];
-    for (let i = 1; i <= 100; i++) {
-      list.push(this.exec(i));
-    }
-
+    const list = this.generate_list();
     let columnCount = 1;
     let html = "<table>";
     html += "<thead>";
@@ -55,6 +51,13 @@ const FizzBuzz = {
     const app = document.querySelector("#app");
     app.innerHTML = html;
 
+    return list;
+  },
+  generate_list() {
+    let list = [];
+    for (let i = 1; i <= 100; i++) {
+      list.push(this.exec(i));
+    }
     return list;
   },
   exec(number) {
