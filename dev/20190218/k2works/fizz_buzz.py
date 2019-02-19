@@ -4,10 +4,10 @@ import unittest
 class FizzBuzzTest(unittest.TestCase):
     def test_1から100までの数をプリントする_ただし3で割り切れる場合はFizz_5で割り切れる場合はBuzz_両方で割り切れる場合はFizzBuzzをプリントする(self):
         list = FizzBuzz.generate_list()
-        self.assertEqual(1, list[0])
-        self.assertEqual('Fizz', list[2])
-        self.assertEqual('Buzz', list[4])
-        self.assertEqual('FizzBuzz', list[14])
+        self.assertEqual(1, list[1])
+        self.assertEqual('Fizz', list[3])
+        self.assertEqual('Buzz', list[5])
+        self.assertEqual('FizzBuzz', list[15])
         self.assertEqual('Buzz', list[-1])
 
     def test_3で割り切れる場合はFizzを返す(self):
@@ -24,19 +24,11 @@ class FizzBuzzTest(unittest.TestCase):
 class FizzBuzz:
     @staticmethod
     def print():
-        list = FizzBuzz.generate_list()
-        for v in list:
-            print(v)
+        [print(v) for v in FizzBuzz.generate_list()]
 
     @staticmethod
     def generate_list():
-        list = []
-
-        for i in range(100):
-            value = FizzBuzz.exec(i + 1)
-            list.append(value)
-
-        return list
+        return list(map(FizzBuzz.exec, range(101)))
 
     @staticmethod
     def exec(number):
