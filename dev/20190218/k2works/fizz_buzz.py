@@ -20,6 +20,10 @@ class FizzBuzzTest(unittest.TestCase):
     def test_3と5で割り切れる場合はFizzBuzzを返す(self):
         self.assertEqual('FizzBuzz', FizzBuzz.generate(15))
 
+    def test_数字以外の場合は例外を発生させる(self):
+        with self.assertRaises(ValueError):
+            FizzBuzz.generate('a')
+
 
 MAX_RANGE = 101
 BUZZ = 'Buzz'
@@ -30,7 +34,10 @@ FIZZ_BUZZ = 'FizzBuzz'
 class FizzBuzz:
     @staticmethod
     def print():
-        [print(v) for v in FizzBuzz.generate_list()]
+        try:
+            [print(v) for v in FizzBuzz.generate_list()]
+        except ValueError as e:
+            print(e)
 
     @staticmethod
     def generate_list():
@@ -38,6 +45,9 @@ class FizzBuzz:
 
     @staticmethod
     def generate(number):
+        if type(number) == str:
+            raise ValueError
+
         if (FizzBuzz.is_fizz(number)) and (FizzBuzz.is_buzz(number)):
             return FIZZ_BUZZ
         if FizzBuzz.is_fizz(number):
