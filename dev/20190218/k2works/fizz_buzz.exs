@@ -38,10 +38,12 @@ defmodule FizzBuzz do
           |> Enum.map(&exec/1)
 
   def exec(number) do
+    fizz = rem(number, 3) == 0
+    buzz = rem(number, 5) == 0
     cond do
-      rem(number, 3) == 0 and rem(number, 5) == 0 -> "FizzBuzz"
-      rem(number, 3) == 0 -> "Fizz"
-      rem(number, 5) == 0 -> "Buzz"
+      fizz and buzz -> "FizzBuzz"
+      fizz -> "Fizz"
+      buzz-> "Buzz"
       true -> number
     end
   end
