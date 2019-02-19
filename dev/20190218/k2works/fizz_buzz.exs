@@ -17,16 +17,16 @@ defmodule FizzBuzzTest do
   end
 
   test "3で割り切れる場合はFizzを返す" do
-    assert FizzBuzz.exec(3) == "Fizz"
-    assert FizzBuzz.exec(1) == 1
+    assert FizzBuzz.generate(3) == "Fizz"
+    assert FizzBuzz.generate(1) == 1
   end
 
   test "5で割り切れる場合はBuzzを返す" do
-    assert FizzBuzz.exec(5) == "Buzz"
+    assert FizzBuzz.generate(5) == "Buzz"
   end
 
   test "3と5で割り切れる場合はFizzBuzzを返す" do
-    assert FizzBuzz.exec(15) == "FizzBuzz"
+    assert FizzBuzz.generate(15) == "FizzBuzz"
   end
 end
 
@@ -40,9 +40,9 @@ defmodule FizzBuzz do
 
   def generate_list(n),
       do: 1..n
-          |> Enum.map(&exec/1)
+          |> Enum.map(&generate/1)
 
-  def exec(number) do
+  def generate(number) do
     cond do
       _fizz?(number) and _buzz?(number) -> @fizz_buzz
       _fizz?(number) -> @fizz
