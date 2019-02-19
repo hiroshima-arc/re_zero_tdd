@@ -24,17 +24,21 @@ suite("FizzBuzzTest", () => {
   });
 });
 
+const MAX_RANGE = 101;
+const FIZZ_BUZZ = "FizzBuzz";
+const FIZZ = "Fizz";
+const BUZZ = "Buzz";
 const FizzBuzz = {
   print() {
     this._renderTable(this.generate_list());
   },
   generate_list() {
-    return [...Array(101).keys()].map(this.exec.bind(this)).slice(1);
+    return [...Array(MAX_RANGE).keys()].map(this.exec.bind(this)).slice(1);
   },
   exec(number) {
-    if ((this._isFizz(number)) && (this._isBuzz(number))) return "FizzBuzz";
-    if (this._isFizz(number)) return "Fizz";
-    if (this._isBuzz(number)) return "Buzz";
+    if ((this._isFizz(number)) && (this._isBuzz(number))) return FIZZ_BUZZ;
+    if (this._isFizz(number)) return FIZZ;
+    if (this._isBuzz(number)) return BUZZ;
     return number;
   },
   _renderTable: function(list) {
