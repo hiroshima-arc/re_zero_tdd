@@ -36,11 +36,21 @@ class FizzBuzz
   end
 
   def self.exec(number)
-    fizz = number % 3
-    buzz = number % 5
+    fizz = fizz?(number)
+    buzz = buzz?(number)
     return 'FizzBuzz' if (fizz).zero? && (buzz).zero?
     return 'Fizz' if (fizz).zero?
     return 'Buzz' if (buzz).zero?
     number
+  end
+
+  private
+
+  def self.buzz?(number)
+    number % 5
+  end
+
+  def self.fizz?(number)
+    number % 3
   end
 end
