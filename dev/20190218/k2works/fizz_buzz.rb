@@ -32,11 +32,7 @@ class FizzBuzz
   end
 
   def self.generate_list
-    list = []
-    (1..100).each do |i|
-      list.push(exec(i))
-    end
-    list
+    (1..100).map(&method(:exec))
   end
 
   def self.exec(number)
