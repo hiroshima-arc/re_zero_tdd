@@ -36,16 +36,9 @@ class FizzBuzz
   end
 
   def self.exec(number)
-    result = number
-
-    if (number % 3).zero? && (number % 5).zero?
-      result = 'FizzBuzz'
-    elsif (number % 3).zero?
-      result = 'Fizz'
-    elsif (number % 5).zero?
-      result = 'Buzz'
-    end
-
-    result
+    return 'FizzBuzz' if (number % 3).zero? && (number % 5).zero?
+    return 'Fizz' if (number % 3).zero?
+    return 'Buzz' if (number % 5).zero?
+    number
   end
 end
