@@ -33,10 +33,8 @@ class FizzBuzz
 
   def self.generate_list
     list = []
-    i = 1
-    while i <= 100
+    (1..100).each do |i|
       list.push(exec(i))
-      i += 1
     end
     list
   end
