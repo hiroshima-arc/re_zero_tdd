@@ -56,20 +56,16 @@ const FizzBuzz = {
   generate_list() {
     return [...Array(101).keys()].map(this.exec.bind(this)).slice(1);
   },
-  _isFizz: function(number) {
-    const fizz = number % 3 === 0;
-    return fizz;
+  _isFizz(number) {
+    return number % 3 === 0;
   },
-  _isBuzz: function(number) {
-    const buzz = number % 5 === 0;
-    return buzz;
+  _isBuzz(number) {
+    return number % 5 === 0;
   },
   exec(number) {
-    const fizz = this._isFizz(number);
-    const buzz = this._isBuzz(number);
-    if ((fizz) && (buzz)) return "FizzBuzz";
-    if (fizz) return "Fizz";
-    if (buzz) return "Buzz";
+    if ((this._isFizz(number)) && (this._isBuzz(number))) return "FizzBuzz";
+    if (this._isFizz(number)) return "Fizz";
+    if (this._isBuzz(number)) return "Buzz";
     return number;
   }
 };
