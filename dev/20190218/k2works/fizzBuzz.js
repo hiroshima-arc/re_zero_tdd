@@ -57,16 +57,9 @@ const FizzBuzz = {
     return [...Array(101).keys()].map(this.exec).slice(1);
   },
   exec(number) {
-    let result = number;
-
-    if ((number % 3 === 0) && (number % 5 === 0)) {
-      result = "FizzBuzz";
-    } else if (number % 3 === 0) {
-      result = "Fizz";
-    } else if (number % 5 === 0) {
-      result = "Buzz";
-    }
-
-    return result;
+    if ((number % 3 === 0) && (number % 5 === 0)) return "FizzBuzz";
+    if (number % 3 === 0) return "Fizz";
+    if (number % 5 === 0) return "Buzz";
+    return number;
   }
 };
