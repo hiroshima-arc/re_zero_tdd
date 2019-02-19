@@ -24,6 +24,10 @@ class TestFizzBuzz < Test::Unit::TestCase
   test '3と5で割り切れる場合はFizzBuzzを返す' do
     assert_equal 'FizzBuzz', FizzBuzz.generate(15)
   end
+
+  test "数字以外の場合は例外を発生させる" do
+    assert_raise(RuntimeError)  {FizzBuzz.generate('a')}
+  end
 end
 
 class FizzBuzz
@@ -33,7 +37,11 @@ class FizzBuzz
   BUZZ = 'Buzz'
 
   def self.print
-    puts generate_list
+    begin
+      puts generate_list
+    rescue => error
+      p error.backtrace
+    end
   end
 
   def self.generate_list
@@ -41,6 +49,8 @@ class FizzBuzz
   end
 
   def self.generate(number)
+    raise "数字以外は処理できません:#{number}" unless number.is_a? Numeric
+
     return FIZZ_BUZZ if (fizz?(number)).zero? && (buzz?(number)).zero?
     return FIZZ if (fizz?(number)).zero?
     return BUZZ if (buzz?(number)).zero?
