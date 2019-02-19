@@ -32,11 +32,13 @@ class FizzBuzz:
 
     @staticmethod
     def exec(number):
-        if (number % 3 == 0) and (number % 5 == 0):
+        fizz = number % 3 == 0
+        buzz = number % 5 == 0
+        if (fizz) and (buzz):
             return 'FizzBuzz'
-        if number % 3 == 0:
+        if fizz:
             return 'Fizz'
-        if number % 5 == 0:
+        if buzz:
             return 'Buzz'
         return number
 
