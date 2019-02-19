@@ -31,7 +31,12 @@ defmodule FizzBuzzTest do
 end
 
 defmodule FizzBuzz do
-  def print, do: Enum.map(generate_list(100), &(IO.puts(&1)))
+  @max_range 100
+  @fizz_buzz "FizzBuzz"
+  @fizz "Fizz"
+  @buzz "Buzz"
+
+  def print, do: Enum.map(generate_list(@max_range), &(IO.puts(&1)))
 
   def generate_list(n),
       do: 1..n
@@ -39,9 +44,9 @@ defmodule FizzBuzz do
 
   def exec(number) do
     cond do
-      _fizz?(number) and _buzz?(number) -> "FizzBuzz"
-      _fizz?(number) -> "Fizz"
-      _buzz?(number)-> "Buzz"
+      _fizz?(number) and _buzz?(number) -> @fizz_buzz
+      _fizz?(number) -> @fizz
+      _buzz?(number)-> @buzz
       true -> number
     end
   end
