@@ -3,7 +3,7 @@
 const assert = chai.assert;
 suite("FizzBuzzTest", () => {
   test("1から100までの数をプリントする,ただし3で割り切れる場合はFizz,5で割り切れる場合はBuzz,両方で割り切れる場合はFizzBuzzをプリントする", () => {
-    const list = FizzBuzz.generate_list();
+    const list = FizzBuzz.generateList();
     assert.equal(1, list[0]);
     assert.equal("Fizz", list[2]);
     assert.equal("Buzz", list[4]);
@@ -30,9 +30,9 @@ const FIZZ = "Fizz";
 const BUZZ = "Buzz";
 const FizzBuzz = {
   print() {
-    this._renderTable(this.generate_list());
+    this._renderTable(this.generateList());
   },
-  generate_list() {
+  generateList() {
     return [...Array(MAX_RANGE).keys()].map(this.generate.bind(this)).slice(1);
   },
   generate(number) {
