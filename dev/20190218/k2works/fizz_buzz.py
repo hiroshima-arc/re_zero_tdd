@@ -11,14 +11,14 @@ class FizzBuzzTest(unittest.TestCase):
         self.assertEqual('Buzz', list[-1])
 
     def test_3で割り切れる場合はFizzを返す(self):
-        self.assertEqual('Fizz', FizzBuzz.exec(3))
-        self.assertEqual(1, FizzBuzz.exec(1))
+        self.assertEqual('Fizz', FizzBuzz.generate(3))
+        self.assertEqual(1, FizzBuzz.generate(1))
 
     def test_5で割り切れる場合はBuzzを返す(self):
-        self.assertEqual('Buzz', FizzBuzz.exec(5))
+        self.assertEqual('Buzz', FizzBuzz.generate(5))
 
     def test_3と5で割り切れる場合はFizzBuzzを返す(self):
-        self.assertEqual('FizzBuzz', FizzBuzz.exec(15))
+        self.assertEqual('FizzBuzz', FizzBuzz.generate(15))
 
 
 MAX_RANGE = 101
@@ -34,10 +34,10 @@ class FizzBuzz:
 
     @staticmethod
     def generate_list():
-        return list(map(FizzBuzz.exec, range(MAX_RANGE)))
+        return list(map(FizzBuzz.generate, range(MAX_RANGE)))
 
     @staticmethod
-    def exec(number):
+    def generate(number):
         if (FizzBuzz.is_fizz(number)) and (FizzBuzz.is_buzz(number)):
             return FIZZ_BUZZ
         if FizzBuzz.is_fizz(number):
