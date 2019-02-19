@@ -27,6 +27,7 @@ class TestFizzBuzz < Test::Unit::TestCase
 end
 
 class FizzBuzz
+  MAX_RANGE = 100
   FIZZ_BUZZ = 'FizzBuzz'
   FIZZ = 'Fizz'
   BUZZ = 'Buzz'
@@ -36,7 +37,7 @@ class FizzBuzz
   end
 
   def self.generate_list
-    (1..100).map(&method(:exec))
+    (1..MAX_RANGE).map(&method(:exec))
   end
 
   def self.exec(number)
