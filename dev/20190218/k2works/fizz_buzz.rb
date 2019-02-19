@@ -42,13 +42,13 @@ class FizzBuzz
     number
   end
 
-  private
+  def self.fizz?(number)
+    number % 3
+  end
 
   def self.buzz?(number)
     number % 5
   end
 
-  def self.fizz?(number)
-    number % 3
-  end
+  private_class_method :buzz?,:fizz?
 end
