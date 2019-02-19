@@ -22,6 +22,10 @@ suite("FizzBuzzTest", () => {
   test("3と5で割り切れる場合はFizzBuzzを返す", () => {
     assert.equal("FizzBuzz", FizzBuzz.generate(15));
   });
+
+  test("数字以外の場合は例外を発生させる", () => {
+    assert.throws(() => {FizzBuzz.generate("a");}, Error, "数字以外は処理できません");
+  });
 });
 
 const MAX_RANGE = 101;
@@ -30,12 +34,18 @@ const FIZZ = "Fizz";
 const BUZZ = "Buzz";
 const FizzBuzz = {
   print() {
-    this._renderTable(this.generateList());
+    try {
+      this._renderTable(this.generateList());
+    } catch (e) {
+      console.log(e);
+    }
   },
   generateList() {
     return [...Array(MAX_RANGE).keys()].map(this.generate.bind(this)).slice(1);
   },
   generate(number) {
+    if (isNaN(number)) throw new Error("数字以外は処理できません");
+
     if ((this._isFizz(number)) && (this._isBuzz(number))) return FIZZ_BUZZ;
     if (this._isFizz(number)) return FIZZ;
     if (this._isBuzz(number)) return BUZZ;
