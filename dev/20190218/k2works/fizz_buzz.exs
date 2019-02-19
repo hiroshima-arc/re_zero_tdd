@@ -4,12 +4,13 @@ defmodule FizzBuzzTest do
   use ExUnit.Case, async: true
 
   test "1から100までの数をプリントする,ただし3で割り切れる場合はFizz,5で割り切れる場合はBuzz,両方で割り切れる場合はFizzBuzzをプリントする" do
-    list = FizzBuzz.print(100)
+    list = FizzBuzz.generate_list(100)
     assert List.first(list) == 1
     assert Enum.take(list, 3) |> List.last() == "Fizz"
     assert Enum.take(list, 5) |> List.last() == "Buzz"
     assert Enum.take(list, 15) |> List.last() == "FizzBuzz"
     assert List.last(list) == "Buzz"
+    FizzBuzz.print()
   end
 
   test "3で割り切れる場合はFizzを返す" do
@@ -27,14 +28,12 @@ defmodule FizzBuzzTest do
 end
 
 defmodule FizzBuzz do
-  def print(n) when n > 0, do: _downto(n, [])
+  def print do
+    Enum.map(generate_list(100), fn (i) -> IO.puts(i) end)
+  end
 
-  defp _downto(0, result), do: result
-
-  defp _downto(current, result) do
-    next_answer = exec(current)
-    IO.puts(next_answer)
-    _downto(current - 1, [next_answer | result])
+  def generate_list(n) do
+    1..n |> Enum.map(fn (n) -> exec(n) end)
   end
 
   def exec(number) when rem(number, 3) == 0 and rem(number, 5) == 0, do: "FizzBuzz"
