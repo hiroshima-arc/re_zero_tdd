@@ -39,7 +39,7 @@ class FizzBuzz
   def self.print
     begin
       puts generate_list
-    rescue => error
+    rescue RuntimeError => error
       p error.backtrace
     end
   end

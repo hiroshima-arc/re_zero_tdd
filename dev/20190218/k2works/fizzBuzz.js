@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-env mocha */
 // eslint-disable-next-line no-undef
 const assert = chai.assert;
