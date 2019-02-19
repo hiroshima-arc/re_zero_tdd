@@ -60,7 +60,7 @@ defmodule FizzBuzz do
     cond do
       _fizz?(number) and _buzz?(number) -> @fizz_buzz
       _fizz?(number) -> @fizz
-      _buzz?(number)-> @buzz
+      _buzz?(number) -> @buzz
       true -> number
     end
   end

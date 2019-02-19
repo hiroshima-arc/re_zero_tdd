@@ -3,12 +3,12 @@ import unittest
 
 class FizzBuzzTest(unittest.TestCase):
     def test_1から100までの数をプリントする_ただし3で割り切れる場合はFizz_5で割り切れる場合はBuzz_両方で割り切れる場合はFizzBuzzをプリントする(self):
-        list = FizzBuzz.generate_list()
-        self.assertEqual(1, list[1])
-        self.assertEqual('Fizz', list[3])
-        self.assertEqual('Buzz', list[5])
-        self.assertEqual('FizzBuzz', list[15])
-        self.assertEqual('Buzz', list[-1])
+        fizz_buzz_list = FizzBuzz.generate_list()
+        self.assertEqual(1, fizz_buzz_list[1])
+        self.assertEqual('Fizz', fizz_buzz_list[3])
+        self.assertEqual('Buzz', fizz_buzz_list[5])
+        self.assertEqual('FizzBuzz', fizz_buzz_list[15])
+        self.assertEqual('Buzz', fizz_buzz_list[-1])
 
     def test_3で割り切れる場合はFizzを返す(self):
         self.assertEqual('Fizz', FizzBuzz.generate(3))
@@ -45,7 +45,7 @@ class FizzBuzz:
 
     @staticmethod
     def generate(number):
-        if type(number) == str:
+        if isinstance(number, str):
             raise ValueError
 
         if (FizzBuzz.is_fizz(number)) and (FizzBuzz.is_buzz(number)):
