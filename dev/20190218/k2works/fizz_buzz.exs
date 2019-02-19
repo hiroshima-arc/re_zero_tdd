@@ -28,6 +28,12 @@ defmodule FizzBuzzTest do
   test "3と5で割り切れる場合はFizzBuzzを返す" do
     assert FizzBuzz.generate(15) == "FizzBuzz"
   end
+
+  test "数字以外の場合は例外を発生させる" do
+    assert_raise RuntimeError, fn ->
+      FizzBuzz.generate('a')
+    end
+  end
 end
 
 defmodule FizzBuzz do
@@ -36,13 +42,21 @@ defmodule FizzBuzz do
   @fizz "Fizz"
   @buzz "Buzz"
 
-  def print, do: Enum.map(generate_list(@max_range), &(IO.puts(&1)))
+  def print do
+    try do
+      Enum.map(generate_list(@max_range), &(IO.puts(&1)))
+    rescue
+      e in RuntimeError -> e
+    end
+  end
 
   def generate_list(n),
       do: 1..n
           |> Enum.map(&generate/1)
 
   def generate(number) do
+    unless is_number(number), do: raise RuntimeError, message: "数字以外は処理できません"
+
     cond do
       _fizz?(number) and _buzz?(number) -> @fizz_buzz
       _fizz?(number) -> @fizz
