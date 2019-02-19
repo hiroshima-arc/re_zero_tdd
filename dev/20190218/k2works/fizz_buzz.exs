@@ -6,9 +6,12 @@ defmodule FizzBuzzTest do
   test "1から100までの数をプリントする,ただし3で割り切れる場合はFizz,5で割り切れる場合はBuzz,両方で割り切れる場合はFizzBuzzをプリントする" do
     list = FizzBuzz.generate_list(100)
     assert List.first(list) == 1
-    assert Enum.take(list, 3) |> List.last() == "Fizz"
-    assert Enum.take(list, 5) |> List.last() == "Buzz"
-    assert Enum.take(list, 15) |> List.last() == "FizzBuzz"
+    assert Enum.take(list, 3)
+           |> List.last() == "Fizz"
+    assert Enum.take(list, 5)
+           |> List.last() == "Buzz"
+    assert Enum.take(list, 15)
+           |> List.last() == "FizzBuzz"
     assert List.last(list) == "Buzz"
     FizzBuzz.print()
   end
@@ -28,13 +31,11 @@ defmodule FizzBuzzTest do
 end
 
 defmodule FizzBuzz do
-  def print do
-    Enum.map(generate_list(100), fn (i) -> IO.puts(i) end)
-  end
+  def print, do: Enum.map(generate_list(100), &(IO.puts(&1)))
 
-  def generate_list(n) do
-    1..n |> Enum.map(fn (n) -> exec(n) end)
-  end
+  def generate_list(n),
+      do: 1..n
+          |> Enum.map(&exec/1)
 
   def exec(number) when rem(number, 3) == 0 and rem(number, 5) == 0, do: "FizzBuzz"
 
