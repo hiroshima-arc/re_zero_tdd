@@ -54,11 +54,19 @@ const FizzBuzz = {
     return list;
   },
   generate_list() {
-    return [...Array(101).keys()].map(this.exec).slice(1);
+    return [...Array(101).keys()].map(this.exec.bind(this)).slice(1);
+  },
+  _isFizz: function(number) {
+    const fizz = number % 3 === 0;
+    return fizz;
+  },
+  _isBuzz: function(number) {
+    const buzz = number % 5 === 0;
+    return buzz;
   },
   exec(number) {
-    const fizz = number % 3 === 0;
-    const buzz = number % 5 === 0;
+    const fizz = this._isFizz(number);
+    const buzz = this._isBuzz(number);
     if ((fizz) && (buzz)) return "FizzBuzz";
     if (fizz) return "Fizz";
     if (buzz) return "Buzz";
