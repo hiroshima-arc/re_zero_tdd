@@ -27,14 +27,14 @@ defmodule FizzBuzzTest do
 end
 
 defmodule FizzBuzz do
-  def print(n) when n > 0, do: _print(n, [])
+  def print(n) when n > 0, do: _downto(n, [])
 
-  defp _print(0, result), do: result
+  defp _downto(0, result), do: result
 
-  defp _print(current, result) do
+  defp _downto(current, result) do
     next_answer = exec(current)
     IO.puts(next_answer)
-    _print(current - 1, [next_answer | result])
+    _downto(current - 1, [next_answer | result])
   end
 
   def exec(number) when rem(number, 3) == 0 and rem(number, 5) == 0, do: "FizzBuzz"
