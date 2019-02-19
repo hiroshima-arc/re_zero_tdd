@@ -32,8 +32,8 @@ class FizzBuzz:
 
     @staticmethod
     def exec(number):
-        fizz = number % 3 == 0
-        buzz = number % 5 == 0
+        fizz = FizzBuzz.is_fizz(number)
+        buzz = FizzBuzz.is_buzz(number)
         if (fizz) and (buzz):
             return 'FizzBuzz'
         if fizz:
@@ -41,6 +41,16 @@ class FizzBuzz:
         if buzz:
             return 'Buzz'
         return number
+
+    @staticmethod
+    def is_buzz(number):
+        buzz = number % 5 == 0
+        return buzz
+
+    @staticmethod
+    def is_fizz(number):
+        fizz = number % 3 == 0
+        return fizz
 
 
 if __name__ == "__main__":
