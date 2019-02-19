@@ -12,15 +12,15 @@ suite("FizzBuzzTest", () => {
   });
 
   test("3で割り切れる場合はFizzを返す", () => {
-    assert.equal("Fizz", FizzBuzz.exec(3));
+    assert.equal("Fizz", FizzBuzz.generate(3));
   });
 
   test("5で割り切れる場合はBuzzを返す", () => {
-    assert.equal("Buzz", FizzBuzz.exec(5));
+    assert.equal("Buzz", FizzBuzz.generate(5));
   });
 
   test("3と5で割り切れる場合はFizzBuzzを返す", () => {
-    assert.equal("FizzBuzz", FizzBuzz.exec(15));
+    assert.equal("FizzBuzz", FizzBuzz.generate(15));
   });
 });
 
@@ -33,9 +33,9 @@ const FizzBuzz = {
     this._renderTable(this.generate_list());
   },
   generate_list() {
-    return [...Array(MAX_RANGE).keys()].map(this.exec.bind(this)).slice(1);
+    return [...Array(MAX_RANGE).keys()].map(this.generate.bind(this)).slice(1);
   },
-  exec(number) {
+  generate(number) {
     if ((this._isFizz(number)) && (this._isBuzz(number))) return FIZZ_BUZZ;
     if (this._isFizz(number)) return FIZZ;
     if (this._isBuzz(number)) return BUZZ;
