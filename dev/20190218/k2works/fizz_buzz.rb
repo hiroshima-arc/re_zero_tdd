@@ -27,6 +27,10 @@ class TestFizzBuzz < Test::Unit::TestCase
 end
 
 class FizzBuzz
+  FIZZ_BUZZ = 'FizzBuzz'
+  FIZZ = 'Fizz'
+  BUZZ = 'Buzz'
+
   def self.print
     puts generate_list
   end
@@ -36,9 +40,9 @@ class FizzBuzz
   end
 
   def self.exec(number)
-    return 'FizzBuzz' if (fizz?(number)).zero? && (buzz?(number)).zero?
-    return 'Fizz' if (fizz?(number)).zero?
-    return 'Buzz' if (buzz?(number)).zero?
+    return FIZZ_BUZZ if (fizz?(number)).zero? && (buzz?(number)).zero?
+    return FIZZ if (fizz?(number)).zero?
+    return BUZZ if (buzz?(number)).zero?
     number
   end
 
