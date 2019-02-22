@@ -84,6 +84,7 @@
         });
         test("3で割り切れる場合はFizzをプリントする", () => {
             assert.equal(fizzBuzz(3), "Fizz");
+            assert.equal(fizzBuzz(1), 1);
         });
     });
 </script>
@@ -98,7 +99,11 @@
     }
 
     function fizzBuzz(number) {
-        return "Fizz"
+        var result = number
+        if (number % 3 === 0) {
+            result = "Fizz";
+        }
+        return result;
     }
 </script>
 
