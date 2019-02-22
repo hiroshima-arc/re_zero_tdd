@@ -89,6 +89,9 @@
         test("5で割り切れる場合はBuzzをプリントする", () => {
             assert.equal(fizzBuzz(5), "Buzz");
         });
+        test("3または5で割り切れる場合はFizzBuzzをプリントする", () => {
+            assert.equal(fizzBuzz(15),"FizzBuzz");
+        });
     });
 </script>
 
@@ -103,8 +106,12 @@
 
     function fizzBuzz(number) {
         var result = number
-        if (number % 3 === 0) {
-            result = "Fizz";
+        if (number % 3 === 0 ) {
+            if (number % 5 === 0 ){
+                result = "FizzBuzz";
+            } else if (number % 3 === 0) {
+                result = "Fizz";
+            }
         } else if (number % 5 == 0) {
             result = "Buzz";
         }
@@ -119,4 +126,3 @@
 </script>
 
 </body>
-</html>
