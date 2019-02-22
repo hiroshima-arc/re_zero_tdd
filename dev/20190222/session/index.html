@@ -77,10 +77,13 @@
 <script>
     const assert = chai.assert;
     suite("FizzBuzzTest", () => {
-        test("1から100までをプリントする", () => {
+        test("1から100までをプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzを返す", () => {
             var array = fizzBuzzPrint();
             assert.equal(array[0], 1);
-            assert.equal(array[99], 100);
+            assert.equal(array[2], "Fizz");
+            assert.equal(array[4], "Buzz");
+            assert.equal(array[14],"FizzBuzz");
+            assert.equal(array[99], "Buzz");
         });
         test("3で割り切れる場合はFizzをプリントする", () => {
             assert.equal(fizzBuzz(3), "Fizz");
@@ -89,7 +92,7 @@
         test("5で割り切れる場合はBuzzをプリントする", () => {
             assert.equal(fizzBuzz(5), "Buzz");
         });
-        test("3または5で割り切れる場合はFizzBuzzをプリントする", () => {
+        test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
             assert.equal(fizzBuzz(15),"FizzBuzz");
         });
     });
@@ -99,7 +102,8 @@
     function fizzBuzzPrint() {
         var array = [];
         for(var i = 1; i <= 100; i++) {
-            array.push(i);
+            array.push(fizzBuzz(i));
+            console.log(fizzBuzz(i));
         }
         return array;
     }
