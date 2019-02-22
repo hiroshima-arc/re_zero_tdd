@@ -86,6 +86,9 @@
             assert.equal(fizzBuzz(3), "Fizz");
             assert.equal(fizzBuzz(1), 1);
         });
+        test("5で割り切れる場合はBuzzをプリントする", () => {
+            assert.equal(fizzBuzz(5), "Buzz");
+        });
     });
 </script>
 
@@ -102,6 +105,8 @@
         var result = number
         if (number % 3 === 0) {
             result = "Fizz";
+        } else if (number % 5 == 0) {
+            result = "Buzz";
         }
         return result;
     }
