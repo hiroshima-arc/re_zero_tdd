@@ -117,12 +117,10 @@
 
     function fizzBuzz(number) {
         var result = number
-        if (number % 3 === 0 ) {
-            if (number % 5 === 0 ){
-                result = "FizzBuzz";
-            } else if (number % 3 === 0) {
-                result = "Fizz";
-            }
+        if ((number % 3 === 0) && (number % 5 === 0)) {
+            result = "FizzBuzz";
+        } else if (number % 3 == 0) {
+            result = "Fizz"
         } else if (number % 5 == 0) {
             result = "Buzz";
         }
