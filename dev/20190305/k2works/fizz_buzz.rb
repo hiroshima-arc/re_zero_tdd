@@ -3,7 +3,7 @@ require 'test/unit'
 
 class FizzBuzzTest < Test::Unit::TestCase
   test '1から100までプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする' do
-    list = generate_list
+    list = FizzBuzz.generate_list
     assert_equal 1, list.first
     assert_equal 'Fizz', list[2]
     assert_equal 'Buzz', list[4]
@@ -12,38 +12,42 @@ class FizzBuzzTest < Test::Unit::TestCase
   end
 
   test '3で割り切れる場合はFizzを出力する' do
-    assert_equal 'Fizz', fizz_buzz(3)
-    assert_equal 1, fizz_buzz(1)
+    assert_equal 'Fizz', FizzBuzz.fizz_buzz(3)
+    assert_equal 1, FizzBuzz.fizz_buzz(1)
   end
 
   test '5で割り切れる場合はBuzzを出力する' do
-    assert_equal 'Buzz', fizz_buzz(5)
+    assert_equal 'Buzz', FizzBuzz.fizz_buzz(5)
   end
 
   test '3と5で割り切れる場合はFizzBuzzを出力する' do
-    assert_equal 'FizzBuzz', fizz_buzz(15)
+    assert_equal 'FizzBuzz', FizzBuzz.fizz_buzz(15)
   end
 end
 
-def print
-  generate_list.each { |value| puts value }
-end
+class FizzBuzz
+  def self.print
+    generate_list.each { |value| puts value }
+  end
 
-def generate_list
-  (1..100).map { |number| fizz_buzz(number) }
-end
+  def self.generate_list
+    (1..100).map { |number| fizz_buzz(number) }
+  end
 
-def fizz_buzz(number)
-  return 'FizzBuzz' if is_fizz?(number) && is_buzz?(number)
-  return 'Fizz' if is_fizz?(number)
-  return 'Buzz' if is_buzz?(number)
-  number
-end
+  def self.fizz_buzz(number)
+    return 'FizzBuzz' if fizz?(number) && buzz?(number)
+    return 'Fizz' if fizz?(number)
+    return 'Buzz' if buzz?(number)
+    number
+  end
 
-def is_fizz?(number)
-  (number % 3).zero?
-end
+  def self.fizz?(number)
+    (number % 3).zero?
+  end
 
-def is_buzz?(number)
-  (number % 5).zero?
+  def self.buzz?(number)
+    (number % 5).zero?
+  end
+
+  private_class_method :fizz?, :buzz?
 end
