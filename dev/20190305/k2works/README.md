@@ -23,6 +23,12 @@
 
 ## 開発
 
+```bash
+gem install observr
+touch test.watchr
+observr test.watchr
+```
+
 ### ふりかえり
 
 #### Keep
