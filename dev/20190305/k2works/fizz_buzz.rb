@@ -3,7 +3,7 @@ require 'test/unit'
 
 class FizzBuzzTest < Test::Unit::TestCase
   test '1から100までプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする' do
-    list = print
+    list = generate_list
     assert_equal 1, list.first
     assert_equal 'Fizz', list[2]
     assert_equal 'Buzz', list[4]
@@ -26,6 +26,10 @@ class FizzBuzzTest < Test::Unit::TestCase
 end
 
 def print
+  generate_list.each { |value| puts value }
+end
+
+def generate_list
   (1..100).map { |number| fizz_buzz(number) }
 end
 
