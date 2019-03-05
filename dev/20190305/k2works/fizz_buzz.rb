@@ -2,10 +2,13 @@
 require 'test/unit'
 
 class FizzBuzzTest < Test::Unit::TestCase
-  test '1から100までプリントする' do
+  test '1から100までプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする' do
     list = print
     assert_equal 1, list.first
-    assert_equal 100, list.last
+    assert_equal 'Fizz', list[2]
+    assert_equal 'Buzz', list[4]
+    assert_equal 'FizzBuzz', list[14]
+    assert_equal 'Buzz', list.last
   end
 
   test '3で割り切れる場合はFizzを出力する' do
@@ -26,7 +29,7 @@ def print
   list =[]
   i = 1
   while i <= 100
-    list.append(i)
+    list.append(fizz_buzz(i))
     i += 1
   end
   list
