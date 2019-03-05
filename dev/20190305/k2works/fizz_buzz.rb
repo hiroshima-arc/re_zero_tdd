@@ -51,6 +51,8 @@ class FizzBuzz
     number
   end
 
+  private
+
   def fizz?(number)
     (number % 3).zero?
   end
