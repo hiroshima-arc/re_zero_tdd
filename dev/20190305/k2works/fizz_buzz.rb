@@ -34,11 +34,16 @@ def generate_list
 end
 
 def fizz_buzz(number)
-  fizz = (number % 3).zero?
-  buzz = (number % 5).zero?
-
-  return 'FizzBuzz' if fizz && buzz
-  return 'Fizz' if fizz
-  return 'Buzz' if buzz
+  return 'FizzBuzz' if is_fizz?(number) && is_buzz?(number)
+  return 'Fizz' if is_fizz?(number)
+  return 'Buzz' if is_buzz?(number)
   number
+end
+
+def is_fizz?(number)
+  (number % 3).zero?
+end
+
+def is_buzz?(number)
+  (number % 5).zero?
 end
