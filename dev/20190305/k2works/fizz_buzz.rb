@@ -32,6 +32,10 @@ end
 
 class FizzBuzz
   attr_reader :list
+  MAX_RANGE = 100
+  FIZZ = 'Fizz'
+  BUZZ = 'Buzz'
+  FIZZ_BUZZ = 'FizzBuzz'
 
   def initialize
     @list = generate_list
@@ -42,16 +46,16 @@ class FizzBuzz
   end
 
   def fizz_buzz(number)
-    return 'FizzBuzz' if fizz?(number) && buzz?(number)
-    return 'Fizz' if fizz?(number)
-    return 'Buzz' if buzz?(number)
+    return FIZZ_BUZZ if fizz?(number) && buzz?(number)
+    return FIZZ if fizz?(number)
+    return BUZZ if buzz?(number)
     number
   end
 
   private
   
   def generate_list
-    (1..100).map { |number| fizz_buzz(number) }
+    (1..FizzBuzz::MAX_RANGE).map { |number| fizz_buzz(number) }
   end
 
   def fizz?(number)
