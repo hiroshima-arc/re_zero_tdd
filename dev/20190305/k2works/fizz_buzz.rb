@@ -26,13 +26,7 @@ class FizzBuzzTest < Test::Unit::TestCase
 end
 
 def print
-  list =[]
-  i = 1
-  while i <= 100
-    list.append(fizz_buzz(i))
-    i += 1
-  end
-  list
+  (1..100).map { |number| fizz_buzz(number) }
 end
 
 def fizz_buzz(number)
