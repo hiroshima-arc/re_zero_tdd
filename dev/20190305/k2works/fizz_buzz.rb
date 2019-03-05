@@ -7,6 +7,11 @@ class FizzBuzzTest < Test::Unit::TestCase
     assert_equal 1, list.first
     assert_equal 100, list.last
   end
+
+  test '3で割り切れる場合はFizzを出力する' do
+    assert_equal 'Fizz', fizz_buzz(3)
+    assert_equal 1, fizz_buzz(1)
+  end
 end
 
 def print
@@ -17,4 +22,14 @@ def print
     i += 1
   end
   list
+end
+
+def fizz_buzz(number)
+  result = number
+
+  if (number % 3).zero?
+    result = 'Fizz'
+  end
+
+  result
 end
