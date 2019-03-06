@@ -78,11 +78,11 @@ class FizzBuzz
     @buzz_list = generate_buzz_list
     @fizz_buzz_list = generate_fizz_buzz_list
     @number_list = generate_number_list
-    @number_list_total = calulate_number_list_total
+    @number_list_total = calculate_number_list_total
   end
 
   def print
-    list.each { |value| puts value }
+    list.each(&method(:puts))
   end
 
   def fizz_buzz(number)
@@ -98,7 +98,7 @@ class FizzBuzz
   private
 
   def generate_list
-    (1..FizzBuzz::MAX_RANGE).map { |number| fizz_buzz(number) }
+    (1..FizzBuzz::MAX_RANGE).map(&method(:fizz_buzz))
   end
 
   def generate_fizz_list
@@ -117,8 +117,8 @@ class FizzBuzz
     @list.reject { |item| item =~ /[a-zA-Z]/ }
   end
 
-  def calulate_number_list_total
-    @number_list.reduce { |total, number| total + number }
+  def calculate_number_list_total
+    @number_list.reduce(&:+)
   end
 
   def fizz?(number)
