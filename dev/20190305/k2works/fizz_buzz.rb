@@ -40,7 +40,7 @@ class FizzBuzz
   def initialize
     @list = generate_list
   end
-  
+
   def print
     list.each { |value| puts value }
   end
@@ -53,7 +53,7 @@ class FizzBuzz
   end
 
   private
-  
+
   def generate_list
     (1..FizzBuzz::MAX_RANGE).map { |number| fizz_buzz(number) }
   end
