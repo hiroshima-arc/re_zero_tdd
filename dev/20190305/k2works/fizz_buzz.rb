@@ -28,10 +28,17 @@ class FizzBuzzTest < Test::Unit::TestCase
   test '3と5で割り切れる場合はFizzBuzzを出力する' do
     assert_equal 'FizzBuzz', @fizz_buzz.fizz_buzz(15)
   end
+
+  test 'Fizzだけを抽出したリストを出力する' do
+    list = @fizz_buzz.fizz_list
+    assert_equal 'Fizz', list.first
+    assert_equal 'Fizz', list.last
+    assert_equal 27, list.size
+  end
 end
 
 class FizzBuzz
-  attr_reader :list
+  attr_reader :list, :fizz_list
   MAX_RANGE = 100
   FIZZ = 'Fizz'
   BUZZ = 'Buzz'
@@ -39,6 +46,7 @@ class FizzBuzz
 
   def initialize
     @list = generate_list
+    @fizz_list = generate_fizz_list
   end
 
   def print
@@ -56,6 +64,10 @@ class FizzBuzz
 
   def generate_list
     (1..FizzBuzz::MAX_RANGE).map { |number| fizz_buzz(number) }
+  end
+
+  def generate_fizz_list
+    @list.select { |item| item == FIZZ }
   end
 
   def fizz?(number)
