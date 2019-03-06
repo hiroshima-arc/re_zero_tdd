@@ -41,10 +41,15 @@ class FizzBuzzTest < Test::Unit::TestCase
     assert_equal 1, list.first
     assert_equal 98, list.last
   end
+
+  test '数字だけを抽出したリストの合計を出力する' do
+    total = @fizz_buzz.number_list_total
+    assert_equal 2632, total
+  end
 end
 
 class FizzBuzz
-  attr_reader :list, :fizz_list, :number_list
+  attr_reader :list, :fizz_list, :number_list, :number_list_total
   MAX_RANGE = 100
   FIZZ = 'Fizz'
   BUZZ = 'Buzz'
@@ -54,6 +59,7 @@ class FizzBuzz
     @list = generate_list
     @fizz_list = generate_fizz_list
     @number_list = generate_number_list
+    @number_list_total = calulate_number_list_total
   end
 
   def print
@@ -78,7 +84,11 @@ class FizzBuzz
   end
 
   def generate_number_list
-    list = @list.reject { |item| item =~ /[a-zA-Z]/ }
+    @list.reject { |item| item =~ /[a-zA-Z]/ }
+  end
+
+  def calulate_number_list_total
+    @number_list.reduce { |total, number| total + number }
   end
 
   def fizz?(number)
