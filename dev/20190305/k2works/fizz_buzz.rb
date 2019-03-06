@@ -5,7 +5,7 @@ class FizzBuzzTest < Test::Unit::TestCase
   def setup
     @fizz_buzz = FizzBuzz.new
   end
-  
+
   test '1から100までプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする' do
     list = @fizz_buzz.list
     assert_equal 1, list.first
