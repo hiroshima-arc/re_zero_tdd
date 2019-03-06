@@ -1,4 +1,6 @@
 # coding: utf-8
+# frozen_string_literal: true
+
 require 'test/unit'
 
 class FizzBuzzTest < Test::Unit::TestCase
@@ -85,8 +87,11 @@ class FizzBuzz
 
   def fizz_buzz(number)
     return FIZZ_BUZZ if fizz?(number) && buzz?(number)
+
     return FIZZ if fizz?(number)
+
     return BUZZ if buzz?(number)
+
     number
   end
 
@@ -123,5 +128,4 @@ class FizzBuzz
   def buzz?(number)
     (number % 5).zero?
   end
-
 end
