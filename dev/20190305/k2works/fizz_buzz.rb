@@ -36,10 +36,25 @@ class FizzBuzzTest < Test::Unit::TestCase
     assert_equal 27, list.size
   end
 
+  test 'Buzzだけを抽出したリストを出力する' do
+    list = @fizz_buzz.buzz_list
+    assert_equal 'Buzz', list.first
+    assert_equal 'Buzz', list.last
+    assert_equal 14, list.size
+  end
+
+  test 'FizzBuzzだけを抽出したリストを出力する' do
+    list = @fizz_buzz.fizz_buzz_list
+    assert_equal 'FizzBuzz', list.first
+    assert_equal 'FizzBuzz', list.last
+    assert_equal 6, list.size
+  end
+
   test '数字だけを抽出したリストを出力する' do
     list = @fizz_buzz.number_list
     assert_equal 1, list.first
     assert_equal 98, list.last
+    assert_equal 53, list.size
   end
 
   test '数字だけを抽出したリストの合計を出力する' do
@@ -49,7 +64,7 @@ class FizzBuzzTest < Test::Unit::TestCase
 end
 
 class FizzBuzz
-  attr_reader :list, :fizz_list, :number_list, :number_list_total
+  attr_reader :list, :fizz_list, :buzz_list, :fizz_buzz_list, :number_list, :number_list_total
   MAX_RANGE = 100
   FIZZ = 'Fizz'
   BUZZ = 'Buzz'
@@ -58,6 +73,8 @@ class FizzBuzz
   def initialize
     @list = generate_list
     @fizz_list = generate_fizz_list
+    @buzz_list = generate_buzz_list
+    @fizz_buzz_list = generate_fizz_buzz_list
     @number_list = generate_number_list
     @number_list_total = calulate_number_list_total
   end
@@ -81,6 +98,14 @@ class FizzBuzz
 
   def generate_fizz_list
     @list.select { |item| item == FIZZ }
+  end
+
+  def generate_buzz_list
+    @list.select { |item| item == BUZZ }
+  end
+
+  def generate_fizz_buzz_list
+    @list.select { |item| item == FIZZ_BUZZ }
   end
 
   def generate_number_list
