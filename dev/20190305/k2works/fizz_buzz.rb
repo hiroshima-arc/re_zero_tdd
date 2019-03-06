@@ -35,10 +35,16 @@ class FizzBuzzTest < Test::Unit::TestCase
     assert_equal 'Fizz', list.last
     assert_equal 27, list.size
   end
+
+  test '数字だけを抽出したリストを出力する' do
+    list = @fizz_buzz.number_list
+    assert_equal 1, list.first
+    assert_equal 98, list.last
+  end
 end
 
 class FizzBuzz
-  attr_reader :list, :fizz_list
+  attr_reader :list, :fizz_list, :number_list
   MAX_RANGE = 100
   FIZZ = 'Fizz'
   BUZZ = 'Buzz'
@@ -47,6 +53,7 @@ class FizzBuzz
   def initialize
     @list = generate_list
     @fizz_list = generate_fizz_list
+    @number_list = generate_number_list
   end
 
   def print
@@ -68,6 +75,10 @@ class FizzBuzz
 
   def generate_fizz_list
     @list.select { |item| item == FIZZ }
+  end
+
+  def generate_number_list
+    list = @list.reject { |item| item =~ /[a-zA-Z]/ }
   end
 
   def fizz?(number)
