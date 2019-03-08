@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet"/>
+
+
+    <style type="text/css">
+        body {
+            width: 810px;
+            margin: 0 auto;
+            background-color: ivory;
+        }
+
+        header {
+            width: 350px;
+        }
+
+        .nav-component {
+            width: 290px;
+            float: left;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        .fizz-buzz-component {
+            width: 500px;
+            float: right;
+            padding-left: 5px;
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+        }
+
+        .fizz-buzz-component table {
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .fizz-buzz-component th {
+            border: 1px solid black;
+            background-color: aqua;
+        }
+
+        .fizz-buzz-component td {
+            border: 1px solid black;
+        }
+
+        footer {
+            clear: both;
+            width: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>HTML5+CSS+JavaScript with TDD</h1>
+<header>
+    <nav class="nav-component">
+        <h1>Menu</h1>
+        <ul>
+            <li><a href="index.html"></a>Ajax郵便番号検索</li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <section class="fizz-buzz-component">
+        <h2>Ajax郵便番号検索</h2>
+        <div id="app">
+            <div id="input_form">
+                <input type="text" id="zip">
+                <button onclick="find()">検索</button>
+            </div>
+            <div id="result"></div>
+        </div>
+        <div id="mocha"></div>
+    </section>
+</section>
+<footer>
+    <p>Copyright</p>
+    <address>hiroshima.arc@gmail.com</address>
+</footer>
+
+<script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+<script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/7.2.7/sinon.min.js"></script>
+<script>mocha.setup("bdd");</script>
+<script>
+  const assert = chai.assert;
+
+  describe("AjaxZipRequestTest", () => {
+    var xhr, requests;
+
+    before(function() {
+      xhr = sinon.useFakeXMLHttpRequest();
+      requests = [];
+      xhr.onCreate = function(req) {
+        requests.push(req);
+      };
+    });
+
+    after(function() {
+      // Like before we must clean up when tampering with globals.
+      xhr.restore();
+    });
+
+    it("郵便番号検索APIにGETリクエストを生成する", () => {
+      var url = "http://api.aoikujira.com/zip/json/2210824";
+      var onsuccess = sinon.fake();
+      var onerror = sinon.fake();
+      httpGet(url, onsuccess, onerror);
+
+      assert.equal(requests.length, 1);
+      assert.equal(requests[0].url, "http://api.aoikujira.com/zip/json/2210824");
+    })
+  });
+
+  describe("AjaxZipResponseTest", () => {
+    var server;
+
+    before(function () { server = sinon.fakeServer.create(); });
+    after(function () { server.restore(); });
+
+    it("郵便番号APIサーバーからデシリアライズされたデータと共にコールバック関数が呼び出される", function () {
+      var url = "http://api.aoikujira.com/zip/json/2210824";
+      var onsuccess = sinon.fake();
+      var onerror = sinon.fake();
+      httpGet(url, onsuccess, onerror);
+
+      // This is part of the FakeXMLHttpRequest API
+      server.requests[0].respond(
+        200,
+        { "Content-Type": "application/json" },
+        JSON.stringify([{"API_URL":"http:\/\/api.aoikujira.com\/zip\/zip.php","version":"1.01","result_code":1,"database":"2018-07-30","ken_kana":"\u30ab\u30ca\u30ac\u30ef\u30b1\u30f3","city_kana":"\u30e8\u30b3\u30cf\u30de\u30b7\u30ab\u30ca\u30ac\u30ef\u30af","address_kana":"\u30d2\u30ed\u30c0\u30a4\u30aa\u30aa\u30bf\u30de\u30c1","state":"\u795e\u5948\u5ddd\u770c","city":"\u6a2a\u6d5c\u5e02\u795e\u5948\u5ddd\u533a","address":"\u5e83\u53f0\u592a\u7530\u753a","result":"\u795e\u5948\u5ddd\u770c\u6a2a\u6d5c\u5e02\u795e\u5948\u5ddd\u533a\u5e83\u53f0\u592a\u7530\u753a"}])
+      );
+
+      assert(onsuccess.calledOnce);
+    });
+  });
+  function httpGet(url, onsuccess, onerror) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          onsuccess(xhr, xhr.responseText);
+        } else {
+          onerror(xhr, xhr.status);
+        }
+      }
+    };
+    xhr.send('');
+    return xhr;
+  }
+  function httpGetJquery(url) {
+    $.ajax({
+      url: url,
+      type: 'GET',
+      data: {}
+    })
+      .done((data) => {
+        $('#result').html(data);
+        console.log(data);
+      })
+      .fail((data) => {
+        $('#result').html(data);
+        console.log(data);
+      })
+      .always((data) => {
+
+      });
+  }
+  //function $(id) { return document.getElementById(id);}
+
+  function zip_onsuccess(xhr, json) {
+    var j = JSON.parse(json);
+    if (j["result_code"] == 0) {
+      $('#result').innerHTML = "該当しません";
+      return;
+    }
+    var s = j["state"] + j["city"] + j["address"];
+    $('#result').innerHTML = s.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;");
+  }
+
+  function zip_onerror(xhr, code) {
+    alert("Ajaxのエラー:" + code);
+  }
+
+  function find() {
+    var zip = $('#zip').val();
+    var url = "http://api.aoikujira.com/zip/zip/json/" + zip;
+    httpGet(url, zip_onsuccess, zip_onerror);
+  }
+</script>
+<script>
+  mocha.checkLeaks();
+  mocha.globals(["jQuery"]);
+  mocha.run();
+</script>
+
+<script>
+
+</script>
+
+</body>
+</html>
