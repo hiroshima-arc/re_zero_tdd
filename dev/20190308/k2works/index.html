@@ -188,6 +188,12 @@
   function zip_onerror(xhr, code) {
     alert("Ajaxのエラー:" + code);
   }
+
+  function find() {
+    var zip = $('#zip').val();
+    var url = "http://api.aoikujira.com/zip/zip/json/" + zip;
+    httpGet(url, zip_onsuccess, zip_onerror);
+  }
 </script>
 <script>
   mocha.checkLeaks();
