@@ -1,0 +1,1 @@
+watch( "(.*)\.rb" )  {|md| system("ruby #{md[0]}") }
