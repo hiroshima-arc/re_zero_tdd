@@ -105,22 +105,20 @@
       xhr.restore();
     });
 
-    it("makes a GET request for todo items", function() {
-      getTodos(42, sinon.fake());
+    it("郵便番号検索APIにGETリクエストを生成する", () => {
+      var url = "http://api.aoikujira.com/zip/json/2210824";
+      var onsuccess = sinon.fake();
+      var onerror = sinon.fake();
+      httpGet(url, onsuccess, onerror);
 
       assert.equal(requests.length, 1);
-      assert.equal(requests[0].url, "/todo/42/items");
-    });
+      assert.equal(requests[0].url, "http://api.aoikujira.com/zip/json/2210824");
+    })
   });
 
-  function getTodos(listId, callback) {
-    jQuery.ajax({
-      url: '/todo/' + listId + '/items',
-      success: function (data) {
-        // Node-style CPS: callback(err, data)
-        callback(null, data);
-      }
-    });
+  function httpGet(url, onsuccess, onerror) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
   }
 </script>
 <script>
