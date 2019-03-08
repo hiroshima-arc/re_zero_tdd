@@ -37,3 +37,5 @@ browser-sync start --server --files "**/*"
 
 ## 参照
 - [Browsersync](https://www.browsersync.io/)
+- [SINON.JS](https://sinonjs.org/#get-started)
+

@@ -85,9 +85,15 @@
 <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
 <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-<script>mocha.setup('tdd')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/7.2.7/sinon.min.js"></script>
+<script>mocha.setup('bdd')</script>
 <script>
-
+const assert = chai.assert;
+describe("AjaxZipTest", () => {
+  it("do something", () => {
+    assert.equal(1, 2);
+  })
+});
 </script>
 <script>
   mocha.checkLeaks();
