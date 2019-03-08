@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Re:ゼロから始めるテスト駆動開発</title>
-    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet"/>
 
 
     <style type="text/css">
@@ -86,18 +86,46 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
 <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/7.2.7/sinon.min.js"></script>
-<script>mocha.setup('bdd')</script>
+<script>mocha.setup("bdd");</script>
 <script>
-const assert = chai.assert;
-describe("AjaxZipTest", () => {
-  it("do something", () => {
-    assert.equal(1, 2);
-  })
-});
+  const assert = chai.assert;
+  describe("AjaxZipTest", () => {
+    var xhr, requests;
+
+    before(function() {
+      xhr = sinon.useFakeXMLHttpRequest();
+      requests = [];
+      xhr.onCreate = function(req) {
+        requests.push(req);
+      };
+    });
+
+    after(function() {
+      // Like before we must clean up when tampering with globals.
+      xhr.restore();
+    });
+
+    it("makes a GET request for todo items", function() {
+      getTodos(42, sinon.fake());
+
+      assert.equal(requests.length, 1);
+      assert.equal(requests[0].url, "/todo/42/items");
+    });
+  });
+
+  function getTodos(listId, callback) {
+    jQuery.ajax({
+      url: '/todo/' + listId + '/items',
+      success: function (data) {
+        // Node-style CPS: callback(err, data)
+        callback(null, data);
+      }
+    });
+  }
 </script>
 <script>
   mocha.checkLeaks();
-  mocha.globals(['jQuery']);
+  mocha.globals(["jQuery"]);
   mocha.run();
 </script>
 
