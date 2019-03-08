@@ -14,6 +14,13 @@
 
 ## 開発
 
+開発サーバーの起動
+
+```bash
+npm install browser-sync -g
+browser-sync start --server --files "**/*"
+```
+
 ### ふりかえり
 
 #### Keep
@@ -23,3 +30,4 @@
 #### Try
 
 ## 参照
+- [Browsersync](https://www.browsersync.io/)
