@@ -89,7 +89,8 @@
 <script>mocha.setup("bdd");</script>
 <script>
   const assert = chai.assert;
-  describe("AjaxZipTest", () => {
+
+  describe("AjaxZipRequestTest", () => {
     var xhr, requests;
 
     before(function() {
@@ -116,9 +117,32 @@
     })
   });
 
+  describe("AjaxZipResponseTest", () => {
+    var server;
+
+    before(function () { server = sinon.fakeServer.create(); });
+    after(function () { server.restore(); });
+
+    it("郵便番号APIサーバーからデシリアライズされたデータと共にコールバック関数が呼び出される", function () {
+      var url = "http://api.aoikujira.com/zip/json/2210824";
+      var onsuccess = sinon.fake();
+      var onerror = sinon.fake();
+      httpGet(url, onsuccess, onerror);
+
+      // This is part of the FakeXMLHttpRequest API
+      server.requests[0].respond(
+        200,
+        { "Content-Type": "application/json" },
+        JSON.stringify([{"API_URL":"http:\/\/api.aoikujira.com\/zip\/zip.php","version":"1.01","result_code":1,"database":"2018-07-30","ken_kana":"\u30ab\u30ca\u30ac\u30ef\u30b1\u30f3","city_kana":"\u30e8\u30b3\u30cf\u30de\u30b7\u30ab\u30ca\u30ac\u30ef\u30af","address_kana":"\u30d2\u30ed\u30c0\u30a4\u30aa\u30aa\u30bf\u30de\u30c1","state":"\u795e\u5948\u5ddd\u770c","city":"\u6a2a\u6d5c\u5e02\u795e\u5948\u5ddd\u533a","address":"\u5e83\u53f0\u592a\u7530\u753a","result":"\u795e\u5948\u5ddd\u770c\u6a2a\u6d5c\u5e02\u795e\u5948\u5ddd\u533a\u5e83\u53f0\u592a\u7530\u753a"}])
+      );
+
+      assert(onsuccess.calledOnce);
+    });
+  });
   function httpGet(url, onsuccess, onerror) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
+    onsuccess(xhr, xhr.responseText);
   }
 </script>
 <script>
