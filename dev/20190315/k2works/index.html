@@ -6,6 +6,9 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Re:ゼロから始めるテスト駆動開発</title>
     <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <script src="https://cdn.rawgit.com/vuejs/vue/dev/dist/vue.min.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue/dev/packages/vue-template-compiler/browser.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue-test-utils/dev/packages/test-utils/dist/vue-test-utils.iife.js"></script>
 
 
     <style type="text/css">
@@ -62,6 +65,13 @@
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
         <div id="app"></div>
+        <h2>コードを書いてみよう</h2>
+        <div id="app2">
+            <p>{{　fruits.name　}}:　単価{{ fruits.price }}円　×　{{　count　}}個</p>
+            <button type="text" @click="addNumber">数を増やす</button>
+            <button type="text" @click="reduceNumber">数を減らす</button>
+            <p>{{　fruits.price　*　count　|　numberWidthDelimiter　}}円</p>
+        </div>
         <div id="mocha"></div>
     </section>
 </section>
@@ -123,6 +133,35 @@
   }
 
   fizzBuzzPrint();
+</script>
+
+<script>
+  const vm = new Vue({
+    el: '#app2',
+    data: {
+      count: 0,
+      fruits: {
+        name: 'みかん',
+        price: 250
+      }
+    },
+    methods: {
+      addNumber () {
+        return this.count++
+      },
+      reduceNumber () {
+        if (this.count !== 0) return this.count--
+      }
+    },
+    filters: {
+      numberWidthDelimiter (value) {
+        if (!value) {
+          return 0
+        }
+        return value.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+      }
+    }
+  })
 </script>
 
 <script>
