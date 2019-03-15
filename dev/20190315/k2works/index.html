@@ -137,78 +137,25 @@
   });
 
   suite("コードを書いてみよう", () => {
-    const { shallowMount } = VueTestUtils;
-
     suite("数を増やす", () => {
       test("数を増やすボタンをおすと合計金額が更新される", () => {
-        const wrapper = shallowMount(FizzBuzzCall, {
-          propsData: {
-            input: 3
-          }
-        });
-        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
-        assert(wrapper.props().output, "Fizz");
       });
       test("数を減らすボタンをおすと合計金額が更新される", () => {
-        const wrapper = shallowMount(FizzBuzzCall, {
-          propsData: {
-            input: 3
-          }
-        });
-        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
-        assert(wrapper.props().output, "Fizz");
       });
     });
   });
 
   suite("コードを書いてみよう2", () => {
-    const { shallowMount } = VueTestUtils;
-
     suite("送信する", () => {
       test("名前が未入力の場合は送信ボタンが押せない", () => {
-        const wrapper = shallowMount(FizzBuzzCall, {
-          propsData: {
-            input: 3
-          }
-        });
-        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
-        assert(wrapper.props().output, "Fizz");
       });
       test("メールアドレスが未入力の場合は送信ボタンが押せない", () => {
-        const wrapper = shallowMount(FizzBuzzCall, {
-          propsData: {
-            input: 3
-          }
-        });
-        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
-        assert(wrapper.props().output, "Fizz");
       });
       test("カテゴリが未入力の場合は送信ボタンが押せない", () => {
-        const wrapper = shallowMount(FizzBuzzCall, {
-          propsData: {
-            input: 3
-          }
-        });
-        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
-        assert(wrapper.props().output, "Fizz");
       });
       test("質問内容が未入力の場合は送信ボタンが押せない", () => {
-        const wrapper = shallowMount(FizzBuzzCall, {
-          propsData: {
-            input: 3
-          }
-        });
-        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
-        assert(wrapper.props().output, "Fizz");
       });
       test("メールアドレスが不正な場合はエラーメッセージを表示する", () => {
-        const wrapper = shallowMount(FizzBuzzCall, {
-          propsData: {
-            input: 3
-          }
-        });
-        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
-        assert(wrapper.props().output, "Fizz");
       });
     });
   });
