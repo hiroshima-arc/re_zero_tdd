@@ -14,6 +14,11 @@
 
 ## 開発
 
+```bash
+npm install browser-sync -g
+browser-sync start --server --files "**/*"
+```
+
 ### ふりかえり
 
 #### Keep
