@@ -72,6 +72,35 @@
             <button type="text" @click="reduceNumber">数を減らす</button>
             <p>{{　fruits.price　*　count　|　numberWidthDelimiter　}}円</p>
         </div>
+        <h2>コードを書いてみよう２</h2>
+        <div id="app3">
+            <div class="Form" id="form">
+                <dl class="Form__wrapper">
+                    <dt>お名前<span class="required">*</span></dt>
+                    <dd><input type="text" class="Form__text" v-model="input.name" @keyup="trimText()">
+
+                    </dd>
+                    <dt>メールアドレス<span class="required">*</span></dt>
+                    <dd><input type="text" class="Form__text" v-model="input.mail">
+                        <p class="required" v-if="!mailVal && this.input.mail != ''">メールアドレスを正しく入力してください</p>
+                    </dd>
+                    <dt>カテゴリ<span class="required">*</span></dt>
+                    <dd>
+                        <select name="category" class="Form__select" v-model="input.select">
+                            <option>選択してください</option>
+                            <option value="cate1">カテゴリ1</option>
+                            <option value="cate2">カテゴリ1</option>
+                            <option value="cate3">カテゴリ1</option>
+                            <option value="cate4">カテゴリ2</option>
+                        </select>
+                    </dd>
+                    <dt>質問内容<span class="required">*</span></dt>
+                    <dd><textarea name="textarea" class="Form__textarea" v-model="input.textarea"></textarea></dd>
+                </dl>
+                <p class="text_center"><span class="required">*</span>印は全て必須項目です。</p>
+                <button class="Form__submit" :disabled="!canSend">送信</button>
+            </div><!-- /#form -->
+        </div>
         <div id="mocha"></div>
     </section>
 </section>
@@ -185,6 +214,53 @@
         }
         return value.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
       }
+    }
+  })
+</script>
+
+<script>
+  /**
+   * フォームバリデーション
+   */
+  const vm2 = new Vue({
+    el: '#app3',
+    data: {
+      input: {
+        name: '',
+        mail: '',
+        select: '選択してください',
+        textarea: ''
+      },
+      error: {
+        mail: false,
+      }
+    },
+    methods: {
+      // キーアップで前後の余白削除
+      trimText () {
+        this.input.name = this.input.name.replace(/^\s+|\s+$/g, '');
+        return this.input.name;
+      }
+    },
+    computed: {
+      // メールバリデーション
+      mailVal () {
+        if (this.input.mail && !this.input.mail.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+          this.error.mail = false;
+        } else {
+          if (this.input.mail) {
+            this.error.mail = true;
+          }
+          else this.error.mail = false;
+        }
+        return this.error.mail;
+      },
+      // 全ての項目の入力メールバリデーションが通ったら送信ボタン活性化
+      canSend () {
+        if (this.input.name != '' && this.input.mail != '' && this.input.select != '' && this.input.textarea != '' && this.error.mail == true && this.input.select != '選択してください') {
+          return true;
+        }
+      },
     }
   })
 </script>
