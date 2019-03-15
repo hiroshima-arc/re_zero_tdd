@@ -58,6 +58,8 @@
         <h1>Menu</h1>
         <ul>
             <li><a href="index.html"></a>FizzBuzz</li>
+            <li><a href="index.html"></a>コードを書いてみよう</li>
+            <li><a href="index.html"></a>コードを書いてみよう２</li>
         </ul>
     </nav>
 </header>
@@ -139,10 +141,12 @@
   suite("コードを書いてみよう", () => {
     suite("数を増やす", () => {
       test("数を増やすボタンをおすと合計金額が更新される", () => {
+        assert.equal(1,0);
       });
     });
     suite("数を減らす", () => {
       test("数を減らすボタンをおすと合計金額が更新される", () => {
+        assert.equal(1,0);
       });
     });
   });
@@ -150,27 +154,25 @@
   suite("コードを書いてみよう2", () => {
     suite("送信する", () => {
       test("名前が未入力の場合は送信ボタンが押せない", () => {
+        assert.equal(1,0);
       });
       test("メールアドレスが未入力の場合は送信ボタンが押せない", () => {
+        assert.equal(1,0);
       });
       test("カテゴリが未入力の場合は送信ボタンが押せない", () => {
+        assert.equal(1,0);
       });
       test("質問内容が未入力の場合は送信ボタンが押せない", () => {
+        assert.equal(1,0);
       });
       test("メールアドレスが不正な場合はエラーメッセージを表示する", () => {
+        assert.equal(1,0);
       });
     });
   });
 </script>
 
 <script>
-  function fizzBuzzPrint() {
-    var array = generateArray();
-    for(var i = 1; i <= 100; i++) {
-      console.log(array[i]);
-    }
-  }
-
   function generateArray() {
     var array = [];
     for(var i = 1; i <= 100; i++) {
@@ -179,7 +181,6 @@
     return array;
   }
 
-
   function fizzBuzz(number) {
     if ((number % 3 === 0) && (number % 5 === 0)) return "FizzBuzz";
     if (number % 3 == 0) return "Fizz";
@@ -187,7 +188,42 @@
     return number;
   }
 
+  function fizzBuzzPrint() {
+    var array = generateArray();
+    for(var i = 1; i <= 100; i++) {
+      console.log(array[i]);
+    }
+  }
+
+  function renderTable(list) {
+    let columnCount = 1;
+    let html = "<table>";
+    html += "<thead>";
+    [...Array(10).keys()].forEach((key) => {
+      html += `<th>${key + 1}</th>`;
+    });
+    html += "</thead>";
+    html += "<tbody>";
+    html += "<tr>";
+    list.forEach((v) => {
+      if (columnCount < 10) {
+        html += `<td>${v}</td>`;
+        columnCount += 1;
+      } else {
+        html += `<td>${v}</td>`;
+        html += "</tr>";
+        columnCount = 1;
+      }
+    });
+    html += "</tbody>";
+    html += "</table>";
+    const app = document.querySelector("#app");
+    app.innerHTML = html;
+  }
+
   fizzBuzzPrint();
+
+  renderTable(generateArray());
 </script>
 
 <script>
