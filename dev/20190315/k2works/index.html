@@ -106,6 +106,31 @@
       assert.equal(fizzBuzz(15),"FizzBuzz");
     });
   });
+
+  suite("コードを書いてみよう", () => {
+    const { shallowMount } = VueTestUtils;
+
+    suite("数を増やす", () => {
+      test("数を増やすボタンをおすと合計金額が更新される", () => {
+        const wrapper = shallowMount(FizzBuzzCall, {
+          propsData: {
+            input: 3
+          }
+        });
+        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
+        assert(wrapper.props().output, "Fizz");
+      });
+      test("数を減らすボタンをおすと合計金額が更新される", () => {
+        const wrapper = shallowMount(FizzBuzzCall, {
+          propsData: {
+            input: 3
+          }
+        });
+        wrapper.find("#fizz-buzz-component__button--call").trigger("click");
+        assert(wrapper.props().output, "Fizz");
+      });
+    });
+  });
 </script>
 
 <script>
