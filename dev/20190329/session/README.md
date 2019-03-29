@@ -14,6 +14,11 @@
 
 ## 開発
 
+```bash
+npm install browser-sync -g
+browser-sync start --server --files "**/*"
+```
+
 ### ふりかえり
 
 #### Keep
@@ -23,3 +28,5 @@
 #### Try
 
 ## 参照
+
+- [Browsersyncを利用してお手軽ブラウザ確認環境をつくろう](https://tech.medpeer.co.jp/entry/2015/06/09/071758)
