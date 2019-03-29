@@ -68,6 +68,7 @@
 <section>
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
+        <div id="greeting"></div>
         <div id="app">
             <table>
                 <thead>
@@ -123,6 +124,12 @@
     function greeting() {
       return "Hello, world";
     }
+
+    function rednerGreeting() {
+        document.querySelector("#greeting").innerHTML = greeting();
+    }
+
+    rednerGreeting();
 </script>
 <script>
   //mocha.checkLeaks();
@@ -130,9 +137,6 @@
   mocha.run();
 </script>
 
-<script>
-
-</script>
 
 </body>
 </html>
