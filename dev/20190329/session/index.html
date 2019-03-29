@@ -123,17 +123,23 @@
         });
 
         test("3で割り切れる場合はFizzをプリントする", () => {
-           assert.equal("Fizz", fizzBuzz(3)); 
+           assert.equal("Fizz", fizzBuzz(3));
         });
 
         test("5で割り切れる場合はBuzzをプリントする", () => {
             assert.equal("Buzz", fizzBuzz(5));
-        })
+        });
+
+        test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+            assert.equal("FizzBuzz", fizzBuzz(15));
+        });
     });
 
     var fizzBuzz = (number) => {
         var result = number;
-        if (number % 3 === 0) {
+        if (number % 3 === 0 && number % 5 === 0) {
+            result = "FizzBuzz";
+        } else if (number % 3 === 0) {
             result = "Fizz";
         } else if (number % 5 === 0) {
             result = "Buzz";
