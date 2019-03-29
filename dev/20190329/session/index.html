@@ -116,10 +116,8 @@
 
     var generateFizzBuzzList = () => {
         var list = [];
-        for(var i = 1; i <= 100; i++) {
-            list.push(fizzBuzz(i));
-        }
-        return list;
+        Array.from(Array(101).keys()).map((number) => {list.push(fizzBuzz(number))})
+        return list.slice(1);
     }
 
     var render = () => {
