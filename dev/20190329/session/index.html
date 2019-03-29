@@ -68,7 +68,6 @@
 <section>
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
-        <div id="greeting"></div>
         <div id="app">
             <table>
                 <thead>
@@ -116,20 +115,15 @@
 <script>
     const assert = chai.assert;
     suite("FizzBuzzTest", () => {
-        test("greeting", () => {
-            assert.equal(greeting(), "Hello, world");
+        test("1から100までをプリントする", () => {
+            assert.equal(1, print1To100());
         });
     })
 
-    function greeting() {
-      return "Hello, world";
+    function print1To100() {
+        return 1;
     }
 
-    function rednerGreeting() {
-        document.querySelector("#greeting").innerHTML = greeting();
-    }
-
-    rednerGreeting();
 </script>
 <script>
   //mocha.checkLeaks();
