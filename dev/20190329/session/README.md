@@ -21,6 +21,16 @@
 - [ ] 5 の倍数のときは｢Buzz｣とプリントできるようにする。
 
 ## 開発
+[LiveShare](https://insiders.liveshare.vsengsaas.visualstudio.com/join?06F4B1AFB2AE7D1F1992E6FFC97BB3F8307F)
+
+[Slack](https://hiroshima-arc-talk.slack.com/messages/CDHQME7NU/details/)
+
+[Gitpod](https://gitpod.io#https://github.com/hiroshima-arc/re_zero_tdd.git)
+
+```bash
+git checktout feature/20190329
+cd dev/20190329/session
+```
 
 ```bash
 npm install browser-sync -g
