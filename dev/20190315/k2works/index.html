@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <script src="https://cdn.rawgit.com/vuejs/vue/dev/dist/vue.min.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue/dev/packages/vue-template-compiler/browser.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue-test-utils/dev/packages/test-utils/dist/vue-test-utils.iife.js"></script>
+
+
+    <style type="text/css">
+        body {
+            width: 810px;
+            margin: 0 auto;
+            background-color: ivory;
+        }
+        header {
+            width: 350px;
+        }
+        .nav-component {
+            width: 290px;
+            float: left;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+        .fizz-buzz-component {
+            width: 500px;
+            float: right;
+            padding-left: 5px;
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+        }
+        .fizz-buzz-component table {
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        .fizz-buzz-component th {
+            border: 1px solid black;
+            background-color: aqua;
+        }
+        .fizz-buzz-component td {
+            border: 1px solid black;
+        }
+        footer {
+            clear: both;
+            width: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>HTML5+CSS+JavaScript with TDD</h1>
+<header>
+    <nav class="nav-component">
+        <h1>Menu</h1>
+        <ul>
+            <li><a href="index.html"></a>FizzBuzz</li>
+            <li><a href="index.html"></a>コードを書いてみよう</li>
+            <li><a href="index.html"></a>コードを書いてみよう２</li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <section class="fizz-buzz-component">
+        <h2>FizzBuzz</h2>
+        <div id="app"></div>
+        <h2>コードを書いてみよう</h2>
+        <div id="app2">
+            <p>{{　fruits.name　}}:　単価{{ fruits.price }}円　×　{{　count　}}個</p>
+            <button type="text" @click="addNumber">数を増やす</button>
+            <button type="text" @click="reduceNumber">数を減らす</button>
+            <p>{{　fruits.price　*　count　|　numberWidthDelimiter　}}円</p>
+        </div>
+        <h2>コードを書いてみよう２</h2>
+        <div id="app3">
+            <div class="Form" id="form">
+                <dl class="Form__wrapper">
+                    <dt>お名前<span class="required">*</span></dt>
+                    <dd><input type="text" class="Form__text" v-model="input.name" @keyup="trimText()">
+
+                    </dd>
+                    <dt>メールアドレス<span class="required">*</span></dt>
+                    <dd><input type="text" class="Form__text" v-model="input.mail">
+                        <p class="required" v-if="!mailVal && this.input.mail != ''">メールアドレスを正しく入力してください</p>
+                    </dd>
+                    <dt>カテゴリ<span class="required">*</span></dt>
+                    <dd>
+                        <select name="category" class="Form__select" v-model="input.select">
+                            <option>選択してください</option>
+                            <option value="cate1">カテゴリ1</option>
+                            <option value="cate2">カテゴリ1</option>
+                            <option value="cate3">カテゴリ1</option>
+                            <option value="cate4">カテゴリ2</option>
+                        </select>
+                    </dd>
+                    <dt>質問内容<span class="required">*</span></dt>
+                    <dd><textarea name="textarea" class="Form__textarea" v-model="input.textarea"></textarea></dd>
+                </dl>
+                <p class="text_center"><span class="required">*</span>印は全て必須項目です。</p>
+                <button class="Form__submit" :disabled="!canSend">送信</button>
+            </div><!-- /#form -->
+        </div>
+        <div id="mocha"></div>
+    </section>
+</section>
+<footer>
+    <p>Copyright</p>
+    <address>hiroshima.arc@gmail.com</address>
+</footer>
+
+<script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+<script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script>mocha.setup('tdd')</script>
+<script>
+  const assert = chai.assert;
+  suite("FizzBuzzTest", () => {
+    test("1から100までをプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzを返す", () => {
+      var array = generateArray();
+      assert.equal(array[0], 1);
+      assert.equal(array[2], "Fizz");
+      assert.equal(array[4], "Buzz");
+      assert.equal(array[14],"FizzBuzz");
+      assert.equal(array[99], "Buzz");
+    });
+    test("3で割り切れる場合はFizzをプリントする", () => {
+      assert.equal(fizzBuzz(3), "Fizz");
+      assert.equal(fizzBuzz(1), 1);
+    });
+    test("5で割り切れる場合はBuzzをプリントする", () => {
+      assert.equal(fizzBuzz(5), "Buzz");
+    });
+    test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+      assert.equal(fizzBuzz(15),"FizzBuzz");
+    });
+  });
+
+  suite("コードを書いてみよう", () => {
+    suite("数を増やす", () => {
+      test("数を増やすボタンをおすと合計金額が更新される", () => {
+        assert.equal(1,0);
+      });
+    });
+    suite("数を減らす", () => {
+      test("数を減らすボタンをおすと合計金額が更新される", () => {
+        assert.equal(1,0);
+      });
+    });
+  });
+
+  suite("コードを書いてみよう2", () => {
+    suite("送信する", () => {
+      test("名前が未入力の場合は送信ボタンが押せない", () => {
+        assert.equal(1,0);
+      });
+      test("メールアドレスが未入力の場合は送信ボタンが押せない", () => {
+        assert.equal(1,0);
+      });
+      test("カテゴリが未入力の場合は送信ボタンが押せない", () => {
+        assert.equal(1,0);
+      });
+      test("質問内容が未入力の場合は送信ボタンが押せない", () => {
+        assert.equal(1,0);
+      });
+      test("メールアドレスが不正な場合はエラーメッセージを表示する", () => {
+        assert.equal(1,0);
+      });
+    });
+  });
+</script>
+
+<script>
+  function generateArray() {
+    var array = [];
+    for(var i = 1; i <= 100; i++) {
+      array.push(fizzBuzz(i));
+    }
+    return array;
+  }
+
+  function fizzBuzz(number) {
+    if ((number % 3 === 0) && (number % 5 === 0)) return "FizzBuzz";
+    if (number % 3 == 0) return "Fizz";
+    if (number % 5 == 0) return "Buzz";
+    return number;
+  }
+
+  function fizzBuzzPrint() {
+    var array = generateArray();
+    for(var i = 1; i <= 100; i++) {
+      console.log(array[i]);
+    }
+  }
+
+  function renderTable(list) {
+    let columnCount = 1;
+    let html = "<table>";
+    html += "<thead>";
+    [...Array(10).keys()].forEach((key) => {
+      html += `<th>${key + 1}</th>`;
+    });
+    html += "</thead>";
+    html += "<tbody>";
+    html += "<tr>";
+    list.forEach((v) => {
+      if (columnCount < 10) {
+        html += `<td>${v}</td>`;
+        columnCount += 1;
+      } else {
+        html += `<td>${v}</td>`;
+        html += "</tr>";
+        columnCount = 1;
+      }
+    });
+    html += "</tbody>";
+    html += "</table>";
+    const app = document.querySelector("#app");
+    app.innerHTML = html;
+  }
+
+  fizzBuzzPrint();
+
+  renderTable(generateArray());
+</script>
+
+<script>
+  const vm = new Vue({
+    el: '#app2',
+    data: {
+      count: 0,
+      fruits: {
+        name: 'みかん',
+        price: 250
+      }
+    },
+    methods: {
+      addNumber () {
+        return this.count++
+      },
+      reduceNumber () {
+        if (this.count !== 0) return this.count--
+      }
+    },
+    filters: {
+      numberWidthDelimiter (value) {
+        if (!value) {
+          return 0
+        }
+        return value.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+      }
+    }
+  })
+</script>
+
+<script>
+  /**
+   * フォームバリデーション
+   */
+  const vm2 = new Vue({
+    el: '#app3',
+    data: {
+      input: {
+        name: '',
+        mail: '',
+        select: '選択してください',
+        textarea: ''
+      },
+      error: {
+        mail: false,
+      }
+    },
+    methods: {
+      // キーアップで前後の余白削除
+      trimText () {
+        this.input.name = this.input.name.replace(/^\s+|\s+$/g, '');
+        return this.input.name;
+      }
+    },
+    computed: {
+      // メールバリデーション
+      mailVal () {
+        if (this.input.mail && !this.input.mail.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+          this.error.mail = false;
+        } else {
+          if (this.input.mail) {
+            this.error.mail = true;
+          }
+          else this.error.mail = false;
+        }
+        return this.error.mail;
+      },
+      // 全ての項目の入力メールバリデーションが通ったら送信ボタン活性化
+      canSend () {
+        if (this.input.name != '' && this.input.mail != '' && this.input.select != '' && this.input.textarea != '' && this.error.mail == true && this.input.select != '選択してください') {
+          return true;
+        }
+      },
+    }
+  })
+</script>
+
+<script>
+  mocha.checkLeaks();
+  mocha.globals(['jQuery']);
+  mocha.run();
+</script>
+
+</body>
