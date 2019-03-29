@@ -17,6 +17,9 @@
 ```bash
 npm install browser-sync -g
 browser-sync start --server --files "**/*"
+npm install markdown-to-html -g
+npm install watch -g
+watch 'markdown README.md > readme.html' ./
 ```
 
 ### ふりかえり
