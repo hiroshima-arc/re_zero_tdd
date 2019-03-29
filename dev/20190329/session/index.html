@@ -68,8 +68,7 @@
 <section>
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
-        <div id="app">
-        </div>
+        <div id="app"></div>
         <div id="mocha"></div>
     </section>
 </section>
@@ -126,8 +125,11 @@
     }
 
     var render = () => {
-        var html = `
+        var table = `
             <table>
+                <tbody>
+        `
+        var header = `
                 <thead>
                 <tr>
                     <th>1</th>
@@ -142,23 +144,28 @@
                     <th>10</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>10</td>
-                </tr>
+        `;
+        table += header;
+        var body = "<tr>";
+        list = print1To100();
+        var counter = 1;
+        list.forEach((number) => {
+            var element = `<td>${number}</td>`;
+            body += element;
+            if (counter === 10) {
+                body += "</tr><tr>";
+                    counter = 1;
+            } else {
+                counter += 1;
+            }
+        });
+        body += "</tr>";
+        table += body;
+        table += `
                 </tbody>
             </table>
-            `;
-        document.querySelector("#app").innerHTML = html;
+        `;
+        document.querySelector("#app").innerHTML = table;
     }
     render();
 
