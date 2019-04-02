@@ -8,6 +8,17 @@ import java.util.stream.IntStream;
 public class FizzBuzz {
     private String _value;
     private List<String> _values;
+    private FizzBuzzType01 _type01;
+
+    public FizzBuzz(int type) {
+        switch (type) {
+            case 1:
+                this._type01 = new FizzBuzzType01();
+                break;
+            default:
+                this._type01 = new FizzBuzzType01();
+        }
+    }
 
     public String getValue() {
         return _value;
@@ -21,17 +32,16 @@ public class FizzBuzz {
         this._values = IntStream.rangeClosed(1,100).mapToObj(i -> this.generate(i, type)).collect(Collectors.toList());
     }
 
+    public void generateFizzBuzzList() {
+        this._values = IntStream.rangeClosed(1,100).mapToObj(this::generate).collect(Collectors.toList());
+    }
+
     public void print() {
         this._values.forEach(System.out::println);
     }
 
     public String generate(int i) {
-        boolean fizz = isFizz(i);
-        boolean buzz = isBuzz(i);
-        if (fizz && buzz) return this._value = "FizzBuzz";
-        if (fizz) return this._value = "Fizz";
-        if (buzz) return this._value = "Buzz";
-        return this._value = Integer.toString(i);
+        return this._value = this._type01.generate(i);
     }
 
     public String generate(int i, int type) {

@@ -11,12 +11,12 @@ public class FizzBuzzTest {
 
     @BeforeEach
     void init() {
-        _fizzBuzz = new FizzBuzz();
+        _fizzBuzz = new FizzBuzz(1);
     }
 
     @Test
     public void 値を1から100までをプリントする() {
-        _fizzBuzz.generateFizzBuzzList(1);
+        _fizzBuzz.generateFizzBuzzList();
         assertEquals("1", _fizzBuzz.getValues().get(0));
         assertEquals("Fizz", _fizzBuzz.getValues().get(2));
         assertEquals("Buzz", _fizzBuzz.getValues().get(4));
@@ -47,8 +47,8 @@ public class FizzBuzzTest {
 
     @Test
     public void タイプ1は通常のパターンを返す() {
-        assertEquals("Fizz", _fizzBuzz.generate(3, 1));
-        _fizzBuzz.generateFizzBuzzList(1);
+        assertEquals("Fizz", _fizzBuzz.generate(3));
+        _fizzBuzz.generateFizzBuzzList();
         assertEquals("Buzz", _fizzBuzz.getValues().get(4));
         assertEquals("FizzBuzz", _fizzBuzz.getValues().get(14));
     }
