@@ -1,13 +1,17 @@
 package helloworld;
 
-public abstract class FizzBuzzType {
-    abstract String generate(int number);
+public enum FizzBuzzType {
+    one(new FizzBuzzType01()),
+    two(new FizzBuzzType02()),
+    three(new FizzBuzzType03());
 
-    protected boolean isBuzz(int i) {
-        return i % 5 == 0;
+    private IFizzBuzzType type;
+
+    FizzBuzzType(IFizzBuzzType type) {
+       this.type = type;
     }
 
-    protected boolean isFizz(int i) {
-        return i % 3 == 0;
+    String generate(int number) {
+        return type.generate(number);
     }
 }

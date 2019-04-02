@@ -11,7 +11,7 @@ public class FizzBuzzTest {
 
     @BeforeEach
     void init() {
-        _fizzBuzz = new FizzBuzz(new FizzBuzzType01());
+        _fizzBuzz = new FizzBuzz(FizzBuzzType.valueOf("one"));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class FizzBuzzTest {
 
     @Test
     public void タイプ1は通常のパターンを返す() {
-        FizzBuzz fizzBuzz = new FizzBuzz(new FizzBuzzType01());
+        FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.valueOf("one"));
         assertEquals("Fizz", fizzBuzz.generate(3));
         fizzBuzz.generateFizzBuzzList();
         assertEquals("Buzz", fizzBuzz.getValues().get(4));
@@ -56,7 +56,7 @@ public class FizzBuzzTest {
 
     @Test
     public void タイプ2は数字のみのパターンを返す() {
-        FizzBuzz fizzBuzz = new FizzBuzz(new FizzBuzzType02());
+        FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.valueOf("two"));
         assertEquals("3", fizzBuzz.generate(3));
         fizzBuzz.generateFizzBuzzList();
         assertEquals("5", fizzBuzz.getValues().get(4));
@@ -65,7 +65,7 @@ public class FizzBuzzTest {
 
     @Test
     public void タイプ3はFizzBuzzのみのパターンを返す() {
-        FizzBuzz fizzBuzz = new FizzBuzz(new FizzBuzzType03());
+        FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.valueOf("three"));
         assertEquals("3", fizzBuzz.generate(3));
         fizzBuzz.generateFizzBuzzList();
         assertEquals("5", fizzBuzz.getValues().get(4));

@@ -1,6 +1,6 @@
 package helloworld;
 
-public class FizzBuzzType01 extends FizzBuzzType {
+public class FizzBuzzType01 extends IFizzBuzzType {
     public String generate(int number) {
         boolean fizz = isFizz(number);
         boolean buzz = isBuzz(number);
