@@ -6,44 +6,55 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FizzBuzz {
-    public static List<String> generateFizzBuzzList(int type) {
-        return IntStream.rangeClosed(1,100).mapToObj(i -> FizzBuzz.generate(i, type)).collect(Collectors.toList());
+    private String _value;
+    private List<String> _values;
+
+    public String getValue() {
+        return _value;
     }
 
-    public static void print(List<String> list) {
-        list.forEach(System.out::println);
+    public List<String> getValues() {
+        return _values;
     }
 
-    public static String generate(int i) {
+    public void generateFizzBuzzList(int type) {
+        this._values = IntStream.rangeClosed(1,100).mapToObj(i -> this.generate(i, type)).collect(Collectors.toList());
+    }
+
+    public void print() {
+        this._values.forEach(System.out::println);
+    }
+
+    public String generate(int i) {
         boolean fizz = isFizz(i);
         boolean buzz = isBuzz(i);
-        if (fizz && buzz) return "FizzBuzz";
-        if (fizz) return "Fizz";
-        if (buzz) return "Buzz";
-        return Integer.toString(i);
+        if (fizz && buzz) return this._value = "FizzBuzz";
+        if (fizz) return this._value = "Fizz";
+        if (buzz) return this._value = "Buzz";
+        return this._value = Integer.toString(i);
     }
 
-    public static String generate(int i, int type) {
+    public String generate(int i, int type) {
         switch (type) {
             case 1:
-                return FizzBuzz.generate(i);
+                return this.generate(i);
             case 2:
-                return Integer.toString(i);
+                return this._value = Integer.toString(i);
             case 3:
                 boolean fizz = isFizz(i);
                 boolean buzz = isBuzz(i);
-                if (fizz && buzz) return "FizzBuzz";
-                return Integer.toString(i);
+                if (fizz && buzz) return this._value = "FizzBuzz";
+                return this._value = Integer.toString(i);
             default:
-                return FizzBuzz.generate(i);
+                return this.generate(i);
         }
     }
 
-    private static boolean isBuzz(int i) {
+    private boolean isBuzz(int i) {
         return i % 5 == 0;
     }
 
-    private static boolean isFizz(int i) {
+    private boolean isFizz(int i) {
         return i % 3 == 0;
     }
 }
