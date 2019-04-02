@@ -10,9 +10,13 @@ public class FizzBuzz {
         for (int i = 0; i < 100; i++) {
             String result = FizzBuzz.fizzBuzz(i + 1);
             list.add(result);
-            System.out.println(list.get(i));
+            print(list, i);
         }
         return list;
+    }
+
+    private static void print(List<String> list, int i) {
+        System.out.println(list.get(i));
     }
 
     public static String fizzBuzz(int i) {
