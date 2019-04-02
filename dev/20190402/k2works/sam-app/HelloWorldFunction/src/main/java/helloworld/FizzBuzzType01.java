@@ -1,6 +1,6 @@
 package helloworld;
 
-public class FizzBuzzType01 {
+public class FizzBuzzType01 implements FizzBuzzType {
     public String generate(int number) {
         boolean fizz = isFizz(number);
         boolean buzz = isBuzz(number);

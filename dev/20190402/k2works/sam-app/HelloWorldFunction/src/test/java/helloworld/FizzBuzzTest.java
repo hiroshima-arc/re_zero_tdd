@@ -11,7 +11,7 @@ public class FizzBuzzTest {
 
     @BeforeEach
     void init() {
-        _fizzBuzz = new FizzBuzz(1);
+        _fizzBuzz = new FizzBuzz(new FizzBuzzType01());
     }
 
     @Test
@@ -47,10 +47,11 @@ public class FizzBuzzTest {
 
     @Test
     public void タイプ1は通常のパターンを返す() {
-        assertEquals("Fizz", _fizzBuzz.generate(3));
-        _fizzBuzz.generateFizzBuzzList();
-        assertEquals("Buzz", _fizzBuzz.getValues().get(4));
-        assertEquals("FizzBuzz", _fizzBuzz.getValues().get(14));
+        FizzBuzz fizzBuzz = new FizzBuzz(new FizzBuzzType01());
+        assertEquals("Fizz", fizzBuzz.generate(3));
+        fizzBuzz.generateFizzBuzzList();
+        assertEquals("Buzz", fizzBuzz.getValues().get(4));
+        assertEquals("FizzBuzz", fizzBuzz.getValues().get(14));
     }
 
     @Test
