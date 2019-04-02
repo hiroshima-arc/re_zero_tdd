@@ -15,9 +15,11 @@ public class FizzBuzz {
     }
 
     public static String fizzBuzz(int i) {
-        if (i % 3 == 0 && i % 5 == 0) return "FizzBuzz";
-        if (i % 3 == 0) return "Fizz";
-        if (i % 5 == 0) return "Buzz";
+        boolean isFizz = i % 3 == 0;
+        boolean isBuzz = i % 5 == 0;
+        if (isFizz && isBuzz) return "FizzBuzz";
+        if (isFizz) return "Fizz";
+        if (isBuzz) return "Buzz";
         return Integer.toString(i);
     }
 }
