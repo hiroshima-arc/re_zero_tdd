@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FizzBuzz {
-    public static List<String> print1To100() {
+    public static List<String> generateFizzBuzzList() {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             String result = FizzBuzz.fizzBuzz(i + 1);
             list.add(result);
-            print(list, i);
         }
         return list;
     }
 
-    private static void print(List<String> list, int i) {
+    public static void print(List<String> list, int i) {
         System.out.println(list.get(i));
     }
 

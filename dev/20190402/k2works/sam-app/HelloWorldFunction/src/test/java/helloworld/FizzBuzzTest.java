@@ -9,7 +9,7 @@ import java.util.List;
 public class FizzBuzzTest {
   @Test
   public void test1から100までをプリントする() {
-      List<String> list = FizzBuzz.print1To100();
+      List<String> list = FizzBuzz.generateFizzBuzzList();
       assertEquals("1", list.get(0));
       assertEquals("Fizz", list.get(2));
       assertEquals("Buzz", list.get(4));
