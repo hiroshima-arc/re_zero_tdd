@@ -9,6 +9,6 @@ public class FizzBuzzTest {
   public void test1から100までをプリントする() {
       int[] list = FizzBuzz.print1To100();
       assertEquals(1, list[0]);
-      assertEquals(100,list[1]);
+      assertEquals(100,list[99]);
   }
 }
