@@ -29,6 +29,11 @@ public class FizzBuzz {
                 return FizzBuzz.generate(i);
             case 2:
                 return Integer.toString(i);
+            case 3:
+                boolean fizz = isFizz(i);
+                boolean buzz = isBuzz(i);
+                if (fizz && buzz) return "FizzBuzz";
+                return Integer.toString(i);
             default:
                 return FizzBuzz.generate(i);
         }
