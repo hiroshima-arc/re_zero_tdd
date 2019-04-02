@@ -7,6 +7,8 @@ import org.junit.Test;
 public class FizzBuzzTest {
   @Test
   public void test1から100までをプリントする() {
-      assertEquals(1, FizzBuzz.print1To100());
+      int[] list = FizzBuzz.print1To100();
+      assertEquals(1, list[0]);
+      assertEquals(100,list[1]);
   }
 }
