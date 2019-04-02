@@ -15,11 +15,19 @@ public class FizzBuzz {
     }
 
     public static String fizzBuzz(int i) {
-        boolean isFizz = i % 3 == 0;
-        boolean isBuzz = i % 5 == 0;
+        boolean isFizz = isFizz(i);
+        boolean isBuzz = isBuzz(i);
         if (isFizz && isBuzz) return "FizzBuzz";
         if (isFizz) return "Fizz";
         if (isBuzz) return "Buzz";
         return Integer.toString(i);
+    }
+
+    private static boolean isBuzz(int i) {
+        return i % 5 == 0;
+    }
+
+    private static boolean isFizz(int i) {
+        return i % 3 == 0;
     }
 }
