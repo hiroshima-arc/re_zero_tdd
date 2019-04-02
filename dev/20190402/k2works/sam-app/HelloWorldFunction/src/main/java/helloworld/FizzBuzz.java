@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FizzBuzz {
-    public static List<String> generateFizzBuzzList() {
-        return IntStream.rangeClosed(1,100).mapToObj(FizzBuzz::generate).collect(Collectors.toList());
+    public static List<String> generateFizzBuzzList(int type) {
+        return IntStream.rangeClosed(1,100).mapToObj(i -> FizzBuzz.generate(i, type)).collect(Collectors.toList());
     }
 
     public static void print(List<String> list) {

@@ -4,6 +4,8 @@ package helloworld;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
@@ -16,8 +18,8 @@ public class FizzBuzzTest {
 
     @Test
     public void 値を1から100までをプリントする() {
-        _fizzBuzzData.setValues(FizzBuzz.generateFizzBuzzList());
-        assertEquals("1", FizzBuzz.generateFizzBuzzList().get(0));
+        _fizzBuzzData.setValues(FizzBuzz.generateFizzBuzzList(1));
+        assertEquals("1", FizzBuzz.generateFizzBuzzList(1).get(0));
         assertEquals("Fizz", _fizzBuzzData.getValues().get(2));
         assertEquals("Buzz", _fizzBuzzData.getValues().get(4));
         assertEquals("FizzBuzz", _fizzBuzzData.getValues().get(14));
@@ -48,5 +50,7 @@ public class FizzBuzzTest {
     @Test
     public void タイプ1は通常のパターンを返す() {
         assertEquals("Fizz", FizzBuzz.generate(3, 1));
+        assertEquals("Buzz", FizzBuzz.generateFizzBuzzList(1).get(4));
+        assertEquals("FizzBuzz", FizzBuzz.generateFizzBuzzList(1).get(14));
     }
 }
