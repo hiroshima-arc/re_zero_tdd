@@ -15,11 +15,11 @@ public class FizzBuzz {
     }
 
     public static String fizzBuzz(int i) {
-        boolean isFizz = isFizz(i);
-        boolean isBuzz = isBuzz(i);
-        if (isFizz && isBuzz) return "FizzBuzz";
-        if (isFizz) return "Fizz";
-        if (isBuzz) return "Buzz";
+        boolean fizz = isFizz(i);
+        boolean buzz = isBuzz(i);
+        if (fizz && buzz) return "FizzBuzz";
+        if (fizz) return "Fizz";
+        if (buzz) return "Buzz";
         return Integer.toString(i);
     }
 
