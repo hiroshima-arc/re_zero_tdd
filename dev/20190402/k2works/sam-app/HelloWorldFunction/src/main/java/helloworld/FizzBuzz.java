@@ -15,14 +15,9 @@ public class FizzBuzz {
     }
 
     public static String fizzBuzz(int i) {
-        String result = Integer.toString(i);
-        if (i % 3 == 0 && i % 5 == 0) {
-           result = "FizzBuzz";
-        } else if (i % 3 == 0) {
-            result = "Fizz";
-        } else if(i % 5 == 0) {
-            result = "Buzz";
-        }
-        return result;
+        if (i % 3 == 0 && i % 5 == 0) return "FizzBuzz";
+        if (i % 3 == 0) return "Fizz";
+        if (i % 5 == 0) return "Buzz";
+        return Integer.toString(i);
     }
 }
