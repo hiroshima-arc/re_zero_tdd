@@ -3,14 +3,15 @@ package helloworld;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class FizzBuzz {
     public static List<String> generateFizzBuzzList() {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            String result = FizzBuzz.fizzBuzz(i + 1);
+        IntStream.rangeClosed(1,100).forEach(i -> {
+            String result = FizzBuzz.fizzBuzz(i);
             list.add(result);
-        }
+        });
         return list;
     }
 
