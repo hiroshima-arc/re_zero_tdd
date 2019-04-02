@@ -1,33 +1,43 @@
 
 package helloworld;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
+  private FizzBuzzData _fizzBuzzData;
+  @BeforeEach
+  void init() {
+      _fizzBuzzData = new FizzBuzzData();
+  }
+
   @Test
   public void test1から100までをプリントする() {
-      List<String> list = FizzBuzz.generateFizzBuzzList();
-      assertEquals("1", list.get(0));
-      assertEquals("Fizz", list.get(2));
-      assertEquals("Buzz", list.get(4));
-      assertEquals("FizzBuzz", list.get(14));
-      assertEquals("Buzz",list.get(99));
-      FizzBuzz.print(list);
+      _fizzBuzzData.setValues(FizzBuzz.generateFizzBuzzList());
+      assertEquals("1", FizzBuzz.generateFizzBuzzList().get(0));
+      assertEquals("Fizz", _fizzBuzzData.getValues().get(2));
+      assertEquals("Buzz", _fizzBuzzData.getValues().get(4));
+      assertEquals("FizzBuzz", _fizzBuzzData.getValues().get(14));
+      assertEquals("Buzz",_fizzBuzzData.getValues().get(99));
+      FizzBuzz.print(_fizzBuzzData.getValues());
       }
   @Test
   public void test3で割り切れる場合はFizzをプリントする() {
-      assertEquals("Fizz", FizzBuzz.generate(3));
-      assertEquals("1", FizzBuzz.generate(1));
+      _fizzBuzzData.setValue(FizzBuzz.generate(3));
+      assertEquals("Fizz", _fizzBuzzData.getValue());
+      _fizzBuzzData.setValue(FizzBuzz.generate(1));
+      assertEquals("1", _fizzBuzzData.getValue());
   }
   @Test
     public void test5で割り切れる場合はBuzzをプリントする() {
-      assertEquals("Buzz", FizzBuzz.generate(5));
+      _fizzBuzzData.setValue(FizzBuzz.generate(5));
+      assertEquals("Buzz", _fizzBuzzData.getValue());
   }
   @Test
     public void test3と5で割り切れる場合はFizzBuzzをプリントする() {
-      assertEquals("FizzBuzz", FizzBuzz.generate(15));
+      _fizzBuzzData.setValue(FizzBuzz.generate(15));
+      assertEquals("FizzBuzz", _fizzBuzzData.getValue());
   }
 }
