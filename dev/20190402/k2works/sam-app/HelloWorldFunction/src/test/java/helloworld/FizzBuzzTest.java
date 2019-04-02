@@ -19,15 +19,15 @@ public class FizzBuzzTest {
       }
   @Test
   public void test3で割り切れる場合はFizzをプリントする() {
-      assertEquals("Fizz", FizzBuzz.fizzBuzz(3));
-      assertEquals("1", FizzBuzz.fizzBuzz(1));
+      assertEquals("Fizz", FizzBuzz.generate(3));
+      assertEquals("1", FizzBuzz.generate(1));
   }
   @Test
     public void test5で割り切れる場合はBuzzをプリントする() {
-      assertEquals("Buzz", FizzBuzz.fizzBuzz(5));
+      assertEquals("Buzz", FizzBuzz.generate(5));
   }
   @Test
     public void test3と5で割り切れる場合はFizzBuzzをプリントする() {
-      assertEquals("FizzBuzz", FizzBuzz.fizzBuzz(15));
+      assertEquals("FizzBuzz", FizzBuzz.generate(15));
   }
 }
