@@ -23,6 +23,15 @@ public class FizzBuzz {
         return Integer.toString(i);
     }
 
+    public static String generate(int i, int type) {
+        switch (type) {
+            case 1:
+                return FizzBuzz.generate(i);
+            default:
+                return FizzBuzz.generate(i);
+        }
+    }
+
     private static boolean isBuzz(int i) {
         return i % 5 == 0;
     }
