@@ -14,8 +14,10 @@ public class FizzBuzz {
         return list;
     }
 
-    public static void print(List<String> list, int i) {
-        System.out.println(list.get(i));
+    public static void print(List<String> list) {
+        for(String s : list) {
+            System.out.println(s);
+        }
     }
 
     public static String fizzBuzz(int i) {

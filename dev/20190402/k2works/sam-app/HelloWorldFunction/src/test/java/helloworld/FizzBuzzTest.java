@@ -15,6 +15,7 @@ public class FizzBuzzTest {
       assertEquals("Buzz", list.get(4));
       assertEquals("FizzBuzz", list.get(14));
       assertEquals("Buzz",list.get(99));
+      FizzBuzz.print(list);
       }
   @Test
   public void test3で割り切れる場合はFizzをプリントする() {
