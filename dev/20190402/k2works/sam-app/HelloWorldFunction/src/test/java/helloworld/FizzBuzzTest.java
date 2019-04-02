@@ -17,11 +17,11 @@ public class FizzBuzzTest {
     @Test
     public void 値を1から100までをプリントする() {
         _fizzBuzz.generateFizzBuzzList();
-        assertEquals("1", _fizzBuzz.getValues().get(0));
-        assertEquals("Fizz", _fizzBuzz.getValues().get(2));
-        assertEquals("Buzz", _fizzBuzz.getValues().get(4));
-        assertEquals("FizzBuzz", _fizzBuzz.getValues().get(14));
-        assertEquals("Buzz", _fizzBuzz.getValues().get(99));
+        assertEquals("1", _fizzBuzz.getValues().get(0).getValue());
+        assertEquals("Fizz", _fizzBuzz.getValues().get(2).getValue());
+        assertEquals("Buzz", _fizzBuzz.getValues().get(4).getValue());
+        assertEquals("FizzBuzz", _fizzBuzz.getValues().get(14).getValue());
+        assertEquals("Buzz", _fizzBuzz.getValues().get(99).getValue());
         _fizzBuzz.print();
     }
 
@@ -48,27 +48,27 @@ public class FizzBuzzTest {
     @Test
     public void タイプ1は通常のパターンを返す() {
         FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.valueOf("one"));
-        assertEquals("Fizz", fizzBuzz.generate(3));
+        assertEquals("Fizz", fizzBuzz.generate(3).getValue());
         fizzBuzz.generateFizzBuzzList();
-        assertEquals("Buzz", fizzBuzz.getValues().get(4));
-        assertEquals("FizzBuzz", fizzBuzz.getValues().get(14));
+        assertEquals("Buzz", fizzBuzz.getValues().get(4).getValue());
+        assertEquals("FizzBuzz", fizzBuzz.getValues().get(14).getValue());
     }
 
     @Test
     public void タイプ2は数字のみのパターンを返す() {
         FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.valueOf("two"));
-        assertEquals("3", fizzBuzz.generate(3));
+        assertEquals("3", fizzBuzz.generate(3).getValue());
         fizzBuzz.generateFizzBuzzList();
-        assertEquals("5", fizzBuzz.getValues().get(4));
-        assertEquals("15", fizzBuzz.getValues().get(14));
+        assertEquals("5", fizzBuzz.getValues().get(4).getValue());
+        assertEquals("15", fizzBuzz.getValues().get(14).getValue());
     }
 
     @Test
     public void タイプ3はFizzBuzzのみのパターンを返す() {
         FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.valueOf("three"));
-        assertEquals("3", fizzBuzz.generate(3));
+        assertEquals("3", fizzBuzz.generate(3).getValue());
         fizzBuzz.generateFizzBuzzList();
-        assertEquals("5", fizzBuzz.getValues().get(4));
-        assertEquals("FizzBuzz", fizzBuzz.getValues().get(14));
+        assertEquals("5", fizzBuzz.getValues().get(4).getValue());
+        assertEquals("FizzBuzz", fizzBuzz.getValues().get(14).getValue());
     }
 }

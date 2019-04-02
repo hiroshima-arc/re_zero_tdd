@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FizzBuzz {
-    private String _value;
-    private List<String> _values;
+    private FizzBuzzValue _value;
+    private List<FizzBuzzValue> _values;
     private FizzBuzzType _type;
 
     public FizzBuzz(FizzBuzzType type) {
@@ -15,10 +15,10 @@ public class FizzBuzz {
     }
 
     public String getValue() {
-        return _value;
+        return _value.getValue();
     }
 
-    public List<String> getValues() {
+    public List<FizzBuzzValue> getValues() {
         return _values;
     }
 
@@ -27,10 +27,10 @@ public class FizzBuzz {
     }
 
     public void print() {
-        this._values.forEach(System.out::println);
+        this._values.forEach(value -> System.out.println(value.getValue()));
     }
 
-    public String generate(int i) {
+    public FizzBuzzValue generate(int i) {
         return this._value = this._type.generate(i);
     }
 }
