@@ -16,5 +16,8 @@ public class FizzBuzzTest {
       assertEquals("Fizz", FizzBuzz.fizzBuzz(3));
       assertEquals("1", FizzBuzz.fizzBuzz(1));
   }
-  
+  @Test
+    public void test5で割り切れる場合はBuzzをプリントする() {
+      assertEquals("Buzz", FizzBuzz.fizzBuzz(5));
+  }
 }

@@ -14,6 +14,8 @@ public class FizzBuzz {
         String result = Integer.toString(i);
         if (i % 3 == 0) {
             result = "Fizz";
+        } else if(i % 5 == 0) {
+            result = "Buzz";
         }
         return result;
     }
