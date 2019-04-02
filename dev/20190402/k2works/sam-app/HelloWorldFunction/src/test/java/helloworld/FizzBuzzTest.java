@@ -56,10 +56,11 @@ public class FizzBuzzTest {
 
     @Test
     public void タイプ2は数字のみのパターンを返す() {
-        assertEquals("3", _fizzBuzz.generate(3, 2));
-        _fizzBuzz.generateFizzBuzzList(2);
-        assertEquals("5", _fizzBuzz.getValues().get(4));
-        assertEquals("15", _fizzBuzz.getValues().get(14));
+        FizzBuzz fizzBuzz = new FizzBuzz(new FizzBuzzType02());
+        assertEquals("3", fizzBuzz.generate(3, 2));
+        fizzBuzz.generateFizzBuzzList(2);
+        assertEquals("5", fizzBuzz.getValues().get(4));
+        assertEquals("15", fizzBuzz.getValues().get(14));
     }
 
     @Test
