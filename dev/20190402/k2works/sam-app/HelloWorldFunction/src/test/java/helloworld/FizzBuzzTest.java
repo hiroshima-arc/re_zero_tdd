@@ -4,12 +4,17 @@ package helloworld;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import java.util.List;
+
 public class FizzBuzzTest {
   @Test
   public void test1から100までをプリントする() {
-      int[] list = FizzBuzz.print1To100();
-      assertEquals(1, list[0]);
-      assertEquals(100,list[99]);
+      List<String> list = FizzBuzz.print1To100();
+      assertEquals("1", list.get(0));
+      assertEquals("Fizz", list.get(2));
+      assertEquals("Buzz", list.get(4));
+      assertEquals("FizzBuzz", list.get(14));
+      assertEquals("Buzz",list.get(99));
       }
   @Test
   public void test3で割り切れる場合はFizzをプリントする() {

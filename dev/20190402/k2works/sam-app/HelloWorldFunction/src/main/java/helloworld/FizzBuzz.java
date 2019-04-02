@@ -1,11 +1,16 @@
 package helloworld;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class FizzBuzz {
-    public static int[] print1To100() {
-        int[] list = new int[100];
+    public static List<String> print1To100() {
+        List<String> list = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            list[i] = i + 1;
-            System.out.println(list[i]);
+            String result = FizzBuzz.fizzBuzz(i + 1);
+            list.add(result);
+            System.out.println(list.get(i));
         }
         return list;
     }
