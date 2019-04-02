@@ -12,7 +12,9 @@ public class FizzBuzz {
 
     public static String fizzBuzz(int i) {
         String result = Integer.toString(i);
-        if (i % 3 == 0) {
+        if (i % 3 == 0 && i % 5 == 0) {
+           result = "FizzBuzz";
+        } else if (i % 3 == 0) {
             result = "Fizz";
         } else if(i % 5 == 0) {
             result = "Buzz";

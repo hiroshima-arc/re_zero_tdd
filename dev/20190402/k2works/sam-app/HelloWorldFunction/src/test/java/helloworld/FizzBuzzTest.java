@@ -20,4 +20,8 @@ public class FizzBuzzTest {
     public void test5で割り切れる場合はBuzzをプリントする() {
       assertEquals("Buzz", FizzBuzz.fizzBuzz(5));
   }
+  @Test
+    public void test3と5で割り切れる場合はFizzBuzzをプリントする() {
+      assertEquals("FizzBuzz", FizzBuzz.fizzBuzz(15));
+  }
 }
