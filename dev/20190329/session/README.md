@@ -15,12 +15,23 @@
 
 ### TODO リスト
 
-- [ ] 1 から 100 まで数をプリントできるようにする。
-- [ ] 3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
-- [ ] 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
-- [ ] 5 の倍数のときは｢Buzz｣とプリントできるようにする。
+- [x] 1 から 100 まで数をプリントできるようにする。
+- [x] 3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
+- [x] 5 の倍数のときは｢Buzz｣とプリントできるようにする。
+- [x] 3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
+- [x] それ以外の場合は数字をプリントする。
 
 ## 開発
+[LiveShare](https://insiders.liveshare.vsengsaas.visualstudio.com/join?06F4B1AFB2AE7D1F1992E6FFC97BB3F8307F)
+
+[Slack](https://hiroshima-arc-talk.slack.com/messages/CDHQME7NU/details/)
+
+[Gitpod](https://gitpod.io#https://github.com/hiroshima-arc/re_zero_tdd.git)
+
+```bash
+git checktout feature/20190329
+cd dev/20190329/session
+```
 
 ```bash
 npm install browser-sync -g
