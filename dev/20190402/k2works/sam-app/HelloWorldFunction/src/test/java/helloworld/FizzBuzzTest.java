@@ -10,5 +10,11 @@ public class FizzBuzzTest {
       int[] list = FizzBuzz.print1To100();
       assertEquals(1, list[0]);
       assertEquals(100,list[99]);
+      }
+  @Test
+  public void test3で割り切れる場合はFizzをプリントする() {
+      assertEquals("Fizz", FizzBuzz.fizzBuzz(3));
+      assertEquals("1", FizzBuzz.fizzBuzz(1));
   }
+  
 }

@@ -9,4 +9,12 @@ public class FizzBuzz {
         }
         return list;
     }
+
+    public static String fizzBuzz(int i) {
+        String result = Integer.toString(i);
+        if (i % 3 == 0) {
+            result = "Fizz";
+        }
+        return result;
+    }
 }
