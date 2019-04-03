@@ -6,19 +6,24 @@
   "config": {
     "s3_bucket": "re-zero-tdd-serverless",
     "stack_name": "sam-app",
-    "function_dir": "HelloWorldFunction"
+    "hello_function_dir": "HelloWorldFunction",
+    "fizzbuzz_function_dir": "FizzBuzzFunction"
   },
   "scripts": {
-    "test": "cd $npm_package_config_function_dir; mvn test",
+    "test": "npm-run-all test:*",
+    "test:hello": "cd $npm_package_config_hello_function_dir; mvn test",
+    "test:fizzbuzz": "cd $npm_package_config_fizzbuzz_function_dir; mvn test",
     "build": "sam build",
-    "clean": "cd $npm_package_config_function_dir; mvn clean",
+    "clean": "npm-run-all clean:*",
+    "clean:hello": "cd $npm_package_config_hello_function_dir; mvn clean",
+    "clean:fizzbuzz": "cd $npm_package_config_fizzbuzz_function_dir; mvn clean",
     "start": "nf start -j Procfile",
     "app:watch": "watch 'npm run build' $npm_package_config_function_dir/src",
     "sam:local": "sam local start-api --host 0.0.0.0",
-    "sam:package": "sam build; sam package --template-file .aws-sam/build/template.yaml --s3-bucket $npm_package_config_s3_bucket --output-template-file .aws-sam/build/packaged.yaml",
+    "sam:package": "sam package --template-file .aws-sam/build/template.yaml --s3-bucket $npm_package_config_s3_bucket --output-template-file .aws-sam/build/packaged.yaml",
     "sam:deploy": "sam deploy --template-file .aws-sam/build/packaged.yaml --stack-name $npm_package_config_stack_name --capabilities CAPABILITY_IAM --parameter-overrides ENV=production",
     "sam:describe": "aws cloudformation describe-stacks --stack-name $npm_package_config_stack_name",
-    "sam:release": "npm-run-all test clean build sam:package sam:deploy sam:describe"
+    "sam:release": "npm-run-all clean test build sam:package sam:deploy sam:describe"
   },
   "author": "k2works",
   "license": "ISC",
