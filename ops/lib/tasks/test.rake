@@ -42,7 +42,17 @@ namespace :test do
     end
   end
 
-
+  desc 'Javaテスト'
+  task :java do
+    cd work do
+      %w(20190402/k2works/sam-app
+         ).each do |dir|
+        cd dir do
+          sh "npm install;npm test"
+        end
+      end
+    end
+  end
   desc 'Test all task'
-  task all: %i[ruby python elixir nodejs]
+  task all: %i[ruby python elixir nodejs java]
 end

@@ -97,3 +97,16 @@ ENV PATH $HOME/.asdf/shims:$PATH
 
 # For PHP
 RUN yum -y install php72
+
+# For Java
+ENV JAVA_VER 8.0.202-amzn
+ENV MAVEN_VER 3.5.4
+ENV SDKMAN_DIR $HOME/.sdkman
+RUN curl -s api.sdkman.io | bash
+RUN sed -i 's/sdkman_auto_answer=false/sdkman_auto_answer=true/' $SDKMAN_DIR/etc/config
+RUN source $SDKMAN_DIR/bin/sdkman-init.sh && \
+    sdk use maven $MAVEN_VER && \
+    sdk use java $JAVA_VER
+ENV PATH /root/.sdkman/candidates/java/current/bin:$PATH
+ENV PATH /root/.sdkman/candidates/maven/current/bin:$PATH
+ENV JAVA_TOOL_OPTIONS -Dfile.encoding=UTF8
