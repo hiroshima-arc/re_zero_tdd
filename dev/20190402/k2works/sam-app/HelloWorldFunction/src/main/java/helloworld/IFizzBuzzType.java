@@ -1,7 +1,7 @@
 package helloworld;
 
 public abstract class IFizzBuzzType {
-    abstract FizzBuzzValue generate(int number);
+    public abstract FizzBuzzValue generate(int number);
 
     protected boolean isBuzz(int i) {
         return i % 5 == 0;

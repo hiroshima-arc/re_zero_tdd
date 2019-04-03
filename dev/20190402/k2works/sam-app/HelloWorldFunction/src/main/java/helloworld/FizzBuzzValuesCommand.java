@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 
 public class FizzBuzzValuesCommand implements IFizzBuzzCommand{
     private FizzBuzzType _type;
-    private FizzBuzzValue _value;
     private FizzBuzzValues _values;
 
     FizzBuzzValuesCommand(FizzBuzzType type) {
