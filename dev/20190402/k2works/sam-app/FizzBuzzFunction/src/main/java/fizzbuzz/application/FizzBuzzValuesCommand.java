@@ -22,6 +22,7 @@ public class FizzBuzzValuesCommand implements IFizzBuzzCommand{
 
     @Override
     public IFizzBuzzValue execute(int arg) {
+        if ( arg > 100) throw new IllegalArgumentException("FizzBuzzValues can't generate over 100");
         IntStream.rangeClosed(1,arg).forEach(i -> this._values = this._values.add(this._type.generate(i)));
         return this._values;
     }

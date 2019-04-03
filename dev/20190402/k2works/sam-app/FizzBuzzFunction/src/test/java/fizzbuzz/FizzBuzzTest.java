@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FizzBuzzTest {
     private FizzBuzzValueCommand _fizzBuzzValueCommand;
@@ -82,5 +83,14 @@ public class FizzBuzzTest {
         FizzBuzzValues values = (FizzBuzzValues) fizzBuzzValuesCommand.execute(100);
         assertEquals("5", values.getFizzBuzzValues().get(4).getValue());
         assertEquals("FizzBuzz", values.getFizzBuzzValues().get(14).getValue());
+    }
+
+    @Test
+    public void リストは100件以上生成しない() {
+        FizzBuzzValuesCommand fizzBuzzValuesCommand = new FizzBuzzValuesCommand(FizzBuzzType.valueOf("one"));
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            fizzBuzzValuesCommand.execute(101);
+        });
+        assertEquals("FizzBuzzValues can't generate over 100", exception.getMessage());
     }
 }
