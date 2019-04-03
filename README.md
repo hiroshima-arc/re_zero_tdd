@@ -21,6 +21,7 @@
 | Python             | 3.6.0      |      |
 | Elixir             | 1.7.4      |      |
 | Erlang             | 21.1.1     |      |
+| Java               | 8          |      |
 
 ## 構成
 
@@ -200,7 +201,21 @@ phpenv install $PHP_VER
 phpenv global $PHP_VER
 ```
 
+##### Javaのセットアップ
 
+- SDKMANのセットアップ
+- Javaのインストール
+
+```bash
+export JAVA_VER=8.0.202-amzn
+export MAVEN_VER=3.5.4
+export SDKMAN_DIR=$HOME/.sdkman
+curl -s api.sdkman.io | bash
+sed -i 's/sdkman_auto_answer=false/sdkman_auto_answer=true/' $SDKMAN_DIR/etc/config
+source $SDKMAN_DIR/bin/sdkman-init.sh && \
+    sdk use maven $MAVEN_VER && \
+    sdk use java $JAVA_VER
+```
 
 #### CI 環境のセットアップ
 
