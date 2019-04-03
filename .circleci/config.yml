@@ -4,7 +4,7 @@ defaults: &defaults
     - CC_TEST_REPORTER_ID: fe53a8f6307a727c3763579632560e44e359114d48daa07f57e5559539a6c4f2
   working_directory: ~/repo
   docker:
-    - image: hiroshimaarc/re-zero-tdd:1.3.0
+    - image: hiroshimaarc/re-zero-tdd:1.3.1
 
 jobs:
   build:

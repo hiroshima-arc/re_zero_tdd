@@ -39,7 +39,7 @@ RUN git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins
 RUN $HOME/.rbenv/plugins/ruby-build/install.sh
 RUN echo 'export PATH="/$HOME/.rbenv/bin:$PATH"' >> $HOME/.bash_profile
 RUN echo 'eval "$(rbenv init -)"' >> $HOME/.bash_profile
-RUN source  $HOME/.bash_profile && \
+RUN . $HOME/.bash_profile && \
             rbenv install $RUBY_VER  && \
             rbenv global $RUBY_VER
 ENV PATH $HOME/.rbenv/shims:$PATH
@@ -56,13 +56,13 @@ RUN git clone https://github.com/creationix/nvm.git $NVM_DIR && \
     cd $NVM_DIR && \
     git checkout `git describe --abbrev=0 --tags`
 # Install default version of Node.js
-RUN source $NVM_DIR/nvm.sh && \
+RUN . $NVM_DIR/nvm.sh && \
     nvm install v$NODE_VERSION && \
     nvm alias default v$NODE_VERSION && \
     nvm use default
 # Add nvm.sh to .bashrc for startup...
-RUN echo "source ${NVM_DIR}/nvm.sh" > $HOME/.bashrc && \
-    source $HOME/.bashrc
+RUN echo ". ${NVM_DIR}/nvm.sh" > $HOME/.bashrc && \
+    . $HOME/.bashrc
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
@@ -72,7 +72,7 @@ RUN curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-instal
 RUN echo 'export PATH="/$HOME/.pyenv/bin:$PATH"' >> $HOME/.bash_profile
 RUN echo 'eval "$(pyenv init -)"' >> $HOME/.bash_profile
 RUN echo 'eval "$(pyenv virtualenv-init -)"' >> $HOME/.bash_profile
-RUN source  $HOME/.bash_profile && \
+RUN .  $HOME/.bash_profile && \
             pyenv install $PYTHON_VER  && \
             pyenv global $PYTHON_VER
 ENV PATH $HOME/.pyenv/shims:$PATH
@@ -86,7 +86,7 @@ RUN git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.6.0
 RUN echo 'export PATH="/$HOME/.asdf/bin:$PATH"' >> $HOME/.bash_profile
 RUN echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc_profile
 RUN echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> $HOME/.bashrc_profile
-RUN source  $HOME/.bash_profile && \
+RUN .  $HOME/.bash_profile && \
             asdf plugin-add erlang  && \
             asdf plugin-add elixir  && \
             asdf install erlang $ERLANG_VER  && \
@@ -101,12 +101,15 @@ RUN yum -y install php72
 # For Java
 ENV JAVA_VER 8.0.202-amzn
 ENV MAVEN_VER 3.5.4
+ENV GRADLE_VER 5.3.1
 ENV SDKMAN_DIR $HOME/.sdkman
 RUN curl -s api.sdkman.io | bash
 RUN sed -i 's/sdkman_auto_answer=false/sdkman_auto_answer=true/' $SDKMAN_DIR/etc/config
-RUN source $SDKMAN_DIR/bin/sdkman-init.sh && \
+RUN . $SDKMAN_DIR/bin/sdkman-init.sh && \
     sdk use maven $MAVEN_VER && \
-    sdk use java $JAVA_VER
+    sdk use java $JAVA_VER && \
+    sdk use gradle $GRADLE_VER
 ENV PATH /root/.sdkman/candidates/java/current/bin:$PATH
 ENV PATH /root/.sdkman/candidates/maven/current/bin:$PATH
+ENV PATH /root/.sdkman/candidates/gradle/current/bin:$PATH
 ENV JAVA_TOOL_OPTIONS -Dfile.encoding=UTF8
