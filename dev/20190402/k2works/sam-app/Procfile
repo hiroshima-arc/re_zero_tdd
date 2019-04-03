@@ -1,0 +1,2 @@
+api: npm run sam:local
+watch: npm run app:watch
