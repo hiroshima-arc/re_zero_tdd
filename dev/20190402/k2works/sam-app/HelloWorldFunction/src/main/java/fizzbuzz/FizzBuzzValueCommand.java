@@ -1,4 +1,4 @@
-package helloworld;
+package fizzbuzz;
 
 public class FizzBuzzValueCommand implements IFizzBuzzCommand{
     private FizzBuzzType _type;

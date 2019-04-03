@@ -1,4 +1,4 @@
-package helloworld;
+package fizzbuzz;
 
 public class FizzBuzzType02 extends IFizzBuzzType {
     @Override

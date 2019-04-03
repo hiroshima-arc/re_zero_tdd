@@ -1,4 +1,4 @@
-package helloworld;
+package fizzbuzz;
 
 public abstract class IFizzBuzzType {
     public abstract FizzBuzzValue generate(int number);

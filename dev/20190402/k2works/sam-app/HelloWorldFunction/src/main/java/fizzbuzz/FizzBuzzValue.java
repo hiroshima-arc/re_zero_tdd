@@ -1,4 +1,4 @@
-package helloworld;
+package fizzbuzz;
 
 public class FizzBuzzValue {
     private Integer _number;

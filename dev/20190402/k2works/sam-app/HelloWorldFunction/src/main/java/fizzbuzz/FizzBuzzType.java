@@ -1,4 +1,4 @@
-package helloworld;
+package fizzbuzz;
 
 public enum FizzBuzzType {
     one(new FizzBuzzType01()),

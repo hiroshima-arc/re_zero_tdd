@@ -1,4 +1,4 @@
-package helloworld;
+package fizzbuzz;
 
 
 import java.util.ArrayList;

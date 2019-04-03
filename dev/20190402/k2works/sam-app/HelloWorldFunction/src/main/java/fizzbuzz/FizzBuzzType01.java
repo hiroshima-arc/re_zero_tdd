@@ -1,4 +1,4 @@
-package helloworld;
+package fizzbuzz;
 
 public class FizzBuzzType01 extends IFizzBuzzType {
     public FizzBuzzValue generate(int number) {
