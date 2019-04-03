@@ -1,0 +1,32 @@
+{
+  "name": "sam-app",
+  "version": "1.0.0",
+  "description": "This is a sample template for sam-app - Below is a brief explanation of what we have generated for you:",
+  "main": "index.js",
+  "config": {
+    "s3_bucket": "re-zero-tdd-serverless",
+    "stack_name": "sam-app",
+    "function_dir": "HelloWorldFunction"
+  },
+  "scripts": {
+    "test": "cd $npm_package_config_function_dir; mvn test",
+    "build": "sam build",
+    "clean": "cd $npm_package_config_function_dir; mvn clean",
+    "start": "nf start -j Procfile",
+    "app:watch": "watch 'npm run build' $npm_package_config_function_dir/src",
+    "sam:local": "sam local start-api --host 0.0.0.0",
+    "sam:package": "sam build; sam package --template-file .aws-sam/build/template.yaml --s3-bucket $npm_package_config_s3_bucket --output-template-file .aws-sam/build/packaged.yaml",
+    "sam:deploy": "sam deploy --template-file .aws-sam/build/packaged.yaml --stack-name $npm_package_config_stack_name --capabilities CAPABILITY_IAM --parameter-overrides ENV=production",
+    "sam:describe": "aws cloudformation describe-stacks --stack-name $npm_package_config_stack_name",
+    "sam:release": "npm-run-all test clean build sam:package sam:deploy sam:describe"
+  },
+  "author": "k2works",
+  "license": "ISC",
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "foreman": "^3.0.1",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^2.6.3",
+    "watch": "^1.0.2"
+  }
+}

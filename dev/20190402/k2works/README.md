@@ -28,11 +28,41 @@ SAMによるJava開発
 
 ## 開発
 
+### 構築
+
 ```bash
 sam init --runtime java
 cd sam-app
 sam build
 sam loacl start-api
+```
+
+### 配置
+
+```bash
+aws s3 mb s3://re-zero-tdd-serverless
+sam package \
+    --output-template-file packaged.yaml \
+    --s3-bucket re-zero-tdd-serverless
+sam deploy \
+    --template-file packaged.yaml \
+    --stack-name sam-app \
+    --capabilities CAPABILITY_IAM
+aws cloudformation describe-stacks \
+    --stack-name sam-app \
+    --query 'Stacks[].Outputs'
+```
+
+### 運用
+
+```bash
+npm init
+npm install npm-run-all watch foreman rimraf cpx --save-dev
+touch Procfile
+```
+
+```bash
+aws cloudformation delete-stack --stack-name sam-app
 ```
 
 ### ふりかえり

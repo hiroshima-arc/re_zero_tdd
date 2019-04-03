@@ -90,3 +90,4 @@ dist
 
 .aws-sam
 target
+packaged.yaml
