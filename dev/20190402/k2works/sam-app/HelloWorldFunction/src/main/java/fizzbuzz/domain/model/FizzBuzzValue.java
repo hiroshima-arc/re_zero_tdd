@@ -1,10 +1,10 @@
-package fizzbuzz;
+package fizzbuzz.domain.model;
 
 public class FizzBuzzValue {
     private Integer _number;
     private String _value;
 
-    FizzBuzzValue(Integer number, String value) {
+    public FizzBuzzValue(Integer number, String value) {
         this._number = number;
         this._value = value;
     }

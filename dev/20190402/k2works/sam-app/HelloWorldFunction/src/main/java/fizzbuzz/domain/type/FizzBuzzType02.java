@@ -1,4 +1,6 @@
-package fizzbuzz;
+package fizzbuzz.domain.type;
+
+import fizzbuzz.domain.model.FizzBuzzValue;
 
 public class FizzBuzzType02 extends IFizzBuzzType {
     @Override

@@ -1,10 +1,13 @@
-package fizzbuzz;
+package fizzbuzz.application;
+
+import fizzbuzz.domain.model.FizzBuzzValue;
+import fizzbuzz.domain.type.FizzBuzzType;
 
 public class FizzBuzzValueCommand implements IFizzBuzzCommand{
     private FizzBuzzType _type;
     private FizzBuzzValue _value;
 
-    FizzBuzzValueCommand(FizzBuzzType type) {
+    public FizzBuzzValueCommand(FizzBuzzType type) {
         _type = type;
     }
 

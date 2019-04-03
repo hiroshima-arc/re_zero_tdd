@@ -1,5 +1,9 @@
-package fizzbuzz;
+package fizzbuzz.application;
 
+
+import fizzbuzz.domain.model.FizzBuzzValue;
+import fizzbuzz.domain.model.FizzBuzzValues;
+import fizzbuzz.domain.type.FizzBuzzType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +13,7 @@ public class FizzBuzzValuesCommand implements IFizzBuzzCommand{
     private FizzBuzzType _type;
     private FizzBuzzValues _values;
 
-    FizzBuzzValuesCommand(FizzBuzzType type) {
+    public FizzBuzzValuesCommand(FizzBuzzType type) {
         _type = type;
         List<FizzBuzzValue> list = new ArrayList<>();
         _values = new FizzBuzzValues(list);

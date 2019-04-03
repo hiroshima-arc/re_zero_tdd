@@ -1,4 +1,6 @@
-package fizzbuzz;
+package fizzbuzz.domain.type;
+
+import fizzbuzz.domain.model.FizzBuzzValue;
 
 public enum FizzBuzzType {
     one(new FizzBuzzType01()),
@@ -11,7 +13,7 @@ public enum FizzBuzzType {
        this.type = type;
     }
 
-    FizzBuzzValue generate(int number) {
+    public FizzBuzzValue generate(int number) {
         return type.generate(number);
     }
 }

@@ -1,4 +1,4 @@
-package fizzbuzz;
+package fizzbuzz.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;

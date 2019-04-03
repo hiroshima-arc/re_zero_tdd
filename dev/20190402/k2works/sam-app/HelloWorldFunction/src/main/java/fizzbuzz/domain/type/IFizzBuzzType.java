@@ -1,4 +1,6 @@
-package fizzbuzz;
+package fizzbuzz.domain.type;
+
+import fizzbuzz.domain.model.FizzBuzzValue;
 
 public abstract class IFizzBuzzType {
     public abstract FizzBuzzValue generate(int number);
