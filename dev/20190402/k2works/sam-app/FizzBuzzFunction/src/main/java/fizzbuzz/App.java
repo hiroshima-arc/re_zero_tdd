@@ -3,6 +3,7 @@ package fizzbuzz;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import fizzbuzz.application.FizzBuzzValueCommand;
+import fizzbuzz.domain.model.FizzBuzzValue;
 import fizzbuzz.domain.type.FizzBuzzType;
 
 import java.util.HashMap;
@@ -21,12 +22,12 @@ public class App implements RequestHandler<Object, Object> {
         try {
             int number = Integer.parseInt((String) params.get("number"));
             FizzBuzzValueCommand fizzBuzzValueCommand = new FizzBuzzValueCommand(FizzBuzzType.valueOf("one"));
-            fizzBuzzValueCommand.execute(number);
-            final String value = fizzBuzzValueCommand.getValue();
-            String output = String.format("{ \"number\": \"%s\", \"value\": \"%s\" }", number,value);
+            FizzBuzzValue value = (FizzBuzzValue) fizzBuzzValueCommand.execute(number);
+            String output = String.format("{ \"number\": \"%s\", \"value\": \"%s\" }", value.getNumber(),value.getValue());
             return new GatewayResponse(output, headers, 200);
         } catch (Exception e) {
-            return new GatewayResponse("{}", headers, 500);
+            String output = String.format("{ \"message\": \"%s\"}", e.getMessage());
+            return new GatewayResponse(output, headers, 500);
         }
     }
 }

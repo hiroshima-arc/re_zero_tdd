@@ -3,7 +3,7 @@ package fizzbuzz.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FizzBuzzValues {
+public class FizzBuzzValues implements IFizzBuzzValue {
     private List<FizzBuzzValue> _fizzBuzzValues;
 
     public List<FizzBuzzValue> getFizzBuzzValues() {

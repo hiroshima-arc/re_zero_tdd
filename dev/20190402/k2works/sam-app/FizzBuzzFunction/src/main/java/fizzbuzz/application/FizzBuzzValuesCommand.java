@@ -3,6 +3,7 @@ package fizzbuzz.application;
 
 import fizzbuzz.domain.model.FizzBuzzValue;
 import fizzbuzz.domain.model.FizzBuzzValues;
+import fizzbuzz.domain.model.IFizzBuzzValue;
 import fizzbuzz.domain.type.FizzBuzzType;
 
 import java.util.ArrayList;
@@ -19,12 +20,9 @@ public class FizzBuzzValuesCommand implements IFizzBuzzCommand{
         _values = new FizzBuzzValues(list);
     }
 
-    public List<FizzBuzzValue> getValues() {
-        return _values.getFizzBuzzValues();
-    }
-
     @Override
-    public void execute(int arg) {
+    public IFizzBuzzValue execute(int arg) {
         IntStream.rangeClosed(1,arg).forEach(i -> this._values = this._values.add(this._type.generate(i)));
+        return this._values;
     }
 }

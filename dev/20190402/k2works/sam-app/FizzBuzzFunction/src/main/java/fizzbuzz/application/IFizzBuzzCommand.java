@@ -1,5 +1,7 @@
 package fizzbuzz.application;
 
+import fizzbuzz.domain.model.IFizzBuzzValue;
+
 public interface IFizzBuzzCommand {
-    void execute(int arg);
+    IFizzBuzzValue execute(int arg);
 }
