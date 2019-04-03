@@ -87,3 +87,7 @@ tmp
 
 dist
 .nyc_output
+
+.aws-sam
+target
+packaged.yaml
