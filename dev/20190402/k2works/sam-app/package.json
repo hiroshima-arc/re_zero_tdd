@@ -23,7 +23,10 @@
     "sam:package": "sam package --template-file .aws-sam/build/template.yaml --s3-bucket $npm_package_config_s3_bucket --output-template-file .aws-sam/build/packaged.yaml",
     "sam:deploy": "sam deploy --template-file .aws-sam/build/packaged.yaml --stack-name $npm_package_config_stack_name --capabilities CAPABILITY_IAM --parameter-overrides ENV=production",
     "sam:describe": "aws cloudformation describe-stacks --stack-name $npm_package_config_stack_name",
-    "sam:release": "npm-run-all clean test build sam:package sam:deploy sam:describe"
+    "sam:release": "npm-run-all clean test build sam:package sam:deploy sam:describe",
+    "sam:destroy": "aws cloudformation delete-stack --stack-name $npm_package_config_stack_name",
+    "aws:s3:create": "aws s3 mb s3://$npm_package_config_s3_bucket",
+    "aws:s3:destroy": "aws s3 rb s3://$npm_package_config_s3_bucket --force"
   },
   "author": "k2works",
   "license": "ISC",

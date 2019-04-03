@@ -62,6 +62,7 @@ touch Procfile
 ```
 
 ```bash
+aws s3 rb s3://re-zero-tdd-serverless --force
 aws cloudformation delete-stack --stack-name sam-app
 ```
 
