@@ -29,7 +29,9 @@ public class App implements RequestHandler<Object, Object> {
                     String body = (String) ((LinkedHashMap) input).get("body");
                     JsonNode jsonBody = objectMapper.readTree(body);
                     int number = jsonBody.get("number").asInt();
-                    FizzBuzzValuesCommand fizzBuzzValuesCommand = new FizzBuzzValuesCommand(FizzBuzzType.valueOf("one"));
+                    String type = "one";
+                    if (Objects.nonNull(jsonBody.get("type"))) type = jsonBody.get("type").asText();
+                    FizzBuzzValuesCommand fizzBuzzValuesCommand = new FizzBuzzValuesCommand(FizzBuzzType.valueOf(type));
                     FizzBuzzValues values = (FizzBuzzValues) fizzBuzzValuesCommand.execute(number);
                     ArrayList<String > jsonValues = new ArrayList<>();
                     for(FizzBuzzValue value :values.getFizzBuzzValues()) {
@@ -41,7 +43,9 @@ public class App implements RequestHandler<Object, Object> {
                 default:
                     Map<Object,Object> params = (Map<Object, Object>) ((LinkedHashMap) input).get("queryStringParameters");
                     number = Integer.parseInt((String) params.get("number"));
-                    FizzBuzzValueCommand fizzBuzzValueCommand = new FizzBuzzValueCommand(FizzBuzzType.valueOf("one"));
+                    type = (String) params.get("type");
+                    if (Objects.isNull(type)) type = "one";
+                    FizzBuzzValueCommand fizzBuzzValueCommand = new FizzBuzzValueCommand(FizzBuzzType.valueOf(type));
                     FizzBuzzValue value = (FizzBuzzValue) fizzBuzzValueCommand.execute(number);
                     output = String.format("{ \"number\": \"%s\", \"value\": \"%s\" }", value.getNumber(),value.getValue());
                     return new GatewayResponse(output, headers, 200);

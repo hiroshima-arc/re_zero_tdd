@@ -16,6 +16,7 @@ public class AppTest {
     request.put("httpMethod","GET");
     Map<String,String> params = new HashMap<>();
     params.put("number","3");
+    params.put("type","one");
     request.put("queryStringParameters",params);
     GatewayResponse result = (GatewayResponse) app.handleRequest(request, null);
     assertEquals(result.getStatusCode(), 200);
@@ -33,7 +34,7 @@ public class AppTest {
     App app = new App();
     LinkedHashMap<Object,Object> request = new LinkedHashMap<>();
     request.put("httpMethod","POST");
-    request.put("body","{\"number\":\"5\"}");
+    request.put("body","{\"number\":\"5\",\"type\":\"one\"}");
     GatewayResponse result = (GatewayResponse) app.handleRequest(request, null);
     assertEquals(result.getStatusCode(), 200);
     assertEquals(result.getHeaders().get("Content-Type"), "application/json");
