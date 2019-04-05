@@ -30,6 +30,8 @@ watch 'markdown README.md > readme.html' ./ &
 browser-sync start --server --files "**/*"
 ```
 
+[LiveShare](https://insiders.liveshare.vsengsaas.visualstudio.com/join?D2B3BB2465381FC03AE3732F0BDD80415756)
+
 ### ふりかえり
 
 #### Keep
