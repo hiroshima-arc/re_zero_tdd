@@ -113,11 +113,7 @@
     }
 
     function generateList(){
-        var list = [];
-        for(var i = 1; i <= 100; i++) {
-            list.push(fizzBuzz(i));
-        }
-        return list;
+        return [...Array(101).keys()].slice(1).map((number)=> fizzBuzz(number));
     }
 
     function renderList() {
