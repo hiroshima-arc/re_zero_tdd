@@ -91,3 +91,5 @@ dist
 .aws-sam
 target
 packaged.yaml
+
+readme.html
