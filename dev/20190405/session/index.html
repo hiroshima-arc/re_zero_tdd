@@ -80,11 +80,11 @@
 <script>
     const assert = chai.assert;
     suite("FizzBuzzTest", () => {
-        test("1から100までをプリントする", () => {
+        test("1から100までをプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
             var list = print1To100();
             assert.equal(1, list[0]);
-            assert.equal(3, list[2]);
-            assert.equal(100, list[99]);
+            assert.equal('Fizz', list[2]);
+            assert.equal('Buzz', list[99]);
         });
 
         test("3で割り切れる場合はFizzをプリントする", () => {
@@ -115,7 +115,7 @@
     function print1To100(){
         var list = [];
         for(var i = 1; i <= 100; i++) {
-            list.push(i);
+            list.push(fizzBuzz(i));
         }
         return list;
     }
@@ -124,6 +124,8 @@
         var table = `
             <table>
                 <thead>
+                    `
+            table += `
                 <tr>
                     <th>1</th>
                     <th>2</th>
@@ -137,31 +139,22 @@
                     <th>10</th>
                 </tr>
                 </thead>
+                `
+            table += `
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                    <td>14</td>
-                    <td>15</td>
-                    <td>16</td>
-                    <td>17</td>
-                    <td>18</td>
-                    <td>19</td>
-                    <td>20</td>
-                </tr>
+                `
+            table += `<tr>`
+            var elm;
+            var list = print1To100();
+            for (var i = 1; i <= 100; i++) {
+                elm += `<td>${list[i-1]}</td>`
+                if (i % 10 === 0) {
+                    elm += `</tr><tr>`
+                }
+            }
+            table += elm;
+            table += `</tr>`
+            table += `
                 </tbody>
             </table>
         `
