@@ -26,7 +26,7 @@
 npm install browser-sync -g
 npm install markdown-to-html -g
 npm install watch -g
-watch 'markdown README.md > readme.html' ./
+watch 'markdown README.md > readme.html' ./ &
 browser-sync start --server --files "**/*"
 ```
 
