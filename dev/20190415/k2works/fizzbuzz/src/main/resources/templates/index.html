@@ -81,50 +81,31 @@
     window.onload = renderTable;
 
     function renderTable() {
-      const table = `
+      let table = `
             <table>
                 <thead>
-                <tr>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                    <th>7</th>
-                    <th>8</th>
-                    <th>9</th>
-                    <th>10</th>
-                </tr>
+      `;
+      table += `<tr>`;
+      for(let i = 0; i < 10; i++) {
+        table += `<th>${i + 1}</th>`
+      }
+      table += `</tr>`;
+      table += `
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                    <td>14</td>
-                    <td>15</td>
-                    <td>16</td>
-                    <td>17</td>
-                    <td>18</td>
-                    <td>19</td>
-                    <td>20</td>
-                </tr>
+      `;
+      table += `<tr>`;
+      const list = printValue();
+      for(let i = 1; i <= 100; i++) {
+        table += `<td>${list[i-1]}</td>`;
+        if (i % 10 === 0) {
+          table += `</tr>`;
+        }
+      }
+      table += `
                 </tbody>
             </table>
-      `;
+      `
       document.querySelector("#app").innerHTML = table;
     }
 
@@ -143,16 +124,19 @@
     function printValue() {
       let list = [];
       for (let i = 1; i <= 100; i++) {
-        list.push(i);
+        list.push(fizzBuzz(i));
       }
       return list;
     }
 
     suite("FizzBuzzTest", () => {
-      test("値を1から100までプリントする", () => {
+      test("値を1から100までプリントするただし、3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
         const list = printValue();
         assert.equal(1, list[0]);
-        assert.equal(100, list[99]);
+        assert.equal("Fizz", list[2]);
+        assert.equal("Buzz", list[4]);
+        assert.equal("FizzBuzz", list[14]);
+        assert.equal("Buzz", list[99]);
       });
 
       test("値が3で割り切れる場合はFizzをプリントする", () => {
