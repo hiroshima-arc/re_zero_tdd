@@ -61,7 +61,27 @@
 <section>
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
-        <div id="app">
+        <div id="app"></div>
+        <div id="mocha"></div>
+    </section>
+</section>
+<footer>
+    <p>Copyright</p>
+    <address>hiroshima.arc@gmail.com</address>
+</footer>
+
+<script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+<script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script>mocha.setup("tdd");</script>
+
+<script>
+    const assert = chai.assert;
+
+    window.onload = renderTable;
+
+    function renderTable() {
+      const table = `
             <table>
                 <thead>
                 <tr>
@@ -104,22 +124,9 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div id="mocha"></div>
-    </section>
-</section>
-<footer>
-    <p>Copyright</p>
-    <address>hiroshima.arc@gmail.com</address>
-</footer>
-
-<script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
-<script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-<script>mocha.setup("tdd");</script>
-
-<script>
-    const assert = chai.assert;
+      `;
+      document.querySelector("#app").innerHTML = table;
+    }
 
     function fizzBuzz(number) {
       let result = number;
