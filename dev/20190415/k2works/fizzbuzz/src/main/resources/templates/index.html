@@ -117,13 +117,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
 <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
 <script>mocha.setup("tdd");</script>
+
+<script>
+    const assert = chai.assert;
+
+    function greeting() {
+          return "Hello, world";
+    }
+
+    suite("FizzBuzzTest", () => {
+      test("greeting", () => {
+        assert.equal(greeting(), "Hello, world");
+      });
+    });
+</script>
+
 <script>
   mocha.checkLeaks();
   mocha.globals(["jQuery"]);
   mocha.run();
-</script>
-
-<script>
 </script>
 
 </body>
