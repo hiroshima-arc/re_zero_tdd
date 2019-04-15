@@ -4,7 +4,10 @@
   "description": "## 概要",
   "main": "index.js",
   "config": {
-    "app_dir": "fizzbuzz"
+     "app_dir": "fizzbuzz",
+     "s3_bucket": "hiroshima-arc-fizzbuzz",
+     "stack_name": "hiroshima-arc-fizzbuzz-lambda",
+     "region": "us-east-1"
   },
   "scripts": {
     "start": "nf start -j Procfile",
@@ -13,7 +16,15 @@
     "app:front": "browser-sync start --config bs-config.js",
     "app:server" : "cd $npm_package_config_app_dir; gradle bootRun",
     "app:api" : "cd $npm_package_config_app_dir; sam local start-api --host 0.0.0.0 --port 4000 --template sam.yaml",
-    "watch": "watch 'npm run build' $npm_package_config_app_dir/src"
+    "watch": "watch 'npm run build' $npm_package_config_app_dir/src",
+    "aws:s3:create": "aws s3 mb s3://$npm_package_config_s3_bucket --region $npm_package_config_region",
+    "aws:s3:destroy": "aws s3 rb s3://$npm_package_config_s3_bucket --force --region $npm_package_config_region",
+    "aws:sam:build": "cd $npm_package_config_app_dir; mvn package",
+    "aws:sam:package": "sam package --template-file $npm_package_config_app_dir/sam.yaml --s3-bucket $npm_package_config_s3_bucket --output-template-file $npm_package_config_app_dir/packaged.yaml",
+    "aws:sam:deploy": "sam deploy --template-file $npm_package_config_app_dir/packaged.yaml --stack-name $npm_package_config_stack_name --capabilities CAPABILITY_NAMED_IAM --region $npm_package_config_region",
+    "aws:sam:describe": "aws --region $npm_package_config_region cloudformation describe-stacks --stack-name $npm_package_config_stack_name",
+    "aws:sam:release": "npm-run-all test aws:sam:build aws:sam:package aws:sam:deploy aws:sam:describe",
+    "aws:sam:destroy": "aws --region $npm_package_config_region cloudformation delete-stack --stack-name $npm_package_config_stack_name"
   },
   "author": "",
   "license": "ISC",

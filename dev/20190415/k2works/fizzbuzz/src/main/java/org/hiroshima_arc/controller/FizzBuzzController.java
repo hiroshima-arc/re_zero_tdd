@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FizzBuzzController {
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/fizzbuzz", method = RequestMethod.GET)
     public ModelAndView index(ModelAndView mav) {
         mav.setViewName("index");
         return mav;
