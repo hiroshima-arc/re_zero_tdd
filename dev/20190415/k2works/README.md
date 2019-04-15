@@ -23,6 +23,21 @@ npm install --save-dev browser-sync connect-browser-sync
 npx browser-sync init
 ```
 
+```bash
+mvn archetype:generate -DgroupId=org.hiroshima_arc -DartifactId=fizzbuzz -Dversion=1.0-SNAPSHOT \
+       -DarchetypeGroupId=com.amazonaws.serverless.archetypes \
+       -DarchetypeArtifactId=aws-serverless-springboot2-archetype \
+       -DarchetypeVersion=1.3.1
+cd fizzbuzz
+mvn clean package
+sam local start-api --template sam.yaml
+```
+
+http://localhost:3000/ping
+```bash
+$ curl -s http://127.0.0.1:3000/ping | python -m json.tool
+```
+
 ### ふりかえり
 
 #### Keep
@@ -32,3 +47,5 @@ npx browser-sync init
 #### Try
 
 ## 参照
+
+- [Quick start Spring Boot](https://github.com/awslabs/aws-serverless-java-container/wiki/Quick-start---Spring-Boot)
