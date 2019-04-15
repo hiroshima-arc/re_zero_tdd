@@ -3,8 +3,17 @@
   "version": "1.0.0",
   "description": "## 概要",
   "main": "index.js",
+  "config": {
+    "app_dir": "fizzbuzz"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nf start -j Procfile",
+    "build": "cd $npm_package_config_app_dir; gradle build",
+    "test": "cd $npm_package_config_app_dir; gradle test ",
+    "app:front": "browser-sync start --config bs-config.js",
+    "app:server" : "cd $npm_package_config_app_dir; gradle bootRun",
+    "app:api" : "cd $npm_package_config_app_dir; sam local start-api --host 0.0.0.0 --port 4000 --template sam.yaml",
+    "watch": "watch 'npm run build' $npm_package_config_app_dir/src"
   },
   "author": "",
   "license": "ISC",

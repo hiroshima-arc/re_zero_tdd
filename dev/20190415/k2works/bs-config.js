@@ -16,17 +16,20 @@ module.exports = {
     "ui": {
         "port": 3001
     },
-    "files": false,
+    "files": "fizzbuzz/src/main/resources/**",
     "watchEvents": [
         "change"
     ],
-    "watch": false,
+    "watch": true,
     "ignore": [],
     "single": false,
     "watchOptions": {
         "ignoreInitial": true
     },
-    "server": false,
+    "server": {
+        baseDir: "fizzbuzz/src/main/resources/templates",
+        index: "index.html"
+    },
     "proxy": false,
     "port": 3000,
     "middleware": false,
