@@ -121,6 +121,14 @@
 <script>
     const assert = chai.assert;
 
+    function fizzBuzz(number) {
+      let result = number;
+      if (number % 3 === 0) {
+        result = "Fizz";
+      };
+      return result;
+    }
+
     function printValue() {
       let list = [];
       for (let i = 1; i <= 100; i++) {
@@ -135,6 +143,10 @@
         assert.equal(1, list[0]);
         assert.equal(100, list[99]);
       });
+
+      test("値が3で割り切れる場合はFizzをプリントする", () => {
+        assert.equal("Fizz", fizzBuzz(3));
+      })
     });
 </script>
 
