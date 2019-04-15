@@ -61,6 +61,7 @@
 <section>
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
+        <div id="greeting"></div>
         <div id="app">
             <table>
                 <thead>
@@ -121,6 +122,11 @@
 <script>
     const assert = chai.assert;
 
+    window.onload = renderGreeting;
+
+    function renderGreeting() {
+      document.querySelector("#greeting").innerHTML = greeting();
+    }
     function greeting() {
           return "Hello, world";
     }
