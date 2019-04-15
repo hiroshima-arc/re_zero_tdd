@@ -86,26 +86,36 @@
                 <thead>
       `;
       table += `<tr>`;
-      for(let i = 0; i < 10; i++) {
-        table += `<th>${i + 1}</th>`
-      }
+      [...Array(10).keys()].forEach((i) => table += `<th>${i + 1}</th>`);
       table += `</tr>`;
       table += `
                 </thead>
                 <tbody>
       `;
-      table += `<tr>`;
-      const list = fizzBuzz.generateList();
-      for(let i = 1; i <= 100; i++) {
-        table += `<td>${list[i-1]}</td>`;
-        if (i % 10 === 0) {
-          table += `</tr>`;
+
+      table = (() => {
+        let counter = 0;
+        return {
+          create(list) {
+            table += `<tr>`;
+            list.forEach((item) => {
+              table += `<td>${item}</td>`;
+              counter++;
+              if (counter === 10) {
+                table += `</tr>`;
+                table += `<tr>`;
+                counter = 0;
+              }
+            });
+            return table;
+          }
         }
-      }
+      })().create(fizzBuzz.generateList());
+
       table += `
                 </tbody>
             </table>
-      `
+      `;
       document.querySelector("#app").innerHTML = table;
     }
 
