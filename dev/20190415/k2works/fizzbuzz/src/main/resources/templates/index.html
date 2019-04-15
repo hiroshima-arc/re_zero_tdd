@@ -110,7 +110,7 @@
     }
 
     const fizzBuzz = {
-      fizzBuzz(number) {
+      generate(number) {
           let result = number;
           if (number % 3 === 0 && number % 5 === 0) {
             result = "FizzBuzz"
@@ -125,7 +125,7 @@
     generateList() {
           let list = [];
           for (let i = 1; i <= 100; i++) {
-            list.push(this.fizzBuzz(i));
+            list.push(this.generate(i));
           }
           return list;
         }
@@ -142,15 +142,15 @@
       });
 
       test("値が3で割り切れる場合はFizzをプリントする", () => {
-        assert.equal("Fizz", fizzBuzz.fizzBuzz(3));
+        assert.equal("Fizz", fizzBuzz.generate(3));
       });
 
       test("値が5で割り切れる場合はBuzzをプリントする", () => {
-        assert.equal("Buzz", fizzBuzz.fizzBuzz(5));
+        assert.equal("Buzz", fizzBuzz.generate(5));
       });
 
       test("値が3または5で割り切れる場合はFizzBuzzをプリントする", () => {
-        assert.equal("FizzBuzz", fizzBuzz.fizzBuzz(15));
+        assert.equal("FizzBuzz", fizzBuzz.generate(15));
       });
     });
 </script>
