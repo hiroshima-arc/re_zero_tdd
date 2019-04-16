@@ -87,6 +87,26 @@
 <script>mocha.setup("tdd");</script>
 
 <script>
+  function changeType(e) {
+    let typeValue = e.target.value;
+    let fizzBuzz = fizzBuzzFactory(typeValue);
+    document.querySelector(".table").innerHTML = fizzBuzz.renderTable();
+  }
+
+  function fizzBuzzFactory(typeValue) {
+    const value = parseInt(typeValue);
+    switch (value) {
+      case 1:
+        return new FizzBuzz(type1);
+      case 2:
+        return new FizzBuzz(type2);
+      case 3:
+        return new FizzBuzz(type3);
+      default:
+        return new FizzBuzz(type1);
+    }
+  }
+
   function type1(number) {
     if (number % 3 === 0 && number % 5 === 0) return "FizzBuzz";
     if (number % 3 === 0) return "Fizz";
@@ -170,28 +190,8 @@
 </script>
 
 <script>
-  let type = type1;
-  let fizzBuzz = new FizzBuzz(type);
+  let fizzBuzz = fizzBuzzFactory(1);
   window.onload = fizzBuzz.render();
-
-  function changeType(e) {
-    let typeValue = e.target.value;
-    switch (parseInt(typeValue, 10)) {
-      case 1:
-        type = type1;
-        break;
-      case 2:
-        type = type2;
-        break;
-      case 3:
-        type = type3;
-        break;
-      default:
-        type = type1;
-    }
-    fizzBuzz = new FizzBuzz(type);
-    document.querySelector(".table").innerHTML = fizzBuzz.renderTable();
-  }
 </script>
 
 <script>
