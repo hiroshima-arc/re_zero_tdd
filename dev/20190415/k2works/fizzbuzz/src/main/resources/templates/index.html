@@ -98,6 +98,8 @@
           if (number % 5 === 0) return this.BUZZ;
         case 2:
           return result;
+        case 3:
+          return this.FIZZ_BUZZ;
         default:
           if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
           if (number % 3 === 0) return this.FIZZ;
@@ -107,7 +109,7 @@
     },
 
     generateList() {
-      return [...Array(101).keys()].map(this.generate.bind(this)).slice(1);
+      return [...Array(101).keys()].map((i) => this.generate.call(this, i, 0)).slice(1);
     },
 
     renderTable(list) {
