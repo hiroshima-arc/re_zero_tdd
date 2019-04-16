@@ -89,22 +89,32 @@
     FIZZ: "Fizz",
     BUZZ: "Buzz",
 
-    generate(number, type) {
+    type1(number) {
       let result = number;
+      if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
+      if (number % 3 === 0) return this.FIZZ;
+      if (number % 5 === 0) return this.BUZZ;
+      return result;
+    },
+
+    type2(number) {
+      return number;
+    },
+
+    type3() {
+      return this.FIZZ_BUZZ;
+    },
+
+    generate(number, type) {
       switch (type) {
         case 1:
-          if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
-          if (number % 3 === 0) return this.FIZZ;
-          if (number % 5 === 0) return this.BUZZ;
+          return this.type1(number);
         case 2:
-          return result;
+          return this.type2(number);
         case 3:
-          return this.FIZZ_BUZZ;
+          return this.type3();
         default:
-          if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
-          if (number % 3 === 0) return this.FIZZ;
-          if (number % 5 === 0) return this.BUZZ;
-          return result;
+          return this.type1(number);
       }
     },
 
