@@ -8,6 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class FizzBuzzController {
     @RequestMapping(value = "/fizzbuzz", method = RequestMethod.GET)
+    public ModelAndView fizzbuzz(ModelAndView mav) {
+        mav.setViewName("index");
+        return mav;
+    }
+    @RequestMapping(value = "/index.html", method = RequestMethod.GET)
     public ModelAndView index(ModelAndView mav) {
         mav.setViewName("index");
         return mav;
