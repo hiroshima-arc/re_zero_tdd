@@ -123,7 +123,7 @@
   }
 
   function FizzBuzz(type) {
-    this.type= type;
+    this.type = type;
 
     this.generate = (number) => {
       return this.type(number);
@@ -185,7 +185,7 @@
     this.render = () => {
       document.querySelector(".selectBox").innerHTML = this.renderSelectBox();
       document.querySelector(".table").innerHTML = this.renderTable();
-    }
+    };
   }
 </script>
 
@@ -266,7 +266,7 @@
         let fizzBuzz = new FizzBuzz(type);
         assert.equal("FizzBuzz", fizzBuzz.generate(15));
       });
-    })
+    });
   });
 </script>
 
