@@ -96,12 +96,14 @@
           if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
           if (number % 3 === 0) return this.FIZZ;
           if (number % 5 === 0) return this.BUZZ;
+        case 2:
+          return result;
         default:
           if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
           if (number % 3 === 0) return this.FIZZ;
           if (number % 5 === 0) return this.BUZZ;
+          return result;
       }
-      return result;
     },
 
     generateList() {
