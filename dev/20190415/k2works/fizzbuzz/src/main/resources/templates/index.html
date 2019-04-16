@@ -69,10 +69,10 @@
 <section>
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
-        <select name=”type”>
-            <option value=”1”>タイプ1</option>
-            <option value=”2”>タイプ2</option>
-            <option value=”3”>タイプ3</option>
+        <select name=”type” onchange="changeType(event)">
+            <option value=1>タイプ1</option>
+            <option value=2>タイプ2</option>
+            <option value=3>タイプ3</option>
         </select>
         <div id="app"></div>
         <div id="mocha"></div>
@@ -160,6 +160,25 @@
   let type = type1;
   let fizzBuzz = new FizzBuzz(type);
   window.onload = fizzBuzz.renderTable();
+
+  function changeType(e) {
+    let typeValue = e.target.value;
+    switch (parseInt(typeValue, 10)) {
+      case 1:
+        type = type1;
+        break;
+      case 2:
+        type = type2;
+        break;
+      case 3:
+        type = type3;
+        break;
+      default:
+        type = type1;
+    }
+    fizzBuzz = new FizzBuzz(type);
+    fizzBuzz.renderTable();
+  }
 </script>
 
 <script>
