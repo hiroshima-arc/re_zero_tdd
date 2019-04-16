@@ -84,45 +84,33 @@
 <script>mocha.setup("tdd");</script>
 
 <script>
-  const fizzBuzz = {
-    FIZZ_BUZZ: "FizzBuzz",
-    FIZZ: "Fizz",
-    BUZZ: "Buzz",
+  function type1(number) {
+    if (number % 3 === 0 && number % 5 === 0) return "FizzBuzz";
+    if (number % 3 === 0) return "Fizz";
+    if (number % 5 === 0) return "Buzz";
+    return number;
+  }
 
-    type1(number) {
-      let result = number;
-      if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
-      if (number % 3 === 0) return this.FIZZ;
-      if (number % 5 === 0) return this.BUZZ;
-      return result;
-    },
+  function type2(number) {
+    return number;
+  }
 
-    type2(number) {
-      return number;
-    },
+  function type3() {
+    return "FizzBuzz";
+  }
 
-    type3() {
-      return this.FIZZ_BUZZ;
-    },
+  function FizzBuzz(type) {
+    this.type= type;
 
-    generate(number, type) {
-      switch (type) {
-        case 1:
-          return this.type1(number);
-        case 2:
-          return this.type2(number);
-        case 3:
-          return this.type3();
-        default:
-          return this.type1(number);
-      }
-    },
+    this.generate = (number) => {
+      return this.type(number);
+    };
 
-    generateList() {
-      return [...Array(101).keys()].map((i) => this.generate.call(this, i, 0)).slice(1);
-    },
+    this.generateList = () => {
+      return [...Array(101).keys()].map((i) => this.generate.call(this, i)).slice(1);
+    };
 
-    renderTable(list) {
+    this.renderTable = () => {
       let table = `
             <table>
                 <thead>
@@ -152,7 +140,7 @@
             return table;
           }
         };
-      })().create(list);
+      })().create(this.generateList());
 
       table += `
                 </tbody>
@@ -160,19 +148,22 @@
       `;
       document.querySelector("#app").innerHTML = table;
     }
-  };
+  }
 </script>
 
 <script>
-  const list = fizzBuzz.generateList();
-  window.onload = fizzBuzz.renderTable(list);
+  let type = type1;
+  let fizzBuzz = new FizzBuzz(type);
+  window.onload = fizzBuzz.renderTable();
 </script>
 
 <script>
   const assert = chai.assert;
   suite("FizzBuzzTest", () => {
     test("値を1から100までプリントするただし、3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
-      const list = fizzBuzz.generateList();
+      let type = type1;
+      let fizzBuzz = new FizzBuzz(type);
+      let list = fizzBuzz.generateList();
       assert.equal(1, list[0]);
       assert.equal("Fizz", list[2]);
       assert.equal("Buzz", list[4]);
@@ -182,43 +173,61 @@
 
     suite("タイプ1の場合", () => {
       test("値が3で割り切れる場合はFizzをプリントする", () => {
-        assert.equal("Fizz", fizzBuzz.generate(3, 1));
+        let type = type1;
+        let fizzBuzz = new FizzBuzz(type);
+        assert.equal("Fizz", fizzBuzz.generate(3));
       });
 
       test("値が5で割り切れる場合はBuzzをプリントする", () => {
-        assert.equal("Buzz", fizzBuzz.generate(5, 1));
+        let type = type1;
+        let fizzBuzz = new FizzBuzz(type);
+        assert.equal("Buzz", fizzBuzz.generate(5));
       });
 
       test("値が3または5で割り切れる場合はFizzBuzzをプリントする", () => {
-        assert.equal("FizzBuzz", fizzBuzz.generate(15, 1));
+        let type = type1;
+        let fizzBuzz = new FizzBuzz(type);
+        assert.equal("FizzBuzz", fizzBuzz.generate(15));
       });
     });
 
     suite("タイプ2の場合", () => {
       test("値が3で割り切れる場合は3をプリントする", () => {
-        assert.equal(3, fizzBuzz.generate(3, 2));
+        let type = type2;
+        let fizzBuzz = new FizzBuzz(type);
+        assert.equal(3, fizzBuzz.generate(3));
       });
 
       test("値が5で割り切れる場合は5をプリントする", () => {
-        assert.equal(5, fizzBuzz.generate(5, 2));
+        let type = type2;
+        let fizzBuzz = new FizzBuzz(type);
+        assert.equal(5, fizzBuzz.generate(5));
       });
 
       test("値が3または5で割り切れる場合は値をプリントする", () => {
-        assert.equal(15, fizzBuzz.generate(15, 2));
+        let type = type2;
+        let fizzBuzz = new FizzBuzz(type);
+        assert.equal(15, fizzBuzz.generate(15));
       });
     });
 
     suite("タイプ3の場合", () => {
       test("値が3で割り切れる場合はFizzBuzzをプリントする", () => {
-        assert.equal("FizzBuzz", fizzBuzz.generate(3, 3));
+        let type = type3;
+        let fizzBuzz = new FizzBuzz(type);
+        assert.equal("FizzBuzz", fizzBuzz.generate(3));
       });
 
       test("値が5で割り切れる場合はFizzBuzzをプリントする", () => {
-        assert.equal("FizzBuzz", fizzBuzz.generate(5, 3));
+        let type = type3;
+        let fizzBuzz = new FizzBuzz(type);
+        assert.equal("FizzBuzz", fizzBuzz.generate(5));
       });
 
       test("値が3または5で割り切れる場合はFizzBuzzをプリントする", () => {
-        assert.equal("FizzBuzz", fizzBuzz.generate(15, 3));
+        let type = type3;
+        let fizzBuzz = new FizzBuzz(type);
+        assert.equal("FizzBuzz", fizzBuzz.generate(15));
       });
     })
   });
