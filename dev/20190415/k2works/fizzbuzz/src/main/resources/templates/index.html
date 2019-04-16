@@ -14,15 +14,18 @@
             margin: 0 auto;
             background-color: ivory;
         }
+
         header {
             width: 350px;
         }
+
         .nav-component {
             width: 290px;
             float: left;
             padding: 5px;
             margin-bottom: 5px;
         }
+
         .fizz-buzz-component {
             width: 500px;
             float: right;
@@ -30,17 +33,21 @@
             padding-bottom: 10px;
             margin-bottom: 5px;
         }
+
         .fizz-buzz-component table {
             margin-top: 10px;
             border-collapse: collapse;
         }
+
         .fizz-buzz-component th {
             border: 1px solid black;
             background-color: aqua;
         }
+
         .fizz-buzz-component td {
             border: 1px solid black;
         }
+
         footer {
             clear: both;
             width: auto;
@@ -76,24 +83,22 @@
 <script>mocha.setup("tdd");</script>
 
 <script>
-    const assert = chai.assert;
+  const fizzBuzz = {
+    FIZZ_BUZZ: "FizzBuzz",
+    FIZZ: "Fizz",
+    BUZZ: "Buzz",
 
-    const fizzBuzz = {
-      FIZZ_BUZZ: "FizzBuzz",
-      FIZZ: "Fizz",
-      BUZZ: "Buzz",
-
-      generate(number) {
-          let result = number;
-          if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
-          if (number % 3 === 0) return this.FIZZ;
-          if (number % 5 === 0) return this.BUZZ;
-          return result;
-        },
+    generate(number) {
+      let result = number;
+      if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
+      if (number % 3 === 0) return this.FIZZ;
+      if (number % 5 === 0) return this.BUZZ;
+      return result;
+    },
 
     generateList() {
-          return [...Array(101).keys()].map(this.generate.bind(this)).slice(1);
-        },
+      return [...Array(101).keys()].map(this.generate.bind(this)).slice(1);
+    },
 
     renderTable(list) {
       let table = `
@@ -124,7 +129,7 @@
             });
             return table;
           }
-        }
+        };
       })().create(list);
 
       table += `
@@ -133,33 +138,36 @@
       `;
       document.querySelector("#app").innerHTML = table;
     }
-    };
+  };
+</script>
 
-    const list = fizzBuzz.generateList();
-    window.onload = fizzBuzz.renderTable(list);
+<script>
+  const list = fizzBuzz.generateList();
+  window.onload = fizzBuzz.renderTable(list);
 
-    suite("FizzBuzzTest", () => {
-      test("値を1から100までプリントするただし、3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
-        const list = fizzBuzz.generateList();
-        assert.equal(1, list[0]);
-        assert.equal("Fizz", list[2]);
-        assert.equal("Buzz", list[4]);
-        assert.equal("FizzBuzz", list[14]);
-        assert.equal("Buzz", list[99]);
-      });
-
-      test("値が3で割り切れる場合はFizzをプリントする", () => {
-        assert.equal("Fizz", fizzBuzz.generate(3));
-      });
-
-      test("値が5で割り切れる場合はBuzzをプリントする", () => {
-        assert.equal("Buzz", fizzBuzz.generate(5));
-      });
-
-      test("値が3または5で割り切れる場合はFizzBuzzをプリントする", () => {
-        assert.equal("FizzBuzz", fizzBuzz.generate(15));
-      });
+  const assert = chai.assert;
+  suite("FizzBuzzTest", () => {
+    test("値を1から100までプリントするただし、3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
+      const list = fizzBuzz.generateList();
+      assert.equal(1, list[0]);
+      assert.equal("Fizz", list[2]);
+      assert.equal("Buzz", list[4]);
+      assert.equal("FizzBuzz", list[14]);
+      assert.equal("Buzz", list[99]);
     });
+
+    test("値が3で割り切れる場合はFizzをプリントする", () => {
+      assert.equal("Fizz", fizzBuzz.generate(3));
+    });
+
+    test("値が5で割り切れる場合はBuzzをプリントする", () => {
+      assert.equal("Buzz", fizzBuzz.generate(5));
+    });
+
+    test("値が3または5で割り切れる場合はFizzBuzzをプリントする", () => {
+      assert.equal("FizzBuzz", fizzBuzz.generate(15));
+    });
+  });
 </script>
 
 <script>
