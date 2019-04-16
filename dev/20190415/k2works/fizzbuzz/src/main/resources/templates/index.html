@@ -78,9 +78,24 @@
 <script>
     const assert = chai.assert;
 
-    window.onload = renderTable;
+    const fizzBuzz = {
+      FIZZ_BUZZ: "FizzBuzz",
+      FIZZ: "Fizz",
+      BUZZ: "Buzz",
 
-    function renderTable() {
+      generate(number) {
+          let result = number;
+          if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
+          if (number % 3 === 0) return this.FIZZ;
+          if (number % 5 === 0) return this.BUZZ;
+          return result;
+        },
+
+    generateList() {
+          return [...Array(101).keys()].map(this.generate.bind(this)).slice(1);
+        },
+
+    renderTable(list) {
       let table = `
             <table>
                 <thead>
@@ -110,7 +125,7 @@
             return table;
           }
         }
-      })().create(fizzBuzz.generateList());
+      })().create(list);
 
       table += `
                 </tbody>
@@ -118,24 +133,10 @@
       `;
       document.querySelector("#app").innerHTML = table;
     }
-
-    const fizzBuzz = {
-      FIZZ_BUZZ: "FizzBuzz",
-      FIZZ: "Fizz",
-      BUZZ: "Buzz",
-
-      generate(number) {
-          let result = number;
-          if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
-          if (number % 3 === 0) return this.FIZZ;
-          if (number % 5 === 0) return this.BUZZ;
-          return result;
-        },
-
-    generateList() {
-          return [...Array(101).keys()].map(this.generate.bind(this)).slice(1);
-        }
     };
+
+    const list = fizzBuzz.generateList();
+    window.onload = fizzBuzz.renderTable(list);
 
     suite("FizzBuzzTest", () => {
       test("値を1から100までプリントするただし、3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
