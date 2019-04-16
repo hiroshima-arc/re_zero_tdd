@@ -120,11 +120,15 @@
     }
 
     const fizzBuzz = {
+      FIZZ_BUZZ: "FizzBuzz",
+      FIZZ: "Fizz",
+      BUZZ: "Buzz",
+
       generate(number) {
           let result = number;
-          if (number % 3 === 0 && number % 5 === 0) return "FizzBuzz";
-          if (number % 3 === 0) return "Fizz";
-          if (number % 5 === 0) return "Buzz";
+          if (number % 3 === 0 && number % 5 === 0) return this.FIZZ_BUZZ;
+          if (number % 3 === 0) return this.FIZZ;
+          if (number % 5 === 0) return this.BUZZ;
           return result;
         },
 
