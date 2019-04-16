@@ -69,12 +69,10 @@
 <section>
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
-        <select name=”type” onchange="changeType(event)">
-            <option value=1>タイプ1</option>
-            <option value=2>タイプ2</option>
-            <option value=3>タイプ3</option>
-        </select>
-        <div id="app"></div>
+        <div id="app">
+            <div class="selectBox"></div>
+            <div class="table"></div>
+        </div>
         <div id="mocha"></div>
     </section>
 </section>
@@ -151,7 +149,22 @@
                 </tbody>
             </table>
       `;
-      document.querySelector("#app").innerHTML = table;
+      return table;
+    };
+
+    this.renderSelectBox = () => {
+      return `
+        <select name=”type” onchange="changeType(event)">
+            <option value=1>タイプ1</option>
+            <option value=2>タイプ2</option>
+            <option value=3>タイプ3</option>
+        </select>
+      `;
+    };
+
+    this.render = () => {
+      document.querySelector(".selectBox").innerHTML = this.renderSelectBox();
+      document.querySelector(".table").innerHTML = this.renderTable();
     }
   }
 </script>
@@ -159,7 +172,7 @@
 <script>
   let type = type1;
   let fizzBuzz = new FizzBuzz(type);
-  window.onload = fizzBuzz.renderTable();
+  window.onload = fizzBuzz.render();
 
   function changeType(e) {
     let typeValue = e.target.value;
@@ -177,7 +190,7 @@
         type = type1;
     }
     fizzBuzz = new FizzBuzz(type);
-    fizzBuzz.renderTable();
+    document.querySelector(".table").innerHTML = fizzBuzz.renderTable();
   }
 </script>
 
