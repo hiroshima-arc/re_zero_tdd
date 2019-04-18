@@ -9,6 +9,10 @@ repositories {
   mavenCentral()
 }
 
+test {
+  useJUnitPlatform()
+}
+
 dependencies {
   compile (
           'org.springframework.boot:spring-boot-starter-thymeleaf:2.1.1.RELEASE',
@@ -17,7 +21,8 @@ dependencies {
           'org.springframework.boot:spring-boot-devtools:2.1.1.RELEASE',
           'io.symphonia:lambda-logging:1.0.1'
   )
-
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
   testCompile("junit:junit:4.12")
 }
 
