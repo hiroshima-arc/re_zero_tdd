@@ -5,6 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FizzBuzz {
+
+    public static final String FIZZ_BUZZ = "FizzBuzz";
+    public static final String FIZZ = "Fizz";
+    public static final String BUZZ = "Buzz";
+
     public static void printValue() {
         generateList().forEach(System.out::println);
     }
@@ -16,9 +21,9 @@ public class FizzBuzz {
     public static String generate(int number) {
         boolean fizz = isFizz(number);
         boolean buzz = isBuzz(number);
-        if (fizz && buzz) return  "FizzBuzz";
-        if (fizz) return  "Fizz";
-        if (buzz) return "Buzz";
+        if (fizz && buzz) return FIZZ_BUZZ;
+        if (fizz) return FIZZ;
+        if (buzz) return BUZZ;
         return Integer.toString(number);
     }
 
