@@ -14,11 +14,19 @@ public class FizzBuzz {
     }
 
     public static String generate(int number) {
-        boolean isFizz = number % 3 == 0;
-        boolean isBuzz = number % 5 == 0;
+        boolean isFizz = isFizz(number);
+        boolean isBuzz = isBuzz(number);
         if (isFizz && isBuzz) return  "FizzBuzz";
         if (isFizz) return  "Fizz";
         if (isBuzz) return "Buzz";
         return Integer.toString(number);
+    }
+
+    private static boolean isBuzz(int number) {
+        return number % 5 == 0;
+    }
+
+    private static boolean isFizz(int number) {
+        return number % 3 == 0;
     }
 }
