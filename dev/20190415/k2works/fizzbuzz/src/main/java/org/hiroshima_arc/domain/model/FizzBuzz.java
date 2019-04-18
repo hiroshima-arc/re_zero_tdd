@@ -6,8 +6,8 @@ import java.util.List;
 public class FizzBuzz {
     public static void printValue() {
         List<String> list = generateList();
-        for (int i = 0; i < 100; i++) {
-            System.out.println(list.get(i));
+        for(String s: list) {
+            System.out.println(s);
         }
     }
 
