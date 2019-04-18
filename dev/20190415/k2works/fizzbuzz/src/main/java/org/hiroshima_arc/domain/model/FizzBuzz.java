@@ -14,9 +14,9 @@ public class FizzBuzz {
 
     public static List<String> generateList() {
         List<String> list = new ArrayList<>();
-        for (int i = 1; i <= 100; i++) {
+        IntStream.rangeClosed(1,100).forEach(i -> {
             list.add(FizzBuzz.generate(i));
-        }
+        });
         return list;
     }
 
