@@ -2,6 +2,7 @@ package org.hiroshima_arc.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class FizzBuzz {
     public static void printValue() {
@@ -14,8 +15,7 @@ public class FizzBuzz {
     public static List<String> generateList() {
         List<String> list = new ArrayList<>();
         for (int i = 1; i <= 100; i++) {
-            String result = FizzBuzz.generate(i);
-            list.add(result);
+            list.add(FizzBuzz.generate(i));
         }
         return list;
     }
