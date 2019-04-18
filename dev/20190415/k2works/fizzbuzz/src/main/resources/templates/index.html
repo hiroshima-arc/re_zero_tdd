@@ -93,15 +93,15 @@
     document.querySelector(".table").innerHTML = fizzBuzz.renderTable();
   }
 
-  function fizzBuzzFactory(typeValue) {
-    const value = parseInt(typeValue);
-    switch (value) {
-      case 1:
-        return new FizzBuzz(type1);
-      case 2:
-        return new FizzBuzz(type2);
-      case 3:
-        return new FizzBuzz(type3);
+  function fizzBuzzFactory(type) {
+    const keys = Object.keys(Type);
+    switch (type) {
+      case keys[0]:
+        return new FizzBuzz(Type.one);
+      case keys[1]:
+        return new FizzBuzz(Type.two);
+      case keys[2]:
+        return new FizzBuzz(Type.three);
       default:
         return new FizzBuzz(type1);
     }
@@ -181,9 +181,9 @@
     this.renderSelectBox = () => {
       return `
         <select name=”type” onchange="changeType(event)">
-            <option value=1>タイプ1</option>
-            <option value=2>タイプ2</option>
-            <option value=3>タイプ3</option>
+            <option value="one">タイプ1</option>
+            <option value="two">タイプ2</option>
+            <option value="three">タイプ3</option>
         </select>
       `;
     };
@@ -196,7 +196,7 @@
 </script>
 
 <script>
-  let fizzBuzz = fizzBuzzFactory(1);
+  let fizzBuzz = fizzBuzzFactory("one");
   window.onload = fizzBuzz.render();
 </script>
 
