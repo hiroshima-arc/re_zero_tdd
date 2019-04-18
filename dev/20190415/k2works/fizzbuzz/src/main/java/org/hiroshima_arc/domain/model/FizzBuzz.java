@@ -1,10 +1,17 @@
 package org.hiroshima_arc.domain.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FizzBuzz {
-    public static int[] printValue() {
-        int[] list = new int[100];
+    public static List<String> printValue() {
+        List<String> list = new ArrayList<>();
         for (int i = 1; i <= 100; i++) {
-            list[i - 1] = i;
+            String result = FizzBuzz.generate(i);
+            list.add(result);
+        }
+        for (int i = 0; i < 100; i++) {
+            System.out.println(list.get(i));
         }
         return list;
     }

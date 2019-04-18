@@ -1,26 +1,36 @@
 package org.hiroshima_arc.domain.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
     @Test
-    public void 値を1から100までプリントする() {
-        int[] list = FizzBuzz.printValue();
-        assertEquals(1, list[0]);
-        assertEquals(100, list[99]);
+    @DisplayName("値を1から100までプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする")
+    public void testPrintValue() {
+        List<String> list = FizzBuzz.printValue();
+        assertEquals("1", list.get(0));
+        assertEquals("Fizz", list.get(2));
+        assertEquals("Buzz", list.get(4));
+        assertEquals("FizzBuzz", list.get(14));
+        assertEquals("Buzz", list.get(99));
     }
     @Test
-    public void 値が3で割り切れる場合はFizzをプリントする() {
+    @DisplayName("値が3で割り切れる場合はFizzをプリントする")
+    public void testGenerateFizz() {
         assertEquals("Fizz", FizzBuzz.generate(3));
     }
     @Test
-    public void 値が5で割り切れる場合はBuzzをプリントする() {
+    @DisplayName("値が5で割り切れる場合はBuzzをプリントする")
+    public void testGenerateBuzz() {
         assertEquals("Buzz", FizzBuzz.generate(5));
     }
     @Test
-    public void 値が3と5で割り切れる場合はFizzBuzzをプリントする() {
+    @DisplayName("値が3と5で割り切れる場合はFizzBuzzをプリントする")
+    public void testGenerateFizzBuzz() {
         assertEquals("FizzBuzz", FizzBuzz.generate(15));
     }
 }
