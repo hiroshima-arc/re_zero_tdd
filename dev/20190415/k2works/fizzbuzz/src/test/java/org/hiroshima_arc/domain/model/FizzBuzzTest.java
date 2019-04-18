@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FizzBuzzTest {
     @Test
     public void 値を1から100までプリントする() {
-        assertEquals(1, FizzBuzz.printValue());
+        int[] list = FizzBuzz.printValue();
+        assertEquals(1, list[0]);
+        assertEquals(100, list[99]);
     }
 }
