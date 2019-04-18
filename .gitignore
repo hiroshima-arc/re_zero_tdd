@@ -94,3 +94,5 @@ packaged.yaml
 
 readme.html
 build
+bin
+.classpath

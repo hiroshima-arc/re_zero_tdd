@@ -15,4 +15,8 @@ public class FizzBuzzTest {
     public void 値が3で割り切れる場合はFizzをプリントする() {
         assertEquals("Fizz", FizzBuzz.generate(3));
     }
+    @Test
+    public void 値が5で割り切れる場合はBuzzをプリントする() {
+        assertEquals("Buzz", FizzBuzz.generate(5));
+    }
 }
