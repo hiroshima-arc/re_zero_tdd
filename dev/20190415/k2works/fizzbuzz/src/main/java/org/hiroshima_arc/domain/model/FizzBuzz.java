@@ -14,11 +14,11 @@ public class FizzBuzz {
     }
 
     public static String generate(int number) {
-        boolean isFizz = isFizz(number);
-        boolean isBuzz = isBuzz(number);
-        if (isFizz && isBuzz) return  "FizzBuzz";
-        if (isFizz) return  "Fizz";
-        if (isBuzz) return "Buzz";
+        boolean fizz = isFizz(number);
+        boolean buzz = isBuzz(number);
+        if (fizz && buzz) return  "FizzBuzz";
+        if (fizz) return  "Fizz";
+        if (buzz) return "Buzz";
         return Integer.toString(number);
     }
 
