@@ -1,23 +1,16 @@
 package org.hiroshima_arc.domain.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FizzBuzz {
     public static void printValue() {
-        List<String> list = generateList();
-        for(String s: list) {
-            System.out.println(s);
-        }
+        generateList().forEach(System.out::println);
     }
 
     public static List<String> generateList() {
-        List<String> list = new ArrayList<>();
-        IntStream.rangeClosed(1,100).forEach(i -> {
-            list.add(FizzBuzz.generate(i));
-        });
-        return list;
+        return IntStream.rangeClosed(1,100).mapToObj(FizzBuzz::generate).collect(Collectors.toList());
     }
 
     public static String generate(int number) {
