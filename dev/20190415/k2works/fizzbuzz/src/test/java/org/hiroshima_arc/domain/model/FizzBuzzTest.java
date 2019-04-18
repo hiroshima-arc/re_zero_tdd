@@ -11,4 +11,8 @@ public class FizzBuzzTest {
         assertEquals(1, list[0]);
         assertEquals(100, list[99]);
     }
+    @Test
+    public void 値が3で割り切れる場合はFizzをプリントする() {
+        assertEquals("Fizz", FizzBuzz.generate(3));
+    }
 }
