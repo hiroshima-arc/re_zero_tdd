@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FizzBuzz {
-    public static List<String> printValue() {
+    public static void printValue() {
+        List<String> list = generateList();
+        for (int i = 0; i < 100; i++) {
+            System.out.println(list.get(i));
+        }
+    }
+
+    public static List<String> generateList() {
         List<String> list = new ArrayList<>();
         for (int i = 1; i <= 100; i++) {
             String result = FizzBuzz.generate(i);
             list.add(result);
-        }
-        for (int i = 0; i < 100; i++) {
-            System.out.println(list.get(i));
         }
         return list;
     }

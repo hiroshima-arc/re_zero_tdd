@@ -11,7 +11,7 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("値を1から100までプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする")
     public void testPrintValue() {
-        List<String> list = FizzBuzz.printValue();
+        List<String> list = FizzBuzz.generateList();
         assertEquals("1", list.get(0));
         assertEquals("Fizz", list.get(2));
         assertEquals("Buzz", list.get(4));
