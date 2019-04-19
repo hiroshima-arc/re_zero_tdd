@@ -43,8 +43,14 @@ public class FizzBuzzTest {
     }
     @Test
     @DisplayName("タイプ1は通常のパターンを返す")
-    public void testType1() {
+    public void testType1Value() {
         _fizzBuzzData.setValue(FizzBuzz.generate(3, 1));
-       assertEquals("Fizz", _fizzBuzzData.getValue());
+        assertEquals("Fizz", _fizzBuzzData.getValue());
+    }
+    @Test
+    @DisplayName("タイプ1は通常のパターンを返す")
+    public void testType1Values() {
+        _fizzBuzzData.setValues(FizzBuzz.generateList(1));
+       assertEquals("Fizz", _fizzBuzzData.getValues().get(2));
     }
 }

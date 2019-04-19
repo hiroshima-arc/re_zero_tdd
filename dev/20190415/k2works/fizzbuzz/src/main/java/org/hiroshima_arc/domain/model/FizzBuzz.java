@@ -18,6 +18,10 @@ public class FizzBuzz {
         return IntStream.rangeClosed(1,100).mapToObj(FizzBuzz::generate).collect(Collectors.toList());
     }
 
+    public static List<String> generateList(int type) {
+        return IntStream.rangeClosed(1,100).mapToObj(i -> FizzBuzz.generate(i, type)).collect(Collectors.toList());
+    }
+
     public static String generate(int number) {
         boolean fizz = isFizz(number);
         boolean buzz = isBuzz(number);
