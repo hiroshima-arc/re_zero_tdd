@@ -65,4 +65,10 @@ public class FizzBuzzTest {
         _fizzBuzzData.setValues(FizzBuzz.generateList(2));
         assertEquals("3", _fizzBuzzData.getValues().get(2));
     }
+    @Test
+    @DisplayName("タイプ3はFizzBuzzのみのパターンを返す")
+    public void testType3Value() {
+        assertEquals("3", FizzBuzz.generate(3, 3));
+        assertEquals("FizzBuzz", FizzBuzz.generate(15, 3));
+    }
 }

@@ -45,6 +45,11 @@ public class FizzBuzz {
                 return FizzBuzz.generate(number);
             case 2:
                 return String.valueOf(number);
+            case 3:
+                boolean fizz = isFizz(number);
+                boolean buzz = isBuzz(number);
+                if (fizz && buzz) return FIZZ_BUZZ;
+                return Integer.toString(number);
             default:
                 return FizzBuzz.generate(number);
         }
