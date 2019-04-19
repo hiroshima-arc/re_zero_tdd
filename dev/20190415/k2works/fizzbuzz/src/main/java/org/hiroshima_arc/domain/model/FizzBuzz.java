@@ -15,11 +15,11 @@ public class FizzBuzz {
     }
 
     public static List<String> generateList() {
-        return IntStream.rangeClosed(1,100).mapToObj(FizzBuzz::generate).collect(Collectors.toList());
+        return IntStream.rangeClosed(1, 100).mapToObj(FizzBuzz::generate).collect(Collectors.toList());
     }
 
     public static List<String> generateList(int type) {
-        return IntStream.rangeClosed(1,100).mapToObj(i -> FizzBuzz.generate(i, type)).collect(Collectors.toList());
+        return IntStream.rangeClosed(1, 100).mapToObj(i -> FizzBuzz.generate(i, type)).collect(Collectors.toList());
     }
 
     public static String generate(int number) {
@@ -29,14 +29,6 @@ public class FizzBuzz {
         if (fizz) return FIZZ;
         if (buzz) return BUZZ;
         return Integer.toString(number);
-    }
-
-    private static boolean isBuzz(int number) {
-        return number % 5 == 0;
-    }
-
-    private static boolean isFizz(int number) {
-        return number % 3 == 0;
     }
 
     public static String generate(int number, int type) {
@@ -53,5 +45,13 @@ public class FizzBuzz {
             default:
                 return FizzBuzz.generate(number);
         }
+    }
+
+    private static boolean isBuzz(int number) {
+        return number % 5 == 0;
+    }
+
+    private static boolean isFizz(int number) {
+        return number % 3 == 0;
     }
 }
