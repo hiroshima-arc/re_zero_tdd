@@ -34,4 +34,13 @@ public class FizzBuzz {
     private static boolean isFizz(int number) {
         return number % 3 == 0;
     }
+
+    public static String generate(int number, int type) {
+        switch (type) {
+            case 1:
+                return FizzBuzz.generate(number);
+            default:
+                return FizzBuzz.generate(number);
+        }
+    }
 }
