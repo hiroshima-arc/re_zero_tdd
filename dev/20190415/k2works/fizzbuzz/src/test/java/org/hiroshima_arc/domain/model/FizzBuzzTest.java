@@ -71,4 +71,10 @@ public class FizzBuzzTest {
         assertEquals("3", FizzBuzz.generate(3, 3));
         assertEquals("FizzBuzz", FizzBuzz.generate(15, 3));
     }
+    @Test
+    @DisplayName("タイプ3はFizzBuzzのみのパターンを返す")
+    public void testType3Values() {
+        assertEquals("3", FizzBuzz.generateList(3).get(2));
+        assertEquals("FizzBuzz", FizzBuzz.generateList(3).get(14));
+    }
 }
