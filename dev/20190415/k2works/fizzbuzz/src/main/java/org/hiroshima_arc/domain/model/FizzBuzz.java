@@ -1,6 +1,7 @@
 package org.hiroshima_arc.domain.model;
 
 import org.hiroshima_arc.domain.type.FizzBuzzType01;
+import org.hiroshima_arc.domain.type.IFizzBuzzType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ public class FizzBuzz {
 
     private String _value;
     private List<String> _values;
-    private FizzBuzzType01 _type01;
+    private IFizzBuzzType _type;
 
     public static final String FIZZ_BUZZ = "FizzBuzz";
     public static final String FIZZ = "Fizz";
@@ -18,17 +19,17 @@ public class FizzBuzz {
 
     public FizzBuzz() {
         _values = new ArrayList<>();
-        _type01 = new FizzBuzzType01();
+        _type = new FizzBuzzType01();
     }
 
     public FizzBuzz(int type) {
         _values = new ArrayList<>();
         switch (type) {
             case 1:
-                _type01 = new FizzBuzzType01();
+                _type = new FizzBuzzType01();
                 break;
             default:
-                _type01 = new FizzBuzzType01();
+                _type = new FizzBuzzType01();
         }
     }
 
@@ -57,7 +58,7 @@ public class FizzBuzz {
     }
 
     public String generate(int number) {
-        _value = _type01.generate(number);
+        _value = _type.generate(number);
         return _value;
     }
 

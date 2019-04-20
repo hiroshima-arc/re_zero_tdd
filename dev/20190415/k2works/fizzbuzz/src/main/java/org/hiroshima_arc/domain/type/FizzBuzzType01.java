@@ -1,6 +1,7 @@
 package org.hiroshima_arc.domain.type;
 
-public class FizzBuzzType01 {
+public class FizzBuzzType01 implements IFizzBuzzType {
+    @Override
     public String generate(int number) {
         boolean fizz = isFizz(number);
         boolean buzz = isBuzz(number);
