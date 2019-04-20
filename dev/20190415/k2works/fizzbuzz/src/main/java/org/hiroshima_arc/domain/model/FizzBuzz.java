@@ -2,6 +2,7 @@ package org.hiroshima_arc.domain.model;
 
 import org.hiroshima_arc.domain.type.FizzBuzzType01;
 import org.hiroshima_arc.domain.type.FizzBuzzType02;
+import org.hiroshima_arc.domain.type.FizzBuzzType03;
 import org.hiroshima_arc.domain.type.IFizzBuzzType;
 
 import java.util.ArrayList;
@@ -31,6 +32,9 @@ public class FizzBuzz {
                 break;
             case 2:
                 _type = new FizzBuzzType02();
+                break;
+            case 3:
+                _type = new FizzBuzzType03();
                 break;
             default:
                 _type = new FizzBuzzType01();

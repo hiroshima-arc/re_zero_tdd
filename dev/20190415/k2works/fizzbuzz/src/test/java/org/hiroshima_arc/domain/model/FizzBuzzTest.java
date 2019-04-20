@@ -10,12 +10,14 @@ public class FizzBuzzTest {
     private FizzBuzz _fizzBuzz;
     private FizzBuzz _fizzBuzzType01;
     private FizzBuzz _fizzBuzzType02;
+    private FizzBuzz _fizzBuzzType03;
 
     @BeforeEach
     void init() {
         _fizzBuzz = new FizzBuzz();
         _fizzBuzzType01 = new FizzBuzz(1);
         _fizzBuzzType02 = new FizzBuzz(2);
+        _fizzBuzzType03 = new FizzBuzz(3);
     }
 
     @Test
@@ -81,15 +83,15 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("タイプ3はFizzBuzzのみのパターンを返す")
     public void testType3Value() {
-        assertEquals("3", _fizzBuzz.generate(3, 3));
-        assertEquals("FizzBuzz", _fizzBuzz.generate(15, 3));
+        assertEquals("3", _fizzBuzzType03.generate(3));
+        assertEquals("FizzBuzz", _fizzBuzzType03.generate(15));
     }
 
     @Test
     @DisplayName("タイプ3はFizzBuzzのみのパターンを返す")
     public void testType3Values() {
-        _fizzBuzz.generateList(3);
-        assertEquals("3", _fizzBuzz.getValues().get(2));
-        assertEquals("FizzBuzz", _fizzBuzz.getValues().get(14));
+        _fizzBuzzType03.generateList(3);
+        assertEquals("3", _fizzBuzzType03.getValues().get(2));
+        assertEquals("FizzBuzz", _fizzBuzzType03.getValues().get(14));
     }
 }
