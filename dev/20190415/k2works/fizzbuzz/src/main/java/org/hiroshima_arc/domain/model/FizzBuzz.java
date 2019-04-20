@@ -17,21 +17,9 @@ public class FizzBuzz {
         _type = FizzBuzzType.valueOf("one");
     }
 
-    public FizzBuzz(int type) {
+    public FizzBuzz(FizzBuzzType type) {
         _values = new ArrayList<>();
-        switch (type) {
-            case 1:
-                _type = FizzBuzzType.valueOf("one");
-                break;
-            case 2:
-                _type = FizzBuzzType.valueOf("two");
-                break;
-            case 3:
-                _type = FizzBuzzType.valueOf("three");
-                break;
-            default:
-                _type = FizzBuzzType.valueOf("one");
-        }
+        this._type = type;
     }
 
     public String getValue() {

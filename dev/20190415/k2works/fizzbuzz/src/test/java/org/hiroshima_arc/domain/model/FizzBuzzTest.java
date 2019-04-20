@@ -1,5 +1,6 @@
 package org.hiroshima_arc.domain.model;
 
+import org.hiroshima_arc.domain.type.FizzBuzzType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,9 +16,9 @@ public class FizzBuzzTest {
     @BeforeEach
     void init() {
         _fizzBuzz = new FizzBuzz();
-        _fizzBuzzType01 = new FizzBuzz(1);
-        _fizzBuzzType02 = new FizzBuzz(2);
-        _fizzBuzzType03 = new FizzBuzz(3);
+        _fizzBuzzType01 = new FizzBuzz(FizzBuzzType.valueOf("one"));
+        _fizzBuzzType02 = new FizzBuzz(FizzBuzzType.valueOf("two"));
+        _fizzBuzzType03 = new FizzBuzz(FizzBuzzType.valueOf("three"));
     }
 
     @Test
