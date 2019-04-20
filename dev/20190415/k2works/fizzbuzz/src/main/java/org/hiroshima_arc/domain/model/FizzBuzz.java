@@ -1,9 +1,6 @@
 package org.hiroshima_arc.domain.model;
 
-import org.hiroshima_arc.domain.type.FizzBuzzType01;
-import org.hiroshima_arc.domain.type.FizzBuzzType02;
-import org.hiroshima_arc.domain.type.FizzBuzzType03;
-import org.hiroshima_arc.domain.type.IFizzBuzzType;
+import org.hiroshima_arc.domain.type.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,27 +10,27 @@ public class FizzBuzz {
 
     private String _value;
     private List<String> _values;
-    private IFizzBuzzType _type;
+    private FizzBuzzType _type;
 
     public FizzBuzz() {
         _values = new ArrayList<>();
-        _type = new FizzBuzzType01();
+        _type = FizzBuzzType.valueOf("one");
     }
 
     public FizzBuzz(int type) {
         _values = new ArrayList<>();
         switch (type) {
             case 1:
-                _type = new FizzBuzzType01();
+                _type = FizzBuzzType.valueOf("one");
                 break;
             case 2:
-                _type = new FizzBuzzType02();
+                _type = FizzBuzzType.valueOf("two");
                 break;
             case 3:
-                _type = new FizzBuzzType03();
+                _type = FizzBuzzType.valueOf("three");
                 break;
             default:
-                _type = new FizzBuzzType01();
+                _type = FizzBuzzType.valueOf("one");
         }
     }
 
