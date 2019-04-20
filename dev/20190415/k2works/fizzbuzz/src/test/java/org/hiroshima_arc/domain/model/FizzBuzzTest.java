@@ -17,7 +17,7 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("値を1から100までプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする")
     public void testPrintValue() {
-        _fizzBuzz.setValues(FizzBuzz.generateList());
+        _fizzBuzz.generateList();
         assertEquals("1", _fizzBuzz.getValues().get(0));
         assertEquals("Fizz", _fizzBuzz.getValues().get(2));
         assertEquals("Buzz", _fizzBuzz.getValues().get(4));
@@ -56,7 +56,7 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("タイプ1は通常のパターンを返す")
     public void testType1Values() {
-        _fizzBuzz.setValues(FizzBuzz.generateList(1));
+        _fizzBuzz.generateList(1);
         assertEquals("Fizz", _fizzBuzz.getValues().get(2));
     }
 
@@ -70,7 +70,7 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("タイプ2は数字のみのパターンを返す")
     public void testType2Values() {
-        _fizzBuzz.setValues(FizzBuzz.generateList(2));
+        _fizzBuzz.generateList(2);
         assertEquals("3", _fizzBuzz.getValues().get(2));
     }
 
@@ -84,7 +84,8 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("タイプ3はFizzBuzzのみのパターンを返す")
     public void testType3Values() {
-        assertEquals("3", FizzBuzz.generateList(3).get(2));
-        assertEquals("FizzBuzz", FizzBuzz.generateList(3).get(14));
+        _fizzBuzz.generateList(3);
+        assertEquals("3", _fizzBuzz.getValues().get(2));
+        assertEquals("FizzBuzz", _fizzBuzz.getValues().get(14));
     }
 }

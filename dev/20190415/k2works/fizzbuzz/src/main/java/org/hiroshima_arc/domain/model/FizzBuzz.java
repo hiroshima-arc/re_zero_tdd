@@ -25,20 +25,16 @@ public class FizzBuzz {
         return _values;
     }
 
-    public void setValues(List<String> _values) {
-        this._values = _values;
+    public void printValue() {
+        _values.forEach(System.out::println);
     }
 
-    public static void printValue() {
-        generateList().forEach(System.out::println);
+    public void generateList() {
+        _values = IntStream.rangeClosed(1, 100).mapToObj(FizzBuzz::generate).collect(Collectors.toList());
     }
 
-    public static List<String> generateList() {
-        return IntStream.rangeClosed(1, 100).mapToObj(FizzBuzz::generate).collect(Collectors.toList());
-    }
-
-    public static List<String> generateList(int type) {
-        return IntStream.rangeClosed(1, 100).mapToObj(i -> FizzBuzz.generate(i, type)).collect(Collectors.toList());
+    public void generateList(int type) {
+        _values = IntStream.rangeClosed(1, 100).mapToObj(i -> FizzBuzz.generate(i, type)).collect(Collectors.toList());
     }
 
     public static String generate(int number) {
