@@ -1,7 +1,7 @@
 package org.hiroshima_arc.domain.model;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FizzBuzz {
@@ -12,6 +12,10 @@ public class FizzBuzz {
     public static final String FIZZ_BUZZ = "FizzBuzz";
     public static final String FIZZ = "Fizz";
     public static final String BUZZ = "Buzz";
+
+    public FizzBuzz() {
+        this._values = new ArrayList<>();
+    }
 
     public String getValue() {
         return _value;
@@ -30,43 +34,45 @@ public class FizzBuzz {
     }
 
     public void generateList() {
-        _values = IntStream.rangeClosed(1, 100).mapToObj(FizzBuzz::generate).collect(Collectors.toList());
+        IntStream.rangeClosed(1, 100).forEach(i -> _values.add(generate(i)));
     }
 
     public void generateList(int type) {
-        _values = IntStream.rangeClosed(1, 100).mapToObj(i -> FizzBuzz.generate(i, type)).collect(Collectors.toList());
+        IntStream.rangeClosed(1, 100).forEach(i -> _values.add(generate(i, type)));
     }
 
-    public static String generate(int number) {
+    public String generate(int number) {
+        _value = Integer.toString(number);
         boolean fizz = isFizz(number);
         boolean buzz = isBuzz(number);
-        if (fizz && buzz) return FIZZ_BUZZ;
-        if (fizz) return FIZZ;
-        if (buzz) return BUZZ;
-        return Integer.toString(number);
+        if (fizz) _value = FIZZ;
+        if (buzz) _value = BUZZ;
+        if (fizz && buzz) _value = FIZZ_BUZZ;
+        return _value;
     }
 
-    public static String generate(int number, int type) {
+    public String generate(int number, int type) {
         switch (type) {
             case 1:
-                return FizzBuzz.generate(number);
+                return generate(number);
             case 2:
                 return String.valueOf(number);
             case 3:
+                _value = Integer.toString(number);
                 boolean fizz = isFizz(number);
                 boolean buzz = isBuzz(number);
-                if (fizz && buzz) return FIZZ_BUZZ;
-                return Integer.toString(number);
+                if (fizz && buzz) _value = FIZZ_BUZZ;
+                return _value;
             default:
-                return FizzBuzz.generate(number);
+                return generate(number);
         }
     }
 
-    private static boolean isBuzz(int number) {
+    private boolean isBuzz(int number) {
         return number % 5 == 0;
     }
 
-    private static boolean isFizz(int number) {
+    private boolean isFizz(int number) {
         return number % 3 == 0;
     }
 }
