@@ -54,10 +54,6 @@ public class FizzBuzz {
     }
 
     public void generateList() {
-        generateList(1);
-    }
-
-    public void generateList(int type) {
         IntStream.rangeClosed(1, 100).forEach(i -> _values.add(_type.generate(i)));
     }
 
