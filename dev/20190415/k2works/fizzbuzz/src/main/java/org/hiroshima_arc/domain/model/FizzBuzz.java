@@ -15,10 +15,6 @@ public class FizzBuzz {
     private List<String> _values;
     private IFizzBuzzType _type;
 
-    public static final String FIZZ_BUZZ = "FizzBuzz";
-    public static final String FIZZ = "Fizz";
-    public static final String BUZZ = "Buzz";
-
     public FizzBuzz() {
         _values = new ArrayList<>();
         _type = new FizzBuzzType01();
@@ -62,36 +58,11 @@ public class FizzBuzz {
     }
 
     public void generateList(int type) {
-        IntStream.rangeClosed(1, 100).forEach(i -> _values.add(generate(i, type)));
+        IntStream.rangeClosed(1, 100).forEach(i -> _values.add(_type.generate(i)));
     }
 
     public String generate(int number) {
         _value = _type.generate(number);
         return _value;
-    }
-
-    public String generate(int number, int type) {
-        switch (type) {
-            case 1:
-                return generate(number);
-            case 2:
-                return String.valueOf(number);
-            case 3:
-                _value = Integer.toString(number);
-                boolean fizz = isFizz(number);
-                boolean buzz = isBuzz(number);
-                if (fizz && buzz) _value = FIZZ_BUZZ;
-                return _value;
-            default:
-                return generate(number);
-        }
-    }
-
-    private boolean isBuzz(int number) {
-        return number % 5 == 0;
-    }
-
-    private boolean isFizz(int number) {
-        return number % 3 == 0;
     }
 }
