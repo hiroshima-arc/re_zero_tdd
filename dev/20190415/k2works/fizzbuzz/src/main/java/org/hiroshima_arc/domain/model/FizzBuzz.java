@@ -6,9 +6,28 @@ import java.util.stream.IntStream;
 
 public class FizzBuzz {
 
+    private String _value;
+    private List<String> _values;
+
     public static final String FIZZ_BUZZ = "FizzBuzz";
     public static final String FIZZ = "Fizz";
     public static final String BUZZ = "Buzz";
+
+    public String getValue() {
+        return _value;
+    }
+
+    public void setValue(String _value) {
+        this._value = _value;
+    }
+
+    public List<String> getValues() {
+        return _values;
+    }
+
+    public void setValues(List<String> _values) {
+        this._values = _values;
+    }
 
     public static void printValue() {
         generateList().forEach(System.out::println);
