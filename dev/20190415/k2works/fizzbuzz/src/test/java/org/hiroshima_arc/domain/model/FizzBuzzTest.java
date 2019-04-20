@@ -1,6 +1,5 @@
 package org.hiroshima_arc.domain.model;
 
-import org.hiroshima_arc.domain.type.FizzBuzzType01;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,11 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FizzBuzzTest {
     private FizzBuzz _fizzBuzz;
     private FizzBuzz _fizzBuzzType01;
+    private FizzBuzz _fizzBuzzType02;
 
     @BeforeEach
     void init() {
         _fizzBuzz = new FizzBuzz();
         _fizzBuzzType01 = new FizzBuzz(1);
+        _fizzBuzzType02 = new FizzBuzz(2);
     }
 
     @Test
@@ -66,15 +67,15 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("タイプ2は数字のみのパターンを返す")
     public void testType2Value() {
-        _fizzBuzz.setValue(_fizzBuzz.generate(3, 2));
-        assertEquals("3", _fizzBuzz.getValue());
+        _fizzBuzzType02.setValue(_fizzBuzzType02.generate(3));
+        assertEquals("3", _fizzBuzzType02.getValue());
     }
 
     @Test
     @DisplayName("タイプ2は数字のみのパターンを返す")
     public void testType2Values() {
-        _fizzBuzz.generateList(2);
-        assertEquals("3", _fizzBuzz.getValues().get(2));
+        _fizzBuzzType02.generateList();
+        assertEquals("3", _fizzBuzzType02.getValues().get(2));
     }
 
     @Test
