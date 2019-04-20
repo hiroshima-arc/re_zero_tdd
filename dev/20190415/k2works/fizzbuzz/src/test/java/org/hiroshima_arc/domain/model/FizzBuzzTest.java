@@ -1,5 +1,6 @@
 package org.hiroshima_arc.domain.model;
 
+import org.hiroshima_arc.domain.type.FizzBuzzType01;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
     private FizzBuzz _fizzBuzz;
+    private FizzBuzz _fizzBuzzType01;
 
     @BeforeEach
     void init() {
         _fizzBuzz = new FizzBuzz();
+        _fizzBuzzType01 = new FizzBuzz(1);
     }
 
     @Test
@@ -49,15 +52,15 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("タイプ1は通常のパターンを返す")
     public void testType1Value() {
-        _fizzBuzz.setValue(_fizzBuzz.generate(3, 1));
-        assertEquals("Fizz", _fizzBuzz.getValue());
+        _fizzBuzzType01.setValue(_fizzBuzzType01.generate(3));
+        assertEquals("Fizz", _fizzBuzzType01.getValue());
     }
 
     @Test
     @DisplayName("タイプ1は通常のパターンを返す")
     public void testType1Values() {
-        _fizzBuzz.generateList(1);
-        assertEquals("Fizz", _fizzBuzz.getValues().get(2));
+        _fizzBuzzType01.generateList();
+        assertEquals("Fizz", _fizzBuzzType01.getValues().get(2));
     }
 
     @Test
