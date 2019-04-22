@@ -1,6 +1,8 @@
 package org.hiroshima_arc.domain.model;
 
-public class FizzBuzzValue {
+import java.util.List;
+
+public class FizzBuzzValue implements IFizzBuzz {
     private final Integer _number;
     private final String _value;
 
@@ -15,5 +17,10 @@ public class FizzBuzzValue {
 
     public String getValue() {
         return _value;
+    }
+
+    @Override
+    public List<FizzBuzzValue> getValues() {
+        return null;
     }
 }
