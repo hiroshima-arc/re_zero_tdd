@@ -26,10 +26,6 @@ public class FizzBuzz {
         return _value;
     }
 
-    public void setValue(String _value) {
-        this._value = _value;
-    }
-
     public List<String> getValues() {
         return _values;
     }
