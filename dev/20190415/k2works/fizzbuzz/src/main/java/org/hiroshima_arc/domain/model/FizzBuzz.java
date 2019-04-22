@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 
 public class FizzBuzz {
 
-    private String _value;
-    private List<String> _values;
+    private FizzBuzzValue _value;
+    private List<FizzBuzzValue> _values;
     private FizzBuzzType _type;
 
     public FizzBuzz() {
@@ -22,11 +22,11 @@ public class FizzBuzz {
         this._type = type;
     }
 
-    public String getValue() {
+    public FizzBuzzValue getValue() {
         return _value;
     }
 
-    public List<String> getValues() {
+    public List<FizzBuzzValue> getValues() {
         return _values;
     }
 
@@ -40,6 +40,6 @@ public class FizzBuzz {
 
     public String generate(int number) {
         _value = _type.generate(number);
-        return _value;
+        return _value.getValue();
     }
 }

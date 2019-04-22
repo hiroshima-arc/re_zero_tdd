@@ -1,5 +1,7 @@
 package org.hiroshima_arc.domain.type;
 
+import org.hiroshima_arc.domain.model.FizzBuzzValue;
+
 public enum FizzBuzzType {
     one(new FizzBuzzType01()),
     two(new FizzBuzzType02()),
@@ -11,7 +13,7 @@ public enum FizzBuzzType {
        this._type = type;
     }
 
-    public String generate(int number) {
+    public FizzBuzzValue generate(int number) {
         return _type.generate(number);
     }
 }
