@@ -24,8 +24,8 @@ public class FizzBuzz {
         this._type = type;
     }
 
-    public FizzBuzzValue getValue() {
-        return _value;
+    public String getValue() {
+        return _value.getValue();
     }
 
     public List<FizzBuzzValue> getValues() {
@@ -40,8 +40,7 @@ public class FizzBuzz {
         IntStream.rangeClosed(1, 100).forEach(i -> _values = _values.add(_type.generate(i)));
     }
 
-    public String generate(int number) {
+    public void generate(int number) {
         _value = _type.generate(number);
-        return _value.getValue();
     }
 }

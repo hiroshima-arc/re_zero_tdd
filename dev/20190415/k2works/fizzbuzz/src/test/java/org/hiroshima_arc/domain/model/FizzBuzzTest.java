@@ -35,25 +35,29 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("値が3で割り切れる場合はFizzをプリントする")
     public void testGenerateFizz() {
-        assertEquals("Fizz", _fizzBuzz.generate(3));
+        _fizzBuzz.generate(3);
+        assertEquals("Fizz", _fizzBuzz.getValue());
     }
 
     @Test
     @DisplayName("値が5で割り切れる場合はBuzzをプリントする")
     public void testGenerateBuzz() {
-        assertEquals("Buzz", _fizzBuzz.generate(5));
+        _fizzBuzz.generate(5);
+        assertEquals("Buzz", _fizzBuzz.getValue());
     }
 
     @Test
     @DisplayName("値が3と5で割り切れる場合はFizzBuzzをプリントする")
     public void testGenerateFizzBuzz() {
-        assertEquals("FizzBuzz", _fizzBuzz.generate(15));
+        _fizzBuzz.generate(15);
+        assertEquals("FizzBuzz", _fizzBuzz.getValue());
     }
 
     @Test
     @DisplayName("タイプ1は通常のパターンを返す")
     public void testType1Value() {
-        assertEquals("Fizz", _fizzBuzzType01.generate(3));
+        _fizzBuzzType01.generate(3);
+        assertEquals("Fizz", _fizzBuzzType01.getValue());
     }
 
     @Test
@@ -66,7 +70,8 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("タイプ2は数字のみのパターンを返す")
     public void testType2Value() {
-        assertEquals("3", _fizzBuzzType02.generate(3));
+        _fizzBuzzType02.generate(3);
+        assertEquals("3", _fizzBuzzType02.getValue());
     }
 
     @Test
@@ -79,8 +84,10 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("タイプ3はFizzBuzzのみのパターンを返す")
     public void testType3Value() {
-        assertEquals("3", _fizzBuzzType03.generate(3));
-        assertEquals("FizzBuzz", _fizzBuzzType03.generate(15));
+        _fizzBuzzType03.generate(3);
+        assertEquals("3", _fizzBuzzType03.getValue());
+        _fizzBuzzType03.generate(15);
+        assertEquals("FizzBuzz", _fizzBuzzType03.getValue());
     }
 
     @Test
