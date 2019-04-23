@@ -2,9 +2,9 @@ package org.hiroshima_arc.domain.type.fizzbuzz;
 
 import org.hiroshima_arc.domain.model.fizzbuzz.FizzBuzzValue;
 
-public class FizzBuzzType03 extends IFizzBuzzType {
+class FizzBuzzType03 extends IFizzBuzzType {
     @Override
-    public FizzBuzzValue generate(int number) {
+    FizzBuzzValue generate(int number) {
         boolean fizz = isFizz(number);
         boolean buzz = isBuzz(number);
         if (fizz && buzz) return new FizzBuzzValue(number,"FizzBuzz");

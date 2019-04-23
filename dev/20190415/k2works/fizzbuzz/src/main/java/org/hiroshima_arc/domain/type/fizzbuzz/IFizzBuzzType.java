@@ -2,8 +2,8 @@ package org.hiroshima_arc.domain.type.fizzbuzz;
 
 import org.hiroshima_arc.domain.model.fizzbuzz.FizzBuzzValue;
 
-public abstract class IFizzBuzzType {
-    public FizzBuzzValue generate(int number) {
+abstract class IFizzBuzzType {
+    FizzBuzzValue generate(int number) {
         boolean fizz = isFizz(number);
         boolean buzz = isBuzz(number);
         if (fizz && buzz) return  new FizzBuzzValue(number,"FizzBuzz");
