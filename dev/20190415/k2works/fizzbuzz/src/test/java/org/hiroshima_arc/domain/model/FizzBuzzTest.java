@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
@@ -103,5 +105,21 @@ public class FizzBuzzTest {
         assertEquals("3", _fizzBuzz.getValues().get(2).getValue());
         _fizzBuzz = command.execute(15);
         assertEquals("FizzBuzz", _fizzBuzz.getValues().get(14).getValue());
+    }
+
+    @Test
+    @DisplayName("FizzBuzzValueはNullオブジェクトを返す")
+    public void testFizzBuzzValueNull() {
+        _fizzBuzz = _fizzBuzzValueCommand.execute(3);
+        List<FizzBuzzValue> values =_fizzBuzz.getValues();
+        assertEquals(null, values);
+    }
+
+    @Test
+    @DisplayName("FizzBuzzValuesはNullオブジェクトを返す")
+    public void testFizzBuzzValuesNull() {
+        _fizzBuzz = _fizzBuzzValuesCommand.execute(3);
+        String value =_fizzBuzz.getValue();
+        assertEquals(null, value);
     }
 }
