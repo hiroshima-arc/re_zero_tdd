@@ -1,12 +1,12 @@
-package org.hiroshima_arc.application.fizzbuzz;
+package org.hiroshima_arc.application.service.fizzbuzz;
 
 import org.hiroshima_arc.domain.model.fizzbuzz.IFizzBuzz;
 import org.hiroshima_arc.domain.type.fizzbuzz.FizzBuzzType;
 
-public class FizzBuzzValueCommand implements IFizzBuzzCommand {
+public class FizzBuzzValueService implements IFizzBuzzService {
     private FizzBuzzType _type;
 
-    public FizzBuzzValueCommand(FizzBuzzType type) {
+    public FizzBuzzValueService(FizzBuzzType type) {
         _type = type;
     }
 

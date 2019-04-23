@@ -1,4 +1,4 @@
-package org.hiroshima_arc.application.fizzbuzz;
+package org.hiroshima_arc.application.service.fizzbuzz;
 
 import org.hiroshima_arc.domain.model.fizzbuzz.FizzBuzzValue;
 import org.hiroshima_arc.domain.model.fizzbuzz.FizzBuzzValues;
@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class FizzBuzzValuesCommand implements IFizzBuzzCommand {
+public class FizzBuzzValuesService implements IFizzBuzzService {
     private FizzBuzzType _type;
     private FizzBuzzValues _values;
 
-    public FizzBuzzValuesCommand(FizzBuzzType type) {
+    public FizzBuzzValuesService(FizzBuzzType type) {
         _type = type;
     }
 

@@ -1,7 +1,7 @@
-package org.hiroshima_arc.application.fizzbuzz;
+package org.hiroshima_arc.application.service.fizzbuzz;
 
 import org.hiroshima_arc.domain.model.fizzbuzz.IFizzBuzz;
 
-public interface IFizzBuzzCommand {
+public interface IFizzBuzzService {
     IFizzBuzz execute(int number);
 }
