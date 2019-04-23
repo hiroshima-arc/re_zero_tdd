@@ -10,9 +10,6 @@ public class FizzBuzzValues implements IFizzBuzz {
         if (values.size() > 100) throw new IllegalArgumentException("FizzBuzzValues can't generate over 100");
         this._values = values;
     }
-    public List<FizzBuzzValue> get_values() {
-        return _values;
-    }
 
     public FizzBuzzValues add(FizzBuzzValue value) {
         List<FizzBuzzValue> result = new ArrayList<>(_values);
