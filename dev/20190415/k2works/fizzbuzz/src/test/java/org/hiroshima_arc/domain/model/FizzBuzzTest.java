@@ -112,7 +112,7 @@ public class FizzBuzzTest {
     public void testFizzBuzzValueNull() {
         _fizzBuzz = _fizzBuzzValueCommand.execute(3);
         List<FizzBuzzValue> values =_fizzBuzz.getValues();
-        assertEquals(null, values);
+        assertEquals("", values.get(0).getValue());
     }
 
     @Test
@@ -120,6 +120,6 @@ public class FizzBuzzTest {
     public void testFizzBuzzValuesNull() {
         _fizzBuzz = _fizzBuzzValuesCommand.execute(3);
         String value =_fizzBuzz.getValue();
-        assertEquals(null, value);
+        assertEquals("", value);
     }
 }

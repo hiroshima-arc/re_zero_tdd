@@ -21,7 +21,8 @@ public class FizzBuzzValues implements IFizzBuzz {
 
     @Override
     public String getValue() {
-        return null;
+        IFizzBuzz value = new FizzBuzzNullValue();
+        return value.getValue();
     }
 
     @Override
