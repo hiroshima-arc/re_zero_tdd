@@ -1,4 +1,4 @@
-package org.hiroshima_arc.domain.model;
+package org.hiroshima_arc.application.service;
 
 import org.hiroshima_arc.application.service.fizzbuzz.FizzBuzzValueService;
 import org.hiroshima_arc.application.service.fizzbuzz.FizzBuzzValuesService;
