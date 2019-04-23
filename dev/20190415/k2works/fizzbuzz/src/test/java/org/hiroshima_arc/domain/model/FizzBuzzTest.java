@@ -1,9 +1,11 @@
 package org.hiroshima_arc.domain.model;
 
-import org.hiroshima_arc.application.FizzBuzzValueCommand;
-import org.hiroshima_arc.application.FizzBuzzValuesCommand;
-import org.hiroshima_arc.application.IFizzBuzzCommand;
-import org.hiroshima_arc.domain.type.FizzBuzzType;
+import org.hiroshima_arc.application.fizzbuzz.FizzBuzzValueCommand;
+import org.hiroshima_arc.application.fizzbuzz.FizzBuzzValuesCommand;
+import org.hiroshima_arc.application.fizzbuzz.IFizzBuzzCommand;
+import org.hiroshima_arc.domain.model.fizzbuzz.FizzBuzzValue;
+import org.hiroshima_arc.domain.model.fizzbuzz.IFizzBuzz;
+import org.hiroshima_arc.domain.type.fizzbuzz.FizzBuzzType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

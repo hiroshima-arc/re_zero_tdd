@@ -1,4 +1,4 @@
-package org.hiroshima_arc.domain.model;
+package org.hiroshima_arc.domain.model.fizzbuzz;
 
 import java.util.ArrayList;
 import java.util.List;

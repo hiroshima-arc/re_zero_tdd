@@ -1,6 +1,6 @@
-package org.hiroshima_arc.domain.type;
+package org.hiroshima_arc.domain.type.fizzbuzz;
 
-import org.hiroshima_arc.domain.model.FizzBuzzValue;
+import org.hiroshima_arc.domain.model.fizzbuzz.FizzBuzzValue;
 
 public abstract class IFizzBuzzType {
     public FizzBuzzValue generate(int number) {

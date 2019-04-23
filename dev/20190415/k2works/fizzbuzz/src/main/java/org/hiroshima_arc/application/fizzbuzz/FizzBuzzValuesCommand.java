@@ -1,9 +1,9 @@
-package org.hiroshima_arc.application;
+package org.hiroshima_arc.application.fizzbuzz;
 
-import org.hiroshima_arc.domain.model.FizzBuzzValue;
-import org.hiroshima_arc.domain.model.FizzBuzzValues;
-import org.hiroshima_arc.domain.model.IFizzBuzz;
-import org.hiroshima_arc.domain.type.FizzBuzzType;
+import org.hiroshima_arc.domain.model.fizzbuzz.FizzBuzzValue;
+import org.hiroshima_arc.domain.model.fizzbuzz.FizzBuzzValues;
+import org.hiroshima_arc.domain.model.fizzbuzz.IFizzBuzz;
+import org.hiroshima_arc.domain.type.fizzbuzz.FizzBuzzType;
 
 import java.util.ArrayList;
 import java.util.List;
