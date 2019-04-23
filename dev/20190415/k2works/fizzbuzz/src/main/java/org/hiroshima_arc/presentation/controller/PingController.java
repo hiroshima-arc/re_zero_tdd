@@ -1,4 +1,4 @@
-package org.hiroshima_arc.controller;
+package org.hiroshima_arc.presentation.controller;
 
 
 import org.springframework.web.bind.annotation.*;

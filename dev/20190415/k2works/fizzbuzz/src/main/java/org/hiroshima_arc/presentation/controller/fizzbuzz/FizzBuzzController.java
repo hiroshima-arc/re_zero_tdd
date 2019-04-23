@@ -1,4 +1,4 @@
-package org.hiroshima_arc.controller.fizzbuzz;
+package org.hiroshima_arc.presentation.controller.fizzbuzz;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
