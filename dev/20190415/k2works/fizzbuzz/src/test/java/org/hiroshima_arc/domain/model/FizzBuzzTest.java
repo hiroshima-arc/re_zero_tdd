@@ -126,7 +126,7 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("FizzBuzzValueの値は正の値のみ許可する")
     public void testFizzBuzzValueNumber() {
-        Throwable exception = assertThrows(AssertionError.class, () -> {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
             _fizzBuzzValueCommand.execute(-3);
         });
         assertEquals("FizzBuzzValue can't generate minus number", exception.getMessage());
@@ -135,7 +135,7 @@ public class FizzBuzzTest {
     @Test
     @DisplayName("FizzBuzzValuesは101以上を許可しない")
     public void testFizzBuzzValuesNumber() {
-        Throwable exception = assertThrows(AssertionError.class, () -> {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
             _fizzBuzzValuesCommand.execute(101);
         });
         assertEquals("FizzBuzzValues can't generate over 100", exception.getMessage());
