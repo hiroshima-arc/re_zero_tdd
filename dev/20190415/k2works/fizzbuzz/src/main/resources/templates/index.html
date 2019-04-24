@@ -84,7 +84,8 @@
 <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
 <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-<script>mocha.setup("tdd");</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/7.2.7/sinon.min.js"></script>
+<script>const assert = chai.assert;</script>
 
 <script>
   function changeType(e) {
@@ -201,7 +202,7 @@
 </script>
 
 <script>
-  const assert = chai.assert;
+  mocha.setup("tdd");
   suite("FizzBuzzTest", () => {
     test("値を1から100までプリントするただし、3で割り切れる場合はFizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
       let fizzBuzz = new FizzBuzz(Type.one);
@@ -266,6 +267,124 @@
   });
 </script>
 
+<script>
+  function httpGet(url, onSuccess, onError) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          onSuccess(xhr, xhr.responseText);
+        } else {
+          onError(xhr, xhr.status);
+        }
+      }
+    };
+    xhr.send('');
+    return xhr;
+  }
+
+  function helloOnSuccess(xhr, data) {
+    var json = JSON.parse(data);
+    var message = `<h2>${json.Output}</h2>`;
+    $('#hello').html(message);
+  }
+
+  function helloOnError(xhr, code) {
+    var message = `<h2>Apiサーバーでエラーが発生しました${code}</h2>`;
+    $('#hello').html(message);
+  }
+
+
+  function httpGetByJquery(url) {
+    $('#hello').html("処理中...");
+
+    $.ajax({
+      url: url,
+      type: 'GET',
+      data: {}
+    })
+      .done((data) => {
+        var message = `<h2>${data.Output}</h2>`;
+        $('#hello').html(message);
+      })
+      .fail((data) => {
+        var message = `<h2>Apiサーバーでエラーが発生しました</h2>`;
+        $('#hello').html(message);
+      })
+  }
+
+</script>
+
+<script>
+  mocha.setup("bdd");
+  describe("AjaxRequestTest", () => {
+    var xhr, requests;
+    before(function () {
+      xhr = sinon.useFakeXMLHttpRequest();
+      requests = [];
+      xhr.onCreate = function (req) {
+        requests.push(req);
+      };
+    });
+    after(function () {
+      // Like before we must clean up when tampering with globals.
+      xhr.restore();
+    });
+    it("makes a GET request for Api call", function () {
+      var url = "http://localhost:3002";
+      httpGet(url, sinon.fake(), sinon.fake());
+      assert.equal(requests.length, 1);
+      assert.equal(requests[0].url, "http://localhost:3002");
+    });
+    it("makes a GET request for Api call by jQuery", function () {
+      var url = "http://localhost:3002";
+      httpGetByJquery(url);
+      assert.equal(requests.length, 2);
+      assert.equal(requests[0].url, "http://localhost:3002");
+    });
+  });
+
+  describe("AjaxResponseTest", () => {
+    var server;
+
+    before(function () {
+      server = sinon.fakeServer.create();
+    });
+    after(function () {
+      server.restore();
+    });
+
+    it("calls callback with deserialized data", function () {
+      var url = "http://localhost:3002";
+      var onSuccess = sinon.fake();
+      var onError = sinon.fake();
+      httpGet(url, onSuccess, onError);
+
+      // This is part of the FakeXMLHttpRequest API
+      server.requests[0].respond(
+        200,
+        {"Content-Type": "application/json"},
+        JSON.stringify([{"Output": "Hello World!", done: true}])
+      );
+
+      assert(onSuccess.calledOnce);
+    });
+    it("calls callback with error data", function () {
+      var url = "http://localhost:3002";
+      var onSuccess = sinon.fake();
+      var onError = sinon.fake();
+      httpGet(url, onSuccess, onError);
+
+      // This is part of the FakeXMLHttpRequest API
+      server.requests[1].respond(
+        400
+      );
+
+      assert(onError.calledOnce);
+    });
+  });
+</script>
 <script>
   mocha.checkLeaks();
   mocha.globals(["jQuery"]);
