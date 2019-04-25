@@ -62,7 +62,8 @@
     <nav class="nav-component">
         <h1>Menu</h1>
         <ul>
-            <li><a href="index.html">FizzBuzz</a></li>
+            <li onclick="showFizzBuzz()" > <a href="#">FizzBuzz</a></li>
+            <li onclick="showFizzBuzzApi()"><a href="#">FizzBuzz(API)</a></li>
         </ul>
     </nav>
 </header>
@@ -70,6 +71,10 @@
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
         <div id="app">
+            <div class="selectBox"></div>
+            <div class="table"></div>
+        </div>
+        <div id="app-api">
             <div class="selectBox"></div>
             <div class="table"></div>
         </div>
@@ -88,6 +93,56 @@
 <script>const assert = chai.assert;</script>
 
 <script>
+  function showFizzBuzz() {
+    let fizzBuzz = fizzBuzzFactory("one");
+    fizzBuzz.render();
+    document.querySelector("#app").style.display="block";
+    document.querySelector("#app-api").style.display="none";
+    document.querySelector("#mocha").style.display="none";
+  }
+
+  function showFizzBuzzApi() {
+    renderFizzBuzzApi();
+    document.querySelector("#app").style.display="none";
+    document.querySelector("#app-api").style.display="block";
+    document.querySelector("#mocha").style.display="none";
+  }
+  
+  function renderFizzBuzzApi() {
+    const table = `
+            <table>
+                <thead>
+                <tr>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                </tr>
+                </tbody>
+            </table>
+    `
+    document.querySelector("#app-api").innerHTML = table;
+  }
   function changeType(e) {
     let typeValue = e.target.value;
     let fizzBuzz = fizzBuzzFactory(typeValue);
