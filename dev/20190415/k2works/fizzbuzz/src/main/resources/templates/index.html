@@ -109,40 +109,60 @@
   }
   
   function renderFizzBuzzApi() {
-    const table = `
+    const header = () => {
+      let header = "<thead>";
+      header += "<tr>";
+      [...Array(10).keys()].forEach((i) => header += `<th>${i + 1}</th>`);
+      header += "</tr>";
+      header += "</thead>";
+      return header;
+    };
+
+    const items = () => {
+      let count = 1;
+      const values =
+        [
+          { number: 1, value: "1" },
+          { number: 2, value: "2" },
+          { number: 3, value: "Fizz" },
+          { number: 4, value: "4" },
+          { number: 5, value: "Buzz" },
+          { number: 6, value: "6" },
+          { number: 7, value: "7" },
+          { number: 8, value: "8" },
+          { number: 9, value: "Fizz" },
+          { number: 10, value: "Buzz" }
+        ].map((item) => item.value);
+
+      let result = "<tr>";
+      values.forEach((value) => {
+        result += `<td>${value}</td>`;
+        if (count === 10) {
+          result += "</tr>";
+          result += "<tr>";
+          count = 1;
+        } else {
+          count++;
+        }
+      });
+
+      return result;
+    };
+
+    let table = `
             <table>
-                <thead>
-                <tr>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                    <th>7</th>
-                    <th>8</th>
-                    <th>9</th>
-                    <th>10</th>
-                </tr>
-                </thead>
+                ${header()}
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>10</td>
-                </tr>
+                ${items()}
                 </tbody>
             </table>
-    `
-    document.querySelector("#app-api").innerHTML = table;
+    `;
+
+    const appApi = document.getElementById("app-api");
+    const appApiTable = appApi.getElementsByClassName("table");
+    appApiTable[0].innerHTML = table;
   }
+
   function changeType(e) {
     let typeValue = e.target.value;
     let fizzBuzz = fizzBuzzFactory(typeValue);
