@@ -127,6 +127,9 @@ suite("FizzBuzzTest", () => {
         assert.equal(1, list[0]);
         assert.equal(100, list[99]);
     })
+    test("3の倍数の時はFizzをプリントする", () => {
+        assert.equal("Fizz", fizz(3));
+    })
 });
 
 function print1To100() {
@@ -135,6 +138,10 @@ function print1To100() {
         list.push(i);
     }
     return list;
+}
+function fizz(number) {
+    if (number % 3 == 0) return "Fizz";
+    return number;
 }
 </script>
 
