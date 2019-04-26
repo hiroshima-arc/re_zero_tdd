@@ -108,9 +108,11 @@ function renderTable() {
                 `
                 
         table += `<tr>`;
-        for(let i = 0; i < 10; i++) {
+        
+        [...Array(10).keys()].forEach(i => {
             table += `<th>${i+1}</td>`
-        }
+        });
+        
         table += `</tr>`;
         
         table += `
