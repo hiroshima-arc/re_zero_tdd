@@ -20,13 +20,16 @@ module.exports = {
     "watchEvents": [
         "change"
     ],
-    "watch": false,
+    "watch": true,
     "ignore": [],
     "single": false,
     "watchOptions": {
         "ignoreInitial": true
     },
-    "server": false,
+    "server": {
+        baseDir: "./src",
+        index: "index.html"
+    },
     "proxy": false,
     "port": 3000,
     "middleware": false,
