@@ -66,10 +66,10 @@
             <table>
                 <thead>
                 <tr>
-                    <th>11</th>
-                    <th>12</th>
-                    <th>13</th>
-                    <th>14</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
                     <th>5</th>
                     <th>6</th>
                     <th>7</th>
@@ -120,6 +120,15 @@
 <script>mocha.setup("tdd");</script>
 
 <script>
+const assert = chai.assert;
+suite("FizzBuzzTest", () => {
+    test("greeting", () => {
+        assert.equal(greeting(), "Hello, world");
+    });
+})
+function greeting(){
+    return "Hello, world";
+}
 </script>
 
 <script>
