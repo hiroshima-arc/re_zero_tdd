@@ -70,6 +70,7 @@
 <section>
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
+        <div id="message"></div>
         <div id="app">
             <div class="selectBox"></div>
             <div class="table"></div>
@@ -161,6 +162,8 @@
     const appApi = document.getElementById("app-api");
     const appApiTable = appApi.getElementsByClassName("table");
     appApiTable[0].innerHTML = table;
+
+    httpGet("http://localhost:8080/api/fizzbuzz", helloOnSuccess, helloOnError);
   }
 
   function changeType(e) {
@@ -360,19 +363,19 @@
   }
 
   function helloOnSuccess(xhr, data) {
-    var json = JSON.parse(data);
-    var message = `<h2>${json.Output}</h2>`;
-    $('#hello').html(message);
+    var message = `<h3>Apiサーバーの読み込みに成功しました</h3>`;
+    $('#message').html(message);
+    return data;
   }
 
   function helloOnError(xhr, code) {
-    var message = `<h2>Apiサーバーでエラーが発生しました${code}</h2>`;
-    $('#hello').html(message);
+    var message = `<h3>Apiサーバーでエラーが発生しました${code}</h3>`;
+    $('#message').html(message);
   }
 
 
   function httpGetByJquery(url) {
-    $('#hello').html("処理中...");
+    $('#message').html("処理中...");
 
     $.ajax({
       url: url,
@@ -380,12 +383,12 @@
       data: {}
     })
       .done((data) => {
-        var message = `<h2>${data.Output}</h2>`;
-        $('#hello').html(message);
+        var message = `<h3>${data.Output}</h2>`;
+        $('#message').html(message);
       })
       .fail((data) => {
-        var message = `<h2>Apiサーバーでエラーが発生しました</h2>`;
-        $('#hello').html(message);
+        var message = `<h3>Apiサーバーでエラーが発生しました</h3>`;
+        $('#message').html(message);
       })
   }
 
