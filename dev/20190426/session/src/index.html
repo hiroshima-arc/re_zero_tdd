@@ -119,18 +119,14 @@ function renderTable() {
         `
                 
         table += `<tr>`;
-        list = generateFizzBuzzList();
-        for(item of list) {
-            table += `<td>${item}</td>`;
-            count += 1;
-            
-            if(count === 10) {
-                table += `</tr>`
-                table += `<tr>`
-                count = 0;
-            }
-        }
         
+        generateFizzBuzzList().forEach((item, index) => {
+            table += `<td>${item}</td>`;
+            if((index + 1) % 10 === 0){
+                table += `</tr>`;
+            }
+        })
+
         table +=    `
                 </tbody>
             </table>
