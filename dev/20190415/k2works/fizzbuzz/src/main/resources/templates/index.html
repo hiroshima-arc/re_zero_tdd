@@ -100,16 +100,17 @@
     document.querySelector("#app").style.display="block";
     document.querySelector("#app-api").style.display="none";
     document.querySelector("#mocha").style.display="none";
+    document.querySelector("#message").innerHTML = "";
   }
 
   function showFizzBuzzApi() {
-    renderFizzBuzzApi();
+    httpGet("http://localhost:8080/api/fizzbuzz", renderFizzBuzzApi);
     document.querySelector("#app").style.display="none";
     document.querySelector("#app-api").style.display="block";
     document.querySelector("#mocha").style.display="none";
   }
   
-  function renderFizzBuzzApi() {
+  function renderFizzBuzzApi(values) {
     const header = () => {
       let header = "<thead>";
       header += "<tr>";
@@ -121,23 +122,9 @@
 
     const items = () => {
       let count = 1;
-      const values =
-        [
-          { number: 1, value: "1" },
-          { number: 2, value: "2" },
-          { number: 3, value: "Fizz" },
-          { number: 4, value: "4" },
-          { number: 5, value: "Buzz" },
-          { number: 6, value: "6" },
-          { number: 7, value: "7" },
-          { number: 8, value: "8" },
-          { number: 9, value: "Fizz" },
-          { number: 10, value: "Buzz" }
-        ].map((item) => item.value);
-
       let result = "<tr>";
       values.forEach((value) => {
-        result += `<td>${value}</td>`;
+        result += `<td>${value.value}</td>`;
         if (count === 10) {
           result += "</tr>";
           result += "<tr>";
@@ -154,7 +141,7 @@
             <table>
                 ${header()}
                 <tbody>
-                ${items()}
+                ${items(values)}
                 </tbody>
             </table>
     `;
@@ -162,8 +149,6 @@
     const appApi = document.getElementById("app-api");
     const appApiTable = appApi.getElementsByClassName("table");
     appApiTable[0].innerHTML = table;
-
-    httpGet("http://localhost:8080/api/fizzbuzz", helloOnSuccess, helloOnError);
   }
 
   function changeType(e) {
@@ -346,33 +331,25 @@
 </script>
 
 <script>
-  function httpGet(url, onSuccess, onError) {
+  function httpGet(url, onSuccess) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          onSuccess(xhr, xhr.responseText);
+          var values= JSON.parse(xhr.responseText);
+          onSuccess(values);
+          var message = `<h3>Apiサーバーの読み込みに成功しました</h3>`;
+          $('#message').html(message);
         } else {
-          onError(xhr, xhr.status);
+          var message = `<h3>Apiサーバーでエラーが発生しました${xhr.status}</h3>`;
+          $('#message').html(message);
         }
       }
     };
     xhr.send('');
     return xhr;
   }
-
-  function helloOnSuccess(xhr, data) {
-    var message = `<h3>Apiサーバーの読み込みに成功しました</h3>`;
-    $('#message').html(message);
-    return data;
-  }
-
-  function helloOnError(xhr, code) {
-    var message = `<h3>Apiサーバーでエラーが発生しました${code}</h3>`;
-    $('#message').html(message);
-  }
-
 
   function httpGetByJquery(url) {
     $('#message').html("処理中...");
