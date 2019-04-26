@@ -101,7 +101,27 @@ suite("FizzBuzzTest", () => {
 
 
 function renderTable() {
-    let count = 0;
+    const header = _ => {
+        [...Array(10).keys()].forEach(i => {
+            table += `<th>${i+1}</td>`
+        });
+    }
+    
+    const content = _ => {
+        let count = 0;
+        
+        generateFizzBuzzList().forEach((item, index) => {
+            table += `<td>${item}</td>`;
+            if(count === 9) {
+                table += `</tr>`;
+                count = 0;
+                table += `<tr>`;
+            } else {
+                count += 1;
+            }
+        })
+    }
+    
     let table = `
             <table>
                 <thead>
@@ -109,9 +129,7 @@ function renderTable() {
                 
         table += `<tr>`;
         
-        [...Array(10).keys()].forEach(i => {
-            table += `<th>${i+1}</td>`
-        });
+        header();
         
         table += `</tr>`;
         
@@ -122,13 +140,8 @@ function renderTable() {
                 
         table += `<tr>`;
         
-        generateFizzBuzzList().forEach((item, index) => {
-            table += `<td>${item}</td>`;
-            if((index + 1) % 10 === 0){
-                table += `</tr>`;
-            }
-        })
-
+        content();
+        
         table +=    `
                 </tbody>
             </table>
