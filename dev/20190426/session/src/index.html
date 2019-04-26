@@ -101,6 +101,7 @@ suite("FizzBuzzTest", () => {
 
 
 function renderTable() {
+    let count = 0;
     let table = `
             <table>
                 <thead>
@@ -118,10 +119,15 @@ function renderTable() {
         `
                 
         table += `<tr>`;
-        for(let i = 1; i <= 100; i++) {
-            table += `<td>${generate(i)}</td>`;
-            if (i % 10 === 0) {
-                table += `</tr>`;
+        list = generateFizzBuzzList();
+        for(item of list) {
+            table += `<td>${item}</td>`;
+            count += 1;
+            
+            if(count === 10) {
+                table += `</tr>`
+                table += `<tr>`
+                count = 0;
             }
         }
         
