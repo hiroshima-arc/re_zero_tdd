@@ -1,0 +1,2 @@
+web: npm run app:front
+watch: npm run watch
