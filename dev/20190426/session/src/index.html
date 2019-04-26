@@ -133,6 +133,9 @@ suite("FizzBuzzTest", () => {
     test("5の倍数の時はBuzzをプリントする", () => {
         assert.equal("Buzz", fizz(5));
     });
+    test("3または5で割り切れる場合はFizzBuzzをプリントする", () => {
+        assert.equal("FizzBuzz", fizz(15));
+    });
 });
 
 function print1To100() {
@@ -143,6 +146,7 @@ function print1To100() {
     return list;
 }
 function fizz(number) {
+    if (number % 3 == 0 && number % 5 == 0) return "FizzBuzz";
     if (number % 3 == 0) return "Fizz";
     if (number % 5 == 0) return "Buzz";
     return number;
