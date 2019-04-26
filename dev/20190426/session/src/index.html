@@ -123,29 +123,29 @@
 const assert = chai.assert;
 suite("FizzBuzzTest", () => {
     test("1から100までをプリントする", () => {
-        let list = print1To100();
+        let list = generateFizzBuzzList();
         assert.equal(1, list[0]);
         assert.equal(100, list[99]);
     })
     test("3の倍数の時はFizzをプリントする", () => {
-        assert.equal("Fizz", fizz(3));
+        assert.equal("Fizz", generate(3));
     })
     test("5の倍数の時はBuzzをプリントする", () => {
-        assert.equal("Buzz", fizz(5));
+        assert.equal("Buzz", generate(5));
     });
     test("3または5で割り切れる場合はFizzBuzzをプリントする", () => {
-        assert.equal("FizzBuzz", fizz(15));
+        assert.equal("FizzBuzz", generate(15));
     });
 });
 
-function print1To100() {
+function generateFizzBuzzList() {
     const list = [];
     for (let i=1; i <= 100; i++) {
         list.push(i);
     }
     return list;
 }
-function fizz(number) {
+function generate(number) {
     if (number % 3 == 0 && number % 5 == 0) return "FizzBuzz";
     if (number % 3 == 0) return "Fizz";
     if (number % 5 == 0) return "Buzz";
