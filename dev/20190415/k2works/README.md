@@ -99,3 +99,7 @@ npm run aws:sam:release:dev
 ## 参照
 
 - [Quick start Spring Boot](https://github.com/awslabs/aws-serverless-java-container/wiki/Quick-start---Spring-Boot)
+- [ThymeleafでSpringの環境変数を使う](https://blog.tagbangers.co.jp/ja/2015/01/18/thymeleaf-environment-properties)
+- [Spring-Bootの設定プロパティと環境変数](https://qiita.com/NewGyu/items/d51f527c7199b746c6b6)
+- [Spring Boot起動時に環境毎にapplication.propertiesを切り替える色々](https://qiita.com/NagaokaKenichi/items/fd9b5e698776fe9b9cc4)
+- [Springの@PropertySourceと@Valueをつかってみる](https://qiita.com/toshiro3/items/56a4d03658d31ef1f939)
