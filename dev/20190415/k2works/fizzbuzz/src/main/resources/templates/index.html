@@ -118,6 +118,7 @@
     document.querySelector("#app-api").style.display="block";
     document.querySelector("#mocha").style.display="none";
   }
+
   function renderFizzBuzzApiSelectBox() {
     let selectBox = `
         <select name=”type” onchange="changeTypeByApiCall(event)">
@@ -176,7 +177,11 @@
   function changeTypeByApiCall(e) {
     const typeValue = e.target.value;
     const url = getApiUrl();
-    apiCall(`${url}/fizzbuzz/${typeValue}`, 'POST', renderFizzBuzzApi);
+    const clearTable = () => {
+     document.querySelector("#app-api").style.display="none";
+    };
+
+    apiCall(`${url}/fizzbuzz/${typeValue}`, 'POST', renderFizzBuzzApi, clearTable);
   }
 
   function changeType(e) {
