@@ -424,7 +424,7 @@
     });
     it("makes a GET request for Api call by jQuery", function () {
       var url = "http://localhost:3002";
-      httpGetByJquery(url);
+      httpGet(url);
       assert.equal(requests.length, 2);
       assert.equal(requests[0].url, "http://localhost:3002");
     });
