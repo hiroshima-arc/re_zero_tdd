@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 public class FizzBuzzApiController {
     @CrossOrigin
-    @RequestMapping(value = "/api/fizzbuzz", produces = "application/json; charset=utf-8", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/fizzbuzz", produces = "application/json; charset=utf-8", method = RequestMethod.POST)
     public List fizzBuzzValues() {
         FizzBuzzApiService service = new FizzBuzzApiService();
         return service.execute(100);
