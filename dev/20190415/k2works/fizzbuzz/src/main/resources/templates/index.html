@@ -78,6 +78,7 @@
         <div id="app-api">
             <div class="selectBox"></div>
             <div class="table"></div>
+            <div hidden id="api-url" th:text="${@environment.getProperty('api.url')}"></div>
         </div>
         <div id="mocha"></div>
     </section>
@@ -103,8 +104,15 @@
     document.querySelector("#message").innerHTML = "";
   }
 
+  function getApiUrl() {
+    let url = document.querySelector("#api-url").innerHTML;
+    if (url === "") url = "http://localhost:8080/api";
+    return url;
+  }
+
   function showFizzBuzzApi() {
-    httpGet("http://localhost:8080/api/fizzbuzz", renderFizzBuzzApi);
+    const url = getApiUrl();
+    httpGet(`${url}/fizzbuzz`, renderFizzBuzzApi);
     document.querySelector("#app").style.display="none";
     document.querySelector("#app-api").style.display="block";
     document.querySelector("#mocha").style.display="none";
@@ -331,7 +339,7 @@
 </script>
 
 <script>
-  function httpGet(url, onSuccess) {
+  function httpGet(url, onSuccess, onErrors) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.onreadystatechange = function () {
@@ -343,6 +351,7 @@
           $('#message').html(message);
         } else {
           var message = `<h3>Apiサーバーでエラーが発生しました${xhr.status}</h3>`;
+          onErrors();
           $('#message').html(message);
         }
       }

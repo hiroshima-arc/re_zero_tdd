@@ -7,7 +7,9 @@
      "app_dir": "fizzbuzz",
      "s3_bucket": "hiroshima-arc-fizzbuzz",
      "stack_name": "hiroshima-arc-fizzbuzz-lambda",
-     "region": "us-east-1"
+     "region": "us-east-1",
+     "stage": "Development",
+     "api_url": "https://czub2kfwbf.execute-api.us-east-1.amazonaws.com/Prod/api/"
   },
   "scripts": {
     "start": "nf start -j Procfile",
@@ -21,7 +23,7 @@
     "aws:s3:destroy": "aws s3 rb s3://$npm_package_config_s3_bucket --force --region $npm_package_config_region",
     "aws:sam:build": "cd $npm_package_config_app_dir; mvn package",
     "aws:sam:package": "sam package --template-file $npm_package_config_app_dir/sam.yaml --s3-bucket $npm_package_config_s3_bucket --output-template-file $npm_package_config_app_dir/packaged.yaml",
-    "aws:sam:deploy": "sam deploy --template-file $npm_package_config_app_dir/packaged.yaml --stack-name $npm_package_config_stack_name --capabilities CAPABILITY_NAMED_IAM --region $npm_package_config_region",
+    "aws:sam:deploy": "sam deploy --template-file $npm_package_config_app_dir/packaged.yaml --stack-name $npm_package_config_stack_name --capabilities CAPABILITY_NAMED_IAM  --parameter-overrides Stage=$npm_package_config_stage ApiUrl=$npm_package_config_api_url --region $npm_package_config_region",
     "aws:sam:describe": "aws --region $npm_package_config_region cloudformation describe-stacks --stack-name $npm_package_config_stack_name",
     "aws:sam:release": "npm-run-all test aws:sam:build aws:sam:package aws:sam:deploy aws:sam:describe",
     "aws:sam:destroy": "aws --region $npm_package_config_region cloudformation delete-stack --stack-name $npm_package_config_stack_name"

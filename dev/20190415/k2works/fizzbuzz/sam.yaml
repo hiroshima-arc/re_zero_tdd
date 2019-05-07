@@ -1,6 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: AWS Serverless Spring Boot 2 API - org.hiroshima_arc::fizzbuzz
+
+Parameters:
+  ApiUrl:
+    Type: String
+    Description: Default api url
+    Default: 'https://api.hiroshima-arc.org'
+
 Globals:
   Api:
     EndpointConfiguration: REGIONAL
@@ -11,6 +18,10 @@ Resources:
     Properties:
       Handler: org.hiroshima_arc.StreamLambdaHandler::handleRequest
       Runtime: java8
+      Environment:
+        Variables:
+          SPRING_PROFILES_ACTIVE: production
+          API_URL: !Ref ApiUrl
       CodeUri: target/fizzbuzz-1.0-SNAPSHOT-lambda-package.zip
       MemorySize: 512
       Policies: AWSLambdaBasicExecutionRole
