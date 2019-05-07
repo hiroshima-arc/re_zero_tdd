@@ -13,7 +13,7 @@ class FizzBuzzApiTest {
     @Test
     @DisplayName("1から100までのオブジェクトリストを返す")
     void testFizzBuzzValues() {
-        FizzBuzzApiService service = new FizzBuzzApiService();
+        FizzBuzzApiService service = new FizzBuzzApiService("one");
         List<FizzBuzzEntity> result = service.execute(100);
         assertEquals("1",Integer.toString(result.get(0).getNumber()));
         assertEquals("1",result.get(0).getValue());

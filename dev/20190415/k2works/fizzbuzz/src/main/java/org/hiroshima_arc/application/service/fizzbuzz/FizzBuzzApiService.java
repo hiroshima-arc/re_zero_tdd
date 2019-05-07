@@ -9,8 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FizzBuzzApiService {
+    private String _type;
+
+    public FizzBuzzApiService(String type) {
+        this._type = type;
+    }
+
     public List<FizzBuzzEntity> execute(int number) {
-        IFizzBuzzService service = new FizzBuzzValuesService(FizzBuzzType.one);
+        IFizzBuzzService service = new FizzBuzzValuesService(FizzBuzzType.valueOf(this._type));
         IFizzBuzz values = service.execute(number);
         List list = new ArrayList();
         for(FizzBuzzValue value : values.getValues()) {
