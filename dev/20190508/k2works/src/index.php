@@ -165,6 +165,17 @@ class FizzBuzzTest extends TestCase
          $this->assertEquals(5, $fizzBuzz->generate(5));
          $this->assertEquals(15, $fizzBuzz->generate(15));
      }
+    /** @noinspection NonAsciiCharacters */
+    /**
+     * @test
+     */
+     public function タイプ3はFizzBuzzの場合のみ返す()
+     {
+         $fizzBuzz = new FizzBuzz(3);
+         $this->assertEquals(3, $fizzBuzz->generate(3));
+         $this->assertEquals(5, $fizzBuzz->generate(5));
+         $this->assertEquals("FizzBuzz", $fizzBuzz->generate(15));
+     }
 }
 
 class FizzBuzz
@@ -201,6 +212,13 @@ class FizzBuzz
 
                 return $number;
             case 2:
+                return $number;
+            case 3:
+                $fizz = $this->isFizz($number);
+                $buzz = $this->isBuzz($number);
+
+                if ($fizz && $buzz) return self::FIZZ_BUZZ;
+
                 return $number;
             default:
                 echo "該当する処理がありません";
