@@ -81,17 +81,8 @@
                 if( isset( $_GET[ 'type' ] ) ){
                     print "送信された内容はType:{$_GET['type']}です。<br/>";
                     $type = $_GET[ 'type'];
-                    switch ($type) {
-                        case "one":
-                            print renderTable(new FizzBuzzType1());
-                            break;
-                        case "two":
-                            print renderTable(new FizzBuzzType2());
-                            break;
-                        case "three":
-                            print renderTable(new FizzBuzzType3());
-                            break;
-                    }
+                    $table = renderTableFactory($type);
+                    print $table;
                 } else {
                     print renderTable(new FizzBuzzType1());
                 }
@@ -337,3 +328,18 @@ function renderTable($type)
 
     return $table;
 }
+
+function renderTableFactory($type)
+{
+    switch ($type) {
+        case "one":
+            return renderTable(new FizzBuzzType1());
+        case "two":
+            return renderTable(new FizzBuzzType2());
+        case "three":
+            return renderTable(new FizzBuzzType3());
+        default:
+            return renderTable(new FizzBuzzType1());
+    }
+}
+
