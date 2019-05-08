@@ -155,6 +155,14 @@ class FizzBuzzTest extends TestCase
     {
         $this->assertEquals("Fizz", fizzBuzz(3));
     }
+    /** @noinspection NonAsciiCharacters */
+    /**
+     * @test
+     */
+    public function 値が5で割り切れる場合はBuzzをプリントする()
+    {
+        $this->assertEquals("Buzz", fizzBuzz(5));
+    }
 }
 
 function fizzBuzz($number)
@@ -162,6 +170,8 @@ function fizzBuzz($number)
     $result = $number;
     if ($number % 3 == 0) {
         $result = "Fizz";
+    } elseif ($number % 5 == 0) {
+        $result = "Buzz";
     }
     return $result;
 }
