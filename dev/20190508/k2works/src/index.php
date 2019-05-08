@@ -144,21 +144,26 @@ class FizzBuzzTest extends TestCase
 
 class FizzBuzz
 {
+    const FIZZ_BUZZ = "FizzBuzz";
+    const FIZZ = "Fizz";
+    const BUZZ = "Buzz";
+    const MAX_NUMBER = 100;
+
     public static function generate($number)
     {
         $fizz = FizzBuzz::isFizz($number);
         $buzz = FizzBuzz::isBuzz($number);
 
-        if ($fizz && $buzz) return "FizzBuzz";
-        if ($fizz) return "Fizz";
-        if ($buzz) return "Buzz";
+        if ($fizz && $buzz) return self::FIZZ_BUZZ;
+        if ($fizz) return self::FIZZ;
+        if ($buzz) return self::BUZZ;
 
         return $number;
     }
 
     public static function generateList()
     {
-        return array_map(function ($number) { return FizzBuzz::generate($number); }, range(1,100));
+        return array_map(function ($number) { return FizzBuzz::generate($number); }, range(1, self::MAX_NUMBER));
     }
 
     private static function isBuzz($number)
