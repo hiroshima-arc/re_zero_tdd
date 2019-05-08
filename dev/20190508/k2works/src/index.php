@@ -80,9 +80,7 @@
 
                 if( isset( $_GET[ 'type' ] ) ){
                     print "送信された内容はType:{$_GET['type']}です。<br/>";
-                    $type = $_GET[ 'type'];
-                    $table = renderTableFactory($type);
-                    print $table;
+                    print renderTableFactory($_GET[ 'type']);
                 } else {
                     print renderTable(new FizzBuzzType1());
                 }
