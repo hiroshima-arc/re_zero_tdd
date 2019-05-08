@@ -68,8 +68,62 @@
 <section>
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
-        <div id="app">
+        <div id="app"></div>
+        <div id="mocha"></div>
+    </section>
+</section>
+<footer>
+    <p>Copyright</p>
+    <address>hiroshima.arc@gmail.com</address>
+</footer>
+
+<script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+<script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script>mocha.setup("tdd");</script>
+<script>
+    const assert = chai.assert;
+    suite("FizzBuzzTest", () => {
+        test("1から100までをプリントする,3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+            var list = generateFizzBuzzList();
+            assert.equal(1, list[0]);
+            assert.equal(2, list[1]);
+            assert.equal('Fizz', list[2]);
+            assert.equal('Buzz', list[4]);
+            assert.equal('FizzBuzz', list[14]);
+            assert.equal('Buzz', list[99]);
+        });
+
+        test("3で割り切れる場合はFizzをプリントする", () => {
+           assert.equal("Fizz", fizzBuzz(3));
+        });
+
+        test("5で割り切れる場合はBuzzをプリントする", () => {
+            assert.equal("Buzz", fizzBuzz(5));
+        });
+
+        test("3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+            assert.equal("FizzBuzz", fizzBuzz(15));
+        });
+    });
+
+    var fizzBuzz = (number) => {
+        if (number % 3 === 0 && number % 5 === 0) return "FizzBuzz";
+        if (number % 3 === 0) return "Fizz";
+        if (number % 5 === 0) return "Buzz";
+        return number;
+    }
+
+    var generateFizzBuzzList = () => {
+        return [...Array(101).keys()].slice(1).map((number) => fizzBuzz(number));
+    }
+
+    var render = () => {
+        var table = `
             <table>
+                <tbody>
+        `;
+        var header = `
                 <thead>
                 <tr>
                     <th>1</th>
@@ -84,43 +138,38 @@
                     <th>10</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>10</td>
-                </tr>
+        `;
+        table += header;
+        var body = "<tr>";
+        list = generateFizzBuzzList();
+        var counter = 1;
+        list.forEach((number) => {
+            var element = `<td>${number}</td>`;
+            body += element;
+            if (counter === 10) {
+                body += "</tr><tr>";
+                    counter = 1;
+            } else {
+                counter += 1;
+            }
+        });
+        body += "</tr>";
+        table += body;
+        table += `
                 </tbody>
             </table>
-        </div>
-        <div id="mocha"></div>
-    </section>
-</section>
-<footer>
-    <p>Copyright</p>
-    <address>hiroshima.arc@gmail.com</address>
-</footer>
+        `;
+        document.querySelector("#app").innerHTML = table;
+    }
+    render();
 
-<script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
-<script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-<script>mocha.setup("tdd");</script>
+</script>
 <script>
-  mocha.checkLeaks();
+  //mocha.checkLeaks();
   mocha.globals(["jQuery"]);
   mocha.run();
 </script>
 
-<script>
-
-</script>
 
 </body>
 </html>
