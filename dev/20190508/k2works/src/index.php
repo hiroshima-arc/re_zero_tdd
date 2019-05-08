@@ -206,6 +206,35 @@ class FizzBuzzTest extends TestCase
      }
 }
 
+class FizzBuzzType1
+{
+    const FIZZ_BUZZ = "FizzBuzz";
+    const FIZZ = "Fizz";
+    const BUZZ = "Buzz";
+
+    public function generate($number)
+    {
+        $fizz = $this->isFizz($number);
+        $buzz = $this->isBuzz($number);
+
+        if ($fizz && $buzz) return self::FIZZ_BUZZ;
+        if ($fizz) return self::FIZZ;
+        if ($buzz) return self::BUZZ;
+
+        return $number;
+    }
+
+    private function isBuzz($number)
+    {
+        return $number % 5 == 0;
+    }
+
+    private function isFizz($number)
+    {
+        return $number % 3 == 0;
+    }
+}
+
 class FizzBuzz
 {
     const FIZZ_BUZZ = "FizzBuzz";
@@ -231,14 +260,8 @@ class FizzBuzz
     {
         switch ($this->type) {
             case 1:
-                $fizz = $this->isFizz($number);
-                $buzz = $this->isBuzz($number);
-
-                if ($fizz && $buzz) return self::FIZZ_BUZZ;
-                if ($fizz) return self::FIZZ;
-                if ($buzz) return self::BUZZ;
-
-                return $number;
+                $fizzBuzzType = new FizzBuzzType1();
+                return $fizzBuzzType->generate($number);
             case 2:
                 return $number;
             case 3:
