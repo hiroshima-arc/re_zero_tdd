@@ -9,42 +9,49 @@
 
 
     <style type="text/css">
-    body {
-    width: 810px;
+        body {
+            width: 810px;
             margin: 0 auto;
             background-color: ivory;
         }
+
         header {
-    width: 350px;
+            width: 350px;
         }
+
         .nav-component {
-    width: 290px;
+            width: 290px;
             float: left;
             padding: 5px;
             margin-bottom: 5px;
         }
+
         .fizz-buzz-component {
-    width: 500px;
+            width: 500px;
             float: right;
             padding-left: 5px;
             padding-bottom: 10px;
             margin-bottom: 5px;
         }
+
         .fizz-buzz-component table {
-    margin-top: 10px;
+            margin-top: 10px;
             border-collapse: collapse;
         }
+
         .fizz-buzz-component th {
-    border: 1px solid black;
+            border: 1px solid black;
             background-color: aqua;
         }
+
         .fizz-buzz-component td {
-    border: 1px solid black;
+            border: 1px solid black;
         }
+
         footer {
-    clear: both;
-    width: auto;
-    text-align: center;
+            clear: both;
+            width: auto;
+            text-align: center;
         }
     </style>
 </head>
@@ -82,7 +89,7 @@
 </script>
 
 <script>
-mocha.checkLeaks();
+  mocha.checkLeaks();
   mocha.globals(["jQuery"]);
   mocha.run();
 </script>
@@ -177,7 +184,7 @@ function renderTable()
     foreach ($list as $key => $value) {
         $item = "<td>{$value}</td>";
         $line .= $item;
-        if(($key + 1) % 10 == 0) {
+        if (($key + 1) % 10 == 0) {
             $line .= "</tr>";
         }
     }
