@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nf start -j Procfile",
+    "build": "composer install",
+    "doc": "markdown README.md > ./src/readme.html",
+    "test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php src/index",
+    "watch": "watch 'npm-run-all test' ./src/",
+    "app:front": "browser-sync start --config bs-config.js",
+    "app:server": "php -S 0.0.0.0:8000 -t src/"
   },
   "author": "",
   "license": "ISC",
