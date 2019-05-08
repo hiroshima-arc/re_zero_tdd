@@ -279,7 +279,20 @@ class FizzBuzz
 
     public function __construct($type)
     {
-        $this->type = $type;
+        switch ($type) {
+            case 1:
+                $fizzBuzzType = new FizzBuzzType1();
+                break;
+            case 2:
+                $fizzBuzzType = new FizzBuzzType2();
+                break;
+            case 3:
+                $fizzBuzzType = new FizzBuzzType3();
+                break;
+            default:
+                echo "該当する処理がありません";
+        }
+        $this->type = $fizzBuzzType;
         $this->list = $this->generateList();
     }
 
@@ -290,19 +303,7 @@ class FizzBuzz
 
     public function generate($number)
     {
-        switch ($this->type) {
-            case 1:
-                $fizzBuzzType = new FizzBuzzType1();
-                return $fizzBuzzType->generate($number);
-            case 2:
-                $fizzBuzzType = new FizzBuzzType2();
-                return $fizzBuzzType->generate($number);
-            case 3:
-                $fizzBuzzType = new FizzBuzzType3();
-                return $fizzBuzzType->generate($number);
-            default:
-                echo "該当する処理がありません";
-        }
+        return $this->type->generate($number);
     }
 
     private function generateList()
