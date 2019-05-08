@@ -70,7 +70,35 @@
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
         <div id="app">
-            <?php echo renderTable() ?>
+            <form action="./index.php" method="GET">
+                <select name="type">
+                    <option value="one">タイプ1</option>
+                    <option value="two">タイプ2</option>
+                    <option value="three">タイプ3</option>
+                </select><br/>
+                <?php
+
+                if( isset( $_GET[ 'type' ] ) ){
+                    print "送信された内容はType:{$_GET['type']}です。<br/>";
+                    $type = $_GET[ 'type'];
+                    switch ($type) {
+                        case "one":
+                            print renderTable(1);
+                            break;
+                        case "two":
+                            print renderTable(2);
+                            break;
+                        case "three":
+                            print renderTable(3);
+                            break;
+                    }
+                } else {
+                    print renderTable(1);
+                }
+
+                ?>
+                <input type="submit" value="送信"/>
+            </form>
         </div>
         <div id="mocha"></div>
     </section>
@@ -241,9 +269,9 @@ class FizzBuzz
     }
 }
 
-function renderTable()
+function renderTable($type)
 {
-    $fizzBuzz = new FizzBuzz(1);
+    $fizzBuzz = new FizzBuzz($type);
     $line = "<tr>";
     foreach (range(1, 10) as $i) {
         $item = "<th>{$i}</th>";
