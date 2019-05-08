@@ -83,17 +83,17 @@
                     $type = $_GET[ 'type'];
                     switch ($type) {
                         case "one":
-                            print renderTable(1);
+                            print renderTable(new FizzBuzzType1());
                             break;
                         case "two":
-                            print renderTable(2);
+                            print renderTable(new FizzBuzzType2());
                             break;
                         case "three":
-                            print renderTable(3);
+                            print renderTable(new FizzBuzzType3());
                             break;
                     }
                 } else {
-                    print renderTable(1);
+                    print renderTable(new FizzBuzzType1());
                 }
 
                 ?>
@@ -137,7 +137,8 @@ class FizzBuzzTest extends TestCase
      */
     public function 値を1から100までをプリントするただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzz()
     {
-        $data = new FizzBuzz(1);
+        $type = new FizzBuzzType1();
+        $data = new FizzBuzz($type);
         $this->assertEquals(1, $data->getList()[0]);
         $this->assertEquals("Fizz", $data->getList()[2]);
         $this->assertEquals("Buzz", $data->getList()[4]);
@@ -150,7 +151,8 @@ class FizzBuzzTest extends TestCase
      */
     public function 値が3で割り切れる場合はFizzをプリントする()
     {
-        $fizzBuzz = new FizzBuzz(1);
+        $type = new FizzBuzzType1();
+        $fizzBuzz = new FizzBuzz($type);
         $this->assertEquals("Fizz", $fizzBuzz->generate(3));
     }
     /** @noinspection NonAsciiCharacters */
@@ -159,7 +161,8 @@ class FizzBuzzTest extends TestCase
      */
     public function 値が5で割り切れる場合はBuzzをプリントする()
     {
-        $fizzBuzz = new FizzBuzz(1);
+        $type = new FizzBuzzType1();
+        $fizzBuzz = new FizzBuzz($type);
         $this->assertEquals("Buzz", $fizzBuzz->generate(5));
     }
     /** @noinspection NonAsciiCharacters */
@@ -168,7 +171,8 @@ class FizzBuzzTest extends TestCase
      */
     public function 値が3または5で割り切れる場合はFizzBuzzをプリントする()
     {
-        $fizzBuzz = new FizzBuzz(1);
+        $type = new FizzBuzzType1();
+        $fizzBuzz = new FizzBuzz($type);
         $this->assertEquals("FizzBuzz", $fizzBuzz->generate(15));
     }
     /** @noinspection NonAsciiCharacters */
@@ -177,7 +181,8 @@ class FizzBuzzTest extends TestCase
      */
     public function タイプ1は通常のパターンを返す()
     {
-        $fizzBuzz = new FizzBuzz(1);
+        $type = new FizzBuzzType1();
+        $fizzBuzz = new FizzBuzz($type);
         $this->assertEquals("Fizz", $fizzBuzz->generate(3));
         $this->assertEquals("Buzz", $fizzBuzz->generate(5));
         $this->assertEquals("FizzBuzz", $fizzBuzz->generate(15));
@@ -188,7 +193,8 @@ class FizzBuzzTest extends TestCase
      */
      public function タイプ2は数字のみを返す()
      {
-         $fizzBuzz = new FizzBuzz(2);
+         $type = new FizzBuzzType2();
+         $fizzBuzz = new FizzBuzz($type);
          $this->assertEquals(3, $fizzBuzz->generate(3));
          $this->assertEquals(5, $fizzBuzz->generate(5));
          $this->assertEquals(15, $fizzBuzz->generate(15));
@@ -199,7 +205,8 @@ class FizzBuzzTest extends TestCase
      */
      public function タイプ3はFizzBuzzの場合のみ返す()
      {
-         $fizzBuzz = new FizzBuzz(3);
+         $type = new FizzBuzzType3();
+         $fizzBuzz = new FizzBuzz($type);
          $this->assertEquals(3, $fizzBuzz->generate(3));
          $this->assertEquals(5, $fizzBuzz->generate(5));
          $this->assertEquals("FizzBuzz", $fizzBuzz->generate(15));
@@ -279,20 +286,7 @@ class FizzBuzz
 
     public function __construct($type)
     {
-        switch ($type) {
-            case 1:
-                $fizzBuzzType = new FizzBuzzType1();
-                break;
-            case 2:
-                $fizzBuzzType = new FizzBuzzType2();
-                break;
-            case 3:
-                $fizzBuzzType = new FizzBuzzType3();
-                break;
-            default:
-                echo "該当する処理がありません";
-        }
-        $this->type = $fizzBuzzType;
+        $this->type = $type;
         $this->list = $this->generateList();
     }
 
@@ -311,15 +305,6 @@ class FizzBuzz
         return array_map(function ($number) { return $this->generate($number); }, range(1, self::MAX_NUMBER));
     }
 
-    private function isBuzz($number)
-    {
-        return $number % 5 == 0;
-    }
-
-    private function isFizz($number)
-    {
-        return $number % 3 == 0;
-    }
 }
 
 function renderTable($type)
