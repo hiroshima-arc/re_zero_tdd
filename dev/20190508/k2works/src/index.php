@@ -109,9 +109,7 @@ class FizzBuzzTest extends TestCase
      */
     public function 値を1から100までをプリントするただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzz()
     {
-        $list = FizzBuzz::generateList();
         $data = new FizzBuzz();
-        $data->setList($list);
         $this->assertEquals(1, $data->getList()[0]);
         $this->assertEquals("Fizz", $data->getList()[2]);
         $this->assertEquals("Buzz", $data->getList()[4]);
@@ -124,7 +122,8 @@ class FizzBuzzTest extends TestCase
      */
     public function 値が3で割り切れる場合はFizzをプリントする()
     {
-        $this->assertEquals("Fizz", FizzBuzz::generate(3));
+        $fizzBuzz = new FizzBuzz();
+        $this->assertEquals("Fizz", $fizzBuzz->generate(3));
     }
     /** @noinspection NonAsciiCharacters */
     /**
@@ -132,7 +131,8 @@ class FizzBuzzTest extends TestCase
      */
     public function 値が5で割り切れる場合はBuzzをプリントする()
     {
-        $this->assertEquals("Buzz", FizzBuzz::generate(5));
+        $fizzBuzz = new FizzBuzz();
+        $this->assertEquals("Buzz", $fizzBuzz->generate(5));
     }
     /** @noinspection NonAsciiCharacters */
     /**
@@ -140,7 +140,8 @@ class FizzBuzzTest extends TestCase
      */
     public function 値が3または5で割り切れる場合はFizzBuzzをプリントする()
     {
-        $this->assertEquals("FizzBuzz", FizzBuzz::generate(15));
+        $fizzBuzz = new FizzBuzz();
+        $this->assertEquals("FizzBuzz", $fizzBuzz->generate(15));
     }
 }
 
@@ -153,20 +154,20 @@ class FizzBuzz
 
     private $list;
 
+    public function __construct()
+    {
+        $this->list = $this->generateList();
+    }
+
     public function getList()
     {
         return $this->list;
     }
 
-    public function setList($list)
+    public function generate($number)
     {
-        $this->list = $list;
-    }
-
-    public static function generate($number)
-    {
-        $fizz = FizzBuzz::isFizz($number);
-        $buzz = FizzBuzz::isBuzz($number);
+        $fizz = $this->isFizz($number);
+        $buzz = $this->isBuzz($number);
 
         if ($fizz && $buzz) return self::FIZZ_BUZZ;
         if ($fizz) return self::FIZZ;
@@ -175,17 +176,17 @@ class FizzBuzz
         return $number;
     }
 
-    public static function generateList()
+    private function generateList()
     {
-        return array_map(function ($number) { return FizzBuzz::generate($number); }, range(1, self::MAX_NUMBER));
+        return array_map(function ($number) { return $this->generate($number); }, range(1, self::MAX_NUMBER));
     }
 
-    private static function isBuzz($number)
+    private function isBuzz($number)
     {
         return $number % 5 == 0;
     }
 
-    private static function isFizz($number)
+    private function isFizz($number)
     {
         return $number % 3 == 0;
     }
@@ -193,6 +194,7 @@ class FizzBuzz
 
 function renderTable()
 {
+    $fizzBuzz = new FizzBuzz();
     $line = "<tr>";
     foreach (range(1, 10) as $i) {
         $item = "<th>{$i}</th>";
@@ -207,7 +209,7 @@ function renderTable()
                 ";
 
     $line = "<tr>";
-    $list = FizzBuzz::generateList();
+    $list = $fizzBuzz->getList();
     foreach ($list as $key => $value) {
         $item = "<td>{$value}</td>";
         $line .= $item;
