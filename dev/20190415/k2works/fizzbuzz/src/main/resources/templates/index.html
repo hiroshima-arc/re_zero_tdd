@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}">
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet"/>
+</head>
+<body>
+<h1>HTML5+CSS+JavaScript with TDD</h1>
+<h3>Powered by SpringBoot and AWS Lambda</h3>
+<header>
+    <nav class="nav-component">
+        <h1>Menu</h1>
+        <ul>
+            <li onclick="showFizzBuzz()" > <a href="#">FizzBuzz</a></li>
+            <li onclick="showFizzBuzzApi()"><a href="#">FizzBuzz(API)</a></li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <section class="fizz-buzz-component">
+        <h2>FizzBuzz</h2>
+        <div id="message"></div>
+        <div id="app">
+            <div class="selectBox"></div>
+            <div class="table"></div>
+        </div>
+        <div id="app-api">
+            <div class="selectBox"></div>
+            <div class="table"></div>
+            <div hidden id="api-url" th:text="${@environment.getProperty('api.url')}"></div>
+        </div>
+        <div id="mocha"></div>
+    </section>
+</section>
+<footer>
+    <p>Copyright</p>
+    <address>hiroshima.arc@gmail.com</address>
+</footer>
+
+<script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+<script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/7.2.7/sinon.min.js"></script>
+<script type="text/javascript" src="js/FizzBuzz.js" th:src="@{/js/FizzBuzz.js}"></script>
+<script type="text/javascript" src="js/FizzBuzzApi.js" th:src="@{/js/FizzBuzzApi.js}"></script>
+<script type="text/javascript" src="js/FizzBuzz.test.js" th:src="@{/js/FizzBuzz.test.js}"></script>
+<script type="text/javascript" src="js/AjaxUtils.js" th:src="@{/js/AjaxUtils.js}"></script>
+<script type="text/javascript" src="js/AjaxUtils.test.js" th:src="@{/js/AjaxUtils.test.js}"></script>
+
+<script>
+  mocha.checkLeaks();
+  mocha.globals(["jQuery"]);
+  mocha.run();
+</script>
+
+<script>
+  let fizzBuzz = fizzBuzzFactory("one");
+  window.onload = fizzBuzz.render();
+</script>
+
+</body>
+</html>
