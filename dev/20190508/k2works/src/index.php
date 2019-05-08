@@ -235,6 +235,38 @@ class FizzBuzzType1
     }
 }
 
+class FizzBuzzType2
+{
+    public function generate($number)
+    {
+        return $number;
+    }
+}
+
+class FizzBuzzType3
+{
+    const FIZZ_BUZZ = "FizzBuzz";
+    public function generate($number)
+    {
+        $fizz = $this->isFizz($number);
+        $buzz = $this->isBuzz($number);
+
+        if ($fizz && $buzz) return self::FIZZ_BUZZ;
+
+        return $number;
+    }
+
+    private function isBuzz($number)
+    {
+        return $number % 5 == 0;
+    }
+
+    private function isFizz($number)
+    {
+        return $number % 3 == 0;
+    }
+}
+
 class FizzBuzz
 {
     const FIZZ_BUZZ = "FizzBuzz";
@@ -263,14 +295,11 @@ class FizzBuzz
                 $fizzBuzzType = new FizzBuzzType1();
                 return $fizzBuzzType->generate($number);
             case 2:
-                return $number;
+                $fizzBuzzType = new FizzBuzzType2();
+                return $fizzBuzzType->generate($number);
             case 3:
-                $fizz = $this->isFizz($number);
-                $buzz = $this->isBuzz($number);
-
-                if ($fizz && $buzz) return self::FIZZ_BUZZ;
-
-                return $number;
+                $fizzBuzzType = new FizzBuzzType3();
+                return $fizzBuzzType->generate($number);
             default:
                 echo "該当する処理がありません";
         }
