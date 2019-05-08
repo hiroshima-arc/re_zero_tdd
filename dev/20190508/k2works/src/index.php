@@ -100,11 +100,14 @@ class FizzBuzzTest extends TestCase
     /**
      * @test
      */
-    public function 値を1から100までをプリントする()
+    public function 値を1から100までをプリントするただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzz()
     {
         $list = printValue();
         $this->assertEquals(1, $list[0]);
-        $this->assertEquals(100, $list[99]);
+        $this->assertEquals("Fizz", $list[2]);
+        $this->assertEquals("Buzz", $list[4]);
+        $this->assertEquals("FizzBuzz", $list[14]);
+        $this->assertEquals("Buzz", $list[99]);
     }
     /** @noinspection NonAsciiCharacters */
     /**
@@ -148,57 +151,45 @@ function fizzBuzz($number)
 function printValue()
 {
     $list = [];
-    for($i = 1; $i <= 100; $i = $i + 1)
-    {
-        $list[] = $i;
+    for ($i = 1; $i <= 100; $i = $i + 1) {
+        $list[] = fizzBuzz($i);
     }
     return $list;
 }
 
 function renderTable()
 {
-    return "
-            <table>
+    $line = "<tr>";
+    for ($i = 1; $i <= 10; $i++) {
+        $item = "<th>{$i}</th>";
+        $line .= $item;
+    }
+    $line .= "</tr>";
+
+    $header = "
                 <thead>
-                <tr>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                    <th>7</th>
-                    <th>8</th>
-                    <th>9</th>
-                    <th>10</th>
-                </tr>
+                {$line}
                 </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                    <td>14</td>
-                    <td>15</td>
-                    <td>16</td>
-                    <td>17</td>
-                    <td>18</td>
-                    <td>19</td>
-                    <td>20</td>
-                </tr>
-                </tbody>
-            </table>
-    ";
+                ";
+
+    $line = "<tr>";
+    $list = printValue();
+    foreach ($list as $key => $value) {
+        $item = "<td>{$value}</td>";
+        $line .= $item;
+        if(($key + 1) % 10 == 0) {
+            $line .= "</tr>";
+        }
+    }
+
+    $body = "<tbody>
+             {$line}
+             </tbody>";
+
+    $table = "<table>
+             {$header}
+             {$body}
+             </table>";
+
+    return $table;
 }
