@@ -109,7 +109,7 @@ class FizzBuzzTest extends TestCase
      */
     public function 値を1から100までをプリントするただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzz()
     {
-        $list = printValue();
+        $list = generateFizzBuzzList();
         $this->assertEquals(1, $list[0]);
         $this->assertEquals("Fizz", $list[2]);
         $this->assertEquals("Buzz", $list[4]);
@@ -155,7 +155,7 @@ function fizzBuzz($number)
     return $result;
 }
 
-function printValue()
+function generateFizzBuzzList()
 {
     $list = [];
     for ($i = 1; $i <= 100; $i = $i + 1) {
@@ -180,7 +180,7 @@ function renderTable()
                 ";
 
     $line = "<tr>";
-    $list = printValue();
+    $list = generateFizzBuzzList();
     foreach ($list as $key => $value) {
         $item = "<td>{$value}</td>";
         $line .= $item;
