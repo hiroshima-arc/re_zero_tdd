@@ -63,6 +63,7 @@
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
         <div id="app">
+            <?php echo greeting(); ?>
             <table>
                 <thead>
                 <tr>
@@ -130,3 +131,20 @@ mocha.checkLeaks();
 
 </body>
 </html>
+
+<?php
+
+use PHPUnit\Framework\TestCase;
+
+class FizzBuzzTest extends TestCase
+{
+    public function testGreeting()
+    {
+        $this->assertEquals('Hello world', greeting());
+    }
+}
+
+function greeting()
+{
+    return "Hello world";
+}
