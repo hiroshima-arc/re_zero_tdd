@@ -14,6 +14,15 @@
 
 ## 開発
 
+```bash
+cd dev/20190508/k2works/
+npm init
+npm install npm-run-all watch foreman cpx rimraf --save-dev
+touch Procfile
+npm install --save-dev browser-sync connect-browser-sync markdown-to-html
+npx browser-sync init
+```
+
 ### ふりかえり
 
 #### Keep
