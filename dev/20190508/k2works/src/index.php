@@ -110,11 +110,13 @@ class FizzBuzzTest extends TestCase
     public function 値を1から100までをプリントするただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzz()
     {
         $list = FizzBuzz::generateList();
-        $this->assertEquals(1, $list[0]);
-        $this->assertEquals("Fizz", $list[2]);
-        $this->assertEquals("Buzz", $list[4]);
-        $this->assertEquals("FizzBuzz", $list[14]);
-        $this->assertEquals("Buzz", $list[99]);
+        $data = new FizzBuzzData();
+        $data->setList($list);
+        $this->assertEquals(1, $data->getList()[0]);
+        $this->assertEquals("Fizz", $data->getList()[2]);
+        $this->assertEquals("Buzz", $data->getList()[4]);
+        $this->assertEquals("FizzBuzz", $data->getList()[14]);
+        $this->assertEquals("Buzz", $data->getList()[99]);
     }
     /** @noinspection NonAsciiCharacters */
     /**
@@ -139,6 +141,32 @@ class FizzBuzzTest extends TestCase
     public function 値が3または5で割り切れる場合はFizzBuzzをプリントする()
     {
         $this->assertEquals("FizzBuzz", FizzBuzz::generate(15));
+    }
+}
+
+class FizzBuzzData
+{
+    private $value;
+    private $list;
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function getList()
+    {
+        return $this->list;
+    }
+
+   public function setList($list)
+    {
+        $this->list = $list;
     }
 }
 
