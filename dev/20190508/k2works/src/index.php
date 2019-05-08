@@ -144,6 +144,7 @@ class FizzBuzzTest extends TestCase
     public function 値を1から100までをプリントする()
     {
         $this->assertEquals(1, printValue());
+        $this->assertEquals(100, printValue());
     }
 }
 
