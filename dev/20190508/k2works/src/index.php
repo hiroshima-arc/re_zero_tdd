@@ -158,8 +158,8 @@ function fizzBuzz($number)
 function generateFizzBuzzList()
 {
     $list = [];
-    for ($i = 1; $i <= 100; $i = $i + 1) {
-        $list[] = fizzBuzz($i);
+    foreach (range(1,100) as $number) {
+        $list[] = fizzBuzz($number);
     }
     return $list;
 }
@@ -167,7 +167,7 @@ function generateFizzBuzzList()
 function renderTable()
 {
     $line = "<tr>";
-    for ($i = 1; $i <= 10; $i++) {
+    foreach (range(1, 10) as $i) {
         $item = "<th>{$i}</th>";
         $line .= $item;
     }
