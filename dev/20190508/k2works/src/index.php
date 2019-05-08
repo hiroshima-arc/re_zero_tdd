@@ -144,12 +144,24 @@ class FizzBuzzTest extends TestCase
 
 function fizzBuzz($number)
 {
-    $fizz = $number % 3 == 0;
-    $buzz = $number % 5 == 0;
+    $fizz = isFizz($number);
+    $buzz = isBuzz($number);
+
     if ($fizz && $buzz) return "FizzBuzz";
     if ($fizz) return "Fizz";
     if ($buzz) return "Buzz";
+
     return $number;
+}
+
+function isBuzz($number)
+{
+    return $number % 5 == 0;
+}
+
+function isFizz($number)
+{
+    return $number % 3 == 0;
 }
 
 function generateFizzBuzzList()
