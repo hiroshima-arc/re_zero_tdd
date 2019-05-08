@@ -78,9 +78,10 @@
                 </select><br/>
                 <?php
 
-                if( isset( $_GET[ 'type' ] ) ){
-                    print "送信された内容はType:{$_GET['type']}です。<br/>";
-                    print renderTableFactory($_GET[ 'type']);
+                $type = $_GET['type'];
+                if( isset($type) ){
+                    print "送信された内容はType:{$type}です。<br/>";
+                    print renderTableFactory($type);
                 } else {
                     print renderTable(new FizzBuzzType1());
                 }
