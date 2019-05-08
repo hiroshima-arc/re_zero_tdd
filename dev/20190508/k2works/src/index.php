@@ -213,7 +213,7 @@ class FizzBuzzTest extends TestCase
      }
 }
 
-class FizzBuzzType1
+class FizzBuzzType
 {
     const FIZZ_BUZZ = "FizzBuzz";
     const FIZZ = "Fizz";
@@ -231,18 +231,22 @@ class FizzBuzzType1
         return $number;
     }
 
-    private function isBuzz($number)
+    protected function isBuzz($number)
     {
         return $number % 5 == 0;
     }
 
-    private function isFizz($number)
+    protected function isFizz($number)
     {
         return $number % 3 == 0;
     }
 }
 
-class FizzBuzzType2
+class FizzBuzzType1 extends FizzBuzzType
+{
+}
+
+class FizzBuzzType2 extends FizzBuzzType
 {
     public function generate($number)
     {
@@ -250,9 +254,8 @@ class FizzBuzzType2
     }
 }
 
-class FizzBuzzType3
+class FizzBuzzType3 extends FizzBuzzType
 {
-    const FIZZ_BUZZ = "FizzBuzz";
     public function generate($number)
     {
         $fizz = $this->isFizz($number);
@@ -261,16 +264,6 @@ class FizzBuzzType3
         if ($fizz && $buzz) return self::FIZZ_BUZZ;
 
         return $number;
-    }
-
-    private function isBuzz($number)
-    {
-        return $number % 5 == 0;
-    }
-
-    private function isFizz($number)
-    {
-        return $number % 3 == 0;
     }
 }
 
