@@ -63,7 +63,6 @@
     <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
         <div id="app">
-            <?php echo greeting(); ?>
             <table>
                 <thead>
                 <tr>
@@ -138,13 +137,17 @@ use PHPUnit\Framework\TestCase;
 
 class FizzBuzzTest extends TestCase
 {
-    public function testGreeting()
+    /** @noinspection NonAsciiCharacters */
+    /**
+     * @test
+     */
+    public function 値を1から100までをプリントする()
     {
-        $this->assertEquals('Hello world', greeting());
+        $this->assertEquals(1, printValue());
     }
 }
 
-function greeting()
+function printValue()
 {
-    return "Hello world";
+    return 1;
 }
