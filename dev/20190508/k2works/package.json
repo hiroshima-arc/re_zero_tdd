@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nf start -j Procfile",
-    "build": "composer install",
-    "doc": "markdown README.md > ./src/readme.html",
+    "build": "npm-run-all build:*",
+    "build:app": "composer install",
+    "build:doc": "markdown README.md > ./src/readme.html",
     "test": "./vendor/bin/phpunit --color --bootstrap vendor/autoload.php src/tests/FizzBuzzTest",
     "watch": "npm-run-all watch:*",
     "watch:src": "watch 'npm-run-all test' ./src",
