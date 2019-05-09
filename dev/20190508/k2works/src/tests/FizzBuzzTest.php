@@ -6,6 +6,12 @@ include "src/fizzbuzz/FizzBuzzType1.php";
 include "src/fizzbuzz/FizzBuzzType2.php";
 include "src/fizzbuzz/FizzBuzzType3.php";
 
+use fizzbuzz\{
+    FizzBuzz,
+    FizzBuzzType1,
+    FizzBuzzType2,
+    FizzBuzzType3
+};
 use PHPUnit\Framework\TestCase;
 
 class FizzBuzzTest extends TestCase

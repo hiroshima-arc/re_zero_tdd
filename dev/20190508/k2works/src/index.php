@@ -5,6 +5,13 @@ include "fizzbuzz/FizzBuzzType1.php";
 include "fizzbuzz/FizzBuzzType2.php";
 include "fizzbuzz/FizzBuzzType3.php";
 
+use fizzbuzz\{
+    FizzBuzz,
+    FizzBuzzType1,
+    FizzBuzzType2,
+    FizzBuzzType3
+};
+
 function renderTableFactory($type)
 {
     switch ($type) {

@@ -1,5 +1,5 @@
 <?php
-
+namespace fizzbuzz;
 
 class FizzBuzzType3 extends FizzBuzzType
 {
