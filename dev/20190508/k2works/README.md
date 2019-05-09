@@ -62,3 +62,10 @@ composer require --dev phpunit/phpunit ^8
 #### Try
 
 ## 参照
+
+- [PHPUnit マニュアル](https://phpunit.readthedocs.io/ja/latest/index.html)
+- [PhpStorm を使っていて、PHPUnit のテストケースでメソッド名を日本語つかいたい場合の noinspection](https://qiita.com/youhey/items/467669ddd564cb1d1854)
+- [PHPで文字列リテラルに式展開](https://qiita.com/tadsan/items/e4796449c736cfb5c9bd)
+- [【PHP超入門】名前空間（namespace・use）について](https://qiita.com/7968/items/1e5c61128fa495358c1f)
+- [PHPのincludeとrequireの使い方と違いを比較](https://www.flatflag.nir87.com/include-598)
+- [PHPerがドメイン駆動設計と関数型プログラミングを学んで得たもの(前編)](https://qiita.com/nunulk/items/53290a9d995f8a67fbda)
