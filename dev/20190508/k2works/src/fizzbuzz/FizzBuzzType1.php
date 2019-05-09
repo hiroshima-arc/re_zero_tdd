@@ -1,0 +1,6 @@
+<?php
+
+
+class FizzBuzzType1 extends FizzBuzzType
+{
+}

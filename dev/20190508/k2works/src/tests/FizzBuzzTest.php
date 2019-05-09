@@ -1,5 +1,11 @@
 <?php
-include "src/index.php";
+
+include "src/fizzbuzz/FizzBuzz.php";
+include "src/fizzbuzz/FizzBuzzType.php";
+include "src/fizzbuzz/FizzBuzzType1.php";
+include "src/fizzbuzz/FizzBuzzType2.php";
+include "src/fizzbuzz/FizzBuzzType3.php";
+
 use PHPUnit\Framework\TestCase;
 
 class FizzBuzzTest extends TestCase

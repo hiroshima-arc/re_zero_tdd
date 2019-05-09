@@ -1,3 +1,64 @@
+<?php
+include "fizzbuzz/FizzBuzz.php";
+include "fizzbuzz/FizzBuzzType.php";
+include "fizzbuzz/FizzBuzzType1.php";
+include "fizzbuzz/FizzBuzzType2.php";
+include "fizzbuzz/FizzBuzzType3.php";
+
+function renderTableFactory($type)
+{
+    switch ($type) {
+        case "one":
+            return renderTable(new FizzBuzzType1());
+        case "two":
+            return renderTable(new FizzBuzzType2());
+        case "three":
+            return renderTable(new FizzBuzzType3());
+        default:
+            return renderTable(new FizzBuzzType1());
+    }
+}
+
+function renderTable($type)
+{
+    $fizzBuzz = new FizzBuzz($type);
+    $line = "<tr>";
+    foreach (range(1, 10) as $i) {
+        $item = "<th>{$i}</th>";
+        $line .= $item;
+    }
+    $line .= "</tr>";
+
+    $header = "
+                <thead>
+                {$line}
+                </thead>
+                ";
+
+    $line = "<tr>";
+    $list = $fizzBuzz->getList();
+    foreach ($list as $key => $value) {
+        $item = "<td>{$value}</td>";
+        $line .= $item;
+        if (($key + 1) % 10 == 0) {
+            $line .= "</tr>";
+        }
+    }
+
+    $body = "<tbody>
+             {$line}
+             </tbody>";
+
+    $table = "<table>
+             {$header}
+             {$body}
+             </table>";
+
+    return $table;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -76,6 +137,7 @@
                     <option value="two">タイプ2</option>
                     <option value="three">タイプ3</option>
                 </select><br/>
+                <input type="submit" value="送信"/>
                 <?php
 
                 $type = $_GET['type'];
@@ -83,11 +145,10 @@
                     print "送信された内容はType:{$type}です。<br/>";
                     print renderTableFactory($type);
                 } else {
-                    print renderTable(new FizzBuzzType1());
+                    print renderTableFactory("one");
                 }
 
                 ?>
-                <input type="submit" value="送信"/>
             </form>
         </div>
         <div id="mocha"></div>
@@ -114,145 +175,4 @@
 
 </body>
 </html>
-
-<?php
-
-class FizzBuzzType
-{
-    const FIZZ_BUZZ = "FizzBuzz";
-    const FIZZ = "Fizz";
-    const BUZZ = "Buzz";
-
-    public function generate($number)
-    {
-        $fizz = $this->isFizz($number);
-        $buzz = $this->isBuzz($number);
-
-        if ($fizz && $buzz) return self::FIZZ_BUZZ;
-        if ($fizz) return self::FIZZ;
-        if ($buzz) return self::BUZZ;
-
-        return $number;
-    }
-
-    protected function isBuzz($number)
-    {
-        return $number % 5 == 0;
-    }
-
-    protected function isFizz($number)
-    {
-        return $number % 3 == 0;
-    }
-}
-
-class FizzBuzzType1 extends FizzBuzzType
-{
-}
-
-class FizzBuzzType2 extends FizzBuzzType
-{
-    public function generate($number)
-    {
-        return $number;
-    }
-}
-
-class FizzBuzzType3 extends FizzBuzzType
-{
-    public function generate($number)
-    {
-        $fizz = $this->isFizz($number);
-        $buzz = $this->isBuzz($number);
-
-        if ($fizz && $buzz) return self::FIZZ_BUZZ;
-
-        return $number;
-    }
-}
-
-class FizzBuzz
-{
-    const FIZZ_BUZZ = "FizzBuzz";
-    const FIZZ = "Fizz";
-    const BUZZ = "Buzz";
-    const MAX_NUMBER = 100;
-
-    private $type;
-    private $list;
-
-    public function __construct($type)
-    {
-        $this->type = $type;
-        $this->list = $this->generateList();
-    }
-
-    public function getList()
-    {
-        return $this->list;
-    }
-
-    public function generate($number)
-    {
-        return $this->type->generate($number);
-    }
-
-    private function generateList()
-    {
-        return array_map(function ($number) { return $this->generate($number); }, range(1, self::MAX_NUMBER));
-    }
-
-}
-
-function renderTable($type)
-{
-    $fizzBuzz = new FizzBuzz($type);
-    $line = "<tr>";
-    foreach (range(1, 10) as $i) {
-        $item = "<th>{$i}</th>";
-        $line .= $item;
-    }
-    $line .= "</tr>";
-
-    $header = "
-                <thead>
-                {$line}
-                </thead>
-                ";
-
-    $line = "<tr>";
-    $list = $fizzBuzz->getList();
-    foreach ($list as $key => $value) {
-        $item = "<td>{$value}</td>";
-        $line .= $item;
-        if (($key + 1) % 10 == 0) {
-            $line .= "</tr>";
-        }
-    }
-
-    $body = "<tbody>
-             {$line}
-             </tbody>";
-
-    $table = "<table>
-             {$header}
-             {$body}
-             </table>";
-
-    return $table;
-}
-
-function renderTableFactory($type)
-{
-    switch ($type) {
-        case "one":
-            return renderTable(new FizzBuzzType1());
-        case "two":
-            return renderTable(new FizzBuzzType2());
-        case "three":
-            return renderTable(new FizzBuzzType3());
-        default:
-            return renderTable(new FizzBuzzType1());
-    }
-}
 
