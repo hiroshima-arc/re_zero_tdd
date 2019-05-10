@@ -8,9 +8,8 @@ function fizzBuzz($number) {
 }
 
 function generateValue() {
-    $list = [];
-    for($i = 1; $i <= 100; $i++) {
-       $list[] = fizzBuzz($i); 
+    foreach(range(1,100) as $number) {
+        $list[] = fizzBuzz($number);
     }
     return $list;
 }
