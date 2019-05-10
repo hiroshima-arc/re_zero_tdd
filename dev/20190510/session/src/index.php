@@ -13,7 +13,7 @@ function renderTable() {
                 </thead>
     ";
     $line = "<tr>";
-    $list = printValue();
+    $list = generateValue();
     foreach($list as $key => $value) {
         $item = "<td>{$value}</td>";
         $line .= $item;
