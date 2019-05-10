@@ -1,5 +1,7 @@
 <?php
 
+include "FizzBuzz.php";
+
 use PHPUnit\Framework\TestCase;
 class FizzBuzzTest extends TestCase {
   /** @noinspection NonAsciiCharacters */
@@ -32,26 +34,4 @@ class FizzBuzzTest extends TestCase {
   public function 値が3と5の両方で割り切れる場合はFizzBuzzをプリントする(){
       $this->assertEquals("FizzBuzz",fizzBuzz(15));
   }
-}
-
-function fizzBuzz($number) {
-    $result = $number;
-    if ($number % 3 === 0) {
-        $result = "Fizz";
-    }
-    if ($number % 5 === 0){
-        $result = "Buzz";
-    }
-    if($number % 3 === 0 && $number % 5 === 0){
-        $result = "FizzBuzz";
-    }
-    return $result;
-}
-
-function printValue() {
-    $list = [];
-    for($i = 1; $i <= 100; $i++) {
-       $list[] = $i; 
-    }
-    return $list;
 }
