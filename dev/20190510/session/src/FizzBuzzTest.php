@@ -7,11 +7,16 @@ class FizzBuzzTest extends TestCase {
   * @test
   */
   public function 値を1から100までプリントする() {
-      $this->assertEquals(1, printValue());
-      $this->assertEquals(100, printValue());
+      $list = printValue();
+      $this->assertEquals(1, $list[0]);
+      $this->assertEquals(100, $list[99]);
   }
 }
 
 function printValue() {
-    return 1;
+    $list = [];
+    for($i = 1; $i <= 100; $i++) {
+       $list[] = $i; 
+    }
+    return $list;
 }
