@@ -1,15 +1,20 @@
 <?php
 
+include "FizzBuzz.php";
+
 use PHPUnit\Framework\TestCase;
 class FizzBuzzTest extends TestCase {
   /** @noinspection NonAsciiCharacters */
   /**
   * @test
   */
-  public function 値を1から100までプリントする() {
-      $list = printValue();
+  public function 値を1から100までプリントするただし3で割り切れる場合はFizz5で割り切れる場合はBuzz３と５で割り切れる場合はFizzBuzzをプリントする() {
+      $list = generateValue();
       $this->assertEquals(1, $list[0]);
-      $this->assertEquals(100, $list[99]);
+      $this->assertEquals("Fizz", $list[2]);
+      $this->assertEquals("Buzz", $list[4]);
+      $this->assertEquals("FizzBuzz", $list[14]);
+      $this->assertEquals("Buzz", $list[99]);
   }
   /** @noinspection NonAsciiCharacters */
   /**
@@ -32,26 +37,4 @@ class FizzBuzzTest extends TestCase {
   public function 値が3と5の両方で割り切れる場合はFizzBuzzをプリントする(){
       $this->assertEquals("FizzBuzz",fizzBuzz(15));
   }
-}
-
-function fizzBuzz($number) {
-    $result = $number;
-    if ($number % 3 === 0) {
-        $result = "Fizz";
-    }
-    if ($number % 5 === 0){
-        $result = "Buzz";
-    }
-    if($number % 3 === 0 && $number % 5 === 0){
-        $result = "FizzBuzz";
-    }
-    return $result;
-}
-
-function printValue() {
-    $list = [];
-    for($i = 1; $i <= 100; $i++) {
-       $list[] = $i; 
-    }
-    return $list;
 }
