@@ -5,6 +5,9 @@
             assert.equal(1, list[0]); 
             assert.equal(100, list[99]); 
         });
+        test("3で割り切れる場合はFizzをプリントする", () => {
+            assert.equal("Fizz", fizzBuzz(3));
+        })
     })
     
     function print1to100() {
@@ -15,4 +18,8 @@
         return list;
     }
     
+    function fizzBuzz(number) {
+        if (number % 3 === 0) return 'Fizz';
+        return number;
+    }
     
