@@ -17,11 +17,7 @@
     });
     
     function generateList(){
-        let list = [];
-        for(let i = 1; i <= 100; i++) {
-            list.push(i);
-        }
-        return list;
+        return [...Array(101).keys()].slice(1).map(ix => ix);
     }
     
     function fizzBuzz(number) {
