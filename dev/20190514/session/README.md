@@ -36,6 +36,7 @@ npx eslint --init
 #### アプリケーションのセットアップ
 
 ```bash
+npm install
 npm run build
 npm start
 ```
