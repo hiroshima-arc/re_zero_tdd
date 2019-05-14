@@ -33,6 +33,13 @@ touch Procfile
 npx eslint --init
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+npm run build
+npm start
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
