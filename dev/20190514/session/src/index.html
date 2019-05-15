@@ -82,7 +82,9 @@
     <script>
       function renderTable() {
         let table = `
-          <table>
+        <table>
+        `;
+        table += `
             <thead>
               <tr>
                 <th>1</th>
@@ -97,6 +99,8 @@
                 <th>10</th>
               </tr>
             </thead>
+            `;
+        table += `
             <tbody>
               <tr>
                 <td>1</td>
@@ -123,6 +127,8 @@
                 <td>20</td>
               </tr>
             </tbody>
+          `;
+        table += `
           </table>
           `;
         document.querySelector("#app").innerHTML = table;
