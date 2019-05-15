@@ -7,7 +7,7 @@
     "start": "nf start -j Procfile",
     "build": "markdown README.md > ./src/readme.html",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src/**/*.js",
+    "lint": "eslint src/**/*.js --fix",
     "format": "prettier --write src/**/*.*",
     "watch": "watch 'npm-run-all lint format' ./src ",
     "app": "browser-sync start --config bs-config.js"
