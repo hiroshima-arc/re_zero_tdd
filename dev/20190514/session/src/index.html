@@ -99,7 +99,7 @@
           return body;
         };
 
-        const table = `
+        document.querySelector("#app").innerHTML = `
         <table>
           <thead>
             <tr>
@@ -111,7 +111,6 @@
           </tbody>
         </table>
         `;
-        document.querySelector("#app").innerHTML = table;
       }
       renderTable();
     </script>
