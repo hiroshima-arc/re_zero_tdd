@@ -82,9 +82,6 @@
     <script src="FizzBuzz.js"></script>
     <script>
       function renderTable() {
-        let table = `
-        <table>
-        `;
         let header = `<thead>`;
         header += "<tr>";
         for (let i = 1; i <= 10; i++) {
@@ -92,27 +89,23 @@
         }
         header += `</tr>`;
         header += `<thead>`;
-        table += `
-            <thead>
-            ${header}
-            </thead>
-            `;
-        let body = `<tr>`;
+
+        let body = `<tbody>`;
+        body = `<tr>`;
         body += `<tr>`;
         let list = generateList();
         list.forEach((v, i) => {
           body += `<td>${v}</td>`;
           if ((i + 1) % 10 === 0) body += `</tr>`;
         });
+        body += `</tbody>`;
 
-        table += `
-            <tbody>
-            ${body}
-            </tbody>
-          `;
-        table += `
-          </table>
-          `;
+        const table = `
+        <table>
+        ${header}
+        ${body}
+        </table>
+        `;
         document.querySelector("#app").innerHTML = table;
       }
       renderTable();
