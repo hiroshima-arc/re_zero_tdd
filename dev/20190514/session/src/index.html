@@ -79,6 +79,7 @@
     <script>
       mocha.setup("tdd");
     </script>
+    <script src="FizzBuzz.js"></script>
     <script>
       function renderTable() {
         let table = `
@@ -99,7 +100,7 @@
         let body = `<tr>`;
         body += `<tr>`;
         for (let i = 1; i <= 100; i++) {
-          body += `<td>${i}</td>`;
+          body += `<td>${fizzBuzz(i)}</td>`;
           if (i % 10 === 0) body += `</tr>`;
         }
 
@@ -115,7 +116,6 @@
       }
       renderTable();
     </script>
-    <script src="FizzBuzz.js"></script>
     <script>
       mocha.checkLeaks();
       mocha.globals(["jQuery"]);
