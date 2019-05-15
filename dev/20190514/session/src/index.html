@@ -92,31 +92,23 @@
 
         const body = () => {
           let body = "<tr>";
-          let list = generateList();
-          list.forEach((v, i) => {
+          generateList().forEach((v, i) => {
             body += `<td>${v}</td>`;
             if ((i + 1) % 10 === 0) body += `</tr><tr>`;
           });
           return body;
         };
 
-        const header = `
-        <thead>
-        <tr>
-          ${th()}
-        </tr>
-        </thead>
-        `;
-
-        const tbody = `
-        <tbody>
-        ${body()}
-        </tbody>`;
-
         const table = `
         <table>
-        ${header}
-        ${tbody}
+          <thead>
+            <tr>
+              ${th()}
+            </tr>
+          </thead>
+          <tbody>
+            ${body()}
+          </tbody>
         </table>
         `;
         document.querySelector("#app").innerHTML = table;
