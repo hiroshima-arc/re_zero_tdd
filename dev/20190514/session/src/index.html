@@ -99,10 +99,11 @@
             `;
         let body = `<tr>`;
         body += `<tr>`;
-        for (let i = 1; i <= 100; i++) {
-          body += `<td>${fizzBuzz(i)}</td>`;
-          if (i % 10 === 0) body += `</tr>`;
-        }
+        let list = generateList();
+        list.forEach((v, i) => {
+          body += `<td>${v}</td>`;
+          if ((i + 1) % 10 === 0) body += `</tr>`;
+        });
 
         table += `
             <tbody>
