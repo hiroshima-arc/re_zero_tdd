@@ -82,11 +82,12 @@
     <script src="FizzBuzz.js"></script>
     <script>
       function renderTable() {
-        const th = () => {
-          let value = "";
+        const header = () => {
+          let value = "<tr>";
           [...Array(10).keys()].forEach(i => {
             value += `<th>${i + 1}</th>`;
           });
+          value += "</tr>";
           return value;
         };
 
@@ -102,9 +103,7 @@
         document.querySelector("#app").innerHTML = `
         <table>
           <thead>
-            <tr>
-              ${th()}
-            </tr>
+            ${header()}
           </thead>
           <tbody>
             ${body()}
