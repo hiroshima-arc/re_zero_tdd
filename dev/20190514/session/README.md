@@ -28,6 +28,7 @@ npm init
 npm install npm-run-all watch foreman cpx rimraf --save-dev
 npm install --save-dev prettier eslint babel-eslint eslint-plugin-react@latest
 npm install --save-dev browser-sync connect-browser-sync markdown-to-html
+npm install --save-dev mocha chai
 npx browser-sync init
 touch Procfile
 npx eslint --init
