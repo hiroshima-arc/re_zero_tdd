@@ -24,19 +24,8 @@ class FizzBuzz
     {
         switch ($this->type) {
             case 1:
-                $isFizz = $number % 3 === 0;
-                $isBuzz = $number % 5 === 0;
-
-                if ($isFizz && $isBuzz) {
-                    return self::FIZZ_BUZZ;
-                }
-                if ($isFizz) {
-                    return self::FIZZ;
-                }
-                if ($isBuzz) {
-                    return self::BUZZ;
-                }
-                return $number;
+                $type = new FizzBuzzType1();
+                return $type->generate($number);
             case 2:
                 return $number;
             case 3:
@@ -51,5 +40,29 @@ class FizzBuzz
         return array_map(function ($number) {
             return $this->generate($number);
         }, range(1, self::MAX_NUMBER));
+    }
+}
+
+class FizzBuzzType1
+{
+    const FIZZ_BUZZ = "FizzBuzz";
+    const FIZZ = "Fizz";
+    const BUZZ = "Buzz";
+
+    public function generate($number)
+    {
+        $isFizz = $number % 3 === 0;
+        $isBuzz = $number % 5 === 0;
+
+        if ($isFizz && $isBuzz) {
+            return self::FIZZ_BUZZ;
+        }
+        if ($isFizz) {
+            return self::FIZZ;
+        }
+        if ($isBuzz) {
+            return self::BUZZ;
+        }
+        return $number;
     }
 }
