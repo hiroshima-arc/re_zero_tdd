@@ -39,6 +39,11 @@ class FizzBuzz
                 return $number;
             case 2:
                 return $number;
+            case 3:
+                if ($number % 3 === 0 && $number % 5 === 0) {
+                    return self::FIZZ_BUZZ;
+                }
+                return $number;
         }
     }
     private function createList()
