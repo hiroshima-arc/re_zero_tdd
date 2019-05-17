@@ -1,0 +1,33 @@
+{
+  "name": "session",
+  "version": "1.0.0",
+  "description": "## 概要",
+  "main": "index.js",
+  "scripts": {
+    "start": "nf start -j Procfile",
+    "build": "markdown README.md > ./src/readme.html",
+    "test": "mocha --ui tdd src/**.js",
+    "lint": "eslint src/**/*.js --fix",
+    "format": "prettier --write src/**/*.*",
+    "watch": "watch 'npm-run-all test format lint' ./src ",
+    "app": "browser-sync start --config bs-config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "browser-sync": "^2.26.5",
+    "chai": "^4.2.0",
+    "connect-browser-sync": "^2.1.0",
+    "cpx": "^1.5.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.13.0",
+    "foreman": "^3.0.1",
+    "markdown-to-html": "0.0.13",
+    "mocha": "^6.1.4",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.17.1",
+    "rimraf": "^2.6.3",
+    "watch": "^1.0.2"
+  }
+}
