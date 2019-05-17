@@ -18,9 +18,7 @@ function fizzBuzz($number)
 }
 function createList()
 {
-    $list = [];
-    foreach (range(1, 100) as $key => $i) {
-        $list[] = fizzBuzz($i);
-    }
-    return $list;
+    return array_map(function ($number) {
+        return fizzBuzz($number);
+    }, range(1, 100));
 }
