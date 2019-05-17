@@ -27,7 +27,7 @@
 ```bash
 npm init
 npm install npm-run-all watch foreman cpx rimraf --save-dev
-npm install --save-dev prettier @prettier/plugin-php
+npm install --save-dev phplint prettier @prettier/plugin-php
 npm install --save-dev browser-sync connect-browser-sync markdown-to-html
 npx browser-sync init
 touch Procfile

@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nf start -j Procfile",
+    "build": "npm-run-all build:*",
+    "build:doc": "markdown README.md > ./src/readme.html",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "phplint '**/*.php' '!vendor/**' !node_modules/**",
+    "format": "prettier ./**/*.php --write",
+    "watch": "watch 'npm-run-all format lint test' ./src"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +22,7 @@
     "foreman": "^3.0.1",
     "markdown-to-html": "0.0.13",
     "npm-run-all": "^4.1.5",
+    "phplint": "^2.0.1",
     "prettier": "^1.17.1",
     "rimraf": "^2.6.3",
     "watch": "^1.0.2"
