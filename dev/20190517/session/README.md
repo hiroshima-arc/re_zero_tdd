@@ -33,6 +33,13 @@ npx browser-sync init
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+composer require --dev phpunit/phpunit ^8
+./vendor/bin/phpunit --version
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
