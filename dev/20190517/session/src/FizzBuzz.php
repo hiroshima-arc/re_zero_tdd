@@ -37,6 +37,8 @@ class FizzBuzz
                     return self::BUZZ;
                 }
                 return $number;
+            case 2:
+                return $number;
         }
     }
     private function createList()
