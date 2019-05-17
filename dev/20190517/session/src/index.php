@@ -3,6 +3,7 @@ include "FizzBuzz.php";
 
 function renderTable()
 {
+    $fizzBuzz = new FizzBuzz();
     $header = "<thead>";
     $header .= "<tr>";
     for ($i = 1; $i <= 10; $i++) {
@@ -12,7 +13,7 @@ function renderTable()
 
     $body = "<tbody>";
     $body .= "<tr>";
-    $list = FizzBuzz::createList();
+    $list = $fizzBuzz->getList();
     foreach ($list as $key => $value) {
         $body .= "<td>${value}</td>";
         if (($key + 1) % 10 === 0) {

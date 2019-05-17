@@ -8,9 +8,9 @@ class FizzBuzz
 
     private $list;
 
-    public function setList($list)
+    public function __construct()
     {
-        $this->list = $list;
+        $this->list = $this->createList();
     }
 
     public function getList()
@@ -34,7 +34,7 @@ class FizzBuzz
         }
         return $number;
     }
-    public static function createList()
+    private static function createList()
     {
         return array_map(function ($number) {
             return self::generate($number);

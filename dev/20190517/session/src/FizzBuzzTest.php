@@ -12,7 +12,6 @@ class FizzBuzzTest extends TestCase
     public function 値を1から100までプリントするただし３で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする()
     {
         $data = new FizzBuzz();
-        $data->setList(FizzBuzz::createList());
         $this->assertEquals(1, $data->getList()[0]);
         $this->assertEquals("Fizz", $data->getList()[2]);
         $this->assertEquals("Buzz", $data->getList()[4]);
