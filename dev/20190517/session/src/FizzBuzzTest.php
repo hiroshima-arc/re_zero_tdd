@@ -39,4 +39,14 @@ class FizzBuzzTest extends TestCase
     {
         $this->assertEquals("FizzBuzz", FizzBuzz::generate(15));
     }
+    /**
+     * @test
+     */
+    public function タイプ1は通常のパターンを返す()
+    {
+        $fizzBuzz = new FizzBuzz(1);
+        $this->assertEquals("Fizz", $fizzBuzz->generate(3));
+        $this->assertEquals("Buzz", $fizzBuzz->generate(5));
+        $this->assertEquals("FizzBuzz", $fizzBuzz->generate(15));
+    }
 }
