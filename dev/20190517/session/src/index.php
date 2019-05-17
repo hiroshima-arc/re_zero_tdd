@@ -12,7 +12,7 @@ function renderTable()
 
     $body = "<tbody>";
     $body .= "<tr>";
-    $list = createList();
+    $list = FizzBuzz::createList();
     foreach ($list as $key => $value) {
         $body .= "<td>${value}</td>";
         if (($key + 1) % 10 === 0) {

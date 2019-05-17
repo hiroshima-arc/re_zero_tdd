@@ -10,7 +10,7 @@ class FizzBuzzTest extends TestCase
      */
     public function 値を1から100までプリントするただし３で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする()
     {
-        $list = createList();
+        $list = FizzBuzz::createList();
         $this->assertEquals(1, $list[0]);
         $this->assertEquals("Fizz", $list[2]);
         $this->assertEquals("Buzz", $list[4]);
@@ -22,20 +22,20 @@ class FizzBuzzTest extends TestCase
      */
     public function 値が3で割り切れる場合はFizzをプリントする()
     {
-        $this->assertEquals("Fizz", fizzBuzz(3));
+        $this->assertEquals("Fizz", FizzBuzz::generate(3));
     }
     /**
      * @test
      */
     public function 値が5で割り切れる場合はBuzzをプリントする()
     {
-        $this->assertEquals("Buzz", fizzBuzz(5));
+        $this->assertEquals("Buzz", FizzBuzz::generate(5));
     }
     /**
      * @test
      */
     public function 値が3または5で割り切れる場合はFizzBuzzをプリントする()
     {
-        $this->assertEquals("FizzBuzz", fizzBuzz(15));
+        $this->assertEquals("FizzBuzz", FizzBuzz::generate(15));
     }
 }

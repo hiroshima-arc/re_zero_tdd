@@ -1,24 +1,26 @@
 <?php
-
-function fizzBuzz($number)
+class FizzBuzz
 {
-    $isFizz = $number % 3 === 0;
-    $isBuzz = $number % 5 === 0;
+    public static function generate($number)
+    {
+        $isFizz = $number % 3 === 0;
+        $isBuzz = $number % 5 === 0;
 
-    if ($isFizz && $isBuzz) {
-        return "FizzBuzz";
+        if ($isFizz && $isBuzz) {
+            return "FizzBuzz";
+        }
+        if ($isFizz) {
+            return "Fizz";
+        }
+        if ($isBuzz) {
+            return "Buzz";
+        }
+        return $number;
     }
-    if ($isFizz) {
-        return "Fizz";
+    public static function createList()
+    {
+        return array_map(function ($number) {
+            return self::generate($number);
+        }, range(1, 100));
     }
-    if ($isBuzz) {
-        return "Buzz";
-    }
-    return $number;
-}
-function createList()
-{
-    return array_map(function ($number) {
-        return fizzBuzz($number);
-    }, range(1, 100));
 }
