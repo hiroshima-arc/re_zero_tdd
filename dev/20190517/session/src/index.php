@@ -3,7 +3,7 @@ include "FizzBuzz.php";
 
 function renderTable()
 {
-    $fizzBuzz = new FizzBuzz();
+    $fizzBuzz = new FizzBuzz(1);
     $header = "<thead>";
     $header .= "<tr>";
     for ($i = 1; $i <= 10; $i++) {

@@ -7,9 +7,11 @@ class FizzBuzz
     const MAX_NUMBER = 100;
 
     private $list;
+    private $type;
 
-    public function __construct()
+    public function __construct($type)
     {
+        $this->type = $type;
         $this->list = $this->createList();
     }
 
@@ -18,26 +20,29 @@ class FizzBuzz
         return $this->list;
     }
 
-    public static function generate($number)
+    public function generate($number)
     {
-        $isFizz = $number % 3 === 0;
-        $isBuzz = $number % 5 === 0;
+        switch ($this->type) {
+            case 1:
+                $isFizz = $number % 3 === 0;
+                $isBuzz = $number % 5 === 0;
 
-        if ($isFizz && $isBuzz) {
-            return self::FIZZ_BUZZ;
+                if ($isFizz && $isBuzz) {
+                    return self::FIZZ_BUZZ;
+                }
+                if ($isFizz) {
+                    return self::FIZZ;
+                }
+                if ($isBuzz) {
+                    return self::BUZZ;
+                }
+                return $number;
         }
-        if ($isFizz) {
-            return self::FIZZ;
-        }
-        if ($isBuzz) {
-            return self::BUZZ;
-        }
-        return $number;
     }
-    private static function createList()
+    private function createList()
     {
         return array_map(function ($number) {
-            return self::generate($number);
+            return $this->generate($number);
         }, range(1, self::MAX_NUMBER));
     }
 }
