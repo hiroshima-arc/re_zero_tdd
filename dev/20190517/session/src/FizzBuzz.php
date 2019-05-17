@@ -11,17 +11,6 @@ class FizzBuzz
 
     public function __construct($type)
     {
-        switch ($type) {
-            case 1:
-                $type = new FizzBuzzType1();
-                break;
-            case 2:
-                $type = new FizzBuzzType2();
-                break;
-            case 3:
-                $type = new FizzBuzzType3();
-                break;
-        }
         $this->type = $type;
         $this->list = $this->createList();
     }
