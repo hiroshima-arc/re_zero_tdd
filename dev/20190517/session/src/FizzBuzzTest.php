@@ -5,13 +5,15 @@ include "FizzBuzz.php";
 use PHPUnit\Framework\TestCase;
 class FizzBuzzTest extends TestCase
 {
-    public function testGreeting()
+    /**
+     * @test
+     */
+    public function 値を1から100までプリントする()
     {
-        $this->assertEquals("Hello World", greeting());
+        $this->assertEquals(1, printValue());
     }
 }
-
-function greeting()
+function printValue()
 {
-    return "Hello World";
+    return 1;
 }
