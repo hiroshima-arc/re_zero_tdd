@@ -60,6 +60,8 @@ composer require --dev phpunit/phpunit ^8
 
 ```bash
 cd re_zero_tdd/dev/20190517/session
+npm run build
+npm start
 ```
 
 #### 仕様

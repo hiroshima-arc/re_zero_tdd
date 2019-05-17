@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nf start -j Procfile",
     "build": "npm-run-all build:*",
+    "build:app": "composer install",
     "build:doc": "markdown README.md > ./src/readme.html",
     "test": "./vendor/bin/phpunit --color --bootstrap vendor/autoload.php src/",
     "lint": "phplint '**/*.php' '!vendor/**' !node_modules/**",
