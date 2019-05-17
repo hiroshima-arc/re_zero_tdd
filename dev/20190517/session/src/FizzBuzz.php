@@ -19,7 +19,7 @@ function fizzBuzz($number)
 function createList()
 {
     $list = [];
-    for ($i = 1; $i <= 100; $i++) {
+    foreach (range(1, 100) as $key => $i) {
         $list[] = fizzBuzz($i);
     }
     return $list;
