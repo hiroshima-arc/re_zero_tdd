@@ -1,4 +1,6 @@
 <?php
+include "FizzBuzz.php";
+
 function renderTable()
 {
     $header = "<thead>";
@@ -10,9 +12,10 @@ function renderTable()
 
     $body = "<tbody>";
     $body .= "<tr>";
-    for ($i = 1; $i <= 100; $i++) {
-        $body .= "<td>${i}</td>";
-        if ($i % 10 === 0) {
+    $list = printValue();
+    foreach ($list as $key => $value) {
+        $body .= "<td>${value}</td>";
+        if (($key + 1) % 10 === 0) {
             $body .= "</tr>";
         }
     }
@@ -24,7 +27,8 @@ function renderTable()
             </table>";
 
     return $table;
-} ?>
+}
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
