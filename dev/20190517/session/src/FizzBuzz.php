@@ -6,6 +6,18 @@ class FizzBuzz
     const BUZZ = "Buzz";
     const MAX_NUMBER = 100;
 
+    private $list;
+
+    public function setList($list)
+    {
+        $this->list = $list;
+    }
+
+    public function getList()
+    {
+        return $this->list;
+    }
+
     public static function generate($number)
     {
         $isFizz = $number % 3 === 0;
