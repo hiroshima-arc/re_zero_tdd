@@ -27,12 +27,11 @@ class FizzBuzz
                 $type = new FizzBuzzType1();
                 return $type->generate($number);
             case 2:
-                return $number;
+                $type = new FizzBuzzType2();
+                return $type->generate($number);
             case 3:
-                if ($number % 3 === 0 && $number % 5 === 0) {
-                    return self::FIZZ_BUZZ;
-                }
-                return $number;
+                $type = new FizzBuzzType3();
+                return $type->generate($number);
         }
     }
     private function createList()
@@ -62,6 +61,30 @@ class FizzBuzzType1
         }
         if ($isBuzz) {
             return self::BUZZ;
+        }
+        return $number;
+    }
+}
+
+class FizzBuzzType2
+{
+    public function generate($number)
+    {
+        return $number;
+    }
+}
+
+class FizzBuzzType3
+{
+    const FIZZ_BUZZ = "FizzBuzz";
+
+    public function generate($number)
+    {
+        $isFizz = $number % 3 === 0;
+        $isBuzz = $number % 5 === 0;
+
+        if ($isFizz && $isBuzz) {
+            return self::FIZZ_BUZZ;
         }
         return $number;
     }
