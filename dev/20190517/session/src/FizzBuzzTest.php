@@ -36,24 +36,3 @@ class FizzBuzzTest extends TestCase
         $this->assertEquals("FizzBuzz", fizzBuzz(15));
     }
 }
-
-function fizzBuzz($number)
-{
-    $result = $number;
-    if ($number % 3 === 0 && $number % 5 === 0) {
-        $result = "FizzBuzz";
-    } elseif ($number % 3 === 0) {
-        $result = "Fizz";
-    } elseif ($number % 5 === 0) {
-        $result = "Buzz";
-    }
-    return $result;
-}
-function printValue()
-{
-    $list = [];
-    for ($i = 1; $i <= 100; $i++) {
-        $list[] = $i;
-    }
-    return $list;
-}
