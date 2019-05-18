@@ -128,8 +128,7 @@
 
         const items = () => {
           let items = `<tr>`;
-          let list = generateList();
-          list.forEach((value, key) => {
+          generateList().forEach((value, key) => {
             items += `<td>${value}</td>`;
             if ((key + 1) % 10 === 0) items += `</tr><tr>`;
           });
