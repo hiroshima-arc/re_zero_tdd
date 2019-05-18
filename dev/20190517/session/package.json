@@ -1,0 +1,35 @@
+{
+  "name": "session",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nf start -j Procfile",
+    "build": "npm-run-all build:*",
+    "build:app": "composer install",
+    "build:doc": "markdown README.md > ./src/readme.html",
+    "test": "./vendor/bin/phpunit --color --bootstrap vendor/autoload.php src/",
+    "lint": "phplint '**/*.php' '!vendor/**' !node_modules/**",
+    "format": "npm-run-all format:*",
+    "format:app": "prettier ./**/*.php --write",
+    "format:doc": "prettier ./*.md --write",
+    "watch": "watch 'npm-run-all format lint test' ./src",
+    "app:front": "browser-sync start --config bs-config.js",
+    "app:server": "php -S 0.0.0.0:8000 -t src/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.10.2",
+    "browser-sync": "^2.26.5",
+    "connect-browser-sync": "^2.1.0",
+    "cpx": "^1.5.0",
+    "foreman": "^3.0.1",
+    "markdown-to-html": "0.0.13",
+    "npm-run-all": "^4.1.5",
+    "phplint": "^2.0.1",
+    "prettier": "^1.17.1",
+    "rimraf": "^2.6.3",
+    "watch": "^1.0.2"
+  }
+}
