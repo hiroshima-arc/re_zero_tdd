@@ -136,23 +136,16 @@
           return items;
         };
 
-        let table = `
+        document.querySelector("#app").innerHTML = `
         <table>
-        `;
-        table += `
             <thead>
             ${header()}
             </thead>
-        `;
-        table += `
             <tbody>
             ${items()}
             </tbody>
-        `;
-        table += `
         </table>
         `;
-        document.querySelector("#app").innerHTML = table;
       }
       renderTable();
     </script>
