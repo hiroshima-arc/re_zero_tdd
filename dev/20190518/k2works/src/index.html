@@ -121,48 +121,24 @@
         let table = `
         <table>
         `;
+        let header = `<tr>`;
+        for (let i = 1; i <= 10; i++) {
+          header += `<th>${i}</th>`;
+        }
+        header += `</tr>`;
         table += `
             <thead>
-              <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-              </tr>
+            ${header}
             </thead>
         `;
+        let items = `<tr>`;
+        for (let i = 1; i <= 100; i++) {
+          items += `<td>${fizzBuzz(i)}</td>`;
+          if (i % 10 === 0) items += `</tr><tr>`;
+        }
         table += `
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>Fizz</td>
-                <td>4</td>
-                <td>Buzz</td>
-                <td>Fizz</td>
-                <td>7</td>
-                <td>8</td>
-                <td>Fizz</td>
-                <td>Buzz</td>
-              </tr>
-              <tr>
-                <td>11</td>
-                <td>Fizz</td>
-                <td>13</td>
-                <td>14</td>
-                <td>FizzBuzz</td>
-                <td>16</td>
-                <td>17</td>
-                <td>Fizz</td>
-                <td>19</td>
-                <td>Buzz</td>
-              </tr>
+            ${items}
             </tbody>
         `;
         table += `
