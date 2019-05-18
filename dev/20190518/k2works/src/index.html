@@ -83,7 +83,7 @@
 
       suite("FizzBuzzTest", () => {
         test("1から100までをプリントするただし、3で割り切れる場合はFizzを5で割り切れる場合はBuzzを15で割り切れる場合はFizzBuzzをプリントする", () => {
-          let list = print1To100();
+          let list = generateList();
           assert.equal(1, list[0]);
           assert.equal("Fizz", list[2]);
           assert.equal("Buzz", list[4]);
@@ -112,7 +112,8 @@
         }
         return result;
       }
-      function print1To100() {
+
+      function generateList() {
         let list = [];
         for (let i = 1; i <= 100; i++) {
           list.push(fizzBuzz(i));
@@ -135,7 +136,7 @@
             </thead>
         `;
         let items = `<tr>`;
-        let list = print1To100();
+        let list = generateList();
         for (const [key, value] of Object.entries(list)) {
           items += `<td>${value}</td>`;
           if ((parseInt(key) + 1) % 10 === 0) items += `</tr><tr>`;
