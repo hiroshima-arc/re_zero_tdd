@@ -126,7 +126,7 @@
           return header;
         };
 
-        const items = () => {
+        const body = () => {
           let items = `<tr>`;
           generateList().forEach((value, key) => {
             items += `<td>${value}</td>`;
@@ -141,7 +141,7 @@
             ${header()}
             </thead>
             <tbody>
-            ${items()}
+            ${body()}
             </tbody>
         </table>
         `;
