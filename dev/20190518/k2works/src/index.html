@@ -119,27 +119,34 @@
       }
 
       function renderTable() {
+        const header = () => {
+          let header = `<tr>`;
+          [...Array(10).keys()].forEach(i => (header += `<th>${i + 1}</th>`));
+          header += `</tr>`;
+          return header;
+        };
+
+        const items = () => {
+          let items = `<tr>`;
+          let list = generateList();
+          list.forEach((value, key) => {
+            items += `<td>${value}</td>`;
+            if ((key + 1) % 10 === 0) items += `</tr><tr>`;
+          });
+          return items;
+        };
+
         let table = `
         <table>
         `;
-        let header = `<tr>`;
-        [...Array(10).keys()].forEach(i => (header += `<th>${i + 1}</th>`));
-        header += `</tr>`;
         table += `
             <thead>
-            ${header}
+            ${header()}
             </thead>
         `;
-        let items = `<tr>`;
-        let list = generateList();
-        list.forEach((value, key) => {
-          items += `<td>${value}</td>`;
-          if ((key + 1) % 10 === 0) items += `</tr><tr>`;
-        });
-
         table += `
             <tbody>
-            ${items}
+            ${items()}
             </tbody>
         `;
         table += `
