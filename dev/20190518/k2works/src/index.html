@@ -133,6 +133,9 @@
         test("3で割り切れる場合はFizzをプリントする", () => {
           assert.equal("Fizz", fizzBuzz(3));
         });
+        test("5 の倍数のときは｢Buzz｣とプリントできるようにする", () => {
+          assert.equal("Buzz", fizzBuzz(5));
+        });
       });
 
       function fizzBuzz(number) {
