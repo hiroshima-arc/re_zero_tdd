@@ -123,9 +123,7 @@
         <table>
         `;
         let header = `<tr>`;
-        for (let i = 1; i <= 10; i++) {
-          header += `<th>${i}</th>`;
-        }
+        [...Array(10).keys()].forEach(i => (header += `<th>${i + 1}</th>`));
         header += `</tr>`;
         table += `
             <thead>
@@ -134,10 +132,10 @@
         `;
         let items = `<tr>`;
         let list = generateList();
-        for (const [key, value] of Object.entries(list)) {
+        list.forEach((value, key) => {
           items += `<td>${value}</td>`;
-          if ((parseInt(key) + 1) % 10 === 0) items += `</tr><tr>`;
-        }
+          if ((key + 1) % 10 === 0) items += `</tr><tr>`;
+        });
 
         table += `
             <tbody>
