@@ -71,3 +71,9 @@ gradle init --type java-application
 **[⬆ back to top](#構成)**
 
 ## 参照
+
+- [Build Init Plugin](https://docs.gradle.org/4.10-rc-2/userguide/build_init_plugin.html#sec:build_init_types)
+- [Building an Application with Spring Boot](https://spring.io/guides/gs/spring-boot/#scratch)
+- [Using JUnit5](https://docs.gradle.org/4.6/userguide/java_plugin.html#using_junit5)
+- [モダンなJava開発ガイド (2018年版)](https://qiita.com/yoichiwo7/items/17190cb440ab7d253cea#linterstatic-code-checker%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B)
+- [Gradle プロジェクトで静的解析ツールを使う](https://qiita.com/toastkidjp/items/180e69d49cbdccb7d3fe#warning-%E6%8C%87%E6%91%98%E3%81%8C%E5%A4%9A%E3%81%99%E3%81%8E%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%A7%E3%82%82%E3%83%93%E3%83%AB%E3%83%89%E3%82%92%E5%A4%B1%E6%95%97%E6%89%B1%E3%81%84%E3%81%AB%E3%81%97%E3%81%AA%E3%81%84)
