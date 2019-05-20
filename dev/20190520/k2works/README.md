@@ -35,6 +35,10 @@ touch Procfile
 #### アプリケーションのセットアップ
 
 ```bash
+mkdir src
+touch src/index.html
+mkdir api
+cd api
 gradle init --type java-application
 ```
 

@@ -33,3 +33,7 @@ dependencies {
 }
 
 apply plugin: 'pmd'
+
+pmd {
+    ignoreFailures = true
+}

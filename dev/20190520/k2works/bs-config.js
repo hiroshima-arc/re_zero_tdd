@@ -16,17 +16,23 @@ module.exports = {
   'ui': {
     'port': 3001
   },
-  'files': false,
+  'files': [
+    'src/*',
+    'api/src/*'
+  ],
   'watchEvents': [
     'change'
   ],
-  'watch': false,
+  'watch': true,
   'ignore': [],
   'single': false,
   'watchOptions': {
     'ignoreInitial': true
   },
-  'server': false,
+  'server': {
+    baseDir: './src',
+    index: 'index.html'
+  },
   'proxy': false,
   'port': 3000,
   'middleware': false,

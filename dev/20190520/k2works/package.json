@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "config": {
+    "app_dir": "api"
+  },
   "scripts": {
     "start": "nf start -j Procfile",
-    "build": "gradle build",
-    "test": "gradle test",
-    "lint": "gradle pmdMain",
-    "format": "prettier --write src/**/*.*",
-    "watch": "watch 'npm-run-all format lint test' ./src ",
+    "build": "npm-run-all build:*",
+    "build:app": "cd $npm_package_config_app_dir; gradle build",
+    "build:doc": "markdown README.md > ./src/readme.html",
+    "test": "cd $npm_package_config_app_dir; gradle test",
+    "test:view": "cd $npm_package_config_app_dir/build/reports/tests/test; browser-sync start --server --files '**/*'",
+    "lint": "cd $npm_package_config_app_dir; gradle pmdMain",
+    "format": "prettier --write $npm_package_config_app_dir/src/**/*.*",
+    "watch": "watch 'npm-run-all format lint test' $npm_package_config_app_dir/src ",
     "app:front": "browser-sync start --config bs-config.js",
-    "app:api": "gradle bootRun"
+    "app:api": "cd $npm_package_config_app_dir; gradle bootRun"
   },
   "keywords": [],
   "author": "",
