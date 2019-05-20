@@ -32,6 +32,12 @@ npx browser-sync init
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+gradle init --type java-application
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
