@@ -13,26 +13,20 @@
 
 | ソフトウェア       | バージョン | 備考 |
 | :----------------- | :--------- | :--- |
-| Ruby               | 2.6.0      |      |
 | Node.js            | 8.14.0     |      |
-| Python3            | 3.7.2      |      |
 | Java               | 1.8.0      |      |
+| Ruby               | 2.6.0      |      |
+| Python             | 3.7.2      |      |
 | PHP                | 7.2.15     |      |
 
 ## 構成
 
 1. [構築](#構築)
-1. [開発](#開発)
 1. [配置](#配置)
 1. [運用](#運用)
+1. [開発](#開発)
 
 ### 構築
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/hiroshima-arc/re_zero_tdd.git)
-
-**[⬆ back to top](#構成)**
-
-### 開発
 
 **[⬆ back to top](#構成)**
 
@@ -41,6 +35,12 @@
 **[⬆ back to top](#構成)**
 
 ### 運用
+
+**[⬆ back to top](#構成)**
+
+### 開発
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/hiroshima-arc/re_zero_tdd.git)
 
 **[⬆ back to top](#構成)**
 
