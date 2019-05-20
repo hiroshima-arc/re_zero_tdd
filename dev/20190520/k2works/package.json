@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nf start -j Procfile",
+    "build": "gradle build",
+    "test": "gradle test",
+    "lint": "gradle pmdMain",
+    "format": "prettier --write src/**/*.*",
+    "watch": "watch 'npm-run-all format lint test' ./src ",
+    "app:front": "browser-sync start --config bs-config.js",
+    "app:api": "gradle bootRun"
   },
   "keywords": [],
   "author": "",
