@@ -54,6 +54,12 @@ gradle init --type java-application
 
 ### 開発
 
+```bash
+npm run install
+npm run build
+npm start
+```
+
 #### 仕様
 
 > 1 から 100 までの数をプリントするプログラムを書け。
