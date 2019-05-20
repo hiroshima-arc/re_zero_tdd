@@ -3,14 +3,14 @@
  */
 package k2works;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 
 public class AppTest {
 
   @Test
-  void testAppHasAGreeting() {
+  public void testAppHasAGreeting() {
     App classUnderTest = new App();
     assertNotNull("app should have a greeting!", classUnderTest.getGreeting());
   }
