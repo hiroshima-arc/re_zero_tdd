@@ -1,3 +1,4 @@
 front: npm run app:front
 api: npm run app:api
-watch: npm run watch
+front_watch: npm run watch:front
+api_watch: npm run watch:api
