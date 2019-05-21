@@ -1,14 +1,16 @@
 package k2works;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FizzBuzzController {
 
+  @CrossOrigin
   @RequestMapping("/fizzbuzz")
   public List index() {
     List<String> list = new ArrayList<>();

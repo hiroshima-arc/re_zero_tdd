@@ -64,6 +64,7 @@
     <section>
       <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
+        <div id="message"></div>
         <div id="app">
           <table>
             <thead>
@@ -121,6 +122,40 @@
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script>
       mocha.setup("tdd");
+    </script>
+
+    <script>
+      function apiCall(url, method, onSuccess, onErrors) {
+        $("#message").html("処理中...");
+        $.ajax({
+          url: url,
+          type: method,
+          data: {}
+        })
+          .done(data => {
+            onSuccess(data);
+            const message = `<h3>Apiサーバーの読み込みに成功しました</h3>`;
+            $("#message").html(message);
+          })
+          .fail(data => {
+            onErrors(data);
+            const message = `<h3>Apiサーバーでエラーが発生しました</h3>`;
+            $("#message").html(message);
+          });
+      }
+    </script>
+
+    <script>
+      function renderTable() {
+        const success = data => {
+          console.log(data);
+        };
+        const errors = data => {
+          console.log(data);
+        };
+        apiCall("http://localhost:8080/fizzbuzz", "GET", success, errors);
+      }
+      window.onload = renderTable();
     </script>
 
     <script>
