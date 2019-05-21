@@ -20,7 +20,7 @@ public class FizzBuzz {
   public static List<String> printValue() {
     List<String> list = new ArrayList<>();
     for (int i = 1; i <= 100; i++) {
-      list.add(Integer.toString(i));
+      list.add(FizzBuzz.generate(i));
     }
     return list;
   }
