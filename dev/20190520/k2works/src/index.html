@@ -106,51 +106,44 @@
       function renderTable() {
         const success = data => {
           console.log(data);
-          table = `
-          <table>
+          const header = () => {
+            return `
             <thead>
               <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
+              ${(() => {
+                let item = "<tr>";
+                for (let i = 1; i <= 10; i++) {
+                  item += `<th>${i}</th>`;
+                }
+                item += "</tr>";
+                return item;
+              })()}
               </tr>
             </thead>
+          `;
+          };
+          const body = () => {
+            return `
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>Fizz</td>
-                <td>4</td>
-                <td>Buzz</td>
-                <td>Fizz</td>
-                <td>7</td>
-                <td>8</td>
-                <td>Fizz</td>
-                <td>Buzz</td>
-              </tr>
-              <tr>
-                <td>11</td>
-                <td>Fizz</td>
-                <td>13</td>
-                <td>14</td>
-                <td>FizzBuzz</td>
-                <td>16</td>
-                <td>17</td>
-                <td>Fizz</td>
-                <td>19</td>
-                <td>Buzz</td>
-              </tr>
-            </tbody>
+            ${(() => {
+              let item = "<tr>";
+              data.forEach((v, k) => {
+                item += `<td>${v}</td>`;
+                if ((k + 1) % 10 === 0) {
+                  item += `</tr><tr>`;
+                }
+              });
+              return item;
+            })()}
+            </tbody>`;
+          };
+
+          document.querySelector("#app").innerHTML = `
+          <table>
+            ${header()}
+            ${body()}
           </table>
           `;
-          document.querySelector("#app").innerHTML = table;
         };
         const errors = data => {
           console.log(data);
