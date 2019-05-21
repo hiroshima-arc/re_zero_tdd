@@ -1,5 +1,7 @@
 package k2works;
 
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,9 +12,9 @@ public class FizzBuzzTest {
   @DisplayName("値を1から100までプリントする")
   @Test
   void testPrint1To100() {
-    int[] lint = FizzBuzz.printValue();
-    assertEquals(1, lint[0]);
-    assertEquals(100, lint[99]);
+    List<String> list = FizzBuzz.printValue();
+    assertEquals("1", list.get(0));
+    assertEquals("100", list.get(99));
   }
 
   @DisplayName("3で割り切れる場合はFizzをプリントする")

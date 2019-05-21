@@ -1,5 +1,8 @@
 package k2works;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FizzBuzz {
 
   public static String generate(int number) {
@@ -14,10 +17,10 @@ public class FizzBuzz {
     return result;
   }
 
-  public static int[] printValue() {
-    int[] list = new int[100];
+  public static List<String> printValue() {
+    List<String> list = new ArrayList<>();
     for (int i = 1; i <= 100; i++) {
-      list[i - 1] = i;
+      list.add(Integer.toString(i));
     }
     return list;
   }
