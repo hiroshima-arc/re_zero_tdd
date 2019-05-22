@@ -78,5 +78,13 @@ public class FizzBuzzTest {
     assertEquals("3", FizzBuzz.generate(3, 3));
   }
 
+  @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す")
+  @Test
+  void testType3Valuse() {
+    _data.setValues(FizzBuzz.generateList(3));
+    assertEquals("FizzBuzz", _data.getValuse().get(14));
+    assertEquals("3", _data.getValuse().get(2));
+  }
+
 }
 
