@@ -10,33 +10,10 @@ public class FizzBuzz {
   public static final String FIZZ = "Fizz";
   public static final String BUZZ = "Buzz";
   private List<String> _valuse;
-  private FizzBuzzType01 _type01;
-  private FizzBuzzType02 _type02;
-  private FizzBuzzType03 _type03;
   private IFizzBuzzType _type;
 
   public List<String> getValuse() {
     return _valuse;
-  }
-
-  public FizzBuzz() {
-    this._valuse = new ArrayList<>();
-    this._type01 = new FizzBuzzType01();
-    this._type02 = new FizzBuzzType02();
-    this._type03 = new FizzBuzzType03();
-  }
-
-  public String generate(int number, int type) {
-    switch (type) {
-      case 1:
-        return this._type01.generate(number);
-      case 2:
-        return this._type02.generate(number);
-      case 3:
-        return this._type03.generate(number);
-      default:
-        return this._type01.generate(number);
-    }
   }
 
   public FizzBuzz(int type) {
@@ -64,12 +41,6 @@ public class FizzBuzz {
   public void generateList() {
     IntStream.rangeClosed(1, MAX_NUMBER).forEach(
       number -> this._valuse.add(this.generate(number))
-    );
-  }
-
-  public void generateList(int type) {
-    IntStream.rangeClosed(1, MAX_NUMBER).forEach(
-      number -> this._valuse.add(this.generate(number, type))
     );
   }
 
