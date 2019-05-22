@@ -11,6 +11,7 @@ public class FizzBuzz {
   public static final String BUZZ = "Buzz";
   private List<String> _valuse;
   private FizzBuzzType01 _type01;
+  private FizzBuzzType02 _type02;
 
   public List<String> getValuse() {
     return _valuse;
@@ -19,6 +20,7 @@ public class FizzBuzz {
   public FizzBuzz() {
     this._valuse = new ArrayList<>();
     this._type01 = new FizzBuzzType01();
+    this._type02 = new FizzBuzzType02();
   }
 
   public static String generate(int number) {
@@ -39,7 +41,7 @@ public class FizzBuzz {
       case 1:
         return this._type01.generate(number);
       case 2:
-        return Integer.toString(number);
+        return this._type02.generate(number);
       case 3:
         boolean isFizz = number % 3 == 0;
         boolean isBuzz = number % 5 == 0;
