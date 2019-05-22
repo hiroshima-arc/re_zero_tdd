@@ -23,6 +23,15 @@ public class FizzBuzz {
     return Integer.toString(number);
   }
 
+  public static String generate(int number, int type) {
+    switch (type) {
+      case 1:
+        return FizzBuzz.generate(number);
+      default:
+        return FizzBuzz.generate(number);
+    }
+  }
+
   public static List<String> generateList() {
     return IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
       FizzBuzz::generate
