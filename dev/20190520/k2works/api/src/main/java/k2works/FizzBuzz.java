@@ -38,5 +38,11 @@ public class FizzBuzz {
     ).collect(Collectors.toList());
   }
 
+  public static List<String> generateList(int type) {
+    return IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
+      number -> FizzBuzz.generate(number, type)
+    ).collect(Collectors.toList());
+  }
+
 }
 
