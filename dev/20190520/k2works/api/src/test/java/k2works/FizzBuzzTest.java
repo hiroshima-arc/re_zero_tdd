@@ -14,7 +14,7 @@ public class FizzBuzzTest {
   )
   @Test
   void testPrint1To100() {
-    List<String> list = FizzBuzz.printValue();
+    List<String> list = FizzBuzz.generateList();
     assertEquals("1", list.get(0));
     assertEquals("Buzz", list.get(99));
   }

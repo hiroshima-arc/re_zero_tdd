@@ -17,7 +17,7 @@ public class FizzBuzz {
     return result;
   }
 
-  public static List<String> printValue() {
+  public static List<String> generateList() {
     List<String> list = new ArrayList<>();
     for (int i = 1; i <= 100; i++) {
       list.add(FizzBuzz.generate(i));
