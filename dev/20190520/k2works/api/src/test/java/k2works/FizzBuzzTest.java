@@ -29,19 +29,19 @@ public class FizzBuzzTest {
   @DisplayName("3で割り切れる場合はFizzをプリントする")
   @Test
   void testFizz() {
-    assertEquals("Fizz", FizzBuzz.generate(3));
+    assertEquals("Fizz", _fizzBuzz.generate(3, 1));
   }
 
   @DisplayName("5で割り切れる場合はBuzzをプリントする")
   @Test
   void testBuzz() {
-    assertEquals("Buzz", FizzBuzz.generate(5));
+    assertEquals("Buzz", _fizzBuzz.generate(5, 1));
   }
 
   @DisplayName("15で割り切れる場合はFizzBuzzをプリントする")
   @Test
   void testFizzBuzz() {
-    assertEquals("FizzBuzz", FizzBuzz.generate(15));
+    assertEquals("FizzBuzz", _fizzBuzz.generate(15, 1));
   }
 
   @DisplayName("タイプ1は通常のパターンの値を返す")
