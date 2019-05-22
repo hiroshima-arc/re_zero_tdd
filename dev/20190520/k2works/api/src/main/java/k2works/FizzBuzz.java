@@ -16,24 +16,6 @@ public class FizzBuzz {
     return _valuse;
   }
 
-  public FizzBuzz(int type) {
-    this._valuse = new ArrayList<>();
-
-    switch (type) {
-      case 1:
-        this._type = new FizzBuzzType01();
-        break;
-      case 2:
-        this._type = new FizzBuzzType02();
-        break;
-      case 3:
-        this._type = new FizzBuzzType03();
-        break;
-      default:
-        this._type = new FizzBuzzType01();
-    }
-  }
-
   public FizzBuzz(IFizzBuzzType type) {
     this._valuse = new ArrayList<>();
     this._type = type;
