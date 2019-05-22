@@ -64,5 +64,12 @@ public class FizzBuzzTest {
     assertEquals("3", FizzBuzz.generate(3, 2));
   }
 
+  @DisplayName("タイプ2は通常のパターンのリストを返す")
+  @Test
+  void testType2Valuse() {
+    _data.setValues(FizzBuzz.generateList(2));
+    assertEquals("3", _data.getValuse().get(2));
+  }
+
 }
 
