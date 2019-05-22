@@ -21,8 +21,7 @@ public class FizzBuzzTest {
   )
   @Test
   void testPrint1To100() {
-    List<String> list = FizzBuzz.generateList();
-    _fizzBuzz.setValues(list);
+    _fizzBuzz.generateList();
     assertEquals("1", _fizzBuzz.getValuse().get(0));
     assertEquals("Buzz", _fizzBuzz.getValuse().get(99));
   }
@@ -54,7 +53,7 @@ public class FizzBuzzTest {
   @DisplayName("タイプ1は通常のパターンのリストを返す")
   @Test
   void testType1Valuse() {
-    _fizzBuzz.setValues(FizzBuzz.generateList(1));
+    _fizzBuzz.generateList(1);
     assertEquals("Fizz", _fizzBuzz.getValuse().get(2));
   }
 
@@ -67,7 +66,7 @@ public class FizzBuzzTest {
   @DisplayName("タイプ2は数字のみのパターンのリストを返す")
   @Test
   void testType2Valuse() {
-    _fizzBuzz.setValues(FizzBuzz.generateList(2));
+    _fizzBuzz.generateList(2);
     assertEquals("3", _fizzBuzz.getValuse().get(2));
   }
 
@@ -81,7 +80,7 @@ public class FizzBuzzTest {
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す")
   @Test
   void testType3Valuse() {
-    _fizzBuzz.setValues(FizzBuzz.generateList(3));
+    _fizzBuzz.generateList(3);
     assertEquals("FizzBuzz", _fizzBuzz.getValuse().get(14));
     assertEquals("3", _fizzBuzz.getValuse().get(2));
   }

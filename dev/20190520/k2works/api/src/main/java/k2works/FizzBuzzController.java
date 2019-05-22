@@ -12,8 +12,9 @@ public class FizzBuzzController {
   @CrossOrigin
   @RequestMapping("/fizzbuzz")
   public List<String> index() {
-    List<String> list = FizzBuzz.generateList();
-    return list;
+    FizzBuzz fizzBuzz = new FizzBuzz();
+    fizzBuzz.generateList();
+    return fizzBuzz.getValuse();
   }
 
 }

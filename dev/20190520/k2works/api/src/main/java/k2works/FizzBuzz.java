@@ -9,15 +9,10 @@ public class FizzBuzz {
   public static final String FIZZ_BUZZ = "FizzBuzz";
   public static final String FIZZ = "Fizz";
   public static final String BUZZ = "Buzz";
-
   private List<String> _valuse;
 
   public List<String> getValuse() {
     return _valuse;
-  }
-
-  public void setValues(List<String> valuse) {
-    this._valuse = valuse;
   }
 
   public static String generate(int number) {
@@ -50,12 +45,12 @@ public class FizzBuzz {
     }
   }
 
-  public static List<String> generateList() {
-    return FizzBuzz.generateList(1);
+  public void generateList() {
+    this.generateList(1);
   }
 
-  public static List<String> generateList(int type) {
-    return IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
+  public void generateList(int type) {
+    this._valuse = IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
       number -> FizzBuzz.generate(number, type)
     ).collect(Collectors.toList());
   }
