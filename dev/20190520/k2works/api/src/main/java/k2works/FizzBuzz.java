@@ -34,6 +34,11 @@ public class FizzBuzz {
     }
   }
 
+  public FizzBuzz(IFizzBuzzType type) {
+    this._valuse = new ArrayList<>();
+    this._type = type;
+  }
+
   public String generate(int number) {
     return this._type.generate(number);
   }
