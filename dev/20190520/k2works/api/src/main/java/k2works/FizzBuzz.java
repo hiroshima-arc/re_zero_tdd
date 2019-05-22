@@ -7,13 +7,13 @@ import java.util.stream.IntStream;
 public class FizzBuzz {
   public static final int MAX_NUMBER = 100;
   private List<String> _valuse;
-  private IFizzBuzzType _type;
+  private FizzBuzzType _type;
 
   public List<String> getValuse() {
     return _valuse;
   }
 
-  public FizzBuzz(IFizzBuzzType type) {
+  public FizzBuzz(FizzBuzzType type) {
     this._valuse = new ArrayList<>();
     this._type = type;
   }
