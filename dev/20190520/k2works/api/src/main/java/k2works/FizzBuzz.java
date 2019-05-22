@@ -6,25 +6,25 @@ import java.util.stream.IntStream;
 
 public class FizzBuzz {
   public static final int MAX_NUMBER = 100;
-  private List<String> _valuse;
+  private List<FizzBuzzValue> _values;
   private FizzBuzzType _type;
 
-  public List<String> getValuse() {
-    return _valuse;
+  public List<FizzBuzzValue> getValues() {
+    return _values;
   }
 
   public FizzBuzz(FizzBuzzType type) {
-    this._valuse = new ArrayList<>();
+    this._values = new ArrayList<>();
     this._type = type;
   }
 
-  public String generate(int number) {
+  public FizzBuzzValue generate(int number) {
     return this._type.generate(number);
   }
 
   public void generateList() {
     IntStream.rangeClosed(1, MAX_NUMBER).forEach(
-      number -> this._valuse.add(this.generate(number))
+      number -> this._values.add(this.generate(number))
     );
   }
 

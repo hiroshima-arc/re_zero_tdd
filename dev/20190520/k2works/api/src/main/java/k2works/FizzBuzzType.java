@@ -12,8 +12,8 @@ public enum FizzBuzzType {
     this._type = type;
   }
 
-  public String generate(int number) {
-    return _type.generate(number);
+  public FizzBuzzValue generate(int number) {
+    return new FizzBuzzValue(number, _type.generate(number));
   }
 
 }
