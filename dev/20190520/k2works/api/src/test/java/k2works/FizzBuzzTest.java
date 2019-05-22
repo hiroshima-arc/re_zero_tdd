@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
-  private FizzBuzzData _data;
+  private FizzBuzz _data;
 
   @BeforeEach
   void init() {
-    _data = new FizzBuzzData();
+    _data = new FizzBuzz();
   }
 
   @DisplayName(

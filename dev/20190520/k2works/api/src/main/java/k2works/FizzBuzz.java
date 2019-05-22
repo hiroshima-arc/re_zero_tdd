@@ -10,6 +10,16 @@ public class FizzBuzz {
   public static final String FIZZ = "Fizz";
   public static final String BUZZ = "Buzz";
 
+  private List<String> _valuse;
+
+  public List<String> getValuse() {
+    return _valuse;
+  }
+
+  public void setValues(List<String> valuse) {
+    this._valuse = valuse;
+  }
+
   public static String generate(int number) {
     boolean isFizz = number % 3 == 0;
     boolean isBuzz = number % 5 == 0;
