@@ -13,8 +13,8 @@ public class FizzBuzzController {
   @RequestMapping("/fizzbuzz")
   public List<FizzBuzzValue> index() {
     FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.one);
-    fizzBuzz.generateList();
-    return fizzBuzz.getValues();
+    FizzBuzzValues list = fizzBuzz.generateList();
+    return list.getValues();
   }
 
 }

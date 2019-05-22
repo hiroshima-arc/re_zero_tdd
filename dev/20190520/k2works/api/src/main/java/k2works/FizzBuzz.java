@@ -9,10 +9,6 @@ public class FizzBuzz {
   private FizzBuzzValues _values;
   private FizzBuzzType _type;
 
-  public List<FizzBuzzValue> getValues() {
-    return this._values.get_values();
-  }
-
   public FizzBuzz(FizzBuzzType type) {
     List<FizzBuzzValue> list = new ArrayList<>();
     _values = new FizzBuzzValues(list);
@@ -23,10 +19,11 @@ public class FizzBuzz {
     return this._type.generate(number);
   }
 
-  public void generateList() {
+  public FizzBuzzValues generateList() {
     IntStream.rangeClosed(1, MAX_NUMBER).forEach(
       number -> _values = this._values.add(this.generate(number))
     );
+    return _values;
   }
 
 }

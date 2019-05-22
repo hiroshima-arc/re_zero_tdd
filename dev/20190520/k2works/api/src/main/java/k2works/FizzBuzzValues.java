@@ -10,7 +10,7 @@ public class FizzBuzzValues {
     _values = values;
   }
 
-  public List<FizzBuzzValue> get_values() {
+  public List<FizzBuzzValue> getValues() {
     return _values;
   }
 

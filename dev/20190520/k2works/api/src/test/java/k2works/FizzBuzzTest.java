@@ -23,9 +23,9 @@ public class FizzBuzzTest {
   )
   @Test
   void testPrint1To100() {
-    _type01.generateList();
-    assertEquals("1", _type01.getValues().get(0).getValue());
-    assertEquals("Buzz", _type01.getValues().get(99).getValue());
+    FizzBuzzValues list = _type01.generateList();
+    assertEquals("1", list.getValues().get(0).getValue());
+    assertEquals("Buzz", list.getValues().get(99).getValue());
   }
 
   @DisplayName("3で割り切れる場合はFizzをプリントする")
@@ -57,8 +57,8 @@ public class FizzBuzzTest {
   @Test
   void testType1Valuse() {
     FizzBuzz type01 = new FizzBuzz(FizzBuzzType.one);
-    type01.generateList();
-    assertEquals("Fizz", type01.getValues().get(2).getValue());
+    FizzBuzzValues list = type01.generateList();
+    assertEquals("Fizz", list.getValues().get(2).getValue());
   }
 
   @DisplayName("タイプ2は数字のみのパターンの値を返す")
@@ -71,7 +71,8 @@ public class FizzBuzzTest {
   @Test
   void testType2Valuse() {
     _type02.generateList();
-    assertEquals("3", _type02.getValues().get(2).getValue());
+    FizzBuzzValues list = _type02.generateList();
+    assertEquals("3", list.getValues().get(2).getValue());
   }
 
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンの値を返す")
@@ -85,8 +86,9 @@ public class FizzBuzzTest {
   @Test
   void testType3Valuse() {
     _type03.generateList();
-    assertEquals("FizzBuzz", _type03.getValues().get(14).getValue());
-    assertEquals("3", _type03.getValues().get(2).getValue());
+    FizzBuzzValues list = _type03.generateList();
+    assertEquals("FizzBuzz", list.getValues().get(14).getValue());
+    assertEquals("3", list.getValues().get(2).getValue());
   }
 
 }
