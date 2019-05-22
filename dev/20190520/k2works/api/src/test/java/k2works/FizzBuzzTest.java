@@ -47,7 +47,7 @@ public class FizzBuzzTest {
   @DisplayName("タイプ1は通常のパターンの値を返す")
   @Test
   void testType1() {
-    assertEquals("Fizz", FizzBuzz.generate(3, 1));
+    assertEquals("Fizz", _fizzBuzz.generate(3, 1));
   }
 
   @DisplayName("タイプ1は通常のパターンのリストを返す")
@@ -60,7 +60,7 @@ public class FizzBuzzTest {
   @DisplayName("タイプ2は数字のみのパターンの値を返す")
   @Test
   void testType2() {
-    assertEquals("3", FizzBuzz.generate(3, 2));
+    assertEquals("3", _fizzBuzz.generate(3, 2));
   }
 
   @DisplayName("タイプ2は数字のみのパターンのリストを返す")
@@ -73,8 +73,8 @@ public class FizzBuzzTest {
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンの値を返す")
   @Test
   void testType3() {
-    assertEquals("FizzBuzz", FizzBuzz.generate(15, 3));
-    assertEquals("3", FizzBuzz.generate(3, 3));
+    assertEquals("FizzBuzz", _fizzBuzz.generate(15, 3));
+    assertEquals("3", _fizzBuzz.generate(3, 3));
   }
 
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す")

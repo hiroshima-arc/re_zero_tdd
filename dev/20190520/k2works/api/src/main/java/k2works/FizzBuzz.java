@@ -1,7 +1,7 @@
 package k2works;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FizzBuzz {
@@ -10,9 +10,15 @@ public class FizzBuzz {
   public static final String FIZZ = "Fizz";
   public static final String BUZZ = "Buzz";
   private List<String> _valuse;
+  private FizzBuzzType01 _type01;
 
   public List<String> getValuse() {
     return _valuse;
+  }
+
+  public FizzBuzz() {
+    this._valuse = new ArrayList<>();
+    this._type01 = new FizzBuzzType01();
   }
 
   public static String generate(int number) {
@@ -28,10 +34,10 @@ public class FizzBuzz {
     return Integer.toString(number);
   }
 
-  public static String generate(int number, int type) {
+  public String generate(int number, int type) {
     switch (type) {
       case 1:
-        return FizzBuzz.generate(number);
+        return this._type01.generate(number);
       case 2:
         return Integer.toString(number);
       case 3:
@@ -50,9 +56,9 @@ public class FizzBuzz {
   }
 
   public void generateList(int type) {
-    this._valuse = IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
-      number -> FizzBuzz.generate(number, type)
-    ).collect(Collectors.toList());
+    IntStream.rangeClosed(1, MAX_NUMBER).forEach(
+      number -> this._valuse.add(this.generate(number, type))
+    );
   }
 
 }
