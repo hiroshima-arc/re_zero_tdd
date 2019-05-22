@@ -1,9 +1,7 @@
 package k2works;
 
-public class FizzBuzzType01 implements IFizzBuzzType {
-  public static final String FIZZ_BUZZ = "FizzBuzz";
-  public static final String FIZZ = "Fizz";
-  public static final String BUZZ = "Buzz";
+public class FizzBuzzType01
+  extends IFizzBuzzType {
 
   public String generate(int number) {
     boolean isFizz = number % 3 == 0;

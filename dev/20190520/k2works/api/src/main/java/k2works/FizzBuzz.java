@@ -6,9 +6,6 @@ import java.util.stream.IntStream;
 
 public class FizzBuzz {
   public static final int MAX_NUMBER = 100;
-  public static final String FIZZ_BUZZ = "FizzBuzz";
-  public static final String FIZZ = "Fizz";
-  public static final String BUZZ = "Buzz";
   private List<String> _valuse;
   private IFizzBuzzType _type;
 
