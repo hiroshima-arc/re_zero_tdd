@@ -1,6 +1,6 @@
 package k2works;
 
-public class FizzBuzzType01 {
+public class FizzBuzzType01 implements IFizzBuzzType {
   public static final String FIZZ_BUZZ = "FizzBuzz";
   public static final String FIZZ = "Fizz";
   public static final String BUZZ = "Buzz";
