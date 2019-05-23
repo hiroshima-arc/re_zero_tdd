@@ -59,69 +59,71 @@ public class FizzBuzzServiceTest {
       assertEquals("FizzBuzz", _type01Command.execute(15).getValue());
     }
 
-  }
+    @DisplayName("タイプ1の場合")
+    @Nested
+    class WhenType1 {
 
-  @DisplayName("タイプ1")
-  @Nested
-  class WhenType1 {
+      @DisplayName("タイプ1は通常のパターンの値を返す")
+      @Test
+      void testType1() {
+        IFizzBuzzCommand command = new FizzBuzzValueCommand(FizzBuzzType.one);
+        assertEquals("Fizz", command.execute(3).getValue());
+      }
 
-    @DisplayName("タイプ1は通常のパターンの値を返す")
-    @Test
-    void testType1() {
-      IFizzBuzzCommand command = new FizzBuzzValueCommand(FizzBuzzType.one);
-      assertEquals("Fizz", command.execute(3).getValue());
+      @DisplayName("タイプ1は通常のパターンのリストを返す")
+      @Test
+      void testType1Values() {
+        IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.one);
+        IFizzBuzz list = command.execute(100);
+        assertEquals("Fizz", list.getValues().get(2).getValue());
+      }
+
     }
 
-    @DisplayName("タイプ1は通常のパターンのリストを返す")
-    @Test
-    void testType1Values() {
-      IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.one);
-      IFizzBuzz list = command.execute(100);
-      assertEquals("Fizz", list.getValues().get(2).getValue());
+    @DisplayName("タイプ2の場合")
+    @Nested
+    class WhenType2 {
+
+      @DisplayName("タイプ2は数字のみのパターンの値を返す")
+      @Test
+      void testType2() {
+        assertEquals("3", _type02Command.execute(3).getValue());
+      }
+
+      @DisplayName("タイプ2は数字のみのパターンのリストを返す")
+      @Test
+      void testType2Values() {
+        IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.two);
+        IFizzBuzz list = command.execute(100);
+        assertEquals("3", list.getValues().get(2).getValue());
+      }
+
     }
 
-  }
+    @DisplayName("タイプ3の場合")
+    @Nested
+    class WhenType3 {
 
-  @DisplayName("タイプ2")
-  @Nested
-  class WhenType2 {
+      @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンの値を返す")
+      @Test
+      void testType3() {
+        assertEquals("FizzBuzz", _type03Command.execute(15).getValue());
+        assertEquals("3", _type03Command.execute(3).getValue());
+      }
 
-    @DisplayName("タイプ2は数字のみのパターンの値を返す")
-    @Test
-    void testType2() {
-      assertEquals("3", _type02Command.execute(3).getValue());
-    }
+      @DisplayName(
+        "タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す"
+      )
+      @Test
+      void testType3Values() {
+        IFizzBuzzCommand command = new FizzBuzzValuesCommand(
+          FizzBuzzType.three
+        );
+        IFizzBuzz list = command.execute(100);
+        assertEquals("FizzBuzz", list.getValues().get(14).getValue());
+        assertEquals("3", list.getValues().get(2).getValue());
+      }
 
-    @DisplayName("タイプ2は数字のみのパターンのリストを返す")
-    @Test
-    void testType2Values() {
-      IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.two);
-      IFizzBuzz list = command.execute(100);
-      assertEquals("3", list.getValues().get(2).getValue());
-    }
-
-  }
-
-  @DisplayName("タイプ3")
-  @Nested
-  class WhenType3 {
-
-    @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンの値を返す")
-    @Test
-    void testType3() {
-      assertEquals("FizzBuzz", _type03Command.execute(15).getValue());
-      assertEquals("3", _type03Command.execute(3).getValue());
-    }
-
-    @DisplayName(
-      "タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す"
-    )
-    @Test
-    void testType3Values() {
-      IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.three);
-      IFizzBuzz list = command.execute(100);
-      assertEquals("FizzBuzz", list.getValues().get(14).getValue());
-      assertEquals("3", list.getValues().get(2).getValue());
     }
 
   }
