@@ -3,11 +3,16 @@ package k2works;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FizzBuzzValues {
+public class FizzBuzzValues implements IFizzBuzz {
   private final List<FizzBuzzValue> _values;
 
   public FizzBuzzValues(List<FizzBuzzValue> values) {
     _values = values;
+  }
+
+  @Override
+  public String getValue() {
+    return null;
   }
 
   public List<FizzBuzzValue> getValues() {

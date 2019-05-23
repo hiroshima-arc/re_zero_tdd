@@ -1,5 +1,7 @@
 package k2works;
 
+import java.util.List;
+
 public class FizzBuzzValue implements IFizzBuzz {
   private final Integer _number;
   private final String _value;
@@ -15,6 +17,11 @@ public class FizzBuzzValue implements IFizzBuzz {
 
   public String getValue() {
     return _value;
+  }
+
+  @Override
+  public List<FizzBuzzValue> getValues() {
+    return null;
   }
 
 }

@@ -12,8 +12,8 @@ public class FizzBuzzController {
   @CrossOrigin
   @RequestMapping("/fizzbuzz")
   public List<FizzBuzzValue> index() {
-    FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.one);
-    FizzBuzzValues list = fizzBuzz.generateList();
+    IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.one);
+    IFizzBuzz list = command.execute(100);
     return list.getValues();
   }
 
