@@ -25,7 +25,9 @@ public class FizzBuzzControllerTest {
   @Test
   public void getFizzBuzz() throws Exception {
     ResultActions resultActions = mvc.perform(
-      MockMvcRequestBuilders.get("/fizzbuzz").accept(MediaType.APPLICATION_JSON)
+      MockMvcRequestBuilders.get("/fizzbuzz/one").accept(
+        MediaType.APPLICATION_JSON
+      )
     ).andExpect(status().isOk()).andExpect(
       content().string(
         equalTo(
