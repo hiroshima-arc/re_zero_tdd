@@ -1,6 +1,6 @@
 package k2works;
 
-public class FizzBuzzValue {
+public class FizzBuzzValue implements IFizzBuzz {
   private final Integer _number;
   private final String _value;
 
