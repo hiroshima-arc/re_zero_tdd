@@ -1,5 +1,8 @@
 package k2works;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -90,6 +93,23 @@ public class FizzBuzzTest {
     IFizzBuzz list = command.execute(100);
     assertEquals("FizzBuzz", list.getValues().get(14).getValue());
     assertEquals("3", list.getValues().get(2).getValue());
+  }
+
+  @DisplayName("FizzBuzzValueはNullオブジェクトを返す")
+  @Test
+  void testFizzBuzzValueNull() {
+    IFizzBuzz fizzBuzz = _type01Command.execute(3);
+    List<FizzBuzzValue> values = fizzBuzz.getValues();
+    List<FizzBuzzValue> empty = new ArrayList<>();
+    assertEquals(empty, values);
+  }
+
+  @DisplayName("FizzBuzzValuesはNullオブジェクトを返す")
+  @Test
+  void testFizzBuzzValuesNull() {
+    IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.one);
+    IFizzBuzz list = command.execute(100);
+    assertEquals("", list.getValue());
   }
 
 }
