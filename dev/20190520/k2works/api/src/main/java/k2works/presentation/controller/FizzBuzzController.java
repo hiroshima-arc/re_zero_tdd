@@ -2,11 +2,8 @@ package k2works.presentation.controller;
 
 import java.util.List;
 
-import k2works.application.service.FizzBuzzValuesCommand;
-import k2works.application.service.IFizzBuzz;
-import k2works.application.service.IFizzBuzzCommand;
+import k2works.application.service.FizzBuzzService;
 import k2works.domain.model.FizzBuzzValue;
-import k2works.domain.type.FizzBuzzType;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,15 +15,12 @@ public class FizzBuzzController {
 
   @CrossOrigin
   @RequestMapping("/fizzbuzz/{type}")
-  public List<FizzBuzzValue> index(
+  public List<FizzBuzzValue> generateList(
     @PathVariable
     String type
   ) {
-    IFizzBuzzCommand command = new FizzBuzzValuesCommand(
-      FizzBuzzType.valueOf(type)
-    );
-    IFizzBuzz list = command.execute(100);
-    return list.getValues();
+    FizzBuzzService service = new FizzBuzzService();
+    return service.generateList(type);
   }
 
 }
