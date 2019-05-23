@@ -1,7 +1,9 @@
-package k2works;
+package k2works.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import k2works.IFizzBuzz;
 
 public class FizzBuzzValue implements IFizzBuzz {
   private final Integer _number;

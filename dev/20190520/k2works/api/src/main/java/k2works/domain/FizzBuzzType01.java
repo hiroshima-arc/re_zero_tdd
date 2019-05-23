@@ -1,6 +1,6 @@
-package k2works;
+package k2works.domain;
 
-public class FizzBuzzType03
+public class FizzBuzzType01
   extends IFizzBuzzType {
 
   public String generate(int number) {
@@ -9,6 +9,10 @@ public class FizzBuzzType03
 
     if (isFizz && isBuzz)
     return FIZZ_BUZZ;
+    if (isFizz)
+    return FIZZ;
+    if (isBuzz)
+    return BUZZ;
     return Integer.toString(number);
   }
 
