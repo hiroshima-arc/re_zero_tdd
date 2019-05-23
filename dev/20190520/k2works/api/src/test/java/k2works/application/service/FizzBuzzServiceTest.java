@@ -1,23 +1,18 @@
-package k2works;
+package k2works.application.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import k2works.application.service.FizzBuzzValueCommand;
-import k2works.application.service.FizzBuzzValuesCommand;
-import k2works.application.service.IFizzBuzz;
-import k2works.application.service.IFizzBuzzCommand;
 import k2works.domain.model.FizzBuzzValue;
 import k2works.domain.type.FizzBuzzType;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class FizzBuzzTest {
+public class FizzBuzzServiceTest {
   private IFizzBuzzCommand _type01Command;
   private IFizzBuzzCommand _type02Command;
   private IFizzBuzzCommand _type03Command;

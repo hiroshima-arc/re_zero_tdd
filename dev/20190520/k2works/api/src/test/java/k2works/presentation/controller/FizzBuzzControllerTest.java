@@ -1,4 +1,4 @@
-package k2works;
+package k2works.presentation.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
