@@ -65,6 +65,11 @@
       <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
         <div id="message"></div>
+        <select name="”type”" onchange="changeType(event)">
+          <option value="one">タイプ1</option>
+          <option value="two">タイプ2</option>
+          <option value="three">タイプ3</option>
+        </select>
         <div id="app"></div>
         <div id="mocha"></div>
       </section>
@@ -103,6 +108,10 @@
     </script>
 
     <script>
+      function changeType(event) {
+        renderTable(event.target.value);
+      }
+
       function renderTable() {
         const success = data => {
           console.log(data);
