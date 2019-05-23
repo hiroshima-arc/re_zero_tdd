@@ -1,4 +1,4 @@
-package k2works;
+package k2works.application.service;
 
 import k2works.domain.type.FizzBuzzType;
 

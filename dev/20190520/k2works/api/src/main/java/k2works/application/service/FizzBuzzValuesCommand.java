@@ -1,4 +1,4 @@
-package k2works;
+package k2works.application.service;
 
 import java.util.ArrayList;
 import java.util.List;

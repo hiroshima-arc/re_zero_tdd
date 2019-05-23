@@ -1,7 +1,10 @@
-package k2works;
+package k2works.presentation.controller;
 
 import java.util.List;
 
+import k2works.application.service.FizzBuzzValuesCommand;
+import k2works.application.service.IFizzBuzz;
+import k2works.application.service.IFizzBuzzCommand;
 import k2works.domain.model.FizzBuzzValue;
 import k2works.domain.type.FizzBuzzType;
 

@@ -3,7 +3,7 @@ package k2works.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import k2works.IFizzBuzz;
+import k2works.application.service.IFizzBuzz;
 
 public class FizzBuzzValue implements IFizzBuzz {
   private final Integer _number;
