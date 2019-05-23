@@ -1,4 +1,4 @@
-package k2works.domain;
+package k2works.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ public class FizzBuzzValue implements IFizzBuzz {
   private final Integer _number;
   private final String _value;
 
-  FizzBuzzValue(Integer number, String value) {
+  public FizzBuzzValue(Integer number, String value) {
     if (number < 0)
     throw new IllegalArgumentException(
       "FizzBuzzValue can't generate by minus number"

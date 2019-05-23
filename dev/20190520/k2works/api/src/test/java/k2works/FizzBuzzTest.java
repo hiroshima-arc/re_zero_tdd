@@ -3,9 +3,8 @@ package k2works;
 import java.util.ArrayList;
 import java.util.List;
 
-import k2works.domain.FizzBuzzType;
-import k2works.domain.FizzBuzzValue;
-import k2works.domain.FizzBuzzValuesCommand;
+import k2works.domain.model.FizzBuzzValue;
+import k2works.domain.type.FizzBuzzType;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,6 @@
-package k2works.domain;
+package k2works.domain.type;
+
+import k2works.domain.model.FizzBuzzValue;
 
 public enum FizzBuzzType {
 

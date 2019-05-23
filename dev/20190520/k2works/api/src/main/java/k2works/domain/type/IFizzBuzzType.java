@@ -1,4 +1,4 @@
-package k2works.domain;
+package k2works.domain.type;
 
 public abstract class IFizzBuzzType {
   static final String FIZZ_BUZZ = "FizzBuzz";

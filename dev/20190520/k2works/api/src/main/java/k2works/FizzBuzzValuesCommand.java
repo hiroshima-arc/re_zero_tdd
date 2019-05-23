@@ -1,14 +1,12 @@
-package k2works.domain;
+package k2works;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import k2works.IFizzBuzz;
-import k2works.IFizzBuzzCommand;
-import k2works.domain.FizzBuzzType;
-import k2works.domain.FizzBuzzValue;
-import k2works.domain.FizzBuzzValues;
+import k2works.domain.model.FizzBuzzValue;
+import k2works.domain.model.FizzBuzzValues;
+import k2works.domain.type.FizzBuzzType;
 
 public class FizzBuzzValuesCommand implements IFizzBuzzCommand {
   private FizzBuzzType _type;

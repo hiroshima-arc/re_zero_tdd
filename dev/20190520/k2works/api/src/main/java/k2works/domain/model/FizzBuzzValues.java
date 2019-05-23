@@ -1,4 +1,4 @@
-package k2works.domain;
+package k2works.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import k2works.IFizzBuzz;
 public class FizzBuzzValues implements IFizzBuzz {
   private final List<FizzBuzzValue> _values;
 
-  FizzBuzzValues(List<FizzBuzzValue> values) {
+  public FizzBuzzValues(List<FizzBuzzValue> values) {
     if (values.size() > 100)
     throw new IllegalArgumentException(
       "FizzBuzzValues can't generate over 100"

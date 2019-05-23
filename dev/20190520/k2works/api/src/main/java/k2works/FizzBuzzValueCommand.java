@@ -1,6 +1,6 @@
 package k2works;
 
-import k2works.domain.FizzBuzzType;
+import k2works.domain.type.FizzBuzzType;
 
 public class FizzBuzzValueCommand implements IFizzBuzzCommand {
   private FizzBuzzType _type;

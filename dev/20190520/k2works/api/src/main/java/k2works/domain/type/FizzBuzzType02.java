@@ -1,4 +1,4 @@
-package k2works.domain;
+package k2works.domain.type;
 
 public class FizzBuzzType02
   extends IFizzBuzzType {
