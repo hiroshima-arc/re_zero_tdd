@@ -7,18 +7,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
-  private FizzBuzz _type01;
-  private FizzBuzz _type02;
-  private FizzBuzz _type03;
   private IFizzBuzzCommand _type01Command;
   private IFizzBuzzCommand _type02Command;
   private IFizzBuzzCommand _type03Command;
 
   @BeforeEach
   void init() {
-    _type01 = new FizzBuzz(FizzBuzzType.one);
-    _type02 = new FizzBuzz(FizzBuzzType.two);
-    _type03 = new FizzBuzz(FizzBuzzType.three);
     _type01Command = new FizzBuzzValueCommand(FizzBuzzType.one);
     _type02Command = new FizzBuzzValueCommand(FizzBuzzType.two);
     _type03Command = new FizzBuzzValueCommand(FizzBuzzType.three);
@@ -62,7 +56,7 @@ public class FizzBuzzTest {
 
   @DisplayName("タイプ1は通常のパターンのリストを返す")
   @Test
-  void testType1Valuse() {
+  void testType1Values() {
     IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.one);
     IFizzBuzz list = command.execute(100);
     assertEquals("Fizz", list.getValues().get(2).getValue());
@@ -76,7 +70,7 @@ public class FizzBuzzTest {
 
   @DisplayName("タイプ2は数字のみのパターンのリストを返す")
   @Test
-  void testType2Valuse() {
+  void testType2Values() {
     IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.two);
     IFizzBuzz list = command.execute(100);
     assertEquals("3", list.getValues().get(2).getValue());
@@ -91,7 +85,7 @@ public class FizzBuzzTest {
 
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す")
   @Test
-  void testType3Valuse() {
+  void testType3Values() {
     IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.three);
     IFizzBuzz list = command.execute(100);
     assertEquals("FizzBuzz", list.getValues().get(14).getValue());
