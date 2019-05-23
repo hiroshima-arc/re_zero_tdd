@@ -1,5 +1,6 @@
-package k2works.application.service;
+package k2works.application.command;
 
+import k2works.application.service.IFizzBuzzCommand;
 import k2works.domain.type.FizzBuzzType;
 
 public class FizzBuzzValueCommand implements IFizzBuzzCommand {

@@ -1,4 +1,4 @@
-package k2works.application.service;
+package k2works.application.command;
 
 import java.util.List;
 

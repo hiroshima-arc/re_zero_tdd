@@ -1,9 +1,10 @@
-package k2works.application.service;
+package k2works.application.command;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import k2works.application.service.IFizzBuzzCommand;
 import k2works.domain.model.FizzBuzzValue;
 import k2works.domain.model.FizzBuzzValues;
 import k2works.domain.type.FizzBuzzType;
