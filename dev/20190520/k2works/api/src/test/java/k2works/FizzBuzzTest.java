@@ -117,7 +117,7 @@ public class FizzBuzzTest {
   @Test
   void testFizzBuzzValueNumber() {
     Throwable exception = assertThrows(
-      AssertionError.class,
+      IllegalArgumentException.class,
       () -> {
         _type01Command.execute(-3);
       }
@@ -132,7 +132,7 @@ public class FizzBuzzTest {
   @Test
   void testFizzBuzzValuesNumber() {
     Throwable exception = assertThrows(
-      AssertionError.class,
+      IllegalArgumentException.class,
       () -> {
         IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.one);
         command.execute(101);

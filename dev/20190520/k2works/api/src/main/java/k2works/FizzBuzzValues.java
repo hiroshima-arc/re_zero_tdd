@@ -7,7 +7,10 @@ public class FizzBuzzValues implements IFizzBuzz {
   private final List<FizzBuzzValue> _values;
 
   FizzBuzzValues(List<FizzBuzzValue> values) {
-    assert values.size() <= 100 : "FizzBuzzValues can't generate over 100";
+    if (values.size() > 100)
+    throw new IllegalArgumentException(
+      "FizzBuzzValues can't generate over 100"
+    );
     _values = values;
   }
 
