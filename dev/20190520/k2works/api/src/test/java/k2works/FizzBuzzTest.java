@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FizzBuzzTest {
   private IFizzBuzzCommand _type01Command;
@@ -110,6 +111,36 @@ public class FizzBuzzTest {
     IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.one);
     IFizzBuzz list = command.execute(100);
     assertEquals("", list.getValue());
+  }
+
+  @DisplayName("FizzBuzzValueの値は正の値のみ許可する")
+  @Test
+  void testFizzBuzzValueNumber() {
+    Throwable exception = assertThrows(
+      AssertionError.class,
+      () -> {
+        _type01Command.execute(-3);
+      }
+    );
+    assertEquals(
+      "FizzBuzzValue can't generate minus number",
+      exception.getMessage()
+    );
+  }
+
+  @DisplayName("FizzBuzzValuesは101以上を許可しない")
+  @Test
+  void testFizzBuzzValuesNumber() {
+    Throwable exception = assertThrows(
+      AssertionError.class,
+      () -> {
+        _type01Command.execute(101);
+      }
+    );
+    assertEquals(
+      "FizzBuzzValues can't generate over 100",
+      exception.getMessage()
+    );
   }
 
 }
