@@ -6,7 +6,8 @@ import java.util.List;
 public class FizzBuzzValues implements IFizzBuzz {
   private final List<FizzBuzzValue> _values;
 
-  public FizzBuzzValues(List<FizzBuzzValue> values) {
+  FizzBuzzValues(List<FizzBuzzValue> values) {
+    assert values.size() <= 100 : "FizzBuzzValues can't generate over 100";
     _values = values;
   }
 

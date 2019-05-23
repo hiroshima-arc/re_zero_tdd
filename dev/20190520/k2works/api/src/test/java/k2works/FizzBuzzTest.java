@@ -123,7 +123,7 @@ public class FizzBuzzTest {
       }
     );
     assertEquals(
-      "FizzBuzzValue can't generate minus number",
+      "FizzBuzzValue can't generate by minus number",
       exception.getMessage()
     );
   }
@@ -134,7 +134,8 @@ public class FizzBuzzTest {
     Throwable exception = assertThrows(
       AssertionError.class,
       () -> {
-        _type01Command.execute(101);
+        IFizzBuzzCommand command = new FizzBuzzValuesCommand(FizzBuzzType.one);
+        command.execute(101);
       }
     );
     assertEquals(
