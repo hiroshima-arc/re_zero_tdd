@@ -99,8 +99,8 @@ public class FizzBuzzTest {
   @Test
   void testFizzBuzzValueNull() {
     IFizzBuzz fizzBuzz = _type01Command.execute(3);
-    List<FizzBuzzValue> values = fizzBuzz.getValues();
     List<FizzBuzzValue> empty = new ArrayList<>();
+    List<FizzBuzzValue> values = fizzBuzz.getValues();
     assertEquals(empty, values);
   }
 

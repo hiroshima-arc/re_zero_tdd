@@ -12,7 +12,7 @@ public class FizzBuzzValues implements IFizzBuzz {
 
   @Override
   public String getValue() {
-    return null;
+    return "";
   }
 
   public List<FizzBuzzValue> getValues() {
