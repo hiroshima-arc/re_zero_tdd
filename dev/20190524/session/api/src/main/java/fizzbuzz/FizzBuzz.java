@@ -9,6 +9,7 @@ public class FizzBuzz {
 
   private List<String> _list;
   private FizzBuzzType01 _type01;
+  private FizzBuzzType02 _type02;
 
   public List<String> getList() {
     return _list;
@@ -17,6 +18,7 @@ public class FizzBuzz {
   public FizzBuzz() {
     _list = new ArrayList<>();
     _type01 = new FizzBuzzType01();
+    _type02 = new FizzBuzzType02();
   }
 
   public void generateList() {
@@ -52,7 +54,7 @@ public class FizzBuzz {
       case 1:
         return _type01.generate(number);
       case 2:
-        return Integer.toString(number);
+        return _type02.generate(number);
       case 3:
         String result = Integer.toString(number);
         boolean isFizz = number % 3 == 0;
