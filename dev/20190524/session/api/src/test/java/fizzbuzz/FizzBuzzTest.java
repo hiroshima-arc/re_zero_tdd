@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
-  private FizzBuzz _data;
+  private FizzBuzz _fizzBuzz;
 
   @BeforeEach
   void innit() {
-    _data = new FizzBuzz();
+    _fizzBuzz = new FizzBuzz();
   }
 
   @DisplayName(
@@ -22,12 +22,12 @@ public class FizzBuzzTest {
   @Test
   void test1To100() {
     List<String> list = FizzBuzz.generateList();
-    _data.setList(list);
-    assertEquals("1", _data.getList().get(0));
-    assertEquals("Fizz", _data.getList().get(2));
-    assertEquals("Buzz", _data.getList().get(4));
-    assertEquals("FizzBuzz", _data.getList().get(14));
-    assertEquals("Buzz", _data.getList().get(99));
+    _fizzBuzz.setList(list);
+    assertEquals("1", _fizzBuzz.getList().get(0));
+    assertEquals("Fizz", _fizzBuzz.getList().get(2));
+    assertEquals("Buzz", _fizzBuzz.getList().get(4));
+    assertEquals("FizzBuzz", _fizzBuzz.getList().get(14));
+    assertEquals("Buzz", _fizzBuzz.getList().get(99));
   }
 
   @DisplayName("3で割り切れる場合はFizzをプリントする")
@@ -57,8 +57,8 @@ public class FizzBuzzTest {
   @DisplayName("タイプ1は通常のパターンのリストを返す")
   @Test
   void testType1List() {
-    _data.setList(FizzBuzz.generateList(1));
-    assertEquals("Fizz", _data.getList().get(2));
+    _fizzBuzz.setList(FizzBuzz.generateList(1));
+    assertEquals("Fizz", _fizzBuzz.getList().get(2));
   }
 
   @DisplayName("タイプ2は数のみのパターンを値を返す")
@@ -70,8 +70,8 @@ public class FizzBuzzTest {
   @DisplayName("タイプ2は数のみのパターンのリストを返す")
   @Test
   void testType2List() {
-    _data.setList(FizzBuzz.generateList(2));
-    assertEquals("3", _data.getList().get(2));
+    _fizzBuzz.setList(FizzBuzz.generateList(2));
+    assertEquals("3", _fizzBuzz.getList().get(2));
   }
 
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンの値を返す")
@@ -84,9 +84,9 @@ public class FizzBuzzTest {
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す")
   @Test
   void testType3Value() {
-    _data.setList(FizzBuzz.generateList(3));
-    assertEquals("FizzBuzz", _data.getList().get(14));
-    assertEquals("3", _data.getList().get(2));
+    _fizzBuzz.setList(FizzBuzz.generateList(3));
+    assertEquals("FizzBuzz", _fizzBuzz.getList().get(14));
+    assertEquals("3", _fizzBuzz.getList().get(2));
   }
 
 }
