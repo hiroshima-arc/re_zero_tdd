@@ -41,6 +41,8 @@ public class FizzBuzz {
     switch (type) {
       case 1:
         return FizzBuzz.generate(number);
+      case 2:
+        return Integer.toString(number);
       default:
         return FizzBuzz.generate(number);
     }
