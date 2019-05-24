@@ -27,5 +27,11 @@ public class FizzBuzzTest {
     assertEquals("Buzz", FizzBuzz.generate(5));
   }
 
+  @DisplayName("15で割り切れる場合はFizzBuzzをプリントする")
+  @Test
+  void testFizzBuzz() {
+    assertEquals("FizzBuzz", FizzBuzz.generate(15));
+  }
+
 }
 
