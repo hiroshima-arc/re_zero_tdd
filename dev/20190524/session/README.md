@@ -29,7 +29,17 @@ npm install --save-dev npm-run-all watch foreman cpx rimraf markdown-to-html
 npm install --save-dev prettier prettier-plugin-java
 npm install --save-dev browser-sync connect-browser-sync 
 npx browser-sync init
-touch Procfile
+touc****h Procfile
+```
+
+#### アプリケーションのセットアップ
+
+```bash
+mkdir src
+touch src/index.html
+mkdir api
+cd api
+gradle init --type java-application
 ```
 
 **[⬆ back to top](#構成)**
