@@ -1,16 +1,22 @@
 package fizzbuzz;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FizzBuzz {
   private static final int MAX_NUMBER = 100;
 
   private List<String> _list;
+  private FizzBuzzType01 _type01;
 
   public List<String> getList() {
     return _list;
+  }
+
+  public FizzBuzz() {
+    _list = new ArrayList<>();
+    _type01 = new FizzBuzzType01();
   }
 
   public void generateList() {
@@ -36,15 +42,15 @@ public class FizzBuzz {
   }
 
   public void generateList(int type) {
-    _list = IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
-      number -> FizzBuzz.generate(number, type)
-    ).collect(Collectors.toList());
+    IntStream.rangeClosed(1, MAX_NUMBER).forEach(
+      number -> _list.add(this.generate(number, type))
+    );
   }
 
-  public static String generate(int number, int type) {
+  public String generate(int number, int type) {
     switch (type) {
       case 1:
-        return FizzBuzz.generate(number);
+        return _type01.generate(number);
       case 2:
         return Integer.toString(number);
       case 3:
