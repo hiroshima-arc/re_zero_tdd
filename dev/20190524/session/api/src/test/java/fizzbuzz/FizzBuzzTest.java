@@ -10,9 +10,12 @@ public class FizzBuzzTest {
   @DisplayName("1から100までをプリントする")
   @Test
   void test1To100() {
-    int[] list = FizzBuzz.print1To100();
-    assertEquals(1, list[0]);
-    assertEquals(100, list[99]);
+    String[] list = FizzBuzz.print1To100();
+    assertEquals("1", list[0]);
+    assertEquals("Fizz", list[2]);
+    assertEquals("Buzz", list[4]);
+    assertEquals("FizzBuzz", list[14]);
+    assertEquals("Buzz", list[99]);
   }
 
   @DisplayName("3で割り切れる場合はFizzをプリントする")
