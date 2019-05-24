@@ -8,19 +8,28 @@ public class FizzBuzz {
   private static final int MAX_NUMBER = 100;
 
   private List<String> _list;
-  private FizzBuzzType01 _type01;
-  private FizzBuzzType02 _type02;
-  private FizzBuzzType03 _type03;
+  private IFizzBuzzType _type;
 
   public List<String> getList() {
     return _list;
   }
 
-  public FizzBuzz() {
+  public FizzBuzz(int type) {
     _list = new ArrayList<>();
-    _type01 = new FizzBuzzType01();
-    _type02 = new FizzBuzzType02();
-    _type03 = new FizzBuzzType03();
+
+    switch (type) {
+      case 1:
+        _type = new FizzBuzzType01();
+        break;
+      case 2:
+        _type = new FizzBuzzType02();
+        break;
+      case 3:
+        _type = new FizzBuzzType03();
+        break;
+      default:
+        _type = new FizzBuzzType01();
+    }
   }
 
   public void generateList() {
@@ -29,21 +38,12 @@ public class FizzBuzz {
 
   public void generateList(int type) {
     IntStream.rangeClosed(1, MAX_NUMBER).forEach(
-      number -> _list.add(this.generate(number, type))
+      number -> _list.add(this.generate(number))
     );
   }
 
-  public String generate(int number, int type) {
-    switch (type) {
-      case 1:
-        return _type01.generate(number);
-      case 2:
-        return _type02.generate(number);
-      case 3:
-        return _type03.generate(number);
-      default:
-        return _type01.generate(number);
-    }
+  public String generate(int number) {
+    return _type.generate(number);
   }
 
 }

@@ -1,6 +1,6 @@
 package fizzbuzz;
 
-public class FizzBuzzType03 {
+public class FizzBuzzType03 implements IFizzBuzzType {
 
   public String generate(int number) {
     String result = Integer.toString(number);

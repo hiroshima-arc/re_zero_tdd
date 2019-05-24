@@ -11,7 +11,7 @@ public class FizzBuzzTest {
 
   @BeforeEach
   void innit() {
-    _fizzBuzz = new FizzBuzz();
+    _fizzBuzz = new FizzBuzz(1);
   }
 
   @DisplayName(
@@ -30,25 +30,26 @@ public class FizzBuzzTest {
   @DisplayName("3で割り切れる場合はFizzをプリントする")
   @Test
   void testFizz() {
-    assertEquals("Fizz", _fizzBuzz.generate(3, 1));
+    assertEquals("Fizz", _fizzBuzz.generate(3));
   }
 
   @DisplayName("5で割り切れる場合はBuzzをプリントする")
   @Test
   void testBuzz() {
-    assertEquals("Buzz", _fizzBuzz.generate(5, 1));
+    assertEquals("Buzz", _fizzBuzz.generate(5));
   }
 
   @DisplayName("15で割り切れる場合はFizzBuzzをプリントする")
   @Test
   void testFizzBuzz() {
-    assertEquals("FizzBuzz", _fizzBuzz.generate(15, 1));
+    assertEquals("FizzBuzz", _fizzBuzz.generate(15));
   }
 
   @DisplayName("タイプ1は通常のパターンを返す")
   @Test
   void testType1() {
-    assertEquals("Fizz", _fizzBuzz.generate(3, 1));
+    FizzBuzz type1 = new FizzBuzz(1);
+    assertEquals("Fizz", type1.generate(3));
   }
 
   @DisplayName("タイプ1は通常のパターンのリストを返す")
@@ -61,29 +62,33 @@ public class FizzBuzzTest {
   @DisplayName("タイプ2は数のみのパターンを値を返す")
   @Test
   void testType2() {
-    assertEquals("3", _fizzBuzz.generate(3, 2));
+    FizzBuzz type2 = new FizzBuzz(2);
+    assertEquals("3", type2.generate(3));
   }
 
   @DisplayName("タイプ2は数のみのパターンのリストを返す")
   @Test
   void testType2List() {
-    _fizzBuzz.generateList(2);
-    assertEquals("3", _fizzBuzz.getList().get(2));
+    FizzBuzz type2 = new FizzBuzz(2);
+    type2.generateList();
+    assertEquals("3", type2.getList().get(2));
   }
 
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンの値を返す")
   @Test
   void testType3() {
-    assertEquals("FizzBuzz", _fizzBuzz.generate(15, 3));
-    assertEquals("3", _fizzBuzz.generate(3, 3));
+    FizzBuzz type3 = new FizzBuzz(3);
+    assertEquals("FizzBuzz", type3.generate(15));
+    assertEquals("3", type3.generate(3));
   }
 
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す")
   @Test
   void testType3Value() {
-    _fizzBuzz.generateList(3);
-    assertEquals("FizzBuzz", _fizzBuzz.getList().get(14));
-    assertEquals("3", _fizzBuzz.getList().get(2));
+    FizzBuzz type3 = new FizzBuzz(3);
+    type3.generateList(3);
+    assertEquals("FizzBuzz", type3.getList().get(14));
+    assertEquals("3", type3.getList().get(2));
   }
 
 }
