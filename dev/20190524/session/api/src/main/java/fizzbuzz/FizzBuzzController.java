@@ -1,5 +1,7 @@
 package fizzbuzz;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,8 +11,8 @@ public class FizzBuzzController {
 
   @CrossOrigin
   @RequestMapping("/fizzbuzz")
-  public String[] fizzbuzz() {
-    String[] list = FizzBuzz.generateList();
+  public List<String> fizzbuzz() {
+    List<String> list = FizzBuzz.generateList();
     return list;
   }
 
