@@ -31,6 +31,12 @@ public class FizzBuzz {
     return result;
   }
 
+  public static List<String> generateList(int type) {
+    return IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
+      number -> FizzBuzz.generate(number, type)
+    ).collect(Collectors.toList());
+  }
+
   public static String generate(int number, int type) {
     switch (type) {
       case 1:
