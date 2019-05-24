@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
 
-  @DisplayName("1から100までをプリントする")
+  @DisplayName(
+    "1から100までをプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz15で割り切れる場合はFizzBuzzをプリントする"
+  )
   @Test
   void test1To100() {
     String[] list = FizzBuzz.print1To100();
