@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "nf start -j Procfile",
+    "dev": "nf start -j Procfile-dev",
     "build": "npm-run-all build:*",
     "build:app": "cd $npm_package_config_app_dir; gradle build",
     "build:doc": "markdown README.md > ./src/readme.html",
