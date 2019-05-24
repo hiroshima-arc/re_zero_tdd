@@ -1,19 +1,19 @@
 package fizzbuzz;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
-  private FizzBuzzData _data;
+  private FizzBuzz _data;
 
   @BeforeEach
   void innit() {
-    _data = new FizzBuzzData();
+    _data = new FizzBuzz();
   }
 
   @DisplayName(

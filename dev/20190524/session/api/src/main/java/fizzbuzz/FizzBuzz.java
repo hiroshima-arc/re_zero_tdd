@@ -7,6 +7,16 @@ import java.util.stream.IntStream;
 public class FizzBuzz {
   private static final int MAX_NUMBER = 100;
 
+  private List<String> _list;
+
+  public List<String> getList() {
+    return _list;
+  }
+
+  public void setList(List<String> list) {
+    _list = list;
+  }
+
   public static List<String> generateList() {
     return IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
       FizzBuzz::generate
