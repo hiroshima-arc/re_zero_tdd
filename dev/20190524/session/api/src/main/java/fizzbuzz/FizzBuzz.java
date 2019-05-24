@@ -27,24 +27,6 @@ public class FizzBuzz {
     this.generateList(1);
   }
 
-  public static String generate(int number) {
-    String result = Integer.toString(number);
-
-    boolean isFizz = number % 3 == 0;
-    boolean isBuzz = number % 5 == 0;
-
-    if (isFizz && isBuzz) {
-      return "FizzBuzz";
-    }
-    if (isFizz) {
-      return "Fizz";
-    }
-    if (isBuzz) {
-      return "Buzz";
-    }
-    return result;
-  }
-
   public void generateList(int type) {
     IntStream.rangeClosed(1, MAX_NUMBER).forEach(
       number -> _list.add(this.generate(number, type))
@@ -60,7 +42,7 @@ public class FizzBuzz {
       case 3:
         return _type03.generate(number);
       default:
-        return FizzBuzz.generate(number);
+        return _type01.generate(number);
     }
   }
 
