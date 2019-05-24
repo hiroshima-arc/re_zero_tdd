@@ -31,5 +31,14 @@ public class FizzBuzz {
     return result;
   }
 
+  public static String generate(int number, int type) {
+    switch (type) {
+      case 1:
+        return FizzBuzz.generate(number);
+      default:
+        return FizzBuzz.generate(number);
+    }
+  }
+
 }
 
