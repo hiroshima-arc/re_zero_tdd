@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
 
-  @DisplayName("こんにちは世界")
+  @DisplayName("1から100までをプリントする")
   @Test
-  void testHelloWorld() {
-    assertEquals("hello, world", FizzBuzz.greeting());
+  void test1To100() {
+    assertEquals(1, FizzBuzz.print1To100());
   }
 
 }

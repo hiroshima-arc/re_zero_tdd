@@ -2,8 +2,8 @@ package fizzbuzz;
 
 public class FizzBuzz {
 
-  public static String greeting() {
-    return "hello, world";
+  public static int print1To100() {
+    return 1;
   }
 
 }
