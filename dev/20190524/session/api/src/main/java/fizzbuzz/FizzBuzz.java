@@ -43,6 +43,14 @@ public class FizzBuzz {
         return FizzBuzz.generate(number);
       case 2:
         return Integer.toString(number);
+      case 3:
+        String result = Integer.toString(number);
+        boolean isFizz = number % 3 == 0;
+        boolean isBuzz = number % 5 == 0;
+        if (isFizz && isBuzz) {
+          return "FizzBuzz";
+        }
+        return result;
       default:
         return FizzBuzz.generate(number);
     }
