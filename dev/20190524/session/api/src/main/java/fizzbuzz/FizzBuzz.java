@@ -5,11 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class FizzBuzz {
+  private static final int MAX_NUMBER = 100;
 
   public static List<String> generateList() {
-    return IntStream.rangeClosed(1, 100).mapToObj(FizzBuzz::generate).collect(
-      Collectors.toList()
-    );
+    return IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
+      FizzBuzz::generate
+    ).collect(Collectors.toList());
   }
 
   public static String generate(int number) {
