@@ -3,8 +3,25 @@
   "version": "1.0.0",
   "description": "## 概要",
   "main": "index.js",
+  "config": {
+    "app_dir": "api"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nf start -j Procfile",
+    "build": "npm-run-all build:*",
+    "build:app": "cd $npm_package_config_app_dir; gradle build",
+    "build:doc": "markdown README.md > ./src/readme.html",
+    "test": "cd $npm_package_config_app_dir; gradle test",
+    "test:report": "cd $npm_package_config_app_dir/build/reports/tests/test; browser-sync start --server --files '**/*'",
+    "lint": "cd $npm_package_config_app_dir; gradle pmdMain",
+    "lint:report": "cd $npm_package_config_app_dir/build/reports/pmd; browser-sync start --server --index test.html --files '**/*'",
+    "format": "npm-run-all format:*",
+    "format:front": "prettier --write src/**/*.*",
+    "format:api": "prettier --write $npm_package_config_app_dir/src/**/*.*",
+    "watch:front": "watch 'npm-run-all format:front' ./src ",
+    "watch:api": "watch 'npm-run-all format:api lint test' $npm_package_config_app_dir/src ",
+    "app:front": "browser-sync start --config bs-config.js",
+    "app:api": "cd $npm_package_config_app_dir; gradle bootRun"
   },
   "keywords": [],
   "author": "",
