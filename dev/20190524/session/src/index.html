@@ -107,51 +107,53 @@
           function renderTable() {
             const success = data => {
               console.log(data);
-            };
-            const errors = data => {
-              console.log(data);
-            }
-            apiCall("http://192.168.1.254:8080/fizzbuzz", "GET", success, errors);
 
-            const headerItem = () => {
-              let item = "<tr>";
-              [...Array(10).keys()].forEach(i => {
-                item += `<th>${i + 1}</th>`;
-              });
-              item += "</tr>";
-              return item;
-            };
+              const headerItem = () => {
+                let item = "<tr>";
+                [...Array(10).keys()].forEach(i => {
+                  item += `<th>${i + 1}</th>`;
+                });
+                item += "</tr>";
+                return item;
+              };
 
-            const header = `
+              const header = `
               <thead>
               ${headerItem()}
               </thead>
             `;
 
-            const bodyItems = () => {
-              let item = "<tr>";
-              [...Array(101).keys()].slice(1).forEach((v,k) => {
-               item += `<td>${v}</td>`;
-               if ((k + 1) % 10 === 0) {
-                 item += `</tr><tr>`;
-               }
-              });
-              return item;
-            };
+              const bodyItems = (data) => {
+                let item = "<tr>";
+                data.forEach((v,k) => {
+                  item += `<td>${v}</td>`;
+                  if ((k + 1) % 10 === 0) {
+                    item += `</tr><tr>`;
+                  }
+                });
+                return item;
+              };
 
-            const body = `
+              const body = `
               <tbody>
-              ${bodyItems()}
+              ${bodyItems(data)}
               </tbody>
             `;
 
-            const table = `
+              const table = `
             <table>
               ${header}
               ${body}
             </table>`;
 
-            document.querySelector("#app").innerHTML = table;
+              document.querySelector("#app").innerHTML = table;
+            };
+
+            const errors = data => {
+              console.log(data);
+            };
+
+            apiCall("http://192.168.1.254:8080/fizzbuzz", "GET", success, errors);
           }
           window.onload = renderTable();
         </script>
