@@ -1,0 +1,3 @@
+api: npm run app:api
+api_watch: npm run watch:api
+report: npm run test:report
