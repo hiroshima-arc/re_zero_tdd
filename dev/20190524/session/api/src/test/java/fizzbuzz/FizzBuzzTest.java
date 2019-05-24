@@ -1,7 +1,5 @@
 package fizzbuzz;
 
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,8 +19,7 @@ public class FizzBuzzTest {
   )
   @Test
   void test1To100() {
-    List<String> list = FizzBuzz.generateList();
-    _fizzBuzz.setList(list);
+    _fizzBuzz.generateList();
     assertEquals("1", _fizzBuzz.getList().get(0));
     assertEquals("Fizz", _fizzBuzz.getList().get(2));
     assertEquals("Buzz", _fizzBuzz.getList().get(4));
@@ -57,7 +54,7 @@ public class FizzBuzzTest {
   @DisplayName("タイプ1は通常のパターンのリストを返す")
   @Test
   void testType1List() {
-    _fizzBuzz.setList(FizzBuzz.generateList(1));
+    _fizzBuzz.generateList(1);
     assertEquals("Fizz", _fizzBuzz.getList().get(2));
   }
 
@@ -70,7 +67,7 @@ public class FizzBuzzTest {
   @DisplayName("タイプ2は数のみのパターンのリストを返す")
   @Test
   void testType2List() {
-    _fizzBuzz.setList(FizzBuzz.generateList(2));
+    _fizzBuzz.generateList(2);
     assertEquals("3", _fizzBuzz.getList().get(2));
   }
 
@@ -84,7 +81,7 @@ public class FizzBuzzTest {
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す")
   @Test
   void testType3Value() {
-    _fizzBuzz.setList(FizzBuzz.generateList(3));
+    _fizzBuzz.generateList(3);
     assertEquals("FizzBuzz", _fizzBuzz.getList().get(14));
     assertEquals("3", _fizzBuzz.getList().get(2));
   }

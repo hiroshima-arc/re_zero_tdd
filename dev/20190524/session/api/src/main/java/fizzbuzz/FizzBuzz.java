@@ -13,12 +13,8 @@ public class FizzBuzz {
     return _list;
   }
 
-  public void setList(List<String> list) {
-    _list = list;
-  }
-
-  public static List<String> generateList() {
-    return FizzBuzz.generateList(1);
+  public void generateList() {
+    this.generateList(1);
   }
 
   public static String generate(int number) {
@@ -39,8 +35,8 @@ public class FizzBuzz {
     return result;
   }
 
-  public static List<String> generateList(int type) {
-    return IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
+  public void generateList(int type) {
+    _list = IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
       number -> FizzBuzz.generate(number, type)
     ).collect(Collectors.toList());
   }
