@@ -2,7 +2,7 @@ package fizzbuzz;
 
 public class FizzBuzz {
 
-  public static String[] print1To100() {
+  public static String[] generateList() {
     String[] list = new String[100];
     for (int i = 1; i <= 100; i++) {
       list[i - 1] = generate(i);

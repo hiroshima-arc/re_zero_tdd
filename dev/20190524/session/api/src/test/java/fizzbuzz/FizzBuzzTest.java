@@ -12,7 +12,7 @@ public class FizzBuzzTest {
   )
   @Test
   void test1To100() {
-    String[] list = FizzBuzz.print1To100();
+    String[] list = FizzBuzz.generateList();
     assertEquals("1", list[0]);
     assertEquals("Fizz", list[2]);
     assertEquals("Buzz", list[4]);

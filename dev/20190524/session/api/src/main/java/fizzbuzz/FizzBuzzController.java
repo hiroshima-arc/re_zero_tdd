@@ -10,7 +10,7 @@ public class FizzBuzzController {
   @CrossOrigin
   @RequestMapping("/fizzbuzz")
   public String[] fizzbuzz() {
-    String[] list = FizzBuzz.print1To100();
+    String[] list = FizzBuzz.generateList();
     return list;
   }
 
