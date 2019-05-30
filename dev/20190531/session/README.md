@@ -33,6 +33,16 @@ npx browser-sync init
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+mkdir src
+touch src/index.html
+mkdir -p api/fizzbuzz
+cd api/fizzbuzz
+gradle init --type java-application
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
