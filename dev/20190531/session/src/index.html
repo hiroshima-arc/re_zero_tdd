@@ -104,58 +104,57 @@
 
     <script>
       function renderTable() {
-        const bodyElements = (() => {
-          let counter = 0;
-          let element = "<tr>";
+        const success = data => {
+          console.log(data);
 
-          for (let i = 1; i <= 100; i++) {
-            element += `<td>${i}</td>`;
-            counter += 1;
+          const bodyElements = (data => {
+            let element = "<tr>";
 
-            if (counter === 10) {
-              element += "</tr><tr>";
-              counter = 0;
+            data.forEach((v, k) => {
+              element += `<td>${v}</td>`;
+
+              if ((k + 1) % 10 === 0) {
+                element += "</tr><tr>";
+              }
+            });
+
+            return element;
+          })(data);
+
+          const headerElements = (() => {
+            let element = "<tr>";
+            for (let i = 1; i <= 10; i++) {
+              element += `<th>${i}</th>`;
             }
-          }
+            element += "</tr>";
+            return element;
+          })();
 
-          return element;
-        })();
-
-        const headerElements = (() => {
-          let element = "<tr>";
-          for (let i = 1; i <= 10; i++) {
-            element += `<th>${i}</th>`;
-          }
-          element += "</tr>";
-          return element;
-        })();
-
-        const header = `
+          const header = `
           <thead>
           ${headerElements}
           </thead>
         `;
 
-        const body = `
+          const body = `
           <tbody>
           ${bodyElements}
           </tbody>
         `;
 
-        const table = `
+          const table = `
         <table>
           ${header}
           ${body}
         </table>`;
 
-        document.querySelector("#app").innerHTML = table;
-
-        const success = data => {
-          console.log(data);
+          document.querySelector("#app").innerHTML = table;
         };
+
         const errors = data => {
           console.log(data);
         };
+
         apiCall("http://localhost:8080/fizzbuzz", "GET", success, errors);
       }
 
