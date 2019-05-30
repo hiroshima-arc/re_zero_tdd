@@ -1,5 +1,7 @@
 package fizzbuzz;
 
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,12 +14,12 @@ public class FizzBuzzTest {
   )
   @Test
   void testPrint1To100() {
-    String[] list = FizzBuzz.generateList();
-    assertEquals("1", list[0]);
-    assertEquals("Fizz", list[2]);
-    assertEquals("Buzz", list[4]);
-    assertEquals("FizzBuzz", list[14]);
-    assertEquals("Buzz", list[99]);
+    List<String> list = FizzBuzz.generateList();
+    assertEquals("1", list.get(0));
+    assertEquals("Fizz", list.get(2));
+    assertEquals("Buzz", list.get(4));
+    assertEquals("FizzBuzz", list.get(14));
+    assertEquals("Buzz", list.get(99));
   }
 
   @DisplayName("3で割り切れる場合はFizzをプリントする")

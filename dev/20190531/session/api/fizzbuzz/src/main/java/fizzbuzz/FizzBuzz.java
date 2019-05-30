@@ -1,11 +1,15 @@
 package fizzbuzz;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FizzBuzz {
 
-  public static String[] generateList() {
-    String[] list = new String[100];
+  public static List<String> generateList() {
+    List<String> list = new ArrayList<>();
     for (int i = 1; i <= 100; i++) {
-      list[i - 1] = FizzBuzz.generate(i);
+      String value = FizzBuzz.generate(i);
+      list.add(value);
     }
     return list;
   }
