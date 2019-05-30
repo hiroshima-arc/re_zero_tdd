@@ -10,8 +10,7 @@ public class FizzBuzz {
     List<String> list = new ArrayList<>();
     IntStream.rangeClosed(1, 100).forEach(
       number -> {
-        String value = FizzBuzz.generate(number);
-        list.add(value);
+        list.add(FizzBuzz.generate(number));
       }
     );
     return list;
