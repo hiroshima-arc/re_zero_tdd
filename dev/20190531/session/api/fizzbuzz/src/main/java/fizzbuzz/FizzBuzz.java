@@ -2,15 +2,18 @@ package fizzbuzz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class FizzBuzz {
 
   public static List<String> generateList() {
     List<String> list = new ArrayList<>();
-    for (int i = 1; i <= 100; i++) {
-      String value = FizzBuzz.generate(i);
-      list.add(value);
-    }
+    IntStream.rangeClosed(1, 100).forEach(
+      number -> {
+        String value = FizzBuzz.generate(number);
+        list.add(value);
+      }
+    );
     return list;
   }
 
