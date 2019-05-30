@@ -9,6 +9,7 @@
 | ソフトウェア   | バージョン | 備考 |
 | :------------- | :--------- | :--- |
 | nodejs         | 8.10.0     |      |
+| java           | 8          |      |
 
 ## 構成
 
@@ -20,6 +21,17 @@
 ## 詳細
 
 ### 構築
+
+#### 開発パッケージのセットアップ
+
+```bash
+npm init -y
+npm install --save-dev npm-run-all watch foreman cpx rimraf markdown-to-html
+npm install --save-dev prettier prettier-plugin-java
+npm install --save-dev browser-sync connect-browser-sync 
+npx browser-sync init
+touch Procfile
+```
 
 **[⬆ back to top](#構成)**
 
