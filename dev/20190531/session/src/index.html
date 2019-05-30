@@ -123,9 +123,9 @@
 
           const headerElements = (() => {
             let element = "<tr>";
-            for (let i = 1; i <= 10; i++) {
+            [...Array(10).keys()].forEach(i => {
               element += `<th>${i}</th>`;
-            }
+            });
             element += "</tr>";
             return element;
           })();
