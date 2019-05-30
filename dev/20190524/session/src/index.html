@@ -65,48 +65,6 @@
       <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
         <div id="app">
-          <table>
-            <thead>
-              <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>Fizz</td>
-                <td>4</td>
-                <td>Buzz</td>
-                <td>Fizz</td>
-                <td>7</td>
-                <td>8</td>
-                <td>Fizz</td>
-                <td>Buzz</td>
-              </tr>
-              <tr>
-                <td>11</td>
-                <td>Fizz</td>
-                <td>13</td>
-                <td>14</td>
-                <td>FizzBuzz</td>
-                <td>16</td>
-                <td>17</td>
-                <td>Fizz</td>
-                <td>19</td>
-                <td>Buzz</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
         <div id="mocha"></div>
       </section>
@@ -124,9 +82,84 @@
     </script>
 
     <script>
-      mocha.checkLeaks();
-      mocha.globals(["jQuery"]);
-      mocha.run();
+        function apiCall(url, method, onSuccess, onErrors) {
+          $("#message").html("処理中...");
+          $.ajax({
+            url: url,
+            type: method,
+            data: {}
+          })
+                  .done(data => {
+                    onSuccess(data);
+                    const message = `<h3>Apiサーバーの読み込みに成功しました</h3>`;
+                    $("#message").html(message);
+                  })
+                  .fail(data => {
+                    onErrors(data);
+                    const message = `<h3>Apiサーバーでエラーが発生しました</h3>`;
+                    $("#message").html(message);
+                  });
+        }
+
+      </script>
+
+        <script>
+          function renderTable() {
+            const success = data => {
+              console.log(data);
+
+              const headerItem = () => {
+                let item = "<tr>";
+                [...Array(10).keys()].forEach(i => {
+                  item += `<th>${i + 1}</th>`;
+                });
+                item += "</tr>";
+                return item;
+              };
+
+              const header = `
+              <thead>
+              ${headerItem()}
+              </thead>
+            `;
+
+              const bodyItems = (data) => {
+                let item = "<tr>";
+                data.forEach((v,k) => {
+                  const isNextLine = (k + 1) % 10 === 0;
+                  isNextLine ? item += `<td>${v}</td></tr><tr>` : item += `<td>${v}</td>`;
+                });
+                return item;
+              };
+
+              const body = `
+              <tbody>
+              ${bodyItems(data)}
+              </tbody>
+            `;
+
+              const table = `
+            <table>
+              ${header}
+              ${body}
+            </table>`;
+
+              document.querySelector("#app").innerHTML = table;
+            };
+
+            const errors = data => {
+              console.log(data);
+            };
+
+            apiCall("http://192.168.1.254:8080/fizzbuzz", "GET", success, errors);
+          }
+          window.onload = renderTable();
+        </script>
+
+
+        mocha.checkLeaks();
+        mocha.globals(["jQuery"]);
+        mocha.run();
     </script>
   </body>
 </html>
