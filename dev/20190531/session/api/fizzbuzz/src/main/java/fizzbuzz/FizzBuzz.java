@@ -11,8 +11,6 @@ public class FizzBuzz {
   }
 
   public static String generate(int number) {
-    String result = Integer.toString(number);
-
     boolean isFizz = number % 3 == 0;
     boolean isBuzz = number % 5 == 0;
 
@@ -25,7 +23,7 @@ public class FizzBuzz {
     if (isBuzz) {
       return "Buzz";
     }
-    return result;
+    return Integer.toString(number);
   }
 
 }
