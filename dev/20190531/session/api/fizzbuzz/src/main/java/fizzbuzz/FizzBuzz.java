@@ -10,5 +10,14 @@ public class FizzBuzz {
     return list;
   }
 
+  public static String generate(int number) {
+    String result = Integer.toString(number);
+
+    if (number % 3 == 0) {
+      result = "Fizz";
+    }
+    return result;
+  }
+
 }
 
