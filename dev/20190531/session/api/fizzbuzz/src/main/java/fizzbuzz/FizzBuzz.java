@@ -5,7 +5,7 @@ public class FizzBuzz {
   public static String[] print1To100() {
     String[] list = new String[100];
     for (int i = 1; i <= 100; i++) {
-      list[i - 1] = Integer.toString(i);
+      list[i - 1] = FizzBuzz.generate(i);
     }
     return list;
   }
