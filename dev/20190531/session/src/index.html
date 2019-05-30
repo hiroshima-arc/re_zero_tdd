@@ -65,50 +65,7 @@
       <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
         <div id="message"></div>
-        <div id="app">
-          <table>
-            <thead>
-              <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>Fizz</td>
-                <td>4</td>
-                <td>Buzz</td>
-                <td>Fizz</td>
-                <td>7</td>
-                <td>8</td>
-                <td>Fizz</td>
-                <td>Buzz</td>
-              </tr>
-              <tr>
-                <td>11</td>
-                <td>Fizz</td>
-                <td>13</td>
-                <td>14</td>
-                <td>FizzBuzz</td>
-                <td>16</td>
-                <td>17</td>
-                <td>Fizz</td>
-                <td>19</td>
-                <td>Buzz</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div id="app"></div>
         <div id="mocha"></div>
       </section>
     </section>
@@ -147,6 +104,52 @@
 
     <script>
       function renderTable() {
+        const bodyElements = (() => {
+          let counter = 0;
+          let element = "<tr>";
+
+          for (let i = 1; i <= 100; i++) {
+            element += `<td>${i}</td>`;
+            counter += 1;
+
+            if (counter === 10) {
+              element += "</tr><tr>";
+              counter = 0;
+            }
+          }
+
+          return element;
+        })();
+
+        const headerElements = (() => {
+          let element = "<tr>";
+          for (let i = 1; i <= 10; i++) {
+            element += `<th>${i}</th>`;
+          }
+          element += "</tr>";
+          return element;
+        })();
+
+        const header = `
+          <thead>
+          ${headerElements}
+          </thead>
+        `;
+
+        const body = `
+          <tbody>
+          ${bodyElements}
+          </tbody>
+        `;
+
+        const table = `
+        <table>
+          ${header}
+          ${body}
+        </table>`;
+
+        document.querySelector("#app").innerHTML = table;
+
         const success = data => {
           console.log(data);
         };
