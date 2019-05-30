@@ -111,11 +111,10 @@
             let element = "<tr>";
 
             data.forEach((v, k) => {
-              element += `<td>${v}</td>`;
-
-              if ((k + 1) % 10 === 0) {
-                element += "</tr><tr>";
-              }
+              const isNextLine = (k + 1) % 10 === 0;
+              isNextLine
+                ? (element += `<td>${v}</td></tr><tr>`)
+                : (element += `<td>${v}</td>`);
             });
 
             return element;
