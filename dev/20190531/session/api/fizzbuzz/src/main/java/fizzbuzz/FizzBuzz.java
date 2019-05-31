@@ -11,6 +11,22 @@ public class FizzBuzz {
   public static final String BUZZ = "Buzz";
 
   private List<String> _list;
+  private FizzBuzzType01 _type01;
+  private FizzBuzzType02 _type02;
+  private FizzBuzzType03 _type03;
+
+  public FizzBuzz(int type) {
+    switch (type) {
+      case 1:
+        _type01 = new FizzBuzzType01();
+      case 2:
+        _type02 = new FizzBuzzType02();
+      case 3:
+        _type03 = new FizzBuzzType03();
+      default:
+        _type01 = new FizzBuzzType01();
+    }
+  }
 
   public List<String> getList() {
     return _list;
@@ -22,20 +38,20 @@ public class FizzBuzz {
 
   public void generateList(int type) {
     _list = IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
-      number -> FizzBuzz.generate(number, type)
+      number -> this.generate(number, type)
     ).collect(Collectors.toList());
   }
 
-  public static String generate(int number, int type) {
+  public String generate(int number, int type) {
     switch (type) {
       case 1:
-        return new FizzBuzzType01(number).generate();
+        return _type01.generate(number);
       case 2:
-        return new FizzBuzzType02(number).generate();
+        return _type02.generate(number);
       case 3:
-        return new FizzBuzzType03(number).generate();
+        return _type03.generate(number);
       default:
-        return new FizzBuzzType01(number).generate();
+        return _type01.generate(number);
     }
   }
 

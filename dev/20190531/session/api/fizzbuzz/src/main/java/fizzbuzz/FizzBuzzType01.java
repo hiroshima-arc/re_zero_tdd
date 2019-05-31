@@ -1,13 +1,8 @@
 package fizzbuzz;
 
 public class FizzBuzzType01 {
-  private int number;
 
-  public FizzBuzzType01(int number) {
-    this.number = number;
-  }
-
-  public String generate() {
+  public String generate(int number) {
     boolean isFizz = number % 3 == 0;
     boolean isBuzz = number % 5 == 0;
 
