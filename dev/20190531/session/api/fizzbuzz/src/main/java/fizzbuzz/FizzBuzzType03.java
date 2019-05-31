@@ -1,6 +1,7 @@
 package fizzbuzz;
 
-public class FizzBuzzType03 {
+public class FizzBuzzType03
+  extends FizzBuzzType {
 
   public String generate(int number) {
     boolean isFizz = number % 3 == 0;
