@@ -54,5 +54,12 @@ public class FizzBuzzTest {
     assertEquals("Fizz", FizzBuzz.generate(3, 1));
   }
 
+  @DisplayName("タイプ1は通常のパターンのリストを返す")
+  @Test
+  void testType1List() {
+    _data.list = FizzBuzz.generateList(1);
+    assertEquals("Fizz", _data.list.get(2));
+  }
+
 }
 
