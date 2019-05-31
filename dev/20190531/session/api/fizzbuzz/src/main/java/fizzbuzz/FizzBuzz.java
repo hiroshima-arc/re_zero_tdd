@@ -17,9 +17,7 @@ public class FizzBuzz {
   }
 
   public void generateList() {
-    _list = IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
-      FizzBuzz::generate
-    ).collect(Collectors.toList());
+    this.generateList(1);
   }
 
   public void generateList(int type) {
