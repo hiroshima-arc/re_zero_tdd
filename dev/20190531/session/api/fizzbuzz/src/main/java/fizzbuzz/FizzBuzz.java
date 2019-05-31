@@ -10,6 +10,16 @@ public class FizzBuzz {
   public static final String FIZZ = "Fizz";
   public static final String BUZZ = "Buzz";
 
+  private List<String> _list;
+
+  public List<String> getList() {
+    return _list;
+  }
+
+  public void setList(List<String> list) {
+    _list = list;
+  }
+
   public static List<String> generateList() {
     return IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
       FizzBuzz::generate
