@@ -33,12 +33,7 @@ public class FizzBuzz {
       case 2:
         return new FizzBuzzType02(number).generate();
       case 3:
-        boolean isFizz = number % 3 == 0;
-        boolean isBuzz = number % 5 == 0;
-        if (isFizz && isBuzz) {
-          return FIZZ_BUZZ;
-        }
-        return Integer.toString(number);
+        return new FizzBuzzType03(number).generate();
       default:
         return new FizzBuzzType01(number).generate();
     }
