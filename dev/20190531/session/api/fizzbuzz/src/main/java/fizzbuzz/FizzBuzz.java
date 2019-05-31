@@ -26,26 +26,10 @@ public class FizzBuzz {
     ).collect(Collectors.toList());
   }
 
-  public static String generate(int number) {
-    boolean isFizz = number % 3 == 0;
-    boolean isBuzz = number % 5 == 0;
-
-    if (isFizz && isBuzz) {
-      return FIZZ_BUZZ;
-    }
-    if (isFizz) {
-      return FIZZ;
-    }
-    if (isBuzz) {
-      return BUZZ;
-    }
-    return Integer.toString(number);
-  }
-
   public static String generate(int number, int type) {
     switch (type) {
       case 1:
-        return FizzBuzz.generate(number);
+        return new FizzBuzzType01(number).generate();
       case 2:
         return Integer.toString(number);
       case 3:
@@ -56,7 +40,7 @@ public class FizzBuzz {
         }
         return Integer.toString(number);
       default:
-        return FizzBuzz.generate(number);
+        return new FizzBuzzType01(number).generate();
     }
   }
 
