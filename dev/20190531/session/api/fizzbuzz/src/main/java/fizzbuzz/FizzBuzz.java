@@ -16,18 +16,14 @@ public class FizzBuzz {
     return _list;
   }
 
-  public void setList(List<String> list) {
-    _list = list;
-  }
-
-  public static List<String> generateList() {
-    return IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
+  public void generateList() {
+    _list = IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
       FizzBuzz::generate
     ).collect(Collectors.toList());
   }
 
-  public static List<String> generateList(int type) {
-    return IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
+  public void generateList(int type) {
+    _list = IntStream.rangeClosed(1, MAX_NUMBER).mapToObj(
       number -> FizzBuzz.generate(number, type)
     ).collect(Collectors.toList());
   }
