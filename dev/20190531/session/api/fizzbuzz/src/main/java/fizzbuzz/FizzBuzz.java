@@ -31,7 +31,7 @@ public class FizzBuzz {
       case 1:
         return new FizzBuzzType01(number).generate();
       case 2:
-        return Integer.toString(number);
+        return new FizzBuzzType02(number).generate();
       case 3:
         boolean isFizz = number % 3 == 0;
         boolean isBuzz = number % 5 == 0;
