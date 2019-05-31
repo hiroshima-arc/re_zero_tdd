@@ -19,7 +19,7 @@ public class FizzBuzzTest {
   )
   @Test
   void testPrint1To100() {
-    _fizzBuzz.generateList(1);
+    _fizzBuzz.generateList();
     assertEquals("1", _fizzBuzz.getList().get(0));
     assertEquals("Fizz", _fizzBuzz.getList().get(2));
     assertEquals("Buzz", _fizzBuzz.getList().get(4));
@@ -55,7 +55,7 @@ public class FizzBuzzTest {
   @DisplayName("タイプ1は通常のパターンのリストを返す")
   @Test
   void testType1List() {
-    _fizzBuzz.generateList(1);
+    _fizzBuzz.generateList();
     assertEquals("Fizz", _fizzBuzz.getList().get(2));
   }
 
