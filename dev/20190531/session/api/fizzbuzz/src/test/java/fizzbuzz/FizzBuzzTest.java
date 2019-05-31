@@ -22,12 +22,12 @@ public class FizzBuzzTest {
   @Test
   void testPrint1To100() {
     List<String> list = FizzBuzz.generateList();
-    _data.list = list;
-    assertEquals("1", _data.list.get(0));
-    assertEquals("Fizz", _data.list.get(2));
-    assertEquals("Buzz", _data.list.get(4));
-    assertEquals("FizzBuzz", _data.list.get(14));
-    assertEquals("Buzz", _data.list.get(99));
+    _data.setList(list);
+    assertEquals("1", _data.getList().get(0));
+    assertEquals("Fizz", _data.getList().get(2));
+    assertEquals("Buzz", _data.getList().get(4));
+    assertEquals("FizzBuzz", _data.getList().get(14));
+    assertEquals("Buzz", _data.getList().get(99));
   }
 
   @DisplayName("3で割り切れる場合はFizzをプリントする")
@@ -57,8 +57,8 @@ public class FizzBuzzTest {
   @DisplayName("タイプ1は通常のパターンのリストを返す")
   @Test
   void testType1List() {
-    _data.list = FizzBuzz.generateList(1);
-    assertEquals("Fizz", _data.list.get(2));
+    _data.setList(FizzBuzz.generateList(1));
+    assertEquals("Fizz", _data.getList().get(2));
   }
 
   @DisplayName("タイプ2は数のみのパターンを返す")
@@ -70,8 +70,8 @@ public class FizzBuzzTest {
   @DisplayName("タイプ2は数のみのパターンのリストを返す")
   @Test
   void testType2List() {
-    _data.list = FizzBuzz.generateList(2);
-    assertEquals("3", _data.list.get(2));
+    _data.setList(FizzBuzz.generateList(2));
+    assertEquals("3", _data.getList().get(2));
   }
 
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンを値を返す")
@@ -84,9 +84,9 @@ public class FizzBuzzTest {
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す")
   @Test
   void testType3List() {
-    _data.list = FizzBuzz.generateList(3);
-    assertEquals("FizzBuzz", _data.list.get(14));
-    assertEquals("3", _data.list.get(2));
+    _data.setList(FizzBuzz.generateList(3));
+    assertEquals("FizzBuzz", _data.getList().get(14));
+    assertEquals("3", _data.getList().get(2));
   }
 
 }
