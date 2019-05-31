@@ -2,12 +2,19 @@ package fizzbuzz;
 
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
+  private FizzBuzzData _data;
+
+  @BeforeEach
+  void init() {
+    _data = new FizzBuzzData();
+  }
 
   @DisplayName(
     "1から100までをプリントする,ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz15で割り切れる場合はFizzBuzzをプリントする"
@@ -15,11 +22,12 @@ public class FizzBuzzTest {
   @Test
   void testPrint1To100() {
     List<String> list = FizzBuzz.generateList();
-    assertEquals("1", list.get(0));
-    assertEquals("Fizz", list.get(2));
-    assertEquals("Buzz", list.get(4));
-    assertEquals("FizzBuzz", list.get(14));
-    assertEquals("Buzz", list.get(99));
+    _data.list = list;
+    assertEquals("1", _data.list.get(0));
+    assertEquals("Fizz", _data.list.get(2));
+    assertEquals("Buzz", _data.list.get(4));
+    assertEquals("FizzBuzz", _data.list.get(14));
+    assertEquals("Buzz", _data.list.get(99));
   }
 
   @DisplayName("3で割り切れる場合はFizzをプリントする")
