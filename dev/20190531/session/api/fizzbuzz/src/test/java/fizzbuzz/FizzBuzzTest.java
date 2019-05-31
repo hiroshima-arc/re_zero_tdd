@@ -1,10 +1,10 @@
 package fizzbuzz;
 
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -65,6 +65,13 @@ public class FizzBuzzTest {
   @Test
   void testType2() {
     assertEquals("3", FizzBuzz.generate(3, 2));
+  }
+
+  @DisplayName("タイプ2は数のみのパターンのリストを返す")
+  @Test
+  void testType2List() {
+    _data.list = FizzBuzz.generateList(2);
+    assertEquals("3", _data.list.get(2));
   }
 
 }
