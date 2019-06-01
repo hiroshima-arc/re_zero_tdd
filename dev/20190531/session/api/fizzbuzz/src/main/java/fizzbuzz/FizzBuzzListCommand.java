@@ -14,6 +14,7 @@ public class FizzBuzzListCommand implements IFizzBuzzCommand {
 
   @Override
   public IFizzBuzz execute(int maxNumber) {
+    assert maxNumber > 0 : "FizzBuzzList can't generate by minus number";
     List<FizzBuzzValue> list = new ArrayList<>();
     _list = new FizzBuzzList(list);
 

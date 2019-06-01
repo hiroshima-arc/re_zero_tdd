@@ -131,5 +131,35 @@ public class FizzBuzzTest {
     );
   }
 
+  @DisplayName("FizzBuzzListの値は正の値のみ許可する")
+  @Test
+  void testFizzBuzzListMinusNumber() {
+    Throwable exception = assertThrows(
+      AssertionError.class,
+      () -> {
+        _fizzBuzzListCommand.execute(-100);
+      }
+    );
+    assertEquals(
+      "FizzBuzzList can't generate by minus number",
+      exception.getMessage()
+    );
+  }
+
+  @DisplayName("FizzBuzzListは101以上を許可しない")
+  @Test
+  void testFizzBuzzListMaxNumber() {
+    Throwable exception = assertThrows(
+      AssertionError.class,
+      () -> {
+        _fizzBuzzListCommand.execute(101);
+      }
+    );
+    assertEquals(
+      "FizzBuzzList can't generate over 100",
+      exception.getMessage()
+    );
+  }
+
 }
 
