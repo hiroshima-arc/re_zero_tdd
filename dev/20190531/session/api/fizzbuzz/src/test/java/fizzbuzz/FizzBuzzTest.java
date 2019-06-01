@@ -20,11 +20,14 @@ public class FizzBuzzTest {
   @Test
   void testPrint1To100() {
     _fizzBuzz.generateList();
-    assertEquals("1", _fizzBuzz.getList().get(0).getValue());
-    assertEquals("Fizz", _fizzBuzz.getList().get(2).getValue());
-    assertEquals("Buzz", _fizzBuzz.getList().get(4).getValue());
-    assertEquals("FizzBuzz", _fizzBuzz.getList().get(14).getValue());
-    assertEquals("Buzz", _fizzBuzz.getList().get(99).getValue());
+    assertEquals("1", _fizzBuzz.generateList().getList().get(0).getValue());
+    assertEquals("Fizz", _fizzBuzz.generateList().getList().get(2).getValue());
+    assertEquals("Buzz", _fizzBuzz.generateList().getList().get(4).getValue());
+    assertEquals(
+      "FizzBuzz",
+      _fizzBuzz.generateList().getList().get(14).getValue()
+    );
+    assertEquals("Buzz", _fizzBuzz.generateList().getList().get(99).getValue());
   }
 
   @DisplayName("3で割り切れる場合はFizzをプリントする")
@@ -56,7 +59,7 @@ public class FizzBuzzTest {
   @Test
   void testType1List() {
     _fizzBuzz.generateList();
-    assertEquals("Fizz", _fizzBuzz.getList().get(2).getValue());
+    assertEquals("Fizz", _fizzBuzz.generateList().getList().get(2).getValue());
   }
 
   @DisplayName("タイプ2は数のみのパターンを返す")
@@ -71,7 +74,7 @@ public class FizzBuzzTest {
   void testType2List() {
     FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.two);
     fizzBuzz.generateList();
-    assertEquals("3", fizzBuzz.getList().get(2).getValue());
+    assertEquals("3", fizzBuzz.generateList().getList().get(2).getValue());
   }
 
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンを値を返す")
@@ -87,8 +90,11 @@ public class FizzBuzzTest {
   void testType3List() {
     FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.three);
     fizzBuzz.generateList();
-    assertEquals("FizzBuzz", fizzBuzz.getList().get(14).getValue());
-    assertEquals("3", fizzBuzz.getList().get(2).getValue());
+    assertEquals(
+      "FizzBuzz",
+      fizzBuzz.generateList().getList().get(14).getValue()
+    );
+    assertEquals("3", fizzBuzz.generateList().getList().get(2).getValue());
   }
 
 }

@@ -15,14 +15,11 @@ public class FizzBuzz {
     _type = type;
   }
 
-  public List<FizzBuzzValue> getList() {
-    return _list.getList();
-  }
-
-  public void generateList() {
+  public FizzBuzzList generateList() {
     IntStream.rangeClosed(1, MAX_NUMBER).forEach(
       number -> _list = _list.add(generate(number))
     );
+    return _list;
   }
 
   public FizzBuzzValue generate(int number) {
