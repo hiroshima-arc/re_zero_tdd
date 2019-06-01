@@ -1,6 +1,6 @@
 package fizzbuzz.domain.model;
 
-import fizzbuzz.application.IFizzBuzz;
+import fizzbuzz.application.service.IFizzBuzz;
 
 import java.util.ArrayList;
 import java.util.List;

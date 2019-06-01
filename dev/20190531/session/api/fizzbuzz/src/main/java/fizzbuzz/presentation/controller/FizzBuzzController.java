@@ -1,9 +1,7 @@
 package fizzbuzz.presentation.controller;
 
-import fizzbuzz.application.IFizzBuzzCommand;
-import fizzbuzz.application.command.FizzBuzzListCommand;
+import fizzbuzz.application.service.FizzBuzzService;
 import fizzbuzz.domain.model.FizzBuzzValue;
-import fizzbuzz.domain.type.FizzBuzzType;
 
 import java.util.List;
 
@@ -21,10 +19,8 @@ public class FizzBuzzController {
     @PathVariable
     String type
   ) {
-    IFizzBuzzCommand command = new FizzBuzzListCommand(
-      FizzBuzzType.valueOf(type)
-    );
-    return command.execute(100).getList();
+    FizzBuzzService service = new FizzBuzzService();
+    return service.generateList(type);
   }
 
 }

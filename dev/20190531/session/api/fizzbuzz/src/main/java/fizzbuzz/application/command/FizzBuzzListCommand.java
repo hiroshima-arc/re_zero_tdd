@@ -1,7 +1,7 @@
 package fizzbuzz.application.command;
 
-import fizzbuzz.application.IFizzBuzz;
-import fizzbuzz.application.IFizzBuzzCommand;
+import fizzbuzz.application.service.IFizzBuzz;
+import fizzbuzz.application.service.IFizzBuzzCommand;
 import fizzbuzz.domain.model.FizzBuzzList;
 import fizzbuzz.domain.model.FizzBuzzValue;
 import fizzbuzz.domain.type.FizzBuzzType;

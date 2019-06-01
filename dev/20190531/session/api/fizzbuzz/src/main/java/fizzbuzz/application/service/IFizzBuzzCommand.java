@@ -1,4 +1,4 @@
-package fizzbuzz.application;
+package fizzbuzz.application.service;
 
 public interface IFizzBuzzCommand {
 
