@@ -1,6 +1,6 @@
 package fizzbuzz;
 
-abstract class FizzBuzzType {
+abstract class IFizzBuzzType {
   public static final String FIZZ_BUZZ = "FizzBuzz";
   public static final String FIZZ = "Fizz";
   public static final String BUZZ = "Buzz";

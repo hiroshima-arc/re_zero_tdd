@@ -7,9 +7,9 @@ import java.util.stream.IntStream;
 public class FizzBuzz {
   public static final int MAX_NUMBER = 100;
   private List<String> _list;
-  private FizzBuzzType _type;
+  private IFizzBuzzType _type;
 
-  public FizzBuzz(FizzBuzzType type) {
+  public FizzBuzz(IFizzBuzzType type) {
     _type = type;
   }
 

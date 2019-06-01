@@ -1,20 +1,20 @@
 package fizzbuzz;
 
 public class FizzBuzzType01
-  extends FizzBuzzType {
+  extends IFizzBuzzType {
 
   public String generate(int number) {
     boolean isFizz = number % 3 == 0;
     boolean isBuzz = number % 5 == 0;
 
     if (isFizz && isBuzz) {
-      return FizzBuzzType.FIZZ_BUZZ;
+      return IFizzBuzzType.FIZZ_BUZZ;
     }
     if (isFizz) {
-      return FizzBuzzType.FIZZ;
+      return IFizzBuzzType.FIZZ;
     }
     if (isBuzz) {
-      return FizzBuzzType.BUZZ;
+      return IFizzBuzzType.BUZZ;
     }
     return Integer.toString(number);
   }

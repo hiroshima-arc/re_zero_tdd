@@ -1,7 +1,7 @@
 package fizzbuzz;
 
 public class FizzBuzzType02
-  extends FizzBuzzType {
+  extends IFizzBuzzType {
 
   public String generate(int number) {
     return Integer.toString(number);
