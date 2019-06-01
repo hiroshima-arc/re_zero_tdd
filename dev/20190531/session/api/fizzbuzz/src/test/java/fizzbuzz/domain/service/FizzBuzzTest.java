@@ -1,7 +1,8 @@
-package fizzbuzz;
+package fizzbuzz.domain.service;
 
 import fizzbuzz.application.command.FizzBuzzListCommand;
 import fizzbuzz.application.command.FizzBuzzValueCommand;
+import fizzbuzz.application.service.FizzBuzzService;
 import fizzbuzz.application.service.IFizzBuzz;
 import fizzbuzz.domain.model.FizzBuzzValue;
 import fizzbuzz.domain.type.FizzBuzzType;
@@ -19,11 +20,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class FizzBuzzTest {
   private FizzBuzzValueCommand _fizzBuzzCommand;
   private FizzBuzzListCommand _fizzBuzzListCommand;
+  private FizzBuzzService _fizzBuzzService;
 
   @BeforeEach
   void init() {
     _fizzBuzzCommand = new FizzBuzzValueCommand(FizzBuzzType.one);
     _fizzBuzzListCommand = new FizzBuzzListCommand(FizzBuzzType.one);
+    _fizzBuzzService = new FizzBuzzService();
   }
 
   @DisplayName(
@@ -31,7 +34,10 @@ public class FizzBuzzTest {
   )
   @Test
   void testPrint1To100() {
-    List<FizzBuzzValue> list = _fizzBuzzListCommand.execute(100).getList();
+    List<FizzBuzzValue> list = _fizzBuzzService.generateList(
+      FizzBuzzType.one,
+      100
+    );
     assertEquals("1", list.get(0).getValue());
     assertEquals("Fizz", list.get(2).getValue());
     assertEquals("Buzz", list.get(4).getValue());

@@ -11,11 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class FizzBuzzService {
 
-  public List<FizzBuzzValue> generateList(String type) {
-    IFizzBuzzCommand command = new FizzBuzzListCommand(
-      FizzBuzzType.valueOf(type)
-    );
-    return command.execute(100).getList();
+  public List<FizzBuzzValue> generateList(FizzBuzzType type, int number) {
+    IFizzBuzzCommand command = new FizzBuzzListCommand(type);
+    return command.execute(number).getList();
   }
 
 }
