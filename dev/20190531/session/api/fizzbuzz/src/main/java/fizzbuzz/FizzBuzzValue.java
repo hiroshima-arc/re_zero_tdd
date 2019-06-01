@@ -8,6 +8,7 @@ public class FizzBuzzValue implements IFizzBuzz {
   private final String _value;
 
   FizzBuzzValue(int number, String value) {
+    assert number >= 0 : "FizzBuzzValue can't generate by minus number";
     _number = number;
     _value = value;
   }
