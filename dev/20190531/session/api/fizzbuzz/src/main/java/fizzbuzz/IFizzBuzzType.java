@@ -5,7 +5,7 @@ abstract class IFizzBuzzType {
   public static final String FIZZ = "Fizz";
   public static final String BUZZ = "Buzz";
 
-  abstract String generate(int number);
+  abstract FizzBuzzValue generate(int number);
 
 }
 

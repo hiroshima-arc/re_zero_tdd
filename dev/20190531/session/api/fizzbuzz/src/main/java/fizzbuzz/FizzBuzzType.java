@@ -12,7 +12,7 @@ public enum FizzBuzzType {
     _type = type;
   }
 
-  public String generate(int number) {
+  public FizzBuzzValue generate(int number) {
     return _type.generate(number);
   }
 

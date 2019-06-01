@@ -6,14 +6,14 @@ import java.util.stream.IntStream;
 
 public class FizzBuzz {
   public static final int MAX_NUMBER = 100;
-  private List<String> _list;
+  private List<FizzBuzzValue> _list;
   private FizzBuzzType _type;
 
   public FizzBuzz(FizzBuzzType type) {
     _type = type;
   }
 
-  public List<String> getList() {
+  public List<FizzBuzzValue> getList() {
     return _list;
   }
 
@@ -23,7 +23,7 @@ public class FizzBuzz {
     ).collect(Collectors.toList());
   }
 
-  public String generate(int number) {
+  public FizzBuzzValue generate(int number) {
     return _type.generate(number);
   }
 
