@@ -1,6 +1,7 @@
 package fizzbuzz.presentation.controller;
 
 import fizzbuzz.application.service.FizzBuzzService;
+import fizzbuzz.application.service.IFizzBuzz;
 import fizzbuzz.domain.model.FizzBuzzValue;
 import fizzbuzz.domain.type.FizzBuzzType;
 
@@ -21,7 +22,8 @@ public class FizzBuzzController {
     String type
   ) {
     FizzBuzzService service = new FizzBuzzService();
-    return service.generateList(FizzBuzzType.valueOf(type), 100);
+    IFizzBuzz list = service.generateList(FizzBuzzType.valueOf(type), 100);
+    return list.getList();
   }
 
 }
