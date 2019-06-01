@@ -3,11 +3,16 @@ package fizzbuzz;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FizzBuzzList {
+public class FizzBuzzList implements IFizzBuzz {
   private final List<FizzBuzzValue> _list;
 
   public FizzBuzzList(List<FizzBuzzValue> list) {
     _list = list;
+  }
+
+  @Override
+  public String getValue() {
+    return null;
   }
 
   public List<FizzBuzzValue> getList() {
