@@ -13,20 +13,8 @@ public class FizzBuzz {
   private List<String> _list;
   private FizzBuzzType _type;
 
-  public FizzBuzz(int type) {
-    switch (type) {
-      case 1:
-        _type = new FizzBuzzType01();
-        break;
-      case 2:
-        _type = new FizzBuzzType02();
-        break;
-      case 3:
-        _type = new FizzBuzzType03();
-        break;
-      default:
-        _type = new FizzBuzzType01();
-    }
+  public FizzBuzz(FizzBuzzType type) {
+    _type = type;
   }
 
   public List<String> getList() {

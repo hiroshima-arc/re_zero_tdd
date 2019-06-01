@@ -12,7 +12,7 @@ public class FizzBuzzController {
   @CrossOrigin
   @RequestMapping("/fizzbuzz")
   public List<String> fizzbuzz() {
-    FizzBuzz fizzBuzz = new FizzBuzz(1);
+    FizzBuzz fizzBuzz = new FizzBuzz(new FizzBuzzType01());
     fizzBuzz.generateList();
     List<String> list = fizzBuzz.getList();
     return list;
