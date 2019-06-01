@@ -65,11 +65,7 @@
       <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
         <div id="message"></div>
-        <select name="type" onchange="changeType(event)">
-          <option value="one">タイプ1</option>
-          <option value="two">タイプ2</option>
-          <option value="three">タイプ3</option>
-        </select>
+        <div id="select"></div>
         <div id="app"></div>
         <div id="mocha"></div>
       </section>
@@ -108,6 +104,16 @@
     </script>
 
     <script>
+      function renderSelectType() {
+        document.querySelector("#select").innerHTML = `
+        <select name="type" onchange="changeType(event)">
+          <option value="one">タイプ1</option>
+          <option value="two">タイプ2</option>
+          <option value="three">タイプ3</option>
+        </select>
+        `;
+      }
+
       function changeType(event) {
         renderTable(event.target.value);
       }
@@ -171,7 +177,12 @@
         );
       }
 
-      window.onload = renderTable("one");
+      function renderApp(type) {
+        renderSelectType();
+        renderTable(type);
+      }
+
+      window.onload = renderApp("one");
     </script>
 
     <script>
