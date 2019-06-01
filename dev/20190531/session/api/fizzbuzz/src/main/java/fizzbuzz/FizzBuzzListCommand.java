@@ -1,5 +1,9 @@
 package fizzbuzz;
 
+import fizzbuzz.domain.model.FizzBuzzList;
+import fizzbuzz.domain.model.FizzBuzzValue;
+import fizzbuzz.domain.type.FizzBuzzType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;

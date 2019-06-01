@@ -1,5 +1,7 @@
 package fizzbuzz;
 
+import fizzbuzz.domain.type.FizzBuzzType;
+
 public class FizzBuzzValueCommand implements IFizzBuzzCommand {
   private FizzBuzzType _type;
 

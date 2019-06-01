@@ -1,5 +1,8 @@
 package fizzbuzz;
 
+import fizzbuzz.domain.model.FizzBuzzValue;
+import fizzbuzz.domain.type.FizzBuzzType;
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;

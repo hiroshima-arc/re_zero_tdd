@@ -1,4 +1,6 @@
-package fizzbuzz;
+package fizzbuzz.domain.type;
+
+import fizzbuzz.domain.model.FizzBuzzValue;
 
 abstract class IFizzBuzzType {
   public static final String FIZZ_BUZZ = "FizzBuzz";
