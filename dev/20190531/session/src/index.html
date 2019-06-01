@@ -112,7 +112,7 @@
         renderTable(event.target.value);
       }
 
-      function renderTable() {
+      function renderTable(type) {
         const success = data => {
           console.log(data);
 
@@ -163,10 +163,15 @@
           console.log(data);
         };
 
-        apiCall("http://localhost:8080/fizzbuzz", "GET", success, errors);
+        apiCall(
+          `http://localhost:8080/fizzbuzz/${type}`,
+          "GET",
+          success,
+          errors
+        );
       }
 
-      window.onload = renderTable();
+      window.onload = renderTable("one");
     </script>
 
     <script>
