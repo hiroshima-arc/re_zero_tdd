@@ -8,10 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FizzBuzzTest {
   private FizzBuzz _fizzBuzz;
+  private FizzBuzzValueCommand _fizzBuzzCommand;
 
   @BeforeEach
   void init() {
     _fizzBuzz = new FizzBuzz(FizzBuzzType.one);
+    _fizzBuzzCommand = new FizzBuzzValueCommand(FizzBuzzType.one);
   }
 
   @DisplayName(
@@ -33,26 +35,26 @@ public class FizzBuzzTest {
   @DisplayName("3で割り切れる場合はFizzをプリントする")
   @Test
   void testFizz() {
-    assertEquals("Fizz", _fizzBuzz.generate(3).getValue());
+    assertEquals("Fizz", _fizzBuzzCommand.execute(3).getValue());
   }
 
   @DisplayName("5で割り切れる場合はBuzzをプリントする")
   @Test
   void testBuzz() {
-    assertEquals("Buzz", _fizzBuzz.generate(5).getValue());
+    assertEquals("Buzz", _fizzBuzzCommand.execute(5).getValue());
   }
 
   @DisplayName("15で割り切れる場合はFizzBuzzをプリントする")
   @Test
   void testFizzBuzz() {
-    assertEquals("FizzBuzz", _fizzBuzz.generate(15).getValue());
+    assertEquals("FizzBuzz", _fizzBuzzCommand.execute(15).getValue());
   }
 
   @DisplayName("タイプ1は通常のパターンを返す")
   @Test
   void testType1() {
-    FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.one);
-    assertEquals("Fizz", fizzBuzz.generate(3).getValue());
+    FizzBuzzValueCommand fizzBuzz = new FizzBuzzValueCommand(FizzBuzzType.one);
+    assertEquals("Fizz", fizzBuzz.execute(3).getValue());
   }
 
   @DisplayName("タイプ1は通常のパターンのリストを返す")
@@ -65,8 +67,8 @@ public class FizzBuzzTest {
   @DisplayName("タイプ2は数のみのパターンを返す")
   @Test
   void testType2() {
-    FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.two);
-    assertEquals("3", fizzBuzz.generate(3).getValue());
+    FizzBuzzValueCommand fizzBuzz = new FizzBuzzValueCommand(FizzBuzzType.two);
+    assertEquals("3", fizzBuzz.execute(3).getValue());
   }
 
   @DisplayName("タイプ2は数のみのパターンのリストを返す")
@@ -80,9 +82,11 @@ public class FizzBuzzTest {
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンを値を返す")
   @Test
   void testType3() {
-    FizzBuzz fizzBuzz = new FizzBuzz(FizzBuzzType.three);
-    assertEquals("FizzBuzz", fizzBuzz.generate(15).getValue());
-    assertEquals("3", fizzBuzz.generate(3).getValue());
+    FizzBuzzValueCommand fizzBuzz = new FizzBuzzValueCommand(
+      FizzBuzzType.three
+    );
+    assertEquals("FizzBuzz", fizzBuzz.execute(15).getValue());
+    assertEquals("3", fizzBuzz.execute(3).getValue());
   }
 
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す")

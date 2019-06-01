@@ -1,6 +1,6 @@
 package fizzbuzz;
 
-public class FizzBuzzValue {
+public class FizzBuzzValue implements IFizzBuzz {
   private final int _number;
   private final String _value;
 
