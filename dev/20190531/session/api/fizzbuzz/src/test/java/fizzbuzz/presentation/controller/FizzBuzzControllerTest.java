@@ -23,7 +23,7 @@ public class FizzBuzzControllerTest {
   private MockMvc mvc;
 
   @Test
-  public void getFizzBuzz() throws Exception {
+  public void testGenerateList() throws Exception {
     ResultActions resultActions = mvc.perform(
       MockMvcRequestBuilders.get("/fizzbuzz/one").accept(
         MediaType.APPLICATION_JSON

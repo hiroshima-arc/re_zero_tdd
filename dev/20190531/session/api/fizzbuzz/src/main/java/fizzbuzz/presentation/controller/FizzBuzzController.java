@@ -17,7 +17,7 @@ public class FizzBuzzController {
 
   @CrossOrigin
   @RequestMapping("/fizzbuzz/{type}")
-  public List<FizzBuzzValue> fizzbuzz(
+  public List<FizzBuzzValue> generateList(
     @PathVariable
     String type
   ) {
