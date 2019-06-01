@@ -120,7 +120,7 @@ public class FizzBuzzTest {
   @Test
   void testFizzBuzzValueNumber() {
     Throwable exception = assertThrows(
-      AssertionError.class,
+      IllegalArgumentException.class,
       () -> {
         _fizzBuzzCommand.execute(-3);
       }
@@ -135,7 +135,7 @@ public class FizzBuzzTest {
   @Test
   void testFizzBuzzListMinusNumber() {
     Throwable exception = assertThrows(
-      AssertionError.class,
+      IllegalArgumentException.class,
       () -> {
         _fizzBuzzListCommand.execute(-100);
       }
@@ -150,7 +150,7 @@ public class FizzBuzzTest {
   @Test
   void testFizzBuzzListMaxNumber() {
     Throwable exception = assertThrows(
-      AssertionError.class,
+      IllegalArgumentException.class,
       () -> {
         _fizzBuzzListCommand.execute(101);
       }
