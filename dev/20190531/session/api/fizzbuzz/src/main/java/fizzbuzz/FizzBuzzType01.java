@@ -8,13 +8,13 @@ public class FizzBuzzType01
     boolean isBuzz = number % 5 == 0;
 
     if (isFizz && isBuzz) {
-      return FizzBuzz.FIZZ_BUZZ;
+      return FizzBuzzType.FIZZ_BUZZ;
     }
     if (isFizz) {
-      return FizzBuzz.FIZZ;
+      return FizzBuzzType.FIZZ;
     }
     if (isBuzz) {
-      return FizzBuzz.BUZZ;
+      return FizzBuzzType.BUZZ;
     }
     return Integer.toString(number);
   }
