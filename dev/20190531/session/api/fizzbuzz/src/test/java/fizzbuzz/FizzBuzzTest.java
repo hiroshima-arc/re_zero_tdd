@@ -1,5 +1,6 @@
 package fizzbuzz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -96,6 +97,15 @@ public class FizzBuzzTest {
     List<FizzBuzzValue> list = fizzBuzz.execute(100).getList();
     assertEquals("FizzBuzz", list.get(14).getValue());
     assertEquals("3", list.get(2).getValue());
+  }
+
+  @DisplayName("FizzBuzzValueはNullオブジェクトを返す")
+  @Test
+  void testFizzBuzzValueNull() {
+    IFizzBuzz fizzBuzz = _fizzBuzzCommand.execute(3);
+    List<FizzBuzzValue> list = fizzBuzz.getList();
+    List<FizzBuzzValue> empty = new ArrayList<>();
+    assertEquals(empty, list);
   }
 
 }

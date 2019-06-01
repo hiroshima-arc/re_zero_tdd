@@ -1,5 +1,6 @@
 package fizzbuzz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FizzBuzzValue implements IFizzBuzz {
@@ -21,7 +22,7 @@ public class FizzBuzzValue implements IFizzBuzz {
 
   @Override
   public List<FizzBuzzValue> getList() {
-    return null;
+    return new ArrayList<>();
   }
 
 }
