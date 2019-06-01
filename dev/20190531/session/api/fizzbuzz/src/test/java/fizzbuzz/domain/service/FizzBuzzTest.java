@@ -4,6 +4,7 @@ import fizzbuzz.application.command.FizzBuzzListCommand;
 import fizzbuzz.application.command.FizzBuzzValueCommand;
 import fizzbuzz.application.service.FizzBuzzService;
 import fizzbuzz.application.service.IFizzBuzz;
+import fizzbuzz.application.service.IFizzBuzzCommand;
 import fizzbuzz.domain.model.FizzBuzzValue;
 import fizzbuzz.domain.type.FizzBuzzType;
 
@@ -18,14 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FizzBuzzTest {
-  private FizzBuzzValueCommand _fizzBuzzCommand;
-  private FizzBuzzListCommand _fizzBuzzListCommand;
   private FizzBuzzService _fizzBuzzService;
 
   @BeforeEach
   void init() {
-    _fizzBuzzCommand = new FizzBuzzValueCommand(FizzBuzzType.one);
-    _fizzBuzzListCommand = new FizzBuzzListCommand(FizzBuzzType.one);
     _fizzBuzzService = new FizzBuzzService();
   }
 
@@ -48,48 +45,65 @@ public class FizzBuzzTest {
   @DisplayName("3で割り切れる場合はFizzをプリントする")
   @Test
   void testFizz() {
-    assertEquals("Fizz", _fizzBuzzCommand.execute(3).getValue());
+    assertEquals(
+      "Fizz",
+      _fizzBuzzService.generate(FizzBuzzType.one, 3).getValue()
+    );
   }
 
   @DisplayName("5で割り切れる場合はBuzzをプリントする")
   @Test
   void testBuzz() {
-    assertEquals("Buzz", _fizzBuzzCommand.execute(5).getValue());
+    assertEquals(
+      "Buzz",
+      _fizzBuzzService.generate(FizzBuzzType.one, 5).getValue()
+    );
   }
 
   @DisplayName("15で割り切れる場合はFizzBuzzをプリントする")
   @Test
   void testFizzBuzz() {
-    assertEquals("FizzBuzz", _fizzBuzzCommand.execute(15).getValue());
+    assertEquals(
+      "FizzBuzz",
+      _fizzBuzzService.generate(FizzBuzzType.one, 15).getValue()
+    );
   }
 
   @DisplayName("タイプ1は通常のパターンを返す")
   @Test
   void testType1() {
-    FizzBuzzValueCommand fizzBuzz = new FizzBuzzValueCommand(FizzBuzzType.one);
-    assertEquals("Fizz", fizzBuzz.execute(3).getValue());
+    assertEquals(
+      "Fizz",
+      _fizzBuzzService.generate(FizzBuzzType.one, 3).getValue()
+    );
   }
 
   @DisplayName("タイプ1は通常のパターンのリストを返す")
   @Test
   void testType1List() {
-    FizzBuzzListCommand fizzBuzz = new FizzBuzzListCommand(FizzBuzzType.one);
-    List<FizzBuzzValue> list = fizzBuzz.execute(100).getList();
+    List<FizzBuzzValue> list = _fizzBuzzService.generateList(
+      FizzBuzzType.one,
+      100
+    );
     assertEquals("Fizz", list.get(2).getValue());
   }
 
   @DisplayName("タイプ2は数のみのパターンを返す")
   @Test
   void testType2() {
-    FizzBuzzValueCommand fizzBuzz = new FizzBuzzValueCommand(FizzBuzzType.two);
-    assertEquals("3", fizzBuzz.execute(3).getValue());
+    assertEquals(
+      "3",
+      _fizzBuzzService.generate(FizzBuzzType.two, 3).getValue()
+    );
   }
 
   @DisplayName("タイプ2は数のみのパターンのリストを返す")
   @Test
   void testType2List() {
-    FizzBuzzListCommand fizzBuzz = new FizzBuzzListCommand(FizzBuzzType.two);
-    List<FizzBuzzValue> list = fizzBuzz.execute(100).getList();
+    List<FizzBuzzValue> list = _fizzBuzzService.generateList(
+      FizzBuzzType.two,
+      100
+    );
     assertEquals("3", list.get(2).getValue());
   }
 
@@ -99,15 +113,23 @@ public class FizzBuzzTest {
     FizzBuzzValueCommand fizzBuzz = new FizzBuzzValueCommand(
       FizzBuzzType.three
     );
-    assertEquals("FizzBuzz", fizzBuzz.execute(15).getValue());
-    assertEquals("3", fizzBuzz.execute(3).getValue());
+    assertEquals(
+      "FizzBuzz",
+      _fizzBuzzService.generate(FizzBuzzType.three, 15).getValue()
+    );
+    assertEquals(
+      "3",
+      _fizzBuzzService.generate(FizzBuzzType.three, 3).getValue()
+    );
   }
 
   @DisplayName("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す")
   @Test
   void testType3List() {
-    FizzBuzzListCommand fizzBuzz = new FizzBuzzListCommand(FizzBuzzType.three);
-    List<FizzBuzzValue> list = fizzBuzz.execute(100).getList();
+    List<FizzBuzzValue> list = _fizzBuzzService.generateList(
+      FizzBuzzType.three,
+      100
+    );
     assertEquals("FizzBuzz", list.get(14).getValue());
     assertEquals("3", list.get(2).getValue());
   }
@@ -115,7 +137,7 @@ public class FizzBuzzTest {
   @DisplayName("FizzBuzzValueはNullオブジェクトを返す")
   @Test
   void testFizzBuzzValueNull() {
-    IFizzBuzz fizzBuzz = _fizzBuzzCommand.execute(3);
+    IFizzBuzz fizzBuzz = _fizzBuzzService.generate(FizzBuzzType.one, 3);
     List<FizzBuzzValue> list = fizzBuzz.getList();
     List<FizzBuzzValue> empty = new ArrayList<>();
     assertEquals(empty, list);
@@ -124,7 +146,8 @@ public class FizzBuzzTest {
   @DisplayName("FizzBuzzListはNullオブジェクトを返す")
   @Test
   void testFizzBuzzListNull() {
-    IFizzBuzz list = _fizzBuzzListCommand.execute(100);
+    IFizzBuzzCommand command = new FizzBuzzListCommand(FizzBuzzType.one);
+    IFizzBuzz list = command.execute(100);
     assertEquals("", list.getValue());
   }
 
@@ -134,7 +157,7 @@ public class FizzBuzzTest {
     Throwable exception = assertThrows(
       IllegalArgumentException.class,
       () -> {
-        _fizzBuzzCommand.execute(-3);
+        _fizzBuzzService.generate(FizzBuzzType.one, -3);
       }
     );
     assertEquals(
@@ -149,7 +172,7 @@ public class FizzBuzzTest {
     Throwable exception = assertThrows(
       IllegalArgumentException.class,
       () -> {
-        _fizzBuzzListCommand.execute(-100);
+        _fizzBuzzService.generateList(FizzBuzzType.one, -100);
       }
     );
     assertEquals(
@@ -164,7 +187,7 @@ public class FizzBuzzTest {
     Throwable exception = assertThrows(
       IllegalArgumentException.class,
       () -> {
-        _fizzBuzzListCommand.execute(101);
+        _fizzBuzzService.generateList(FizzBuzzType.one, 101);
       }
     );
     assertEquals(
