@@ -64,9 +64,11 @@
     <section>
       <section class="fizz-buzz-component">
         <h2>FizzBuzz</h2>
-        <div id="message"></div>
-        <div id="select"></div>
-        <div id="app"></div>
+        <div class="app">
+          <div id="app__message"></div>
+          <div id="app__select"></div>
+          <div id="app__table"></div>
+        </div>
         <div id="mocha"></div>
       </section>
     </section>
@@ -93,19 +95,19 @@
           .done(data => {
             onSuccess(data);
             const message = `<h3>Apiサーバーの読み込みに成功しました</h3>`;
-            $("#message").html(message);
+            $("#app__message").html(message);
           })
           .fail(data => {
             onErrors(data);
             const message = `<h3>Apiサーバーでエラーが発生しました</h3>`;
-            $("#message").html(message);
+            $("#app__message").html(message);
           });
       }
     </script>
 
     <script>
       function renderSelectType() {
-        document.querySelector("#select").innerHTML = `
+        document.querySelector("#app__select").innerHTML = `
         <select name="type" onchange="changeType(event)">
           <option value="one">タイプ1</option>
           <option value="two">タイプ2</option>
@@ -162,7 +164,7 @@
           ${body}
         </table>`;
 
-          document.querySelector("#app").innerHTML = table;
+          document.querySelector("#app__table").innerHTML = table;
         };
 
         const errors = data => {
