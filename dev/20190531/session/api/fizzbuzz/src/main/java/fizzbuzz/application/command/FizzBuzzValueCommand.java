@@ -1,5 +1,7 @@
-package fizzbuzz;
+package fizzbuzz.application.command;
 
+import fizzbuzz.application.IFizzBuzz;
+import fizzbuzz.application.IFizzBuzzCommand;
 import fizzbuzz.domain.type.FizzBuzzType;
 
 public class FizzBuzzValueCommand implements IFizzBuzzCommand {

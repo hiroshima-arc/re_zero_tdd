@@ -1,4 +1,4 @@
-package fizzbuzz;
+package fizzbuzz.application;
 
 import fizzbuzz.domain.model.FizzBuzzValue;
 
