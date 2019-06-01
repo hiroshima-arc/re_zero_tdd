@@ -108,5 +108,12 @@ public class FizzBuzzTest {
     assertEquals(empty, list);
   }
 
+  @DisplayName("FizzBuzzListはNullオブジェクトを返す")
+  @Test
+  void testFizzBuzzListNull() {
+    IFizzBuzz list = _fizzBuzzListCommand.execute(100);
+    assertEquals("", list.getValue());
+  }
+
 }
 
