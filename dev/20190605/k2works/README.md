@@ -43,7 +43,7 @@ sam init -r nodejs10.x -n api
 
 テストセットアップ
 ```bash
-npm install --save-dev mocha chai
+npm install --save-dev mocha chai supertest unit.js
 ```
 
 Expressのセットアップ

@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
+const HelloController = require('./controller/HelloController');
 
-app.get("/", (req, res) => res.send("Hello World!"));
+const API = '/api';
+
+app.use(API, HelloController);
 
 module.exports = app;
