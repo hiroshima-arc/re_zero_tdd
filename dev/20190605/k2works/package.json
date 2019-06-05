@@ -25,7 +25,7 @@
     "format:frontend": "prettier --write src/**/*.*",
     "format:backend": "prettier --write $npm_package_config_app_dir/**/*.js",
     "watch:frontend": "watch 'npm-run-all format:frontend' ./src ",
-    "watch:backend": "watch 'npm-run-all format:backend lint:backend test' $npm_package_config_app_dir ",
+    "watch:backend": "watch 'npm-run-all format:backend' $npm_package_config_app_dir ",
     "app:frontend": "browser-sync start --config bs-config.js",
     "app:backend": "cd $npm_package_config_api_dir; sam local start-api --host 0.0.0.0 --port 4000",
     "sam:build": "cd $npm_package_config_api_dir; sam build",
