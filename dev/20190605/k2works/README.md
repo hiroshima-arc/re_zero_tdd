@@ -36,8 +36,14 @@ touch Procfile
 #### アプリケーションのセットアップ
 
 ```bash
-npm run build
-npm start
+mkdir src
+touch src/index.html
+sam init -r nodejs10.x -n api
+```
+
+テストセットアップ
+```bash
+npm install --save-dev mocha chai
 ```
 
 **[⬆ back to top](#構成)**
