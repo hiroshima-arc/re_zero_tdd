@@ -8,7 +8,7 @@
 
 | ソフトウェア   | バージョン | 備考 |
 | :------------- | :--------- | :--- |
-| nodejs         | 8.10.0     |      |
+| nodejs         | 10.16.0     |      |
 
 ## 構成
 
@@ -45,6 +45,7 @@ sam init -r nodejs10.x -n api
 ```bash
 npm install --save-dev mocha chai supertest unit.js
 npm install --save-dev cucumber selenium-webdriver chromedriver
+npm install --save-dev aws-sdk aws-sdk-mock
 mkdir -p features/step_definitions
 mkdir -p features/support
 touch cucumber.js
@@ -55,7 +56,7 @@ Expressのセットアップ
 mdir api/src
 cd api/src
 npm init -y
-npm install express aws-serverless-express --save
+npm install express aws-serverless-express aws-sdk --save
 ```
 
 **[⬆ back to top](#構成)**

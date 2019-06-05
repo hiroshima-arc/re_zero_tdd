@@ -7,7 +7,9 @@
     "api_dir": "api",
     "app_dir": "api/src",
     "s3_bucket": "re-zero-tdd-serverless",
-    "stack_name": "re-zero-tdd-api"
+    "stack_name": "re-zero-tdd-api",
+    "local_network": "lambda-local",
+    "local_db": "dynamodb"
   },
   "scripts": {
     "start": "nf start -j Procfile",
@@ -42,12 +44,24 @@
     "aws:s3:destroy": "aws s3 rb s3://$npm_package_config_s3_bucket --force",
     "doc:feature:html": "docker run -v \"$PWD:/output\" rmpestano/cukedoctor -p /output/cucumber.json -f html -toc left -numbered -o /output/docs/generated_doc/documentation",
     "doc:feature:pdf": "docker run -v \"$PWD:/output\" rmpestano/cukedoctor -p /output/cucumber.json -f pdf -o /output/docs/generated_doc/documentation",
-    "doc:open": "open ./docs/generated_doc/documentation.html"
+    "doc:open": "open ./docs/generated_doc/documentation.html",
+    "db:setup": "npm-run-all db:setup:*",
+    "db:setup:network": "docker network create $npm_package_config_local_network",
+    "db:setup:db": "docker run -d -v $PWD:/dynamodb_local_db -p 8000:8000 --network $npm_package_config_local_network --name $npm_package_config_local_db instructure/dynamo-local-admin",
+    "db:destroy": "npm-run-all db:destroy:db db:destroy:network",
+    "db:destroy:network": "docker network rm $npm_package_config_local_network",
+    "db:destroy:db": "docker rm -f $npm_package_config_local_db",
+    "db:start": "docker start $npm_package_config_local_db",
+    "db:stop": "docker stop $npm_package_config_local_db",
+    "db:show": "open http://127.0.0.1:8000",
+    "db:restart": "npm-run-all db:stop db:start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "aws-sdk": "^2.468.0",
+    "aws-sdk-mock": "^4.4.0",
     "babel-eslint": "^10.0.1",
     "browser-sync": "^2.26.5",
     "chai": "^4.2.0",
@@ -69,6 +83,7 @@
     "prettier": "^1.17.1",
     "rimraf": "^2.6.3",
     "selenium-webdriver": "^4.0.0-alpha.1",
+    "sinon": "^7.3.2",
     "supertest": "^4.0.2",
     "unit.js": "^2.1.0",
     "watch": "^1.0.2"
