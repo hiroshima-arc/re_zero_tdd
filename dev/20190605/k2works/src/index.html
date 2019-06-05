@@ -9,14 +9,48 @@
     />
   </head>
   <body>
+    <div id="message"></div>
+    <div id="app"></div>
     <div id="mocha"></div>
     <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script>
       mocha.setup("tdd");
-    </script>
 
+      function apiCall(url, method, onSuccess, onErrors) {
+        $("#message").html("処理中...");
+        $.ajax({
+          url: url,
+          type: method,
+          data: {}
+        })
+          .done(data => {
+            onSuccess(data);
+            const message = `<h3>Apiサーバーの読み込みに成功しました</h3>`;
+            $("#app__message").html(message);
+          })
+          .fail(data => {
+            onErrors(data);
+            const message = `<h3>Apiサーバーでエラーが発生しました</h3>`;
+            $("#app__message").html(message);
+          });
+      }
+
+      function renderApp() {
+        const success = data => {
+          console.log(data);
+          document.querySelector("#app").innerHTML = data.Output;
+        };
+        const errors = data => {
+          console.log(data);
+        };
+
+        apiCall(`http://localhost:4000/api/hello`, "GET", success, errors);
+      }
+
+      renderApp();
+    </script>
     <script>
       mocha.checkLeaks();
       mocha.globals(["jQuery"]);
