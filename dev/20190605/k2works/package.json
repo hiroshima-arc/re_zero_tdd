@@ -1,10 +1,16 @@
 {
   "name": "k2works",
   "version": "1.0.0",
-  "description": "## 概要",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nf start -j Procfile",
+    "build": "markdown README.md > ./src/readme.html",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write src/**/*.*",
+    "watch": "watch 'npm-run-all format' ./src ",
+    "app": "browser-sync start --config bs-config.js"
   },
   "keywords": [],
   "author": "",
