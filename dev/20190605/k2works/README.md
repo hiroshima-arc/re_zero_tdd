@@ -44,6 +44,10 @@ sam init -r nodejs10.x -n api
 テストセットアップ
 ```bash
 npm install --save-dev mocha chai supertest unit.js
+npm install --save-dev cucumber selenium-webdriver chromedriver
+mkdir -p features/step_definitions
+mkdir -p features/support
+touch cucumber.js
 ```
 
 Expressのセットアップ
