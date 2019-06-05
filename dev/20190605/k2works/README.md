@@ -48,9 +48,10 @@ npm install --save-dev mocha chai
 
 Expressのセットアップ
 ```bash
-cd api
+mdir api/src
+cd api/src
 npm init -y
-npm install express --save
+npm install express aws-serverless-express --save
 ```
 
 **[⬆ back to top](#構成)**

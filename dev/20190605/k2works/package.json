@@ -5,7 +5,7 @@
   "main": "index.js",
   "config": {
     "api_dir": "api",
-    "app_dir": "api/hello-world",
+    "app_dir": "api/src",
     "s3_bucket": "re-zero-tdd-serverless",
     "stack_name": "re-zero-tdd-api"
   },
@@ -15,7 +15,7 @@
     "build:backend": "cd $npm_package_config_api_dir; sam build",
     "build:doc": "markdown README.md > ./src/readme.html",
     "test": "npm-run-all test:*",
-    "test:backend": "cd $npm_package_config_app_dir; npm test",
+    "test:backend": "mocha api/hello-world/tests/unit",
     "lint": "npm-run-all lint:*",
     "lint:frontend": "eslint src/**/*.js --fix",
     "lint:backend": "eslint $npm_package_config_app_dir/**/*.js --fix",
