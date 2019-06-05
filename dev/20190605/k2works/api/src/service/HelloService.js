@@ -1,5 +1,5 @@
-const repository = require("../repository/DynamodbRepository");
-const hello = require("../model/Hello");
+const repository = require("../repository/HelloRepository");
+const model = require("../model/Hello");
 
 exports.createTable = async () => {
   await repository.create();
@@ -14,5 +14,5 @@ exports.saveHelloInfo = async info => {
 };
 
 exports.getAllContact = async () => {
-  return await repository.selectAll({ TableName: hello.model.TableName });
+  return await repository.selectAll({ TableName: model.model.TableName });
 };
