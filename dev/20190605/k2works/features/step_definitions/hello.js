@@ -6,7 +6,7 @@ const { By } = require('selenium-webdriver');
 When('{string}にアクセスした', async function(string) {
   await this.driver.get(`http://localhost:3000`);
   const title = await this.driver.getTitle();
-  assert.equal('Title', title);
+  assert.equal('Landing Page - Start Bootstrap Theme', title);
 });
 
 Then('{string}が表示される', async function(string) {
