@@ -27,7 +27,7 @@
 npm init -y
 npm install --save-dev npm-run-all watch foreman cpx rimraf markdown-to-html
 npm install --save-dev prettier eslint babel-eslint
-npm install --save-dev browser-sync connect-browser-sync 
+npm install --save-dev browser-sync connect-browser-sync nodemon
 npx browser-sync init
 npx eslint --init
 touch Procfile
@@ -44,6 +44,13 @@ sam init -r nodejs10.x -n api
 テストセットアップ
 ```bash
 npm install --save-dev mocha chai
+```
+
+Expressのセットアップ
+```bash
+cd api
+npm init -y
+npm install express --save
 ```
 
 **[⬆ back to top](#構成)**
