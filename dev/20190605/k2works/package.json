@@ -59,12 +59,15 @@
     "db:start": "docker start $npm_package_config_local_db",
     "db:stop": "docker stop $npm_package_config_local_db",
     "db:show": "open http://127.0.0.1:8000",
-    "db:restart": "npm-run-all db:stop db:start"
+    "db:restart": "npm-run-all db:stop db:start",
+    "aws:amplify:publish": "amplify publish",
+    "aws:amplify:status": "amplify status"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@aws-amplify/cli": "^1.7.0",
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/polyfill": "^7.4.4",
@@ -109,5 +112,8 @@
     "webpack": "^4.33.0",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.6.0"
+  },
+  "dependencies": {
+    "aws-amplify": "^1.1.28"
   }
 }

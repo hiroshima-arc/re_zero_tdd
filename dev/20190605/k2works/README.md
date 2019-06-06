@@ -64,6 +64,20 @@ npm init -y
 npm install express aws-serverless-express aws-sdk --save
 ```
 
+AWS Amplifyのセットアップ
+```bash
+npm install -g @aws-amplify/cli
+amplify configure
+npm install --save-dev @aws-amplify/cli
+npm install --save aws-amplify
+amplify init
+amplify add analytics
+amplify push
+amplify add hosting
+amplify publish
+amplify status
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
@@ -95,3 +109,4 @@ npm install express aws-serverless-express aws-sdk --save
 ## 参照
 
 - [Bootstrap Editor](https://www.venezia-works.com/bst/index.html)
+- [Amplify JavaScript](https://aws-amplify.github.io/docs/js/start)

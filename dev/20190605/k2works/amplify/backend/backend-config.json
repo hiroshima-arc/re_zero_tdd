@@ -1,0 +1,20 @@
+{
+	"auth": {
+		"cognitoca545a14": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"analytics": {
+		"k2works": {
+			"service": "Pinpoint",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}
