@@ -35,6 +35,8 @@
     <link href="css/landing-page2.min.css" rel="stylesheet" />
 
     <link href="contents.css" rel="stylesheet" />
+
+    <script src="main.bundle.js"></script>
   </head>
 
   <body>
@@ -66,7 +68,6 @@
         <div id="AnalyticsResult"></div>
       </div>
     </div>
-    <script src="main.bundle.js"></script>
 
     <!-- Masthead -->
     <header class="masthead text-white text-center">
@@ -334,50 +335,23 @@
       href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css"
       rel="stylesheet"
     />
-    <div id="mocha"></div>
-    <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
-    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-    <script>
-      mocha.setup("tdd");
+    <div id="dev">
+      <div id="mocha"></div>
+      <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+      <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
 
-      function apiCall(url, method, onSuccess, onErrors) {
-        $("#app__message").html("処理中...");
-        $.ajax({
-          url: url,
-          type: method,
-          data: {}
-        })
-          .done(data => {
-            onSuccess(data);
-            const message = `<h3>Apiサーバーの読み込みに成功しました</h3>`;
-            $("#app__message").html(message);
-          })
-          .fail(data => {
-            onErrors(data);
-            const message = `<h3>Apiサーバーでエラーが発生しました</h3>`;
-            $("#app__message").html(message);
-          });
-      }
+      <script>
+        mocha.setup("tdd");
+      </script>
 
-      function renderApp() {
-        const success = data => {
-          console.log(data);
-          document.querySelector("#app").innerHTML = data.Output;
-        };
-        const errors = data => {
-          console.log(data);
-        };
+      <script></script>
 
-        apiCall(`http://localhost:4000/api/hello`, "GET", success, errors);
-      }
-
-      renderApp();
-    </script>
-    <script>
-      mocha.checkLeaks();
-      mocha.globals(["jQuery"]);
-      mocha.run();
-    </script>
+      <script>
+        mocha.checkLeaks();
+        mocha.globals(["jQuery"]);
+        mocha.run();
+      </script>
+    </div>
   </body>
 </html>

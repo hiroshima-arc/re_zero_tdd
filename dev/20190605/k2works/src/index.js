@@ -1,8 +1,47 @@
 import "./contents.css";
 import Auth from "@aws-amplify/auth";
 import Analytics from "@aws-amplify/analytics";
-
 import awsconfig from "./aws-exports";
+
+let apiUrl = "http://localhost:4000";
+
+if (process.env.NODE_ENV === "production") {
+  document.querySelector("#dev").style.display = "none";
+  apiUrl = "https://o0ufy01frj.execute-api.us-east-1.amazonaws.com/Prod";
+}
+
+function apiCall(url, method, onSuccess, onErrors) {
+  $("#app__message").html("処理中...");
+  $.ajax({
+    url: url,
+    type: method,
+    data: {}
+  })
+    .done(data => {
+      onSuccess(data);
+      const message = `<h3>Apiサーバーの読み込みに成功しました</h3>`;
+      $("#app__message").html(message);
+    })
+    .fail(data => {
+      onErrors(data);
+      const message = `<h3>Apiサーバーでエラーが発生しました</h3>`;
+      $("#app__message").html(message);
+    });
+}
+
+function renderApp() {
+  const success = data => {
+    console.log(data);
+    document.querySelector("#app").innerHTML = data.Output;
+  };
+  const errors = data => {
+    console.log(data);
+  };
+
+  apiCall(`${apiUrl}/api/hello`, "GET", success, errors);
+}
+
+renderApp();
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
