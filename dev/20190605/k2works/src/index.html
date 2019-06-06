@@ -44,6 +44,10 @@
       </div>
     </nav>
 
+    <!-- API -->
+    <div id="app__message"></div>
+    <div id="app"></div>
+
     <!-- Masthead -->
     <header class="masthead text-white text-center">
       <div class="overlay"></div>
@@ -310,8 +314,6 @@
             href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css"
             rel="stylesheet"
     />
-    <div id="message"></div>
-    <div id="app"></div>
     <div id="mocha"></div>
     <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
@@ -320,7 +322,7 @@
       mocha.setup("tdd");
 
       function apiCall(url, method, onSuccess, onErrors) {
-        $("#message").html("処理中...");
+        $("#app__message").html("処理中...");
         $.ajax({
           url: url,
           type: method,
