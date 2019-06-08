@@ -110,3 +110,4 @@ amplify status
 
 - [Bootstrap Editor](https://www.venezia-works.com/bst/index.html)
 - [Amplify JavaScript](https://aws-amplify.github.io/docs/js/start)
+- [AWS AmplifyでサーバレスWebアプリの構築(Cognito + API Gateway + IAM認証)](https://qiita.com/nakayama_cw/items/c4aae9ddb19c087e18cb)

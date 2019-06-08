@@ -69,6 +69,114 @@
       </div>
     </div>
 
+    <!-- Auth -->
+    <div class="auth">
+      <div class="app-header">
+        <div class="app-body">
+          <div id="signup">
+            <h1>Sign Up</h1>
+            <form name="form-signup">
+              <span style="display: inline-block; width: 150px;"
+                >User ID(Email)</span
+              >
+              <input type="text" id="email" placeholder="Email Address" />
+              <span style="display: inline-block; width: 150px;">Password</span>
+              <input type="password" id="password" placeholder="Password" />
+              <span style="display: inline-block; width: 150px;"
+                >ConfirmPassword</span
+              >
+              <input
+                type="password"
+                id="confirm-password"
+                placeholder="Password"
+              />
+              <input
+                type="button"
+                name="register-submit"
+                id="register-submit"
+                tabindex="4"
+                class="form-control btn btn-register"
+                value="Register Now"
+              />
+            </form>
+          </div>
+
+          <div id="verify">
+            <h1>Verify</h1>
+            <form name="form-signup">
+              <span style="display: inline-block; width: 150px;"
+                >User ID(Email)</span
+              >
+              <input
+                type="text"
+                id="verify-email"
+                placeholder="Email Address"
+              />
+              <span style="display: inline-block; width: 150px;"
+                >Verify Code</span
+              >
+              <input type="text" id="verify-code" placeholder="Verify Code" />
+              <input
+                type="button"
+                name="verify"
+                id="verify-now"
+                tabindex="4"
+                class="form-control btn btn-register"
+                value="Verify Now"
+              />
+            </form>
+          </div>
+
+          <div id="signin">
+            <h1>Sign In</h1>
+            <form name="form-signup">
+              <span style="display: inline-block; width: 150px;"
+                >User ID(Email)</span
+              >
+              <input
+                type="text"
+                id="signin-email"
+                placeholder="Email Address"
+              />
+              <span style="display: inline-block; width: 150px;">Password</span>
+              <input
+                type="password"
+                id="signin-password"
+                placeholder="Password"
+              />
+              <input
+                type="button"
+                name="signin"
+                id="signin-submit"
+                tabindex="4"
+                class="form-control btn btn-register"
+                value="Sign In"
+              />
+            </form>
+          </div>
+
+          <div id="signout">
+            <h1>Sign Out</h1>
+            <form name="form-signout">
+              <input
+                type="button"
+                name="signout"
+                id="signout-submit"
+                tabindex="4"
+                class="form-control btn btn-register"
+                value="Sign Out"
+              />
+            </form>
+          </div>
+
+          <div id="current-user">
+            <h1>Sign In User</h1>
+            <label for="current-user" id="signin-user"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Masthead -->
     <header class="masthead text-white text-center">
       <div class="overlay"></div>

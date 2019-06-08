@@ -1,7 +1,9 @@
 import "./contents.css";
+import Amplify from "aws-amplify";
 import Auth from "@aws-amplify/auth";
 import Analytics from "@aws-amplify/analytics";
 import awsconfig from "./aws-exports";
+import $ from "jquery";
 
 let apiUrl = "http://localhost:4000";
 
@@ -69,3 +71,107 @@ AnalyticsEventButton.addEventListener("click", evt => {
       '" target="_blank">View Events on the Amazon Pinpoint Console</a>';
   });
 });
+
+Amplify.configure({
+  Auth: {
+    // フェデレーションアイデンティティのID
+    identityPoolId: "us-east-1:2f6acc9d-75fc-4d40-8826-7e833b45cc9b",
+    // リージョン
+    region: "us-east-1",
+    // ユーザープールのID
+    userPoolId: "us-east-1_yqHANLMEx",
+    // ユーザープールのウェブクライアントID
+    userPoolWebClientId: "1bi9k5r3elbf8esbnqo2tkq3pb"
+  }
+});
+
+const SignUpButton = document.getElementById("register-submit");
+SignUpButton.addEventListener("click", () => {
+  const email = document.querySelector("#email").value;
+  const password = document.querySelector("#password").value;
+  const confirmPassword = document.querySelector("#confirm-password").value;
+
+  console.log(email);
+
+  Auth.signUp(email, password)
+    .then(data => {
+      alert("登録メールアドレスに検証コードを送信しました");
+    })
+    .catch(err => {
+      console.log(err);
+      alert("エラーが発生しました");
+      return;
+    });
+});
+
+const VeirfyButton = document.getElementById("verify-now");
+VeirfyButton.addEventListener("click", () => {
+  const email = document.querySelector("#verify-email").value;
+  const code = document.querySelector("#verify-code").value;
+
+  console.log(email);
+  console.log(code);
+
+  Auth.confirmSignUp(email, code)
+    .then(data => {
+      alert("ユーザ登録が完了しました。");
+    })
+    .catch(err => {
+      console.log(err);
+      alert("検証に失敗しました");
+      return;
+    });
+});
+
+const SignInButton = document.getElementById("signin-submit");
+SignInButton.addEventListener("click", () => {
+  const email = document.querySelector("#signin-email").value;
+  const password = document.querySelector("#signin-password").value;
+
+  console.log(email);
+  console.log(password);
+
+  Auth.signIn(email, password)
+    .then(data => {
+      alert("サインインに成功しました");
+      CurrentUser();
+    })
+    .catch(err => {
+      console.log(err);
+      alert("サインインに失敗しました");
+      return;
+    });
+});
+
+const SignOutButton = document.getElementById("signout-submit");
+SignOutButton.addEventListener("click", () => {
+  Auth.signOut()
+    .then(data => {
+      alert("サインアウトしました");
+      CurrentUser(data);
+    })
+    .catch(err => {
+      console.log(err);
+      alert("サインアウトに失敗しました");
+      return;
+    });
+});
+
+const CurrentUser = () => {
+  const filter = data => {
+    console.log(data);
+    return data === "not authenticated" ? data : data.attributes.email;
+  };
+
+  Auth.currentAuthenticatedUser({
+    bypassCache: false
+  })
+    .then(user => renderCurrentUser(filter(user)))
+    .catch(err => renderCurrentUser(filter(err)));
+};
+
+const renderCurrentUser = data => {
+  document.querySelector("#signin-user").innerHTML = data;
+};
+
+CurrentUser();
