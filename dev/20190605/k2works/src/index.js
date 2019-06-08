@@ -1,5 +1,6 @@
 import "./contents.css";
 import Amplify from "aws-amplify";
+import API from "@aws-amplify/api";
 import Auth from "@aws-amplify/auth";
 import Analytics from "@aws-amplify/analytics";
 import awsconfig from "./aws-exports";
@@ -11,6 +12,18 @@ if (process.env.NODE_ENV === "production") {
   document.querySelector("#dev").style.display = "none";
   apiUrl = "https://o0ufy01frj.execute-api.us-east-1.amazonaws.com/Prod";
 }
+
+Amplify.configure({
+  API: {
+    endpoints: [
+      {
+        name: "AmplifyTest",
+        endpoint: "https://o0ufy01frj.execute-api.us-east-1.amazonaws.com/Prod",
+        region: "us-east-1"
+      }
+    ]
+  }
+});
 
 function apiCall(url, method, onSuccess, onErrors) {
   $("#app__message").html("処理中...");
@@ -31,6 +44,22 @@ function apiCall(url, method, onSuccess, onErrors) {
     });
 }
 
+function apiGet(path, onSuccess, onErrors) {
+  let apiName = "AmplifyTest";
+
+  API.get(apiName, path)
+    .then(response => {
+      onSuccess(response);
+      const message = `<h3>Apiサーバーの読み込みに成功しました</h3>`;
+      $("#app__message").html(message);
+    })
+    .catch(err => {
+      onErrors(err);
+      const message = `<h3>Apiサーバーでエラーが発生しました</h3>`;
+      $("#app__message").html(message);
+    });
+}
+
 function renderApp() {
   const success = data => {
     console.log(data);
@@ -40,7 +69,8 @@ function renderApp() {
     console.log(data);
   };
 
-  apiCall(`${apiUrl}/api/hello`, "GET", success, errors);
+  //apiCall(`${apiUrl}/api/hello`, "GET", success, errors);
+  apiGet("/api/hello", success, errors);
 }
 
 renderApp();
