@@ -5,6 +5,44 @@ import Auth from "@aws-amplify/auth";
 import Analytics from "@aws-amplify/analytics";
 import awsconfig from "./aws-exports";
 import $ from "jquery";
+import {graphqlOperation} from "aws-amplify"
+import * as queries from './graphql/queries';
+import * as mutations from './graphql/mutations';
+import * as subscriptions from './graphql/subscriptions';
+
+Amplify.configure(awsconfig);
+
+// Simple query
+const query = (async () => {
+  const allTodos = await API.graphql(graphqlOperation(queries.listTodos));
+  console.log(allTodos);
+})();
+
+// Query using a parameter
+const queryWithPrams = (async () => {
+  const oneTodo = await API.graphql(graphqlOperation(queries.getTodo, { id: 'some id' }));
+  console.log(oneTodo);
+})();
+
+// Mutation
+const createTodo = async () => {
+  const todoDetails = {
+    name: 'Todo 1',
+    description: 'Learn AWS AppSync'
+  };
+
+  const newTodo = await API.graphql(graphqlOperation(mutations.createTodo, {input: todoDetails}));
+  console.log(newTodo);
+};
+
+const subscription = API.graphql(
+  graphqlOperation(subscriptions.onCreateTodo)
+).subscribe({
+  next: (todoData) => console.log(todoData)
+});
+
+// Stop receiving data updates from the subscription
+subscription.unsubscribe();
 
 let apiUrl = "http://localhost:4000";
 
