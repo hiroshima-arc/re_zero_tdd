@@ -55,13 +55,45 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: "AmplifyTest",
-        endpoint: "https://o0ufy01frj.execute-api.us-east-1.amazonaws.com/Prod",
+        name: awsconfig.aws_cloud_logic_custom.name,
+        endpoint: awsconfig.aws_cloud_logic_custom.endpoint
+      },
+      {
+        name: awsconfig.aws_cloud_logic_custom.name,
+        endpoint: awsconfig.aws_cloud_logic_custom.endpoint,
+        service: "lambda",
         region: "us-east-1"
       }
     ]
   }
 });
+
+let apiName = 'api1f0c273a';
+let path = '/items';
+let myInit = { // OPTIONAL
+  headers: {}, // OPTIONAL
+  response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+  queryStringParameters: {  // OPTIONAL
+    name: 'param'
+  }
+};
+
+API.get(apiName, path, myInit).then(response => {
+  // Add your code here
+}).catch(error => {
+  console.log(error.response)
+});
+
+const getData = async () => {
+  let apiName = 'api1f0c273a';
+  let path = '/items';
+  let myInit = { // OPTIONAL
+    headers: {} // OPTIONAL
+  }
+  return await API.get(apiName, path, myInit);
+}
+
+getData();
 
 function apiCall(url, method, onSuccess, onErrors) {
   $("#app__message").html("処理中...");
@@ -107,8 +139,8 @@ function renderApp() {
     console.log(data);
   };
 
-  //apiCall(`${apiUrl}/api/hello`, "GET", success, errors);
-  apiGet("/api/hello", success, errors);
+  apiCall(`${apiUrl}/api/hello`, "GET", success, errors);
+  //apiGet("/api/hello", success, errors);
 }
 
 renderApp();
@@ -138,19 +170,6 @@ AnalyticsEventButton.addEventListener("click", evt => {
       url +
       '" target="_blank">View Events on the Amazon Pinpoint Console</a>';
   });
-});
-
-Amplify.configure({
-  Auth: {
-    // フェデレーションアイデンティティのID
-    identityPoolId: "us-east-1:2f6acc9d-75fc-4d40-8826-7e833b45cc9b",
-    // リージョン
-    region: "us-east-1",
-    // ユーザープールのID
-    userPoolId: "us-east-1_yqHANLMEx",
-    // ユーザープールのウェブクライアントID
-    userPoolWebClientId: "1bi9k5r3elbf8esbnqo2tkq3pb"
-  }
 });
 
 const SignUpButton = document.getElementById("register-submit");

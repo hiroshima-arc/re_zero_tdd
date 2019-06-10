@@ -8,7 +8,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: "production",
-  entry: ["@babel/plyfill","./src/index.js"],
+  entry: ["@babel/polyfill","./src/index.js"],
 
   output: {
     path: path.join(__dirname, "dist"),

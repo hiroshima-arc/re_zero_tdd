@@ -24,6 +24,58 @@
 			"output": {
 				"securityType": "API_KEY"
 			}
+		},
+		"api1f0c273a": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "k2works62ef76ca",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
+		}
+	},
+	"function": {
+		"k2works62ef76ca": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [
+				{
+					"category": "auth",
+					"resourceName": "cognitoca545a14",
+					"attributes": [
+						"UserPoolId"
+					]
+				},
+				{
+					"category": "analytics",
+					"resourceName": "k2works",
+					"attributes": [
+						"Id",
+						"Region"
+					]
+				},
+				{
+					"category": "hosting",
+					"resourceName": "S3AndCloudFront",
+					"attributes": [
+						"HostingBucketName"
+					]
+				},
+				{
+					"category": "api",
+					"resourceName": "k2works",
+					"attributes": [
+						"GraphQLAPIIdOutput"
+					]
+				}
+			]
 		}
 	}
 }
