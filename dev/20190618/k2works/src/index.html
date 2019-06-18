@@ -66,7 +66,7 @@
 
           describe("FizzBuzz", () => {
             describe(".generateList", () => {
-              it("return 1 to 100", () => {
+              it("return 1 to 100 ", () => {
                 const list = FizzBuzz.generateList();
                 assert.equal(1, list[0]);
                 assert.equal("Buzz", list[99]);
@@ -100,16 +100,18 @@
             });
 
             describe(".generate", () => {
-              it("print Fizz when divisible by 3 ", () => {
-                assert.equal("Fizz", FizzBuzz.generate(3));
-              });
+              describe("タイプ1の場合", () => {
+                it("print Fizz when divisible by 3 ", () => {
+                  assert.equal("Fizz", FizzBuzz.generate(3, 1));
+                });
 
-              it("print Buzz when divisible by 5 ", () => {
-                assert.equal("Buzz", FizzBuzz.generate(5));
-              });
+                it("print Buzz when divisible by 5 ", () => {
+                  assert.equal("Buzz", FizzBuzz.generate(5, 1));
+                });
 
-              it("print FizzBuzz when divisible by 15 ", () => {
-                assert.equal("FizzBuzz", FizzBuzz.generate(15));
+                it("print FizzBuzz when divisible by 15 ", () => {
+                  assert.equal("FizzBuzz", FizzBuzz.generate(15, 1));
+                });
               });
             });
           });
@@ -124,15 +126,24 @@
                 .map(this.generate);
             },
 
-            generate(number) {
+            generate(number, type) {
               const isFizz = number % 3 === 0;
               const isBuzz = number % 5 === 0;
 
-              if (isFizz && isBuzz) return "FizzBuzz";
-              if (isFizz) return "Fizz";
-              if (isBuzz) return "Buzz";
+              switch (type) {
+                case 1:
+                  if (isFizz && isBuzz) return "FizzBuzz";
+                  if (isFizz) return "Fizz";
+                  if (isBuzz) return "Buzz";
 
-              return number;
+                  return number;
+                default:
+                  if (isFizz && isBuzz) return "FizzBuzz";
+                  if (isFizz) return "Fizz";
+                  if (isBuzz) return "Buzz";
+
+                  return number;
+              }
             },
 
             renderTable() {
