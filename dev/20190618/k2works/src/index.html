@@ -127,6 +127,20 @@
                   assert.equal(15, FizzBuzz.generate(15, 2));
                 });
               });
+
+              describe("タイプ3の場合", () => {
+                it("print 3 when divisible by 3 ", () => {
+                  assert.equal(3, FizzBuzz.generate(3, 3));
+                });
+
+                it("print 5 when divisible by 5 ", () => {
+                  assert.equal(5, FizzBuzz.generate(5, 3));
+                });
+
+                it("print FizzBuzz when divisible by 15 ", () => {
+                  assert.equal("FizzBuzz", FizzBuzz.generate(15, 3));
+                });
+              });
             });
           });
 
@@ -152,6 +166,9 @@
 
                   return number;
                 case 2:
+                  return number;
+                case 3:
+                  if (isFizz && isBuzz) return "FizzBuzz";
                   return number;
               }
             },
