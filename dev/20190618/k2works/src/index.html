@@ -105,7 +105,19 @@
               assert.equal(1, list[0]);
               assert.equal(100, list[99]);
             });
+
+            it("print Fizz when divisible by 3", () => {
+              assert.equal("Fizz", fizzBuzz(3));
+            });
           });
+
+          function fizzBuzz(number) {
+            let result = number;
+            if (number % 3 === 0) {
+              result = "Fizz";
+            }
+            return result;
+          }
 
           function print1To100() {
             let list = [];
