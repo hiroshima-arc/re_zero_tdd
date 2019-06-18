@@ -61,10 +61,33 @@
 
           describe("FizzBuzz", () => {
             describe(".generateList", () => {
-              it("print 1 to 100", () => {
+              it("return 1 to 100", () => {
                 const list = generateList();
                 assert.equal(1, list[0]);
                 assert.equal("Buzz", list[99]);
+              });
+
+              it("数字の合計は2632 ", () => {
+                const result = generateList()
+                  .filter(i => !isNaN(i))
+                  .reduce((a, b) => a + b);
+                assert.equal(2632, result);
+              });
+
+              it("Fizzの合計数は27 ", () => {
+                const result = generateList().filter(i => i === "Fizz").length;
+                assert.equal(27, result);
+              });
+
+              it("Buzzの合計数は14 ", () => {
+                const result = generateList().filter(i => i === "Buzz").length;
+                assert.equal(14, result);
+              });
+
+              it("FizzBuzzの合計数は6 ", () => {
+                const result = generateList().filter(i => i === "FizzBuzz")
+                  .length;
+                assert.equal(6, result);
               });
             });
 
