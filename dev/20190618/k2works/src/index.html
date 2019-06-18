@@ -97,7 +97,7 @@
           }
 
           function renderTable() {
-            let header = (() => {
+            const header = (() => {
               let items = "<tr>";
               [...Array(10).keys()].forEach(i => {
                 items += `<th>${i + 1}</th>`;
@@ -111,13 +111,13 @@
               `;
             })();
 
-            let body = (() => {
-              let list = generateList();
+            const body = (() => {
               let items = "<tr>";
-              list.forEach((v, k) => {
+              generateList().forEach((v, k) => {
                 items += `<td>${v}</td>`;
                 if ((k + 1) % 10 === 0) items += "</tr><tr>";
               });
+
               return `
                 <tbody>
                   ${items}
@@ -125,13 +125,12 @@
              `;
             })();
 
-            let table = `
+            return `
               <table class="table table-bordered">
                 ${header}
                 ${body}
               </table>
           `;
-            return table;
           }
 
           document.querySelector("#app").innerHTML = renderTable();
