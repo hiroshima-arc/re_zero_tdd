@@ -16,7 +16,7 @@
       crossorigin="anonymous"
     />
 
-    <title>Hello, world!</title>
+    <title>Fizz Buzz</title>
   </head>
   <body>
     <!-- Optional JavaScript -->
@@ -38,7 +38,57 @@
     ></script>
 
     <main class="container" id="service">
-      <div id="app"></div>
+      <div class="starter-template">
+        <h1>FizzBuzz Service</h1>
+        <p class="lead">
+          1 から 100 までの数をプリントするプログラムを書け。<br />
+          ただし 3 の倍数のときは数の代わりに｢Fizz｣とプリントし、<br />
+          5 の倍数のときは｢Buzz｣とプリントし、<br />
+          3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。
+        </p>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+              <th>6</th>
+              <th>7</th>
+              <th>8</th>
+              <th>9</th>
+              <th>10</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>Fizz</td>
+              <td>4</td>
+              <td>Buzz</td>
+              <td>Fizz</td>
+              <td>7</td>
+              <td>8</td>
+              <td>Fizz</td>
+              <td>Buzz</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Fizz</td>
+              <td>13</td>
+              <td>14</td>
+              <td>FizzBuzz</td>
+              <td>16</td>
+              <td>17</td>
+              <td>Fizz</td>
+              <td>19</td>
+              <td>Buzz</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div id="dev">
         <div id="mocha"></div>
         <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
@@ -49,7 +99,7 @@
           mocha.setup("bdd");
           const assert = chai.assert;
 
-          describe(".greeting", () => {
+          describe("FizzBuzz Test", () => {
             it("print hello, world", () => {
               assert.equal("hello, world", greeting());
             });
@@ -58,8 +108,6 @@
           function greeting() {
             return "hello, world";
           }
-
-          document.querySelector("#app").innerHTML = greeting();
         </script>
 
         <script>
