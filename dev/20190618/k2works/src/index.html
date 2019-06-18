@@ -113,6 +113,20 @@
                   assert.equal("FizzBuzz", FizzBuzz.generate(15, 1));
                 });
               });
+
+              describe("タイプ2の場合", () => {
+                it("print 3 when divisible by 3 ", () => {
+                  assert.equal(3, FizzBuzz.generate(3, 2));
+                });
+
+                it("print 5 when divisible by 5 ", () => {
+                  assert.equal(5, FizzBuzz.generate(5, 2));
+                });
+
+                it("print 15 when divisible by 15 ", () => {
+                  assert.equal(15, FizzBuzz.generate(15, 2));
+                });
+              });
             });
           });
 
@@ -123,7 +137,7 @@
               // 配列は0から始まるので1を足す
               return [...Array(this.MAX_NUMBER + 1).keys()]
                 .slice(1)
-                .map(this.generate);
+                .map(i => this.generate(i, 1));
             },
 
             generate(number, type) {
@@ -137,11 +151,7 @@
                   if (isBuzz) return "Buzz";
 
                   return number;
-                default:
-                  if (isFizz && isBuzz) return "FizzBuzz";
-                  if (isFizz) return "Fizz";
-                  if (isBuzz) return "Buzz";
-
+                case 2:
                   return number;
               }
             },
