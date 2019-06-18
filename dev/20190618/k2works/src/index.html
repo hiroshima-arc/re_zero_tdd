@@ -19,8 +19,6 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
@@ -38,5 +36,38 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+
+    <main class="container" id="service">
+      <div id="app"></div>
+      <div id="dev">
+        <div id="mocha"></div>
+        <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+        <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+
+        <script>
+          mocha.setup("bdd");
+          const assert = chai.assert;
+
+          describe(".greeting", () => {
+            it("print hello, world", () => {
+              assert.equal("hello, world", greeting());
+            });
+          });
+
+          function greeting() {
+            return "hello, world";
+          }
+
+          document.querySelector("#app").innerHTML = greeting();
+        </script>
+
+        <script>
+          mocha.checkLeaks();
+          mocha.globals(["jQuery"]);
+          mocha.run();
+        </script>
+      </div>
+    </main>
   </body>
 </html>
