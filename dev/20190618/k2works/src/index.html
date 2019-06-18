@@ -113,11 +113,17 @@
             it("print Buzz when divisible by 5", () => {
               assert.equal("Buzz", fizzBuzz(5));
             });
+
+            it("print FizzBuzz when divisible by 15", () => {
+              assert.equal("FizzBuzz", fizzBuzz(15));
+            });
           });
 
           function fizzBuzz(number) {
             let result = number;
-            if (number % 3 === 0) {
+            if (number % 3 === 0 && number % 5 === 0) {
+              result = "FizzBuzz";
+            } else if (number % 3 === 0) {
               result = "Fizz";
             } else if (number % 5 === 0) {
               result = "Buzz";
