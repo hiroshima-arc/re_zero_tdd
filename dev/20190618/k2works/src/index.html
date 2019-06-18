@@ -63,7 +63,7 @@
             it("print 1 to 100", () => {
               const list = generateList();
               assert.equal(1, list[0]);
-              assert.equal(100, list[99]);
+              assert.equal("Buzz", list[99]);
             });
 
             it("print Fizz when divisible by 3", () => {
@@ -86,51 +86,49 @@
             if (isFizz && isBuzz) return "FizzBuzz";
             if (isFizz) return "Fizz";
             if (isBuzz) return "Buzz";
+
             return number;
           }
 
           function generateList() {
-            let list = [];
-            for (let i = 0; i < 100; i++) {
-              list[i] = i + 1;
-            }
-            return list;
+            return [...Array(101).keys()].slice(1).map(fizzBuzz);
           }
 
           function renderTable() {
             let header = (() => {
               let items = "<tr>";
-              for (let i = 0; i < 10; i++) {
+              [...Array(10).keys()].forEach(i => {
                 items += `<th>${i + 1}</th>`;
-              }
+              });
               items += "</tr>";
+
               return `
-              <thead>
-                ${items}
-              </thead>
-            `;
+                <thead>
+                  ${items}
+                </thead>
+              `;
             })();
 
             let body = (() => {
+              let list = generateList();
               let items = "<tr>";
-              for (let i = 1; i <= 100; i++) {
-                items += `<td>${fizzBuzz(i)}</td>`;
-                if (i % 10 === 0) items += "</tr><tr>";
-              }
-
+              list.forEach((v, k) => {
+                items += `<td>${v}</td>`;
+                if ((k + 1) % 10 === 0) items += "</tr><tr>";
+              });
               return `
-              <tbody>
-                ${items}
-              </tbody>
-           `;
+                <tbody>
+                  ${items}
+                </tbody>
+             `;
             })();
 
             let table = `
-            <table class="table table-bordered">
-              ${header}
-              ${body}
-            </table>
-        `;
+              <table class="table table-bordered">
+                ${header}
+                ${body}
+              </table>
+          `;
             return table;
           }
 
