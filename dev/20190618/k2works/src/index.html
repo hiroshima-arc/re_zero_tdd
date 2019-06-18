@@ -46,48 +46,8 @@
           5 の倍数のときは｢Buzz｣とプリントし、<br />
           3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。
         </p>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>1</th>
-              <th>2</th>
-              <th>3</th>
-              <th>4</th>
-              <th>5</th>
-              <th>6</th>
-              <th>7</th>
-              <th>8</th>
-              <th>9</th>
-              <th>10</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>Fizz</td>
-              <td>4</td>
-              <td>Buzz</td>
-              <td>Fizz</td>
-              <td>7</td>
-              <td>8</td>
-              <td>Fizz</td>
-              <td>Buzz</td>
-            </tr>
-            <tr>
-              <td>11</td>
-              <td>Fizz</td>
-              <td>13</td>
-              <td>14</td>
-              <td>FizzBuzz</td>
-              <td>16</td>
-              <td>17</td>
-              <td>Fizz</td>
-              <td>19</td>
-              <td>Buzz</td>
-            </tr>
-          </tbody>
-        </table>
+
+        <div id="app"></div>
       </div>
       <div id="dev">
         <div id="mocha"></div>
@@ -138,6 +98,45 @@
             }
             return list;
           }
+
+          function renderTable() {
+            let header = (() => {
+              let items = "<tr>";
+              for (let i = 0; i < 10; i++) {
+                items += `<th>${i + 1}</th>`;
+              }
+              items += "</tr>";
+              return `
+              <thead>
+                ${items}
+              </thead>
+            `;
+            })();
+
+            let body = (() => {
+              let items = "<tr>";
+              for (let i = 1; i <= 100; i++) {
+                items += `<td>${fizzBuzz(i)}</td>`;
+                if (i % 10 === 0) items += "</tr><tr>";
+              }
+
+              return `
+              <tbody>
+                ${items}
+              </tbody>
+           `;
+            })();
+
+            let table = `
+            <table class="table table-bordered">
+              ${header}
+              ${body}
+            </table>
+        `;
+            return table;
+          }
+
+          document.querySelector("#app").innerHTML = renderTable();
         </script>
 
         <script>
