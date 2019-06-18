@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "This is a sample template for api - Below is a brief explanation of what we have generated for you:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.468.0",
+    "aws-serverless-express": "^3.3.6",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "uuid": "^3.3.2"
+  }
+}

@@ -99,3 +99,7 @@ bin
 
 vendor
 .devcontainer
+
+screenshot.jpg
+cucumber.json
+generated_doc
