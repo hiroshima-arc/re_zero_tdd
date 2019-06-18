@@ -59,23 +59,27 @@
           mocha.setup("bdd");
           const assert = chai.assert;
 
-          describe("FizzBuzz Test", () => {
-            it("print 1 to 100", () => {
-              const list = generateList();
-              assert.equal(1, list[0]);
-              assert.equal("Buzz", list[99]);
+          describe("FizzBuzz", () => {
+            describe(".generateList", () => {
+              it("print 1 to 100", () => {
+                const list = generateList();
+                assert.equal(1, list[0]);
+                assert.equal("Buzz", list[99]);
+              });
             });
 
-            it("print Fizz when divisible by 3", () => {
-              assert.equal("Fizz", fizzBuzz(3));
-            });
+            describe(".fizzBuzz", () => {
+              it("print Fizz when divisible by 3", () => {
+                assert.equal("Fizz", fizzBuzz(3));
+              });
 
-            it("print Buzz when divisible by 5", () => {
-              assert.equal("Buzz", fizzBuzz(5));
-            });
+              it("print Buzz when divisible by 5", () => {
+                assert.equal("Buzz", fizzBuzz(5));
+              });
 
-            it("print FizzBuzz when divisible by 15", () => {
-              assert.equal("FizzBuzz", fizzBuzz(15));
+              it("print FizzBuzz when divisible by 15", () => {
+                assert.equal("FizzBuzz", fizzBuzz(15));
+              });
             });
           });
 
