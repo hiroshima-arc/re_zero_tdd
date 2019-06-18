@@ -99,17 +99,17 @@
               });
             });
 
-            describe(".fizzBuzz", () => {
+            describe(".generate", () => {
               it("print Fizz when divisible by 3 ", () => {
-                assert.equal("Fizz", FizzBuzz.fizzBuzz(3));
+                assert.equal("Fizz", FizzBuzz.generate(3));
               });
 
               it("print Buzz when divisible by 5 ", () => {
-                assert.equal("Buzz", FizzBuzz.fizzBuzz(5));
+                assert.equal("Buzz", FizzBuzz.generate(5));
               });
 
               it("print FizzBuzz when divisible by 15 ", () => {
-                assert.equal("FizzBuzz", FizzBuzz.fizzBuzz(15));
+                assert.equal("FizzBuzz", FizzBuzz.generate(15));
               });
             });
           });
@@ -121,10 +121,10 @@
               // 配列は0から始まるので1を足す
               return [...Array(this.MAX_NUMBER + 1).keys()]
                 .slice(1)
-                .map(this.fizzBuzz);
+                .map(this.generate);
             },
 
-            fizzBuzz(number) {
+            generate(number) {
               const isFizz = number % 3 === 0;
               const isBuzz = number % 5 === 0;
 
