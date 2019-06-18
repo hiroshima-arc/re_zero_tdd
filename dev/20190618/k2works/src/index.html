@@ -61,7 +61,7 @@
 
           describe("FizzBuzz Test", () => {
             it("print 1 to 100", () => {
-              const list = print1To100();
+              const list = generateList();
               assert.equal(1, list[0]);
               assert.equal(100, list[99]);
             });
@@ -91,7 +91,7 @@
             return result;
           }
 
-          function print1To100() {
+          function generateList() {
             let list = [];
             for (let i = 0; i < 100; i++) {
               list[i] = i + 1;
