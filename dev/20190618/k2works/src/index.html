@@ -44,7 +44,12 @@
           1 から 100 までの数をプリントするプログラムを書け。<br />
           ただし 3 の倍数のときは数の代わりに｢Fizz｣とプリントし、<br />
           5 の倍数のときは｢Buzz｣とプリントし、<br />
-          3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。
+          3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。<br />
+          <br />
+          タイプごとに出力を切り替える、<br />
+          タイプ１は通常、<br />
+          タイプ２は数字のみ、<br />
+          タイプ３は FizzBuzz の場合のみをプリントする。
         </p>
 
         <div id="app"></div>
@@ -160,6 +165,11 @@
               })();
 
               return `
+              <select name="type">
+               <option value="one">タイプ1</option>
+               <option value="two">タイプ2</option>
+               <option value="three">タイプ3</option>
+              </select>
               <table class="table table-bordered">
                 ${header}
                 ${body}
