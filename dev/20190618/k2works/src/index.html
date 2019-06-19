@@ -144,6 +144,21 @@
             });
           });
 
+          const FizzBuzzType01 = function(number) {
+            this.number = number;
+
+            this.generate = () => {
+              const isFizz = this.number % 3 === 0;
+              const isBuzz = this.number % 5 === 0;
+
+              if (isFizz && isBuzz) return "FizzBuzz";
+              if (isFizz) return "Fizz";
+              if (isBuzz) return "Buzz";
+
+              return this.number;
+            };
+          };
+
           const FizzBuzz = {
             MAX_NUMBER: 100,
 
@@ -162,11 +177,7 @@
 
               switch (type) {
                 case 1:
-                  if (isFizz && isBuzz) return "FizzBuzz";
-                  if (isFizz) return "Fizz";
-                  if (isBuzz) return "Buzz";
-
-                  return number;
+                  return new FizzBuzzType01(number).generate();
                 case 2:
                   return number;
                 case 3:
