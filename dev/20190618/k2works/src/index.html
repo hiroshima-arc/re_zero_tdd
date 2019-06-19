@@ -124,7 +124,9 @@
                 const command = FizzBuzzListCommand.create(
                   FizzBuzzTypeEnum.type01()
                 );
-                chai.expect(command.exec(101)).to.throw();
+                chai
+                  .expect(() => command.exec(101))
+                  .to.throw("FizzBuzzList can't generate over 100");
               });
             });
 
@@ -155,7 +157,9 @@
                   const command = FizzBuzzValueCommand.create(
                     FizzBuzzTypeEnum.type01()
                   );
-                  chai.expect(command.exec(-1)).to.throw();
+                  chai
+                    .expect(() => command.exec(-1))
+                    .to.throw("FizzBuzzValue can't generate by minus number");
                 });
               });
 
@@ -291,7 +295,8 @@
 
           const FizzBuzzValue = {
             create(number, value) {
-              assert(number >= 0);
+              if (number < 0)
+                throw new Error(`FizzBuzzValue can't generate by minus number`);
               let self = Object.create(FizzBuzzValue.prototype);
               self.number = number;
               self.value = value;
@@ -302,7 +307,8 @@
 
           const FizzBuzzList = {
             create(list) {
-              assert(list.length <= 100);
+              if (list.length > 100)
+                throw new Error(`FizzBuzzList can't generate over 100`);
               let self = Object.create(FizzBuzzList.prototype);
               self.list = list;
               return self;
