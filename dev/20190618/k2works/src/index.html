@@ -67,9 +67,9 @@
           describe("FizzBuzz", () => {
             describe(".generateList", () => {
               it("return 1 to 100 ", () => {
-                FizzBuzzData.list = FizzBuzz.generateList();
-                assert.equal(1, FizzBuzzData.list[0]);
-                assert.equal("Buzz", FizzBuzzData.list[99]);
+                FizzBuzz.list = FizzBuzz.generateList();
+                assert.equal(1, FizzBuzz.list[0]);
+                assert.equal("Buzz", FizzBuzz.list[99]);
               });
 
               it("数字の合計は2632 ", () => {
@@ -144,12 +144,10 @@
             });
           });
 
-          const FizzBuzzData = {
-            list: []
-          };
-
           const FizzBuzz = {
             MAX_NUMBER: 100,
+
+            list: [],
 
             generateList() {
               // 配列は0から始まるので1を足す
