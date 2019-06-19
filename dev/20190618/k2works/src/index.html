@@ -67,14 +67,14 @@
           describe("FizzBuzz", () => {
             describe(".generateList", () => {
               it("return 1 to 100 ", () => {
-                const fizzBuzz = new FizzBuzz(1);
+                const fizzBuzz = new FizzBuzz(new FizzBuzzType01());
                 fizzBuzz.generateList();
                 assert.equal(1, fizzBuzz.list[0]);
                 assert.equal("Buzz", fizzBuzz.list[99]);
               });
 
               it("数字の合計は2632 ", () => {
-                const fizzBuzz = new FizzBuzz(1);
+                const fizzBuzz = new FizzBuzz(new FizzBuzzType01());
                 fizzBuzz.generateList();
                 const result = fizzBuzz.list
                   .filter(i => !isNaN(i))
@@ -83,21 +83,21 @@
               });
 
               it("Fizzの合計数は27 ", () => {
-                const fizzBuzz = new FizzBuzz(1);
+                const fizzBuzz = new FizzBuzz(new FizzBuzzType01());
                 fizzBuzz.generateList();
                 const result = fizzBuzz.list.filter(i => i === "Fizz").length;
                 assert.equal(27, result);
               });
 
               it("Buzzの合計数は14 ", () => {
-                const fizzBuzz = new FizzBuzz(1);
+                const fizzBuzz = new FizzBuzz(new FizzBuzzType01());
                 fizzBuzz.generateList();
                 const result = fizzBuzz.list.filter(i => i === "Buzz").length;
                 assert.equal(14, result);
               });
 
               it("FizzBuzzの合計数は6 ", () => {
-                const fizzBuzz = new FizzBuzz(1);
+                const fizzBuzz = new FizzBuzz(new FizzBuzzType01());
                 fizzBuzz.generateList();
                 const result = fizzBuzz.list.filter(i => i === "FizzBuzz")
                   .length;
@@ -108,51 +108,51 @@
             describe(".generate", () => {
               describe("タイプ1の場合", () => {
                 it("print Fizz when divisible by 3 ", () => {
-                  const fizzBuzz = new FizzBuzz(1);
+                  const fizzBuzz = new FizzBuzz(new FizzBuzzType01());
                   assert.equal("Fizz", fizzBuzz.generate(3));
                 });
 
                 it("print Buzz when divisible by 5 ", () => {
-                  const fizzBuzz = new FizzBuzz(1);
+                  const fizzBuzz = new FizzBuzz(new FizzBuzzType01());
                   assert.equal("Buzz", fizzBuzz.generate(5));
                 });
 
                 it("print FizzBuzz when divisible by 15 ", () => {
-                  const fizzBuzz = new FizzBuzz(1);
+                  const fizzBuzz = new FizzBuzz(new FizzBuzzType01());
                   assert.equal("FizzBuzz", fizzBuzz.generate(15));
                 });
               });
 
               describe("タイプ2の場合", () => {
                 it("print 3 when divisible by 3 ", () => {
-                  const fizzBuzz = new FizzBuzz(2);
+                  const fizzBuzz = new FizzBuzz(new FizzBuzzType02());
                   assert.equal(3, fizzBuzz.generate(3));
                 });
 
                 it("print 5 when divisible by 5 ", () => {
-                  const fizzBuzz = new FizzBuzz(2);
+                  const fizzBuzz = new FizzBuzz(new FizzBuzzType02());
                   assert.equal(5, fizzBuzz.generate(5));
                 });
 
                 it("print 15 when divisible by 15 ", () => {
-                  const fizzBuzz = new FizzBuzz(2);
+                  const fizzBuzz = new FizzBuzz(new FizzBuzzType02());
                   assert.equal(15, fizzBuzz.generate(15));
                 });
               });
 
               describe("タイプ3の場合", () => {
                 it("print 3 when divisible by 3 ", () => {
-                  const fizzBuzz = new FizzBuzz(3);
+                  const fizzBuzz = new FizzBuzz(new FizzBuzzType03());
                   assert.equal(3, fizzBuzz.generate(3));
                 });
 
                 it("print 5 when divisible by 5 ", () => {
-                  const fizzBuzz = new FizzBuzz(3);
+                  const fizzBuzz = new FizzBuzz(new FizzBuzzType03());
                   assert.equal(5, fizzBuzz.generate(5));
                 });
 
                 it("print FizzBuzz when divisible by 15 ", () => {
-                  const fizzBuzz = new FizzBuzz(3);
+                  const fizzBuzz = new FizzBuzz(new FizzBuzzType03());
                   assert.equal("FizzBuzz", fizzBuzz.generate(15));
                 });
               });
@@ -195,26 +195,15 @@
 
             this.type = type;
 
-            this.typeObject = function(type) {
-              switch (type) {
-                case 1:
-                  return new FizzBuzzType01();
-                case 2:
-                  return new FizzBuzzType02();
-                case 3:
-                  return new FizzBuzzType03();
-              }
-            };
-
             this.generateList = function() {
               // 配列は0から始まるので1を足す
               this.list = [...Array(this.MAX_NUMBER + 1).keys()]
                 .slice(1)
-                .map(i => this.typeObject(this.type).generate(i));
+                .map(i => this.type.generate(i));
             };
 
             this.generate = function(number) {
-              return this.typeObject(this.type).generate(number);
+              return this.type.generate(number);
             };
 
             this.renderTable = function() {
@@ -261,7 +250,7 @@
             };
           };
 
-          const fizzBuzz = new FizzBuzz(1);
+          const fizzBuzz = new FizzBuzz(new FizzBuzzType01());
           document.querySelector("#app").innerHTML = fizzBuzz.renderTable();
         </script>
 
