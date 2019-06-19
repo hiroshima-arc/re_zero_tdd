@@ -64,23 +64,23 @@
           mocha.setup("bdd");
           const assert = chai.assert;
 
-          describe("FizzBuzz", () => {
+          describe("FizzBuzzService", () => {
             describe(".generateList", () => {
               it("return 1 to 100 ", () => {
-                const command = FizzBuzzListCommand.create(
+                const service = FizzBuzzService.create(
                   FizzBuzzTypeEnum.type01()
                 );
-                command.exec(100);
-                assert.equal(1, command.fizzBuzzList.list[0].value);
-                assert.equal("Buzz", command.fizzBuzzList.list[99].value);
+                const list = service.generateList(100);
+                assert.equal(1, list[0].value);
+                assert.equal("Buzz", list[99].value);
               });
 
               it("数字の合計は2632 ", () => {
-                const command = FizzBuzzListCommand.create(
+                const service = FizzBuzzService.create(
                   FizzBuzzTypeEnum.type01()
                 );
-                command.exec(100);
-                const result = command.fizzBuzzList.list
+                const list = service.generateList(100);
+                const result = list
                   .filter(i => !isNaN(i.value))
                   .map(i => i.value)
                   .reduce((a, b) => a + b);
@@ -88,44 +88,44 @@
               });
 
               it("Fizzの合計数は27 ", () => {
-                const command = FizzBuzzListCommand.create(
+                const service = FizzBuzzService.create(
                   FizzBuzzTypeEnum.type01()
                 );
-                command.exec(100);
-                const result = command.fizzBuzzList.list
+                const list = service.generateList(100);
+                const result = list
                   .filter(i => i.value === "Fizz")
                   .map(i => i.value).length;
                 assert.equal(27, result);
               });
 
               it("Buzzの合計数は14 ", () => {
-                const command = FizzBuzzListCommand.create(
+                const service = FizzBuzzService.create(
                   FizzBuzzTypeEnum.type01()
                 );
-                command.exec(100);
-                const result = command.fizzBuzzList.list
+                const list = service.generateList(100);
+                const result = list
                   .filter(i => i.value === "Buzz")
                   .map(i => i.value).length;
                 assert.equal(14, result);
               });
 
               it("FizzBuzzの合計数は6 ", () => {
-                const command = FizzBuzzListCommand.create(
+                const service = FizzBuzzService.create(
                   FizzBuzzTypeEnum.type01()
                 );
-                command.exec(100);
-                const result = command.fizzBuzzList.list
+                const list = service.generateList(100);
+                const result = list
                   .filter(i => i.value === "FizzBuzz")
                   .map(i => i.value).length;
                 assert.equal(6, result);
               });
 
               it("100より多い数を許可しない", () => {
-                const command = FizzBuzzListCommand.create(
+                const service = FizzBuzzService.create(
                   FizzBuzzTypeEnum.type01()
                 );
                 chai
-                  .expect(() => command.exec(101))
+                  .expect(() => service.generateList(101))
                   .to.throw("FizzBuzzList can't generate over 100");
               });
             });
@@ -133,79 +133,79 @@
             describe(".generate", () => {
               describe("タイプ1の場合", () => {
                 it("print Fizz when divisible by 3 ", () => {
-                  const command = FizzBuzzValueCommand.create(
+                  const service = FizzBuzzService.create(
                     FizzBuzzTypeEnum.type01()
                   );
-                  assert.equal("Fizz", command.exec(3).value);
+                  assert.equal("Fizz", service.generate(3));
                 });
 
                 it("print Buzz when divisible by 5 ", () => {
-                  const command = FizzBuzzValueCommand.create(
+                  const service = FizzBuzzService.create(
                     FizzBuzzTypeEnum.type01()
                   );
-                  assert.equal("Buzz", command.exec(5).value);
+                  assert.equal("Buzz", service.generate(5));
                 });
 
                 it("print FizzBuzz when divisible by 15 ", () => {
-                  const command = FizzBuzzValueCommand.create(
+                  const service = FizzBuzzService.create(
                     FizzBuzzTypeEnum.type01()
                   );
-                  assert.equal("FizzBuzz", command.exec(15).value);
+                  assert.equal("FizzBuzz", service.generate(15));
                 });
 
                 it("値は正の値のみ許可する", () => {
-                  const command = FizzBuzzValueCommand.create(
+                  const service = FizzBuzzService.create(
                     FizzBuzzTypeEnum.type01()
                   );
                   chai
-                    .expect(() => command.exec(-1))
+                    .expect(() => service.generate(-1))
                     .to.throw("FizzBuzzValue can't generate by minus number");
                 });
               });
 
               describe("タイプ2の場合", () => {
                 it("print 3 when divisible by 3 ", () => {
-                  const command = FizzBuzzValueCommand.create(
+                  const service = FizzBuzzService.create(
                     FizzBuzzTypeEnum.type02()
                   );
-                  assert.equal(3, command.exec(3).value);
+                  assert.equal(3, service.generate(3));
                 });
 
                 it("print 5 when divisible by 5 ", () => {
-                  const command = FizzBuzzValueCommand.create(
+                  const service = FizzBuzzService.create(
                     FizzBuzzTypeEnum.type02()
                   );
-                  assert.equal(5, command.exec(5).value);
+                  assert.equal(5, service.generate(5));
                 });
 
                 it("print 15 when divisible by 15 ", () => {
-                  const command = FizzBuzzValueCommand.create(
+                  const service = FizzBuzzService.create(
                     FizzBuzzTypeEnum.type02()
                   );
-                  assert.equal(15, command.exec(15).value);
+                  assert.equal(15, service.generate(15));
                 });
               });
 
               describe("タイプ3の場合", () => {
                 it("print 3 when divisible by 3 ", () => {
-                  const command = FizzBuzzValueCommand.create(
+                  const service = FizzBuzzService.create(
                     FizzBuzzTypeEnum.type03()
                   );
-                  assert.equal(3, command.exec(3).value);
+                  assert.equal(3, service.generate(3));
                 });
 
                 it("print 5 when divisible by 5 ", () => {
-                  const command = FizzBuzzValueCommand.create(
+                  const service = FizzBuzzService.create(
                     FizzBuzzTypeEnum.type03()
                   );
-                  assert.equal(5, command.exec(5).value);
+                  assert.equal(5, service.generate(5));
                 });
 
                 it("print FizzBuzz when divisible by 15 ", () => {
-                  const command = FizzBuzzValueCommand.create(
+                  const service = FizzBuzzService.create(
                     FizzBuzzTypeEnum.type03()
                   );
-                  assert.equal("FizzBuzz", command.exec(15).value);
+                  assert.equal("FizzBuzz", service.generate(15));
                 });
               });
             });
@@ -365,6 +365,24 @@
                         this.type.generate(number)
                       ))
                   );
+                return this.fizzBuzzList;
+              }
+            }
+          };
+
+          const FizzBuzzService = {
+            create(type) {
+              let self = Object.create(FizzBuzzService.prototype);
+              self.valueCommand = FizzBuzzValueCommand.create(type);
+              self.listCommand = FizzBuzzListCommand.create(type);
+              return self;
+            },
+            prototype: {
+              generate(number) {
+                return this.valueCommand.exec(number).value;
+              },
+              generateList(number) {
+                return this.listCommand.exec(number).list;
               }
             }
           };
@@ -372,9 +390,8 @@
           const FizzBuzz = {
             create(type) {
               let self = Object.create(FizzBuzz.prototype);
-              const command = FizzBuzzListCommand.create(type);
-              command.exec(100);
-              self.list = command.fizzBuzzList.list;
+              self.MAX_NUMBER = 100;
+              self.service = FizzBuzzService.create(type);
               return self;
             },
 
@@ -396,7 +413,7 @@
 
                 const body = (() => {
                   let items = "<tr>";
-                  this.list.forEach((v, k) => {
+                  this.service.generateList(this.MAX_NUMBER).forEach((v, k) => {
                     items += `<td>${v.value}</td>`;
                     if ((k + 1) % 10 === 0) items += "</tr><tr>";
                   });
