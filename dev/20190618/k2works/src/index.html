@@ -66,35 +66,35 @@
 
           describe("FizzBuzz", () => {
             describe(".generateList", () => {
+              beforeEach(() => {
+                FizzBuzz.generateList();
+              });
+
               it("return 1 to 100 ", () => {
-                FizzBuzz.list = FizzBuzz.generateList();
                 assert.equal(1, FizzBuzz.list[0]);
                 assert.equal("Buzz", FizzBuzz.list[99]);
               });
 
               it("数字の合計は2632 ", () => {
-                const result = FizzBuzz.generateList()
+                const result = FizzBuzz.list
                   .filter(i => !isNaN(i))
                   .reduce((a, b) => a + b);
                 assert.equal(2632, result);
               });
 
               it("Fizzの合計数は27 ", () => {
-                const result = FizzBuzz.generateList().filter(i => i === "Fizz")
-                  .length;
+                const result = FizzBuzz.list.filter(i => i === "Fizz").length;
                 assert.equal(27, result);
               });
 
               it("Buzzの合計数は14 ", () => {
-                const result = FizzBuzz.generateList().filter(i => i === "Buzz")
-                  .length;
+                const result = FizzBuzz.list.filter(i => i === "Buzz").length;
                 assert.equal(14, result);
               });
 
               it("FizzBuzzの合計数は6 ", () => {
-                const result = FizzBuzz.generateList().filter(
-                  i => i === "FizzBuzz"
-                ).length;
+                const result = FizzBuzz.list.filter(i => i === "FizzBuzz")
+                  .length;
                 assert.equal(6, result);
               });
             });
@@ -151,7 +151,7 @@
 
             generateList() {
               // 配列は0から始まるので1を足す
-              return [...Array(this.MAX_NUMBER + 1).keys()]
+              this.list = [...Array(this.MAX_NUMBER + 1).keys()]
                 .slice(1)
                 .map(i => this.generate(i, 1));
             },
@@ -191,8 +191,9 @@
               })();
 
               const body = (() => {
+                this.generateList();
                 let items = "<tr>";
-                this.generateList().forEach((v, k) => {
+                this.list.forEach((v, k) => {
                   items += `<td>${v}</td>`;
                   if ((k + 1) % 10 === 0) items += "</tr><tr>";
                 });
