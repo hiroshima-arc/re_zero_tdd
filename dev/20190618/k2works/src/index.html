@@ -67,14 +67,14 @@
           describe("FizzBuzz", () => {
             describe(".generateList", () => {
               it("return 1 to 100 ", () => {
-                const fizzBuzz = FizzBuzz.create(FizzBuzzType01.create());
+                const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                 fizzBuzz.generateList();
                 assert.equal(1, fizzBuzz.list[0]);
                 assert.equal("Buzz", fizzBuzz.list[99]);
               });
 
               it("数字の合計は2632 ", () => {
-                const fizzBuzz = FizzBuzz.create(FizzBuzzType01.create());
+                const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                 fizzBuzz.generateList();
                 const result = fizzBuzz.list
                   .filter(i => !isNaN(i))
@@ -83,21 +83,21 @@
               });
 
               it("Fizzの合計数は27 ", () => {
-                const fizzBuzz = FizzBuzz.create(FizzBuzzType01.create());
+                const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                 fizzBuzz.generateList();
                 const result = fizzBuzz.list.filter(i => i === "Fizz").length;
                 assert.equal(27, result);
               });
 
               it("Buzzの合計数は14 ", () => {
-                const fizzBuzz = FizzBuzz.create(FizzBuzzType01.create());
+                const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                 fizzBuzz.generateList();
                 const result = fizzBuzz.list.filter(i => i === "Buzz").length;
                 assert.equal(14, result);
               });
 
               it("FizzBuzzの合計数は6 ", () => {
-                const fizzBuzz = FizzBuzz.create(FizzBuzzType01.create());
+                const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                 fizzBuzz.generateList();
                 const result = fizzBuzz.list.filter(i => i === "FizzBuzz")
                   .length;
@@ -108,56 +108,68 @@
             describe(".generate", () => {
               describe("タイプ1の場合", () => {
                 it("print Fizz when divisible by 3 ", () => {
-                  const fizzBuzz = FizzBuzz.create(FizzBuzzType01.create());
+                  const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                   assert.equal("Fizz", fizzBuzz.generate(3));
                 });
 
                 it("print Buzz when divisible by 5 ", () => {
-                  const fizzBuzz = FizzBuzz.create(FizzBuzzType01.create());
+                  const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                   assert.equal("Buzz", fizzBuzz.generate(5));
                 });
 
                 it("print FizzBuzz when divisible by 15 ", () => {
-                  const fizzBuzz = FizzBuzz.create(FizzBuzzType01.create());
+                  const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                   assert.equal("FizzBuzz", fizzBuzz.generate(15));
                 });
               });
 
               describe("タイプ2の場合", () => {
                 it("print 3 when divisible by 3 ", () => {
-                  const fizzBuzz = FizzBuzz.create(FizzBuzzType02.create());
+                  const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type02());
                   assert.equal(3, fizzBuzz.generate(3));
                 });
 
                 it("print 5 when divisible by 5 ", () => {
-                  const fizzBuzz = FizzBuzz.create(FizzBuzzType02.create());
+                  const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type02());
                   assert.equal(5, fizzBuzz.generate(5));
                 });
 
                 it("print 15 when divisible by 15 ", () => {
-                  const fizzBuzz = FizzBuzz.create(FizzBuzzType02.create());
+                  const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type02());
                   assert.equal(15, fizzBuzz.generate(15));
                 });
               });
 
               describe("タイプ3の場合", () => {
                 it("print 3 when divisible by 3 ", () => {
-                  const fizzBuzz = FizzBuzz.create(FizzBuzzType03.create());
+                  const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type03());
                   assert.equal(3, fizzBuzz.generate(3));
                 });
 
                 it("print 5 when divisible by 5 ", () => {
-                  const fizzBuzz = FizzBuzz.create(FizzBuzzType03.create());
+                  const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type03());
                   assert.equal(5, fizzBuzz.generate(5));
                 });
 
                 it("print FizzBuzz when divisible by 15 ", () => {
-                  const fizzBuzz = FizzBuzz.create(FizzBuzzType03.create());
+                  const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type03());
                   assert.equal("FizzBuzz", fizzBuzz.generate(15));
                 });
               });
             });
           });
+
+          const FizzBuzzTypeEnum = {
+            type01() {
+              return FizzBuzzType01.create();
+            },
+            type02() {
+              return FizzBuzzType02.create();
+            },
+            type03() {
+              return FizzBuzzType03.create();
+            }
+          };
 
           const FizzBuzzType = {
             create() {
@@ -295,44 +307,6 @@
 
           const fizzBuzz = FizzBuzz.create(FizzBuzzType01.create());
           document.querySelector("#app").innerHTML = fizzBuzz.renderTable();
-        </script>
-
-        <script>
-          var Animal = {
-            create(type) {
-              var animal = Object.create(Animal.prototype);
-              animal.type = type;
-              return animal;
-            },
-            isAnimal(obj, type) {
-              if (!Animal.prototype.isPrototypeOf(obj)) {
-                return false;
-              }
-              return type ? obj.type === type : true;
-            },
-            prototype: {}
-          };
-          var Dog = {
-            create(name, breed) {
-              var dog = Object.create(Dog.prototype);
-              Object.assign(dog, Animal.create("dog"));
-              dog.name = name;
-              dog.breed = breed;
-              return dog;
-            },
-            isDog(obj) {
-              return Animal.isAnimal(obj, "dog");
-            },
-            prototype: {
-              bark() {
-                console.log("ruff, ruff");
-              },
-              print() {
-                console.log("The dog " + this.name + " is a " + this.breed);
-              }
-            }
-          };
-          //Object.setPrototypeOf(Dog.prototype, Animal.prototype);
         </script>
 
         <script>
