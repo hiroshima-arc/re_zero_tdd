@@ -66,34 +66,40 @@
 
           describe("FizzBuzz", () => {
             describe(".generateList", () => {
-              beforeEach(() => {
-                FizzBuzz.generateList();
-              });
-
               it("return 1 to 100 ", () => {
-                assert.equal(1, FizzBuzz.list[0]);
-                assert.equal("Buzz", FizzBuzz.list[99]);
+                const fizzBuzz = new FizzBuzz(1);
+                fizzBuzz.generateList();
+                assert.equal(1, fizzBuzz.list[0]);
+                assert.equal("Buzz", fizzBuzz.list[99]);
               });
 
               it("数字の合計は2632 ", () => {
-                const result = FizzBuzz.list
+                const fizzBuzz = new FizzBuzz(1);
+                fizzBuzz.generateList();
+                const result = fizzBuzz.list
                   .filter(i => !isNaN(i))
                   .reduce((a, b) => a + b);
                 assert.equal(2632, result);
               });
 
               it("Fizzの合計数は27 ", () => {
-                const result = FizzBuzz.list.filter(i => i === "Fizz").length;
+                const fizzBuzz = new FizzBuzz(1);
+                fizzBuzz.generateList();
+                const result = fizzBuzz.list.filter(i => i === "Fizz").length;
                 assert.equal(27, result);
               });
 
               it("Buzzの合計数は14 ", () => {
-                const result = FizzBuzz.list.filter(i => i === "Buzz").length;
+                const fizzBuzz = new FizzBuzz(1);
+                fizzBuzz.generateList();
+                const result = fizzBuzz.list.filter(i => i === "Buzz").length;
                 assert.equal(14, result);
               });
 
               it("FizzBuzzの合計数は6 ", () => {
-                const result = FizzBuzz.list.filter(i => i === "FizzBuzz")
+                const fizzBuzz = new FizzBuzz(1);
+                fizzBuzz.generateList();
+                const result = fizzBuzz.list.filter(i => i === "FizzBuzz")
                   .length;
                 assert.equal(6, result);
               });
@@ -102,110 +108,116 @@
             describe(".generate", () => {
               describe("タイプ1の場合", () => {
                 it("print Fizz when divisible by 3 ", () => {
-                  assert.equal("Fizz", FizzBuzz.generate(3, 1));
+                  const fizzBuzz = new FizzBuzz(1);
+                  assert.equal("Fizz", fizzBuzz.generate(3));
                 });
 
                 it("print Buzz when divisible by 5 ", () => {
-                  assert.equal("Buzz", FizzBuzz.generate(5, 1));
+                  const fizzBuzz = new FizzBuzz(1);
+                  assert.equal("Buzz", fizzBuzz.generate(5));
                 });
 
                 it("print FizzBuzz when divisible by 15 ", () => {
-                  assert.equal("FizzBuzz", FizzBuzz.generate(15, 1));
+                  const fizzBuzz = new FizzBuzz(1);
+                  assert.equal("FizzBuzz", fizzBuzz.generate(15));
                 });
               });
 
               describe("タイプ2の場合", () => {
                 it("print 3 when divisible by 3 ", () => {
-                  assert.equal(3, FizzBuzz.generate(3, 2));
+                  const fizzBuzz = new FizzBuzz(2);
+                  assert.equal(3, fizzBuzz.generate(3));
                 });
 
                 it("print 5 when divisible by 5 ", () => {
-                  assert.equal(5, FizzBuzz.generate(5, 2));
+                  const fizzBuzz = new FizzBuzz(2);
+                  assert.equal(5, fizzBuzz.generate(5));
                 });
 
                 it("print 15 when divisible by 15 ", () => {
-                  assert.equal(15, FizzBuzz.generate(15, 2));
+                  const fizzBuzz = new FizzBuzz(2);
+                  assert.equal(15, fizzBuzz.generate(15));
                 });
               });
 
               describe("タイプ3の場合", () => {
                 it("print 3 when divisible by 3 ", () => {
-                  assert.equal(3, FizzBuzz.generate(3, 3));
+                  const fizzBuzz = new FizzBuzz(3);
+                  assert.equal(3, fizzBuzz.generate(3));
                 });
 
                 it("print 5 when divisible by 5 ", () => {
-                  assert.equal(5, FizzBuzz.generate(5, 3));
+                  const fizzBuzz = new FizzBuzz(3);
+                  assert.equal(5, fizzBuzz.generate(5));
                 });
 
                 it("print FizzBuzz when divisible by 15 ", () => {
-                  assert.equal("FizzBuzz", FizzBuzz.generate(15, 3));
+                  const fizzBuzz = new FizzBuzz(3);
+                  assert.equal("FizzBuzz", fizzBuzz.generate(15));
                 });
               });
             });
           });
 
-          const FizzBuzzType01 = function(number) {
-            this.number = number;
-
-            this.generate = () => {
-              const isFizz = this.number % 3 === 0;
-              const isBuzz = this.number % 5 === 0;
+          const FizzBuzzType01 = function() {
+            this.generate = number => {
+              const isFizz = number % 3 === 0;
+              const isBuzz = number % 5 === 0;
 
               if (isFizz && isBuzz) return "FizzBuzz";
               if (isFizz) return "Fizz";
               if (isBuzz) return "Buzz";
 
-              return this.number;
+              return number;
             };
           };
 
-          const FizzBuzzType02 = function(number) {
-            this.number = number;
-
-            this.generate = () => {
-              return this.number;
+          const FizzBuzzType02 = function() {
+            this.generate = number => {
+              return number;
             };
           };
 
-          const FizzBuzzType03 = function(number) {
-            this.number = number;
-
-            this.generate = () => {
-              const isFizz = this.number % 3 === 0;
-              const isBuzz = this.number % 5 === 0;
+          const FizzBuzzType03 = function() {
+            this.generate = number => {
+              const isFizz = number % 3 === 0;
+              const isBuzz = number % 5 === 0;
 
               if (isFizz && isBuzz) return "FizzBuzz";
               return number;
             };
           };
 
-          const FizzBuzz = {
-            MAX_NUMBER: 100,
+          const FizzBuzz = function(type) {
+            this.MAX_NUMBER = 100;
 
-            list: [],
+            this.list = [];
 
-            generateList() {
+            this.type = type;
+
+            this.typeObject = function(type) {
+              switch (type) {
+                case 1:
+                  return new FizzBuzzType01();
+                case 2:
+                  return new FizzBuzzType02();
+                case 3:
+                  return new FizzBuzzType03();
+              }
+            };
+
+            this.generateList = function() {
               // 配列は0から始まるので1を足す
               this.list = [...Array(this.MAX_NUMBER + 1).keys()]
                 .slice(1)
-                .map(i => this.generate(i, 1));
-            },
+                .map(i => this.typeObject(this.type).generate(i));
+            };
 
-            generate(number, type) {
-              const isFizz = number % 3 === 0;
-              const isBuzz = number % 5 === 0;
+            this.generate = function(number) {
+              return this.typeObject(this.type).generate(number);
+            };
 
-              switch (type) {
-                case 1:
-                  return new FizzBuzzType01(number).generate();
-                case 2:
-                  return new FizzBuzzType02(number).generate();
-                case 3:
-                  return new FizzBuzzType03(number).generate();
-              }
-            },
-
-            renderTable() {
+            this.renderTable = function() {
               const header = (() => {
                 let items = "<tr>";
                 [...Array(10).keys()].forEach(i => {
@@ -246,10 +258,11 @@
                 ${body}
               </table>
           `;
-            }
+            };
           };
 
-          document.querySelector("#app").innerHTML = FizzBuzz.renderTable();
+          const fizzBuzz = new FizzBuzz(1);
+          document.querySelector("#app").innerHTML = fizzBuzz.renderTable();
         </script>
 
         <script>
