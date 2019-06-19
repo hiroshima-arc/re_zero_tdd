@@ -69,15 +69,16 @@
               it("return 1 to 100 ", () => {
                 const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                 fizzBuzz.generateList();
-                assert.equal(1, fizzBuzz.list[0]);
-                assert.equal("Buzz", fizzBuzz.list[99]);
+                assert.equal(1, fizzBuzz.list[0].value);
+                assert.equal("Buzz", fizzBuzz.list[99].value);
               });
 
               it("数字の合計は2632 ", () => {
                 const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                 fizzBuzz.generateList();
                 const result = fizzBuzz.list
-                  .filter(i => !isNaN(i))
+                  .filter(i => !isNaN(i.value))
+                  .map(i => i.value)
                   .reduce((a, b) => a + b);
                 assert.equal(2632, result);
               });
@@ -85,22 +86,27 @@
               it("Fizzの合計数は27 ", () => {
                 const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                 fizzBuzz.generateList();
-                const result = fizzBuzz.list.filter(i => i === "Fizz").length;
+                const result = fizzBuzz.list
+                  .filter(i => i.value === "Fizz")
+                  .map(i => i.value).length;
                 assert.equal(27, result);
               });
 
               it("Buzzの合計数は14 ", () => {
                 const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                 fizzBuzz.generateList();
-                const result = fizzBuzz.list.filter(i => i === "Buzz").length;
+                const result = fizzBuzz.list
+                  .filter(i => i.value === "Buzz")
+                  .map(i => i.value).length;
                 assert.equal(14, result);
               });
 
               it("FizzBuzzの合計数は6 ", () => {
                 const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
                 fizzBuzz.generateList();
-                const result = fizzBuzz.list.filter(i => i === "FizzBuzz")
-                  .length;
+                const result = fizzBuzz.list
+                  .filter(i => i.value === "FizzBuzz")
+                  .map(i => i.value).length;
                 assert.equal(6, result);
               });
             });
@@ -109,51 +115,51 @@
               describe("タイプ1の場合", () => {
                 it("print Fizz when divisible by 3 ", () => {
                   const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
-                  assert.equal("Fizz", fizzBuzz.generate(3));
+                  assert.equal("Fizz", fizzBuzz.generate(3).value);
                 });
 
                 it("print Buzz when divisible by 5 ", () => {
                   const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
-                  assert.equal("Buzz", fizzBuzz.generate(5));
+                  assert.equal("Buzz", fizzBuzz.generate(5).value);
                 });
 
                 it("print FizzBuzz when divisible by 15 ", () => {
                   const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
-                  assert.equal("FizzBuzz", fizzBuzz.generate(15));
+                  assert.equal("FizzBuzz", fizzBuzz.generate(15).value);
                 });
               });
 
               describe("タイプ2の場合", () => {
                 it("print 3 when divisible by 3 ", () => {
                   const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type02());
-                  assert.equal(3, fizzBuzz.generate(3));
+                  assert.equal(3, fizzBuzz.generate(3).value);
                 });
 
                 it("print 5 when divisible by 5 ", () => {
                   const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type02());
-                  assert.equal(5, fizzBuzz.generate(5));
+                  assert.equal(5, fizzBuzz.generate(5).value);
                 });
 
                 it("print 15 when divisible by 15 ", () => {
                   const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type02());
-                  assert.equal(15, fizzBuzz.generate(15));
+                  assert.equal(15, fizzBuzz.generate(15).value);
                 });
               });
 
               describe("タイプ3の場合", () => {
                 it("print 3 when divisible by 3 ", () => {
                   const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type03());
-                  assert.equal(3, fizzBuzz.generate(3));
+                  assert.equal(3, fizzBuzz.generate(3).value);
                 });
 
                 it("print 5 when divisible by 5 ", () => {
                   const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type03());
-                  assert.equal(5, fizzBuzz.generate(5));
+                  assert.equal(5, fizzBuzz.generate(5).value);
                 });
 
                 it("print FizzBuzz when divisible by 15 ", () => {
                   const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type03());
-                  assert.equal("FizzBuzz", fizzBuzz.generate(15));
+                  assert.equal("FizzBuzz", fizzBuzz.generate(15).value);
                 });
               });
             });
@@ -200,11 +206,12 @@
                 const isFizz = FizzBuzzType.prototype.isFizz(number);
                 const isBuzz = FizzBuzzType.prototype.isBuzz(number);
 
-                if (isFizz && isBuzz) return this.FIZZ_BUZZ;
-                if (isFizz) return this.FIZZ;
-                if (isBuzz) return this.BUZZ;
+                if (isFizz && isBuzz)
+                  return FizzBuzzValue.create(number, this.FIZZ_BUZZ);
+                if (isFizz) return FizzBuzzValue.create(number, this.FIZZ);
+                if (isBuzz) return FizzBuzzValue.create(number, this.BUZZ);
 
-                return number;
+                return FizzBuzzValue.create(number, number);
               }
             }
           };
@@ -217,7 +224,7 @@
             },
             prototype: {
               generate(number) {
-                return number;
+                return FizzBuzzValue.create(number, number);
               }
             }
           };
@@ -233,10 +240,21 @@
                 const isFizz = FizzBuzzType.prototype.isFizz(number);
                 const isBuzz = FizzBuzzType.prototype.isBuzz(number);
 
-                if (isFizz && isBuzz) return this.FIZZ_BUZZ;
-                return number;
+                if (isFizz && isBuzz)
+                  return FizzBuzzValue.create(number, this.FIZZ_BUZZ);
+                return FizzBuzzValue.create(number, number);
               }
             }
+          };
+
+          const FizzBuzzValue = {
+            create(number, value) {
+              let self = Object.create(FizzBuzzValue.prototype);
+              self.number = number;
+              self.value = value;
+              return self;
+            },
+            prototype: {}
           };
 
           const FizzBuzz = {
@@ -279,7 +297,7 @@
                   this.generateList();
                   let items = "<tr>";
                   this.list.forEach((v, k) => {
-                    items += `<td>${v}</td>`;
+                    items += `<td>${v.value}</td>`;
                     if ((k + 1) % 10 === 0) items += "</tr><tr>";
                   });
 
