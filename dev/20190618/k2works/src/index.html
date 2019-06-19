@@ -119,6 +119,13 @@
                   .map(i => i.value).length;
                 assert.equal(6, result);
               });
+
+              it("100より多い数を許可しない", () => {
+                const command = FizzBuzzListCommand.create(
+                  FizzBuzzTypeEnum.type01()
+                );
+                chai.expect(command.exec(101)).to.throw();
+              });
             });
 
             describe(".generate", () => {
@@ -142,6 +149,13 @@
                     FizzBuzzTypeEnum.type01()
                   );
                   assert.equal("FizzBuzz", command.exec(15).value);
+                });
+
+                it("値は正の値のみ許可する", () => {
+                  const command = FizzBuzzValueCommand.create(
+                    FizzBuzzTypeEnum.type01()
+                  );
+                  chai.expect(command.exec(-1)).to.throw();
                 });
               });
 
@@ -277,6 +291,7 @@
 
           const FizzBuzzValue = {
             create(number, value) {
+              assert(number >= 0);
               let self = Object.create(FizzBuzzValue.prototype);
               self.number = number;
               self.value = value;
@@ -287,6 +302,7 @@
 
           const FizzBuzzList = {
             create(list) {
+              assert(list.length <= 100);
               let self = Object.create(FizzBuzzList.prototype);
               self.list = list;
               return self;
