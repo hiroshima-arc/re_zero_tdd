@@ -52,7 +52,10 @@
           タイプ３は FizzBuzz の場合のみをプリントする。
         </p>
 
-        <div id="app"></div>
+        <div id="app">
+          <div id="app__select"></div>
+          <div id="app__table"></div>
+        </div>
       </div>
       <div id="dev">
         <div id="mocha"></div>
@@ -387,15 +390,40 @@
             }
           };
 
-          const FizzBuzz = {
+          const FizzBuzzApp = {
             create(type) {
-              let self = Object.create(FizzBuzz.prototype);
+              let self = Object.create(FizzBuzzApp.prototype);
               self.MAX_NUMBER = 100;
               self.service = FizzBuzzService.create(type);
               return self;
             },
 
             prototype: {
+              changeEvent(e) {
+                switch (e.target.value) {
+                  case "one":
+                    FizzBuzzApp.create(FizzBuzzType01.create()).renderTable();
+                    break;
+                  case "two":
+                    FizzBuzzApp.create(FizzBuzzType02.create()).renderTable();
+                    break;
+                  case "three":
+                    FizzBuzzApp.create(FizzBuzzType03.create()).renderTable();
+                    break;
+                  default:
+                    FizzBuzzApp.create(FizzBuzzType01.create()).renderTable();
+                }
+              },
+              renderSelect() {
+                const select = `
+              <select name="type" id="app__select--type">
+               <option value="one">タイプ1</option>
+               <option value="two">タイプ2</option>
+               <option value="three">タイプ3</option>
+              </select>
+                `;
+                document.querySelector("#app__select").innerHTML = select;
+              },
               renderTable() {
                 const header = (() => {
                   let items = "<tr>";
@@ -425,23 +453,28 @@
              `;
                 })();
 
-                return `
-              <select name="type">
-               <option value="one">タイプ1</option>
-               <option value="two">タイプ2</option>
-               <option value="three">タイプ3</option>
-              </select>
+                const table = `
               <table class="table table-bordered">
                 ${header}
                 ${body}
               </table>
           `;
+                document.querySelector("#app__table").innerHTML = table;
+              },
+              renderApp() {
+                this.renderSelect();
+                this.renderTable();
+                document
+                  .querySelector("#app__select--type")
+                  .addEventListener("change", this.changeEvent);
               }
             }
           };
 
-          const fizzBuzz = FizzBuzz.create(FizzBuzzType01.create());
-          document.querySelector("#app").innerHTML = fizzBuzz.renderTable();
+          window.onload = () => {
+            const fizzbuzz = FizzBuzzApp.create(FizzBuzzType01.create());
+            fizzbuzz.renderApp();
+          };
         </script>
 
         <script>
