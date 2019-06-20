@@ -76,6 +76,17 @@
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script>
       mocha.setup("bdd");
+      const expect = chai.expect;
+
+      describe("Hello World", () => {
+        it("greeting", () => {
+          expect("hello, world").to.equal(greeting());
+        });
+      });
+
+      function greeting() {
+        return "hello, world";
+      }
     </script>
 
     <script>
