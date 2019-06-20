@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <title>Fizz Buzz</title>
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <main class="container" id="service">
+      <div class="starter-template">
+        <h1>FizzBuzz Service</h1>
+        <p class="lead">
+          1 から 100 までの数をプリントするプログラムを書け。<br />
+          ただし 3 の倍数のときは数の代わりに｢Fizz｣とプリントし、<br />
+          5 の倍数のときは｢Buzz｣とプリントし、<br />
+          3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること。<br />
+          <br />
+          タイプごとに出力を切り替える、<br />
+          タイプ１は通常、<br />
+          タイプ２は数字のみ、<br />
+          タイプ３は FizzBuzz の場合のみをプリントする。
+        </p>
+
+        <div id="app">
+          <div id="app__select"></div>
+          <div id="app__table"></div>
+        </div>
+      </div>
+      <div id="dev">
+        <div id="mocha"></div>
+        <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+        <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+        <script src="fizzbuzz.js"></script>
+        <script>
+          mocha.setup("bdd");
+          const assert = chai.assert;
+
+          describe("FizzBuzzService", () => {
+            describe(".generateList", () => {
+              it("return 1 to 100 ", () => {
+                const service = FizzBuzzService.create(
+                  FizzBuzzTypeEnum.type01()
+                );
+                const list = service.generateList(100);
+                assert.equal(1, list[0].value);
+                assert.equal("Buzz", list[99].value);
+              });
+
+              it("数字の合計は2632 ", () => {
+                const service = FizzBuzzService.create(
+                  FizzBuzzTypeEnum.type01()
+                );
+                const list = service.generateList(100);
+                const result = list
+                  .filter(i => !isNaN(i.value))
+                  .map(i => i.value)
+                  .reduce((a, b) => a + b);
+                assert.equal(2632, result);
+              });
+
+              it("Fizzの合計数は27 ", () => {
+                const service = FizzBuzzService.create(
+                  FizzBuzzTypeEnum.type01()
+                );
+                const list = service.generateList(100);
+                const result = list
+                  .filter(i => i.value === "Fizz")
+                  .map(i => i.value).length;
+                assert.equal(27, result);
+              });
+
+              it("Buzzの合計数は14 ", () => {
+                const service = FizzBuzzService.create(
+                  FizzBuzzTypeEnum.type01()
+                );
+                const list = service.generateList(100);
+                const result = list
+                  .filter(i => i.value === "Buzz")
+                  .map(i => i.value).length;
+                assert.equal(14, result);
+              });
+
+              it("FizzBuzzの合計数は6 ", () => {
+                const service = FizzBuzzService.create(
+                  FizzBuzzTypeEnum.type01()
+                );
+                const list = service.generateList(100);
+                const result = list
+                  .filter(i => i.value === "FizzBuzz")
+                  .map(i => i.value).length;
+                assert.equal(6, result);
+              });
+
+              it("100より多い数を許可しない", () => {
+                const service = FizzBuzzService.create(
+                  FizzBuzzTypeEnum.type01()
+                );
+                chai
+                  .expect(() => service.generateList(101))
+                  .to.throw("FizzBuzzList can't generate over 100");
+              });
+            });
+
+            describe(".generate", () => {
+              describe("タイプ1の場合", () => {
+                it("print Fizz when divisible by 3 ", () => {
+                  const service = FizzBuzzService.create(
+                    FizzBuzzTypeEnum.type01()
+                  );
+                  assert.equal("Fizz", service.generate(3));
+                });
+
+                it("print Buzz when divisible by 5 ", () => {
+                  const service = FizzBuzzService.create(
+                    FizzBuzzTypeEnum.type01()
+                  );
+                  assert.equal("Buzz", service.generate(5));
+                });
+
+                it("print FizzBuzz when divisible by 15 ", () => {
+                  const service = FizzBuzzService.create(
+                    FizzBuzzTypeEnum.type01()
+                  );
+                  assert.equal("FizzBuzz", service.generate(15));
+                });
+
+                it("値は正の値のみ許可する", () => {
+                  const service = FizzBuzzService.create(
+                    FizzBuzzTypeEnum.type01()
+                  );
+                  chai
+                    .expect(() => service.generate(-1))
+                    .to.throw("FizzBuzzValue can't generate by minus number");
+                });
+              });
+
+              describe("タイプ2の場合", () => {
+                it("print 3 when divisible by 3 ", () => {
+                  const service = FizzBuzzService.create(
+                    FizzBuzzTypeEnum.type02()
+                  );
+                  assert.equal(3, service.generate(3));
+                });
+
+                it("print 5 when divisible by 5 ", () => {
+                  const service = FizzBuzzService.create(
+                    FizzBuzzTypeEnum.type02()
+                  );
+                  assert.equal(5, service.generate(5));
+                });
+
+                it("print 15 when divisible by 15 ", () => {
+                  const service = FizzBuzzService.create(
+                    FizzBuzzTypeEnum.type02()
+                  );
+                  assert.equal(15, service.generate(15));
+                });
+              });
+
+              describe("タイプ3の場合", () => {
+                it("print 3 when divisible by 3 ", () => {
+                  const service = FizzBuzzService.create(
+                    FizzBuzzTypeEnum.type03()
+                  );
+                  assert.equal(3, service.generate(3));
+                });
+
+                it("print 5 when divisible by 5 ", () => {
+                  const service = FizzBuzzService.create(
+                    FizzBuzzTypeEnum.type03()
+                  );
+                  assert.equal(5, service.generate(5));
+                });
+
+                it("print FizzBuzz when divisible by 15 ", () => {
+                  const service = FizzBuzzService.create(
+                    FizzBuzzTypeEnum.type03()
+                  );
+                  assert.equal("FizzBuzz", service.generate(15));
+                });
+              });
+            });
+          });
+        </script>
+
+        <script>
+          window.onload = () => {
+            const fizzbuzz = FizzBuzzApp.create(FizzBuzzType01.create());
+            fizzbuzz.renderApp();
+          };
+        </script>
+
+        <script>
+          mocha.checkLeaks();
+          mocha.globals(["jQuery"]);
+          mocha.run();
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

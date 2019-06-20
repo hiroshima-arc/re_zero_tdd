@@ -1,0 +1,9 @@
+html, body { font-family: "Amazon Ember", "Helvetica", "sans-serif"; margin: 0; }
+a { color: #FF9900; }
+h1 { font-weight: 300; }
+.app { width: 100%; }
+.app-header { color: white; text-align: center; background: linear-gradient(30deg, #f90 55%, #FFC300); width: 100%; margin: 0 0 1em 0; padding: 3em 0 3em 0; box-shadow: 1px 2px 4px rgba(0, 0, 0, .3); }
+.app-logo { width: 126px; margin: 0 auto; }
+.app-body { width: 400px; margin: 0 auto; text-align: center; }
+.app-body button { background-color: #FF9900; font-size: 14px; color: white; text-transform: uppercase; padding: 1em; border: none; }
+.app-body button:hover { opacity: 0.8; }
