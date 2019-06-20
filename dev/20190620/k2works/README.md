@@ -56,6 +56,7 @@ npm start
 ### 開発
 
 #### 仕様
+> Imagine a company of theatrical players who go out to various events performing plays. Typically, a customer will request a few plays and the company charges them based on the size of the audience and the kind of play they perform. There are currently two kinds of plays that the company performs: tragedies and comedies. As well as providing a bill for the performance, the company gives its customers "volume credits" which they can use for discounts on future performances—think of it as a customer loyalty mechanism.
 
 #### 設計
 
@@ -64,6 +65,10 @@ npm start
 #### ふりかえり
 
 ##### Keep
+
+>  When you have to add a feature to a program but the code is not structured in a convenient way, first refactor the program to make it easy to add the feature, then add the feature.
+
+> Before you start refactoring, make sure you have a solid suite of tests. These tests must be self-checking. 
 
 ##### Problem
 
