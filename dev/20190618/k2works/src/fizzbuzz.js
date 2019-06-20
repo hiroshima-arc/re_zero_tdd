@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const FizzBuzzTypeEnum = {
   type01() {
     return FizzBuzzType01.create();
@@ -109,8 +110,7 @@ const FizzBuzzList = {
 
 const FizzBuzzCommand = {
   create() {
-    let self = Object.create(FizzBuzzCommand.prototype);
-    return self;
+    return Object.create(FizzBuzzCommand.prototype);
   },
   prototype: {
     exec() {}
@@ -197,14 +197,13 @@ const FizzBuzzApp = {
       }
     },
     renderSelect() {
-      const select = `
+      document.querySelector("#app__select").innerHTML = `
               <select name="type" id="app__select--type">
                <option value="one">タイプ1</option>
                <option value="two">タイプ2</option>
                <option value="three">タイプ3</option>
               </select>
                 `;
-      document.querySelector("#app__select").innerHTML = select;
     },
     renderTable() {
       const header = (() => {
@@ -235,13 +234,12 @@ const FizzBuzzApp = {
              `;
       })();
 
-      const table = `
+      document.querySelector("#app__table").innerHTML = `
               <table class="table table-bordered">
                 ${header}
                 ${body}
               </table>
           `;
-      document.querySelector("#app__table").innerHTML = table;
     },
     renderApp() {
       this.renderSelect();
