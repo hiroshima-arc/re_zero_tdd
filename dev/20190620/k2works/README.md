@@ -70,6 +70,8 @@ npm start
 
 > Before you start refactoring, make sure you have a solid suite of tests. These tests must be self-checking. 
 
+>  Refactoring changes the programs in small steps, so if you make a mistake, it is easy to find where the bug is. 
+
 ##### Problem
 
 ##### Try
