@@ -147,11 +147,11 @@
 
           // add volume credits
           volumeCredits += Math.max(perf.audience - 30, 0);
-          // add extra creddit for every ten comedy attendees
+          // add extra credit for every ten comedy attendees
           if ("comedy" === play.type)
             volumeCredits += Math.floor(perf.audience / 5);
 
-          // print line for this orer
+          // print line for this order
           result += ` ${play.name}: ${format(thisAmount / 100)} (${
             perf.audience
           } seats)\n`;
