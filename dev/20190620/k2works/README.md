@@ -72,6 +72,8 @@ npm start
 
 >  Refactoring changes the programs in small steps, so if you make a mistake, it is easy to find where the bug is. 
 
+> Any fool can write code that a computer can understand. Good programmers write code that humans can understand. 
+
 ##### Problem
 
 ##### Try
