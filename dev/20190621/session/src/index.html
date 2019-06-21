@@ -108,11 +108,7 @@
       }
 
       function generateList(number) {
-        let list = [];
-        for (let i = 0; i <= 100; i++) {
-          list[i] = fizzBuzz(i + 1);
-        }
-        return list;
+        return [...Array(101).keys()].slice(1).map(fizzBuzz);
       }
 
       function renderTable() {
