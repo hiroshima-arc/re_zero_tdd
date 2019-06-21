@@ -100,6 +100,8 @@
         });
       });
 
+      const MAX_NUMBER = 100;
+
       function fizzBuzz(number) {
         const isBuzz = number % 5 === 0;
         const isFizz = number % 3 === 0;
@@ -111,7 +113,8 @@
       }
 
       function generateList(number) {
-        return [...Array(101).keys()].slice(1).map(fizzBuzz);
+        // 配列は0から始まるので1を足す
+        return [...Array(MAX_NUMBER + 1).keys()].slice(1).map(fizzBuzz);
       }
 
       function renderTable() {
