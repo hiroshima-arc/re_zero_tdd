@@ -101,16 +101,10 @@
       });
 
       function fizzBuzz(number) {
-        let result = number;
-        if (number % 3 === 0 && number % 5 === 0) {
-          result = "FizzBuzz";
-        } else if (number % 5 === 0) {
-          result = "Buzz";
-        } else if (number % 3 === 0) {
-          result = "Fizz";
-        }
-
-        return result;
+        if (number % 3 === 0 && number % 5 === 0) return "FizzBuzz";
+        if (number % 5 === 0) return "Buzz";
+        if (number % 3 === 0) return "Fizz";
+        return number;
       }
 
       function generateList(number) {
