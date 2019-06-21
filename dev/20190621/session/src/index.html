@@ -135,14 +135,19 @@
         test("5で割り切れる場合はBuzzをプリントする", () => {
           assert.equal("Buzz", fizzBuzz(5));
         });
+        test("15で割り切れる場合はFizzBuzzをプリントする", () => {
+          assert.equal("FizzBuzz", fizzBuzz(15));
+        });
       });
 
       function fizzBuzz(number) {
         let result = number;
-        if (number % 3 === 0) {
-          result = "Fizz";
+        if (number % 3 === 0 && number % 5 === 0) {
+          result = "FizzBuzz";
         } else if (number % 5 === 0) {
           result = "Buzz";
+        } else if (number % 3 === 0) {
+          result = "Fizz";
         }
 
         return result;
