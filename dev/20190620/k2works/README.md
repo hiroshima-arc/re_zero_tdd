@@ -74,6 +74,8 @@ npm start
 
 > Any fool can write code that a computer can understand. Good programmers write code that humans can understand. 
 
+> When programming, follow the camping rule: Always leave the code base healthier than when you found it.
+
 ##### Problem
 
 ##### Try
