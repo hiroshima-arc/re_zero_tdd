@@ -172,6 +172,13 @@
       }
       // createStatementDdata
       function createStatementData(invoice, plays) {
+        class PerformanceCalculator {
+          constructor(aPerformace, aPlay) {
+            this.performace = aPerformace;
+            this.play = aPlay;
+          }
+        }
+
         const statementData = {};
         statementData.customer = invoice.customer;
         statementData.performances = invoice.performances.map(
@@ -182,8 +189,12 @@
         return statementData;
 
         function enrichPerformance(aPerformace) {
+          const calculator = new PerformanceCalculator(
+            aPerformace,
+            playFor(aPerformace)
+          );
           const result = Object.assign({}, aPerformace);
-          result.play = playFor(result);
+          result.play = calculator.play;
           result.amount = amountFor(result);
           result.volumeCredits = volumeCreditsFor(result);
           return result;
