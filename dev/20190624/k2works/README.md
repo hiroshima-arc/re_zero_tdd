@@ -34,6 +34,22 @@ touch .jshintrc
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+mkdir src
+touch src/index.html
+```
+
+テストセットアップ
+```bash
+npm install --save-dev mocha chai
+```
+
+Webpackセットアップ
+```bash
+npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/register @babel/polyfill babel-plugin-istanbul cross-env nyc webpack webpack-cli webpack-dev-server babel-loader css-loader html-webpack-plugin mini-css-extract-plugin copy-webpack-plugin clean-webpack-plugin @babel/polyfill                                                                                                                                                                                                                                                               
+```
 **[⬆ back to top](#構成)**
 
 ### 配置
