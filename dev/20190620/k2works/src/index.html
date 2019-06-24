@@ -177,6 +177,34 @@
             this.performace = aPerformace;
             this.play = aPlay;
           }
+          get amount() {
+            let result = 0;
+            switch (this.play.type) {
+              case "tragedy":
+                result = 40000;
+                if (this.performace.audience > 30) {
+                  result += 1000 * (this.performace.audience - 30);
+                }
+                break;
+              case "comedy":
+                result = 30000;
+                if (this.performace.audience > 20) {
+                  result += 10000 + 500 * (this.performace.audience - 20);
+                }
+                result += 300 * this.performace.audience;
+                break;
+              default:
+                throw new Error(`unknown type: ${perf.play.type}`);
+            }
+            return result;
+          }
+          get volumeCredits() {
+            let result = 0;
+            result += Math.max(this.performace.audience - 30.0);
+            if ("comedy" === this.play.type)
+              result += Math.floor(this.performace.audience / 5);
+            return result;
+          }
         }
 
         const statementData = {};
@@ -196,7 +224,7 @@
           const result = Object.assign({}, aPerformace);
           result.play = calculator.play;
           result.amount = amountFor(result);
-          result.volumeCredits = volumeCreditsFor(result);
+          result.volumeCredits = calculator.volumeCredits;
           return result;
         }
 
@@ -204,25 +232,8 @@
           return plays[aPerformace.playID];
         }
         function amountFor(aPerformace) {
-          let result = 0;
-          switch (aPerformace.play.type) {
-            case "tragedy":
-              result = 40000;
-              if (aPerformace.audience > 30) {
-                result += 1000 * (aPerformace.audience - 30);
-              }
-              break;
-            case "comedy":
-              result = 30000;
-              if (aPerformace.audience > 20) {
-                result += 10000 + 500 * (aPerformace.audience - 20);
-              }
-              result += 300 * aPerformace.audience;
-              break;
-            default:
-              throw new Error(`unknown type: ${perf.play.type}`);
-          }
-          return result;
+          return new PerformanceCalculator(aPerformace, playFor(aPerformace))
+            .amount;
         }
         function volumeCreditsFor(aPerformance) {
           let result = 0;
