@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link
+      href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css"
+      rel="stylesheet"
+    />
+
+    <style type="text/css">
+      body {
+        width: 810px;
+        margin: 0 auto;
+        background-color: ivory;
+      }
+
+      header {
+        width: 350px;
+      }
+
+      .nav-component {
+        width: 290px;
+        float: left;
+        padding: 5px;
+        margin-bottom: 5px;
+      }
+
+      .app-component {
+        width: 500px;
+        float: right;
+        padding-left: 5px;
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+      }
+
+      .app-component table {
+        margin-top: 10px;
+        border-collapse: collapse;
+      }
+
+      .app-component th {
+        border: 1px solid black;
+        background-color: aqua;
+      }
+
+      .app-component td {
+        border: 1px solid black;
+      }
+
+      footer {
+        clear: both;
+        width: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>HTML5+CSS+JavaScript with TDD</h1>
+    <header>
+      <nav class="nav-component">
+        <h1>Menu</h1>
+        <ul>
+          <li><a href="readme.html" target="_blank">README</a></li>
+          <li><a href="index.html">App</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <section class="app-component">
+        <h2>VolumeCredits</h2>
+        <div id="app-component"></div>
+        <div id="mocha"></div>
+      </section>
+    </section>
+    <footer>
+      <p>Copyright</p>
+      <address>hiroshima.arc@gmail.com</address>
+    </footer>
+
+    <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script>
+      mocha.setup("bdd");
+      const expect = chai.expect;
+
+      describe("VolumeCredits Test", () => {
+        it("print text statement", () => {
+          const expected = `Statement for BigCo\n Hamlet: $650.00 (55 seats)\n As You Like It: $580.00 (35 seats)\n Othello: $500.00 (40 seats)\nAmount owed is $1,730.00\nYou earned 47 credits\n`;
+          expect(expected).to.equal(statement(invoices[0], player));
+        });
+        it("print html statement", () => {
+          const expected = `<h1>Statement for BigCo</h1>\n<table>\n<tr><th>play</th><th>seats</th><th>cost</th></tr> <tr><td>Hamlet</td><td>55</td><td>$65,000.00</td></tr>\n <tr><td>As You Like It</td><td>35</td><td>$58,000.00</td></tr>\n <tr><td>Othello</td><td>40</td><td>$50,000.00</td></tr>\n</table>\n<p>Amount owed is <em>$173,000.00</em></p>\n<p>You earned <em> 47</em>credits</p>\n`;
+          expect(expected).to.equal(htmlStatement(invoices[0], player));
+        });
+      });
+
+      const player = {
+        hamlet: { name: "Hamlet", type: "tragedy" },
+        "as-like": { name: "As You Like It", type: "comedy" },
+        othello: { name: "Othello", type: "tragedy" }
+      };
+
+      const invoices = [
+        {
+          customer: "BigCo",
+          performances: [
+            {
+              playID: "hamlet",
+              audience: 55
+            },
+            {
+              playID: "as-like",
+              audience: 35
+            },
+            {
+              playID: "othello",
+              audience: 40
+            }
+          ]
+        }
+      ];
+
+      const resultText = statement(invoices[0], player);
+      console.log(resultText);
+
+      const resultHtml = htmlStatement(invoices[0], player);
+      document.querySelector("#app-component").innerHTML = `${resultHtml}`;
+
+      // statement
+      function statement(invoice, plays) {
+        return renderPlainText(createStatementData(invoice, plays));
+      }
+      function renderPlainText(data, plays) {
+        let result = `Statement for ${data.customer}\n`;
+        for (let perf of data.performances) {
+          result += ` ${perf.play.name}: ${usd(perf.amount / 100)} (${
+            perf.audience
+          } seats)\n`;
+        }
+        result += `Amount owed is ${usd(data.totalAmount / 100)}\n`;
+        result += `You earned ${data.totalVolumeCredits} credits\n`;
+        return result;
+      }
+      function htmlStatement(invoice, plays) {
+        return renderHtml(createStatementData(invoice, plays));
+      }
+      function renderHtml(data) {
+        let result = `<h1>Statement for ${data.customer}</h1>\n`;
+        result += "<table>\n";
+        result += "<tr><th>play</th><th>seats</th><th>cost</th></tr>";
+        for (let perf of data.performances) {
+          result += ` <tr><td>${perf.play.name}</td><td>${perf.audience}</td>`;
+          result += `<td>${usd(perf.amount)}</td></tr>\n`;
+        }
+        result += "</table>\n";
+        result += `<p>Amount owed is <em>${usd(data.totalAmount)}</em></p>\n`;
+        result += `<p>You earned <em> ${data.totalVolumeCredits}</em>credits</p>\n`;
+        return result;
+      }
+
+      function usd(aNumber) {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 2
+        }).format(aNumber);
+      }
+      // createStatementDdata
+      function createStatementData(invoice, plays) {
+        class PerformanceCalculator {
+          constructor(aPerformace, aPlay) {
+            this.performace = aPerformace;
+            this.play = aPlay;
+          }
+          get amount() {
+            throw new Error("subclass responsibility");
+          }
+          get volumeCredits() {
+            return Math.max(this.performace.audience - 30.0);
+          }
+        }
+        class TrageyCalculator extends PerformanceCalculator {
+          get amount() {
+            let result = 40000;
+            if (this.performace.audience > 30) {
+              result += 1000 * (this.performace.audience - 30);
+            }
+            return result;
+          }
+        }
+        class ComedyCalculator extends PerformanceCalculator {
+          get amount() {
+            let result = 30000;
+            if (this.performace.audience > 20) {
+              result += 10000 + 500 * (this.performace.audience - 20);
+            }
+            result += 300 * this.performace.audience;
+            return result;
+          }
+          get volumeCredits() {
+            return (
+              super.volumeCredits + Math.floor(this.performace.audience / 5)
+            );
+          }
+        }
+        const statementData = {};
+        statementData.customer = invoice.customer;
+        statementData.performances = invoice.performances.map(
+          enrichPerformance
+        );
+        statementData.totalAmount = totalAmount(statementData);
+        statementData.totalVolumeCredits = totalVolumeCredits(statementData);
+        return statementData;
+
+        function enrichPerformance(aPerformace) {
+          const calculator = new createPerformanceCalculator(
+            aPerformace,
+            playFor(aPerformace)
+          );
+          const result = Object.assign({}, aPerformace);
+          result.play = calculator.play;
+          result.amount = calculator.amount;
+          result.volumeCredits = calculator.volumeCredits;
+          return result;
+        }
+        function createPerformanceCalculator(aPerformace, aPlay) {
+          switch (aPlay.type) {
+            case "tragedy":
+              return new TrageyCalculator(aPerformace, aPlay);
+            case "comedy":
+              return new ComedyCalculator(aPerformace, aPlay);
+            default:
+              throw new Error(`unknown type: ${aPlay.type}`);
+          }
+        }
+        function playFor(aPerformace) {
+          return plays[aPerformace.playID];
+        }
+        function totalAmount(data) {
+          return data.performances.reduce((total, p) => total + p.amount, 0);
+        }
+        function totalVolumeCredits(data) {
+          return data.performances.reduce(
+            (total, p) => total + p.volumeCredits,
+            0
+          );
+        }
+      }
+    </script>
+
+    <script>
+      mocha.checkLeaks();
+      mocha.globals(["jQuery"]);
+      mocha.run();
+    </script>
+  </body>
+</html>
