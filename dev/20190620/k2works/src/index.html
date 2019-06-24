@@ -217,16 +217,6 @@
         statementData.totalVolumeCredits = totalVolumeCredits(statementData);
         return statementData;
 
-        function createPerformanceCalculator(aPerformace, aPlay) {
-          switch (aPlay.type) {
-            case "tragedy":
-              return new TrageyCalculator(aPerformace, aPlay);
-            case "comedy":
-              return new ComedyCalculator(aPerformace, aPlay);
-            default:
-              throw new Error(`unknown type: ${aPlay.type}`);
-          }
-        }
         function enrichPerformance(aPerformace) {
           const calculator = new createPerformanceCalculator(
             aPerformace,
@@ -237,6 +227,16 @@
           result.amount = calculator.amount;
           result.volumeCredits = calculator.volumeCredits;
           return result;
+        }
+        function createPerformanceCalculator(aPerformace, aPlay) {
+          switch (aPlay.type) {
+            case "tragedy":
+              return new TrageyCalculator(aPerformace, aPlay);
+            case "comedy":
+              return new ComedyCalculator(aPerformace, aPlay);
+            default:
+              throw new Error(`unknown type: ${aPlay.type}`);
+          }
         }
         function playFor(aPerformace) {
           return plays[aPerformace.playID];

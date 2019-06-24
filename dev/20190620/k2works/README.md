@@ -76,6 +76,8 @@ npm start
 
 > When programming, follow the camping rule: Always leave the code base healthier than when you found it.
 
+> The true test of good code is how easy it is to change it.
+
 ##### Problem
 
 ##### Try
