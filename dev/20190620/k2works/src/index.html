@@ -172,16 +172,6 @@
       }
       // createStatementDdata
       function createStatementData(invoice, plays) {
-        function createPerformanceCalculator(aPerformace, aPlay) {
-          switch (aPlay.type) {
-            case "tragedy":
-              return new TrageyCalculator(aPerformace, aPlay);
-            case "comedy":
-              return new ComedyCalculator(aPerformace, aPlay);
-            default:
-              throw new Error(`unknown type: ${aPlay.type}`);
-          }
-        }
         class PerformanceCalculator {
           constructor(aPerformace, aPlay) {
             this.performace = aPerformace;
@@ -218,7 +208,6 @@
             );
           }
         }
-
         const statementData = {};
         statementData.customer = invoice.customer;
         statementData.performances = invoice.performances.map(
@@ -228,6 +217,16 @@
         statementData.totalVolumeCredits = totalVolumeCredits(statementData);
         return statementData;
 
+        function createPerformanceCalculator(aPerformace, aPlay) {
+          switch (aPlay.type) {
+            case "tragedy":
+              return new TrageyCalculator(aPerformace, aPlay);
+            case "comedy":
+              return new ComedyCalculator(aPerformace, aPlay);
+            default:
+              throw new Error(`unknown type: ${aPlay.type}`);
+          }
+        }
         function enrichPerformance(aPerformace) {
           const calculator = new createPerformanceCalculator(
             aPerformace,
@@ -239,20 +238,8 @@
           result.volumeCredits = calculator.volumeCredits;
           return result;
         }
-
         function playFor(aPerformace) {
           return plays[aPerformace.playID];
-        }
-        function amountFor(aPerformace) {
-          return new PerformanceCalculator(aPerformace, playFor(aPerformace))
-            .amount;
-        }
-        function volumeCreditsFor(aPerformance) {
-          let result = 0;
-          result += Math.max(aPerformance.audience - 30, 0);
-          if ("comedy" === aPerformance.play.type)
-            result += Math.floor(aPerformance.audience / 5);
-          return result;
         }
         function totalAmount(data) {
           return data.performances.reduce((total, p) => total + p.amount, 0);
