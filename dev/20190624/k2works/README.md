@@ -79,3 +79,5 @@ npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/register 
 **[⬆ back to top](#構成)**
 
 ## 参照
+- [Visual Studio Code上でwebpack-dev-serverを使ってデバッグする
+](https://qiita.com/tochi_ondy/items/6b357731916a3dedaa4d)
