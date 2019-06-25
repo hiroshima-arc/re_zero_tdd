@@ -14,7 +14,7 @@
     "watch": "watch 'npm-run-all format test' ./src ",
     "app": "npm-run-all app:*",
     "app:frontend": "browser-sync start --config bs-config.js",
-    "app:webpack": "webpack-dev-server --hot --inline --config webpack.dev.js"
+    "app:webpack": "webpack-dev-server -d --progress --colors --display-error-details --hot --inline --config webpack.dev.js"
   },
   "keywords": [],
   "author": "",
