@@ -26,7 +26,7 @@ export const invoices = [
 export function statement(invoice, plays) {
   let totalAmount = 0;
   let volumeCredits = 0;
-  let result = `Stagement for ${invoice.customer}\n`;
+  let result = `Statement for ${invoice.customer}\n`;
   const format = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -56,8 +56,8 @@ export function statement(invoice, plays) {
 
     // add volume credits
     volumeCredits += Math.max(perf.audience - 30, 0);
-    // add extra credit for every ten comedy attendess
-    if ("comeddy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
+    // add extra credit for every ten comedy attendees
+    if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
 
     // print line for this order
     result += ` ${play.name}: ${format(thisAmount / 100)}(${
@@ -66,6 +66,6 @@ export function statement(invoice, plays) {
     totalAmount += thisAmount;
   }
   result += `Amount owed is ${format(totalAmount / 100)}\n`;
-  result += `You earned ${volumeCredits} creddits\n`;
+  result += `You earned ${volumeCredits} credits\n`;
   return result;
 }
