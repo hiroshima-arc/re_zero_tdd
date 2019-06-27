@@ -51,22 +51,22 @@ export function statement(invoice, plays) {
   result += `You earned ${volumeCredits} credits\n`;
   return result;
 
-  function amountFor(aPerformace, play) {
+  function amountFor(aPerformances, play) {
     let result = 0;
 
     switch (play.type) {
       case "tragedy":
         result = 40000;
-        if (aPerformace.audience > 30) {
-          result += 1000 * (aPerformace.audience - 30);
+        if (aPerformances.audience > 30) {
+          result += 1000 * (aPerformances.audience - 30);
         }
         break;
       case "comedy":
         result = 30000;
-        if (aPerformace.audience > 20) {
-          result += 10000 + 500 * (aPerformace.audience - 20);
+        if (aPerformances.audience > 20) {
+          result += 10000 + 500 * (aPerformances.audience - 20);
         }
-        result += 300 * aPerformace.audience;
+        result += 300 * aPerformances.audience;
         break;
       default:
         throw new Error(`unknown type: ${play.type}`);
