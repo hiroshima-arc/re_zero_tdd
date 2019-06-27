@@ -33,7 +33,7 @@ export function statement(invoice, plays) {
     minimumFractionDigits: 2
   }).format;
   for (let perf of invoice.performances) {
-    const play = plays[perf.playID];
+    const play = playFor(perf);
     let thisAmount = amountFor(perf, play);
 
     // add volume credits
@@ -72,5 +72,8 @@ export function statement(invoice, plays) {
         throw new Error(`unknown type: ${play.type}`);
     }
     return result;
+  }
+  function playFor(aPerformance) {
+    return plays[aPerformance.playID];
   }
 }
