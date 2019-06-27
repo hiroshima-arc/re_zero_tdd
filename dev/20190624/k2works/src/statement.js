@@ -65,11 +65,11 @@ export function statement(invoice, plays) {
   function playFor(aPerformance) {
     return plays[aPerformance.playID];
   }
-  function volumeCreditsFor(aPerformace) {
+  function volumeCreditsFor(aPerformance) {
     let result = 0;
-    result += Math.max(aPerformace.audience - 30, 0);
-    if ("comedy" === playFor(aPerformace).type)
-      result += Math.floor(aPerformace.audience / 5);
+    result += Math.max(aPerformance.audience - 30, 0);
+    if ("comedy" === playFor(aPerformance).type)
+      result += Math.floor(aPerformance.audience / 5);
     return result;
   }
   function usd(aNumber) {
