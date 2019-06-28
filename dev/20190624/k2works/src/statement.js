@@ -33,9 +33,8 @@ export function statement(invoice, plays) {
     } seats)\n`;
     totalAmount += amountFor(perf);
   }
-  let volumeCredits = totalVolumeCredits(invoice);
   result += `Amount owed is ${usd(totalAmount)}\n`;
-  result += `You earned ${volumeCredits} credits\n`;
+  result += `You earned ${totalVolumeCredits()} credits\n`;
   return result;
 
   function amountFor(aPerformances) {
@@ -77,7 +76,7 @@ export function statement(invoice, plays) {
       minimumFractionDigits: 2
     }).format(aNumber / 100);
   }
-  function totalVolumeCredits(invoice) {
+  function totalVolumeCredits() {
     let volumeCredits = 0;
     for (let perf of invoice.performances) {
       volumeCredits += volumeCreditsFor(perf);
