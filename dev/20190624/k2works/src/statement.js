@@ -24,7 +24,6 @@ export const invoices = [
 ];
 
 export function statement(invoice, plays) {
-  let totalAmount = 0;
   let result = `Statement for ${invoice.customer}\n`;
   for (let perf of invoice.performances) {
     // print line for this order
@@ -32,6 +31,7 @@ export function statement(invoice, plays) {
       perf.audience
     } seats)\n`;
   }
+  let totalAmount = 0;
   for (let perf of invoice.performances) {
     totalAmount += amountFor(perf);
   }
