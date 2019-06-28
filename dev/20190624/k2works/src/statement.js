@@ -33,10 +33,7 @@ export function statement(invoice, plays) {
     } seats)\n`;
     totalAmount += amountFor(perf);
   }
-  let volumeCredits = 0;
-  for(let perf of invoice.performances) {
-    volumeCredits += volumeCreditsFor(perf);
-  }
+  let volumeCredits = totalVolumeCredits(invoice);
   result += `Amount owed is ${usd(totalAmount)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
@@ -79,5 +76,12 @@ export function statement(invoice, plays) {
       currency: "USD",
       minimumFractionDigits: 2
     }).format(aNumber / 100);
+  }
+  function totalVolumeCredits(invoice) {
+    let volumeCredits = 0;
+    for (let perf of invoice.performances) {
+      volumeCredits += volumeCreditsFor(perf);
+    }
+    return volumeCredits;
   }
 }
