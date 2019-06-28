@@ -8,7 +8,7 @@
     "build": "npm-run-all build:*",
     "build:doc": "markdown README.md > ./src/readme.html",
     "build:webpack": "webpack --config webpack.prod.js",
-    "test": "cross-env NODE_ENV=test nyc mocha --require @babel/register test/**.test.js",
+    "test": "cross-env NODE_ENV=test mocha --require @babel/register test/**.test.js",
     "lint": "eslint src/**/*.js",
     "format": "prettier --write src/**/*.*",
     "watch": "watch 'npm-run-all format test' ./src ",
