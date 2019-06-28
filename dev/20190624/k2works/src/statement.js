@@ -31,6 +31,8 @@ export function statement(invoice, plays) {
     result += ` ${playFor(perf).name}: ${usd(amountFor(perf))}(${
       perf.audience
     } seats)\n`;
+  }
+  for (let perf of invoice.performances) {
     totalAmount += amountFor(perf);
   }
   result += `Amount owed is ${usd(totalAmount)}\n`;
