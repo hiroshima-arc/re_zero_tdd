@@ -4,6 +4,28 @@ export default function createStaementData(invoice, plays) {
       this.performance = aPerformance;
       this.play = aPlay;
     }
+    get amount() {
+      let result = 0;
+
+      switch (this.play.type) {
+        case "tragedy":
+          result = 40000;
+          if (this.performance.audience > 30) {
+            result += 1000 * (this.performance.audience - 30);
+          }
+          break;
+        case "comedy":
+          result = 30000;
+          if (this.performance.audience > 20) {
+            result += 10000 + 500 * (this.performance.audience - 20);
+          }
+          result += 300 * this.performance.audience;
+          break;
+        default:
+          throw new Error(`unknown type: ${this.performance.play.type}`);
+      }
+      return result;
+    }
   }
 
   const statementData = {};
@@ -28,26 +50,8 @@ export default function createStaementData(invoice, plays) {
     return plays[aPerformance.playID];
   }
   function amountFor(aPerformances) {
-    let result = 0;
-
-    switch (aPerformances.play.type) {
-      case "tragedy":
-        result = 40000;
-        if (aPerformances.audience > 30) {
-          result += 1000 * (aPerformances.audience - 30);
-        }
-        break;
-      case "comedy":
-        result = 30000;
-        if (aPerformances.audience > 20) {
-          result += 10000 + 500 * (aPerformances.audience - 20);
-        }
-        result += 300 * aPerformances.audience;
-        break;
-      default:
-        throw new Error(`unknown type: ${aPerformances.play.type}`);
-    }
-    return result;
+    return new PerformanceCalculator(aPerformances, playFor(aPerformances))
+      .amount;
   }
   function volumeCreditsFor(aPerformance) {
     let result = 0;
