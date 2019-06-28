@@ -42,8 +42,11 @@ export default function createStaementData(invoice, plays) {
   statementData.totalVolumeCredits = totalVolumeCredits(statementData);
   return statementData;
 
+  function createPerformanceCalculator(aPerformance, aPlay) {
+    return new PerformanceCalculator(aPerformance, aPlay);
+  }
   function enrichPerformance(aPerformance) {
-    const calculator = new PerformanceCalculator(
+    const calculator = createPerformanceCalculator(
       aPerformance,
       playFor(aPerformance)
     );
