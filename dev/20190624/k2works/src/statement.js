@@ -24,12 +24,16 @@ export const invoices = [
 ];
 
 export function statement(invoice, plays) {
+  return renderPlainText(createStaementData(invoice, plays));
+}
+
+function createStaementData(invoice, plays) {
   const statementData = {};
   statementData.customer = invoice.customer;
   statementData.performances = invoice.performances.map(enrichPerformance);
   statementData.totalAmount = totalAmount(statementData);
   statementData.totalVolumeCredits = totalVolumeCredits(statementData);
-  return renderPlainText(statementData, invoice, plays);
+  return statementData;
 
   function enrichPerformance(aPerformance) {
     const result = Object.assign({}, aPerformance);
@@ -78,7 +82,7 @@ export function statement(invoice, plays) {
   }
 }
 
-export function renderPlainText(data, invoice, plays) {
+function renderPlainText(data, invoice, plays) {
   let result = `Statement for ${data.customer}\n`;
   for (let perf of data.performances) {
     // print line for this order
