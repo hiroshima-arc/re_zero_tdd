@@ -24,10 +24,11 @@ export const invoices = [
 ];
 
 export function statement(invoice, plays) {
-  return renderPlainText(invoice, plays);
+  const statementData = {};
+  return renderPlainText(statementData, invoice, plays);
 }
 
-export function renderPlainText(invoice, plays) {
+export function renderPlainText(data, invoice, plays) {
   let result = `Statement for ${invoice.customer}\n`;
   for (let perf of invoice.performances) {
     // print line for this order
