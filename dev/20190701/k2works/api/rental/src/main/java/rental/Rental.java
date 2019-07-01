@@ -27,24 +27,20 @@ class Rental {
         baseAmount = 200;
         baseDays = 2;
         amountPerDay = 150;
-        if (daysRented > baseDays) additionalAmount =
-          (daysRented - baseDays) * amountPerDay;
         break;
       case CHILDREN:
         baseAmount = 150;
         baseDays = 3;
         amountPerDay = 150;
-        if (daysRented > baseDays) additionalAmount =
-          (daysRented - baseDays) * amountPerDay;
         break;
       case NEW_RELEASE:
         baseAmount = 0;
         amountPerDay = 300;
-        if (daysRented > baseDays) additionalAmount =
-          (daysRented - baseDays) * amountPerDay;
         break;
     }
 
+    if (daysRented > baseDays) additionalAmount =
+      (daysRented - baseDays) * amountPerDay;
     return baseAmount + additionalAmount;
   }
 
