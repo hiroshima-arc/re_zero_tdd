@@ -16,9 +16,9 @@ public class StatementController {
     Movie childrenMovie = new Movie("子供", new OldRelease(CHILDREN));
     Movie regularMovie = new Movie("一般", new OldRelease(REGULAR));
 
-    Rental newRelease = new Rental(newReleaseMovie, 3);
-    Rental children = new Rental(childrenMovie, 2);
-    Rental regular = new Rental(regularMovie, 1);
+    Rental newRelease = new Rental(newReleaseMovie, new DaysRented(3));
+    Rental children = new Rental(childrenMovie, new DaysRented(2));
+    Rental regular = new Rental(regularMovie, new DaysRented(1));
 
     Customer customer = new Customer("山田");
 

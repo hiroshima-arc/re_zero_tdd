@@ -16,9 +16,9 @@ class StatementOutput {
     Movie childrenMovie = new Movie("子供", new OldRelease(CHILDREN));
     Movie regularMovie = new Movie("一般", new OldRelease(REGULAR));
 
-    newRelease = new Rental(newReleaseMovie, 3);
-    children = new Rental(childrenMovie, 2);
-    regular = new Rental(regularMovie, 1);
+    newRelease = new Rental(newReleaseMovie, new DaysRented(3));
+    children = new Rental(childrenMovie, new DaysRented(2));
+    regular = new Rental(regularMovie, new DaysRented(1));
   }
 
   String output;

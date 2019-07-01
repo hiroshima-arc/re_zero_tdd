@@ -8,12 +8,12 @@ public class OldRelease implements Rate {
   }
 
   @Override
-  public int amount(int daysRented) {
-    return movieType.amount(daysRented);
+  public int amount(DaysRented daysRented) {
+    return movieType.amount(daysRented.intValue());
   }
 
   @Override
-  public int point(int daysRented) {
+  public int point(DaysRented daysRented) {
     return 1;
   }
 }

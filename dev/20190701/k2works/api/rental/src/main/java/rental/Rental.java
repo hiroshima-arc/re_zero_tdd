@@ -2,9 +2,9 @@ package rental;
 
 class Rental {
   Movie movie;
-  int daysRented;
+  DaysRented daysRented;
 
-  Rental(Movie movie, int daysRented) {
+  Rental(Movie movie, DaysRented daysRented) {
     this.movie = movie;
     this.daysRented = daysRented;
   }

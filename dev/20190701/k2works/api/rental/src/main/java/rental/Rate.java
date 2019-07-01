@@ -1,6 +1,6 @@
 package rental;
 
 public interface Rate {
-  int amount(int daysRented);
-  int point(int daysRented);
+  int amount(DaysRented daysRented);
+  int point(DaysRented daysRented);
 }
