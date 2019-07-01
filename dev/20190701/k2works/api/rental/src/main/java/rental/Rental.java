@@ -22,18 +22,29 @@ class Rental {
   int amount() {
     int baseAmount = 0;
     int additionalAmount = 0;
+
+    int baseDays = 0;
+    int amountPerDay = 0;
+
     switch (movie().movieType()) {
       case REGULAR:
         baseAmount = 200;
-        if (daysRented() > 2) additionalAmount = (daysRented - 2) * 150;
+        baseDays = 2;
+        amountPerDay = 150;
+        if (daysRented() > baseDays) additionalAmount =
+          (daysRented - baseDays) * amountPerDay;
         break;
       case NEW_RELEASE:
         baseAmount = 0;
-        additionalAmount = daysRented() * 300;
+        amountPerDay = 300;
+        additionalAmount = daysRented() * amountPerDay;
         break;
       case CHILDREN:
         baseAmount = 150;
-        if (daysRented() > 3) additionalAmount = (daysRented - 3) * 150;
+        baseDays = 3;
+        amountPerDay = 150;
+        if (daysRented() > baseDays) additionalAmount =
+          (daysRented - baseDays) * amountPerDay;
     }
 
     return baseAmount + additionalAmount;
