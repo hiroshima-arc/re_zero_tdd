@@ -20,4 +20,11 @@ public enum MovieType {
     if (daysRented > baseDays) return (daysRented - baseDays) * amountPerDay;
     return 0;
   }
+
+  int point(int daysRented) {
+    int points = 1;
+    if (this == NEW_RELEASE && daysRented > 1) points++;
+
+    return points;
+  }
 }
