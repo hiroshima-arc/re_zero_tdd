@@ -16,22 +16,7 @@ public class Statement {
     String result = customer.name() + "様のレンタル明細\n";
 
     for (Rental each : customer.rentals.asList()) {
-      int thisAmount = 0;
-      switch (each.movie().movieType()) {
-        case REGULAR:
-          thisAmount += 200;
-          if (each.daysRented() > 2) thisAmount +=
-            (each.daysRented() - 2) * 150;
-          break;
-        case NEW_RELEASE:
-          thisAmount += each.daysRented() * 300;
-          break;
-        case CHILDREN:
-          thisAmount += 150;
-          if (each.daysRented() > 3) thisAmount +=
-            (each.daysRented() - 3) * 150;
-      }
-
+      int thisAmount = each.amount();
       points++;
       if (
         each.movie().movieType() == NEW_RELEASE && each.daysRented() > 1
