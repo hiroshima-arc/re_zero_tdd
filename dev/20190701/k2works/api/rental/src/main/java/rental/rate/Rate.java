@@ -1,4 +1,4 @@
-package rental;
+package rental.rate;
 
 public interface Rate {
   int amount(DaysRented daysRented);

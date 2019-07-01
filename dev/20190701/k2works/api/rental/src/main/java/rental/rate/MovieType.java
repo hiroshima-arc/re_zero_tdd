@@ -1,4 +1,4 @@
-package rental;
+package rental.rate;
 
 public enum MovieType {
   REGULAR(200, 2, 150), CHILDREN(150, 3, 150);

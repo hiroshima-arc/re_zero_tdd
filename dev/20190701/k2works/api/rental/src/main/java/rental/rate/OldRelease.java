@@ -1,9 +1,9 @@
-package rental;
+package rental.rate;
 
 public class OldRelease implements Rate {
   MovieType movieType;
 
-  OldRelease(MovieType movieType) {
+  public OldRelease(MovieType movieType) {
     this.movieType = movieType;
   }
 

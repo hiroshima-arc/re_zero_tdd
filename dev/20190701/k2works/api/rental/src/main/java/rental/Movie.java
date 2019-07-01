@@ -1,5 +1,7 @@
 package rental;
 
+import rental.rate.Rate;
+
 class Movie {
   String title;
   Rate movieType;

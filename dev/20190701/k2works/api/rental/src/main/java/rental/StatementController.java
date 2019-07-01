@@ -3,8 +3,11 @@ package rental;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import static rental.MovieType.CHILDREN;
-import static rental.MovieType.REGULAR;
+import rental.rate.DaysRented;
+import rental.rate.NewRelease;
+import rental.rate.OldRelease;
+import static rental.rate.MovieType.CHILDREN;
+import static rental.rate.MovieType.REGULAR;
 
 @RestController
 public class StatementController {

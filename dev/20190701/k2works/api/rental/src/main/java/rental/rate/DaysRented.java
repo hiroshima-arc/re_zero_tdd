@@ -1,9 +1,9 @@
-package rental;
+package rental.rate;
 
 public class DaysRented {
   int value;
 
-  DaysRented(int value) {
+  public DaysRented(int value) {
     this.value = value;
   }
 

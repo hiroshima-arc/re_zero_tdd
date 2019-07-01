@@ -1,4 +1,4 @@
-package rental;
+package rental.rate;
 
 public class NewRelease implements Rate {
   int amountPerDay = 300;
