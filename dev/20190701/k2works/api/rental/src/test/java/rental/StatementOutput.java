@@ -2,6 +2,9 @@ package rental;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static rental.MovieType.CHILDREN;
+import static rental.MovieType.NEW_RELEASE;
+import static rental.MovieType.REGULAR;
 
 class StatementOutput {
   Rental newRelease;
@@ -10,9 +13,9 @@ class StatementOutput {
 
   @BeforeEach
   void setupData() {
-    Movie newReleaseMovie = new Movie("新作", Movie.NEW_RELEASE);
-    Movie childrenMovie = new Movie("子供", Movie.CHILDREN);
-    Movie regularMovie = new Movie("一般", Movie.REGULAR);
+    Movie newReleaseMovie = new Movie("新作", NEW_RELEASE);
+    Movie childrenMovie = new Movie("子供", CHILDREN);
+    Movie regularMovie = new Movie("一般", REGULAR);
 
     newRelease = new Rental(newReleaseMovie, 3);
     children = new Rental(childrenMovie, 2);

@@ -3,6 +3,9 @@ package rental;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import static rental.MovieType.CHILDREN;
+import static rental.MovieType.NEW_RELEASE;
+import static rental.MovieType.REGULAR;
 
 @RestController
 public class StatementController {
@@ -10,9 +13,9 @@ public class StatementController {
   @CrossOrigin
   @RequestMapping("/")
   public String index() {
-    Movie newReleaseMovie = new Movie("新作", Movie.NEW_RELEASE);
-    Movie childrenMovie = new Movie("子供", Movie.CHILDREN);
-    Movie regularMovie = new Movie("一般", Movie.REGULAR);
+    Movie newReleaseMovie = new Movie("新作", NEW_RELEASE);
+    Movie childrenMovie = new Movie("子供", CHILDREN);
+    Movie regularMovie = new Movie("一般", REGULAR);
 
     Rental newRelease = new Rental(newReleaseMovie, 3);
     Rental children = new Rental(childrenMovie, 2);
