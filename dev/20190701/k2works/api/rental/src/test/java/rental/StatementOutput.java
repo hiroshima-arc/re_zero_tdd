@@ -37,12 +37,12 @@ class StatementOutput {
   @Test
   @DisplayName("ステートメント出力")
   void output() {
-    Rentals rentals = new Rentals();
+    Customer customer = new Customer("山田");
+    Rentals rentals = new Rentals(customer);
     rentals.addRental(newRelease);
     rentals.addRental(children);
     rentals.addRental(regular);
-    Customer customer = new Customer("山田", rentals);
-    Statement statement = new Statement(customer);
+    Statement statement = new Statement(rentals);
 
     assertEquals(output, statement.statement());
   }

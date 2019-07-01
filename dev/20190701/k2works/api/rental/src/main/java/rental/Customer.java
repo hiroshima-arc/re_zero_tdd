@@ -2,11 +2,9 @@ package rental;
 
 class Customer {
   String name;
-  Rentals rentals = new Rentals();
 
-  Customer(String name, Rentals rentals) {
+  Customer(String name) {
     this.name = name;
-    this.rentals = rentals;
   }
 
   String name() {

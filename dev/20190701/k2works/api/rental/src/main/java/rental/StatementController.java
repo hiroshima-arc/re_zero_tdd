@@ -20,13 +20,15 @@ public class StatementController {
     Rental children = new Rental(childrenMovie, 2);
     Rental regular = new Rental(regularMovie, 1);
 
-    Rentals rentals = new Rentals();
+    Customer customer = new Customer("山田");
+
+    Rentals rentals = new Rentals(customer);
+
     rentals.addRental(newRelease);
     rentals.addRental(children);
     rentals.addRental(regular);
 
-    Customer customer = new Customer("山田", rentals);
-    Statement statement = new Statement(customer);
+    Statement statement = new Statement(rentals);
 
     return statement.statement();
   }
