@@ -7,7 +7,11 @@ public class DaysRented {
     this.value = value;
   }
 
-  int intValue() {
+  public int intValue() {
     return value;
+  }
+
+  public boolean lessThan(int days) {
+    return value < days;
   }
 }
