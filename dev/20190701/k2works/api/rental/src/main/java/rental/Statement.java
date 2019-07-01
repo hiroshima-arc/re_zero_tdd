@@ -1,7 +1,5 @@
 package rental;
 
-import static rental.MovieType.*;
-
 public class Statement {
   Customer customer;
 
@@ -17,11 +15,7 @@ public class Statement {
 
     for (Rental each : customer.rentals.asList()) {
       int thisAmount = each.amount();
-      points++;
-      if (
-        each.movie().movieType() == NEW_RELEASE && each.daysRented() > 1
-      ) points++;
-
+      points += each.frequentPoints();
       result += "\t" + each.movie().title() + "\t" + thisAmount + "円\n";
 
       totalAmount += thisAmount;
