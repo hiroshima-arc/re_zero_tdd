@@ -14,12 +14,12 @@ class Rental {
   }
 
   int amount() {
-    MovieType movieType = movie.movieType();
+    Rate movieType = movie.movieType();
     return movieType.amount(daysRented);
   }
 
   int frequentPoints() {
-    MovieType movieType = movie.movieType();
+    Rate movieType = movie.movieType();
     return movieType.point(daysRented);
   }
 }

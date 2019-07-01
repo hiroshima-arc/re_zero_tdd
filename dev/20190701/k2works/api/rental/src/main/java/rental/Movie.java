@@ -2,14 +2,14 @@ package rental;
 
 class Movie {
   String title;
-  MovieType movieType;
+  Rate movieType;
 
-  Movie(String title, MovieType movieType) {
+  Movie(String title, Rate movieType) {
     this.title = title;
     this.movieType = movieType;
   }
 
-  MovieType movieType() {
+  Rate movieType() {
     return this.movieType;
   }
 
