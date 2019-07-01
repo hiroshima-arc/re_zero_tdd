@@ -1,7 +1,7 @@
 package rental;
 
 public enum MovieType implements Rate {
-  REGULAR(200, 2, 150), CHILDREN(150, 3, 150), NEW_RELEASE(0, 0, 300);
+  REGULAR(200, 2, 150), CHILDREN(150, 3, 150);
   int baseAmount = 0;
   int baseDays = 0;
   int amountPerDay = 0;
@@ -22,9 +22,6 @@ public enum MovieType implements Rate {
   }
 
   public int point(int daysRented) {
-    int points = 1;
-    if (this == NEW_RELEASE && daysRented > 1) points++;
-
-    return points;
+    return 1;
   }
 }
