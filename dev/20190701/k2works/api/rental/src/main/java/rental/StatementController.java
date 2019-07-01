@@ -24,7 +24,8 @@ public class StatementController {
     rentals.addRental(regular);
 
     Customer customer = new Customer("山田", rentals);
+    Statement statement = new Statement(customer);
 
-    return customer.statement();
+    return statement.statement();
   }
 }

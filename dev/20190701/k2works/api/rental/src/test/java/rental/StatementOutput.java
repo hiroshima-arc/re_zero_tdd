@@ -40,7 +40,8 @@ class StatementOutput {
     rentals.addRental(children);
     rentals.addRental(regular);
     Customer customer = new Customer("山田", rentals);
+    Statement statement = new Statement(customer);
 
-    assertEquals(output, customer.statement());
+    assertEquals(output, statement.statement());
   }
 }
