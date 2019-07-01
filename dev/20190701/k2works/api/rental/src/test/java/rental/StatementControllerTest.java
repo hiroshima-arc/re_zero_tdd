@@ -16,16 +16,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class HelloControllerTest {
+public class StatementControllerTest {
   @Autowired
   private MockMvc mvc;
 
   @Test
-  public void getHello() throws Exception {
+  public void getStatement() throws Exception {
     mvc.perform(
       MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON)
     )
       .andExpect(status().isOk())
-      .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
+      .andExpect(
+        content()
+          .string(
+            equalTo(
+              "山田様のレンタル明細\n\t新作\t900円\n\t子供\t150円\n\t一般\t200円\n合計金額 1250円\n獲得ポイント 4p"
+            )
+          )
+      );
   }
 }

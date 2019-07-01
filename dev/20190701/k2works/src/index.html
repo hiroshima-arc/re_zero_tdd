@@ -81,6 +81,17 @@
     </script>
 
     <script>
+      fetch("http://localhost:8080")
+        .then(response => {
+          return response.text();
+        })
+        .then(text => {
+          document.querySelector("#app").innerHTML = `<pre>${text}</pre>`;
+          console.log(text);
+        });
+    </script>
+
+    <script>
       mocha.checkLeaks();
       mocha.globals(["jQuery"]);
       mocha.run();
