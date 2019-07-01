@@ -18,10 +18,12 @@ public class StatementController {
     Rental children = new Rental(childrenMovie, 2);
     Rental regular = new Rental(regularMovie, 1);
 
-    Customer customer = new Customer("山田");
-    customer.addRental(newRelease);
-    customer.addRental(children);
-    customer.addRental(regular);
+    Rentals rentals = new Rentals();
+    rentals.addRental(newRelease);
+    rentals.addRental(children);
+    rentals.addRental(regular);
+
+    Customer customer = new Customer("山田", rentals);
 
     return customer.statement();
   }

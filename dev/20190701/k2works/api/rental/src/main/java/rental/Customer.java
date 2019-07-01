@@ -1,18 +1,12 @@
 package rental;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class Customer {
   String name;
-  List<Rental> rentals = new ArrayList<>();
+  Rentals rentals = new Rentals();
 
-  Customer(String name) {
+  Customer(String name, Rentals rentals) {
     this.name = name;
-  }
-
-  void addRental(Rental rental) {
-    rentals.add(rental);
+    this.rentals = rentals;
   }
 
   String name() {
@@ -25,7 +19,7 @@ class Customer {
 
     String result = name() + "様のレンタル明細\n";
 
-    for (Rental each : rentals) {
+    for (Rental each : rentals.asList()) {
       int thisAmount = 0;
       switch (each.movie().priceCode()) {
         case Movie.REGULAR:
