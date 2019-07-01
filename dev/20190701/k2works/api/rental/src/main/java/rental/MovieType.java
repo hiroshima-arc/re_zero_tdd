@@ -11,4 +11,13 @@ public enum MovieType {
     this.baseDays = baseDays;
     this.amountPerDay = amountPerDay;
   }
+
+  int amount(int daysRented) {
+    return baseAmount + additionalAmount(daysRented);
+  }
+
+  private int additionalAmount(int daysRented) {
+    if (daysRented > baseDays) return (daysRented - baseDays) * amountPerDay;
+    return 0;
+  }
 }
