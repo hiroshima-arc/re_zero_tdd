@@ -23,4 +23,12 @@ public class Rentals {
 
     return result;
   }
+
+  int totalPoints() {
+    int result = 0;
+    for (Rental each : rentals) {
+      result += each.frequentPoints();
+    }
+    return result;
+  }
 }
