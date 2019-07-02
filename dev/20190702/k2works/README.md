@@ -75,3 +75,5 @@ mvn archetype:generate -DgroupId=rental -DartifactId=rental -Dversion=1.0-SNAPSH
 **[⬆ back to top](#構成)**
 
 ## 参照
+
+- [Quick start Spring Boot](https://github.com/awslabs/aws-serverless-java-container/wiki/Quick-start---Spring-Boot)
