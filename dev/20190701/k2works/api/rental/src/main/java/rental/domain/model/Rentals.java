@@ -33,7 +33,7 @@ public class Rentals {
     return total.sum();
   }
 
-  public String customerName() {
-    return customer.name();
+  public Customer customer() {
+    return customer;
   }
 }

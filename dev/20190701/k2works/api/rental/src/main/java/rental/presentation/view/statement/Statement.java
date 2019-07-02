@@ -2,6 +2,7 @@ package rental.presentation.view.statement;
 
 import rental.domain.model.Rental;
 import rental.domain.model.Rentals;
+import java.time.LocalDate;
 
 public class Statement {
   Rentals rentals;
@@ -11,14 +12,42 @@ public class Statement {
   }
 
   public String statement() {
-    String result = rentals.customerName() + "様のレンタル明細\n";
+    return String.format("%s\n%s\n%s", header(), details(), footer());
+  }
 
+  private String header() {
+    return String.format(
+      "レンタル記録 %s様 %s\n",
+      rentals.customer(),
+      LocalDate.now()
+    );
+  }
+
+  private String details() {
+    StringBuilder result = new StringBuilder();
     for (Rental each : rentals.asList()) {
-      result += "\t" + each.movie() + "\t" + each.chargeAmount() + "\n";
+      result.append(
+        String.format(
+          "%s\t%s\t%s\t%s\n",
+          each.movie(),
+          each.days(),
+          each.chargeAmount(),
+          each.frequentPoints()
+        )
+      );
     }
+    return result.toString();
+  }
 
-    result += "合計金額 " + rentals.totalAmount() + "\n";
-    result += "獲得ポイント " + rentals.totalPoints();
-    return result;
+  private String footer() {
+    return String.format("%s\n%s", totalCharge(), totalPoints());
+  }
+
+  private String totalPoints() {
+    return String.format("獲得ポイント %s", rentals.totalPoints());
+  }
+
+  private String totalCharge() {
+    return String.format("合計金額 %s", rentals.totalAmount());
   }
 }

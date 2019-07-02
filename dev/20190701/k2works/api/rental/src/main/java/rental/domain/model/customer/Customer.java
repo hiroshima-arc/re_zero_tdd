@@ -7,7 +7,8 @@ public class Customer {
     this.name = name;
   }
 
-  public String name() {
+  @Override
+  public String toString() {
     return name;
   }
 }

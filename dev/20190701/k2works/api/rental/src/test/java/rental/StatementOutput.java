@@ -38,10 +38,14 @@ class StatementOutput {
   @BeforeEach
   void setupResult() {
     output =
-      "山田様のレンタル明細\n" +
-        "\t新作\t900円\n" +
-        "\t子供\t150円\n" +
-        "\t一般\t200円\n" +
+      "レンタル記録 山田様 " +
+        LocalDate.now() +
+        "\n" +
+        "\n" +
+        "新作\t3日間\t900円\t2ポイント\n" +
+        "子供\t2日間\t150円\t1ポイント\n" +
+        "一般\t1日間\t200円\t1ポイント\n" +
+        "\n" +
         "合計金額 1250円\n" +
         "獲得ポイント 4ポイント";
   }

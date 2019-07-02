@@ -33,7 +33,7 @@ public class Rental {
     return ChargeType.REGULAR;
   }
 
-  Point frequentPoints() {
+  public Point frequentPoints() {
     return pointType().point(days);
   }
 

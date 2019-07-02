@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import java.time.LocalDate;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,7 +31,9 @@ public class StatementControllerTest {
         content()
           .string(
             equalTo(
-              "山田様のレンタル明細\n\t新作\t900円\n\t子供\t150円\n\t一般\t200円\n合計金額 1250円\n獲得ポイント 4ポイント"
+              "レンタル記録 山田様 " +
+                LocalDate.now() +
+                "\n\n新作\t3日間\t900円\t2ポイント\n子供\t2日間\t150円\t1ポイント\n一般\t1日間\t200円\t1ポイント\n\n合計金額 1250円\n獲得ポイント 4ポイント"
             )
           )
       );
