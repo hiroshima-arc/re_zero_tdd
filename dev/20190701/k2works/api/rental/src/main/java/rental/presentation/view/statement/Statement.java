@@ -26,17 +26,21 @@ public class Statement {
   private String details() {
     StringBuilder result = new StringBuilder();
     for (Rental each : rentals.asList()) {
-      result.append(
-        String.format(
-          "%s\t%s\t%s\t%s\n",
-          each.movie(),
-          each.days(),
-          each.amount(),
-          each.points()
-        )
-      );
+      addDetail(result, each);
     }
     return result.toString();
+  }
+
+  private void addDetail(StringBuilder result, Rental each) {
+    result.append(
+      String.format(
+        "%s\t%s\t%s\t%s\n",
+        each.movie(),
+        each.days(),
+        each.amount(),
+        each.points()
+      )
+    );
   }
 
   private String footer() {
