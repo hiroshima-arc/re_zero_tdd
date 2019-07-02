@@ -33,6 +33,19 @@ npx browser-sync init
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+mkdir src
+touch src/index.html
+mkdir api
+cd api
+mvn archetype:generate -DgroupId=rental -DartifactId=rental -Dversion=1.0-SNAPSHOT \
+       -DarchetypeGroupId=com.amazonaws.serverless.archetypes \
+       -DarchetypeArtifactId=aws-serverless-springboot2-archetype \
+       -DarchetypeVersion=1.3.2
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
