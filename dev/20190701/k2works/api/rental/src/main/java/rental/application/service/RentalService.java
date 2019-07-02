@@ -8,7 +8,6 @@ import rental.domain.model.customer.Customer;
 import rental.domain.model.movie.Movie;
 import rental.domain.model.movie.ReleaseDate;
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class RentalService {
@@ -35,9 +34,5 @@ public class RentalService {
     rentals.addRental(new Rental(regular, Days.of(1)));
 
     return rentals;
-  }
-
-  public List<Rental> createRentalList() {
-    return this.createRentals().asList();
   }
 }

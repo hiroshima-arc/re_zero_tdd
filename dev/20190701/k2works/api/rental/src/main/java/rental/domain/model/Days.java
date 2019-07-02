@@ -24,10 +24,6 @@ public class Days {
     return String.format("%d日間", value);
   }
 
-  public int getValue() {
-    return value;
-  }
-
   public static Days of(int value) {
     return new Days(value);
   }

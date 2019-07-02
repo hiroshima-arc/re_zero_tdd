@@ -10,14 +10,6 @@ public class Rental {
   Movie movie;
   Days days;
 
-  public Movie getMovie() {
-    return movie;
-  }
-
-  public Days getDays() {
-    return days;
-  }
-
   public Rental(Movie movie, Days days) {
     this.movie = movie;
     this.days = days;
