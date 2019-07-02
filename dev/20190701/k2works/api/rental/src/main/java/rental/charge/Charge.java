@@ -1,7 +1,9 @@
 package rental.charge;
 
-import rental.DaysRented;
+public class Charge {
+  int value;
 
-public interface Charge {
-  public int amountFor(DaysRented daysRented);
+  public Charge(int value) {
+    this.value = value;
+  }
 }
