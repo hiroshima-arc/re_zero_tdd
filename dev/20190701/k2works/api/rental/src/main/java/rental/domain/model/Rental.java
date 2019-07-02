@@ -24,21 +24,12 @@ public class Rental {
   }
 
   public Charge chargeAmount() {
-    return chargeType().amount(days);
-  }
-
-  private ChargeType chargeType() {
-    if (movie.isNewRelease()) return ChargeType.NEW_RELEASE;
-    if (movie.forChildre()) return ChargeType.CHILDREN;
-    return ChargeType.REGULAR;
+    ChargeType type = ChargeType.of(movie);
+    return type.amount(days);
   }
 
   public Point frequentPoints() {
-    return pointType().point(days);
-  }
-
-  private PointType pointType() {
-    if (movie.isNewRelease()) return PointType.NEW_RELEASE;
-    return PointType.OLD_RELEASE;
+    PointType type = PointType.of(movie);
+    return type.point(days);
   }
 }
