@@ -1,12 +1,14 @@
 package rental;
 
-import org.junit.jupiter.api.*;
-import rental.rate.DaysRented;
-import rental.rate.NewRelease;
-import rental.rate.OldRelease;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import rental.customer.Customer;
+import rental.movie.Movie;
+import rental.movie.MovieType;
+import rental.statement.Statement;
+import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static rental.rate.MovieType.CHILDREN;
-import static rental.rate.MovieType.REGULAR;
 
 class StatementOutput {
   Rental newRelease;
@@ -15,9 +17,21 @@ class StatementOutput {
 
   @BeforeEach
   void setupData() {
-    Movie newReleaseMovie = new Movie("新作", new NewRelease());
-    Movie childrenMovie = new Movie("子供", new OldRelease(CHILDREN));
-    Movie regularMovie = new Movie("一般", new OldRelease(REGULAR));
+    Movie newReleaseMovie = new Movie(
+      "新作",
+      LocalDate.now().minusDays(10),
+      MovieType.Children
+    );
+    Movie childrenMovie = new Movie(
+      "子供",
+      LocalDate.now().minusDays(30 * 10),
+      MovieType.Children
+    );
+    Movie regularMovie = new Movie(
+      "一般",
+      LocalDate.now().minusDays(30 * 5),
+      MovieType.General
+    );
 
     newRelease = new Rental(newReleaseMovie, new DaysRented(3));
     children = new Rental(childrenMovie, new DaysRented(2));

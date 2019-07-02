@@ -1,17 +1,22 @@
 package rental.point;
 
-import rental.rate.DaysRented;
+import rental.DaysRented;
 
 public enum PointType {
   NEW_RELEASE, OLD_RELEASE;
-  public int point(DaysRented daysRented) {
-    return 1 + bonusPoinnt(daysRented);
+  Point zero = new Point(0);
+  Point one = new Point(1);
+
+  Point basePoint = one;
+
+  public Point point(DaysRented daysRented) {
+    return basePoint.add(bonusPoint(daysRented));
   }
 
-  private int bonusPoinnt(DaysRented daysRented) {
-    if (this != NEW_RELEASE) return 0;
-    if (daysRented.lessThan(2)) return 0;
+  private Point bonusPoint(DaysRented daysRented) {
+    if (this != NEW_RELEASE) return zero;
+    if (daysRented.lessThan(2)) return zero;
 
-    return 1;
+    return one;
   }
 }

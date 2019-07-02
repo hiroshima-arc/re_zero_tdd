@@ -1,5 +1,7 @@
 package rental;
 
+import rental.customer.Customer;
+import rental.point.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,37 +9,37 @@ public class Rentals {
   Customer customer;
   List<Rental> rentals = new ArrayList<>();
 
-  Rentals(Customer customer) {
+  public Rentals(Customer customer) {
     this.customer = customer;
   }
 
-  void addRental(Rental rental) {
+  public void addRental(Rental rental) {
     rentals.add(rental);
   }
 
-  List<Rental> asList() {
+  public List<Rental> asList() {
     return rentals;
   }
 
-  int totalAmount() {
+  public int totalAmount() {
     int result = 0;
     for (Rental each : rentals) {
-      int thisAmount = each.amount();
+      int thisAmount = each.chargeAmount();
       result += thisAmount;
     }
 
     return result;
   }
 
-  int totalPoints() {
-    int result = 0;
+  public Point totalPoints() {
+    Point result = new Point(0);
     for (Rental each : rentals) {
-      result += each.frequentPoints();
+      result = result.add(each.frequentPoints());
     }
     return result;
   }
 
-  String custoemrName() {
+  public String customerName() {
     return customer.name();
   }
 }

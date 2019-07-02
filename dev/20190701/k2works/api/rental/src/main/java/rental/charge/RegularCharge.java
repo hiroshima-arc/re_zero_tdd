@@ -1,6 +1,6 @@
 package rental.charge;
 
-import rental.rate.DaysRented;
+import rental.DaysRented;
 
 public class RegularCharge implements Charge {
   int baseAmount = 200;

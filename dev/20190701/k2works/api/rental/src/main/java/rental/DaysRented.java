@@ -1,4 +1,4 @@
-package rental.rate;
+package rental;
 
 public class DaysRented {
   int value;
