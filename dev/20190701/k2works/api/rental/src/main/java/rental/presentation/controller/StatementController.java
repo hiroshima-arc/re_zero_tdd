@@ -4,9 +4,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rental.application.service.RentalService;
-import rental.domain.model.Rental;
 import rental.presentation.view.statement.Statement;
-import java.util.List;
+import rental.presentation.view.statement.StatementDTO;
 
 @RestController
 public class StatementController {
@@ -22,8 +21,9 @@ public class StatementController {
 
   @CrossOrigin
   @RequestMapping("/json")
-  public List<Rental> json() {
+  public StatementDTO json() {
     RentalService service = new RentalService();
-    return service.createRentalList();
+
+    return new StatementDTO(service.createRentals());
   }
 }
