@@ -64,39 +64,7 @@
     <section>
       <section class="app-component">
         <h2>VideoRental</h2>
-        <div id="app">
-          <p>レンタル記録 山田様 2019-07-02</p>
-          <table>
-            <thead>
-              <th>作品タイトル</th>
-              <th>レンタル日数</th>
-              <th>レンタル料金</th>
-              <th>付与ポイント</th>
-            </thead>
-            <tbody>
-              <tr>
-                <td>新作</td>
-                <td>3日間</td>
-                <td>900円</td>
-                <td>2ポイント</td>
-              </tr>
-              <tr>
-                <td>子供</td>
-                <td>2日間</td>
-                <td>150円</td>
-                <td>1ポイント</td>
-              </tr>
-              <tr>
-                <td>一般</td>
-                <td>1日間</td>
-                <td>200円</td>
-                <td>1ポイント</td>
-              </tr>
-            </tbody>
-          </table>
-          <p>合計金額 1250円</p>
-          <p>獲得ポイント 4ポイント</p>
-        </div>
+        <div id="app"></div>
         <div id="mocha"></div>
       </section>
     </section>
@@ -113,6 +81,46 @@
     </script>
 
     <script>
+      function renderTable(data) {
+        const header = (() => {
+          return `
+              <th>作品タイトル</th>
+              <th>レンタル日数</th>
+              <th>レンタル料金</th>
+              <th>付与ポイント</th>
+            `;
+        })();
+
+        const items = (data => {
+          let item = "<tr>";
+          data.details.forEach(
+            i =>
+              (item += `<td>${i.movie}</td>
+                          <td>${i.days}</td>
+                          <td>${i.amount}</td>
+                          <td>${i.point}</td>
+            </tr><tr>`)
+          );
+          item += "</tr>";
+
+          return item;
+        })(data);
+
+        document.querySelector("#app").innerHTML = `
+          <p>${data.header.title}</p>
+          <table>
+            <thead>
+            ${header}
+            </thead>
+            <tbody>
+            ${items}
+            </tbody>
+          </table>
+          <p>${data.footer.totalCharge}</p>
+          <p>${data.footer.totalPoints}</p>
+          `;
+      }
+
       fetch("http://localhost:8080/text")
         .then(response => {
           return response.text();
@@ -120,12 +128,14 @@
         .then(text => {
           console.log(text);
         });
+
       fetch("http://localhost:8080/json")
         .then(response => {
           return response.json();
         })
-        .then(json => {
-          console.log(json);
+        .then(data => {
+          renderTable(data);
+          console.log(data);
         });
     </script>
 
