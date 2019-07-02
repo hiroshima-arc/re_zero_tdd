@@ -14,4 +14,12 @@ public class DaysRented {
   public boolean lessThan(int days) {
     return value < days;
   }
+
+  public boolean within(int days) {
+    return value <= days;
+  }
+
+  public DaysRented minus(int days) {
+    return new DaysRented(value - days);
+  }
 }

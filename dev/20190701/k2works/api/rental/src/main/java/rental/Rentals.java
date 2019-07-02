@@ -1,6 +1,7 @@
 package rental;
 
-import basic.Total;
+import generics.Total;
+import rental.charge.Charge;
 import rental.customer.Customer;
 import rental.point.Point;
 import java.util.ArrayList;
@@ -22,22 +23,14 @@ public class Rentals {
     return rentals;
   }
 
-  public int totalAmount() {
-    int result = 0;
-    for (Rental each : rentals) {
-      int thisAmount = each.chargeAmount();
-      result += thisAmount;
-    }
-
-    return result;
+  public Charge totalAmount() {
+    Total<Rental, Charge> total = new Total<>(rentals, Rental::chargeAmount);
+    return total.sum();
   }
 
   public Point totalPoints() {
-    Total<Point> total = new Total<>();
-    for (Rental each : rentals) {
-      total.cumulate(each.frequentPoints());
-    }
-    return total.result();
+    Total<Rental, Point> total = new Total<>(rentals, Rental::frequentPoints);
+    return total.sum();
   }
 
   public String customerName() {

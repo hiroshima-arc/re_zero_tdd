@@ -14,13 +14,10 @@ public class Statement {
     String result = rentals.customerName() + "様のレンタル明細\n";
 
     for (Rental each : rentals.asList()) {
-      result +=
-        "\t" + each.movie().title() + "\t" + each.chargeAmount() + "円\n";
+      result += "\t" + each.movie().title() + "\t" + each.chargeAmount() + "\n";
     }
 
-    int totalAmount = rentals.totalAmount();
-
-    result += "合計金額 " + totalAmount + "円\n";
+    result += "合計金額 " + rentals.totalAmount() + "\n";
     result += "獲得ポイント " + rentals.totalPoints();
     return result;
   }

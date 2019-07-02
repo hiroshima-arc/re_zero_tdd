@@ -4,22 +4,26 @@ import rental.DaysRented;
 
 public enum ChargeType {
   NEW_RELEASE(0, 0, 300), REGULAR(200, 2, 150), CHILDREN(150, 3, 150);
-  int baseAmount = 0;
+  int baseCharge = 0;
   int baseDays = 0;
-  int amountPerDay = 0;
+  int chargePerDay;
 
-  private ChargeType(int baseAmount, int baseDays, int amountPerDay) {
-    this.baseAmount = baseAmount;
+  private ChargeType(int baseAmount, int baseDays, int chargePerDay) {
+    this.baseCharge = baseAmount;
     this.baseDays = baseDays;
-    this.amountPerDay = amountPerDay;
+    this.chargePerDay = chargePerDay;
   }
 
-  public int amount(DaysRented daysRented) {
-    return baseAmount + additionalAmount(daysRented.intValue());
+  public Charge amount(DaysRented daysRented) {
+    Charge base = new Charge(baseCharge);
+    return base.add(additionalAmount(daysRented));
   }
 
-  private int additionalAmount(int daysRented) {
-    if (daysRented > baseDays) return (daysRented - baseDays) * amountPerDay;
-    return 0;
+  private Charge additionalAmount(DaysRented daysRented) {
+    if (daysRented.within(baseDays)) return new Charge(0);
+
+    ChargePerDay perDay = new ChargePerDay(chargePerDay);
+    DaysRented additionalDays = daysRented.minus(baseDays);
+    return perDay.forDays(additionalDays);
   }
 }

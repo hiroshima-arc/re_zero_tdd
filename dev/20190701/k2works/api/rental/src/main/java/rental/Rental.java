@@ -1,5 +1,6 @@
 package rental;
 
+import rental.charge.Charge;
 import rental.charge.ChargeType;
 import rental.movie.Movie;
 import rental.point.Point;
@@ -18,7 +19,7 @@ public class Rental {
     return movie;
   }
 
-  public int chargeAmount() {
+  public Charge chargeAmount() {
     return chargeType().amount(daysRented);
   }
 

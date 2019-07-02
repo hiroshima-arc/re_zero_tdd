@@ -1,6 +1,6 @@
 package rental.point;
 
-import basic.Accumulate;
+import generics.Accumulate;
 
 public class Point implements Accumulate<Point> {
   int value;
