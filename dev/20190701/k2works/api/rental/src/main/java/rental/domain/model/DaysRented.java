@@ -1,4 +1,4 @@
-package rental;
+package rental.domain.model;
 
 public class DaysRented {
   int value;

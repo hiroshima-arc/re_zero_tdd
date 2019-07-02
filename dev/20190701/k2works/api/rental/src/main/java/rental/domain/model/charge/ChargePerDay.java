@@ -1,6 +1,6 @@
-package rental.charge;
+package rental.domain.model.charge;
 
-import rental.DaysRented;
+import rental.domain.model.DaysRented;
 
 public class ChargePerDay {
   Charge perDay;

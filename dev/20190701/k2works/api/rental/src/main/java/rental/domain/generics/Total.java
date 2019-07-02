@@ -1,4 +1,4 @@
-package generics;
+package rental.domain.generics;
 
 import java.util.List;
 import java.util.function.Function;

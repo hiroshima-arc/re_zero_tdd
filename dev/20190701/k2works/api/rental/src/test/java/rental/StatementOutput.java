@@ -3,10 +3,13 @@ package rental;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import rental.customer.Customer;
-import rental.movie.Movie;
-import rental.movie.MovieType;
-import rental.statement.Statement;
+import rental.domain.model.DaysRented;
+import rental.domain.model.Rental;
+import rental.domain.model.Rentals;
+import rental.domain.model.customer.Customer;
+import rental.domain.model.movie.Movie;
+import rental.domain.model.movie.MovieType;
+import rental.presentation.view.statement.Statement;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -1,12 +1,15 @@
-package rental;
+package rental.presentation.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import rental.customer.Customer;
-import rental.movie.Movie;
-import rental.movie.MovieType;
-import rental.statement.Statement;
+import rental.domain.model.DaysRented;
+import rental.domain.model.Rental;
+import rental.domain.model.Rentals;
+import rental.domain.model.customer.Customer;
+import rental.domain.model.movie.Movie;
+import rental.domain.model.movie.MovieType;
+import rental.presentation.view.statement.Statement;
 import java.time.LocalDate;
 
 @RestController

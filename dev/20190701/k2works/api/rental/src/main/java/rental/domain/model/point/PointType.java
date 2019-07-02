@@ -1,6 +1,6 @@
-package rental.point;
+package rental.domain.model.point;
 
-import rental.DaysRented;
+import rental.domain.model.DaysRented;
 
 public enum PointType {
   NEW_RELEASE, OLD_RELEASE;

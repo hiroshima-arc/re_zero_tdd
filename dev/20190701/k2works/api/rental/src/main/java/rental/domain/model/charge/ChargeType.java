@@ -1,6 +1,6 @@
-package rental.charge;
+package rental.domain.model.charge;
 
-import rental.DaysRented;
+import rental.domain.model.DaysRented;
 
 public enum ChargeType {
   NEW_RELEASE(0, 0, 300), REGULAR(200, 2, 150), CHILDREN(150, 3, 150);

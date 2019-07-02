@@ -1,4 +1,4 @@
-package rental.movie;
+package rental.domain.model.movie;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

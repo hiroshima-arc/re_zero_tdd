@@ -1,7 +1,7 @@
-package rental.statement;
+package rental.presentation.view.statement;
 
-import rental.Rental;
-import rental.Rentals;
+import rental.domain.model.Rental;
+import rental.domain.model.Rentals;
 
 public class Statement {
   Rentals rentals;

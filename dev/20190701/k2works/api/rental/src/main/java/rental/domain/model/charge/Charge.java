@@ -1,6 +1,6 @@
-package rental.charge;
+package rental.domain.model.charge;
 
-import generics.Accumulate;
+import rental.domain.generics.Accumulate;
 
 public class Charge implements Accumulate<Charge> {
   int value;

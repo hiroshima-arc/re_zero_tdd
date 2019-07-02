@@ -1,9 +1,9 @@
-package rental;
+package rental.domain.model;
 
-import generics.Total;
-import rental.charge.Charge;
-import rental.customer.Customer;
-import rental.point.Point;
+import rental.domain.generics.Total;
+import rental.domain.model.charge.Charge;
+import rental.domain.model.customer.Customer;
+import rental.domain.model.point.Point;
 import java.util.ArrayList;
 import java.util.List;
 

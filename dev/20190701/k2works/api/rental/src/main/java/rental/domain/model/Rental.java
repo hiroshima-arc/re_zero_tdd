@@ -1,10 +1,10 @@
-package rental;
+package rental.domain.model;
 
-import rental.charge.Charge;
-import rental.charge.ChargeType;
-import rental.movie.Movie;
-import rental.point.Point;
-import rental.point.PointType;
+import rental.domain.model.charge.Charge;
+import rental.domain.model.charge.ChargeType;
+import rental.domain.model.movie.Movie;
+import rental.domain.model.point.Point;
+import rental.domain.model.point.PointType;
 
 public class Rental {
   Movie movie;
