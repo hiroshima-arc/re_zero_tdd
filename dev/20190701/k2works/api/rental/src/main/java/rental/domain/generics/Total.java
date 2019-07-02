@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+/**
+* 集計
+* @param <Source>
+* @param <Target>
+*/
 public class Total<Source, Target extends Accumulate<Target>> {
   List<Source> source;
   Function<Source, Target> map;
