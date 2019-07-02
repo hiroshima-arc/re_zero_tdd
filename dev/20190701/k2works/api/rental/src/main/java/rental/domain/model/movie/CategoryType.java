@@ -1,5 +1,5 @@
 package rental.domain.model.movie;
 
-public enum MovieType {
+public enum CategoryType {
   Children, General;
 }
