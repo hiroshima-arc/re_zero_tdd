@@ -3,7 +3,7 @@ package rental.presentation.controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import rental.domain.model.DaysRented;
+import rental.domain.model.Days;
 import rental.domain.model.Rental;
 import rental.domain.model.Rentals;
 import rental.domain.model.customer.Customer;
@@ -34,9 +34,9 @@ public class StatementController {
       MovieType.General
     );
 
-    Rental newRelease = new Rental(newReleaseMovie, new DaysRented(3));
-    Rental children = new Rental(childrenMovie, new DaysRented(2));
-    Rental regular = new Rental(regularMovie, new DaysRented(1));
+    Rental newRelease = new Rental(newReleaseMovie, Days.of(3));
+    Rental children = new Rental(childrenMovie, Days.of(2));
+    Rental regular = new Rental(regularMovie, Days.of(1));
 
     Customer customer = new Customer("山田");
 

@@ -30,7 +30,7 @@ public class StatementControllerTest {
         content()
           .string(
             equalTo(
-              "山田様のレンタル明細\n\t新作\t900円\n\t子供\t150円\n\t一般\t200円\n合計金額 1250円\n獲得ポイント 4p"
+              "山田様のレンタル明細\n\t新作\t900円\n\t子供\t150円\n\t一般\t200円\n合計金額 1250円\n獲得ポイント 4ポイント"
             )
           )
       );

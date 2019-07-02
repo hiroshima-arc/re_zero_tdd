@@ -5,9 +5,12 @@ import rental.domain.generics.Accumulate;
 public class Point implements Accumulate<Point> {
   int value;
 
-  public Point(int value) {
+  Point(int value) {
     this.value = value;
   }
+
+  public static Point zero = new Point(0);
+  public static Point one = new Point(1);
 
   @Override
   public Point add(Point other) {
@@ -16,6 +19,6 @@ public class Point implements Accumulate<Point> {
 
   @Override
   public String toString() {
-    return value + "p";
+    return value + "ポイント";
   }
 }

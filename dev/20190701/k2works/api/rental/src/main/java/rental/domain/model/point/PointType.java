@@ -1,22 +1,20 @@
 package rental.domain.model.point;
 
-import rental.domain.model.DaysRented;
+import rental.domain.model.Days;
 
 public enum PointType {
-  NEW_RELEASE, OLD_RELEASE;
-  Point zero = new Point(0);
-  Point one = new Point(1);
+  NEW_RELEASE(Point.one), OLD_RELEASE(Point.zero);
+  Point bonusPoint;
 
-  Point basePoint = one;
-
-  public Point point(DaysRented daysRented) {
-    return basePoint.add(bonusPoint(daysRented));
+  PointType(Point bonusPoint) {
+    this.bonusPoint = bonusPoint;
   }
 
-  private Point bonusPoint(DaysRented daysRented) {
-    if (this != NEW_RELEASE) return zero;
-    if (daysRented.lessThan(2)) return zero;
+  Point basePoint = Point.one;
+  static Days bonusCriteria = Days.of(1);
 
-    return one;
+  public Point point(Days daysRented) {
+    if (daysRented.within(bonusCriteria)) return basePoint;
+    return basePoint.add(bonusPoint);
   }
 }

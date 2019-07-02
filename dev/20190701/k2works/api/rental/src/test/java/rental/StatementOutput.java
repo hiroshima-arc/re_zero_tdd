@@ -3,7 +3,7 @@ package rental;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import rental.domain.model.DaysRented;
+import rental.domain.model.Days;
 import rental.domain.model.Rental;
 import rental.domain.model.Rentals;
 import rental.domain.model.customer.Customer;
@@ -36,9 +36,9 @@ class StatementOutput {
       MovieType.General
     );
 
-    newRelease = new Rental(newReleaseMovie, new DaysRented(3));
-    children = new Rental(childrenMovie, new DaysRented(2));
-    regular = new Rental(regularMovie, new DaysRented(1));
+    newRelease = new Rental(newReleaseMovie, Days.of(3));
+    children = new Rental(childrenMovie, Days.of(2));
+    regular = new Rental(regularMovie, Days.of(1));
   }
 
   String output;
@@ -51,7 +51,7 @@ class StatementOutput {
         "\t子供\t150円\n" +
         "\t一般\t200円\n" +
         "合計金額 1250円\n" +
-        "獲得ポイント 4p";
+        "獲得ポイント 4ポイント";
   }
 
   @Test

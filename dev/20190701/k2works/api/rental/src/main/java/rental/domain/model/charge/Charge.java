@@ -18,4 +18,8 @@ public class Charge implements Accumulate<Charge> {
   public String toString() {
     return value + "円";
   }
+
+  public static Charge of(int value) {
+    return new Charge(value);
+  }
 }

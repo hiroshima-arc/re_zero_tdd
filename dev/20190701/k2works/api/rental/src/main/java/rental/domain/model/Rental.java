@@ -8,11 +8,11 @@ import rental.domain.model.point.PointType;
 
 public class Rental {
   Movie movie;
-  DaysRented daysRented;
+  Days days;
 
-  public Rental(Movie movie, DaysRented daysRented) {
+  public Rental(Movie movie, Days days) {
     this.movie = movie;
-    this.daysRented = daysRented;
+    this.days = days;
   }
 
   public Movie movie() {
@@ -20,7 +20,7 @@ public class Rental {
   }
 
   public Charge chargeAmount() {
-    return chargeType().amount(daysRented);
+    return chargeType().amount(days);
   }
 
   private ChargeType chargeType() {
@@ -34,7 +34,7 @@ public class Rental {
   }
 
   Point frequentPoints() {
-    return pointType().point(daysRented);
+    return pointType().point(days);
   }
 
   private PointType pointType() {
