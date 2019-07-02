@@ -11,11 +11,11 @@ import java.util.stream.Stream;
 */
 public class Total<Source, Target extends Accumulate<Target>> {
   List<Source> source;
-  Function<Source, Target> map;
+  Function<Source, Target> convertToValues;
 
-  public Total(List<Source> source, Function<Source, Target> map) {
-    this.source = source;
-    this.map = map;
+  public Total(List<Source> sources, Function<Source, Target> convertToValues) {
+    this.source = sources;
+    this.convertToValues = convertToValues;
   }
 
   public Target sum() {
@@ -27,6 +27,6 @@ public class Total<Source, Target extends Accumulate<Target>> {
   }
 
   private Stream<Target> targetStream() {
-    return source.stream().map(map);
+    return source.stream().map(convertToValues);
   }
 }
