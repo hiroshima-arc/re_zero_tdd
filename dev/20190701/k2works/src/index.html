@@ -121,7 +121,10 @@
           `;
       }
 
-      fetch("http://localhost:8080/text")
+      const textUrl = "http://localhost:8080/text";
+      const jsonUrl = "http://localhost:8080/json";
+
+      fetch(textUrl)
         .then(response => {
           return response.text();
         })
@@ -129,7 +132,7 @@
           console.log(text);
         });
 
-      fetch("http://localhost:8080/json")
+      fetch(jsonUrl)
         .then(response => {
           return response.json();
         })
