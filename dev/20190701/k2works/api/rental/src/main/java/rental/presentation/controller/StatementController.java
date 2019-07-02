@@ -8,7 +8,7 @@ import rental.domain.model.Rental;
 import rental.domain.model.Rentals;
 import rental.domain.model.customer.Customer;
 import rental.domain.model.movie.Movie;
-import rental.domain.model.movie.MovieType;
+import rental.domain.model.movie.ReleaseDate;
 import rental.presentation.view.statement.Statement;
 import java.time.LocalDate;
 
@@ -18,33 +18,25 @@ public class StatementController {
   @CrossOrigin
   @RequestMapping("/")
   public String index() {
-    Movie newReleaseMovie = new Movie(
-      "新作",
-      LocalDate.now().minusDays(10),
-      MovieType.Children
+    ReleaseDate tenDaysBefore = new ReleaseDate(LocalDate.now().minusDays(10));
+    ReleaseDate tenMonthsBefore = new ReleaseDate(
+      LocalDate.now().minusMonths(10)
     );
-    Movie childrenMovie = new Movie(
-      "子供",
-      LocalDate.now().minusDays(30 * 10),
-      MovieType.Children
-    );
-    Movie regularMovie = new Movie(
-      "一般",
-      LocalDate.now().minusDays(30 * 5),
-      MovieType.General
+    ReleaseDate fiveMonthBefore = new ReleaseDate(
+      LocalDate.now().minusMonths(5)
     );
 
-    Rental newRelease = new Rental(newReleaseMovie, Days.of(3));
-    Rental children = new Rental(childrenMovie, Days.of(2));
-    Rental regular = new Rental(regularMovie, Days.of(1));
+    Movie newOne = Movie.children("新作", tenDaysBefore);
+    Movie children = Movie.children("子供", tenMonthsBefore);
+    Movie regular = Movie.create("一般", fiveMonthBefore);
 
     Customer customer = new Customer("山田");
 
     Rentals rentals = new Rentals(customer);
 
-    rentals.addRental(newRelease);
-    rentals.addRental(children);
-    rentals.addRental(regular);
+    rentals.addRental(new Rental(newOne, Days.of(3)));
+    rentals.addRental(new Rental(children, Days.of(2)));
+    rentals.addRental(new Rental(regular, Days.of(1)));
 
     Statement statement = new Statement(rentals);
 

@@ -1,29 +1,35 @@
 package rental.domain.model.movie;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-
 public class Movie {
   String title;
 
-  LocalDate releaseDate;
+  ReleaseDate releaseDate;
   MovieType type;
 
-  public Movie(String title, LocalDate releaseDate, MovieType type) {
+  public Movie(String title, ReleaseDate releaseDate, MovieType type) {
     this.title = title;
     this.releaseDate = releaseDate;
     this.type = type;
   }
 
-  public long daysFromRelease() {
-    return ChronoUnit.DAYS.between(releaseDate, LocalDate.now());
+  public static Movie children(String title, ReleaseDate releaseDate) {
+    return new Movie(title, releaseDate, MovieType.Children);
+  }
+
+  public static Movie create(String title, ReleaseDate releaseDate) {
+    return new Movie(title, releaseDate, MovieType.General);
   }
 
   public boolean forChildre() {
     return type == MovieType.Children;
   }
 
-  public String title() {
+  public boolean isNewRelease() {
+    return releaseDate.isNewRelease();
+  }
+
+  @Override
+  public String toString() {
     return title;
   }
 }
