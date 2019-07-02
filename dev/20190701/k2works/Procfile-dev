@@ -1,0 +1,3 @@
+backend: npm run app:backend
+backend_watch: npm run watch:backend
+report: npm run test:report
