@@ -23,12 +23,12 @@ public class Rental {
     return days;
   }
 
-  public Charge chargeAmount() {
+  public Charge amount() {
     ChargeType type = ChargeType.of(movie);
     return type.amount(days);
   }
 
-  public Point frequentPoints() {
+  public Point points() {
     PointType type = PointType.of(movie);
     return type.point(days);
   }

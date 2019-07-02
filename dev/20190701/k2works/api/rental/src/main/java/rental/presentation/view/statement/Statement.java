@@ -31,8 +31,8 @@ public class Statement {
           "%s\t%s\t%s\t%s\n",
           each.movie(),
           each.days(),
-          each.chargeAmount(),
-          each.frequentPoints()
+          each.amount(),
+          each.points()
         )
       );
     }
@@ -44,10 +44,10 @@ public class Statement {
   }
 
   private String totalPoints() {
-    return String.format("獲得ポイント %s", rentals.totalPoints());
+    return String.format("獲得ポイント %s", rentals.points());
   }
 
   private String totalCharge() {
-    return String.format("合計金額 %s", rentals.totalAmount());
+    return String.format("合計金額 %s", rentals.charge());
   }
 }

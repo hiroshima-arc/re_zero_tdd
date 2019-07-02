@@ -23,13 +23,13 @@ public class Rentals {
     return rentals;
   }
 
-  public Charge totalAmount() {
-    Total<Rental, Charge> total = new Total<>(rentals, Rental::chargeAmount);
+  public Charge charge() {
+    Total<Rental, Charge> total = new Total<>(rentals, Rental::amount);
     return total.sum();
   }
 
-  public Point totalPoints() {
-    Total<Rental, Point> total = new Total<>(rentals, Rental::frequentPoints);
+  public Point points() {
+    Total<Rental, Point> total = new Total<>(rentals, Rental::points);
     return total.sum();
   }
 
