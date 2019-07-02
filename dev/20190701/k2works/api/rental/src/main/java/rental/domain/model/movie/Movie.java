@@ -3,6 +3,18 @@ package rental.domain.model.movie;
 public class Movie {
   String title;
 
+  public String getTitle() {
+    return title;
+  }
+
+  public ReleaseDate getReleaseDate() {
+    return releaseDate;
+  }
+
+  public CategoryType getType() {
+    return type;
+  }
+
   ReleaseDate releaseDate;
   CategoryType type;
 

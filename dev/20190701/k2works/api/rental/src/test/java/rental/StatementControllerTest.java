@@ -24,7 +24,7 @@ public class StatementControllerTest {
   @Test
   public void getStatement() throws Exception {
     mvc.perform(
-      MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON)
+      MockMvcRequestBuilders.get("/text").accept(MediaType.APPLICATION_JSON)
     )
       .andExpect(status().isOk())
       .andExpect(
