@@ -78,3 +78,7 @@ gradle init --type java-application
 **[⬆ back to top](#構成)**
 
 ## 参照
+
+- [「リファクタリング」本、「最初の例」のリファクタリング](https://github.com/system-sekkei/rental-refactored)
+- [Javaアプリケーションのための練習プログラム集](https://github.com/k2works/etude_for_java/tree/master/docs)
+- [[フロントエンド] fetchを用いたAjax通信を行う](https://www.yoheim.net/blog.php?q=20170107)
