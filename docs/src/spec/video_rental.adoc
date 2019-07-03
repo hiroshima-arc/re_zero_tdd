@@ -20,6 +20,7 @@
 * [x] statementメソッドの分割、再配置
 * [x] amountForメソッドの移動
 * [x] レンタルポイント計算部分の抽出
+* [x] 一時変数の削除
 
 === ユースケース図
 [plantuml]
@@ -47,6 +48,8 @@ class Rental {
 }
 class Customer {
   statement()
+  getTotalCharge()
+  getTotalFrequentRenterPoints()
 }
 Movie "1"<-"*" Rental
 Rental "*"<-"1" Customer
@@ -57,12 +60,20 @@ Rental "*"<-"1" Customer
 ----
 -> aCustomer: statement
    activate aCustomer
-       aCustomer -> aCustomer :*[for all rental]
+       aCustomer -> aCustomer :getTotalCharge
        activate aCustomer
-           aCustomer -> aRental :getCharge
-           aRental -> aMovie :getPriceCode
-           aCustomer -> aRental :getFrequentRenterPoints
-           aRental -> aMovie :getPriceCode
+        aCustomer -> aRental :getCharge
+        activate aRental
+         aRental -> aMovie :getPriceCode
+        deactivate aRental
+       deactivate aCustomer
+
+       aCustomer -> aCustomer :getTotalFrequentRenterPoints
+       activate aCustomer
+        aCustomer -> aRental :getFrequentRenterPoints
+        activate aRental
+         aRental -> aMovie :getPriceCode
+        deactivate aRental
        deactivate aCustomer
    deactivate aCustomer
 ----
