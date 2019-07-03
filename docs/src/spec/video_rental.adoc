@@ -17,7 +17,8 @@
 === TODOリスト
 
 * [x] スモークテスト作成
-* [ ] statementメソッドの分割、再配置
+* [x] statementメソッドの分割、再配置
+* [x] amountForメソッドの移動
 
 === ユースケース図
 [plantuml]
