@@ -554,9 +554,7 @@ abstract class Price {
   abstract int getCharge(int daysRented);
 
   int getFrequentRenterPoints(int daysRented) {
-    if (
-      (getPriceCode() == Movie.NEW_RELEASE) &amp;&amp; daysRented &gt; 1
-    ) return 2; else return 1;
+    return 1;
   }
 }</pre>
 </div>
@@ -621,6 +619,10 @@ public class NewReleasePrice extends Price {
 
   int getCharge(int daysRented) {
     return daysRented * 300;
+  }
+
+  int getFrequentRenterPoints(int daysRented) {
+    return (daysRented &gt; 1) ? 2 : 1;
   }
 }</pre>
 </div>
@@ -871,7 +873,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 18:00:05 JST
+Last updated 2019-07-03 18:04:58 JST
 </div>
 </div>
 </body>
