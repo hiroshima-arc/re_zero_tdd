@@ -20,7 +20,6 @@ public class Customer {
   }
 
   public String statement() {
-    int totalAmount = 0;
     int frequentRenterPoints = 0;
     String result = getName() + "様のレンタル明細" + "\n";
     for (Rental each : _rentals) {
@@ -29,6 +28,7 @@ public class Customer {
       //この貸し出しに関する数値の表示
       result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "円\n";
     }
+    int totalAmount = 0;
     for (Rental each : _rentals) {
       totalAmount += each.getCharge();
     }
