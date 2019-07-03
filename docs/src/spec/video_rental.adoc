@@ -19,6 +19,7 @@
 * [x] スモークテスト作成
 * [x] statementメソッドの分割、再配置
 * [x] amountForメソッドの移動
+* [x] レンタルポイント計算部分の抽出
 
 === ユースケース図
 [plantuml]
@@ -42,6 +43,7 @@ class Movie {
 class Rental {
   daysRented:int
   getCharge()
+  getFrequentRenterPoints()
 }
 class Customer {
   statement()
@@ -57,9 +59,10 @@ Rental "*"<-"1" Customer
    activate aCustomer
        aCustomer -> aCustomer :*[for all rental]
        activate aCustomer
-           aCustomer -> aRental :getMovie
-           aCustomer -> aMovie :getPriceCode
-           aCustomer -> aRental :getDaysRented
+           aCustomer -> aRental :getCharge
+           aRental -> aMovie :getPriceCode
+           aCustomer -> aRental :getFrequentRenterPoints
+           aRental -> aMovie :getPriceCode
        deactivate aCustomer
    deactivate aCustomer
 ----
