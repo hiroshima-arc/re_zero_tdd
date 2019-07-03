@@ -16,12 +16,14 @@
 == 構成
 * <<anchor-1,HelloWorld>>
 * <<anchor-2,FizzBuzz>>
+* <<anchor-3,VideoRental>>
 
 == 詳細
 === link:./spec/hello_world.html[HelloWorld][[anchor-1]]
 === link:./spec/fizz_buzz.html[FizzBuzz][[anchor-2]]
 ==== link:./session/20181109.html[テストおじさん、襲来]
 ==== link:./session/20181116.html[見知らぬ、構造化プログラミング]
+=== link:./spec/video_rental.html[VideoRental][[anchor-3]]
 
 == 参照
 * http://asciidoctor.org/[Asciidoctor]
