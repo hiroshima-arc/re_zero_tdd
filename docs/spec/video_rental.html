@@ -604,16 +604,9 @@ public class Rental {
   }
 
   int getFrequentRenterPoints() {
-    int frequentRenterPoints = 0;
-
-    //レンタルポイントを加算
-    frequentRenterPoints++;
-
-    //新作を二日以上借りた場合はボーナスポイント
     if (
       (getMovie().getPriceCode() == Movie.NEW_RELEASE) &amp;&amp; getDaysRented() &gt; 1
-    ) frequentRenterPoints++;
-    return frequentRenterPoints;
+    ) return 2; else return 1;
   }
 }</pre>
 </div>
@@ -739,7 +732,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 15:02:24 JST
+Last updated 2019-07-03 15:04:58 JST
 </div>
 </div>
 </body>

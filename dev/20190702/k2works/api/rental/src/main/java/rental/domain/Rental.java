@@ -36,15 +36,8 @@ public class Rental {
   }
 
   int getFrequentRenterPoints() {
-    int frequentRenterPoints = 0;
-
-    //レンタルポイントを加算
-    frequentRenterPoints++;
-
-    //新作を二日以上借りた場合はボーナスポイント
     if (
       (getMovie().getPriceCode() == Movie.NEW_RELEASE) && getDaysRented() > 1
-    ) frequentRenterPoints++;
-    return frequentRenterPoints;
+    ) return 2; else return 1;
   }
 }
