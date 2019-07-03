@@ -28,10 +28,9 @@ public class Customer {
       //この貸し出しに関する数値の表示
       result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "円\n";
     }
-    int totalAmount = getTotalAmount();
 
     //フッタ部分の追加
-    result += "合計金額 " + totalAmount + "円\n";
+    result += "合計金額 " + getTotalAmount() + "円\n";
     result += "獲得ポイント " + frequentRenterPoints + "ポイント";
     return result;
   }
