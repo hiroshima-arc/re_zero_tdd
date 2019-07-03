@@ -25,21 +25,19 @@ public class Movie {
     return _title;
   }
 
-  int getCharge(Rental rental) {
+  int getCharge(int daysRented) {
     int result = 0;
-    switch (rental.getMovie().getPriceCode()) {
+    switch (getPriceCode()) {
       case REGULAR:
         result += 200;
-        if (rental.getDaysRented() > 2) result +=
-          (rental.getDaysRented() - 2) * 150;
+        if (daysRented > 2) result += (daysRented - 2) * 150;
         break;
       case NEW_RELEASE:
-        result += rental.getDaysRented() * 300;
+        result += daysRented * 300;
         break;
       case CHILDREN:
         result += 150;
-        if (rental.getDaysRented() > 3) result +=
-          (rental.getDaysRented() - 3) * 150;
+        if (daysRented > 3) result += (daysRented - 3) * 150;
         break;
     }
     return result;
