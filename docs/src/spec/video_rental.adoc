@@ -21,7 +21,7 @@
 * [x] amountForメソッドの移動
 * [x] レンタルポイント計算部分の抽出
 * [x] 一時変数の削除
-* [ ] 料金計算の条件文をポリモーフィズムに置き換える
+* [x] 料金計算の条件文をポリモーフィズムに置き換える
 
 === ユースケース図
 [plantuml]
@@ -39,22 +39,24 @@ rectangle VedioRental {
 === クラス図
 [plantuml]
 ----
-class Movie {
-  priceCode:int
-  getCharge()
+class Price {
+  getCharge(days: int)
   getFrequentRenterPoints(days: int)
 }
-class Price {
-  getCharge()
-}
 class RegularPrice {
-  getCharge()
+  getCharge(days: int)
 }
 class ChildrenPrice {
-  getCharge()
+  getCharge(days: int)
 }
 class NewReleasePrice {
+  getCharge(days: int)
+  getFrequentRenterPoints(days: int)
+}
+class Movie {
+  title: String
   getCharge()
+  getFrequentRenterPoints(days: int)
 }
 class Rental {
   daysRented:int
@@ -62,13 +64,14 @@ class Rental {
   getFrequentRenterPoints()
 }
 class Customer {
+  name: String
   statement()
   htmlStatement()
   getTotalCharge()
   getTotalFrequentRenterPoints()
 }
-Movie "1"<-"*" Rental
-Rental "*"<-"1" Customer
+Movie "1"<- Rental
+Rental "*"<- Customer
 Price "1"<- Movie
 Price <|-- RegularPrice
 Price <|-- ChildrenPrice
@@ -82,17 +85,23 @@ Price <|-- NewReleasePrice
    activate aCustomer
        aCustomer -> aCustomer :getTotalCharge
        activate aCustomer
-        aCustomer -> aRental :getCharge
+        aCustomer -> aRental :*[for all rentals] getCharge
         activate aRental
-         aRental -> aMovie :getPriceCode
+         aRental -> aMovie :getCharge(days)
+         activate aPrice
+          aMovie -> aPrice :getCharge(days)
+         deactivate aPrice
         deactivate aRental
        deactivate aCustomer
 
        aCustomer -> aCustomer :getTotalFrequentRenterPoints
        activate aCustomer
-        aCustomer -> aRental :getFrequentRenterPoints
+        aCustomer -> aRental :*[for all rentals] getFrequentRenterPoints
         activate aRental
-         aRental -> aMovie :getPriceCode
+         aRental -> aMovie :getFrequentRenterPoints(days)
+         activate aPrice
+          aMovie -> aPrice :getFrequentRenterPoints(days)
+         deactivate aPrice
         deactivate aRental
        deactivate aCustomer
    deactivate aCustomer

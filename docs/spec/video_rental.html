@@ -507,7 +507,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>&#10003; 一時変数の削除</p>
 </li>
 <li>
-<p>&#10063; 料金計算の条件文をポリモーフィズムに置き換える</p>
+<p>&#10003; 料金計算の条件文をポリモーフィズムに置き換える</p>
 </li>
 </ul>
 </div>
@@ -524,7 +524,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_クラス図">2.3. クラス図</h3>
 <div class="imageblock">
 <div class="content">
-<img src="diag-39052d82b02b00ee1f7dd0642508f0e5.png" alt="diag 39052d82b02b00ee1f7dd0642508f0e5" width="884" height="238">
+<img src="diag-ba8423211fe68d04afb0048b976bfae3.png" alt="diag ba8423211fe68d04afb0048b976bfae3" width="968" height="264">
 </div>
 </div>
 </div>
@@ -532,7 +532,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_シーケンス図">2.4. シーケンス図</h3>
 <div class="imageblock">
 <div class="content">
-<img src="diag-dfd0dd8850c3dca5f4de28b063d210e6.png" alt="diag dfd0dd8850c3dca5f4de28b063d210e6" width="450" height="329">
+<img src="diag-018309fe98a870ba01ced1f8d4c8f541.png" alt="diag 018309fe98a870ba01ced1f8d4c8f541" width="860" height="387">
 </div>
 </div>
 </div>
@@ -640,7 +640,7 @@ public class Movie {
   public static final int NEW_RELEASE = 1;
 
   private String _title;
-  Price _price;
+  private Price _price;
 
   public Movie(String title, int priceCode) {
     _title = title;
@@ -670,6 +670,14 @@ public class Movie {
   public String getTitle() {
     return _title;
   }
+
+  public int getCharge(int daysRented) {
+    return _price.getCharge(daysRented);
+  }
+
+  public int getFrequentRenterPoints(int daysRented) {
+    return _price.getFrequentRenterPoints(daysRented);
+  }
 }</pre>
 </div>
 </div>
@@ -698,11 +706,11 @@ public class Rental {
   }
 
   int getCharge() {
-    return _movie._price.getCharge(_daysRented);
+    return _movie.getCharge(_daysRented);
   }
 
   int getFrequentRenterPoints() {
-    return _movie._price.getFrequentRenterPoints(_daysRented);
+    return _movie.getFrequentRenterPoints(_daysRented);
   }
 }</pre>
 </div>
@@ -873,7 +881,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 18:04:58 JST
+Last updated 2019-07-03 18:22:01 JST
 </div>
 </div>
 </body>

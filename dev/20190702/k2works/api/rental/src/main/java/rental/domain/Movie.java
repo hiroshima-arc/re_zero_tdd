@@ -6,7 +6,7 @@ public class Movie {
   public static final int NEW_RELEASE = 1;
 
   private String _title;
-  Price _price;
+  private Price _price;
 
   public Movie(String title, int priceCode) {
     _title = title;
@@ -35,5 +35,13 @@ public class Movie {
 
   public String getTitle() {
     return _title;
+  }
+
+  public int getCharge(int daysRented) {
+    return _price.getCharge(daysRented);
+  }
+
+  public int getFrequentRenterPoints(int daysRented) {
+    return _price.getFrequentRenterPoints(daysRented);
   }
 }
