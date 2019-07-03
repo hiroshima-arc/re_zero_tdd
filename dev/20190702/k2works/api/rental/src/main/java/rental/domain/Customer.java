@@ -24,14 +24,7 @@ public class Customer {
     int frequentRenterPoints = 0;
     String result = getName() + "様のレンタル明細" + "\n";
     for (Rental each : _rentals) {
-      //レンタルポイントを加算
-      frequentRenterPoints++;
-
-      //新作を二日以上借りた場合はボーナスポイント
-      if (
-        (each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-        each.getDaysRented() > 1
-      ) frequentRenterPoints++;
+      frequentRenterPoints += getFrequentRenterPoints(each);
 
       //この貸し出しに関する数値の表示
       result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "円\n";
@@ -42,5 +35,19 @@ public class Customer {
     result += "合計金額 " + totalAmount + "円\n";
     result += "獲得ポイント " + frequentRenterPoints + "ポイント";
     return result;
+  }
+
+  private int getFrequentRenterPoints(Rental each) {
+    int frequentRenterPoints = 0;
+
+    //レンタルポイントを加算
+    frequentRenterPoints++;
+
+    //新作を二日以上借りた場合はボーナスポイント
+    if (
+      (each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
+      each.getDaysRented() > 1
+    ) frequentRenterPoints++;
+    return frequentRenterPoints;
   }
 }
