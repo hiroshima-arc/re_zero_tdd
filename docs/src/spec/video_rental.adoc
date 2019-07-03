@@ -61,5 +61,20 @@ Rental "*"<-"1" Customer
 
 == 開発
 
+=== Movie.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Movie.java[]
+----
+
+=== Rental.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Rental.java[]
+----
+
+=== Customer.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Customer.java[]
+----
+
 == 参照
 * PlantUML[http://plantuml.com]
