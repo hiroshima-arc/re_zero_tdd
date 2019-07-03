@@ -41,8 +41,20 @@ rectangle VedioRental {
 ----
 class Movie {
   priceCode:int
-  getCharge(days: int)
+  getCharge()
   getFrequentRenterPoints(days: int)
+}
+class Price {
+  getCharge()
+}
+class RegularPrice {
+  getCharge()
+}
+class ChildrenPrice {
+  getCharge()
+}
+class NewReleasePrice {
+  getCharge()
 }
 class Rental {
   daysRented:int
@@ -57,6 +69,10 @@ class Customer {
 }
 Movie "1"<-"*" Rental
 Rental "*"<-"1" Customer
+Price "1"<- Movie
+Price <|-- RegularPrice
+Price <|-- ChildrenPrice
+Price <|-- NewReleasePrice
 ----
 
 === シーケンス図
@@ -87,6 +103,26 @@ Rental "*"<-"1" Customer
 === Movie.java
 ----
 include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Movie.java[]
+----
+
+=== Price.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Price.java[]
+----
+
+=== RegularPrice.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/RegularPrice.java[]
+----
+
+=== ChildrenPrice.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/ChildrenPrice.java[]
+----
+
+=== NewReleasePrice.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/NewReleasePrice.java[]
 ----
 
 === Rental.java

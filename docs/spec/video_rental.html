@@ -443,9 +443,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_開発">3. 開発</a>
 <ul class="sectlevel2">
 <li><a href="#_movie_java">3.1. Movie.java</a></li>
-<li><a href="#_rental_java">3.2. Rental.java</a></li>
-<li><a href="#_customer_java">3.3. Customer.java</a></li>
-<li><a href="#_statementoutput_java">3.4. StatementOutput.java</a></li>
+<li><a href="#_price_java">3.2. Price.java</a></li>
+<li><a href="#_regularprice_java">3.3. RegularPrice.java</a></li>
+<li><a href="#_childrenprice_java">3.4. ChildrenPrice.java</a></li>
+<li><a href="#_newreleaseprice_java">3.5. NewReleasePrice.java</a></li>
+<li><a href="#_rental_java">3.6. Rental.java</a></li>
+<li><a href="#_customer_java">3.7. Customer.java</a></li>
+<li><a href="#_statementoutput_java">3.8. StatementOutput.java</a></li>
 </ul>
 </li>
 <li><a href="#_参照">4. 参照</a></li>
@@ -520,7 +524,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_クラス図">2.3. クラス図</h3>
 <div class="imageblock">
 <div class="content">
-<img src="diag-59aee0b2903f3be5b3f5181801ac9106.png" alt="diag 59aee0b2903f3be5b3f5181801ac9106" width="618" height="117">
+<img src="diag-39052d82b02b00ee1f7dd0642508f0e5.png" alt="diag 39052d82b02b00ee1f7dd0642508f0e5" width="884" height="238">
 </div>
 </div>
 </div>
@@ -550,18 +554,31 @@ public class Movie {
 
   private String _title;
   private int _priceCode;
+  private Price _price;
 
   public Movie(String title, int priceCode) {
     _title = title;
-    _priceCode = priceCode;
+    setPriceCode(priceCode);
   }
 
   public int getPriceCode() {
-    return _priceCode;
+    return _price.getPriceCode();
   }
 
   public void setPriceCode(int arg) {
-    _priceCode = arg;
+    switch (arg) {
+      case REGULAR:
+        _price = new RegularPrice();
+        break;
+      case CHILDREN:
+        _price = new ChildrenPrice();
+        break;
+      case NEW_RELEASE:
+        _price = new NewReleasePrice();
+        break;
+      default:
+        throw new IllegalArgumentException("不正な料金コード");
+    }
   }
 
   public String getTitle() {
@@ -596,7 +613,68 @@ public class Movie {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_rental_java">3.2. Rental.java</h3>
+<h3 id="_price_java">3.2. Price.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+abstract class Price {
+
+  abstract int getPriceCode();
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_regularprice_java">3.3. RegularPrice.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class RegularPrice extends Price {
+
+  @Override
+  int getPriceCode() {
+    return Movie.REGULAR;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_childrenprice_java">3.4. ChildrenPrice.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class ChildrenPrice extends Price {
+
+  @Override
+  int getPriceCode() {
+    return Movie.CHILDREN;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_newreleaseprice_java">3.5. NewReleasePrice.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class NewReleasePrice extends Price {
+
+  @Override
+  int getPriceCode() {
+    return Movie.NEW_RELEASE;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rental_java">3.6. Rental.java</h3>
 <div class="listingblock">
 <div class="content">
 <pre>package rental.domain;
@@ -630,7 +708,7 @@ public class Rental {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_customer_java">3.3. Customer.java</h3>
+<h3 id="_customer_java">3.7. Customer.java</h3>
 <div class="listingblock">
 <div class="content">
 <pre>package rental.domain;
@@ -701,7 +779,7 @@ public class Customer {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_statementoutput_java">3.4. StatementOutput.java</h3>
+<h3 id="_statementoutput_java">3.8. StatementOutput.java</h3>
 <div class="listingblock">
 <div class="content">
 <pre>package rental;
@@ -794,7 +872,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 17:16:41 JST
+Last updated 2019-07-03 17:42:33 JST
 </div>
 </div>
 </body>
