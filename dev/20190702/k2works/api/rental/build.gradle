@@ -2,21 +2,26 @@ plugins {
   id 'org.springframework.boot' version '2.1.1.RELEASE'
 }
 apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
 
 repositories {
   jcenter()
   mavenLocal()
   mavenCentral()
 }
-
+configurations {
+  developmentOnly
+  runtimeClasspath {
+    extendsFrom developmentOnly
+  }
+}
 dependencies {
   compile (
           'org.springframework.boot:spring-boot-starter-web:2.1.1.RELEASE',
           'com.amazonaws.serverless:aws-serverless-java-container-spring:[1.0,)',
           'io.symphonia:lambda-logging:1.0.1'
   )
-
-  testCompile("org.springframework.boot:spring-boot-starter-test")
+  developmentOnly("org.springframework.boot:spring-boot-devtools")
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
   testCompileOnly 'junit:junit:4.12'
@@ -34,3 +39,9 @@ task buildZip(type: Zip) {
 }
 
 build.dependsOn buildZip
+
+apply plugin: 'pmd'
+
+pmd {
+  ignoreFailures = true
+}

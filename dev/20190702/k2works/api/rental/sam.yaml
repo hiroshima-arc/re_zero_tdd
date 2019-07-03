@@ -25,6 +25,6 @@ Resources:
 Outputs:
   RentalApi:
     Description: URL for application
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/statement'
     Export:
       Name: RentalApi

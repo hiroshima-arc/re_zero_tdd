@@ -16,6 +16,8 @@
 
 === TODOリスト
 
+* [x] スモークテスト作成
+
 === ユースケース図
 [plantuml]
 ----
@@ -76,5 +78,10 @@ include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Re
 include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Customer.java[]
 ----
 
+=== StatementOutput.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/test/java/rental/StatementOutput.java[]
+----
+
 == 参照
-* PlantUML[http://plantuml.com]
+* http://plantuml.com[PlantUML]

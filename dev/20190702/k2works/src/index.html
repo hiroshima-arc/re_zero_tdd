@@ -81,6 +81,19 @@
     </script>
 
     <script>
+      const statementUrl = "http://localhost:8080/statement";
+      fetch(statementUrl)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          document.querySelector(
+            "#app"
+          ).innerHTML = `<pre>${data.statement}</pre>`;
+        });
+    </script>
+
+    <script>
       mocha.checkLeaks();
       mocha.globals(["jQuery"]);
       mocha.run();
