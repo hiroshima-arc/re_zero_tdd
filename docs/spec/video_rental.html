@@ -508,7 +508,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_クラス図">2.3. クラス図</h3>
 <div class="imageblock">
 <div class="content">
-<img src="diag-c2b652549b1ab8aac3ff834c04ef4406.png" alt="diag c2b652549b1ab8aac3ff834c04ef4406" width="348" height="78">
+<img src="diag-ffe02ceab84736228470e2dec25f785a.png" alt="diag ffe02ceab84736228470e2dec25f785a" width="348" height="91">
 </div>
 </div>
 </div>
@@ -581,6 +581,24 @@ public class Rental {
   public Movie getMovie() {
     return _movie;
   }
+
+  int getCharge() {
+    int result = 0;
+    switch (getMovie().getPriceCode()) {
+      case Movie.REGULAR:
+        result += 200;
+        if (getDaysRented() &gt; 2) result += (getDaysRented() - 2) * 150;
+        break;
+      case Movie.NEW_RELEASE:
+        result += getDaysRented() * 300;
+        break;
+      case Movie.CHILDREN:
+        result += 150;
+        if (getDaysRented() &gt; 3) result += (getDaysRented() - 3) * 150;
+        break;
+    }
+    return result;
+  }
 }</pre>
 </div>
 </div>
@@ -617,7 +635,7 @@ public class Customer {
     for (Rental each : _rentals) {
       int thisAmount = 0;
 
-      thisAmount = amountFor(each);
+      thisAmount = each.getCharge();
 
       //レンタルポイントを加算
       frequentRenterPoints++;
@@ -636,26 +654,6 @@ public class Customer {
     //フッタ部分の追加
     result += "合計金額 " + totalAmount + "円\n";
     result += "獲得ポイント " + frequentRenterPoints + "ポイント";
-    return result;
-  }
-
-  private int amountFor(Rental aRental) {
-    int result = 0;
-    switch (aRental.getMovie().getPriceCode()) {
-      case Movie.REGULAR:
-        result += 200;
-        if (aRental.getDaysRented() &gt; 2) result +=
-          (aRental.getDaysRented() - 2) * 150;
-        break;
-      case Movie.NEW_RELEASE:
-        result += aRental.getDaysRented() * 300;
-        break;
-      case Movie.CHILDREN:
-        result += 150;
-        if (aRental.getDaysRented() &gt; 3) result +=
-          (aRental.getDaysRented() - 3) * 150;
-        break;
-    }
     return result;
   }
 }</pre>
@@ -736,7 +734,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 14:38:22 JST
+Last updated 2019-07-03 14:46:34 JST
 </div>
 </div>
 </body>
