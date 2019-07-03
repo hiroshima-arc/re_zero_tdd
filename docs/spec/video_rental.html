@@ -490,6 +490,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p>&#10003; スモークテスト作成</p>
 </li>
+<li>
+<p>&#10063; statementメソッドの分割、再配置</p>
+</li>
 </ul>
 </div>
 </div>
@@ -614,22 +617,7 @@ public class Customer {
     for (Rental each : _rentals) {
       int thisAmount = 0;
 
-      //一行ごとに金額を計算
-      switch (each.getMovie().getPriceCode()) {
-        case Movie.REGULAR:
-          thisAmount += 200;
-          if (each.getDaysRented() &gt; 2) thisAmount +=
-            (each.getDaysRented() - 2) * 150;
-          break;
-        case Movie.NEW_RELEASE:
-          thisAmount += each.getDaysRented() * 300;
-          break;
-        case Movie.CHILDREN:
-          thisAmount += 150;
-          if (each.getDaysRented() &gt; 3) thisAmount +=
-            (each.getDaysRented() - 3) * 150;
-          break;
-      }
+      thisAmount = amountFor(each);
 
       //レンタルポイントを加算
       frequentRenterPoints++;
@@ -649,6 +637,26 @@ public class Customer {
     result += "合計金額 " + totalAmount + "円\n";
     result += "獲得ポイント " + frequentRenterPoints + "ポイント";
     return result;
+  }
+
+  private int amountFor(Rental each) {
+    int thisAmount = 0;
+    switch (each.getMovie().getPriceCode()) {
+      case Movie.REGULAR:
+        thisAmount += 200;
+        if (each.getDaysRented() &gt; 2) thisAmount +=
+          (each.getDaysRented() - 2) * 150;
+        break;
+      case Movie.NEW_RELEASE:
+        thisAmount += each.getDaysRented() * 300;
+        break;
+      case Movie.CHILDREN:
+        thisAmount += 150;
+        if (each.getDaysRented() &gt; 3) thisAmount +=
+          (each.getDaysRented() - 3) * 150;
+        break;
+    }
+    return thisAmount;
   }
 }</pre>
 </div>
@@ -728,7 +736,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 14:21:53 JST
+Last updated 2019-07-03 14:32:27 JST
 </div>
 </div>
 </body>
