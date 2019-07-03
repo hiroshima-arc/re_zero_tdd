@@ -23,7 +23,7 @@ public class Customer {
     String result = getName() + "様のレンタル明細" + "\n";
     for (Rental each : _rentals) {
       //この貸し出しに関する数値の表示
-      result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "円\n";
+      result += "\t" + each.getMovie().getTitle() + "\t" + each._movie.getCharge(each) + "円\n";
     }
 
     //フッタ部分の追加
@@ -36,7 +36,7 @@ public class Customer {
     String result = "<H1><EM>" + getName() + "</EM>様のレンタル明細</H1>\n";
     for (Rental each : _rentals) {
       //この貸し出しに関する数値の表示
-      result += each.getMovie().getTitle() + ": " + each.getCharge() + "円<BR>\n";
+      result += each.getMovie().getTitle() + ": " + each._movie.getCharge(each) + "円<BR>\n";
     }
 
     //フッタ部分の追加
@@ -57,7 +57,7 @@ public class Customer {
   private int getTotalAmount() {
     int totalAmount = 0;
     for (Rental each : _rentals) {
-      totalAmount += each.getCharge();
+      totalAmount += each._movie.getCharge(each);
     }
     return totalAmount;
   }

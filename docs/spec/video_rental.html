@@ -502,6 +502,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p>&#10003; 一時変数の削除</p>
 </li>
+<li>
+<p>&#10063; 料金計算の条件文をポリモーフィズムに置き換える</p>
+</li>
 </ul>
 </div>
 </div>
@@ -564,6 +567,26 @@ public class Movie {
   public String getTitle() {
     return _title;
   }
+
+  int getCharge(Rental rental) {
+    int result = 0;
+    switch (rental.getMovie().getPriceCode()) {
+      case REGULAR:
+        result += 200;
+        if (rental.getDaysRented() &gt; 2) result +=
+          (rental.getDaysRented() - 2) * 150;
+        break;
+      case NEW_RELEASE:
+        result += rental.getDaysRented() * 300;
+        break;
+      case CHILDREN:
+        result += 150;
+        if (rental.getDaysRented() &gt; 3) result +=
+          (rental.getDaysRented() - 3) * 150;
+        break;
+    }
+    return result;
+  }
 }</pre>
 </div>
 </div>
@@ -575,7 +598,7 @@ public class Movie {
 <pre>package rental.domain;
 
 public class Rental {
-  private Movie _movie;
+  Movie _movie;
   private int _daysRented;
 
   public Rental(Movie movie, int daysRented) {
@@ -589,24 +612,6 @@ public class Rental {
 
   public Movie getMovie() {
     return _movie;
-  }
-
-  int getCharge() {
-    int result = 0;
-    switch (getMovie().getPriceCode()) {
-      case Movie.REGULAR:
-        result += 200;
-        if (getDaysRented() &gt; 2) result += (getDaysRented() - 2) * 150;
-        break;
-      case Movie.NEW_RELEASE:
-        result += getDaysRented() * 300;
-        break;
-      case Movie.CHILDREN:
-        result += 150;
-        if (getDaysRented() &gt; 3) result += (getDaysRented() - 3) * 150;
-        break;
-    }
-    return result;
   }
 
   int getFrequentRenterPoints() {
@@ -647,7 +652,7 @@ public class Customer {
     String result = getName() + "様のレンタル明細" + "\n";
     for (Rental each : _rentals) {
       //この貸し出しに関する数値の表示
-      result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "円\n";
+      result += "\t" + each.getMovie().getTitle() + "\t" + each._movie.getCharge(each) + "円\n";
     }
 
     //フッタ部分の追加
@@ -660,7 +665,7 @@ public class Customer {
     String result = "&lt;H1&gt;&lt;EM&gt;" + getName() + "&lt;/EM&gt;様のレンタル明細&lt;/H1&gt;\n";
     for (Rental each : _rentals) {
       //この貸し出しに関する数値の表示
-      result += each.getMovie().getTitle() + ": " + each.getCharge() + "円&lt;BR&gt;\n";
+      result += each.getMovie().getTitle() + ": " + each._movie.getCharge(each) + "円&lt;BR&gt;\n";
     }
 
     //フッタ部分の追加
@@ -681,7 +686,7 @@ public class Customer {
   private int getTotalAmount() {
     int totalAmount = 0;
     for (Rental each : _rentals) {
-      totalAmount += each.getCharge();
+      totalAmount += each._movie.getCharge(each);
     }
     return totalAmount;
   }
@@ -783,7 +788,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 16:54:09 JST
+Last updated 2019-07-03 17:05:56 JST
 </div>
 </div>
 </body>
