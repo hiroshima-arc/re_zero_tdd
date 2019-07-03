@@ -442,11 +442,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_開発">3. 開発</a>
 <ul class="sectlevel2">
-<li><a href="#_movie_java">3.1. Movie.java</a></li>
-<li><a href="#_price_java">3.2. Price.java</a></li>
-<li><a href="#_regularprice_java">3.3. RegularPrice.java</a></li>
-<li><a href="#_childrenprice_java">3.4. ChildrenPrice.java</a></li>
-<li><a href="#_newreleaseprice_java">3.5. NewReleasePrice.java</a></li>
+<li><a href="#_price_java">3.1. Price.java</a></li>
+<li><a href="#_regularprice_java">3.2. RegularPrice.java</a></li>
+<li><a href="#_childrenprice_java">3.3. ChildrenPrice.java</a></li>
+<li><a href="#_newreleaseprice_java">3.4. NewReleasePrice.java</a></li>
+<li><a href="#_movie_java">3.5. Movie.java</a></li>
 <li><a href="#_rental_java">3.6. Rental.java</a></li>
 <li><a href="#_customer_java">3.7. Customer.java</a></li>
 <li><a href="#_statementoutput_java">3.8. StatementOutput.java</a></li>
@@ -542,7 +542,86 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_開発">3. 開発</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_movie_java">3.1. Movie.java</h3>
+<h3 id="_price_java">3.1. Price.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+abstract class Price {
+
+  abstract int getPriceCode();
+
+  int getCharge(int daysRented) {
+    int result = 0;
+    switch (getPriceCode()) {
+      case Movie.REGULAR:
+        result += 200;
+        if (daysRented &gt; 2) result += (daysRented - 2) * 150;
+        break;
+      case Movie.NEW_RELEASE:
+        result += daysRented * 300;
+        break;
+      case Movie.CHILDREN:
+        result += 150;
+        if (daysRented &gt; 3) result += (daysRented - 3) * 150;
+        break;
+    }
+    return result;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_regularprice_java">3.2. RegularPrice.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class RegularPrice extends Price {
+
+  @Override
+  int getPriceCode() {
+    return Movie.REGULAR;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_childrenprice_java">3.3. ChildrenPrice.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class ChildrenPrice extends Price {
+
+  @Override
+  int getPriceCode() {
+    return Movie.CHILDREN;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_newreleaseprice_java">3.4. NewReleasePrice.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class NewReleasePrice extends Price {
+
+  @Override
+  int getPriceCode() {
+    return Movie.NEW_RELEASE;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_movie_java">3.5. Movie.java</h3>
 <div class="listingblock">
 <div class="content">
 <pre>package rental.domain;
@@ -554,7 +633,7 @@ public class Movie {
 
   private String _title;
   private int _priceCode;
-  private Price _price;
+  Price _price;
 
   public Movie(String title, int priceCode) {
     _title = title;
@@ -585,89 +664,10 @@ public class Movie {
     return _title;
   }
 
-  int getCharge(int daysRented) {
-    int result = 0;
-    switch (getPriceCode()) {
-      case REGULAR:
-        result += 200;
-        if (daysRented &gt; 2) result += (daysRented - 2) * 150;
-        break;
-      case NEW_RELEASE:
-        result += daysRented * 300;
-        break;
-      case CHILDREN:
-        result += 150;
-        if (daysRented &gt; 3) result += (daysRented - 3) * 150;
-        break;
-    }
-    return result;
-  }
-
   int getFrequentRenterPoints(int daysRented) {
     if (
       (getPriceCode() == NEW_RELEASE) &amp;&amp; daysRented &gt; 1
     ) return 2; else return 1;
-  }
-}</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_price_java">3.2. Price.java</h3>
-<div class="listingblock">
-<div class="content">
-<pre>package rental.domain;
-
-abstract class Price {
-
-  abstract int getPriceCode();
-}</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_regularprice_java">3.3. RegularPrice.java</h3>
-<div class="listingblock">
-<div class="content">
-<pre>package rental.domain;
-
-public class RegularPrice extends Price {
-
-  @Override
-  int getPriceCode() {
-    return Movie.REGULAR;
-  }
-}</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_childrenprice_java">3.4. ChildrenPrice.java</h3>
-<div class="listingblock">
-<div class="content">
-<pre>package rental.domain;
-
-public class ChildrenPrice extends Price {
-
-  @Override
-  int getPriceCode() {
-    return Movie.CHILDREN;
-  }
-}</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_newreleaseprice_java">3.5. NewReleasePrice.java</h3>
-<div class="listingblock">
-<div class="content">
-<pre>package rental.domain;
-
-public class NewReleasePrice extends Price {
-
-  @Override
-  int getPriceCode() {
-    return Movie.NEW_RELEASE;
   }
 }</pre>
 </div>
@@ -697,7 +697,7 @@ public class Rental {
   }
 
   int getCharge() {
-    return _movie.getCharge(_daysRented);
+    return _movie._price.getCharge(_daysRented);
   }
 
   int getFrequentRenterPoints() {
@@ -872,7 +872,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 17:42:33 JST
+Last updated 2019-07-03 17:47:30 JST
 </div>
 </div>
 </body>

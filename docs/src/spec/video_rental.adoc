@@ -100,11 +100,6 @@ Price <|-- NewReleasePrice
 
 == 開発
 
-=== Movie.java
-----
-include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Movie.java[]
-----
-
 === Price.java
 ----
 include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Price.java[]
@@ -123,6 +118,11 @@ include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Ch
 === NewReleasePrice.java
 ----
 include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/NewReleasePrice.java[]
+----
+
+=== Movie.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Movie.java[]
 ----
 
 === Rental.java
