@@ -28,14 +28,19 @@ public class Customer {
       //この貸し出しに関する数値の表示
       result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "円\n";
     }
-    int totalAmount = 0;
-    for (Rental each : _rentals) {
-      totalAmount += each.getCharge();
-    }
+    int totalAmount = getTotalAmount();
 
     //フッタ部分の追加
     result += "合計金額 " + totalAmount + "円\n";
     result += "獲得ポイント " + frequentRenterPoints + "ポイント";
     return result;
+  }
+
+  private int getTotalAmount() {
+    int totalAmount = 0;
+    for (Rental each : _rentals) {
+      totalAmount += each.getCharge();
+    }
+    return totalAmount;
   }
 }
