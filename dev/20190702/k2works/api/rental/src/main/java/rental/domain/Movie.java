@@ -6,7 +6,6 @@ public class Movie {
   public static final int NEW_RELEASE = 1;
 
   private String _title;
-  private int _priceCode;
   Price _price;
 
   public Movie(String title, int priceCode) {

@@ -551,23 +551,7 @@ abstract class Price {
 
   abstract int getPriceCode();
 
-  int getCharge(int daysRented) {
-    int result = 0;
-    switch (getPriceCode()) {
-      case Movie.REGULAR:
-        result += 200;
-        if (daysRented &gt; 2) result += (daysRented - 2) * 150;
-        break;
-      case Movie.NEW_RELEASE:
-        result += daysRented * 300;
-        break;
-      case Movie.CHILDREN:
-        result += 150;
-        if (daysRented &gt; 3) result += (daysRented - 3) * 150;
-        break;
-    }
-    return result;
-  }
+  abstract int getCharge(int daysRented);
 }</pre>
 </div>
 </div>
@@ -583,6 +567,12 @@ public class RegularPrice extends Price {
   @Override
   int getPriceCode() {
     return Movie.REGULAR;
+  }
+
+  int getCharge(int daysRented) {
+    int result = 200;
+    if (daysRented &gt; 2) result += (daysRented - 2) * 150;
+    return result;
   }
 }</pre>
 </div>
@@ -600,6 +590,12 @@ public class ChildrenPrice extends Price {
   int getPriceCode() {
     return Movie.CHILDREN;
   }
+
+  int getCharge(int daysRented) {
+    int result = 150;
+    if (daysRented &gt; 3) result += (daysRented - 3) * 150;
+    return result;
+  }
 }</pre>
 </div>
 </div>
@@ -615,6 +611,10 @@ public class NewReleasePrice extends Price {
   @Override
   int getPriceCode() {
     return Movie.NEW_RELEASE;
+  }
+
+  int getCharge(int daysRented) {
+    return daysRented * 300;
   }
 }</pre>
 </div>
@@ -632,7 +632,6 @@ public class Movie {
   public static final int NEW_RELEASE = 1;
 
   private String _title;
-  private int _priceCode;
   Price _price;
 
   public Movie(String title, int priceCode) {
@@ -872,7 +871,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 17:47:30 JST
+Last updated 2019-07-03 17:56:04 JST
 </div>
 </div>
 </body>
