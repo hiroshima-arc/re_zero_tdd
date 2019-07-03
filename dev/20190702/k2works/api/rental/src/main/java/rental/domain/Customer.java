@@ -20,19 +20,24 @@ public class Customer {
   }
 
   public String statement() {
-    int frequentRenterPoints = 0;
     String result = getName() + "様のレンタル明細" + "\n";
     for (Rental each : _rentals) {
-      frequentRenterPoints += each.getFrequentRenterPoints();
-
       //この貸し出しに関する数値の表示
       result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "円\n";
     }
 
     //フッタ部分の追加
     result += "合計金額 " + getTotalAmount() + "円\n";
-    result += "獲得ポイント " + frequentRenterPoints + "ポイント";
+    result += "獲得ポイント " + getFrequentRenterPoints() + "ポイント";
     return result;
+  }
+
+  private int getFrequentRenterPoints() {
+    int frequentRenterPoints = 0;
+    for (Rental each : _rentals) {
+      frequentRenterPoints += each.getFrequentRenterPoints();
+    }
+    return frequentRenterPoints;
   }
 
   private int getTotalAmount() {
