@@ -27,9 +27,9 @@ public class StreamLambdaHandlerTest {
   }
 
   @Test
-  public void ping_streamRequest_respondsWithHello() {
+  public void textStatement() {
     InputStream requestStream = new AwsProxyRequestBuilder(
-      "/statement",
+      "/textStatement",
       HttpMethod.GET
     )
       .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
@@ -51,6 +51,31 @@ public class StreamLambdaHandlerTest {
           "{\"statement\":\"山田様のレンタル明細\\n\\t新作\\t900円\\n\\t子供\\t150円\\n\\t一般\\t200円\\n合計金額 1250円\\n獲得ポイント 4ポイント\"}"
         )
     );
+
+    assertTrue(
+      response.getMultiValueHeaders().containsKey(HttpHeaders.CONTENT_TYPE)
+    );
+    assertTrue(
+      response.getMultiValueHeaders()
+        .getFirst(HttpHeaders.CONTENT_TYPE)
+        .startsWith(MediaType.APPLICATION_JSON)
+    );
+  }
+
+  @Test
+  public void htmlStatement() {
+    InputStream requestStream = new AwsProxyRequestBuilder(
+      "/htmlStatement",
+      HttpMethod.GET
+    )
+      .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
+      .buildStream();
+    ByteArrayOutputStream responseStream = new ByteArrayOutputStream();
+
+    handle(requestStream, responseStream);
+
+    AwsProxyResponse response = readResponse(responseStream);
+    assertTrue(response.getBody().contains("statement"));
 
     assertTrue(
       response.getMultiValueHeaders().containsKey(HttpHeaders.CONTENT_TYPE)

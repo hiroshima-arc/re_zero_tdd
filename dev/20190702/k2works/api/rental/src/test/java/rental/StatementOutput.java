@@ -24,27 +24,47 @@ public class StatementOutput {
     regular = new Rental(regularMovie, 1);
   }
 
-  String output;
+  String textOutput;
+  String htmlOutput;
 
   @BeforeEach
   void setupResult() {
-    output =
+    textOutput =
       "山田様のレンタル明細\n" +
         "\t新作\t900円\n" +
         "\t子供\t150円\n" +
         "\t一般\t200円\n" +
         "合計金額 1250円\n" +
         "獲得ポイント 4ポイント";
+
+    htmlOutput =
+      "<H1><EM>山田</EM>様のレンタル明細</H1>\n" +
+        "新作: 900円<BR>\n" +
+        "子供: 150円<BR>\n" +
+        "一般: 200円<BR>\n" +
+        "<P>合計金額 <EM>1250円</EM></P>\n" +
+        "<P>獲得ポイント <EM>4ポイント</EM></P>";
   }
 
   @Test
   @DisplayName("ステートメント出力")
-  void output() {
+  void textOutput() {
     Customer customer = new Customer("山田");
     customer.addRental(newRelease);
     customer.addRental(children);
     customer.addRental(regular);
 
-    assertEquals(output, customer.statement());
+    assertEquals(textOutput, customer.statement());
+  }
+
+  @Test
+  @DisplayName("HTMLステートメント出力")
+  void htmlOutput() {
+    Customer customer = new Customer("山田");
+    customer.addRental(newRelease);
+    customer.addRental(children);
+    customer.addRental(regular);
+
+    assertEquals(htmlOutput, customer.htmlStatement());
   }
 }

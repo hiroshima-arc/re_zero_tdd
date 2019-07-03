@@ -32,6 +32,20 @@ public class Customer {
     return result;
   }
 
+  public String htmlStatement() {
+    String result = "<H1><EM>" + getName() + "</EM>様のレンタル明細</H1>\n";
+    for (Rental each : _rentals) {
+      //この貸し出しに関する数値の表示
+      result += each.getMovie().getTitle() + ": " + each.getCharge() + "円<BR>\n";
+    }
+
+    //フッタ部分の追加
+    result += "<P>合計金額 <EM>" + getTotalAmount() + "円</EM></P>\n";
+    result +=
+      "<P>獲得ポイント <EM>" + getFrequentRenterPoints() + "ポイント</EM></P>";
+    return result;
+  }
+
   private int getFrequentRenterPoints() {
     int frequentRenterPoints = 0;
     for (Rental each : _rentals) {

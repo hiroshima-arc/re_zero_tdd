@@ -48,6 +48,7 @@ class Rental {
 }
 class Customer {
   statement()
+  htmlStatement()
   getTotalCharge()
   getTotalFrequentRenterPoints()
 }

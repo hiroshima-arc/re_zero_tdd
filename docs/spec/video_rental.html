@@ -517,7 +517,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_クラス図">2.3. クラス図</h3>
 <div class="imageblock">
 <div class="content">
-<img src="diag-5d7f74307f7ff1ce7fcc8f06c4e14734.png" alt="diag 5d7f74307f7ff1ce7fcc8f06c4e14734" width="504" height="104">
+<img src="diag-773b2be71149d2cf7523b0561701b90e.png" alt="diag 773b2be71149d2cf7523b0561701b90e" width="504" height="117">
 </div>
 </div>
 </div>
@@ -656,6 +656,20 @@ public class Customer {
     return result;
   }
 
+  public String htmlStatement() {
+    String result = "&lt;H1&gt;&lt;EM&gt;" + getName() + "&lt;/EM&gt;様のレンタル明細&lt;/H1&gt;\n";
+    for (Rental each : _rentals) {
+      //この貸し出しに関する数値の表示
+      result += each.getMovie().getTitle() + ": " + each.getCharge() + "円&lt;BR&gt;\n";
+    }
+
+    //フッタ部分の追加
+    result += "&lt;P&gt;合計金額 &lt;EM&gt;" + getTotalAmount() + "円&lt;/EM&gt;&lt;/P&gt;\n";
+    result +=
+      "&lt;P&gt;獲得ポイント &lt;EM&gt;" + getFrequentRenterPoints() + "ポイント&lt;/EM&gt;&lt;/P&gt;";
+    return result;
+  }
+
   private int getFrequentRenterPoints() {
     int frequentRenterPoints = 0;
     for (Rental each : _rentals) {
@@ -705,28 +719,48 @@ public class StatementOutput {
     regular = new Rental(regularMovie, 1);
   }
 
-  String output;
+  String textOutput;
+  String htmlOutput;
 
   @BeforeEach
   void setupResult() {
-    output =
+    textOutput =
       "山田様のレンタル明細\n" +
         "\t新作\t900円\n" +
         "\t子供\t150円\n" +
         "\t一般\t200円\n" +
         "合計金額 1250円\n" +
         "獲得ポイント 4ポイント";
+
+    htmlOutput =
+      "&lt;H1&gt;&lt;EM&gt;山田&lt;/EM&gt;様のレンタル明細&lt;/H1&gt;\n" +
+        "新作: 900円&lt;BR&gt;\n" +
+        "子供: 150円&lt;BR&gt;\n" +
+        "一般: 200円&lt;BR&gt;\n" +
+        "&lt;P&gt;合計金額 &lt;EM&gt;1250円&lt;/EM&gt;&lt;/P&gt;\n" +
+        "&lt;P&gt;獲得ポイント &lt;EM&gt;4ポイント&lt;/EM&gt;&lt;/P&gt;";
   }
 
   @Test
   @DisplayName("ステートメント出力")
-  void output() {
+  void textOutput() {
     Customer customer = new Customer("山田");
     customer.addRental(newRelease);
     customer.addRental(children);
     customer.addRental(regular);
 
-    assertEquals(output, customer.statement());
+    assertEquals(textOutput, customer.statement());
+  }
+
+  @Test
+  @DisplayName("HTMLステートメント出力")
+  void htmlOutput() {
+    Customer customer = new Customer("山田");
+    customer.addRental(newRelease);
+    customer.addRental(children);
+    customer.addRental(regular);
+
+    assertEquals(htmlOutput, customer.htmlStatement());
   }
 }</pre>
 </div>
@@ -749,7 +783,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 15:45:43 JST
+Last updated 2019-07-03 16:54:09 JST
 </div>
 </div>
 </body>
