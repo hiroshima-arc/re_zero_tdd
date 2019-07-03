@@ -28,6 +28,8 @@ public class Customer {
 
       //この貸し出しに関する数値の表示
       result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "円\n";
+    }
+    for (Rental each : _rentals) {
       totalAmount += each.getCharge();
     }
 
