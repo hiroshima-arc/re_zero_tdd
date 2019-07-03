@@ -41,6 +41,8 @@ rectangle VedioRental {
 ----
 class Movie {
   priceCode:int
+  getCharge(days: int)
+  getFrequentRenterPoints(days: int)
 }
 class Rental {
   daysRented:int

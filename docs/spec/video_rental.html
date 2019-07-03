@@ -520,7 +520,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_クラス図">2.3. クラス図</h3>
 <div class="imageblock">
 <div class="content">
-<img src="diag-773b2be71149d2cf7523b0561701b90e.png" alt="diag 773b2be71149d2cf7523b0561701b90e" width="504" height="117">
+<img src="diag-59aee0b2903f3be5b3f5181801ac9106.png" alt="diag 59aee0b2903f3be5b3f5181801ac9106" width="618" height="117">
 </div>
 </div>
 </div>
@@ -617,6 +617,14 @@ public class Rental {
   public Movie getMovie() {
     return _movie;
   }
+
+  int getCharge() {
+    return _movie.getCharge(_daysRented);
+  }
+
+  int getFrequentRenterPoints() {
+    return _movie.getFrequentRenterPoints(_daysRented);
+  }
 }</pre>
 </div>
 </div>
@@ -650,7 +658,7 @@ public class Customer {
     String result = getName() + "様のレンタル明細" + "\n";
     for (Rental each : _rentals) {
       //この貸し出しに関する数値の表示
-      result += "\t" + each.getMovie().getTitle() + "\t" + each._movie.getCharge(each.getDaysRented()) + "円\n";
+      result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "円\n";
     }
 
     //フッタ部分の追加
@@ -663,7 +671,7 @@ public class Customer {
     String result = "&lt;H1&gt;&lt;EM&gt;" + getName() + "&lt;/EM&gt;様のレンタル明細&lt;/H1&gt;\n";
     for (Rental each : _rentals) {
       //この貸し出しに関する数値の表示
-      result += each.getMovie().getTitle() + ": " + each._movie.getCharge(each.getDaysRented()) + "円&lt;BR&gt;\n";
+      result += each.getMovie().getTitle() + ": " + each.getCharge() + "円&lt;BR&gt;\n";
     }
 
     //フッタ部分の追加
@@ -676,8 +684,7 @@ public class Customer {
   private int getFrequentRenterPoints() {
     int frequentRenterPoints = 0;
     for (Rental each : _rentals) {
-      frequentRenterPoints +=
-        each._movie.getFrequentRenterPoints(each.getDaysRented());
+      frequentRenterPoints += each.getFrequentRenterPoints();
     }
     return frequentRenterPoints;
   }
@@ -685,7 +692,7 @@ public class Customer {
   private int getTotalAmount() {
     int totalAmount = 0;
     for (Rental each : _rentals) {
-      totalAmount += each._movie.getCharge(each.getDaysRented());
+      totalAmount += each.getCharge();
     }
     return totalAmount;
   }
@@ -787,7 +794,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 17:13:51 JST
+Last updated 2019-07-03 17:16:41 JST
 </div>
 </div>
 </body>
