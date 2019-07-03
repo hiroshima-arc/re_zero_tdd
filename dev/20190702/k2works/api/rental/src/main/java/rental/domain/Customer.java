@@ -49,7 +49,8 @@ public class Customer {
   private int getFrequentRenterPoints() {
     int frequentRenterPoints = 0;
     for (Rental each : _rentals) {
-      frequentRenterPoints += each.getFrequentRenterPoints();
+      frequentRenterPoints +=
+        each._movie.getFrequentRenterPoints(each.getDaysRented());
     }
     return frequentRenterPoints;
   }

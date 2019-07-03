@@ -585,6 +585,12 @@ public class Movie {
     }
     return result;
   }
+
+  int getFrequentRenterPoints(int daysRented) {
+    if (
+      (getPriceCode() == NEW_RELEASE) &amp;&amp; daysRented &gt; 1
+    ) return 2; else return 1;
+  }
 }</pre>
 </div>
 </div>
@@ -610,12 +616,6 @@ public class Rental {
 
   public Movie getMovie() {
     return _movie;
-  }
-
-  int getFrequentRenterPoints() {
-    if (
-      (getMovie().getPriceCode() == Movie.NEW_RELEASE) &amp;&amp; getDaysRented() &gt; 1
-    ) return 2; else return 1;
   }
 }</pre>
 </div>
@@ -676,7 +676,8 @@ public class Customer {
   private int getFrequentRenterPoints() {
     int frequentRenterPoints = 0;
     for (Rental each : _rentals) {
-      frequentRenterPoints += each.getFrequentRenterPoints();
+      frequentRenterPoints +=
+        each._movie.getFrequentRenterPoints(each.getDaysRented());
     }
     return frequentRenterPoints;
   }
@@ -786,7 +787,7 @@ public class StatementOutput {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 17:11:10 JST
+Last updated 2019-07-03 17:13:51 JST
 </div>
 </div>
 </body>
