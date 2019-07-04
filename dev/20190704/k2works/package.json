@@ -5,7 +5,7 @@
   "main": "index.js",
   "config": {
     "app_dir":  "api",
-    "app_service_dir":  "api/hello_world",
+    "app_service_dir":  "api/rental",
     "s3_bucket": "re-zero-tdd-serverless",
     "stack_name": "rental-ruby-service",
     "region": "us-east-1",
@@ -29,7 +29,7 @@
     "watch:frontend": "watch 'npm-run-all format:frontend' ./src ",
     "watch:backend": "watch 'npm-run-all format:backend linter test' $npm_package_config_app_dir/",
     "app:frontend": "browser-sync start --config bs-config.js",
-    "app:backend": "cd $npm_package_config_app_dir; bundle exec shotgun -p 9292 hello_world/config.ru",
+    "app:backend": "cd $npm_package_config_app_dir; bundle exec shotgun -p 9292 rental/config.ru",
     "aws:sam:build": "cd $npm_package_config_app_dir; sam build",
     "aws:sam:local": "cd $npm_package_config_app_dir; sam local start-api --host 0.0.0.0 --port 4000 --template template.yaml",
     "aws:sam:package": "sam package --template-file $npm_package_config_app_dir/template.yaml --s3-bucket $npm_package_config_s3_bucket --output-template-file $npm_package_config_app_dir/packaged.yaml",

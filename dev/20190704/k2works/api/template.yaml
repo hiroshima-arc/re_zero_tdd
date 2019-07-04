@@ -21,7 +21,7 @@ Resources:
     Properties:
       Handler: lambda.handler
       Runtime: ruby2.5
-      CodeUri: hello_world
+      CodeUri: rental
       MemorySize: 512
       Timeout: 30
       Events:

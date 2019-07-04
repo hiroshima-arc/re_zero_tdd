@@ -1,4 +1,4 @@
-require_relative '../../hello_world/app.rb'
+require_relative '../../rental/app.rb'
 require 'rack/test'
 
 set :environment, :test

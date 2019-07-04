@@ -57,13 +57,13 @@
         <h1>Menu</h1>
         <ul>
           <li><a href="readme.html" target="_blank">README</a></li>
-          <li><a href="index.html">HelloWorld</a></li>
+          <li><a href="index.html">VideoRental</a></li>
         </ul>
       </nav>
     </header>
     <section>
       <section class="app-component">
-        <h2>HelloWorld</h2>
+        <h2>VideoRental</h2>
         <div id="app"></div>
         <div id="mocha"></div>
       </section>
@@ -81,12 +81,14 @@
     </script>
 
     <script>
-      fetch("http://localhost:9292/api/hello-world")
+      fetch("http://localhost:9292/api/statement")
         .then(response => {
           return response.json();
         })
         .then(data => {
-          document.querySelector("#app").innerHTML = `<p>${data.Output}</p>`;
+          document.querySelector(
+            "#app"
+          ).innerHTML = `<pre>${data.statement}</pre>`;
           console.log(data);
         });
     </script>
