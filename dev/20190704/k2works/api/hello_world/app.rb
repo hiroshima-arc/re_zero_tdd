@@ -1,38 +1,28 @@
-# require 'httparty'
-require 'json'
+require 'sinatra'
 
-def lambda_handler(event:, context:)
-  # Sample pure Lambda function
+before do
+  if !request.body.read.empty? && !request.body.empty?
+    request.body.rewind
+    @params = Sinatra::IndifferentHash.new
+    @params.merge!(JSON.parse(request.body.read))
+  end
+end
 
-  # Parameters
-  # ----------
-  # event: Hash, required
-  #     API Gateway Lambda Proxy Input Format
-  #     Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
+##################################
+# Return a Hello world JSON
+##################################
+get '/api/hello-world' do
+  content_type :json
+  headers 'Access-Control-Allow-Origin' => '*'
 
-  # context: object, required
-  #     Lambda Context runtime methods and attributes
-  #     Context doc: https://docs.aws.amazon.com/lambda/latest/dg/ruby-context.html
+  content_type :json
+  { Output: 'Hello World!' }.to_json
+end
 
-  # Returns
-  # ------
-  # API Gateway Lambda Proxy Output Format: dict
-  #     'statusCode' and 'body' are required
-  #     # api-gateway-simple-proxy-for-lambda-output-format
-  #     Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
+post '/api/hello-world' do
+  content_type :json
+  headers 'Access-Control-Allow-Origin' => '*'
 
-  # begin
-  #   response = HTTParty.get('http://checkip.amazonaws.com/')
-  # rescue HTTParty::Error => error
-  #   puts error.inspect
-  #   raise error
-  # end
-
-  {
-    statusCode: 200,
-    body: {
-      # location: response.body
-      message: 'Hello World!'
-    }.to_json
-  }
+  content_type :json
+  { Output: 'Hello World!' }.to_json
 end
