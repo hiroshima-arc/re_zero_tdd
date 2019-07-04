@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>Re:ゼロから始めるテスト駆動開発生活</title>
+<title>Video Rental</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -427,117 +427,452 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Re:ゼロから始めるテスト駆動開発生活</h1>
+<h1>Video Rental</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_目的">1. 目的</a></li>
-<li><a href="#_前提">2. 前提</a></li>
-<li><a href="#_構成">3. 構成</a></li>
-<li><a href="#_詳細">4. 詳細</a>
+<li><a href="#_仕様">1. 仕様</a></li>
+<li><a href="#_設計">2. 設計</a>
 <ul class="sectlevel2">
-<li><a href="#_a_href_spec_hello_world_html_helloworld_a_a_id_anchor_1_a">4.1. <a href="./spec/hello_world.html">HelloWorld</a><a id="anchor-1"></a></a></li>
-<li><a href="#_a_href_spec_fizz_buzz_html_fizzbuzz_a_a_id_anchor_2_a">4.2. <a href="./spec/fizz_buzz.html">FizzBuzz</a><a id="anchor-2"></a></a>
-<ul class="sectlevel3">
-<li><a href="#_a_href_session_20181109_html_テストおじさん_襲来_a">4.2.1. <a href="./session/20181109.html">テストおじさん、襲来</a></a></li>
-<li><a href="#_a_href_session_20181116_html_見知らぬ_構造化プログラミング_a">4.2.2. <a href="./session/20181116.html">見知らぬ、構造化プログラミング</a></a></li>
+<li><a href="#_todoリスト">2.1. TODOリスト</a></li>
+<li><a href="#_ユースケース図">2.2. ユースケース図</a></li>
+<li><a href="#_クラス図">2.3. クラス図</a></li>
+<li><a href="#_シーケンス図">2.4. シーケンス図</a></li>
 </ul>
 </li>
-<li><a href="#_a_href_spec_video_rental_html_videorental_a_a_id_anchor_3_a">4.3. <a href="./spec/video_rental.html">VideoRental</a><a id="anchor-3"></a></a></li>
+<li><a href="#_開発">3. 開発</a>
+<ul class="sectlevel2">
+<li><a href="#_price_java">3.1. Price.java</a></li>
+<li><a href="#_regularprice_java">3.2. RegularPrice.java</a></li>
+<li><a href="#_childrenprice_java">3.3. ChildrenPrice.java</a></li>
+<li><a href="#_newreleaseprice_java">3.4. NewReleasePrice.java</a></li>
+<li><a href="#_movie_java">3.5. Movie.java</a></li>
+<li><a href="#_rental_java">3.6. Rental.java</a></li>
+<li><a href="#_customer_java">3.7. Customer.java</a></li>
+<li><a href="#_statementoutput_java">3.8. StatementOutput.java</a></li>
 </ul>
 </li>
-<li><a href="#_参照">5. 参照</a></li>
+<li><a href="#_参照">4. 参照</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_目的">1. 目的</h2>
+<h2 id="_仕様">1. 仕様</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>開発ドキュメントの管理</p>
+<p>顧客が借りたビデオのレンタル料金を計算して計算書を印刷する。</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_前提">2. 前提</h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ソフトウェア</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">バージョン</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">備考</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AsciiDoc</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_構成">3. 構成</h2>
-<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#anchor-1">HelloWorld</a></p>
+<p>ビデオレンタルの料金を計算して計算書を印刷するプログラム</p>
 </li>
 <li>
-<p><a href="#anchor-2">FizzBuzz</a></p>
+<p>システムにはどの映画を何日間借りるかが入力される。</p>
 </li>
 <li>
-<p><a href="#anchor-3">VideoRental</a></p>
+<p>貸出の日数によって料金が計算され、映画の分類が判定される。</p>
+</li>
+<li>
+<p>映画の分類は３つある。一般向け、子供向け、新作。</p>
+</li>
+<li>
+<p>レンタルポイントも印刷される。新作かどうかによってポイント計算の仕方が異なる。</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_詳細">4. 詳細</h2>
+<h2 id="_設計">2. 設計</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_a_href_spec_hello_world_html_helloworld_a_a_id_anchor_1_a">4.1. <a href="./spec/hello_world.html">HelloWorld</a><a id="anchor-1"></a></h3>
-
+<h3 id="_todoリスト">2.1. TODOリスト</h3>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10003; スモークテスト作成</p>
+</li>
+<li>
+<p>&#10003; statementメソッドの分割、再配置</p>
+</li>
+<li>
+<p>&#10003; amountForメソッドの移動</p>
+</li>
+<li>
+<p>&#10003; レンタルポイント計算部分の抽出</p>
+</li>
+<li>
+<p>&#10003; 一時変数の削除</p>
+</li>
+<li>
+<p>&#10003; 料金計算の条件文をポリモーフィズムに置き換える</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_a_href_spec_fizz_buzz_html_fizzbuzz_a_a_id_anchor_2_a">4.2. <a href="./spec/fizz_buzz.html">FizzBuzz</a><a id="anchor-2"></a></h3>
-<div class="sect3">
-<h4 id="_a_href_session_20181109_html_テストおじさん_襲来_a">4.2.1. <a href="./session/20181109.html">テストおじさん、襲来</a></h4>
-
+<h3 id="_ユースケース図">2.2. ユースケース図</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-48441ede18c6840e39c6ddbcd8366d02.png" alt="diag 48441ede18c6840e39c6ddbcd8366d02" width="310" height="232">
 </div>
-<div class="sect3">
-<h4 id="_a_href_session_20181116_html_見知らぬ_構造化プログラミング_a">4.2.2. <a href="./session/20181116.html">見知らぬ、構造化プログラミング</a></h4>
-
 </div>
 </div>
 <div class="sect2">
-<h3 id="_a_href_spec_video_rental_html_videorental_a_a_id_anchor_3_a">4.3. <a href="./spec/video_rental.html">VideoRental</a><a id="anchor-3"></a></h3>
-
+<h3 id="_クラス図">2.3. クラス図</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-ba8423211fe68d04afb0048b976bfae3.png" alt="diag ba8423211fe68d04afb0048b976bfae3" width="968" height="264">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_シーケンス図">2.4. シーケンス図</h3>
+<div class="imageblock">
+<div class="content">
+<img src="diag-018309fe98a870ba01ced1f8d4c8f541.png" alt="diag 018309fe98a870ba01ced1f8d4c8f541" width="860" height="387">
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_参照">5. 参照</h2>
+<h2 id="_開発">3. 開発</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_price_java">3.1. Price.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+abstract class Price {
+
+  abstract int getPriceCode();
+
+  abstract int getCharge(int daysRented);
+
+  int getFrequentRenterPoints(int daysRented) {
+    return 1;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_regularprice_java">3.2. RegularPrice.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class RegularPrice extends Price {
+
+  @Override
+  int getPriceCode() {
+    return Movie.REGULAR;
+  }
+
+  int getCharge(int daysRented) {
+    int result = 200;
+    if (daysRented &gt; 2) result += (daysRented - 2) * 150;
+    return result;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_childrenprice_java">3.3. ChildrenPrice.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class ChildrenPrice extends Price {
+
+  @Override
+  int getPriceCode() {
+    return Movie.CHILDREN;
+  }
+
+  int getCharge(int daysRented) {
+    int result = 150;
+    if (daysRented &gt; 3) result += (daysRented - 3) * 150;
+    return result;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_newreleaseprice_java">3.4. NewReleasePrice.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class NewReleasePrice extends Price {
+
+  @Override
+  int getPriceCode() {
+    return Movie.NEW_RELEASE;
+  }
+
+  int getCharge(int daysRented) {
+    return daysRented * 300;
+  }
+
+  int getFrequentRenterPoints(int daysRented) {
+    return (daysRented &gt; 1) ? 2 : 1;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_movie_java">3.5. Movie.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class Movie {
+  public static final int CHILDREN = 2;
+  public static final int REGULAR = 0;
+  public static final int NEW_RELEASE = 1;
+
+  private String _title;
+  private Price _price;
+
+  public Movie(String title, int priceCode) {
+    _title = title;
+    setPriceCode(priceCode);
+  }
+
+  public int getPriceCode() {
+    return _price.getPriceCode();
+  }
+
+  public void setPriceCode(int arg) {
+    switch (arg) {
+      case REGULAR:
+        _price = new RegularPrice();
+        break;
+      case CHILDREN:
+        _price = new ChildrenPrice();
+        break;
+      case NEW_RELEASE:
+        _price = new NewReleasePrice();
+        break;
+      default:
+        throw new IllegalArgumentException("不正な料金コード");
+    }
+  }
+
+  public String getTitle() {
+    return _title;
+  }
+
+  public int getCharge(int daysRented) {
+    return _price.getCharge(daysRented);
+  }
+
+  public int getFrequentRenterPoints(int daysRented) {
+    return _price.getFrequentRenterPoints(daysRented);
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rental_java">3.6. Rental.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+public class Rental {
+  Movie _movie;
+  private int _daysRented;
+
+  public Rental(Movie movie, int daysRented) {
+    _movie = movie;
+    _daysRented = daysRented;
+  }
+
+  public int getDaysRented() {
+    return _daysRented;
+  }
+
+  public Movie getMovie() {
+    return _movie;
+  }
+
+  int getCharge() {
+    return _movie.getCharge(_daysRented);
+  }
+
+  int getFrequentRenterPoints() {
+    return _movie.getFrequentRenterPoints(_daysRented);
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_customer_java">3.7. Customer.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental.domain;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Customer {
+  private String _name;
+  private List&lt;Rental&gt; _rentals = new ArrayList&lt;&gt;();
+
+  public Customer(String name) {
+    _name = name;
+  }
+
+  public void addRental(Rental arg) {
+    _rentals.add(arg);
+  }
+
+  public String getName() {
+    return _name;
+  }
+
+  public String statement() {
+    String result = getName() + "様のレンタル明細" + "\n";
+    for (Rental each : _rentals) {
+      //この貸し出しに関する数値の表示
+      result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "円\n";
+    }
+
+    //フッタ部分の追加
+    result += "合計金額 " + getTotalAmount() + "円\n";
+    result += "獲得ポイント " + getFrequentRenterPoints() + "ポイント";
+    return result;
+  }
+
+  public String htmlStatement() {
+    String result = "&lt;H1&gt;&lt;EM&gt;" + getName() + "&lt;/EM&gt;様のレンタル明細&lt;/H1&gt;\n";
+    for (Rental each : _rentals) {
+      //この貸し出しに関する数値の表示
+      result += each.getMovie().getTitle() + ": " + each.getCharge() + "円&lt;BR&gt;\n";
+    }
+
+    //フッタ部分の追加
+    result += "&lt;P&gt;合計金額 &lt;EM&gt;" + getTotalAmount() + "円&lt;/EM&gt;&lt;/P&gt;\n";
+    result +=
+      "&lt;P&gt;獲得ポイント &lt;EM&gt;" + getFrequentRenterPoints() + "ポイント&lt;/EM&gt;&lt;/P&gt;";
+    return result;
+  }
+
+  private int getFrequentRenterPoints() {
+    int frequentRenterPoints = 0;
+    for (Rental each : _rentals) {
+      frequentRenterPoints += each.getFrequentRenterPoints();
+    }
+    return frequentRenterPoints;
+  }
+
+  private int getTotalAmount() {
+    int totalAmount = 0;
+    for (Rental each : _rentals) {
+      totalAmount += each.getCharge();
+    }
+    return totalAmount;
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_statementoutput_java">3.8. StatementOutput.java</h3>
+<div class="listingblock">
+<div class="content">
+<pre>package rental;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import rental.domain.Customer;
+import rental.domain.Movie;
+import rental.domain.Rental;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class StatementOutput {
+  Rental newRelease;
+  Rental children;
+  Rental regular;
+
+  @BeforeEach
+  void setupData() {
+    Movie newReleaseMovie = new Movie("新作", Movie.NEW_RELEASE);
+    Movie childrenMovie = new Movie("子供", Movie.CHILDREN);
+    Movie regularMovie = new Movie("一般", Movie.REGULAR);
+
+    newRelease = new Rental(newReleaseMovie, 3);
+    children = new Rental(childrenMovie, 2);
+    regular = new Rental(regularMovie, 1);
+  }
+
+  String textOutput;
+  String htmlOutput;
+
+  @BeforeEach
+  void setupResult() {
+    textOutput =
+      "山田様のレンタル明細\n" +
+        "\t新作\t900円\n" +
+        "\t子供\t150円\n" +
+        "\t一般\t200円\n" +
+        "合計金額 1250円\n" +
+        "獲得ポイント 4ポイント";
+
+    htmlOutput =
+      "&lt;H1&gt;&lt;EM&gt;山田&lt;/EM&gt;様のレンタル明細&lt;/H1&gt;\n" +
+        "新作: 900円&lt;BR&gt;\n" +
+        "子供: 150円&lt;BR&gt;\n" +
+        "一般: 200円&lt;BR&gt;\n" +
+        "&lt;P&gt;合計金額 &lt;EM&gt;1250円&lt;/EM&gt;&lt;/P&gt;\n" +
+        "&lt;P&gt;獲得ポイント &lt;EM&gt;4ポイント&lt;/EM&gt;&lt;/P&gt;";
+  }
+
+  @Test
+  @DisplayName("ステートメント出力")
+  void textOutput() {
+    Customer customer = new Customer("山田");
+    customer.addRental(newRelease);
+    customer.addRental(children);
+    customer.addRental(regular);
+
+    assertEquals(textOutput, customer.statement());
+  }
+
+  @Test
+  @DisplayName("HTMLステートメント出力")
+  void htmlOutput() {
+    Customer customer = new Customer("山田");
+    customer.addRental(newRelease);
+    customer.addRental(children);
+    customer.addRental(regular);
+
+    assertEquals(htmlOutput, customer.htmlStatement());
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_参照">4. 参照</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://asciidoctor.org/">Asciidoctor</a></p>
-</li>
-<li>
-<p><a href="http://www.plantuml.com">PlantUML</a></p>
-</li>
-<li>
-<p><a href="https://about.draw.io/">draw.io</a></p>
+<p><a href="http://plantuml.com">PlantUML</a></p>
 </li>
 </ul>
 </div>
@@ -546,7 +881,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-03 11:35:31 JST
+Last updated 2019-07-03 18:22:01 JST
 </div>
 </div>
 </body>
