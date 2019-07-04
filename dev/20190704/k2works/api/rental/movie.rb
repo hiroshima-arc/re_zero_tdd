@@ -1,7 +1,7 @@
 class Movie
   REGULAR = 0
   NEW_RELEASE = 1
-  CHILDRENS = 2
+  CHILDREN = 2
 
   attr_reader :title
   attr_reader :price_code

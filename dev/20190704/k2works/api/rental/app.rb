@@ -32,7 +32,7 @@ end
 
 get '/api/statement' do
   new_release_movie = Movie.new('新作', Movie::NEW_RELEASE)
-  children_movie = Movie.new('子供', Movie::CHILDRENS)
+  children_movie = Movie.new('子供', Movie::CHILDREN)
   regular_movie = Movie.new('一般', Movie::REGULAR)
 
   new_release = Rental.new(new_release_movie, 3)
