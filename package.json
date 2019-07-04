@@ -40,7 +40,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier **/*.md --write",
     "check": "remark .",
-    "lint": "eslint dev"
+    "lint": "eslint dev",
+    "build:doc": "gradle asciidoctor",
+    "watch:doc": "watch 'npm-run-all build:doc' ./docs/src ",
+    "doc:local": "open http://localhost:35729; gradle livereload"
   },
   "repository": {
     "type": "git",
