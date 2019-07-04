@@ -1,7 +1,8 @@
 require 'sinatra'
-require_relative './movie'
-require_relative './rental'
-require_relative './customer'
+require_relative './domain/movie'
+require_relative './domain/rental'
+require_relative './domain/customer'
+include Domain
 
 before do
   if !request.body.read.empty? && !request.body.empty?
@@ -14,22 +15,6 @@ end
 ##################################
 # Return a Hello world JSON
 ##################################
-get '/api/hello-world' do
-  content_type :json
-  headers 'Access-Control-Allow-Origin' => '*'
-
-  content_type :json
-  { Output: 'Hello World!' }.to_json
-end
-
-post '/api/hello-world' do
-  content_type :json
-  headers 'Access-Control-Allow-Origin' => '*'
-
-  content_type :json
-  { Output: 'Hello World!' }.to_json
-end
-
 get '/api/statement' do
   new_release_movie = Movie.new('新作', Movie::NEW_RELEASE)
   children_movie = Movie.new('子供', Movie::CHILDREN)

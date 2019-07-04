@@ -1,9 +1,11 @@
 require 'test/unit'
-require_relative '../../rental/movie'
-require_relative '../../rental/rental'
-require_relative '../../rental/customer'
+require_relative '../../rental/domain/movie'
+require_relative '../../rental/domain/rental'
+require_relative '../../rental/domain/customer'
 
 class StatementOutputTest < Test::Unit::TestCase
+  include Domain
+
   def setup
     new_release_movie = Movie.new('新作', Movie::NEW_RELEASE)
     children_movie = Movie.new('子供', Movie::CHILDREN)

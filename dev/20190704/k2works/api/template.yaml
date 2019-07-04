@@ -71,4 +71,4 @@ Resources:
 Outputs:
   SinatraAppUrl:
     Description: App endpoint URL
-    Value: !Sub "https://${SinatraAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/hello-world"
+    Value: !Sub "https://${SinatraAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/statement"
