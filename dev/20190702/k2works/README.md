@@ -50,9 +50,21 @@ mvn archetype:generate -DgroupId=rental -DartifactId=rental -Dversion=1.0-SNAPSH
 
 ### 配置
 
+```bash
+npm run aws:s3:create
+npm run aws:sam:build
+npm run aws:sam:package
+npm run aws:sam:deploy
+npm run aws:sam:describe
+```
+
 **[⬆ back to top](#構成)**
 
 ### 運用
+
+```bash
+npm run aws:sam:release
+```
 
 **[⬆ back to top](#構成)**
 
@@ -70,6 +82,13 @@ mvn archetype:generate -DgroupId=rental -DartifactId=rental -Dversion=1.0-SNAPSH
 #### 設計
 
 ##### TODO リスト
+
+- [x] スモークテスト作成
+- [x] statementメソッドの分割、再配置
+- [x] amountForメソッドの移動
+- [x] レンタルポイント計算部分の抽出
+- [x] 一時変数の削除
+- [x] 料金計算の条件文をポリモーフィズムに置き換える
 
 #### ふりかえり
 
