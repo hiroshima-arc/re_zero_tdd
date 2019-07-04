@@ -1,0 +1,153 @@
+:toc: left
+:toclevels: 5
+:sectnums:
+= Video Rental
+
+== 仕様
+顧客が借りたビデオのレンタル料金を計算して計算書を印刷する。
+
+* ビデオレンタルの料金を計算して計算書を印刷するプログラム
+* システムにはどの映画を何日間借りるかが入力される。
+* 貸出の日数によって料金が計算され、映画の分類が判定される。
+* 映画の分類は３つある。一般向け、子供向け、新作。
+* レンタルポイントも印刷される。新作かどうかによってポイント計算の仕方が異なる。
+
+== 設計
+
+=== TODOリスト
+
+* [x] スモークテスト作成
+* [x] statementメソッドの分割、再配置
+* [x] amountForメソッドの移動
+* [x] レンタルポイント計算部分の抽出
+* [x] 一時変数の削除
+* [x] 料金計算の条件文をポリモーフィズムに置き換える
+
+=== ユースケース図
+[plantuml]
+----
+left to right direction
+skinparam packageStyle rectangle
+actor customer
+rectangle VedioRental {
+  customer -- (Rental)
+              (Calculate rental fee)
+              (Print a statement)
+}
+----
+
+=== クラス図
+[plantuml]
+----
+class Price {
+  getCharge(days: int)
+  getFrequentRenterPoints(days: int)
+}
+class RegularPrice {
+  getCharge(days: int)
+}
+class ChildrenPrice {
+  getCharge(days: int)
+}
+class NewReleasePrice {
+  getCharge(days: int)
+  getFrequentRenterPoints(days: int)
+}
+class Movie {
+  title: String
+  getCharge()
+  getFrequentRenterPoints(days: int)
+}
+class Rental {
+  daysRented:int
+  getCharge()
+  getFrequentRenterPoints()
+}
+class Customer {
+  name: String
+  statement()
+  htmlStatement()
+  getTotalCharge()
+  getTotalFrequentRenterPoints()
+}
+Movie "1"<- Rental
+Rental "*"<- Customer
+Price "1"<- Movie
+Price <|-- RegularPrice
+Price <|-- ChildrenPrice
+Price <|-- NewReleasePrice
+----
+
+=== シーケンス図
+[plantuml]
+----
+-> aCustomer: statement
+   activate aCustomer
+       aCustomer -> aCustomer :getTotalCharge
+       activate aCustomer
+        aCustomer -> aRental :*[for all rentals] getCharge
+        activate aRental
+         aRental -> aMovie :getCharge(days)
+         activate aPrice
+          aMovie -> aPrice :getCharge(days)
+         deactivate aPrice
+        deactivate aRental
+       deactivate aCustomer
+
+       aCustomer -> aCustomer :getTotalFrequentRenterPoints
+       activate aCustomer
+        aCustomer -> aRental :*[for all rentals] getFrequentRenterPoints
+        activate aRental
+         aRental -> aMovie :getFrequentRenterPoints(days)
+         activate aPrice
+          aMovie -> aPrice :getFrequentRenterPoints(days)
+         deactivate aPrice
+        deactivate aRental
+       deactivate aCustomer
+   deactivate aCustomer
+----
+
+== 開発
+
+=== Price.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Price.java[]
+----
+
+=== RegularPrice.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/RegularPrice.java[]
+----
+
+=== ChildrenPrice.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/ChildrenPrice.java[]
+----
+
+=== NewReleasePrice.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/NewReleasePrice.java[]
+----
+
+=== Movie.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Movie.java[]
+----
+
+=== Rental.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Rental.java[]
+----
+
+=== Customer.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/main/java/rental/domain/Customer.java[]
+----
+
+=== StatementOutput.java
+----
+include::../../../dev/20190702/k2works/api/rental/src/test/java/rental/StatementOutput.java[]
+----
+
+== 参照
+* http://plantuml.com[PlantUML]
