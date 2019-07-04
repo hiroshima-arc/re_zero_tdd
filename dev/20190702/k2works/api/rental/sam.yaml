@@ -1,6 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: AWS Serverless Spring Boot 2 API - rental::rental
+
+Parameters:
+  ApiUrl:
+    Type: String
+    Description: Default api url
+    Default: 'https://api.hiroshima-arc.org'
+
 Globals:
   Api:
     EndpointConfiguration: REGIONAL
@@ -11,6 +18,10 @@ Resources:
     Properties:
       Handler: rental.StreamLambdaHandler::handleRequest
       Runtime: java8
+      Environment:
+        Variables:
+          SPRING_PROFILES_ACTIVE: production
+          API_URL: !Ref ApiUrl
       CodeUri: target/rental-1.0-SNAPSHOT-lambda-package.zip
       MemorySize: 512
       Policies: AWSLambdaBasicExecutionRole
@@ -25,6 +36,6 @@ Resources:
 Outputs:
   RentalApi:
     Description: URL for application
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/textStatement'
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/index.html'
     Export:
       Name: RentalApi

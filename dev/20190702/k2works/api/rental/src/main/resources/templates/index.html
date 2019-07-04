@@ -65,6 +65,7 @@
       <section class="app-component">
         <h2>VideoRental</h2>
         <div id="app"></div>
+        <div hidden id="api-url" th:text="${@environment.getProperty('api.url')}"></div>
         <div id="mocha"></div>
       </section>
     </section>
@@ -81,8 +82,13 @@
     </script>
 
     <script>
-      const textStatementUrl = "http://localhost:8080/api/textStatement";
-      const htmlStatementUrl = "http://localhost:8080/api/htmlStatement";
+      function getApiUrl() {
+        let url = document.querySelector("#api-url").innerHTML;
+        if (url === "") url = "http://localhost:8080/api";
+        return url;
+      }
+      const textStatementUrl = `${getApiUrl()}/textStatement`;
+      const htmlStatementUrl = `${getApiUrl()}/htmlStatement`;
       fetch(textStatementUrl)
         .then(response => {
           return response.json();

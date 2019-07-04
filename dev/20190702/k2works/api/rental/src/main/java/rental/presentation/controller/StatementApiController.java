@@ -1,4 +1,4 @@
-package rental.controller;
+package rental.presentation.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +11,10 @@ import java.util.Map;
 
 @RestController
 @EnableWebMvc
-public class StatementController {
+public class StatementApiController {
 
   @CrossOrigin
-  @RequestMapping(path = "/textStatement", method = RequestMethod.GET)
+  @RequestMapping(path = "/api/textStatement", method = RequestMethod.GET)
   private Map<String, String> textStatement() {
     StatementService service = new StatementService();
     HashMap<String, String> result = new HashMap<>();
@@ -23,7 +23,7 @@ public class StatementController {
   }
 
   @CrossOrigin
-  @RequestMapping(path = "/htmlStatement", method = RequestMethod.GET)
+  @RequestMapping(path = "/api/htmlStatement", method = RequestMethod.GET)
   private Map<String, String> htmlStatement() {
     StatementService service = new StatementService();
     HashMap<String, String> result = new HashMap<>();

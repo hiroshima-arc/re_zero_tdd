@@ -29,7 +29,7 @@ public class StreamLambdaHandlerTest {
   @Test
   public void textStatement() {
     InputStream requestStream = new AwsProxyRequestBuilder(
-      "/textStatement",
+      "/api/textStatement",
       HttpMethod.GET
     )
       .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
@@ -65,7 +65,7 @@ public class StreamLambdaHandlerTest {
   @Test
   public void htmlStatement() {
     InputStream requestStream = new AwsProxyRequestBuilder(
-      "/htmlStatement",
+      "/api/htmlStatement",
       HttpMethod.GET
     )
       .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)

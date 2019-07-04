@@ -9,12 +9,13 @@ import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import rental.controller.StatementController;
+import rental.presentation.controller.StatementApiController;
+import rental.presentation.controller.StatementController;
 
 @SpringBootApplication
 // We use direct @Import instead of @ComponentScan to speed up cold starts
 // @ComponentScan(basePackages = "rental.controller")
-@Import({ StatementController.class })
+@Import({ StatementApiController.class, StatementController.class })
 public class Application extends SpringBootServletInitializer {
 
   /*

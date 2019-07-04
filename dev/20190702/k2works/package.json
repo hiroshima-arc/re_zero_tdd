@@ -4,9 +4,12 @@
   "description": "## 概要",
   "main": "index.js",
   "config": {
+    "app_dir":  "api/rental",
     "s3_bucket": "re-zero-tdd-serverless",
     "stack_name": "rental-service",
-    "app_dir":  "api/rental"
+    "region": "us-east-1",
+    "stage": "Development",
+    "api_url": "https://27mfbgo8s5.execute-api.us-east-1.amazonaws.com/Prod/api"
   },
   "scripts": {
     "start": "nf start -j Procfile",
@@ -25,13 +28,14 @@
     "watch:backend": "watch 'npm-run-all format:backend lint test' $npm_package_config_app_dir/src ",
     "app:frontend": "browser-sync start --config bs-config.js",
     "app:backend": "cd $npm_package_config_app_dir; gradle bootRun",
-    "sam:build": "cd $npm_package_config_app_dir; mvn clean package",
-    "sam:local": "cd $npm_package_config_app_dir; sam local start-api --host 0.0.0.0 --port 4000 --template sam.yaml",
-    "sam:package": "cd $npm_package_config_app_dir; aws cloudformation package --template-file sam.yaml --output-template-file output-sam.yaml --s3-bucket $npm_package_config_s3_bucket",
-    "sam:deploy": "cd $npm_package_config_app_dir; aws cloudformation deploy --template-file output-sam.yaml --stack-name $npm_package_config_stack_name --capabilities CAPABILITY_IAM --parameter-overrides ENV=production",
-    "sam:describe": "aws cloudformation describe-stacks --stack-name $npm_package_config_stack_name",
-    "sam:release": "npm-run-all test build sam:package sam:deploy sam:describe",
-    "sam:destroy": "aws cloudformation delete-stack --stack-name $npm_package_config_stack_name",
+    "aws:sam:build": "cd $npm_package_config_app_dir; mvn clean package",
+    "aws:sam:local": "cd $npm_package_config_app_dir; sam local start-api --host 0.0.0.0 --port 4000 --template sam.yaml",
+    "aws:sam:package": "sam package --template-file $npm_package_config_app_dir/sam.yaml --s3-bucket $npm_package_config_s3_bucket --output-template-file $npm_package_config_app_dir/packaged.yaml",
+    "sam:deploy": "cd $npm_package_config_app_dir; aws cloudformation deploy --template-file output-sam.yaml --stack-name $npm_package_config_stack_name --capabilities CAPABILITY_IAM --parameter-overrides ENV=production ApiUrl=$npm_package_config_api_url",
+    "aws:sam:deploy": "sam deploy --template-file $npm_package_config_app_dir/packaged.yaml --stack-name $npm_package_config_stack_name --parameter-overrides Stage=$npm_package_config_stage ApiUrl=$npm_package_config_api_url --region $npm_package_config_region --capabilities CAPABILITY_NAMED_IAM",
+    "aws:sam:describe": "aws --region $npm_package_config_region cloudformation describe-stacks --stack-name $npm_package_config_stack_name",
+    "aws:sam:release": "npm-run-all test aws:sam:build aws:sam:package aws:sam:deploy aws:sam:describe",
+    "aws:sam:destroy": "aws --region $npm_package_config_region cloudformation delete-stack --stack-name $npm_package_config_stack_name",
     "aws:s3:create": "aws s3 mb s3://$npm_package_config_s3_bucket",
     "aws:s3:destroy": "aws s3 rb s3://$npm_package_config_s3_bucket --force"
   },
