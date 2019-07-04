@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "httparty"
+gem 'rubocop', require: false
 
 group :test do
   gem "test-unit"
