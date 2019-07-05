@@ -28,11 +28,7 @@ module Domain
     private
 
     def total_charge
-      total_amount = 0
-      @rentals.each do |element|
-        total_amount += element.charge
-      end
-      total_amount
+      @rentals.inject(0) {|sum, rental| sum + rental.charge}
     end
 
   end
