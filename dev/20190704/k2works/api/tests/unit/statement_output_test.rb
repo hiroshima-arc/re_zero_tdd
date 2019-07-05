@@ -7,13 +7,13 @@ class StatementOutputTest < Test::Unit::TestCase
   include Domain
 
   def setup
-    new_release_movie = Movie.new('新作', Movie::NEW_RELEASE)
-    children_movie = Movie.new('子供', Movie::CHILDREN)
-    regular_movie = Movie.new('一般', Movie::REGULAR)
+    new_release_movie = Movie.new('新作', NewReleasePrice.new)
+    children_movie = Movie.new('子供', ChildrenPrice.new)
+    regular_movie = Movie.new('一般', RegularPrice.new)
 
-    new_release_movie.price_code = Movie::NEW_RELEASE
-    children_movie.price_code = Movie::CHILDREN
-    regular_movie.price_code = Movie::REGULAR
+    new_release_movie.price = NewReleasePrice.new
+    children_movie.price = ChildrenPrice.new
+    regular_movie.price = RegularPrice.new
 
     @new_release = Rental.new(new_release_movie, 3)
     @children = Rental.new(children_movie, 2)
