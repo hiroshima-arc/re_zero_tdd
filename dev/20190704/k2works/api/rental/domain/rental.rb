@@ -23,5 +23,16 @@ module Domain
       end
       result
     end
+
+    def frequent_renter_point(frequent_renter_points)
+      # レンタルポイントを加算
+      frequent_renter_points += 1
+      # 新作２日間レンタルでボーナス点を加算
+      if movie.price_code == Movie::NEW_RELEASE &&
+          days_rented > 1
+        frequent_renter_points += 1
+      end
+      frequent_renter_points
+    end
   end
 end
