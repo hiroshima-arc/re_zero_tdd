@@ -15,8 +15,6 @@ module Domain
       total_amount, frequent_renter_points = 0, 0
       result = "#{@name}様のレンタル明細\n"
       @rentals.each do |element|
-        this_amount = element.charge
-
         # レンタルポイントを加算
         frequent_renter_points += 1
         # 新作２日間レンタルでボーナス点を加算
@@ -25,8 +23,8 @@ module Domain
           frequent_renter_points += 1
         end
         # このレンタルの料金を表示
-        result += "\t" + element.movie.title + "\t" + this_amount.to_s + "円\n"
-        total_amount += this_amount
+        result += "\t" + element.movie.title + "\t" + element.charge.to_s + "円\n"
+        total_amount += element.charge
       end
       # フッター行を追加
       result += "合計金額 #{total_amount}円\n"
