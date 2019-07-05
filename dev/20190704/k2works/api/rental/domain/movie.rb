@@ -10,5 +10,24 @@ module Domain
     def initialize(title, price_code)
       @title, @price_code = title, price_code
     end
+
+    def charge(days_rented)
+      result = 0
+      case price_code
+      when Movie::REGULAR
+        result += 200
+        if days_rented > 2
+          result += (days_rented - 2) * 1.5
+        end
+      when Movie::NEW_RELEASE
+        result += days_rented * 300
+      when Movie::CHILDREN
+        result += 150
+        if days_rented > 3
+          result += (days_rented - 3) * 1.5
+        end
+      end
+      result
+    end
   end
 end
