@@ -18,6 +18,8 @@ module Domain
         frequent_renter_points += element.frequent_renter_point
         # このレンタルの料金を表示
         result += "\t" + element.movie.title + "\t" + element.charge.to_s + "円\n"
+      end
+      @rentals.each do |element|
         total_amount += element.charge
       end
       # フッター行を追加
