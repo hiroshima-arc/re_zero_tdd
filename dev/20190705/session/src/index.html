@@ -157,6 +157,8 @@
             return volumeCredits;
           }
         }
+        class TragedyCalaculator extends PerformanceCalculator {}
+        class ComedyCalaculator extends PerformanceCalculator {}
 
         const statementData = {};
         statementData.customer = invoice.customer;
@@ -168,7 +170,14 @@
         return statementData;
 
         function createPerformaceCalculator(aPerformance, aPlay) {
-          return new PerformanceCalculator(aPerformance, playFor(aPerformance));
+          switch (aPlay.type) {
+            case "tragedy":
+              return new TragedyCalaculator(aPerformance, aPlay);
+            case "comedy":
+              return new ComedyCalaculator(aPerformance, aPlay);
+            default:
+              throw new Error(`unknown type: ${aPlay.type}`);
+          }
         }
 
         function enrichPerformance(aPerformance) {
