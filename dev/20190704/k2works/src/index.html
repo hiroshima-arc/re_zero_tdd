@@ -81,7 +81,7 @@
     </script>
 
     <script>
-      fetch("http://localhost:9292/api/statement")
+      fetch("http://localhost:9292/api/text-statement")
         .then(response => {
           return response.json();
         })
@@ -89,6 +89,14 @@
           document.querySelector(
             "#app"
           ).innerHTML = `<pre>${data.statement}</pre>`;
+          console.log(data);
+        });
+      fetch("http://localhost:9292/api/html-statement")
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          document.querySelector("#app").innerHTML = data.statement;
           console.log(data);
         });
     </script>

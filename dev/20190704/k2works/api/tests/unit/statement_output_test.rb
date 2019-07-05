@@ -20,7 +20,7 @@ class StatementOutputTest < Test::Unit::TestCase
     # Do nothing
   end
 
-  test "ステートメント出力" do
+  test "テキストステートメント出力" do
     output =
         "山田様のレンタル明細\n" +
             "\t新作\t900円\n" +
@@ -35,5 +35,22 @@ class StatementOutputTest < Test::Unit::TestCase
     customer.add_rental(@regular)
 
     assert_equal(output, customer.statement)
+  end
+
+  test "HTMLステートメント出力" do
+    output =
+        "<h1><em>山田様</em>のレンタル明細</h1><p>\n" +
+            "\t新作\t900円<br>\n" +
+            "\t子供\t150円<br>\n" +
+            "\t一般\t200円<br>\n" +
+            "<p>合計金額 <em>1250円</em><p>\n" +
+            "獲得ポイント <em>4ポイント</em><p>"
+
+    customer = Customer.new('山田')
+    customer.add_rental(@new_release)
+    customer.add_rental(@children)
+    customer.add_rental(@regular)
+
+    assert_equal(output, customer.html_statement)
   end
 end

@@ -1,8 +1,6 @@
 require 'sinatra'
-require_relative './domain/movie'
-require_relative './domain/rental'
-require_relative './domain/customer'
-include Domain
+require_relative './application/statement_service'
+include Application
 
 before do
   if !request.body.read.empty? && !request.body.empty?
@@ -15,21 +13,18 @@ end
 ##################################
 # Return a Hello world JSON
 ##################################
-get '/api/statement' do
-  new_release_movie = Movie.new('新作', Movie::NEW_RELEASE)
-  children_movie = Movie.new('子供', Movie::CHILDREN)
-  regular_movie = Movie.new('一般', Movie::REGULAR)
-
-  new_release = Rental.new(new_release_movie, 3)
-  children = Rental.new(children_movie, 2)
-  regular = Rental.new(regular_movie, 1)
-
-  customer = Customer.new('山田')
-  customer.add_rental(new_release)
-  customer.add_rental(children)
-  customer.add_rental(regular)
+get '/api/text-statement' do
+  service = StatementService.new
 
   content_type :json
   headers 'Access-Control-Allow-Origin' => '*'
-  { statement: customer.statement }.to_json
+  { statement: service.create_text_statement }.to_json
+end
+
+get '/api/html-statement' do
+  service = StatementService.new
+
+  content_type :json
+  headers 'Access-Control-Allow-Origin' => '*'
+  { statement: service.create_html_statement }.to_json
 end
