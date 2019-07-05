@@ -19,9 +19,8 @@ module Domain
         # このレンタルの料金を表示
         result += "\t" + element.movie.title + "\t" + element.charge.to_s + "円\n"
       end
-      total_amount = total_charge
       # フッター行を追加
-      result += "合計金額 #{total_amount}円\n"
+      result += "合計金額 #{total_charge}円\n"
       result += "獲得ポイント #{frequent_renter_points}ポイント"
       result
     end
