@@ -167,8 +167,12 @@
         statementData.totalVolumeCredits = totalVolumeCredits(statementData);
         return statementData;
 
+        function createPerformaceCalculator(aPerformance, aPlay) {
+          return new PerformanceCalculator(aPerformance, playFor(aPerformance));
+        }
+
         function enrichPerformance(aPerformance) {
-          const calculator = new PerformanceCalculator(
+          const calculator = createPerformaceCalculator(
             aPerformance,
             playFor(aPerformance)
           );
