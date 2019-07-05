@@ -1,0 +1,41 @@
+inherit_from: .rubocop_todo.yml
+AllCops:
+  DisplayStyleGuide: true
+  DisplayCopNames: true
+  Include:
+    - '**/Gemfile'
+    - '**/Rakefile'
+  Exclude:
+    - '**/bin/spring'
+    - '**/bin/setup'
+    - '**/bin/rake'
+    - '**/bin/rails'
+    - '**/db/schema.rb'
+    - 'client/**/**'
+    - 'config/**/**'
+    - 'db/**/**'
+    - 'bin/**'
+    - 'app/models/role.rb'
+    - '**/vendor/*'
+    - '.aws-sam'
+
+  Metrics/LineLength:
+    Max: 120
+
+  Metrics/MethodLength:
+    Max: 20
+
+  Style/Documentation:
+    Enabled: false
+
+  Metrics/AbcSize:
+    Max: 25
+
+  Metrics/ModuleLength:
+    Exclude:
+      - "**/*_spec.rb"
+
+  Metrics/BlockLength:
+    Exclude:
+      - "**/*_spec.rb"
+    ExcludedMethods: ['included']
