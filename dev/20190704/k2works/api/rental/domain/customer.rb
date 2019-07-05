@@ -12,13 +12,14 @@ module Domain
     end
 
     def statement
-      total_amount, frequent_renter_points = 0, 0
+      frequent_renter_points = 0
       result = "#{@name}様のレンタル明細\n"
       @rentals.each do |element|
         frequent_renter_points += element.frequent_renter_point
         # このレンタルの料金を表示
         result += "\t" + element.movie.title + "\t" + element.charge.to_s + "円\n"
       end
+      total_amount = 0
       @rentals.each do |element|
         total_amount += element.charge
       end
