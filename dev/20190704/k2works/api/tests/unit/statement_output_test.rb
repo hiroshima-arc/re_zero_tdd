@@ -24,14 +24,12 @@ class StatementOutputTest < Test::Unit::TestCase
     # Do nothing
   end
 
-  test "テキストステートメント出力" do
+  test 'テキストステートメント出力' do
     output =
-        "山田様のレンタル明細\n" +
-            "\t新作\t900円\n" +
-            "\t子供\t150円\n" +
-            "\t一般\t200円\n" +
-            "合計金額 1250円\n" +
-            "獲得ポイント 4ポイント"
+      "山田様のレンタル明細\n" + "\t新作\t900円\n" + "\t子供\t150円\n" +
+        "\t一般\t200円\n" +
+        "合計金額 1250円\n" +
+        '獲得ポイント 4ポイント'
 
     customer = Customer.new('山田')
     customer.add_rental(@new_release)
@@ -41,14 +39,13 @@ class StatementOutputTest < Test::Unit::TestCase
     assert_equal(output, customer.statement)
   end
 
-  test "HTMLステートメント出力" do
+  test 'HTMLステートメント出力' do
     output =
-        "<h1><em>山田様</em>のレンタル明細</h1><p>\n" +
-            "\t新作\t900円<br>\n" +
-            "\t子供\t150円<br>\n" +
-            "\t一般\t200円<br>\n" +
-            "<p>合計金額 <em>1250円</em><p>\n" +
-            "獲得ポイント <em>4ポイント</em><p>"
+      "<h1><em>山田様</em>のレンタル明細</h1><p>\n" + "\t新作\t900円<br>\n" +
+        "\t子供\t150円<br>\n" +
+        "\t一般\t200円<br>\n" +
+        "<p>合計金額 <em>1250円</em><p>\n" +
+        '獲得ポイント <em>4ポイント</em><p>'
 
     customer = Customer.new('山田')
     customer.add_rental(@new_release)

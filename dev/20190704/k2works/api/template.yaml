@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
   api
@@ -9,7 +9,7 @@ Parameters:
   ApiUrl:
     Type: String
     Description: Default api url
-    Default: 'https://api.hiroshima-arc.org'
+    Default: "https://api.hiroshima-arc.org"
 
 Globals:
   Function:
@@ -17,7 +17,7 @@ Globals:
 
 Resources:
   SinatraFunction:
-    Type: 'AWS::Serverless::Function'
+    Type: "AWS::Serverless::Function"
     Properties:
       Handler: lambda.handler
       Runtime: ruby2.5
@@ -36,8 +36,8 @@ Resources:
     Properties:
       StageName: Prod
       DefinitionBody:
-        swagger: '2.0'
-        basePath: '/Prod'
+        swagger: "2.0"
+        basePath: "/Prod"
         info:
           title: !Ref AWS::StackName
         paths:
@@ -45,8 +45,7 @@ Resources:
             x-amazon-apigateway-any-method:
               responses: {}
               x-amazon-apigateway-integration:
-                uri:
-                  !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SinatraFunction.Arn}/invocations'
+                uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SinatraFunction.Arn}/invocations"
                 passthroughBehavior: "when_no_match"
                 httpMethod: POST
                 type: "aws_proxy"
@@ -54,8 +53,7 @@ Resources:
             get:
               responses: {}
               x-amazon-apigateway-integration:
-                uri:
-                  !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SinatraFunction.Arn}/invocations'
+                uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SinatraFunction.Arn}/invocations"
                 passthroughBehavior: "when_no_match"
                 httpMethod: POST
                 type: "aws_proxy"

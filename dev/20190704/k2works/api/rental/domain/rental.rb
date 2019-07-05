@@ -12,6 +12,5 @@ module Domain
     def frequent_renter_points
       @movie.frequent_renter_points(days_rented)
     end
-
   end
 end

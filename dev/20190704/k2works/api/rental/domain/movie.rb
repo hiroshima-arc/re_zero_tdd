@@ -22,6 +22,5 @@ module Domain
     def frequent_renter_points(days_rented)
       @price.frequent_renter_points(days_rented)
     end
-
   end
 end

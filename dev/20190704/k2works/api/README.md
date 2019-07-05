@@ -18,9 +18,9 @@ This is a sample template for api - Below is a brief explanation of what we have
 
 ## Requirements
 
-* AWS CLI already configured with at Administrator permission
-* [Ruby 2.5 installed](https://www.ruby-lang.org/en/documentation/installation/)
-* [Docker installed](https://www.docker.com/community-edition)
+- AWS CLI already configured with at Administrator permission
+- [Ruby 2.5 installed](https://www.ruby-lang.org/en/documentation/installation/)
+- [Docker installed](https://www.docker.com/community-edition)
 
 ## Setup process
 
@@ -43,13 +43,13 @@ If the previous command ran successfully you should now be able to hit the follo
 **SAM CLI** is used to emulate both Lambda and API Gateway locally and uses our `template.yaml` to understand how to bootstrap this environment (runtime, where the source code is, etc.) - The following excerpt is what the CLI will read in order to initialize an API and its routes:
 
 ```yaml
-...
+---
 Events:
-    HelloWorld:
-        Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-        Properties:
-            Path: /hello
-            Method: get
+  HelloWorld:
+    Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+    Properties:
+      Path: /hello
+      Method: get
 ```
 
 ## Packaging and deployment
@@ -97,7 +97,7 @@ aws cloudformation describe-stacks \
     --stack-name api \
     --query 'Stacks[].Outputs[?OutputKey==`HelloWorldApi`]' \
     --output table
-``` 
+```
 
 ## Fetch, tail, and filter Lambda function logs
 
@@ -133,22 +133,21 @@ Here are a few things you can try to get more acquainted with building serverles
 
 ### Learn how SAM Build can help you with dependencies
 
-* Uncomment lines on `app.rb`
-* Build the project with ``sam build --use-container``
-* Invoke with ``sam local invoke HelloWorldFunction --event event.json``
-* Update tests
+- Uncomment lines on `app.rb`
+- Build the project with `sam build --use-container`
+- Invoke with `sam local invoke HelloWorldFunction --event event.json`
+- Update tests
 
 ### Create an additional API resource
 
-* Create a catch all resource (e.g. /hello/{proxy+}) and return the name requested through this new path
-* Update tests
+- Create a catch all resource (e.g. /hello/{proxy+}) and return the name requested through this new path
+- Update tests
 
 ### Step-through debugging
 
-* **[Enable step-through debugging docs for supported runtimes]((https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging.html))**
+- **[Enable step-through debugging docs for supported runtimes](<(https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging.html)>)**
 
 Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
-
 
 # Appendix
 
@@ -162,12 +161,12 @@ sam build
 ```
 
 If your dependencies contain native modules that need to be compiled specifically for the operating system running on AWS Lambda, use this command to build inside a Lambda-like Docker container instead:
+
 ```bash
 sam build --use-container
 ```
 
 By default, this command writes built artifacts to `.aws-sam/build` folder.
-
 
 ## SAM and AWS CLI commands
 
@@ -206,4 +205,3 @@ aws cloudformation describe-stacks \
 # Tail Lambda function Logs using Logical name defined in SAM Template
 sam logs -n HelloWorldFunction --stack-name api --tail
 ```
-

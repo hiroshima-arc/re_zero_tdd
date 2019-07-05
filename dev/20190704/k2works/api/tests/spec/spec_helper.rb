@@ -8,9 +8,10 @@ def app
 end
 
 def stub_client
-  @stub_client ||= begin
-    Aws::DynamoDB::Client.new(stub_responses: true) # don't send real calls to DynamoDB in test env
-  end
+  @stub_client ||=
+    begin
+      Aws::DynamoDB::Client.new(stub_responses: true) # don't send real calls to DynamoDB in test env
+    end
 end
 
 # We could use native RSpec `post '/endpoint', param1: 'foo', param2: 'bar'
@@ -21,7 +22,7 @@ def api_gateway_post(path, params)
   api_gateway_body_fwd = params.to_json
   rack_input = StringIO.new(api_gateway_body_fwd)
 
-  post path, real_params = {}, {"rack.input" => rack_input}
+  post path, real_params = {}, { 'rack.input' => rack_input }
 end
 
 def json_result
