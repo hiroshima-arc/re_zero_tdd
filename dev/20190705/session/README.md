@@ -34,6 +34,15 @@ touch .jshintrc
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+mkdir src
+touch src/index.html
+npm run build
+npm start
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
