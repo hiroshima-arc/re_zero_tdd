@@ -82,7 +82,7 @@
       describe("VolumeCredits Test", () => {
         it("print statement", () => {
           const expected = `Statement for BigCo\n Hamlet: $650.00 (55 seats)\n As You Like It: $580.00 (35 seats)\n Othello: $500.00 (40 seats)\nAmount owed is $1,730.00\nYou earned 47 credits\n`;
-          expect(expected).to.equal(statement(invoices[0], player));
+          expect(expected).to.equal(textStatement(invoices[0], player));
         });
       });
 
@@ -112,6 +112,10 @@
       ];
 
       function statement(invoice, plays) {
+        return renderHtml(createStatmentData(invoice, plays));
+      }
+
+      function textStatement(invoice, plays) {
         return renderPlainText(createStatmentData(invoice, plays));
       }
 
@@ -182,6 +186,20 @@
         }
       }
 
+      function renderHtml(data) {
+        let result = `<h1>Statement for ${data.customer}</h1>\n`;
+        result += "<table>\n";
+        result += "<tr><th>play</th><th>seats</th><th>cost</th></tr>";
+        for (let perf of data.performances) {
+          result += ` <tr><td>${perf.play.name}</td><td>${perf.audience}</td>`;
+          result += ` <td>${usd(perf.amount)}</td></tr>\n`;
+        }
+        result += "</table>\n";
+        result += `<p>Amount owed is <em>${usd(data.totalAmount)}</em></p>\n`;
+        result += `<p>You earned <em>${data.totalVolumeCredits}</em>credits</p>\n`;
+        return result;
+      }
+
       function renderPlainText(data, plays) {
         let result = `Statement for ${data.customer}\n`;
         for (let perf of data.performances) {
@@ -193,14 +211,13 @@
         result += `Amount owed is ${usd(data.totalAmount)}\n`;
         result += `You earned ${data.totalVolumeCredits} credits\n`;
         return result;
-
-        function usd(aNumber) {
-          return new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            minimumFractionDigits: 2
-          }).format(aNumber / 100);
-        }
+      }
+      function usd(aNumber) {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 2
+        }).format(aNumber / 100);
       }
       const result = statement(invoices[0], player);
       document.querySelector(
