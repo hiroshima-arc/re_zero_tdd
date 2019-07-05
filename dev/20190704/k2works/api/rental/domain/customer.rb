@@ -15,7 +15,7 @@ module Domain
       total_amount, frequent_renter_points = 0, 0
       result = "#{@name}様のレンタル明細\n"
       @rentals.each do |element|
-        frequent_renter_points = element.frequent_renter_point(frequent_renter_points)
+        frequent_renter_points += element.frequent_renter_point
         # このレンタルの料金を表示
         result += "\t" + element.movie.title + "\t" + element.charge.to_s + "円\n"
         total_amount += element.charge
