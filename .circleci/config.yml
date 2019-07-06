@@ -4,7 +4,7 @@ defaults: &defaults
     - CC_TEST_REPORTER_ID: fe53a8f6307a727c3763579632560e44e359114d48daa07f57e5559539a6c4f2
   working_directory: ~/repo
   docker:
-    - image: hiroshimaarc/re-zero-tdd:1.3.1
+    - image: hiroshimaarc/re-zero-tdd:1.3.2
 
 jobs:
   build:
@@ -18,16 +18,15 @@ jobs:
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
             chmod +x ./tmp/cc-test-reporter
       - run:
-          name: Run ruby tests
-          command: |
-            rake test:ruby
-            ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/codeclimate.ruby.json dev/coverage/.resultset.json
-      - run:
           name: Run python tests
           command: |
             rake test:python
             rake coverage:python
             ./tmp/cc-test-reporter format-coverage -t coverage.py -o tmp/codeclimate.python.json dev/coverage.xml
+      - run:
+          name: Run ruby tests
+          command: |
+            rake test:ruby
       - run:
           name: Run elixir tests
           command: |
@@ -36,8 +35,6 @@ jobs:
           name: Run nodejs tests
           command: |
             rake test:nodejs
-            rake coverage:nodejs
-            ./tmp/cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.nodjs.json dev/coverage/lcov.info
       - run:
           name: Run java tests
           command: |

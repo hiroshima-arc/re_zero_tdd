@@ -16,6 +16,7 @@
     "start": "nf start -j Procfile",
     "dev": "nf start -j Procfile-dev",
     "build": "npm-run-all build:* sam:build",
+    "build:api": "cd $npm_package_config_app_dir; bundle install --path vendor/bundle",
     "build:backend": "cd $npm_package_config_app_service_dir; bundle install --path vendor/bundle",
     "build:doc": "markdown README.md > ./src/readme.html",
     "test": "npm-run-all test:*",
