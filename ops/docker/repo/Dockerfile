@@ -33,7 +33,7 @@ RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
     pip install awscli
 
 # For Ruby
-ENV RUBY_VER 2.5.3
+ENV RUBY_VER 2.5.5
 RUN git clone https://github.com/sstephenson/rbenv $HOME/.rbenv
 RUN git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
 RUN $HOME/.rbenv/plugins/ruby-build/install.sh
@@ -99,7 +99,7 @@ ENV PATH $HOME/.asdf/shims:$PATH
 RUN yum -y install php72
 
 # For Java
-ENV JAVA_VER 8.0.202-amzn
+ENV JAVA_VER 8.0.212-amzn
 ENV MAVEN_VER 3.5.4
 ENV GRADLE_VER 5.3.1
 ENV SDKMAN_DIR $HOME/.sdkman

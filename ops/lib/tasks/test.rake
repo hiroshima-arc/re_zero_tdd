@@ -4,8 +4,12 @@ namespace :test do
   desc 'Rubyテスト'
   task :ruby do
     cd work do
-      Dir.glob("**/**/*.rb").each do |test|
-        sh "ruby #{test}"
+      %w(20190704/k2works).each do |dir|
+        cd dir do
+          sh "npm install"
+          sh "npm run build:api"
+          sh "npm run test"
+        end
       end
     end
   end
