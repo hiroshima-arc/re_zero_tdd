@@ -1,0 +1,33 @@
+{
+  "name": "k2works",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nf start -j Procfile",
+    "build": "markdown README.md > ./src/readme.html",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write src/**/*.*",
+    "watch": "watch 'npm-run-all format' ./src ",
+    "app": "browser-sync start --config bs-config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^10.0.2",
+    "browser-sync": "^2.26.7",
+    "connect-browser-sync": "^2.1.0",
+    "cpx": "^1.5.0",
+    "eslint": "^5.16.0",
+    "foreman": "^3.0.1",
+    "jshint": "^2.10.2",
+    "markdown-to-html": "0.0.13",
+    "nodemon": "^1.19.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
+    "watch": "^1.0.2"
+  }
+}

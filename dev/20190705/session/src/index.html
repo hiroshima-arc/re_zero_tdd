@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link
+      href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css"
+      rel="stylesheet"
+    />
+
+    <style type="text/css">
+      body {
+        width: 810px;
+        margin: 0 auto;
+        background-color: ivory;
+      }
+      header {
+        width: 350px;
+      }
+      .nav-component {
+        width: 290px;
+        float: left;
+        padding: 5px;
+        margin-bottom: 5px;
+      }
+      .app-component {
+        width: 500px;
+        float: right;
+        padding-left: 5px;
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+      }
+      .app-component table {
+        margin-top: 10px;
+        border-collapse: collapse;
+      }
+      .app-component th {
+        border: 1px solid black;
+        background-color: aqua;
+      }
+      .app-component td {
+        border: 1px solid black;
+      }
+      footer {
+        clear: both;
+        width: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>HTML5+CSS+JavaScript with TDD</h1>
+    <header>
+      <nav class="nav-component">
+        <h1>Menu</h1>
+        <ul>
+          <li><a href="readme.html" target="_blank">README</a></li>
+          <li><a href="index.html">VolumeCredits</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="app-component">
+      <h2>VolumeCredits</h2>
+      <div id="app-component"></div>
+      <div id="mocha"></div>
+    </section>
+
+    <footer>
+      <p>Copyright</p>
+      <address>hiroshima.arc@gmail.com</address>
+    </footer>
+
+    <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script>
+      mocha.setup("bdd");
+      const expect = chai.expect;
+
+      describe("VolumeCredits Test", () => {
+        it("print statement", () => {
+          const expected = `Statement for BigCo\n Hamlet: $650.00 (55 seats)\n As You Like It: $580.00 (35 seats)\n Othello: $500.00 (40 seats)\nAmount owed is $1,730.00\nYou earned 47 credits\n`;
+          expect(expected).to.equal(textStatement(invoices[0], player));
+        });
+      });
+
+      const player = {
+        hamlet: { name: "Hamlet", type: "tragedy" },
+        "as-like": { name: "As You Like It", type: "comedy" },
+        othello: { name: "Othello", type: "tragedy" }
+      };
+      const invoices = [
+        {
+          customer: "BigCo",
+          performances: [
+            {
+              playID: "hamlet",
+              audience: 55
+            },
+            {
+              playID: "as-like",
+              audience: 35
+            },
+            {
+              playID: "othello",
+              audience: 40
+            }
+          ]
+        }
+      ];
+
+      function statement(invoice, plays) {
+        return renderHtml(createStatmentData(invoice, plays));
+      }
+
+      function textStatement(invoice, plays) {
+        return renderPlainText(createStatmentData(invoice, plays));
+      }
+
+      function createStatmentData(invoice, plays) {
+        class PerformanceCalculator {
+          constructor(aPerformance, aPlay) {
+            this.performance = aPerformance;
+            this.play = aPlay;
+          }
+          get amount() {
+            throw new Error("subclass responsibilty");
+          }
+          get volumeCredits() {
+            return Math.max(this.performance.audience - 30, 0);
+          }
+        }
+        class TragedyCalaculator extends PerformanceCalculator {
+          get amount() {
+            let result = 40000;
+            if (this.performance.audience > 30) {
+              result += 1000 * (this.performance.audience - 30);
+            }
+            return result;
+          }
+        }
+        class ComedyCalaculator extends PerformanceCalculator {
+          get amount() {
+            let result = 30000;
+            if (this.performance.audience > 20) {
+              result += 10000 + 500 * (this.performance.audience - 20);
+            }
+            result += 300 * this.performance.audience;
+            return result;
+          }
+          get volumeCredits() {
+            return (
+              super.volumeCredits + Math.floor(this.performance.audience / 5)
+            );
+          }
+        }
+
+        const statementData = {};
+        statementData.customer = invoice.customer;
+        statementData.performances = invoice.performances.map(
+          enrichPerformance
+        );
+        statementData.totalAmount = totalAmount(statementData);
+        statementData.totalVolumeCredits = totalVolumeCredits(statementData);
+        return statementData;
+
+        function createPerformaceCalculator(aPerformance, aPlay) {
+          switch (aPlay.type) {
+            case "tragedy":
+              return new TragedyCalaculator(aPerformance, aPlay);
+            case "comedy":
+              return new ComedyCalaculator(aPerformance, aPlay);
+            default:
+              throw new Error(`unknown type: ${aPlay.type}`);
+          }
+        }
+
+        function enrichPerformance(aPerformance) {
+          const calculator = createPerformaceCalculator(
+            aPerformance,
+            playFor(aPerformance)
+          );
+          const result = Object.assign({}, aPerformance);
+          result.play = calculator.play;
+          result.amount = calculator.amount;
+          result.volumeCredits = calculator.volumeCredits;
+          return result;
+        }
+
+        function totalVolumeCredits(data) {
+          return data.performances.reduce(
+            (total, p) => total + p.volumeCredits,
+            0
+          );
+        }
+
+        function totalAmount(data) {
+          return data.performances.reduce((total, p) => total + p.amount, 0);
+        }
+
+        function amountFor(aPerformance) {
+          return new PerformanceCalculator(aPerformance, playFor(aPerformance))
+            .amount;
+        }
+
+        function playFor(aPerformance) {
+          return plays[aPerformance.playID];
+        }
+      }
+
+      function renderHtml(data) {
+        let result = `<h1>Statement for ${data.customer}</h1>\n`;
+        result += "<table>\n";
+        result += "<tr><th>play</th><th>seats</th><th>cost</th></tr>";
+        for (let perf of data.performances) {
+          result += ` <tr><td>${perf.play.name}</td><td>${perf.audience}</td>`;
+          result += ` <td>${usd(perf.amount)}</td></tr>\n`;
+        }
+        result += "</table>\n";
+        result += `<p>Amount owed is <em>${usd(data.totalAmount)}</em></p>\n`;
+        result += `<p>You earned <em>${data.totalVolumeCredits}</em>credits</p>\n`;
+        return result;
+      }
+
+      function renderPlainText(data, plays) {
+        let result = `Statement for ${data.customer}\n`;
+        for (let perf of data.performances) {
+          // print line for this order
+          result += ` ${perf.play.name}: ${usd(perf.amount)} (${
+            perf.audience
+          } seats)\n`;
+        }
+        result += `Amount owed is ${usd(data.totalAmount)}\n`;
+        result += `You earned ${data.totalVolumeCredits} credits\n`;
+        return result;
+      }
+      function usd(aNumber) {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 2
+        }).format(aNumber / 100);
+      }
+      const result = statement(invoices[0], player);
+      document.querySelector(
+        "#app-component"
+      ).innerHTML = `<pre>${result}</pre>`;
+    </script>
+
+    <script>
+      mocha.checkLeaks();
+      mocha.globals(["jQuery"]);
+      mocha.run();
+    </script>
+  </body>
+</html>
