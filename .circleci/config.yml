@@ -21,8 +21,6 @@ jobs:
           name: Run python tests
           command: |
             rake test:python
-            rake coverage:python
-            ./tmp/cc-test-reporter format-coverage -t coverage.py -o tmp/codeclimate.python.json dev/coverage.xml
       - run:
           name: Run ruby tests
           command: |
@@ -39,8 +37,3 @@ jobs:
           name: Run java tests
           command: |
             rake test:java
-      - run:
-          name: Upload coverage results to Code Climate
-          command: |
-            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 3 -o tmp/codeclimate.total.json
-            ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
