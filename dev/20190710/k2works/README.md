@@ -32,6 +32,14 @@ npx browser-sync init
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+mkdir src
+touch src/index.html
+sam init --runtime python3.7 -n api
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
