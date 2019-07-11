@@ -69,3 +69,5 @@ sam init --runtime python3.7 -n api
 **[⬆ back to top](#構成)**
 
 ## 参照
+- [Serverless Python Web Applications With AWS Lambda and Flask](https://spiegelmock.com/2018/09/06/serverless-python-web-applications-with-aws-lambda-and-flask/)
+- [AWSGI](https://github.com/slank/awsgi)
