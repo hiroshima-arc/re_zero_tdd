@@ -20,7 +20,7 @@ class Customer:
         result = f"{self.name}様のレンタル明細\n"
 
         for element in self.__rentals:
-            frequent_renter_points = element.frequent_renter_point(frequent_renter_points)
+            frequent_renter_points += element.frequent_renter_point()
             # このレンタルの料金を表示
             result += f"\t{element.movie.title}\t{str(element.charge())}円\n"
             total_amount += element.charge()
