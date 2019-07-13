@@ -20,7 +20,7 @@ class Customer:
         result = f"{self.name}様のレンタル明細\n"
 
         for element in self.__rentals:
-            frequent_renter_points = self.frequent_renter_point(element, frequent_renter_points)
+            frequent_renter_points = element.frequent_renter_point(frequent_renter_points)
             # このレンタルの料金を表示
             result += f"\t{element.movie.title}\t{str(element.charge())}円\n"
             total_amount += element.charge()
@@ -28,12 +28,4 @@ class Customer:
         result += f"合計金額 {total_amount}円\n"
         result += f"獲得ポイント {frequent_renter_points}ポイント"
         return result
-
-    def frequent_renter_point(self, element, frequent_renter_points):
-        # レンタルポイントを加算
-        frequent_renter_points += 1
-        # 新作2日間レンタルでボーナス点を加算
-        if element.movie.price_code == Movie.NEW_RELEASE and element.days_rented > 1:
-            frequent_renter_points += 1
-        return frequent_renter_points
 

@@ -29,3 +29,12 @@ class Rental:
             if self.days_rented > 3:
                 result += (self.days_rented - 3) * 1.5
         return result
+
+    def frequent_renter_point(self, frequent_renter_points):
+        # レンタルポイントを加算
+        frequent_renter_points += 1
+        # 新作2日間レンタルでボーナス点を加算
+        if self.movie.price_code == Movie.NEW_RELEASE and self.days_rented > 1:
+            frequent_renter_points += 1
+        return frequent_renter_points
+
