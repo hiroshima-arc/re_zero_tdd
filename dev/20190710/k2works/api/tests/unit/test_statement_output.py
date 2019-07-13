@@ -3,13 +3,16 @@ import unittest
 from video_rental.domain.movie import Movie
 from video_rental.domain.rental import Rental
 from video_rental.domain.customer import Customer
+from video_rental.domain.new_release_price import NewReleasePrice
+from video_rental.domain.children_price import ChildrenPrice
+from video_rental.domain.regular_price import RegularPrice
 
 
 class StatementOutputTest(unittest.TestCase):
     def setUp(self):
-        new_release_movie = Movie("新作", Movie.NEW_RELEASE)
-        children_movie = Movie("子供", Movie.CHILDREN)
-        regular_movie = Movie("一般", Movie.REGULAR)
+        new_release_movie = Movie("新作", NewReleasePrice())
+        children_movie = Movie("子供", ChildrenPrice())
+        regular_movie = Movie("一般", RegularPrice())
 
         self.new_release = Rental(new_release_movie, 3)
         self.children = Rental(children_movie, 2)

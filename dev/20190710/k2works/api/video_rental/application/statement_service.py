@@ -1,6 +1,9 @@
 from customer import Customer
 from movie import Movie
 from rental import Rental
+from new_release_price import NewReleasePrice
+from children_price import ChildrenPrice
+from regular_price import RegularPrice
 
 
 class StatementService:
@@ -13,11 +16,11 @@ class StatementService:
         return customer.html_statement()
 
     def create_statement(self):
-        new_release_movie = Movie("新作", Movie.NEW_RELEASE)
+        new_release_movie = Movie("新作", NewReleasePrice())
 
-        children_movie = Movie("子供", Movie.CHILDREN)
+        children_movie = Movie("子供", ChildrenPrice())
 
-        regular_movie = Movie("一般", Movie.REGULAR)
+        regular_movie = Movie("一般", RegularPrice())
 
         new_release = Rental(new_release_movie, 3)
 
