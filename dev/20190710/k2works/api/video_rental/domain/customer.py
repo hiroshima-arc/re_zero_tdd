@@ -23,12 +23,16 @@ class Customer:
             # このレンタルの料金を表示
             result += f"\t{element.movie.title}\t{str(element.charge())}円\n"
 
-        total_amount = 0
-        for element in self.__rentals:
-            total_amount += element.charge()
+        total_amount = self.total_charge()
 
         # フッター行を追加
         result += f"合計金額 {total_amount}円\n"
         result += f"獲得ポイント {frequent_renter_points}ポイント"
         return result
+
+    def total_charge(self):
+        total_amount = 0
+        for element in self.__rentals:
+            total_amount += element.charge()
+        return total_amount
 
