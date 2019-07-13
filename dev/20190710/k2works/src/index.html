@@ -63,14 +63,14 @@
     </header>
     <section>
       <section class="app-component">
-        <statement>VideoRental</h2>
+        <h2>VideoRental</h2>
         <div id="app"></div>
         <div id="mocha"></div>
       </section>
     </section>
     <footer>
-      <p>Creopyright</p>
-      <statement>rehiroshima.arc@gmail.com</address>
+      <p>Copyright</p>
+      <address>rehiroshima.arc@gmail.com</address>
     </footer>
 
     <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
@@ -86,7 +86,9 @@
           return response.json();
         })
         .then(data => {
-          document.querySelector("#app").innerHTML = `<pre>${data.statement}</pre>`;
+          document.querySelector(
+            "#app"
+          ).innerHTML = `<pre>${data.statement}</pre>`;
           console.log(data);
         });
     </script>

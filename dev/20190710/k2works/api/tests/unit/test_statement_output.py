@@ -1,8 +1,8 @@
 import unittest
 
-from rental.movie import Movie
-from rental.rental import Rental
-from rental.customer import Customer
+from video_rental.domain.movie import Movie
+from video_rental.domain.rental import Rental
+from video_rental.domain.customer import Customer
 
 
 class StatementOutputTest(unittest.TestCase):

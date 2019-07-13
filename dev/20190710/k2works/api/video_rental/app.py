@@ -3,6 +3,7 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "vendor"))
+sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "domain"))
 
 import awsgi
 
@@ -16,16 +17,11 @@ app.config["JSON_AS_ASCII"] = False
 
 CORS(app)
 
-from .movie import Movie
+from movie import Movie
 
-from .rental import Rental
+from rental import Rental
 
-from .customer import Customer
-
-
-@app.route("/api/hello")
-def index():
-    return jsonify(status=200, message="hello world")
+from customer import Customer
 
 
 @app.route("/api/statement")

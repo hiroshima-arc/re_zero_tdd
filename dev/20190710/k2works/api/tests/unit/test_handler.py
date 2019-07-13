@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from rental import app
+from video_rental import app
 
 
 @pytest.fixture()

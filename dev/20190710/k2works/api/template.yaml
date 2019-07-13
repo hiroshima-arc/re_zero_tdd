@@ -19,7 +19,7 @@ Resources:
   FlaskFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: rental/
+      CodeUri: video_rental/
       Handler: app.lambda_handler
       Runtime: python3.7
       Events:
@@ -70,4 +70,4 @@ Resources:
 Outputs:
   FlaskAppUrl:
     Description: App endpoint URL
-    Value: !Sub "https://${FlaskApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/hello"
+    Value: !Sub "https://${FlaskApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/statement"

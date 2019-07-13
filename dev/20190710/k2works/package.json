@@ -5,7 +5,7 @@
   "main": "index.js",
   "config": {
     "app_dir":  "api",
-    "app_service_dir":  "api/rental",
+    "app_service_dir":  "api/video_rental",
     "s3_bucket": "re-zero-tdd-serverless",
     "stack_name": "rental-python-service",
     "region": "us-east-1",
