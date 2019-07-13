@@ -4,6 +4,7 @@ import sys
 
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "vendor"))
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "domain"))
+sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "application"))
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "."))
 
 import awsgi
