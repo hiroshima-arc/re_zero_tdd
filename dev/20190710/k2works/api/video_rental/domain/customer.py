@@ -36,16 +36,4 @@ class Customer:
         return result
 
     def amount_for(self, rental):
-        result = 0
-        # 各行の金額を計算
-        if rental.movie.price_code == Movie.REGULAR:
-            result += 200
-            if rental.days_rented > 2:
-                result += (rental.days_rented - 2) * 1.5
-        elif rental.movie.price_code == Movie.NEW_RELEASE:
-            result += rental.days_rented * 300
-        elif rental.movie.price_code == Movie.CHILDREN:
-            result += 150
-            if rental.days_rented > 3:
-                result += (rental.days_rented - 3) * 1.5
-        return result
+        return rental.charge()
