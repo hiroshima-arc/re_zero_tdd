@@ -20,7 +20,7 @@ class Customer:
         result = f"{self.name}様のレンタル明細\n"
 
         for element in self.__rentals:
-            this_amount = self.amount_for(element)
+            this_amount = element.charge()
 
             # レンタルポイントを加算
             frequent_renter_points += 1
@@ -35,5 +35,3 @@ class Customer:
         result += f"獲得ポイント {frequent_renter_points}ポイント"
         return result
 
-    def amount_for(self, rental):
-        return rental.charge()
