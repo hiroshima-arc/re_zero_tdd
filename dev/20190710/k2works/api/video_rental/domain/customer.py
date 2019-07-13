@@ -35,17 +35,17 @@ class Customer:
         result += f"獲得ポイント {frequent_renter_points}ポイント"
         return result
 
-    def amount_for(self, element):
-        this_amount = 0
+    def amount_for(self, rental):
+        result = 0
         # 各行の金額を計算
-        if element.movie.price_code == Movie.REGULAR:
-            this_amount += 200
-            if element.days_rented > 2:
-                this_amount += (element.days_rented - 2) * 1.5
-        elif element.movie.price_code == Movie.NEW_RELEASE:
-            this_amount += element.days_rented * 300
-        elif element.movie.price_code == Movie.CHILDREN:
-            this_amount += 150
-            if element.days_rented > 3:
-                this_amount += (element.days_rented - 3) * 1.5
-        return this_amount
+        if rental.movie.price_code == Movie.REGULAR:
+            result += 200
+            if rental.days_rented > 2:
+                result += (rental.days_rented - 2) * 1.5
+        elif rental.movie.price_code == Movie.NEW_RELEASE:
+            result += rental.days_rented * 300
+        elif rental.movie.price_code == Movie.CHILDREN:
+            result += 150
+            if rental.days_rented > 3:
+                result += (rental.days_rented - 3) * 1.5
+        return result
