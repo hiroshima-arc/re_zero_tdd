@@ -58,7 +58,7 @@ def apigw_event():
         "pathParameters": {"proxy": "/examplepath"},
         "httpMethod": "GET",
         "stageVariables": {"baz": "qux"},
-        "path": "/api/statement",
+        "path": "/api/text-statement",
     }
 
 
