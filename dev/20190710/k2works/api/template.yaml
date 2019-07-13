@@ -19,7 +19,7 @@ Resources:
   FlaskFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: hello_world/
+      CodeUri: rental/
       Handler: app.lambda_handler
       Runtime: python3.7
       Events:

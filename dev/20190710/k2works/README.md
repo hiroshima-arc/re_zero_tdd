@@ -27,7 +27,7 @@
 npm init -y
 npm install --save-dev npm-run-all watch foreman cpx rimraf markdown-to-html
 npm install --save-dev prettier @prettier/plugin-python
-npm install --save-dev browser-sync connect-browser-sync
+npm install --save-dev browser-sync connect-browser-sync nodemon
 npx browser-sync init
 touch Procfile
 ```

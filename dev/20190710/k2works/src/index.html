@@ -57,20 +57,20 @@
         <h1>Menu</h1>
         <ul>
           <li><a href="readme.html" target="_blank">README</a></li>
-          <li><a href="index.html">HelloWorld</a></li>
+          <li><a href="index.html">VideoRental</a></li>
         </ul>
       </nav>
     </header>
     <section>
       <section class="app-component">
-        <h2>HelloWorld</h2>
+        <statement>VideoRental</h2>
         <div id="app"></div>
         <div id="mocha"></div>
       </section>
     </section>
     <footer>
-      <p>Copyright</p>
-      <address>hiroshima.arc@gmail.com</address>
+      <p>Creopyright</p>
+      <statement>rehiroshima.arc@gmail.com</address>
     </footer>
 
     <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
@@ -81,12 +81,12 @@
     </script>
 
     <script>
-      fetch("http://localhost:8000/api/hello")
+      fetch("http://localhost:8000/api/statement")
         .then(response => {
           return response.json();
         })
         .then(data => {
-          document.querySelector("#app").innerHTML = `<p>${data.message}</p>`;
+          document.querySelector("#app").innerHTML = `<pre>${data.statement}</pre>`;
           console.log(data);
         });
     </script>
