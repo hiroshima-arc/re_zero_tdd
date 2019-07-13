@@ -70,4 +70,4 @@ Resources:
 Outputs:
   FlaskAppUrl:
     Description: App endpoint URL
-    Value: !Sub "https://${FlaskApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/text-statement"
+    Value: !Sub "https://${FlaskApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

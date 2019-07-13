@@ -9,7 +9,7 @@ sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "."))
 
 import awsgi
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 
 from flask_cors import CORS
 
@@ -20,6 +20,11 @@ app.config["JSON_AS_ASCII"] = False
 CORS(app)
 
 from statement_service import StatementService
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 @app.route("/api/text-statement")
