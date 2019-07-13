@@ -18,7 +18,7 @@ module.exports = {
   },
   'files': [
     'src/*',
-    'api/**/src/**'
+    'api/**/**'
   ],
   'watchEvents': [
     'change'

@@ -32,7 +32,7 @@ def index():
 def statement():
     new_release_movie = Movie("新作", Movie.NEW_RELEASE)
 
-    children_movie = Movie("子供", Movie.CHILDRENS)
+    children_movie = Movie("子供", Movie.CHILDREN)
 
     regular_movie = Movie("一般", Movie.REGULAR)
 

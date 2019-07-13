@@ -58,7 +58,7 @@ def apigw_event():
         "pathParameters": {"proxy": "/examplepath"},
         "httpMethod": "GET",
         "stageVariables": {"baz": "qux"},
-        "path": "/api/hello",
+        "path": "/api/statement",
     }
 
 
@@ -68,5 +68,5 @@ def test_lambda_handler(apigw_event, mocker):
     data = json.loads(ret["body"])
 
     assert ret["statusCode"] == '200'
-    assert "message" in ret["body"]
-    assert data["message"] == "hello world"
+    assert "statement" in ret["body"]
+    assert data["statement"] == "山田様のレンタル明細\n\t新作\t900円\n\t子供\t150円\n\t一般\t200円\n合計金額 1250円\n獲得ポイント 4ポイント"
