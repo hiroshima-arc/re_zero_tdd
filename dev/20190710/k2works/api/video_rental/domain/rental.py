@@ -18,6 +18,6 @@ class Rental:
     def charge(self):
         return self.movie.charge(self.days_rented)
 
-    def frequent_renter_point(self):
-        return 2 if self.movie.price_code == Movie.NEW_RELEASE and self.days_rented else 1
+    def frequent_renter_points(self):
+        return self.movie.frequent_renter_points(self.days_rented)
 

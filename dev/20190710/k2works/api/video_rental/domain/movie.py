@@ -32,3 +32,6 @@ class Movie:
             if days_rented > 3:
                 result += (days_rented - 3) * 1.5
         return result
+
+    def frequent_renter_points(self, days_rented):
+        return 2 if self.price_code == Movie.NEW_RELEASE and days_rented else 1

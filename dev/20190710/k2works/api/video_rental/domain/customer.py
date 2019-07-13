@@ -41,7 +41,7 @@ class Customer:
     def total_frequent_renter_points(self):
         total_point = 0
         for element in self.__rentals:
-            total_point += element.frequent_renter_point()
+            total_point += element.frequent_renter_points()
         return total_point
 
     def total_charge(self):
