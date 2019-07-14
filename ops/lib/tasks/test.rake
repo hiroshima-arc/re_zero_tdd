@@ -17,8 +17,12 @@ namespace :test do
   desc 'Pythonテスト'
   task :python do
     cd work do
-      Dir.glob("**/**/*.py").each do |test|
-        sh "python #{test}"
+      %w(20190710/k2works).each do |dir|
+        cd dir do
+          sh "npm install"
+          sh "npm run build:backend"
+          sh "npm run test"
+        end
       end
     end
   end
