@@ -75,3 +75,7 @@ dotnet add package Microsoft.DotNet.Watcher.Tools
 **[⬆ back to top](#構成)**
 
 ## 参照
+- [ASP.NET Core を使って Web API を作成する](https://docs.microsoft.com/ja-jp/aspnet/core/web-api/?view=aspnetcore-2.2)
+- [Developing .NET Core AWS Lambda functions](https://aws.amazon.com/jp/blogs/compute/developing-net-core-aws-lambda-functions/)
+- [AWS Lambda for .NET Core](https://github.com/aws/aws-lambda-dotnet)
+- [Dotnet Watch (Like Nodemon For NodeJS)](https://davidemanske.com/dotnet-watch-like-nodemon-for-nodejs/)
