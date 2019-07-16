@@ -44,6 +44,7 @@ dotnet new --install "Amazon.Lambda.Templates"
 dotnet new serverless.AspNetCoreWebAPI -n todo
 cd todo/src/todo
 dotnet add package Microsoft.DotNet.Watcher.Tools
+dotnet add todo.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc2
 ```
 
 **[⬆ back to top](#構成)**
