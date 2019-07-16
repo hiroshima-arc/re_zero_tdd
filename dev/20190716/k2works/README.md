@@ -42,6 +42,8 @@ mkdir api
 cd api
 dotnet new --install "Amazon.Lambda.Templates"
 dotnet new serverless.AspNetCoreWebAPI -n todo
+cd todo/src/todo
+dotnet add package Microsoft.DotNet.Watcher.Tools
 ```
 
 **[⬆ back to top](#構成)**
