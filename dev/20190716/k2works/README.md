@@ -80,3 +80,4 @@ dotnet add todo.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc2
 - [Developing .NET Core AWS Lambda functions](https://aws.amazon.com/jp/blogs/compute/developing-net-core-aws-lambda-functions/)
 - [AWS Lambda for .NET Core](https://github.com/aws/aws-lambda-dotnet)
 - [Dotnet Watch (Like Nodemon For NodeJS)](https://davidemanske.com/dotnet-watch-like-nodemon-for-nodejs/)
+- [AWS Elastic Beanstalk を使用した ASP.NET Core アプリケーションのデプロイ](https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/dotnet-core-tutorial.html)

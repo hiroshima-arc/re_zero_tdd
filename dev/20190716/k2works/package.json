@@ -32,7 +32,13 @@
     "dotnet:lambda:describe": "cd $npm_package_config_app_dir; dotnet lambda list-serverless --region $npm_package_config_region",
     "dotnet:lambda:destroy": "cd $npm_package_config_app_dir; dotnet lambda delete-serverless -sn $npm_package_config_stack_name --region $npm_package_config_region",
     "aws:s3:create": "aws s3 mb s3://$npm_package_config_s3_bucket",
-    "aws:s3:destroy": "aws s3 rb s3://$npm_package_config_s3_bucket --force"
+    "aws:s3:destroy": "aws s3 rb s3://$npm_package_config_s3_bucket --force",
+    "aws:eb:clean": "cd $npm_package_config_app_dir; rm -rf site; rm *.zip",
+    "aws:eb:build": "cd $npm_package_config_app_dir; dotnet restore; dotnet publish -o site",
+    "aws:eb:package": "cd $npm_package_config_app_dir; cd site; zip ../site.zip *;cd ..; zip todo.zip site.zip aws-windows-deployment-manifest.json ",
+    "aws:eb:deploy": "cd $npm_package_config_app_dir; eb deploy",
+    "aws:eb:release": "npm-run-all test aws:eb:clean aws:eb:build aws:eb:package aws:eb:deploy",
+    "aws:eb:destroy": "cd $npm_package_config_app_dir; eb terminate"
   },
   "keywords": [],
   "author": "",
