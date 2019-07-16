@@ -9,6 +9,7 @@
 | ソフトウェア   | バージョン | 備考 |
 | :------------- | :--------- | :--- |
 | nodejs         | 8.10.0     |      |
+| ASP.NET Core   | 2.1.0     |      |
 
 ## 構成
 
@@ -30,6 +31,17 @@ npm install --save-dev prettier prettier-plugin-csharp
 npm install --save-dev browser-sync connect-browser-sync
 npx browser-sync init
 touch Procfile
+```
+
+#### アプリケーションのセットアップ
+
+```bash
+mkdir src
+touch src/index.html
+mkdir api
+cd api
+dotnet new --install "Amazon.Lambda.Templates"
+dotnet new serverless.AspNetCoreWebAPI -n todo
 ```
 
 **[⬆ back to top](#構成)**
