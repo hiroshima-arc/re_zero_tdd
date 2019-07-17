@@ -81,3 +81,7 @@ dotnet add todo.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc2
 - [AWS Lambda for .NET Core](https://github.com/aws/aws-lambda-dotnet)
 - [Dotnet Watch (Like Nodemon For NodeJS)](https://davidemanske.com/dotnet-watch-like-nodemon-for-nodejs/)
 - [AWS Elastic Beanstalk を使用した ASP.NET Core アプリケーションのデプロイ](https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/dotnet-core-tutorial.html)
+- [ASP.NET Core のコントローラーのロジックをテストする](https://docs.microsoft.com/ja-jp/aspnet/core/mvc/controllers/testing?view=aspnetcore-2.2)
+- [TestingControllersSample](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/testing/samples)
+- [Unit Testing in ASP.NET Core Web API](https://code-maze.com/unit-testing-aspnetcore-web-api/)
+- [Moq : Mocking Framework for .NET](https://qiita.com/usamik26/items/42959d8b95397d3a8ffb)
