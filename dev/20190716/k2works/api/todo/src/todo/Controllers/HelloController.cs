@@ -8,7 +8,7 @@ namespace todo.Controllers
     {
         [Route("api/[controller]")]
         [HttpGet]
-        public Dictionary<string, string> Get(int id)
+        public Dictionary<string, string> Get()
         {
             var data = new Dictionary<string, string>();
             data["Output"] = "hello, world";
