@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "config": {
-    "app_dir": "api/todo/src/todo",
+    "app_dir": "app/MvcMovie",
     "test_dir": "api/todo/test/todo.Tests",
     "s3_bucket": "re-zero-tdd-serverless",
     "stack_name": "todo-dotnet-service",
@@ -33,6 +33,8 @@
     "dotnet:lambda:destroy": "cd $npm_package_config_app_dir; dotnet lambda delete-serverless -sn $npm_package_config_stack_name --region $npm_package_config_region",
     "aws:s3:create": "aws s3 mb s3://$npm_package_config_s3_bucket",
     "aws:s3:destroy": "aws s3 rb s3://$npm_package_config_s3_bucket --force",
+    "aws:eb:init": "cd $npm_package_config_app_dir; eb init --profile default",
+    "aws:eb:create": "cd $npm_package_config_app_dir; eb create",
     "aws:eb:clean": "cd $npm_package_config_app_dir; rm -rf site; rm *.zip",
     "aws:eb:build": "cd $npm_package_config_app_dir; dotnet restore; dotnet publish -o site",
     "aws:eb:package": "cd $npm_package_config_app_dir; cd site; zip ../site.zip *;cd ..; zip todo.zip site.zip aws-windows-deployment-manifest.json ",
