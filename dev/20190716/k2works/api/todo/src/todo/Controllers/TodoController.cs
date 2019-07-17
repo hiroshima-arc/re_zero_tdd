@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using todo.Models;
+using todo.Repositories;
 
 namespace todo.Controllers
 {
@@ -12,30 +13,26 @@ namespace todo.Controllers
     public class TodoController : ControllerBase
     {
         private readonly TodoContext _context;
+        private readonly ITodoRepository _repository;
 
-        public TodoController(TodoContext context)
+        public TodoController(ITodoRepository repository)
         {
-            _context = context;
-
-            if (_context.TodoItems.Count() == 0)
-            {
-                _context.TodoItems.Add(new TodoItem {Name = "Item1"});
-                _context.SaveChanges();
-            }
+            _repository = repository;
+            _repository.Save();
         }
 
         // GET: api/Todo
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
         {
-            return await _context.TodoItems.ToListAsync();
+            return await _repository.SelectAllAsync();
         }
 
         // GET: api/Todo
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var todoItem = await _repository.FindAsync(id);
 
             if (todoItem == null)
             {
@@ -49,9 +46,7 @@ namespace todo.Controllers
         [HttpPost]
         public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem item)
         {
-            _context.TodoItems.Add(item);
-            await _context.SaveChangesAsync();
-
+            await _repository.SaveAsync(item);
             return CreatedAtAction(nameof(GetTodoItem), new {id = item.Id}, item);
         }
         
@@ -64,8 +59,7 @@ namespace todo.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            await _repository.UpdateAsync(item);
 
             return NoContent();
         }
@@ -74,16 +68,15 @@ namespace todo.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodoItem(long id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var todoItem = await _repository.FindAsync(id);
 
             if (todoItem == null)
             {
                 return NotFound();
             }
 
-            _context.TodoItems.Remove(todoItem);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(todoItem);
+            
             return NoContent();
         }
     }
