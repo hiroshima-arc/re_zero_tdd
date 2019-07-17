@@ -1,3 +1,4 @@
+application: npm run app
 frontend: npm run app:frontend
 backend: npm run app:backend
 front_watch: npm run watch:frontend
