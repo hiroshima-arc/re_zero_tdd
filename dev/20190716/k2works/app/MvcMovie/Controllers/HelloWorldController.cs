@@ -1,14 +1,14 @@
-using Microsoft.AspNetCore.Rewrite.Internal;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MvcMovie.Controllers
 {
-    public class HelloWorldController
+    public class HelloWorldController : Controller
     {
         //
         // GET: /HelloWorld
-        public string Index()
+        public IActionResult Index()
         {
-            return "This is my default action...";
+            return View();
         }
         //
         // GET: /HelloWorld/Welcome/
