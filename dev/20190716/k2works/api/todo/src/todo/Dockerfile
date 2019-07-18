@@ -12,7 +12,7 @@ WORKDIR /app/todo
 RUN dotnet publish -c Release -o out
 
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.1 AS runtime
 WORKDIR /app
 COPY --from=build /app/todo/out ./
 ENTRYPOINT ["dotnet", "todo.dll"]
