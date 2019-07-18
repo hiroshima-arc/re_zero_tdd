@@ -5,3 +5,4 @@
 !.elasticbeanstalk/*.global.yml
 site
 *.zip
+*.db
