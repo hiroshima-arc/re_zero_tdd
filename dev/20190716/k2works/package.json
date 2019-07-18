@@ -43,7 +43,15 @@
     "aws:eb:package": "cd $npm_package_config_app_dir; cd site; zip ../site.zip *;cd ..; zip app.zip site.zip aws-windows-deployment-manifest.json ",
     "aws:eb:deploy": "cd $npm_package_config_app_dir; eb deploy",
     "aws:eb:release": "npm-run-all aws:eb:clean aws:eb:build aws:eb:package aws:eb:deploy",
-    "aws:eb:destroy": "cd $npm_package_config_app_dir; eb terminate"
+    "aws:eb:destroy": "cd $npm_package_config_app_dir; eb terminate",
+    "docker:app": "npm-run-all docker:app:build docker:app:run",
+    "docker:app:build": "cd $npm_package_config_app_dir; docker build -t mvcmovie .",
+    "docker:app:run": "cd $npm_package_config_app_dir; docker run -it --rm -p 8000:80 --name MvcMovie mvcmovie",
+    "docker:app:destroy": "cd $npm_package_config_app_dir; docker rm -f MvcMovie",
+    "docker:api": "npm-run-all docker:api:build docker:api:run",
+    "docker:api:build": "cd $npm_package_config_api_dir; docker build -t todo .",
+    "docker:api:run": "cd $npm_package_config_api_dir; docker run -it --rm -p 9000:80 --name Todo todo",
+    "docker:api:destroy": "cd $npm_package_config_api_dir; docker rm -f MvcMovie"
   },
   "keywords": [],
   "author": "",
