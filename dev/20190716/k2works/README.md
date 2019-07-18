@@ -87,3 +87,4 @@ dotnet add todo.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc2
 - [Moq : Mocking Framework for .NET](https://qiita.com/usamik26/items/42959d8b95397d3a8ffb)
 - [ASP.NET Core MVC で Web アプリを作成する](https://docs.microsoft.com/ja-jp/aspnet/core/tutorials/first-mvc-app/?view=aspnetcore-2.2)
 - [Docker コンテナーで ASP.NET Core をホストする](https://docs.microsoft.com/ja-jp/aspnet/core/host-and-deploy/docker/?view=aspnetcore-2.2)
+- [dotnet sh](https://docs.microsoft.com/ja-jp/dotnet/core/tools/dotnet-sln)
