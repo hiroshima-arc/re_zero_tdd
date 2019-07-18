@@ -17,6 +17,8 @@ namespace MvcMovie.Models
         [Display(Name = "値段")]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
+        [Display(Name = "評価")]
+        public string Rating { get; set; }
     }
 }
 
