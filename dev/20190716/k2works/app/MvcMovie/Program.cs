@@ -5,8 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvcMovie.Models;
 
 namespace MvcMovie
 {
@@ -20,6 +23,23 @@ namespace MvcMovie
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
+
+            using (var scop = host.Services.CreateScope())
+            {
+                var services = scop.ServiceProvider;
+
+                try
+                {
+                    var context = services.GetRequiredService < MvcMovieContext>();
+                    context.Database.Migrate();
+                    SeedData.Initialize(services);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred seeding the DB.");
+                }
+            }
 
             host.Run();
         }
