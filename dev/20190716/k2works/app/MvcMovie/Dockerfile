@@ -7,12 +7,12 @@ COPY *.csproj .
 RUN dotnet restore
 
 # copy everything else and build app
-COPY . ./MvcMovie/
-WORKDIR /app/MvcMovie
+COPY . .
+WORKDIR /app
 RUN dotnet publish -c Release -o out
 
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
-COPY --from=build /app/MvcMovie/out ./
+COPY --from=build /app/out ./
 ENTRYPOINT ["dotnet", "MvcMovie.dll"]

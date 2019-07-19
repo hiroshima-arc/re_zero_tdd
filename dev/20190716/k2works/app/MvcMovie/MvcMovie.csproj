@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include=".elasticbeanstalk" />
     <Folder Include="Migrations" />
   </ItemGroup>
 
