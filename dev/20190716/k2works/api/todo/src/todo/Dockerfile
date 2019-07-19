@@ -7,12 +7,12 @@ COPY *.csproj .
 RUN dotnet restore
 
 # copy everything else and build app
-COPY . ./todo/
-WORKDIR /app/todo
+COPY . .
+WORKDIR /app
 RUN dotnet publish -c Release -o out
 
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.1 AS runtime
 WORKDIR /app
-COPY --from=build /app/todo/out ./
+COPY --from=build /app/out ./
 ENTRYPOINT ["dotnet", "todo.dll"]

@@ -44,6 +44,7 @@
     "aws:eb:deploy": "cd $npm_package_config_app_dir; eb deploy",
     "aws:eb:release": "npm-run-all aws:eb:clean aws:eb:build aws:eb:package aws:eb:deploy",
     "aws:eb:destroy": "cd $npm_package_config_app_dir; eb terminate",
+    "docker:login": "docker login",
     "docker:app": "npm-run-all docker:app:build docker:app:run",
     "docker:app:build": "cd $npm_package_config_app_dir; docker build -t mvcmovie .",
     "docker:app:run": "cd $npm_package_config_app_dir; docker run -it --rm -p 8000:80 --name MvcMovie mvcmovie",
@@ -51,7 +52,13 @@
     "docker:api": "npm-run-all docker:api:build docker:api:run",
     "docker:api:build": "cd $npm_package_config_api_dir; docker build -t todo .",
     "docker:api:run": "cd $npm_package_config_api_dir; docker run -it --rm -p 9000:80 --name Todo todo",
-    "docker:api:destroy": "cd $npm_package_config_api_dir; docker rm -f MvcMovie"
+    "aws:eb:ecs:app:build": "cd $npm_package_config_app_dir; docker build -t k2works/dotnet-core-mvcmovie .",
+    "aws:eb:ecs:app:local": "cd $npm_package_config_app_dir; eb local run",
+    "aws:eb:ecs:app:deploy": "cd $npm_package_config_app_dir; docker push k2works/dotnet-core-mvcmovie; eb deploy",
+    "docker:api:destroy": "cd $npm_package_config_api_dir; docker rm -f MvcMovie",
+    "aws:eb:ecs:api:build": "cd $npm_package_config_api_dir; docker build -t k2works/dotnet-core-todo .",
+    "aws:eb:ecs:api:local": "cd $npm_package_config_api_dir; eb local run",
+    "aws:eb:ecs:api:deploy": "cd $npm_package_config_api_dir; docker push k2works/dotnet-core-todo; eb deploy"
   },
   "keywords": [],
   "author": "",
