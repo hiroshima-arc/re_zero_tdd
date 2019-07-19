@@ -90,3 +90,4 @@ dotnet add todo.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc2
 - [dotnet sh](https://docs.microsoft.com/ja-jp/dotnet/core/tools/dotnet-sln)
 - [マルチコンテナのDocker](https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/create_deploy_docker_ecs.html)
 - [Nginx 搭載の Linux で ASP.NET Core をホストする](https://docs.microsoft.com/ja-jp/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-2.2)
+- [Elastic Beanstalk Docker using AWS EC2 Container Registry (ECR)](https://blog.eq8.eu/til/elastic-beanstalk-docker-using-aws-ec2-container-registry-ecr.html)
