@@ -1,0 +1,15 @@
+version: '3'
+services:
+  app:
+    image: app
+    build:
+      context: app/MvcMovie
+    ports:
+      - "8000:80"
+  api:
+    image: api
+    build:
+      context: api/todo/src/todo
+    ports:
+      - "9000:80"
+

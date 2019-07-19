@@ -3,8 +3,6 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "vendor"))
-sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "domain"))
-sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "application"))
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "."))
 
 import awsgi
@@ -19,7 +17,7 @@ app.config["JSON_AS_ASCII"] = False
 
 CORS(app)
 
-from statement_service import StatementService
+from application.statement_service import StatementService
 
 
 @app.route('/')

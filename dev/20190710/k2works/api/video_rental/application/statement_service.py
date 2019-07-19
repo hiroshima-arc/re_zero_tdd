@@ -1,9 +1,9 @@
-from customer import Customer
-from movie import Movie
-from rental import Rental
-from new_release_price import NewReleasePrice
-from children_price import ChildrenPrice
-from regular_price import RegularPrice
+from domain.customer import Customer
+from domain.movie import Movie
+from domain.rental import Rental
+from domain.new_release_price import NewReleasePrice
+from domain.children_price import ChildrenPrice
+from domain.regular_price import RegularPrice
 
 
 class StatementService:

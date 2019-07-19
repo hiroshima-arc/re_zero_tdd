@@ -1,4 +1,3 @@
-from movie import Movie
 
 
 class Customer:

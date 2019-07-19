@@ -1,0 +1,88 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "dotnet-core-app",
+      "host": {
+        "sourcePath": "/var/app/current/app/MvcMovie/wwwroot"
+      }
+    },
+    {
+      "name": "dotnet-core-api",
+      "host": {
+        "sourcePath": "/var/app/current/api/todo/src/todo/wwwroot"
+      }
+    },
+    {
+      "name": "nginx-proxy-conf",
+      "host": {
+        "sourcePath": "/var/app/current/ops/nginx/proxy/conf.d"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "dotnet-core-app",
+      "image": "k2works/dotnet-core-mvcmovie",
+      "essential": true,
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "dotnet-core-app",
+          "containerPath": "/var/www/html",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "name": "dotnet-core-api",
+      "image": "k2works/dotnet-core-todo",
+      "essential": true,
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "dotnet-core-api",
+          "containerPath": "/var/www/html",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "name":  "nginx-proxy",
+      "image":  "nginx",
+      "essential":  true,
+      "memory":  128,
+      "portMappings":  [
+        {
+          "hostPort":  80,
+          "containerPort":  80
+        }
+      ],
+      "links":  [
+        "dotnet-core-app",
+        "dotnet-core-api"
+      ],
+      "mountPoints":  [
+        {
+          "sourceVolume":  "dotnet-core-app",
+          "containerPath":  "/var/www/app/html",
+          "readOnly":  true
+        },
+        {
+          "sourceVolume":  "dotnet-core-api",
+          "containerPath":  "/var/www/api/html",
+          "readOnly":  true
+        },
+        {
+          "sourceVolume":  "nginx-proxy-conf",
+          "containerPath":  "/etc/nginx/conf.d",
+          "readOnly":  true
+        },
+        {
+          "sourceVolume":  "awseb-logs-nginx-proxy",
+          "containerPath":  "/var/log/nginx"
+        }
+      ]
+    }
+  ]
+}

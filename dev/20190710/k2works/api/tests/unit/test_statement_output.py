@@ -1,11 +1,11 @@
 import unittest
 
-from video_rental.domain.movie import Movie
-from video_rental.domain.rental import Rental
-from video_rental.domain.customer import Customer
-from video_rental.domain.new_release_price import NewReleasePrice
-from video_rental.domain.children_price import ChildrenPrice
-from video_rental.domain.regular_price import RegularPrice
+from domain.movie import Movie
+from domain.rental import Rental
+from domain.customer import Customer
+from domain.new_release_price import NewReleasePrice
+from domain.children_price import ChildrenPrice
+from domain.regular_price import RegularPrice
 
 
 class StatementOutputTest(unittest.TestCase):
