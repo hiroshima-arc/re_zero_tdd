@@ -88,3 +88,5 @@ dotnet add todo.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc2
 - [ASP.NET Core MVC で Web アプリを作成する](https://docs.microsoft.com/ja-jp/aspnet/core/tutorials/first-mvc-app/?view=aspnetcore-2.2)
 - [Docker コンテナーで ASP.NET Core をホストする](https://docs.microsoft.com/ja-jp/aspnet/core/host-and-deploy/docker/?view=aspnetcore-2.2)
 - [dotnet sh](https://docs.microsoft.com/ja-jp/dotnet/core/tools/dotnet-sln)
+- [マルチコンテナのDocker](https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/create_deploy_docker_ecs.html)
+- [Nginx 搭載の Linux で ASP.NET Core をホストする](https://docs.microsoft.com/ja-jp/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-2.2)
