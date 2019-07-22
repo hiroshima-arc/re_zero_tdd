@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "config": {
+    "app": "ContosoUniversity",
     "app_dir": "app/ContosoUniversity",
     "test_dir": "app/ContosoUniversity.Tests"
   },
@@ -14,7 +15,11 @@
     "build:app": "cd $npm_package_config_app_dir; dotnet build",
     "app": "cd $npm_package_config_app_dir; dotnet watch run",
     "app:frontend": "browser-sync start --config bs-config.js",
-    "watch:app": "watch 'npm-run-all test' $npm_package_config_app_dir/"
+    "watch:app": "watch 'npm-run-all test' $npm_package_config_app_dir/",
+    "docker:app": "npm-run-all docker:app:build docker:app:run",
+    "docker:app:build": "cd $npm_package_config_app_dir; docker build -t app .",
+    "docker:app:run": "cd $npm_package_config_app_dir; docker run -it --rm -p 8000:80 --name $npm_package_config_app app",
+    "docker:app:destroy": "cd $npm_package_config_app_dir; docker rm -f $npm_package_config_app"
   },
   "keywords": [],
   "author": "",
