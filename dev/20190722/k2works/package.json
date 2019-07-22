@@ -5,14 +5,16 @@
   "main": "index.js",
   "config": {
     "app_dir": "app/ContosoUniversity",
-    "test_dir": ""
+    "test_dir": "app/ContosoUniversity.Tests"
   },
   "scripts": {
     "start": "nf start -j Procfile",
     "build": "npm-run-all build:*",
+    "test": "cd $npm_package_config_test_dir; dotnet test",
     "build:app": "cd $npm_package_config_app_dir; dotnet build",
     "app": "cd $npm_package_config_app_dir; dotnet watch run",
-    "app:frontend": "browser-sync start --config bs-config.js"
+    "app:frontend": "browser-sync start --config bs-config.js",
+    "watch:app": "watch 'npm-run-all test' $npm_package_config_app_dir/"
   },
   "keywords": [],
   "author": "",

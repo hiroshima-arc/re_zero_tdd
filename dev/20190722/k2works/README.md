@@ -40,6 +40,10 @@ mkdir app
 cd app
 dotnet add package Microsoft.DotNet.Watcher.Tools
 dotnet new webapp -o ContosoUniversity
+dotnet new xunit -o ContosoUniversity.Tests
+dotnet new sln -n ConntosUniversity
+dotnet sln ConntosUniversity.sln add ContosoUniversity/ContosoUniversity.csproj 
+dotnet sln ConntosUniversity.sln add ContosoUniversity.Tests/ContosoUniversity.Tests.csproj 
 ```
 
 **[⬆ back to top](#構成)**
