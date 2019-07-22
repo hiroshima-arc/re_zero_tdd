@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Models
@@ -13,6 +9,8 @@ namespace ContosoUniversity.Models
         {
         }
 
-        public DbSet<ContosoUniversity.Models.Student> Student { get; set; }
+        public DbSet<Student> Student { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }
