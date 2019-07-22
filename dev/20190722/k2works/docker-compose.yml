@@ -6,6 +6,13 @@ services:
       context: app/ContosoUniversity
     ports:
       - "8000:80"
+  db:
+    image: microsoft/mssql-server-linux
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=P@ssw0rd!
+    ports:
+      - "1433:1433"
   dev:
     image: dev
     working_dir: /app
