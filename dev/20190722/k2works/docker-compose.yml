@@ -6,4 +6,9 @@ services:
       context: app/ContosoUniversity
     ports:
       - "8000:80"
-
+  dev:
+    image: dev
+    working_dir: /app
+    build: .
+    volumes:
+      - ./:/app

@@ -34,6 +34,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "connect-browser-sync": "^2.1.0",
     "cpx": "^1.5.0",
     "foreman": "^3.0.1",
     "markdown-to-html": "0.0.13",
