@@ -2,7 +2,7 @@
   "AWSEBDockerrunVersion": 2,
   "volumes": [
     {
-      "name": "dotnet-core-app",
+      "name": "app",
       "host": {
         "sourcePath": "/var/app/current/ContosoUniversity"
       }
@@ -10,7 +10,7 @@
   ],
   "containerDefinitions": [
     {
-      "name": "dotnet-core-app",
+      "name": "app",
       "image": "k2works/contoso-university:v0.1.0",
       "essential": true,
       "memory": 128,
@@ -19,7 +19,26 @@
           "hostPort":  80,
           "containerPort":  80
         }
+      ],
+      "links": [
+        "db"
       ]
+    },
+    {
+      "name": "db",
+      "image": "microsoft/mssql-server-linux",
+      "environment": [
+        {
+          "name":  "ACCEPT_EULA",
+          "value":  "Y"
+        },
+        {
+          "name":  "SA_PASSWORD",
+          "value":  "P@ssw0rd!"
+        }
+      ],
+      "essential": true,
+      "memory": 1024
     }
   ]
 }

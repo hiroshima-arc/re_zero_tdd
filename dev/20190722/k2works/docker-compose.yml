@@ -6,6 +6,8 @@ services:
       context: app/ContosoUniversity
     ports:
       - "8000:80"
+    depends_on:
+      - db
   db:
     image: microsoft/mssql-server-linux
     environment:
@@ -13,9 +15,16 @@ services:
       - SA_PASSWORD=P@ssw0rd!
     ports:
       - "1433:1433"
+    volumes:
+      - mssql-data:/var/opt/mssql/data
   dev:
     image: dev
     working_dir: /app
     build: .
     volumes:
       - ./:/app
+    depends_on:
+      - db
+volumes:
+  mssql-data:
+    driver: local
