@@ -1,0 +1,25 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "dotnet-core-app",
+      "host": {
+        "sourcePath": "/var/app/current/ContosoUniversity"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "dotnet-core-app",
+      "image": "k2works/contoso-university:v0.1.0",
+      "essential": true,
+      "memory": 128,
+      "portMappings":  [
+        {
+          "hostPort":  80,
+          "containerPort":  80
+        }
+      ]
+    }
+  ]
+}

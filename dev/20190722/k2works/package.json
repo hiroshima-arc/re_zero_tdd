@@ -5,6 +5,7 @@
   "main": "index.js",
   "config": {
     "app": "ContosoUniversity",
+    "app_docker": "k2works/contoso-university:v0.1.0",
     "app_dir": "app/ContosoUniversity",
     "test_dir": "app/ContosoUniversity.Tests"
   },
@@ -17,9 +18,17 @@
     "app:frontend": "browser-sync start --config bs-config.js",
     "watch:app": "watch 'npm-run-all test' $npm_package_config_app_dir/",
     "docker:app": "npm-run-all docker:app:build docker:app:run",
-    "docker:app:build": "cd $npm_package_config_app_dir; docker build -t app .",
-    "docker:app:run": "cd $npm_package_config_app_dir; docker run -it --rm -p 8000:80 --name $npm_package_config_app app",
-    "docker:app:destroy": "cd $npm_package_config_app_dir; docker rm -f $npm_package_config_app"
+    "docker:app:build": "cd $npm_package_config_app_dir; docker build -t $npm_package_config_app_docker .",
+    "docker:app:push": "cd $npm_package_config_app_dir; docker push $npm_package_config_app_docker",
+    "docker:app:run": "cd $npm_package_config_app_dir; docker run -it --rm -p 8000:80 --name $npm_package_config_app $npm_package_config_app_docker",
+    "docker:app:destroy": "cd $npm_package_config_app_dir; docker rm -f $npm_package_config_app",
+    "aws:eb:init": "eb init $npm_package_config_app --profile default",
+    "aws:eb:create": "eb create",
+    "aws:eb:app:local": "eb local run",
+    "aws:eb:app:build": "npm-run-all docker:app:build",
+    "aws:eb:app:package": "npm-run-all docker:app:build docker:app:push",
+    "aws:eb:app:deploy": "npm-run-all aws:eb:app:package; eb deploy",
+    "aws:eb:app:release": "npm-run-all build test aws:eb:app:build aws:eb:app:package aws:eb:app:deploy"
   },
   "keywords": [],
   "author": "",
