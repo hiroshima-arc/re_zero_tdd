@@ -33,6 +33,15 @@ npx browser-sync init
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+mkdir app
+cd app
+dotnet add package Microsoft.DotNet.Watcher.Tools
+dotnet new webapp -o ContosoUniversity
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
