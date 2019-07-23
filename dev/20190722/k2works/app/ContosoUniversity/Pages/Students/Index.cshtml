@@ -12,21 +12,26 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
+    <tr>
+        <th>
+            <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
                 @Html.DisplayNameFor(model => model.Student[0].LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student[0].FirstMidName)
-            </th>
-            <th>
+            </a>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student[0].FirstMidName)
+        </th>
+        <th>
+            <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
                 @Html.DisplayNameFor(model => model.Student[0].EnrollmentDate)
-            </th>
-            <th></th>
-        </tr>
+            </a>
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Student) {
+    @foreach (var item in Model.Student)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
@@ -43,6 +48,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
