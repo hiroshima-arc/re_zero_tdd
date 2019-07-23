@@ -4,7 +4,7 @@
     {
       "name": "app",
       "host": {
-        "sourcePath": "/var/app/current/ContosoUniversity"
+        "sourcePath": "/var/app/current/"
       }
     }
   ],
@@ -45,6 +45,28 @@
       ],
       "essential": true,
       "memory": 1024
+    },
+    {
+      "name": "dev",
+      "image": "k2works/dotnet-core-dev",
+      "environment": [
+        {
+          "name":  "ASPNETCORE_ENVIRONMENT",
+          "value":  "Staging"
+        }
+      ],
+      "essential": false,
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "app",
+          "containerPath": "/src",
+          "readOnly": false
+        }
+      ],
+      "links": [
+        "db"
+      ]
     }
   ]
 }

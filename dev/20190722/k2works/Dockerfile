@@ -55,3 +55,4 @@ ENV PATH /root/.ebcli-virtual-env/executables:$PATH
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
 
+ENTRYPOINT ["/bin/sh", "-c", "while true; do echo .NET Core Development Env; sleep 1; done"]

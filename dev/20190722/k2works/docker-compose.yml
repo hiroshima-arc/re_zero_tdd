@@ -22,7 +22,7 @@ services:
     working_dir: /app
     build: .
     volumes:
-      - ./:/app
+      - ./:/src
     depends_on:
       - db
 volumes:
