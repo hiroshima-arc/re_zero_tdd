@@ -33,6 +33,7 @@
     "docker:dev:destroy": "docker rm -f $npm_package_config_app_dev_docker",
     "aws:eb:init": "eb init $npm_package_config_app --profile default",
     "aws:eb:create": "eb create",
+    "aws:eb:destroy": "eb terminate",
     "aws:eb:app:local": "eb local run",
     "aws:eb:app:build": "npm-run-all docker:app:build",
     "aws:eb:app:package": "npm-run-all docker:app:build docker:app:push",
