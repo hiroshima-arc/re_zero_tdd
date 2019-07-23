@@ -84,3 +84,6 @@ npm run aws:eb:app:release
 ## 参照
 - [ASP.NET Core での Entity Framework Core を使用した Razor ページ - チュートリアル ](https://docs.microsoft.com/ja-jp/aspnet/core/data/ef-rp/intro?view=aspnetcore-2.2&tabs=visual-studio)
 - [dotnet テストと xUnit を使用した .NET Core での単体テスト C#](https://docs.microsoft.com/ja-jp/dotnet/core/testing/unit-testing-with-dotnet-test?toc=%2Faspnet%2Fcore%2Ftoc.json&bc=%2Faspnet%2Fcore%2Fbreadcrumb%2Ftoc.json&view=aspnetcore-2.2)
+- [Quickstart: Compose and ASP.NET Core with SQL Server](https://docs.docker.com/compose/aspnet-mssql-compose/)
+- [SQL Server in Docker](https://github.com/microsoft/mssql-docker)
+- [コマンドラインでSQL Serverを使う最低限のメモ](https://qiita.com/zaburo/items/6edf7c05c5d4f5e039eb)

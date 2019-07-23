@@ -12,6 +12,12 @@
     {
       "name": "app",
       "image": "k2works/contoso-university:v0.1.0",
+      "environment": [
+        {
+          "name":  "ASPNETCORE_ENVIRONMENT",
+          "value":  "Production"
+        }
+      ],
       "essential": true,
       "memory": 128,
       "portMappings":  [
