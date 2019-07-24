@@ -19,10 +19,12 @@ services:
       - mssql-data:/var/opt/mssql/data
   dev:
     image: dev
-    working_dir: /app
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    working_dir: /root/workspace
     build: .
     volumes:
-      - ./:/src
+      - .:/root/workspace
     depends_on:
       - db
 volumes:
