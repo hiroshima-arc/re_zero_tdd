@@ -17,6 +17,7 @@
     "build:app": "cd $npm_package_config_app_dir; dotnet build",
     "app": "cd $npm_package_config_app_dir; dotnet watch run",
     "app:db:migrate": "cd $npm_package_config_app_dir; dotnet ef database update",
+    "app:db:destroy": "cd $npm_package_config_app_dir; dotnet ef database drop",
     "app:frontend": "browser-sync start --config bs-config.js",
     "watch:app": "watch 'npm-run-all test' $npm_package_config_app_dir/",
     "docker:login": "docker login",
