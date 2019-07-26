@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ContosoUniversity.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ContosoUniversity.Pages.Courses
 {
-    public class CreateModel : PageModel
+    public class CreateModel : DepartmentNamePageModel
     {
         private readonly ContosoUniversity.Models.SchoolContext _context;
 
@@ -20,7 +21,7 @@ namespace ContosoUniversity.Pages.Courses
 
         public IActionResult OnGet()
         {
-        ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentID", "DepartmentID");
+            PopulateDepartmentsDropDownList(_context);
             return Page();
         }
 
@@ -33,11 +34,21 @@ namespace ContosoUniversity.Pages.Courses
             {
                 return Page();
             }
+            
+            var emptyCourse = new Course();
 
-            _context.Courses.Add(Course);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            if (await TryUpdateModelAsync<Course>(emptyCourse,
+                "course", // Prefix for form value
+                s => s.CourseID, s => s.DepartmentID, s => s.Title, s => s.Credits))
+            {
+                _context.Courses.Add(emptyCourse);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            
+            // Select DepartmentID if TryUpdateModelAsync fails.
+            PopulateDepartmentsDropDownList(_context, emptyCourse.Department);
+            return Page();
         }
     }
 }
