@@ -22,7 +22,7 @@ namespace ContosoUniversity.Pages
         public async Task OnGetAsync()
         {
             IQueryable<EnrollmentDateGroup> data =
-                from student in _context.Student
+                from student in _context.Students
                 group student by student.EnrollmentDate into dateGroup
                 select new EnrollmentDateGroup()
                 {

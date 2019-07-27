@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +9,11 @@ namespace ContosoUniversity.Pages.Students
 {
     public class DetailsModel : PageModel
     {
-        private readonly ContosoUniversity.Models.SchoolContext _context;
+        private readonly IStudentRepository _repository;
 
-        public DetailsModel(ContosoUniversity.Models.SchoolContext context)
+        public DetailsModel(IStudentRepository context)
         {
-            _context = context;
+            _repository = context;
         }
 
         public Student Student { get; set; }
@@ -27,7 +25,7 @@ namespace ContosoUniversity.Pages.Students
                 return NotFound();
             }
 
-            Student = await _context.Student
+            Student = await _repository.GetStudents()
                 .Include(s => s.Enrollments)
                 .ThenInclude(e => e.Course)
                 .AsNoTracking()

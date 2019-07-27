@@ -10,7 +10,7 @@ namespace ContosoUniversity.Models
         {
         }
 
-        public DbSet<Student> Student { get; set; }
+        public DbSet<Student> Students { get; set; }
         public DbSet<Enrollment> Enrollment { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Department> Departments { get; set; }

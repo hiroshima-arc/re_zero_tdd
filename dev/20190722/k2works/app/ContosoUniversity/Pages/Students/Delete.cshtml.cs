@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -8,11 +9,11 @@ namespace ContosoUniversity.Pages.Students
 {
     public class DeleteModel : PageModel
     {
-        private readonly ContosoUniversity.Models.SchoolContext _context;
+        private readonly IStudentRepository _repository;
 
-        public DeleteModel(ContosoUniversity.Models.SchoolContext context)
+        public DeleteModel(IStudentRepository context)
         {
-            _context = context;
+            _repository = context;
         }
 
         [BindProperty]
@@ -26,7 +27,7 @@ namespace ContosoUniversity.Pages.Students
                 return NotFound();
             }
 
-            Student = await _context.Student
+            Student = await _repository.GetStudents()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
 
@@ -50,7 +51,7 @@ namespace ContosoUniversity.Pages.Students
                 return NotFound();
             }
 
-            var student = await _context.Student
+            var student = await _repository.GetStudents()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
 
@@ -61,8 +62,8 @@ namespace ContosoUniversity.Pages.Students
 
             try
             {
-                _context.Student.Remove(student);
-                await _context.SaveChangesAsync();
+                _repository.DeleteStudent(student.ID);
+                await _repository.Save();
                 return RedirectToPage("./Index");
             }
             catch (DbUpdateException /* ex */)

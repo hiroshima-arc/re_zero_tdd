@@ -1,22 +1,20 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Models;
-using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators.Internal;
 
 namespace ContosoUniversity.Pages.Students
 {
     public class IndexModel : PageModel
     {
-        private readonly ContosoUniversity.Models.SchoolContext _context;
+        private readonly IStudentRepository _repository;
 
-        public IndexModel(ContosoUniversity.Models.SchoolContext context)
+        public IndexModel(IStudentRepository context)
         {
-            _context = context;
+            _repository = context;
         }
         
         public string NameSort { get; set; }
@@ -41,7 +39,7 @@ namespace ContosoUniversity.Pages.Students
             }
             CurrentFilter = searchString;
 
-            IQueryable<Student> studentIQ = from s in _context.Student select s;
+            IQueryable<Student> studentIQ = from s in _repository.GetStudents() select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {

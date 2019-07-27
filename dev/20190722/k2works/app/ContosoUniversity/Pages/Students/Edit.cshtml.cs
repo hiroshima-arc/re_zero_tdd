@@ -1,23 +1,19 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Models;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace ContosoUniversity.Pages.Students
 {
     public class EditModel : PageModel
     {
-        private readonly ContosoUniversity.Models.SchoolContext _context;
+        private readonly IStudentRepository _repository;
 
-        public EditModel(ContosoUniversity.Models.SchoolContext context)
+        public EditModel(IStudentRepository context)
         {
-            _context = context;
+            _repository = context;
         }
 
         [BindProperty]
@@ -30,7 +26,7 @@ namespace ContosoUniversity.Pages.Students
                 return NotFound();
             }
 
-            Student = await _context.Student.FindAsync(id);
+            Student = await _repository.GetStudentByID(id);
 
             if (Student == null)
             {
@@ -46,14 +42,14 @@ namespace ContosoUniversity.Pages.Students
                 return Page();
             }
 
-            var studentToUpdate = await _context.Student.FindAsync(id);
+            var studentToUpdate = await _repository.GetStudentByID(id);
 
             if (await TryUpdateModelAsync<Student>(
                 studentToUpdate,
                 "student",
                 s => s.FirstMidName, s => s.LastName, s => s.Enrollments))
             {
-                await _context.SaveChangesAsync();
+                await _repository.Save();
                 return RedirectToPage("./Index");
             }
 
@@ -63,7 +59,7 @@ namespace ContosoUniversity.Pages.Students
 
         private bool StudentExists(int id)
         {
-            return _context.Student.Any(e => e.ID == id);
+            return _repository.GetStudents().Any(e => e.ID == id);
         }
     }
 }
