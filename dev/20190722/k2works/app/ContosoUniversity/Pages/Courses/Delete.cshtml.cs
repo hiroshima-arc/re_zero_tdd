@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -8,11 +9,11 @@ namespace ContosoUniversity.Pages.Courses
 {
     public class DeleteModel : PageModel
     {
-        private readonly SchoolContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public DeleteModel(SchoolContext context)
+        public DeleteModel(UnitOfWork context)
         {
-            _context = context;
+            _unitOfWork = context;
         }
 
         [BindProperty]
@@ -25,7 +26,7 @@ namespace ContosoUniversity.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _context.Courses
+            Course = await _unitOfWork.CourseRepository.Get()
                 .AsNoTracking()
                 .Include(c => c.Department)
                 .FirstOrDefaultAsync(m => m.CourseID == id);
@@ -44,14 +45,14 @@ namespace ContosoUniversity.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _context.Courses
+            Course = await _unitOfWork.CourseRepository.Get()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.CourseID == id);
 
             if (Course != null)
             {
-                _context.Courses.Remove(Course);
-                await _context.SaveChangesAsync();
+                _unitOfWork.CourseRepository.Delete(Course.CourseID);
+                await _unitOfWork.Save();
             }
 
             return RedirectToPage("./Index");

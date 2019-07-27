@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +11,11 @@ namespace ContosoUniversity.Pages.Courses
 {
     public class EditModel : DepartmentNamePageModel
     {
-        private readonly SchoolContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public EditModel(SchoolContext context)
+        public EditModel(UnitOfWork context)
         {
-            _context = context;
+            _unitOfWork = context;
         }
 
         [BindProperty]
@@ -27,7 +28,7 @@ namespace ContosoUniversity.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _context.Courses
+            Course = await _unitOfWork.CourseRepository.Get()
                 .Include(c => c.Department).FirstOrDefaultAsync(m => m.CourseID == id);
 
             if (Course == null)
@@ -35,7 +36,7 @@ namespace ContosoUniversity.Pages.Courses
                 return NotFound();
             }
             // Select current DepartmentID
-            PopulateDepartmentsDropDownList(_context, Course.DepartmentID);
+            PopulateDepartmentsDropDownList(_unitOfWork.Context, Course.DepartmentID);
             return Page();
         }
 
@@ -46,25 +47,25 @@ namespace ContosoUniversity.Pages.Courses
                 return Page();
             }
 
-            var courseToUpdate = await _context.Courses.FindAsync(id);
+            var courseToUpdate = await _unitOfWork.CourseRepository.GetByID(id);
 
             if (await TryUpdateModelAsync<Course>(
                 courseToUpdate,
-                "cource", // Prefix for form value.
+                "course", // Prefix for form value.
                 c => c.Credits, c => c.DepartmentID, c => c.Title))
             {
-                await _context.SaveChangesAsync();
+                await _unitOfWork.Save();
                 return RedirectToPage("./Index");
             }
             
             // Select DepartmentID if TryUpdateModelAsync fails.
-            PopulateDepartmentsDropDownList(_context, courseToUpdate.DepartmentID);
+            PopulateDepartmentsDropDownList(_unitOfWork.Context, courseToUpdate.DepartmentID);
             return Page();
         }
 
         private bool CourseExists(int id)
         {
-            return _context.Courses.Any(e => e.CourseID == id);
+            return _unitOfWork.CourseRepository.Get().Any(e => e.CourseID == id);
         }
     }
 }
