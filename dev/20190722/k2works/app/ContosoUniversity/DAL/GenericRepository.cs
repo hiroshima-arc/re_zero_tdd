@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using ContosoUniversity.Models;
 using System.Linq.Expressions;
@@ -19,12 +18,14 @@ namespace ContosoUniversity.DAL
             this.dbSet = context.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> Get(
+        public DbSet<TEntity> DbSet => dbSet;
+
+        public virtual Task<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            Expression<Func<TEntity, bool>> option = null,
             string includeProperties = "")
         {
-            IQueryable<TEntity> query = dbSet;
+            IQueryable<TEntity> query = dbSet.AsNoTracking();
 
             if (filter != null)
             {
@@ -32,24 +33,12 @@ namespace ContosoUniversity.DAL
             }
 
             foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                (new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
             {
                 query = query.Include(includeProperty);
             }
 
-            if (orderBy != null)
-            {
-                return orderBy(query).ToList();
-            }
-            else
-            {
-                return query.ToList();
-            }
-        }
-
-        public virtual DbSet<TEntity> Get()
-        {
-            return dbSet;
+            return option != null ? query.FirstOrDefaultAsync(option) : query.FirstOrDefaultAsync();
         }
 
         public virtual Task<TEntity> GetByID(object id)
@@ -74,6 +63,7 @@ namespace ContosoUniversity.DAL
             {
                 dbSet.Attach(entityToDelete);
             }
+
             dbSet.Remove(entityToDelete);
         }
 

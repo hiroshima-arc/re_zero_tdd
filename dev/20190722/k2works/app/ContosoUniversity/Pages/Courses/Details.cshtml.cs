@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
@@ -25,10 +26,10 @@ namespace ContosoUniversity.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _unitOfWork.CourseRepository.Get()
-                .AsNoTracking()
-                .Include(c => c.Department)
-                .FirstOrDefaultAsync(m => m.CourseID == id);
+            Course = await _unitOfWork.CourseRepository.Get(
+                includeProperties: "Department",
+                option: m => m.CourseID == id
+                );
 
             if (Course == null)
             {

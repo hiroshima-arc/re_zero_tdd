@@ -1,11 +1,7 @@
-using System.Linq;
 using System.Threading.Tasks;
 using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ContosoUniversity.Pages.Courses
 {
@@ -28,8 +24,10 @@ namespace ContosoUniversity.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _unitOfWork.CourseRepository.Get()
-                .Include(c => c.Department).FirstOrDefaultAsync(m => m.CourseID == id);
+            Course = await _unitOfWork.CourseRepository.Get(
+                includeProperties: "Department",
+                option: m => m.CourseID == id
+            );
 
             if (Course == null)
             {
@@ -61,11 +59,6 @@ namespace ContosoUniversity.Pages.Courses
             // Select DepartmentID if TryUpdateModelAsync fails.
             PopulateDepartmentsDropDownList(_unitOfWork.Context, courseToUpdate.DepartmentID);
             return Page();
-        }
-
-        private bool CourseExists(int id)
-        {
-            return _unitOfWork.CourseRepository.Get().Any(e => e.CourseID == id);
         }
     }
 }

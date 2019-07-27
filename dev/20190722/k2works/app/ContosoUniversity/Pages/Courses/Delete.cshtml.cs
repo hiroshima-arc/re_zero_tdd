@@ -26,10 +26,10 @@ namespace ContosoUniversity.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _unitOfWork.CourseRepository.Get()
-                .AsNoTracking()
-                .Include(c => c.Department)
-                .FirstOrDefaultAsync(m => m.CourseID == id);
+            Course = await _unitOfWork.CourseRepository.Get(
+                    includeProperties:"Department",
+                    option: m => m.CourseID == id
+                    );
 
             if (Course == null)
             {
@@ -45,9 +45,7 @@ namespace ContosoUniversity.Pages.Courses
                 return NotFound();
             }
 
-            Course = await _unitOfWork.CourseRepository.Get()
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
+            Course = await _unitOfWork.CourseRepository.Get(option: m => m.CourseID == id);
 
             if (Course != null)
             {

@@ -20,7 +20,7 @@ namespace ContosoUniversity.Pages.Courses
 
         public async Task OnGetAsync()
         {
-            CourseVM = await _unitOfWork.CourseRepository.Get()
+            CourseVM = await _unitOfWork.CourseRepository.dbSet
                 .Select(p => new CourseViewModel
                 {
                     CourseID = p.CourseID,
