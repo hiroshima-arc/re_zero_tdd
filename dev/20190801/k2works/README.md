@@ -31,6 +31,25 @@ npm install --save-dev browser-sync connect-browser-sync nodemon
 npx browser-sync init
 touch Procfile
 ```
+#### アプリケーションのセットアップ
+
+```bash
+mkdir app
+cd app
+dotnet new webapp -o SalesManagement
+cd SalesManagement
+dotnet add package Microsoft.DotNet.Watcher.Tools
+cd ..
+dotnet new xunit -o SalesManagement.Tests
+cd SalesManagement.Tests
+dotnet add package Microsoft.AspNetCore.TestHost
+dotnet add package Microsoft.AspNetCore.App
+cd ..
+cd ..
+dotnet new sln -n SalesManagement
+dotnet sln SalesManagement.sln add app/SalesManagement/SalesManagement.csproj 
+dotnet sln SalesManagement.sln add app/SalesManagement.Tests/SalesManagement.Tests.csproj 
+```
 
 **[⬆ back to top](#構成)**
 
