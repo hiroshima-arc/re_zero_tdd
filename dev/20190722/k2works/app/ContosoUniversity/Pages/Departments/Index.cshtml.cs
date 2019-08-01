@@ -1,29 +1,26 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Pages.Departments
 {
     public class IndexModel : PageModel
     {
-        private readonly ContosoUniversity.Models.SchoolContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public IndexModel(ContosoUniversity.Models.SchoolContext context)
+        public IndexModel(UnitOfWork context)
         {
-            _context = context;
+            _unitOfWork = context;
         }
 
         public IList<Department> Department { get;set; }
 
         public async Task OnGetAsync()
         {
-            Department = await _context.Departments
-                .Include(d => d.Administrator).ToListAsync();
+            Department = await _unitOfWork.DepartmentRepository.dbSet.Include(d => d.Administrator).ToListAsync();
         }
     }
 }

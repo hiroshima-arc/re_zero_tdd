@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +9,11 @@ namespace ContosoUniversity.Pages.Departments
 {
     public class DetailsModel : PageModel
     {
-        private readonly ContosoUniversity.Models.SchoolContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public DetailsModel(ContosoUniversity.Models.SchoolContext context)
+        public DetailsModel(UnitOfWork context)
         {
-            _context = context;
+            _unitOfWork = context;
         }
 
         public Department Department { get; set; }
@@ -27,8 +25,9 @@ namespace ContosoUniversity.Pages.Departments
                 return NotFound();
             }
 
-            Department = await _context.Departments
-                .Include(d => d.Administrator).FirstOrDefaultAsync(m => m.DepartmentID == id);
+            Department = await _unitOfWork.DepartmentRepository.Get(
+                   includeProperties: "Administrator",
+                   option: m => m.DepartmentID == id);
 
             if (Department == null)
             {

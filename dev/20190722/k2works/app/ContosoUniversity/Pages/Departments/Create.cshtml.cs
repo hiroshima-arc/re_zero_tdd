@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,16 +9,16 @@ namespace ContosoUniversity.Pages.Departments
 {
     public class CreateModel : PageModel
     {
-        private readonly ContosoUniversity.Models.SchoolContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public CreateModel(ContosoUniversity.Models.SchoolContext context)
+        public CreateModel(UnitOfWork context)
         {
-            _context = context;
+            _unitOfWork = context;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FirstMidName");
+        ViewData["InstructorID"] = new SelectList(_unitOfWork.Context.Instructors, "ID", "FirstMidName");
             return Page();
         }
 
@@ -34,8 +32,8 @@ namespace ContosoUniversity.Pages.Departments
                 return Page();
             }
 
-            _context.Departments.Add(Department);
-            await _context.SaveChangesAsync();
+            _unitOfWork.DepartmentRepository.Insert(Department);
+            await _unitOfWork.Save();
 
             return RedirectToPage("./Index");
         }

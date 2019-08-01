@@ -1,5 +1,5 @@
-using System;
 using System.Threading.Tasks;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -9,11 +9,11 @@ namespace ContosoUniversity.Pages.Departments
 {
     public class DeleteModel : PageModel
     {
-        private readonly SchoolContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public DeleteModel(SchoolContext context)
+        public DeleteModel(UnitOfWork context)
         {
-            _context = context;
+            _unitOfWork = context;
         }
 
         [BindProperty] public Department Department { get; set; }
@@ -21,10 +21,9 @@ namespace ContosoUniversity.Pages.Departments
 
         public async Task<IActionResult> OnGetAsync(int? id, bool? concurrencyError)
         {
-            Department = await _context.Departments
-                .Include(d => d.Administrator)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.DepartmentID == id);
+            Department = await _unitOfWork.DepartmentRepository.Get(
+                    includeProperties:"Administrator",
+                    option: m => m.DepartmentID == id);
 
             if (Department == null)
             {
@@ -47,14 +46,14 @@ namespace ContosoUniversity.Pages.Departments
         {
             try
             {
-                if (await _context.Departments.AnyAsync(
+                if (await _unitOfWork.Context.Departments.AnyAsync(
                     m => m.DepartmentID == id))
                 {
                     // Department.rowVersion value is from when the entity
                     // was fetched. If it doesn't match the DB, a
                     // DbUpdateConcurrencyException exception is thrown.
-                    _context.Departments.Remove(Department);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.DepartmentRepository.Delete(Department);
+                    await _unitOfWork.Save();
                 }
 
                 return RedirectToPage("./Index");

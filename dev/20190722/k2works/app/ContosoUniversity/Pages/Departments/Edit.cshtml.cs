@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using ContosoUniversity.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,11 +11,11 @@ namespace ContosoUniversity.Pages.Departments
 {
     public class EditModel : PageModel
     {
-        private readonly SchoolContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        public EditModel(SchoolContext context)
+        public EditModel(UnitOfWork context)
         {
-            _context = context;
+            _unitOfWork = context;
         }
 
         [BindProperty]
@@ -24,10 +25,9 @@ namespace ContosoUniversity.Pages.Departments
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            Department = await _context.Departments
-                .Include(d => d.Administrator) // eager loadinng
-                .AsNoTracking()                                    // tracking not required
-                .FirstOrDefaultAsync(m => m.DepartmentID == id);
+            Department = await _unitOfWork.DepartmentRepository.Get(
+                    includeProperties:"Administrator",
+                    option:m => m.DepartmentID == id);
 
             if (Department == null)
             {
@@ -35,7 +35,7 @@ namespace ContosoUniversity.Pages.Departments
             }
             
             // User strongly typed data rather than ViewData.
-            InstructorNameSL = new SelectList(_context.Instructors, "ID", "FirstMidName");
+            InstructorNameSL = new SelectList(_unitOfWork.Context.Instructors, "ID", "FirstMidName");
             
             return Page();
         }
@@ -47,7 +47,7 @@ namespace ContosoUniversity.Pages.Departments
                 return Page();
             }
 
-            var departmentToUpdate = await _context.Departments
+            var departmentToUpdate = await _unitOfWork.Context.Departments
                 .Include(i => i.Administrator)
                 .FirstOrDefaultAsync(m => m.DepartmentID == id);
             
@@ -63,7 +63,7 @@ namespace ContosoUniversity.Pages.Departments
             // a DbUpdateConcurrencyException is thrown.
             // A second postback will make them match, unless a new
             // concurrency issue happens.
-            _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = Department.RowVersion;
+            _unitOfWork.Context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = Department.RowVersion;
 
             if (await TryUpdateModelAsync<Department>(
                 departmentToUpdate,
@@ -72,7 +72,7 @@ namespace ContosoUniversity.Pages.Departments
             {
                 try
                 {
-                    await _context.SaveChangesAsync();
+                    await _unitOfWork.Save();
                     return RedirectToPage("./Index");
                 }
                 catch (DbUpdateConcurrencyException ex)
@@ -87,7 +87,7 @@ namespace ContosoUniversity.Pages.Departments
                     }
 
                     var dbValues = (Department) databaseEntry.ToObject();
-                    await setDbErrorMessage(dbValues, clientValues, _context);
+                    await setDbErrorMessage(dbValues, clientValues, _unitOfWork);
                     
                     // Save the current RowVersion so next postback
                     // matches unless an new concurrency issue happens.
@@ -97,7 +97,7 @@ namespace ContosoUniversity.Pages.Departments
                 }
             }
             
-            InstructorNameSL = new SelectList(_context.Instructors, "ID", "FullName", departmentToUpdate.InstructorID);
+            InstructorNameSL = new SelectList(_unitOfWork.Context.Instructors, "ID", "FullName", departmentToUpdate.InstructorID);
             return Page();
         }
         private IActionResult HandleDeletedDepartment()
@@ -105,10 +105,10 @@ namespace ContosoUniversity.Pages.Departments
            var deletedDepartment = new Department();
            // ModelState contains the posted data because of the deletion error and will overide the Department instance values when displaying Page().
            ModelState.AddModelError(string.Empty, "Unable to save. The department was deleted by another user.");
-           InstructorNameSL = new SelectList(_context.Instructors, "ID", "FullName", Department.InstructorID);
+           InstructorNameSL = new SelectList(_unitOfWork.Context.Instructors, "ID", "FullName", Department.InstructorID);
            return Page();
         }
-        private async Task setDbErrorMessage(Department dbValues, Department clientValues, SchoolContext context)
+        private async Task setDbErrorMessage(Department dbValues, Department clientValues, UnitOfWork context)
         {
             if (dbValues.Name != clientValues.Name)
             {
@@ -124,7 +124,7 @@ namespace ContosoUniversity.Pages.Departments
             }
             if (dbValues.InstructorID != clientValues.InstructorID)
             {
-                Instructor dbInstructor = await _context.Instructors
+                Instructor dbInstructor = await _unitOfWork.Context.Instructors
                     .FindAsync(dbValues.InstructorID);
                 ModelState.AddModelError("Department.InstructorID", $"Current value: {dbInstructor?.FullName}");
             }
