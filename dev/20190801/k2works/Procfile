@@ -1,0 +1,3 @@
+application: npm run app
+forntend: npm run app:frontend
+watch: npm run watch:app
