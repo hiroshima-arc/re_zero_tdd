@@ -51,6 +51,11 @@ dotnet sln SalesManagement.sln add app/SalesManagement/SalesManagement.csproj
 dotnet sln SalesManagement.sln add app/SalesManagement.Tests/SalesManagement.Tests.csproj 
 ```
 
+```bash
+Scaffold-DbContext 'Server=localhost;Database=Sales;User=sa;Password=P@ssw0rd!' Microsoft.EntityFrameworkCore.SqlServer
+Scaffold-DbContext 'Server=localhost;Initial Catalog=Sales;Integrated Security=True' Microsoft.EntityFrameworkCore.SqlServer -ContextDir Data -OutputDir Models
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
