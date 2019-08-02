@@ -12,4 +12,10 @@
     <PackageReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application\Repositories" />
+    <Folder Include="Application\Services" />
+    <Folder Include="Domain\Type" />
+  </ItemGroup>
+
 </Project>
