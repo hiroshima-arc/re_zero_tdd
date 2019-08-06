@@ -124,28 +124,165 @@
         });
       });
 
-      const DB_NAME = "todo.db";
-      const DB_VER = 100;
-      const req = indexedDB.open(DB_NAME, DB_VER);
+      describe("Indexed Database", () => {
+        beforeEach(done => {
+          done();
+        });
+
+        afterEach(done => {
+          indexedDbDestroy();
+          done();
+        });
+
+        it("やることを保存する", () => {
+          const data = { id: "1", title: "やること" };
+          indexedDbSetItem(data);
+        });
+
+        it("やることを取得する", () => {
+          const data = { id: "2", title: "やること2" };
+          indexedDbSetItem(data);
+          const keyValue = "2";
+          indexedDbGetItem(keyValue);
+        });
+
+        it("やることをすべて取得する", () => {
+          const list = [
+            { id: "1", title: "やること1" },
+            { id: "2", title: "やること2" },
+            { id: "3", title: "やることe" }
+          ];
+          list.forEach(data => {
+            indexedDbSetItem(data);
+          });
+
+          indexedDbGetItems();
+        });
+
+        it("やることを削除する", () => {
+          const data = { id: "3", title: "やること3" };
+          indexedDbSetItem(data);
+          const keyValue = "3";
+          indexedDbDeleteItem(keyValue);
+        });
+      });
+
       let indexeddb;
-      req.onsuccess = function(e) {
-        indexeddb = e.target.result;
-        showList();
-      };
-      req.onerror = onError;
       function onError(e) {
         alert("Error:" + e.message);
       }
 
-      req.onupgradeneeded = function(e) {
-        indexeddb = e.target.result;
-        const store_name = "items";
-        const store_opt = {
-          keyPath: "id",
-          autoIncrement: true
+      function setUpIndexedDb() {
+        const DB_NAME = "todo.db";
+        const DB_VER = 100;
+        const req = indexedDB.open(DB_NAME, DB_VER);
+        req.onsuccess = function(e) {
+          indexeddb = e.target.result;
+          showList();
         };
-        indexeddb.createObjectStore(store_name, store_opt);
-      };
+        req.onerror = onError;
+
+        req.onupgradeneeded = function(e) {
+          indexeddb = e.target.result;
+          const store_name = "items";
+          const store_opt = {
+            keyPath: "id",
+            autoIncrement: true
+          };
+          indexeddb.createObjectStore(store_name, store_opt);
+        };
+      }
+
+      const dbName = "todo.test.db";
+      const storeName = "items";
+
+      function createRequest() {
+        const openReq = indexedDB.open(dbName);
+
+        openReq.onupgradeneeded = function(event) {
+          const db = event.target.result;
+          db.createObjectStore(storeName, {
+            keyPath: "id"
+          });
+        };
+
+        return openReq;
+      }
+
+      function indexedDbSetItem(data) {
+        const req = createRequest();
+        req.onsuccess = function(event) {
+          const db = event.target.result;
+          const trans = db.transaction(storeName, "readwrite");
+          const store = trans.objectStore(storeName);
+          const putReq = store.put(data);
+
+          putReq.onsuccess = function() {
+            console.log("put data success");
+          };
+
+          trans.oncomplete = function() {
+            // トランザクション完了時(putReq.onsuccessの後)に実行
+            console.log("transaction complete");
+          };
+        };
+      }
+
+      function indexedDbGetItem(keyValue) {
+        const req = createRequest();
+        req.onsuccess = function(event) {
+          const db = event.target.result;
+          const trans = db.transaction(storeName, "readwrite");
+          const store = trans.objectStore(storeName);
+          const getReq = store.get(keyValue);
+
+          getReq.onsuccess = function(event) {
+            console.log(event.target.result);
+          };
+        };
+      }
+
+      function indexedDbGetItems() {
+        const req = createRequest();
+        req.onsuccess = function(event) {
+          const db = event.target.result;
+          const trans = db.transaction(storeName, "readwrite");
+          const store = trans.objectStore(storeName);
+          const getReq = store.openCursor();
+
+          getReq.onsuccess = function(event) {
+            let cur = event.target.result;
+            if (!cur) return;
+            console.log(cur.value);
+            cur.continue();
+          };
+        };
+      }
+
+      function indexedDbDeleteItem(keyValue) {
+        const req = createRequest();
+        req.onsuccess = function(event) {
+          const db = event.target.result;
+          const trans = db.transaction(storeName, "readwrite");
+          const store = trans.objectStore(storeName);
+          const getReq = store.delete(keyValue);
+
+          getReq.onsuccess = function(event) {
+            console.log(event.target.result);
+          };
+        };
+      }
+
+      function indexedDbDestroy() {
+        const deleteReq = indexedDB.deleteDatabase(dbName);
+        deleteReq.onsuccess = function(event) {
+          console.log("db delete success");
+        };
+
+        deleteReq.onerror = function() {
+          console.log("db delete error");
+        };
+      }
 
       function indexedDbaddItem() {
         const tr = indexeddb.transaction(["items"], "readwrite");
@@ -153,7 +290,7 @@
         const req = os.put({ title: $("indexed-db-title").value });
         req.onerror = onError;
         tr.oncomplete = function() {
-          showList;
+          showList();
           $("indexed-db-title").value = "";
           $("indexed-db-title").focus();
         };
@@ -211,6 +348,8 @@
         <button onclick="addItem()">追加</button>
         <ul class="app-component" id="list"></ul>
         `;
+
+        setUpIndexedDb();
       };
     </script>
 
