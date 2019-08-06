@@ -150,13 +150,28 @@
           const list = [
             { id: "1", title: "やること1" },
             { id: "2", title: "やること2" },
-            { id: "3", title: "やることe" }
+            { id: "3", title: "やること3" }
           ];
           list.forEach(data => {
             indexedDbSetItem(data);
           });
 
           indexedDbGetItems();
+        });
+
+        it("特定の範囲のやることをすべて取得する", () => {
+          const list = [
+            { id: "1", title: "やること1", order: 1 },
+            { id: "2", title: "やること2", order: 2 },
+            { id: "3", title: "やること3", order: 3 },
+            { id: "4", title: "やること4", order: 4 },
+            { id: "5", title: "やること5", order: 5 }
+          ];
+          list.forEach(data => {
+            indexedDbSetItem(data);
+          });
+
+          indexedDbGetItemsByRange(2, 4);
         });
 
         it("やることを削除する", () => {
@@ -201,9 +216,10 @@
 
         openReq.onupgradeneeded = function(event) {
           const db = event.target.result;
-          db.createObjectStore(storeName, {
+          const os = db.createObjectStore(storeName, {
             keyPath: "id"
           });
+          os.createIndex("order", "order", { unique: false });
         };
 
         return openReq;
@@ -249,6 +265,25 @@
           const trans = db.transaction(storeName, "readwrite");
           const store = trans.objectStore(storeName);
           const getReq = store.openCursor();
+
+          getReq.onsuccess = function(event) {
+            let cur = event.target.result;
+            if (!cur) return;
+            console.log(cur.value);
+            cur.continue();
+          };
+        };
+      }
+
+      function indexedDbGetItemsByRange(from, to) {
+        const req = createRequest();
+        req.onsuccess = function(event) {
+          const db = event.target.result;
+          const trans = db.transaction(storeName, "readwrite");
+          const store = trans.objectStore(storeName);
+          const index = store.index("order");
+          const range = IDBKeyRange.bound(from, to);
+          const getReq = index.openCursor(range);
 
           getReq.onsuccess = function(event) {
             let cur = event.target.result;
