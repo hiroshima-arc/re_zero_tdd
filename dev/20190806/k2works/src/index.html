@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <title>Re:ゼロから始めるテスト駆動開発</title>
+    <link
+      href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css"
+      rel="stylesheet"
+    />
+
+    <style type="text/css">
+      body {
+        width: 810px;
+        margin: 0 auto;
+        background-color: ivory;
+      }
+      header {
+        width: 350px;
+      }
+      .nav-component {
+        width: 290px;
+        float: left;
+        padding: 5px;
+        margin-bottom: 5px;
+      }
+      .app-component {
+        width: 500px;
+        float: right;
+        padding-left: 5px;
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+      }
+      .app-component table {
+        margin-top: 10px;
+        border-collapse: collapse;
+      }
+      .app-component th {
+        border: 1px solid black;
+        background-color: aqua;
+      }
+      .app-component td {
+        border: 1px solid black;
+      }
+      footer {
+        clear: both;
+        width: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>HTML5+CSS+JavaScript with TDD</h1>
+    <header>
+      <nav class="nav-component">
+        <h1>Menu</h1>
+        <ul>
+          <li><a href="readme.html" target="_blank">README</a></li>
+          <li><a href="index.html">App</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <div class="app-component" id="web-sql-db"></div>
+      <div class="app-component" id="indexed-db"></div>
+    </section>
+    <div class="app-component" id="mocha"></div>
+    <footer>
+      <p>Copyright</p>
+      <address>hiroshima.arc@gmail.com</address>
+    </footer>
+
+    <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="web-sql-db-todo.js"></script>
+    <script src="indexed-db-todo.js"></script>
+    <script>
+      mocha.setup("bdd");
+      const expect = chai.expect;
+
+      describe("Web SQL Database", () => {
+        beforeEach(done => {
+          setupWebSqlDb();
+          done();
+        });
+
+        afterEach(done => {
+          rmAllItem();
+          done();
+        });
+
+        it("やることを保存する", () => {
+          setItem("やること");
+
+          getItem(1).then(result => {
+            expect("やること").to.equal(result.title);
+          });
+        });
+
+        it("やることを削除する", () => {
+          setItem("やること");
+
+          rmItem(1);
+
+          getItems().then(result => {
+            expect(0).to.equal(result.length);
+          });
+        });
+
+        it("やることを取得する", () => {
+          setItem("やること1");
+          setItem("やること2");
+          setItem("やること3");
+
+          getItems().then(result => {
+            expect(3).to.equal(result.length);
+          });
+        });
+      });
+
+      describe("Indexed Database", () => {
+        beforeEach(done => {
+          done();
+        });
+
+        afterEach(done => {
+          indexedDbDestroy();
+          done();
+        });
+
+        it("やることを保存する", () => {
+          const data = { id: "1", title: "やること" };
+          indexedDbSetItem(data);
+        });
+
+        it("やることを取得する", () => {
+          const data = { id: "2", title: "やること2" };
+          indexedDbSetItem(data);
+
+          const keyValue = "2";
+          indexedDbGetItem(keyValue).then(data => {
+            expect("やること2").to.equal(data.title);
+          });
+        });
+
+        it("やることをすべて取得する", () => {
+          const list = [
+            { id: "1", title: "やること1" },
+            { id: "2", title: "やること2" },
+            { id: "3", title: "やること3" }
+          ];
+          list.forEach(data => {
+            indexedDbSetItem(data);
+          });
+
+          indexedDbGetItems().then(data => {
+            expect(3).to.equal(data.length);
+          });
+        });
+
+        it("特定の範囲のやることをすべて取得する", () => {
+          const list = [
+            { id: "1", title: "やること1", order: 1 },
+            { id: "2", title: "やること2", order: 2 },
+            { id: "3", title: "やること3", order: 3 },
+            { id: "4", title: "やること4", order: 4 },
+            { id: "5", title: "やること5", order: 5 }
+          ];
+          list.forEach(data => {
+            indexedDbSetItem(data);
+          });
+
+          indexedDbGetItemsByRange(2, 4).then(data => {
+            expect(3).to.equal(data.length);
+          });
+        });
+
+        it("やることを削除する", () => {
+          const data = { id: "3", title: "やること3" };
+          indexedDbSetItem(data);
+          const keyValue = "3";
+          indexedDbDeleteItem(keyValue);
+        });
+      });
+
+      function tohtml(t) {
+        t = t.replace("&", "&amp;");
+        t = t.replace("<", "&lt;");
+        t = t.replace(">", "&gt;");
+        return t;
+      }
+
+      function $(id) {
+        return document.getElementById(id);
+      }
+
+      window.onload = function() {
+        setupWebSqlDb();
+        document.querySelector("#web-sql-db").innerHTML = `
+        <h1>TODO(Web SQL Database)</h1>
+        項目: <input id="item" type="text" />
+        <button onclick="addItem()">追加</button>
+        <ul class="app-component" id="list"></ul>
+        `;
+
+        setUpIndexedDb();
+        document.querySelector("#indexed-db").innerHTML = `
+        <h1>TODO(Indexed Database)</h1>
+        項目: <input id="indexed-db-title" type="text" />
+        <button onclick="indexedDbaddItem()">追加</button>
+        <ul class="app-component" id="indexed-db-list"></ul>
+        `;
+      };
+    </script>
+
+    <script>
+      mocha.checkLeaks();
+      mocha.globals(["jQuery"]);
+      mocha.run();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+app_frontend: npm run app
+watch: npm run watch
