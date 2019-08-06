@@ -1,5 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesManagement.Domain.Models;
+using SalesManagement.Domain.Models.ManagementResources;
+using SalesManagement.Domain.Models.ManagementResources.Department;
+using SalesManagement.Domain.Models.ManagementResources.Employee;
+using SalesManagement.Domain.Models.ManagementResources.Product;
 
 namespace SalesManagement.Infrastructure
 {

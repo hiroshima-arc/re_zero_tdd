@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SalesManagement.Domain.Models
+namespace SalesManagement.Domain.Models.ManagementResources
 {
     public class CompanyCategoryGroup
     {

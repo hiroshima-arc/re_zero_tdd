@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SalesManagement.Domain.Models
+namespace SalesManagement.Domain.Models.ManagementResources.Department
 {
     public sealed class DeptMst
     {

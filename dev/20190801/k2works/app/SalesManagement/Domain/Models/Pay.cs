@@ -1,4 +1,6 @@
 ﻿using System;
+using SalesManagement.Domain.Models.ManagementResources;
+using SalesManagement.Domain.Models.ManagementResources.Department;
 
 namespace SalesManagement.Domain.Models
 {

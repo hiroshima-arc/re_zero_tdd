@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using SalesManagement.Domain.Models.ManagementResources;
+using SalesManagement.Domain.Models.ManagementResources.Employee;
 
 namespace SalesManagement.Domain.Models
 {

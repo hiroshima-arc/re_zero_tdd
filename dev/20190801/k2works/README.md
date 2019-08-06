@@ -56,6 +56,13 @@ Scaffold-DbContext 'Server=localhost;Database=Sales;User=sa;Password=P@ssw0rd!' 
 Scaffold-DbContext 'Server=localhost;Initial Catalog=Sales;Integrated Security=True' Microsoft.EntityFrameworkCore.SqlServer -ContextDir Data -OutputDir Models
 ```
 
+```bash
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet aspnet-codegenerator razorpage -m DeptMst -dc SalesContext -udl -outDir Pages/ManagementResources/Departments --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m Employee -dc SalesContext -udl -outDir Pages/ManagementResources/Employee --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m Products -dc SalesContext -udl -outDir Pages/ManagementResources/Products --referenceScriptLibraries
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置

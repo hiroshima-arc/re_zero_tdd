@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using SalesManagement.Domain.Models.ManagementResources.Product;
 
-namespace SalesManagement.Domain.Models
+namespace SalesManagement.Domain.Models.ManagementResources
 {
     public sealed class CompanysMst
     {

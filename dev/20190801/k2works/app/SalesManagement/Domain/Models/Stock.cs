@@ -1,4 +1,5 @@
 ﻿using System;
+using SalesManagement.Domain.Models.ManagementResources;
 
 namespace SalesManagement.Domain.Models
 {
