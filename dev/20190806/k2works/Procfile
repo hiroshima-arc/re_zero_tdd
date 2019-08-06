@@ -1,3 +1,2 @@
-app_frontend: npm run app:frontend
-app_webpack: npm run app:webpack
+app_frontend: npm run app
 watch: npm run watch
