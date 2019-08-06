@@ -62,10 +62,14 @@
       </nav>
     </header>
     <section>
-      <section class="app-component">
-        <div id="mocha"></div>
-      </section>
+      <div class="app-compnent">
+        <h1>TODO</h1>
+        項目: <input id="item" type="text" />
+        <button onclick="addItem()">追加</button>
+        <ul class="app-component" id="list"></ul>
+      </div>
     </section>
+    <div id="mocha"></div>
     <footer>
       <p>Copyright</p>
       <address>hiroshima.arc@gmail.com</address>
@@ -76,6 +80,90 @@
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script>
       mocha.setup("bdd");
+
+      let db;
+      window.onload = function() {
+        db = openDatabase("todo.db", "1.0", "todo", 1024 * 1024 * 0);
+        db.transaction(function(tr) {
+          tr.executeSql(
+            "CREATE TABLE IF NOT EXISTS " +
+              "items(" +
+              "   id INTEGER PRIMARY KEY," +
+              "   title TEXT" +
+              ")",
+            [],
+            function() {
+              showItems();
+            },
+            sqlError
+          );
+        });
+      };
+
+      function showItems() {
+        $("list").innerHTML = "";
+        db.transaction(function(tr) {
+          tr.executeSql("SELECT * FROM items", [], showItemsOnResult, sqlError);
+        });
+        $("item").focus();
+      }
+
+      function showItemsOnResult(rt, rs) {
+        let html = "";
+        for (let i = 0; i < rs.rows.length; i++) {
+          let row = rs.rows.item(i);
+          html +=
+            "<li><button onclick='rmItem(" +
+            row.id +
+            ")'>x</button> " +
+            tohtml(row.title) +
+            "</li>";
+        }
+        $("list").innerHTML = html;
+      }
+
+      function addItem() {
+        let title = $("item").value;
+        $("item").value = "";
+        db.transaction(function(tr) {
+          tr.executeSql(
+            "INSERT INTO items" + "(title)VALUES(?)",
+            [title],
+            function() {
+              showItems();
+            },
+            sqlError
+          );
+        });
+      }
+
+      function rmItem(id) {
+        db.transaction(function(tr) {
+          tr.executeSql(
+            "DELETE FROM items " + "WHERE id=?",
+            [id],
+            function() {
+              showItems();
+            },
+            sqlError
+          );
+        });
+      }
+
+      function sqlError(tr, e) {
+        alert("ERROR:" + e.message);
+      }
+
+      function tohtml(t) {
+        t = t.replace("&", "&amp;");
+        t = t.replace("<", "&lt;");
+        t = t.replace(">", "&gt;");
+        return t;
+      }
+
+      function $(id) {
+        return document.getElementById(id);
+      }
     </script>
 
     <script>
