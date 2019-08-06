@@ -62,7 +62,13 @@
       </nav>
     </header>
     <section>
-      <div class="app-compnent" id="web-sql-db"></div>
+      <div class="app-component" id="web-sql-db"></div>
+      <div class="app-component" id="indexed-db">
+        <h1>TODO(Indexed Database)</h1>
+        項目: <input id="indexed-db-title" type="text" />
+        <button onclick="indexedDbaddItem()">追加</button>
+        <ul class="app-component" id="indexed-db-list"></ul>
+      </div>
     </section>
     <div class="app-component" id="mocha"></div>
     <footer>
@@ -117,6 +123,85 @@
           });
         });
       });
+
+      const DB_NAME = "todo.db";
+      const DB_VER = 100;
+      const req = indexedDB.open(DB_NAME, DB_VER);
+      let indexeddb;
+      req.onsuccess = function(e) {
+        indexeddb = e.target.result;
+        showList();
+      };
+      req.onerror = onError;
+      function onError(e) {
+        alert("Error:" + e.message);
+      }
+
+      req.onupgradeneeded = function(e) {
+        indexeddb = e.target.result;
+        const store_name = "items";
+        const store_opt = {
+          keyPath: "id",
+          autoIncrement: true
+        };
+        indexeddb.createObjectStore(store_name, store_opt);
+      };
+
+      function indexedDbaddItem() {
+        const tr = indexeddb.transaction(["items"], "readwrite");
+        const os = tr.objectStore("items");
+        const req = os.put({ title: $("indexed-db-title").value });
+        req.onerror = onError;
+        tr.oncomplete = function() {
+          showList;
+          $("indexed-db-title").value = "";
+          $("indexed-db-title").focus();
+        };
+      }
+
+      function showList() {
+        $("indexed-db-list").innerHTML = "";
+        const tr = indexeddb.transaction(["items"]);
+        const os = tr.objectStore("items");
+        const req = os.openCursor();
+        req.onerror = onError;
+        req.onsuccess = showListOnSuccess;
+      }
+
+      function showListOnSuccess(e) {
+        const cur = e.target.result;
+        if (!cur) return;
+        const v = cur.value;
+        const li = document.createElement("li");
+        li.innerHTML =
+          "<button onclick='" +
+          "rmIndexedDbItem(" +
+          v.id +
+          ")'>x" +
+          "</button> " +
+          tohtml(v.title);
+        $("indexed-db-list").appendChild(li);
+        cur.continue();
+      }
+
+      function rmIndexedDbItem(id) {
+        const tr = indexeddb.transaction(["items"], "readwrite");
+        const os = tr.objectStore("items");
+        const req = os.delete(id);
+        req.onerror = onError;
+        tr.oncomplete = showList;
+      }
+
+      function tohtml(t) {
+        t = t.replace("&", "&amp;");
+        t = t.replace("<", "&lt;");
+        t = t.replace(">", "&gt;");
+        return t;
+      }
+
+      function $(id) {
+        return document.getElementById(id);
+      }
 
       window.onload = function() {
         setupWebSqlDb();

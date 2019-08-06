@@ -140,14 +140,3 @@ function rmItem(id) {
 function sqlError(tr, e) {
   alert("ERROR:" + e.message);
 }
-
-function tohtml(t) {
-  t = t.replace("&", "&amp;");
-  t = t.replace("<", "&lt;");
-  t = t.replace(">", "&gt;");
-  return t;
-}
-
-function $(id) {
-  return document.getElementById(id);
-}
