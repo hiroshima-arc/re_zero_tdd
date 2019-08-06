@@ -69,7 +69,7 @@
         <ul class="app-component" id="list"></ul>
       </div>
     </section>
-    <div id="mocha"></div>
+    <div class="app-component" id="mocha"></div>
     <footer>
       <p>Copyright</p>
       <address>hiroshima.arc@gmail.com</address>
@@ -80,10 +80,50 @@
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script>
       mocha.setup("bdd");
+      const expect = chai.expect;
 
-      let db;
-      window.onload = function() {
-        db = openDatabase("todo.db", "1.0", "todo", 1024 * 1024 * 0);
+      describe("Web SQL Database", () => {
+        beforeEach(done => {
+          setupDb();
+          done();
+        });
+
+        afterEach(done => {
+          rmAllItem();
+          done();
+        });
+
+        it("やることを保存する", () => {
+          setItem("やること");
+
+          getItem(1).then(result => {
+            expect("やること").to.equal(result.title);
+          });
+        });
+
+        it("やることを削除する", () => {
+          setItem("やること");
+
+          rmItem(1);
+
+          getItems().then(result => {
+            expect(0).to.equal(result.length);
+          });
+        });
+
+        it("やることを取得する", () => {
+          setItem("やること1");
+          setItem("やること2");
+          setItem("やること3");
+
+          getItems().then(result => {
+            expect(3).to.equal(result.length);
+          });
+        });
+      });
+
+      const db = openDatabase("todo.db", "1.0", "todo", 1024 * 1024 * 0);
+      function setupDb() {
         db.transaction(function(tr) {
           tr.executeSql(
             "CREATE TABLE IF NOT EXISTS " +
@@ -98,7 +138,7 @@
             sqlError
           );
         });
-      };
+      }
 
       function showItems() {
         $("list").innerHTML = "";
@@ -137,6 +177,76 @@
         });
       }
 
+      function setItem(title) {
+        return new Promise(resolve => {
+          db.transaction(tr => {
+            tr.executeSql(
+              "INSERT INTO items" + "(title)VALUES(?)",
+              [title],
+              function() {
+                resolve();
+              },
+              sqlError
+            );
+          });
+        });
+      }
+
+      function getItems() {
+        return new Promise(resolve => {
+          db.transaction(tr => {
+            tr.executeSql(
+              "SELECT * FROM items",
+              [],
+              (rt, rs) => {
+                let row;
+                for (let i = 0; i < rs.rows.length; i++) {
+                  row = rs.rows.item(i);
+                  console.log(row);
+                }
+                resolve(rs.rows);
+              },
+              sqlError
+            );
+          });
+        });
+      }
+
+      function getItem(id) {
+        return new Promise((resolve, reject) => {
+          db.transaction(function(tr) {
+            tr.executeSql(
+              "SELECT * FROM items " + "WHERE id=?",
+              [id],
+              function(rt, rs) {
+                let row;
+                for (let i = 0; i < rs.rows.length; i++) {
+                  row = rs.rows.item(i);
+                  console.log(row);
+                }
+                resolve(row);
+              },
+              sqlError
+            );
+          });
+        });
+      }
+
+      function rmAllItem() {
+        return new Promise((resolve, reject) => {
+          db.transaction(function(tr) {
+            tr.executeSql(
+              "DELETE FROM items",
+              [],
+              function() {
+                showItems();
+              },
+              sqlError
+            );
+          });
+        });
+      }
+
       function rmItem(id) {
         db.transaction(function(tr) {
           tr.executeSql(
@@ -164,6 +274,10 @@
       function $(id) {
         return document.getElementById(id);
       }
+
+      window.onload = function() {
+        setupDb();
+      };
     </script>
 
     <script>
