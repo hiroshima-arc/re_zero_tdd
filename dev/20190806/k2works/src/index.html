@@ -142,8 +142,11 @@
         it("やることを取得する", () => {
           const data = { id: "2", title: "やること2" };
           indexedDbSetItem(data);
+
           const keyValue = "2";
-          indexedDbGetItem(keyValue);
+          indexedDbGetItem(keyValue).then(data => {
+            expect("やること2").to.equal(data.title);
+          });
         });
 
         it("やることをすべて取得する", () => {
@@ -156,7 +159,9 @@
             indexedDbSetItem(data);
           });
 
-          indexedDbGetItems();
+          indexedDbGetItems().then(data => {
+            expect(3).to.equal(data.length);
+          });
         });
 
         it("特定の範囲のやることをすべて取得する", () => {
@@ -171,7 +176,9 @@
             indexedDbSetItem(data);
           });
 
-          indexedDbGetItemsByRange(2, 4);
+          indexedDbGetItemsByRange(2, 4).then(data => {
+            expect(3).to.equal(data.length);
+          });
         });
 
         it("やることを削除する", () => {
@@ -245,53 +252,65 @@
       }
 
       function indexedDbGetItem(keyValue) {
-        const req = createRequest();
-        req.onsuccess = function(event) {
-          const db = event.target.result;
-          const trans = db.transaction(storeName, "readwrite");
-          const store = trans.objectStore(storeName);
-          const getReq = store.get(keyValue);
+        return new Promise(resolve => {
+          const req = createRequest();
+          req.onsuccess = function(event) {
+            const db = event.target.result;
+            const trans = db.transaction(storeName, "readwrite");
+            const store = trans.objectStore(storeName);
+            const getReq = store.get(keyValue);
 
-          getReq.onsuccess = function(event) {
-            console.log(event.target.result);
+            getReq.onsuccess = function(event) {
+              const result = event.target.result;
+              console.log(result);
+              resolve(result);
+            };
           };
-        };
+        });
       }
 
       function indexedDbGetItems() {
-        const req = createRequest();
-        req.onsuccess = function(event) {
-          const db = event.target.result;
-          const trans = db.transaction(storeName, "readwrite");
-          const store = trans.objectStore(storeName);
-          const getReq = store.openCursor();
+        return new Promise(resolve => {
+          const req = createRequest();
+          req.onsuccess = function(event) {
+            const db = event.target.result;
+            const trans = db.transaction(storeName, "readwrite");
+            const store = trans.objectStore(storeName);
+            const getReq = store.openCursor();
 
-          getReq.onsuccess = function(event) {
-            let cur = event.target.result;
-            if (!cur) return;
-            console.log(cur.value);
-            cur.continue();
+            let list = [];
+            getReq.onsuccess = function(event) {
+              let cur = event.target.result;
+              if (!cur) return resolve(list);
+              console.log(cur.value);
+              list.push(cur.value);
+              cur.continue();
+            };
           };
-        };
+        });
       }
 
       function indexedDbGetItemsByRange(from, to) {
-        const req = createRequest();
-        req.onsuccess = function(event) {
-          const db = event.target.result;
-          const trans = db.transaction(storeName, "readwrite");
-          const store = trans.objectStore(storeName);
-          const index = store.index("order");
-          const range = IDBKeyRange.bound(from, to);
-          const getReq = index.openCursor(range);
+        return new Promise(resolve => {
+          const req = createRequest();
+          req.onsuccess = function(event) {
+            const db = event.target.result;
+            const trans = db.transaction(storeName, "readwrite");
+            const store = trans.objectStore(storeName);
+            const index = store.index("order");
+            const range = IDBKeyRange.bound(from, to);
+            const getReq = index.openCursor(range);
 
-          getReq.onsuccess = function(event) {
-            let cur = event.target.result;
-            if (!cur) return;
-            console.log(cur.value);
-            cur.continue();
+            let list = [];
+            getReq.onsuccess = function(event) {
+              let cur = event.target.result;
+              if (!cur) return resolve(list);
+              console.log(cur.value);
+              list.push(cur.value);
+              cur.continue();
+            };
           };
-        };
+        });
       }
 
       function indexedDbDeleteItem(keyValue) {
