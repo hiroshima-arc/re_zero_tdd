@@ -1,0 +1,72 @@
+@page
+@model SalesManagement.Pages.ManagementResources.Departments.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptMst[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptMst[0].DepName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptMst[0].Layer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptMst[0].UpDivisionCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptMst[0].SlitYn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptMst[0].UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptMst[0].Updater)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.DeptMst) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Layer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpDivisionCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SlitYn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Updater)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.DeptCode">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.DeptCode">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.DeptCode">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

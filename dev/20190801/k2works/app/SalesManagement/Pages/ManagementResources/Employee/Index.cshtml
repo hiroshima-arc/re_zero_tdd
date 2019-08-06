@@ -1,0 +1,96 @@
+@page
+@model SalesManagement.Pages.ManagementResources.Employee.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].EmpName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].EmpKana)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].LoginPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Tel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Fax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].DeptCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].OccuCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].ApprovalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee[0].Updater)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Employee) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpKana)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoginPassword)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeptCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OccuCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApprovalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Updater)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.EmpCode">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.EmpCode">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.EmpCode">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

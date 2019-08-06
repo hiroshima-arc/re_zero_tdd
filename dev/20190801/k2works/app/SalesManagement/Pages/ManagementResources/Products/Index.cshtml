@@ -1,0 +1,132 @@
+@page
+@model SalesManagement.Pages.ManagementResources.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].ProdFullname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].ProdName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].ProdKana)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].ProdType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].SerialNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].Unitprice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].PoPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].TaxType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].CategoryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].WideUseType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].StockManageType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].StockReserveType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].SupCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].SupSubNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].Updater)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Products) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdFullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdKana)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unitprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PoPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WideUseType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockManageType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockReserveType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupSubNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Updater)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ProdCode">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ProdCode">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ProdCode">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
