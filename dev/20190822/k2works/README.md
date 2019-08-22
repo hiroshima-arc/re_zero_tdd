@@ -20,6 +20,19 @@
 ## 詳細
 
 ### 構築
+#### 開発パッケージのセットアップ
+
+```bash
+npm init -y
+npm install --save-dev npm-run-all watch foreman cpx rimraf markdown-to-html
+npm install --save-dev prettier eslint babel-eslint jshint tslint typescript
+npm install --save-dev browser-sync connect-browser-sync nodemon
+npx browser-sync init
+npx eslint --init
+npx tslint --init
+touch .jshintrc
+touch Procfile
+```
 
 **[⬆ back to top](#構成)**
 
