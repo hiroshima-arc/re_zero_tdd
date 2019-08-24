@@ -25,13 +25,26 @@
 ```bash
 npm init -y
 npm install --save-dev npm-run-all watch foreman cpx rimraf markdown-to-html
-npm install --save-dev prettier eslint babel-eslint jshint tslint typescript
-npm install --save-dev browser-sync connect-browser-sync nodemon
+npm install --save-dev prettier eslint babel-eslint jshint tslint typescript tslint-config-prettier tslint-plugin-prettier
+npm install --save-dev browser-sync connect-browser-sync nodemon cross-env
 npx browser-sync init
 npx eslint --init
 npx tslint --init
 touch .jshintrc
 touch Procfile
+```
+
+#### アプリケーションのセットアップ
+
+```bash
+npm i -D webpack webpack-cli ts-loader webpack-dev-server html-webpack-plugin
+npm install --save-dev mocha chai @babel/register ts-node @types/mocha @types/chai
+touch tsconfig.json
+touch webpack.config.js
+mkdir src
+touch src/index.html
+npm run build
+npm start
 ```
 
 **[⬆ back to top](#構成)**
@@ -63,3 +76,6 @@ touch Procfile
 **[⬆ back to top](#構成)**
 
 ## 参照
+- [webpack+TypeScriptの最小構成](https://ics.media/entry/16329/#webpack-ts)
+- [TSLintを使うTypeScriptプロジェクトにコードフォーマッタPrettierを導入する](https://qiita.com/akisx/items/4b90106c7faca4965852)
+- [typescriptでテストを書く環境を作ってみた（mocha, chai）](https://www.te-nu.com/entry/2018/04/21/195248)
