@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
+    "build:app": "tsc --module amd src/*.ts --out dist/compiled.js",
     "start": "nf start -j Procfile",
     "app": "webpack-dev-server",
-    "watch": "watch 'npm-run-all format lint test' ./src ",
+    "watch": "watch 'npm-run-all build:app format lint test' ./src ",
     "watch:app": "webpack --watch",
     "watch:test": "watch 'npm-run-all format lint test' ./test ",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register test/**/*.test.ts",
