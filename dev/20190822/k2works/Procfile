@@ -1,4 +1,5 @@
-app: npm run app
+app_frontend: npm run app:frontend
+app_backend: npm run app:backend
 watch_app: npm run watch:app
 watch_app: npm run watch
 watch_test: npm run watch:test

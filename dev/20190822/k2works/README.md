@@ -38,7 +38,7 @@ touch Procfile
 
 ```bash
 npm i -D webpack webpack-cli ts-loader webpack-dev-server html-webpack-plugin
-npm install --save-dev mocha chai @babel/register ts-node @types/mocha @types/chai
+npm install --save-dev mocha chai nyc @babel/register ts-node @types/mocha @types/chai
 touch tsconfig.json
 touch webpack.config.js
 mkdir src
