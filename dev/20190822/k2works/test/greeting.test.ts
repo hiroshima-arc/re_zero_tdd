@@ -9,6 +9,10 @@ describe("FizzBuzz", () => {
   });
 
   it("3で割り切れる場合はFizzをプリントする", () => {
-    assert.equal("Fizz", FizzBuzz.generate(3));
+    assert.equal(FizzBuzz.generate(3), "Fizz");
+  });
+
+  it("5で割り切れる場合はBuzzをプリントする", () => {
+    assert.equal(FizzBuzz.generate(5), "Buzz");
   });
 });
