@@ -7,4 +7,8 @@ describe("FizzBuzz", () => {
     assert.equal(list[0], 1);
     assert.equal(list[99], 100);
   });
+
+  it("3で割り切れる場合はFizzをプリントする", () => {
+    assert.equal("Fizz", FizzBuzz.generate(3));
+  });
 });
