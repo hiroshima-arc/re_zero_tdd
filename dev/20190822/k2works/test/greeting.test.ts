@@ -15,4 +15,8 @@ describe("FizzBuzz", () => {
   it("5で割り切れる場合はBuzzをプリントする", () => {
     assert.equal(FizzBuzz.generate(5), "Buzz");
   });
+
+  it("15で割り切れる場合はFizzBuzzをプリントする", () => {
+    assert.equal(FizzBuzz.generate(15), "FizzBuzz");
+  });
 });
