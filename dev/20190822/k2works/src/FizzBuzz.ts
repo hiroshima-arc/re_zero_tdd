@@ -1,16 +1,16 @@
 export class FizzBuzz {
   public static generate(num: number): any {
-    let result: string = num.toString();
-
     if (num % 3 === 0 && num % 5 === 0) {
-      result = "FizzBuzz";
-    } else if (num % 3 === 0) {
-      result = "Fizz";
-    } else if (num % 5 === 0) {
-      result = "Buzz";
+      return "FizzBuzz";
+    }
+    if (num % 3 === 0) {
+      return "Fizz";
+    }
+    if (num % 5 === 0) {
+      return "Buzz";
     }
 
-    return result;
+    return num.toString();
   }
   public static generateList(): number[] {
     const list = [];
