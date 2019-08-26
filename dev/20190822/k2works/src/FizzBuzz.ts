@@ -17,10 +17,14 @@ export class FizzBuzz {
   }
   public static generateList(): string[] {
     const list: string[] = [];
-    for (let i: number = 1; i <= 100; i++) {
+    const range = (start: number, end: number) =>
+      Array.from({ length: end - start + 1 }, (v, k) => k + start);
+
+    range(1, 100).forEach(i => {
       const value: string = FizzBuzz.generate(i);
       list.push(value);
-    }
+    });
+
     return list;
   }
 }
