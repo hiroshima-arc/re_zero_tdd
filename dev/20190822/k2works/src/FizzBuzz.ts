@@ -12,7 +12,7 @@ export class FizzBuzz {
 
     return result;
   }
-  public static print1To100(): number[] {
+  public static generateList(): number[] {
     const list = [];
     for (let i = 1; i <= 100; i++) {
       list[i - 1] = i;
