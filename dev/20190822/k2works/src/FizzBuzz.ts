@@ -15,10 +15,11 @@ export class FizzBuzz {
 
     return num.toString();
   }
-  public static generateList(): number[] {
-    const list = [];
-    for (let i = 1; i <= 100; i++) {
-      list[i - 1] = i;
+  public static generateList(): string[] {
+    const list: string[] = [];
+    for (let i: number = 1; i <= 100; i++) {
+      const value: string = FizzBuzz.generate(i);
+      list.push(value);
     }
     return list;
   }
