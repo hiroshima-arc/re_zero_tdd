@@ -21,8 +21,7 @@ export class FizzBuzz {
       Array.from({ length: end - start + 1 }, (v, k) => k + start);
 
     range(1, 100).forEach(i => {
-      const value: string = FizzBuzz.generate(i);
-      list.push(value);
+      list.push(FizzBuzz.generate(i));
     });
 
     return list;
