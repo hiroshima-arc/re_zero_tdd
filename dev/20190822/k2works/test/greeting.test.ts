@@ -3,6 +3,8 @@ import { FizzBuzz } from "../src/FizzBuzz";
 
 describe("FizzBuzz", () => {
   it("1から100までをプリントする", () => {
-    assert.equal(1, FizzBuzz.print1To100());
+    const list: number[] = FizzBuzz.print1To100();
+    assert.equal(list[0], 1);
+    assert.equal(list[99], 100);
   });
 });
