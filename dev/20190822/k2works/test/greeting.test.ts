@@ -1,8 +1,8 @@
 import { assert } from "chai";
-import { greeting } from "../src/greeting";
+import { FizzBuzz } from "../src/FizzBuzz";
 
-describe("Hello, world", () => {
-  it("say greeting", () => {
-    assert.equal(greeting(), "hello, world");
+describe("FizzBuzz", () => {
+  it("1から100までをプリントする", () => {
+    assert.equal(1, FizzBuzz.print1To100());
   });
 });
