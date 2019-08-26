@@ -1,12 +1,15 @@
 export class FizzBuzz {
-  public static generate(num: number): any {
-    if (num % 3 === 0 && num % 5 === 0) {
+  public static generate(num: number): string {
+    const isFizz: boolean = num % 3 === 0;
+    const isBuzz: boolean = num % 5 === 0;
+
+    if (isFizz && isBuzz) {
       return "FizzBuzz";
     }
-    if (num % 3 === 0) {
+    if (isFizz) {
       return "Fizz";
     }
-    if (num % 5 === 0) {
+    if (isBuzz) {
       return "Buzz";
     }
 
