@@ -33,11 +33,16 @@ describe("FizzBuzz", () => {
   });
 
   it("タイプ1は通常のパターンのリストを返す", () => {
-    this._data.list = FizzBuzz.generateList();
+    this._data.list = FizzBuzz.generateList(1);
     assert.equal("Fizz", this._data.list[2]);
   });
 
   it("タイプ2は数のみのパターンを返す", () => {
     assert.equal("3", FizzBuzz.generate(3, 2));
+  });
+
+  it("タイプ2は数のみのパターンのリストを返す", () => {
+    this._data.list = FizzBuzz.generateList(2);
+    assert.equal("3", this._data.list[2]);
   });
 });
