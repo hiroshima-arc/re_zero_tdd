@@ -4,7 +4,23 @@ export class FizzBuzz {
   public static readonly BUZZ: string = "Buzz";
   public static readonly FIZZ_BUZZ: string = "FizzBuzz";
 
-  public static generate(num: number): string {
+  public static generate(input: number, type: number = 1) {
+    switch (type) {
+      case 1:
+        return this._generate(input);
+      default:
+        return this._generate(input);
+    }
+  }
+
+  public static generateList(): any[] {
+    const range = (start: number, end: number) =>
+      Array.from({ length: end - start + 1 }, (v, k) => k + start);
+
+    return range(1, this.MAX_NUMBER).map(i => FizzBuzz.generate(i));
+  }
+
+  private static _generate(num: number): string {
     const isFizz: boolean = num % 3 === 0;
     const isBuzz: boolean = num % 5 === 0;
 
@@ -19,11 +35,5 @@ export class FizzBuzz {
     }
 
     return num.toString();
-  }
-  public static generateList(): any[] {
-    const range = (start: number, end: number) =>
-      Array.from({ length: end - start + 1 }, (v, k) => k + start);
-
-    return range(1, this.MAX_NUMBER).map(i => FizzBuzz.generate(i));
   }
 }

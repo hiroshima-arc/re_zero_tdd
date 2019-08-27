@@ -27,4 +27,8 @@ describe("FizzBuzz", () => {
   it("15で割り切れる場合はFizzBuzzをプリントする", () => {
     assert.equal(FizzBuzz.generate(15), "FizzBuzz");
   });
+
+  it("タイプ1は通常のパターンを返す", () => {
+    assert.equal("Fizz", FizzBuzz.generate(3, 1));
+  });
 });
