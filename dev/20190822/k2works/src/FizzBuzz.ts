@@ -13,11 +13,11 @@ export class FizzBuzz {
     }
   }
 
-  public static generateList(): any[] {
+  public static generateList(type: number = 1): string[] {
     const range = (start: number, end: number) =>
       Array.from({ length: end - start + 1 }, (v, k) => k + start);
 
-    return range(1, this.MAX_NUMBER).map(i => FizzBuzz.generate(i));
+    return range(1, this.MAX_NUMBER).map(i => FizzBuzz.generate(i, type));
   }
 
   private static _generate(num: number): string {
