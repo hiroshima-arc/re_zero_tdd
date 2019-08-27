@@ -1,14 +1,19 @@
 import { assert } from "chai";
 import { FizzBuzz } from "../src/FizzBuzz";
+import { FizzBuzzData } from "../src/FizzBuzzData";
 
 describe("FizzBuzz", () => {
+  beforeEach(() => {
+    this._data = new FizzBuzzData();
+  });
+
   it("1から100までをプリントする", () => {
-    const list: string[] = FizzBuzz.generateList();
-    assert.equal(list[0], "1");
-    assert.equal(list[2], "Fizz");
-    assert.equal(list[4], "Buzz");
-    assert.equal(list[14], "FizzBuzz");
-    assert.equal(list[99], "Buzz");
+    this._data.list = FizzBuzz.generateList();
+    assert.equal(this._data.list[0], "1");
+    assert.equal(this._data.list[2], "Fizz");
+    assert.equal(this._data.list[4], "Buzz");
+    assert.equal(this._data.list[14], "FizzBuzz");
+    assert.equal(this._data.list[99], "Buzz");
   });
 
   it("3で割り切れる場合はFizzをプリントする", () => {
