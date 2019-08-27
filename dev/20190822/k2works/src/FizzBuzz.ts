@@ -8,6 +8,8 @@ export class FizzBuzz {
     switch (type) {
       case 1:
         return this._generate(input);
+      case 2:
+        return input.toString();
       default:
         return this._generate(input);
     }
