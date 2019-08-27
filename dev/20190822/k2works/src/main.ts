@@ -4,14 +4,13 @@ const fizzBuzzView = {
   create(): void {
     this._renderTable();
   },
+  _range: (start: number, end: number) =>
+    Array.from({ length: end - start + 1 }, (v, k) => k + start),
   _renderTable(): void {
     const table = (() => {
-      const range = (start: number, end: number) =>
-        Array.from({ length: end - start + 1 }, (v, k) => k + start);
-
       const header: string = (() => {
         let element = "<tr>";
-        range(1, 10).forEach(i => {
+        this._range(1, 10).forEach(i => {
           element += `<th>${i}</th>`;
         });
         element += "</tr>";
