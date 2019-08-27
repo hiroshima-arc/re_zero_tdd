@@ -45,4 +45,9 @@ describe("FizzBuzz", () => {
     this._data.list = FizzBuzz.generateList(2);
     assert.equal("3", this._data.list[2]);
   });
+
+  it("タイプ3は15で割り切れる場合にFizzBuzzを返す", () => {
+    assert.equal(FizzBuzz.generate(15, 3), "FizzBuzz");
+    assert.equal(FizzBuzz.generate(3, 3), "3");
+  });
 });

@@ -10,6 +10,14 @@ export class FizzBuzz {
         return this._generate(input);
       case 2:
         return input.toString();
+      case 3:
+        const isFizz: boolean = input % 3 === 0;
+        const isBuzz: boolean = input % 5 === 0;
+
+        if (isFizz && isBuzz) {
+          return this.FIZZ_BUZZ;
+        }
+        return input.toString();
       default:
         return this._generate(input);
     }
