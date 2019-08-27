@@ -1,47 +1,51 @@
 import { FizzBuzz } from "./FizzBuzz";
 
-const range = (start: number, end: number) =>
-  Array.from({ length: end - start + 1 }, (v, k) => k + start);
+const fizzBuzzView = {
+  create(): void {
+    this._renderTable();
+  },
+  _renderTable(): void {
+    const table = (() => {
+      const range = (start: number, end: number) =>
+        Array.from({ length: end - start + 1 }, (v, k) => k + start);
 
-const header: string = (() => {
-  let element = "<tr>";
-  range(1, 10).forEach(i => {
-    element += `<th>${i}</th>`;
-  });
-  element += "</tr>";
+      const header: string = (() => {
+        let element = "<tr>";
+        range(1, 10).forEach(i => {
+          element += `<th>${i}</th>`;
+        });
+        element += "</tr>";
 
-  return `
+        return `
             <thead>
             ${element}
-            </thead>
-`;
-})();
+            </thead>`;
+      })();
 
-const body: string = (() => {
-  let element = "<tr>";
-  FizzBuzz.generateList().forEach((v, k) => {
-    element += `<td>${v}</td>`;
-    if ((k + 1) % 10 === 0) {
-      element += "</tr>";
-    }
-  });
+      const body: string = (() => {
+        let element = "<tr>";
+        FizzBuzz.generateList().forEach((v, k) => {
+          element += `<td>${v}</td>`;
+          if ((k + 1) % 10 === 0) {
+            element += "</tr>";
+          }
+        });
 
-  return `
+        return `
             <tbody>
             ${element}
-            </tbody>
-`;
-})();
+            </tbody>`;
+      })();
 
-const table = `
+      return `
           <table>
           ${header}
           ${body}
-          </table>
-`;
+          </table>`;
+    })();
 
-export function renderTable(): void {
-  document.querySelector("#app").innerHTML = table;
-}
+    document.querySelector("#app").innerHTML = table;
+  }
+};
 
-renderTable();
+fizzBuzzView.create();
