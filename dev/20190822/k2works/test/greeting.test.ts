@@ -50,4 +50,10 @@ describe("FizzBuzz", () => {
     assert.equal(FizzBuzz.generate(15, 3), "FizzBuzz");
     assert.equal(FizzBuzz.generate(3, 3), "3");
   });
+
+  it("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す", () => {
+    this._data.list = FizzBuzz.generateList(3);
+    assert.equal(this._data.list[14], "FizzBuzz");
+    assert.equal(this._data.list[2], "3");
+  });
 });
