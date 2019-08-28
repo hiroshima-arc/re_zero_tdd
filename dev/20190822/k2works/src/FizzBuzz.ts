@@ -25,7 +25,7 @@ export class FizzBuzz {
       case 3:
         return new FizzBuzzType03(input).generate();
       default:
-        return this._generate(input);
+        return new FizzBuzzType01(input).generate();
     }
   }
 
@@ -33,22 +33,5 @@ export class FizzBuzz {
     this._list = FizzBuzz.range(1, FizzBuzz.MAX_NUMBER).map(i =>
       this.generate(i, type)
     );
-  }
-
-  private _generate(num: number): string {
-    const isFizz: boolean = num % 3 === 0;
-    const isBuzz: boolean = num % 5 === 0;
-
-    if (isFizz && isBuzz) {
-      return FizzBuzz.FIZZ_BUZZ;
-    }
-    if (isFizz) {
-      return FizzBuzz.FIZZ;
-    }
-    if (isBuzz) {
-      return FizzBuzz.BUZZ;
-    }
-
-    return num.toString();
   }
 }
