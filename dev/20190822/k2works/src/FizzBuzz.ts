@@ -1,10 +1,16 @@
 export class FizzBuzz {
+  public get list(): string[] {
+    return this._list;
+  }
   public static readonly MAX_NUMBER: number = 100;
   public static readonly FIZZ: string = "Fizz";
   public static readonly BUZZ: string = "Buzz";
   public static readonly FIZZ_BUZZ: string = "FizzBuzz";
 
-  public static generate(input: number, type: number = 1) {
+  // tslint:disable-next-line: variable-name
+  private _list: string[];
+
+  public generate(input: number, type: number = 1) {
     switch (type) {
       case 1:
         return this._generate(input);
@@ -15,7 +21,7 @@ export class FizzBuzz {
         const isBuzz: boolean = input % 5 === 0;
 
         if (isFizz && isBuzz) {
-          return this.FIZZ_BUZZ;
+          return FizzBuzz.FIZZ_BUZZ;
         }
         return input.toString();
       default:
@@ -23,36 +29,26 @@ export class FizzBuzz {
     }
   }
 
-  public static generateList(type: number = 1): string[] {
+  public generateList(type: number = 1): void {
     const range = (start: number, end: number) =>
       Array.from({ length: end - start + 1 }, (v, k) => k + start);
 
-    return range(1, this.MAX_NUMBER).map(i => FizzBuzz.generate(i, type));
+    this._list = range(1, FizzBuzz.MAX_NUMBER).map(i => this.generate(i, type));
   }
-
-  private static _generate(num: number): string {
+  private _generate(num: number): string {
     const isFizz: boolean = num % 3 === 0;
     const isBuzz: boolean = num % 5 === 0;
 
     if (isFizz && isBuzz) {
-      return this.FIZZ_BUZZ;
+      return FizzBuzz.FIZZ_BUZZ;
     }
     if (isFizz) {
-      return this.FIZZ;
+      return FizzBuzz.FIZZ;
     }
     if (isBuzz) {
-      return this.BUZZ;
+      return FizzBuzz.BUZZ;
     }
 
     return num.toString();
-  }
-
-  private _list: string[];
-  get list() {
-    return this._list;
-  }
-
-  set list(list: string[]) {
-    this._list = list;
   }
 }
