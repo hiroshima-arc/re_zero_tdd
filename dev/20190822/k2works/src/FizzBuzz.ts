@@ -15,17 +15,34 @@ export class FizzBuzz {
 
   // tslint:disable-next-line: variable-name
   private _list: string[];
+  // tslint:disable-next-line: variable-name
+  private _type01: FizzBuzzType01;
+  // tslint:disable-next-line: variable-name
+  private _type02: FizzBuzzType02;
+  // tslint:disable-next-line: variable-name
+  private _type03: FizzBuzzType03;
+
+  constructor(type: number) {
+    switch (type) {
+      case 1:
+        this._type01 = new FizzBuzzType01();
+      case 2:
+        this._type02 = new FizzBuzzType02();
+      case 3:
+        this._type03 = new FizzBuzzType03();
+    }
+  }
 
   public generate(input: number, type: number = 1) {
     switch (type) {
       case 1:
-        return new FizzBuzzType01(input).generate();
+        return this._type01.generate(input);
       case 2:
-        return new FizzBuzzType02(input).generate();
+        return this._type02.generate(input);
       case 3:
-        return new FizzBuzzType03(input).generate();
+        return this._type03.generate(input);
       default:
-        return new FizzBuzzType01(input).generate();
+        return this._type01.generate(input);
     }
   }
 

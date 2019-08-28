@@ -23,7 +23,7 @@ const fizzBuzzView = {
 
       const body: string = (() => {
         let element = "<tr>";
-        const fizzBuzz = new FizzBuzz();
+        const fizzBuzz = new FizzBuzz(1);
         fizzBuzz.generateList();
         fizzBuzz.list.forEach((v, k) => {
           element += `<td>${v}</td>`;
