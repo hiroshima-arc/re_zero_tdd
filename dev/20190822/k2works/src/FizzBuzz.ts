@@ -1,3 +1,4 @@
+import { FizzBuzzType } from "./FizzBuzzType";
 import { FizzBuzzType01 } from "./FizzBuzzType01";
 import { FizzBuzzType02 } from "./FizzBuzzType02";
 import { FizzBuzzType03 } from "./FizzBuzzType03";
@@ -16,39 +17,29 @@ export class FizzBuzz {
   // tslint:disable-next-line: variable-name
   private _list: string[];
   // tslint:disable-next-line: variable-name
-  private _type01: FizzBuzzType01;
-  // tslint:disable-next-line: variable-name
-  private _type02: FizzBuzzType02;
-  // tslint:disable-next-line: variable-name
-  private _type03: FizzBuzzType03;
+  private _type: FizzBuzzType;
 
   constructor(type: number) {
     switch (type) {
       case 1:
-        this._type01 = new FizzBuzzType01();
+        this._type = new FizzBuzzType01();
+        break;
       case 2:
-        this._type02 = new FizzBuzzType02();
+        this._type = new FizzBuzzType02();
+        break;
       case 3:
-        this._type03 = new FizzBuzzType03();
+        this._type = new FizzBuzzType03();
+        break;
     }
   }
 
-  public generate(input: number, type: number = 1) {
-    switch (type) {
-      case 1:
-        return this._type01.generate(input);
-      case 2:
-        return this._type02.generate(input);
-      case 3:
-        return this._type03.generate(input);
-      default:
-        return this._type01.generate(input);
-    }
+  public generate(input: number) {
+    return this._type.generate(input);
   }
 
-  public generateList(type: number = 1): void {
+  public generateList(): void {
     this._list = FizzBuzz.range(1, FizzBuzz.MAX_NUMBER).map(i =>
-      this.generate(i, type)
+      this.generate(i)
     );
   }
 }

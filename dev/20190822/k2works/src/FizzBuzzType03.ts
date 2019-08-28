@@ -1,6 +1,7 @@
 import { FizzBuzz } from "./FizzBuzz";
+import { FizzBuzzType } from "./FizzBuzzType";
 
-export class FizzBuzzType03 {
+export class FizzBuzzType03 extends FizzBuzzType {
   public generate(input: number): string {
     const isFizz: boolean = input % 3 === 0;
     const isBuzz: boolean = input % 5 === 0;
