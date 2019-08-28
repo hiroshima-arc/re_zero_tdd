@@ -3,17 +3,14 @@ import { FizzBuzz } from "../src/FizzBuzz";
 import { FizzBuzzData } from "../src/FizzBuzzData";
 
 describe("FizzBuzz", () => {
-  beforeEach(() => {
-    this._data = new FizzBuzzData();
-  });
-
   it("1から100までをプリントする", () => {
-    this._data.list = FizzBuzz.generateList();
-    assert.equal(this._data.list[0], "1");
-    assert.equal(this._data.list[2], "Fizz");
-    assert.equal(this._data.list[4], "Buzz");
-    assert.equal(this._data.list[14], "FizzBuzz");
-    assert.equal(this._data.list[99], "Buzz");
+    const data = new FizzBuzzData();
+    data.list = FizzBuzz.generateList();
+    assert.equal(data.list[0], "1");
+    assert.equal(data.list[2], "Fizz");
+    assert.equal(data.list[4], "Buzz");
+    assert.equal(data.list[14], "FizzBuzz");
+    assert.equal(data.list[99], "Buzz");
   });
 
   it("3で割り切れる場合はFizzをプリントする", () => {
@@ -33,8 +30,9 @@ describe("FizzBuzz", () => {
   });
 
   it("タイプ1は通常のパターンのリストを返す", () => {
-    this._data.list = FizzBuzz.generateList(1);
-    assert.equal("Fizz", this._data.list[2]);
+    const data = new FizzBuzzData();
+    data.list = FizzBuzz.generateList(1);
+    assert.equal("Fizz", data.list[2]);
   });
 
   it("タイプ2は数のみのパターンを返す", () => {
@@ -42,8 +40,9 @@ describe("FizzBuzz", () => {
   });
 
   it("タイプ2は数のみのパターンのリストを返す", () => {
-    this._data.list = FizzBuzz.generateList(2);
-    assert.equal("3", this._data.list[2]);
+    const data = new FizzBuzzData();
+    data.list = FizzBuzz.generateList(2);
+    assert.equal("3", data.list[2]);
   });
 
   it("タイプ3は15で割り切れる場合にFizzBuzzを返す", () => {
@@ -52,8 +51,9 @@ describe("FizzBuzz", () => {
   });
 
   it("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す", () => {
-    this._data.list = FizzBuzz.generateList(3);
-    assert.equal(this._data.list[14], "FizzBuzz");
-    assert.equal(this._data.list[2], "3");
+    const data = new FizzBuzzData();
+    data.list = FizzBuzz.generateList(3);
+    assert.equal(data.list[14], "FizzBuzz");
+    assert.equal(data.list[2], "3");
   });
 });
