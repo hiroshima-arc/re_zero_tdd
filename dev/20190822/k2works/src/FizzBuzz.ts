@@ -6,6 +6,8 @@ export class FizzBuzz {
   public static readonly FIZZ: string = "Fizz";
   public static readonly BUZZ: string = "Buzz";
   public static readonly FIZZ_BUZZ: string = "FizzBuzz";
+  public static readonly range = (start: number, end: number) =>
+    Array.from({ length: end - start + 1 }, (v, k) => k + start);
 
   // tslint:disable-next-line: variable-name
   private _list: string[];
@@ -30,11 +32,11 @@ export class FizzBuzz {
   }
 
   public generateList(type: number = 1): void {
-    const range = (start: number, end: number) =>
-      Array.from({ length: end - start + 1 }, (v, k) => k + start);
-
-    this._list = range(1, FizzBuzz.MAX_NUMBER).map(i => this.generate(i, type));
+    this._list = FizzBuzz.range(1, FizzBuzz.MAX_NUMBER).map(i =>
+      this.generate(i, type)
+    );
   }
+
   private _generate(num: number): string {
     const isFizz: boolean = num % 3 === 0;
     const isBuzz: boolean = num % 5 === 0;
