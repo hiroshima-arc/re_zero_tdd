@@ -1,3 +1,5 @@
+import { FizzBuzzType01 } from "./FizzBuzzType01";
+
 export class FizzBuzz {
   public get list(): string[] {
     return this._list;
@@ -15,7 +17,7 @@ export class FizzBuzz {
   public generate(input: number, type: number = 1) {
     switch (type) {
       case 1:
-        return this._generate(input);
+        return new FizzBuzzType01(input).generate();
       case 2:
         return input.toString();
       case 3:

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "build:app": "tsc --module amd src/*.ts --out dist/compiled.js",
+    "build:app": "tsc --target es5 --module amd src/*.ts --out dist/compiled.js",
     "start": "nf start -j Procfile",
     "app": "npm-run-all app:*",
     "app:frontend": "browser-sync start --config bs-config.js",
