@@ -1,10 +1,9 @@
 import { assert } from "chai";
 import { FizzBuzz } from "../src/FizzBuzz";
-import { FizzBuzzData } from "../src/FizzBuzzData";
 
 describe("FizzBuzz", () => {
   it("1から100までをプリントする", () => {
-    const data = new FizzBuzzData();
+    const data = new FizzBuzz();
     data.list = FizzBuzz.generateList();
     assert.equal(data.list[0], "1");
     assert.equal(data.list[2], "Fizz");
@@ -30,7 +29,7 @@ describe("FizzBuzz", () => {
   });
 
   it("タイプ1は通常のパターンのリストを返す", () => {
-    const data = new FizzBuzzData();
+    const data = new FizzBuzz();
     data.list = FizzBuzz.generateList(1);
     assert.equal("Fizz", data.list[2]);
   });
@@ -40,7 +39,7 @@ describe("FizzBuzz", () => {
   });
 
   it("タイプ2は数のみのパターンのリストを返す", () => {
-    const data = new FizzBuzzData();
+    const data = new FizzBuzz();
     data.list = FizzBuzz.generateList(2);
     assert.equal("3", data.list[2]);
   });
@@ -51,7 +50,7 @@ describe("FizzBuzz", () => {
   });
 
   it("タイプ3は15で割り切れる場合にFizzBuzzのパターンのリストを返す", () => {
-    const data = new FizzBuzzData();
+    const data = new FizzBuzz();
     data.list = FizzBuzz.generateList(3);
     assert.equal(data.list[14], "FizzBuzz");
     assert.equal(data.list[2], "3");
