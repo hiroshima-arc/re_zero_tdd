@@ -1,5 +1,6 @@
 import { FizzBuzzType01 } from "./FizzBuzzType01";
 import { FizzBuzzType02 } from "./FizzBuzzType02";
+import { FizzBuzzType03 } from "./FizzBuzzType03";
 
 export class FizzBuzz {
   public get list(): string[] {
@@ -22,13 +23,7 @@ export class FizzBuzz {
       case 2:
         return new FizzBuzzType02(input).generate();
       case 3:
-        const isFizz: boolean = input % 3 === 0;
-        const isBuzz: boolean = input % 5 === 0;
-
-        if (isFizz && isBuzz) {
-          return FizzBuzz.FIZZ_BUZZ;
-        }
-        return input.toString();
+        return new FizzBuzzType03(input).generate();
       default:
         return this._generate(input);
     }
