@@ -19,18 +19,8 @@ export class FizzBuzz {
   // tslint:disable-next-line: variable-name
   private _type: FizzBuzzType;
 
-  constructor(type: number) {
-    switch (type) {
-      case 1:
-        this._type = new FizzBuzzType01();
-        break;
-      case 2:
-        this._type = new FizzBuzzType02();
-        break;
-      case 3:
-        this._type = new FizzBuzzType03();
-        break;
-    }
+  constructor(type: FizzBuzzType) {
+    this._type = type;
   }
 
   public generate(input: number) {
