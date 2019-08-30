@@ -1,19 +1,19 @@
 import { FizzBuzz } from "./FizzBuzz";
-import { FizzBuzzType } from "./FizzBuzzType";
+import { IFizzBuzzType } from "./IFizzBuzzType";
 
-export class FizzBuzzType01 extends FizzBuzzType {
+export class FizzBuzzType01 extends IFizzBuzzType {
   public generate(input: number): string {
     const isFizz: boolean = input % 3 === 0;
     const isBuzz: boolean = input % 5 === 0;
 
     if (isFizz && isBuzz) {
-      return FizzBuzzType.FIZZ_BUZZ;
+      return IFizzBuzzType.FIZZ_BUZZ;
     }
     if (isFizz) {
-      return FizzBuzzType.FIZZ;
+      return IFizzBuzzType.FIZZ;
     }
     if (isBuzz) {
-      return FizzBuzzType.BUZZ;
+      return IFizzBuzzType.BUZZ;
     }
 
     return input.toString();

@@ -1,6 +1,6 @@
-import { FizzBuzzType } from "./FizzBuzzType";
+import { IFizzBuzzType } from "./IFizzBuzzType";
 
-export class FizzBuzzType02 extends FizzBuzzType {
+export class FizzBuzzType02 extends IFizzBuzzType {
   public generate(input: number): string {
     return input.toString();
   }

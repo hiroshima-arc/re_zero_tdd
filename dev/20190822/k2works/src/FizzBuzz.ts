@@ -1,7 +1,4 @@
-import { FizzBuzzType } from "./FizzBuzzType";
-import { FizzBuzzType01 } from "./FizzBuzzType01";
-import { FizzBuzzType02 } from "./FizzBuzzType02";
-import { FizzBuzzType03 } from "./FizzBuzzType03";
+import { IFizzBuzzType } from "./IFizzBuzzType";
 
 export class FizzBuzz {
   public get list(): string[] {
@@ -14,9 +11,9 @@ export class FizzBuzz {
   // tslint:disable-next-line: variable-name
   private _list: string[];
   // tslint:disable-next-line: variable-name
-  private _type: FizzBuzzType;
+  private _type: IFizzBuzzType;
 
-  constructor(type: FizzBuzzType) {
+  constructor(type: IFizzBuzzType) {
     this._type = type;
   }
 
