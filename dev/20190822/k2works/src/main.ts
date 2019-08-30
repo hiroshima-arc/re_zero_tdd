@@ -1,4 +1,5 @@
 import { FizzBuzz } from "./FizzBuzz";
+import { FizzBuzzType } from "./FizzBuzzType";
 
 const fizzBuzzView = {
   create(): void {
@@ -23,7 +24,7 @@ const fizzBuzzView = {
 
       const body: string = (() => {
         let element = "<tr>";
-        const fizzBuzz = new FizzBuzz(1);
+        const fizzBuzz = new FizzBuzz(FizzBuzzType.one);
         fizzBuzz.generateList();
         fizzBuzz.list.forEach((v, k) => {
           element += `<td>${v}</td>`;
