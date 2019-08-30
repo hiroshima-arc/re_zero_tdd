@@ -1,4 +1,3 @@
-import { throws } from "assert";
 import { FizzBuzz } from "./FizzBuzz";
 import { FizzBuzzType } from "./FizzBuzzType";
 
