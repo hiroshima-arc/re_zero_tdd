@@ -1,8 +1,11 @@
+import { throws } from "assert";
 import { FizzBuzz } from "./FizzBuzz";
 import { FizzBuzzType } from "./FizzBuzzType";
 
 const fizzBuzzView = {
   create(): void {
+    this.model = new FizzBuzz(FizzBuzzType.one);
+    this.model.generateList();
     this._renderTable();
   },
   _range: (start: number, end: number) =>
@@ -24,9 +27,7 @@ const fizzBuzzView = {
 
       const body: string = (() => {
         let element = "<tr>";
-        const fizzBuzz = new FizzBuzz(FizzBuzzType.one);
-        fizzBuzz.generateList();
-        fizzBuzz.list.forEach((v, k) => {
+        this.model.list.forEach((v, k) => {
           element += `<td>${v}</td>`;
           if ((k + 1) % 10 === 0) {
             element += "</tr>";
