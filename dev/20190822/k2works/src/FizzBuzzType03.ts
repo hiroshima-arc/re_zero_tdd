@@ -7,7 +7,7 @@ export class FizzBuzzType03 extends FizzBuzzType {
     const isBuzz: boolean = input % 5 === 0;
 
     if (isFizz && isBuzz) {
-      return FizzBuzz.FIZZ_BUZZ;
+      return FizzBuzzType.FIZZ_BUZZ;
     }
     return input.toString();
   }

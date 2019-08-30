@@ -7,13 +7,13 @@ export class FizzBuzzType01 extends FizzBuzzType {
     const isBuzz: boolean = input % 5 === 0;
 
     if (isFizz && isBuzz) {
-      return FizzBuzz.FIZZ_BUZZ;
+      return FizzBuzzType.FIZZ_BUZZ;
     }
     if (isFizz) {
-      return FizzBuzz.FIZZ;
+      return FizzBuzzType.FIZZ;
     }
     if (isBuzz) {
-      return FizzBuzz.BUZZ;
+      return FizzBuzzType.BUZZ;
     }
 
     return input.toString();
