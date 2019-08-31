@@ -1,5 +1,6 @@
 import { FizzBuzz } from "./FizzBuzz";
 import { FizzBuzzType } from "./FizzBuzzType";
+import { FizzBuzzValue } from "./FizzBuzzValue";
 
 const fizzBuzzView = {
   create(): void {
@@ -26,8 +27,8 @@ const fizzBuzzView = {
 
       const body: string = (() => {
         let element = "<tr>";
-        this.model.list.forEach((v, k) => {
-          element += `<td>${v}</td>`;
+        this.model.list.forEach((v: FizzBuzzValue, k: number) => {
+          element += `<td>${v.value}</td>`;
           if ((k + 1) % 10 === 0) {
             element += "</tr>";
           }

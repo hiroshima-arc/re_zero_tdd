@@ -1,7 +1,8 @@
+import { FizzBuzzValue } from "./FizzBuzzValue";
 import { IFizzBuzzType } from "./IFizzBuzzType";
 
 export class FizzBuzzType02 extends IFizzBuzzType {
-  public generate(input: number): string {
-    return input.toString();
+  public generate(input: number): FizzBuzzValue {
+    return new FizzBuzzValue(input, input.toString());
   }
 }
