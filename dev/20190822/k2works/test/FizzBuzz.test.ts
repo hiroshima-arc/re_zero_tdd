@@ -65,4 +65,11 @@ describe("FizzBuzz", () => {
     assert.equal(list[14].value, "FizzBuzz");
     assert.equal(list[2].value, "3");
   });
+
+  it("FizzBuzzValueはNullオブジェクトを返す", () => {
+    const fizzbuzz = this._command.execute(3);
+    const list = fizzbuzz.getList();
+    const empty = [];
+    assert.deepEqual(list, empty);
+  });
 });

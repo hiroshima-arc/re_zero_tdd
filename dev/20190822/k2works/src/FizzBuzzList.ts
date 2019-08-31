@@ -13,7 +13,7 @@ export class FizzBuzzList implements IFizzBuzz {
   }
 
   public getValue(): string {
-    return null;
+    return "";
   }
 
   public getList(): FizzBuzzValue[] {

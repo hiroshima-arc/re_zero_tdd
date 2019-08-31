@@ -21,6 +21,6 @@ export class FizzBuzzValue implements IFizzBuzz {
     return this.value;
   }
   public getList(): FizzBuzzValue[] {
-    return null;
+    return [];
   }
 }
