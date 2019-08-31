@@ -20,4 +20,7 @@ export class FizzBuzzValue implements IFizzBuzz {
   public getValue(): string {
     return this.value;
   }
+  public getList(): FizzBuzzValue[] {
+    return null;
+  }
 }

@@ -1,6 +1,10 @@
 import { FizzBuzzValue } from "./FizzBuzzValue";
+import { IFizzBuzz } from "./IFizzBuzz";
 
-export class FizzBuzzList {
+export class FizzBuzzList implements IFizzBuzz {
+  public get list(): FizzBuzzValue[] {
+    return this._list;
+  }
   // tslint:disable-next-line: variable-name
   private _list: FizzBuzzValue[];
 
@@ -8,8 +12,12 @@ export class FizzBuzzList {
     this._list = list;
   }
 
-  public get list(): FizzBuzzValue[] {
-    return this._list;
+  public getValue(): string {
+    return null;
+  }
+
+  public getList(): FizzBuzzValue[] {
+    return this.list;
   }
 
   public add(value: FizzBuzzValue): FizzBuzzList {
