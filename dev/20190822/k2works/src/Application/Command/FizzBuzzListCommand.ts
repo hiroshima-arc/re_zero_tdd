@@ -1,6 +1,6 @@
-import { FizzBuzzList } from "./Domain/Model/FizzBuzzList";
-import { IFizzBuzz } from "./Domain/Model/IFizzBuzz";
-import { IFizzBuzzType } from "./Domain/Type/IFizzBuzzType";
+import { FizzBuzzList } from "../../Domain/Model/FizzBuzzList";
+import { IFizzBuzz } from "../../Domain/Model/IFizzBuzz";
+import { IFizzBuzzType } from "../../Domain/Type/IFizzBuzzType";
 import { IFizzBuzzCommand } from "./IFizzBuzzCommand";
 
 export class FizzBuzzListCommand implements IFizzBuzzCommand {
@@ -13,7 +13,9 @@ export class FizzBuzzListCommand implements IFizzBuzzCommand {
     this._type = type;
   }
 
-  public execute(input: number): import("./Domain/Model/IFizzBuzz").IFizzBuzz {
+  public execute(
+    input: number
+  ): import("../../Domain/Model/IFizzBuzz").IFizzBuzz {
     if (input < 0) {
       throw new Error("FizzBuzzList can't generate by minus number");
     }

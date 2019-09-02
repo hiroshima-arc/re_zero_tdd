@@ -1,7 +1,7 @@
 import { assert, expect } from "chai";
+import { FizzBuzzListCommand } from "../src/Application/Command/FizzBuzzListCommand";
+import { FizzBuzzValueCommand } from "../src/Application/Command/FizzBuzzValueCommand";
 import { FizzBuzzType } from "../src/Domain/Type/FizzBuzzType";
-import { FizzBuzzListCommand } from "../src/FizzBuzzListCommand";
-import { FizzBuzzValueCommand } from "../src/FizzBuzzValueCommand";
 
 describe("FizzBuzz", () => {
   beforeEach(() => {
