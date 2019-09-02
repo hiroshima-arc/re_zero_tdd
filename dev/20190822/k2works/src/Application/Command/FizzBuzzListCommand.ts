@@ -13,9 +13,7 @@ export class FizzBuzzListCommand implements IFizzBuzzCommand {
     this._type = type;
   }
 
-  public execute(
-    input: number
-  ): import("../../Domain/Model/IFizzBuzz").IFizzBuzz {
+  public execute(input: number): IFizzBuzz {
     if (input < 0) {
       throw new Error("FizzBuzzList can't generate by minus number");
     }
