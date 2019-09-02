@@ -32,6 +32,21 @@ npx browser-sync init
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+mkdir app
+cd app
+dotnet new react -o FizzBuzz 
+dotnet new xunit -o FizzBuzz.Tests
+cd FizzBuzz
+dotnet add package Microsoft.DotNet.Watcher.Tools
+cd ../..
+dotnet new sln -n FizzBuzz
+dotnet sln FizzBuzz.sln add app/FizzBuzz/FizzBuzz.csproj 
+dotnet sln FizzBuzz.sln add app/FizzBuzz.Tests/FizzBuzz.Tests.csproj
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
@@ -61,3 +76,4 @@ touch Procfile
 **[⬆ back to top](#構成)**
 
 ## 参照
+- [ASP.NET Core で React プロジェクト テンプレートを使用する](https://docs.microsoft.com/ja-jp/aspnet/core/client-side/spa/react?view=aspnetcore-2.2&tabs=visual-studio)
