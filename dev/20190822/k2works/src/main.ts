@@ -1,6 +1,6 @@
+import { FizzBuzzValue } from "./Domain/Model/FizzBuzzValue";
+import { FizzBuzzType } from "./Domain/Type/FizzBuzzType";
 import { FizzBuzzListCommand } from "./FizzBuzzListCommand";
-import { FizzBuzzType } from "./FizzBuzzType";
-import { FizzBuzzValue } from "./FizzBuzzValue";
 interface IHTMLElementEvent<T extends HTMLElement> extends Event {
   target: T;
 }

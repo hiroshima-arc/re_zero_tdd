@@ -1,6 +1,6 @@
 import { assert, expect } from "chai";
+import { FizzBuzzType } from "../src/Domain/Type/FizzBuzzType";
 import { FizzBuzzListCommand } from "../src/FizzBuzzListCommand";
-import { FizzBuzzType } from "../src/FizzBuzzType";
 import { FizzBuzzValueCommand } from "../src/FizzBuzzValueCommand";
 
 describe("FizzBuzz", () => {
