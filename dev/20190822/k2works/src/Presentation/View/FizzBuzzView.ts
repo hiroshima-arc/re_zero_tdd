@@ -1,10 +1,10 @@
-import { FizzBuzzListCommand } from "./Application/Command/FizzBuzzListCommand";
-import { FizzBuzzValue } from "./Domain/Model/FizzBuzzValue";
-import { FizzBuzzType } from "./Domain/Type/FizzBuzzType";
+import { FizzBuzzListCommand } from "../../Application/Command/FizzBuzzListCommand";
+import { FizzBuzzValue } from "../../Domain/Model/FizzBuzzValue";
+import { FizzBuzzType } from "../../Domain/Type/FizzBuzzType";
 interface IHTMLElementEvent<T extends HTMLElement> extends Event {
   target: T;
 }
-const fizzBuzzView = {
+export const fizzBuzzView = {
   MAX_NUMBER: 100,
   create(): void {
     this.models = new FizzBuzzListCommand(FizzBuzzType.one).execute(
@@ -99,5 +99,3 @@ const fizzBuzzView = {
     this._renderTable();
   }
 };
-
-fizzBuzzView.create();

@@ -9,7 +9,7 @@ module.exports = {
   mode: "development",
 
   // メインとなるJavaScriptファイル（エントリーポイント）
-  entry: "./src/main.ts",
+  entry: "./src/Presentation/main.ts",
 
   module: {
     rules: [
@@ -27,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: src + "/index.html",
+      template: src + "/Presentation/index.html",
       filename: "index.html"
     })
   ]
