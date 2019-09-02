@@ -72,4 +72,10 @@ describe("FizzBuzz", () => {
     const empty = [];
     assert.deepEqual(list, empty);
   });
+
+  it("FizzBuzzListはNullオブジェクトを返す", () => {
+    const command = new FizzBuzzListCommand(FizzBuzzType.one);
+    const fizzbuzz = command.execute(100);
+    assert.equal("", fizzbuzz.getValue());
+  });
 });
