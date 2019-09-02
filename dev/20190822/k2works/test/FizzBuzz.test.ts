@@ -86,4 +86,20 @@ describe("FizzBuzz", () => {
       "FizzBuzzValue can't generate by minus number"
     );
   });
+
+  it("FizzBuzzListの値は正の値のみ許可する", () => {
+    const command = new FizzBuzzListCommand(FizzBuzzType.one);
+    expect(() => command.execute(-100)).to.throw(
+      Error,
+      "FizzBuzzList can't generate by minus number"
+    );
+  });
+
+  it("FizzBuzzListは101以上を許可しない", () => {
+    const command = new FizzBuzzListCommand(FizzBuzzType.one);
+    expect(() => command.execute(101)).to.throw(
+      Error,
+      "FizzBuzzList can't generate over 100"
+    );
+  });
 });

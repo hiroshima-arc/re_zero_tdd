@@ -14,6 +14,9 @@ export class FizzBuzzListCommand implements IFizzBuzzCommand {
   }
 
   public execute(input: number): import("./IFizzBuzz").IFizzBuzz {
+    if (input < 0) {
+      throw new Error("FizzBuzzList can't generate by minus number");
+    }
     this._list = new FizzBuzzList([]);
 
     FizzBuzz.range(1, input).forEach(

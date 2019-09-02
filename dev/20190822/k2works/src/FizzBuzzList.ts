@@ -9,6 +9,9 @@ export class FizzBuzzList implements IFizzBuzz {
   private _list: FizzBuzzValue[];
 
   constructor(list: FizzBuzzValue[]) {
+    if (list.length > 100) {
+      throw new Error("FizzBuzzList can't generate over 100");
+    }
     this._list = list;
   }
 
