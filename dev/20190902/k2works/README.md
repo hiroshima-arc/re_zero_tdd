@@ -54,6 +54,7 @@ yarn remove eslint eslint-config-react-app eslint-plugin-flowtype eslint-plugin-
 yarn add typescript @types/node @types/react @types/react-dom @types/jest
 yarn add @types/react-router
 yarn add --dev prettier tslint typescript tslint-config-prettier tslint-plugin-prettier
+yarn add --dev npm-run-all watch foreman cpx rimraf
 ```
 **[⬆ back to top](#構成)**
 
