@@ -16,7 +16,7 @@ const fizzBuzzView = {
   _renderType(): void {
     const select = (() => {
       return `
-      <select id="typeSelect" name="type">
+      <select id="type-select" name="type">
        <option value="one">タイプ1</option>
        <option value="two">タイプ2</option>
        <option value="three">タイプ3</option>
@@ -28,9 +28,9 @@ const fizzBuzzView = {
       this._rerenderTable(event.target.value);
     };
 
-    document.querySelector("#type").innerHTML = select;
+    document.querySelector("#app__select").innerHTML = select;
     document
-      .querySelector("#typeSelect")
+      .querySelector("#type-select")
       .addEventListener("change", changeType);
   },
   _renderTable(): void {
@@ -70,7 +70,7 @@ const fizzBuzzView = {
           </table>`;
     })();
 
-    document.querySelector("#app").innerHTML = table;
+    document.querySelector("#app__table").innerHTML = table;
   },
   _rerenderTable(type: string): void {
     switch (type) {
