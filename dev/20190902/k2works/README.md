@@ -47,6 +47,13 @@ dotnet sln FizzBuzz.sln add app/FizzBuzz/FizzBuzz.csproj
 dotnet sln FizzBuzz.sln add app/FizzBuzz.Tests/FizzBuzz.Tests.csproj
 ```
 
+```bash
+cd app/FizzBuzz/ClientApp
+yarn upgrade react-scripts --latest
+yarn remove eslint eslint-config-react-app eslint-plugin-flowtype eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react babel-eslint
+yarn add typescript @types/node @types/react @types/react-dom @types/jest
+yarn add @types/react-router
+```
 **[⬆ back to top](#構成)**
 
 ### 配置
@@ -77,3 +84,4 @@ dotnet sln FizzBuzz.sln add app/FizzBuzz.Tests/FizzBuzz.Tests.csproj
 
 ## 参照
 - [ASP.NET Core で React プロジェクト テンプレートを使用する](https://docs.microsoft.com/ja-jp/aspnet/core/client-side/spa/react?view=aspnetcore-2.2&tabs=visual-studio)
+- [How to use Typescript with the ASP.NET Core 2.x React Project Template](https://jonhilton.net/new-aspnet-core-react-project/)

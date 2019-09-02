@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
-export class FetchData extends Component {
+interface Props {}
+interface State {
+  forecasts: [],
+  loading: boolean,
+}
+export class FetchData extends Component<Props, State> {
   static displayName = FetchData.name;
 
-  constructor (props) {
+  constructor (props: Props) {
     super(props);
     this.state = { forecasts: [], loading: true };
 
@@ -14,7 +19,7 @@ export class FetchData extends Component {
       });
   }
 
-  static renderForecastsTable (forecasts) {
+  static renderForecastsTable (forecasts: any) {
     return (
       <table className='table table-striped'>
         <thead>
@@ -26,7 +31,7 @@ export class FetchData extends Component {
           </tr>
         </thead>
         <tbody>
-          {forecasts.map(forecast =>
+          {forecasts.map((forecast:any) =>
             <tr key={forecast.dateFormatted}>
               <td>{forecast.dateFormatted}</td>
               <td>{forecast.temperatureC}</td>
