@@ -1,5 +1,5 @@
-import { FizzBuzz } from "./FizzBuzz";
 import { FizzBuzzList } from "./FizzBuzzList";
+import { IFizzBuzz } from "./IFizzBuzz";
 import { IFizzBuzzCommand } from "./IFizzBuzzCommand";
 import { IFizzBuzzType } from "./IFizzBuzzType";
 
@@ -19,7 +19,7 @@ export class FizzBuzzListCommand implements IFizzBuzzCommand {
     }
     this._list = new FizzBuzzList([]);
 
-    FizzBuzz.range(1, input).forEach(
+    IFizzBuzz.range(1, input).forEach(
       i => (this._list = this._list.add(this._type.generate(i)))
     );
 

@@ -1,5 +1,4 @@
 import { assert, expect } from "chai";
-import { FizzBuzz } from "../src/FizzBuzz";
 import { FizzBuzzListCommand } from "../src/FizzBuzzListCommand";
 import { FizzBuzzType } from "../src/FizzBuzzType";
 import { FizzBuzzValueCommand } from "../src/FizzBuzzValueCommand";
@@ -37,9 +36,8 @@ describe("FizzBuzz", () => {
   });
 
   it("タイプ1は通常のパターンのリストを返す", () => {
-    const fizzBuzz = new FizzBuzz(FizzBuzzType.one);
-    fizzBuzz.generateList();
-    assert.equal("Fizz", fizzBuzz.list[2].value);
+    const command = new FizzBuzzListCommand(FizzBuzzType.one);
+    assert.equal("Fizz", command.execute(5).getList()[2].value);
   });
 
   it("タイプ2は数のみのパターンを返す", () => {

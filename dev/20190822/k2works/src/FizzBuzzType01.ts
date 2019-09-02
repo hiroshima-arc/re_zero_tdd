@@ -1,4 +1,3 @@
-import { FizzBuzz } from "./FizzBuzz";
 import { FizzBuzzValue } from "./FizzBuzzValue";
 import { IFizzBuzzType } from "./IFizzBuzzType";
 

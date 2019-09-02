@@ -1,13 +1,15 @@
-import { FizzBuzz } from "./FizzBuzz";
+import { FizzBuzzListCommand } from "./FizzBuzzListCommand";
 import { FizzBuzzType } from "./FizzBuzzType";
 import { FizzBuzzValue } from "./FizzBuzzValue";
 interface IHTMLElementEvent<T extends HTMLElement> extends Event {
   target: T;
 }
 const fizzBuzzView = {
+  MAX_NUMBER: 100,
   create(): void {
-    this.model = new FizzBuzz(FizzBuzzType.one);
-    this.model.generateList();
+    this.models = new FizzBuzzListCommand(FizzBuzzType.one).execute(
+      this.MAX_NUMBER
+    );
     this._renderType();
     this._renderTable();
   },
@@ -50,7 +52,7 @@ const fizzBuzzView = {
 
       const body: string = (() => {
         let element = "<tr>";
-        this.model.list.forEach((v: FizzBuzzValue, k: number) => {
+        this.models.getList().forEach((v: FizzBuzzValue, k: number) => {
           element += `<td>${v.value}</td>`;
           if ((k + 1) % 10 === 0) {
             element += "</tr>";
@@ -75,18 +77,25 @@ const fizzBuzzView = {
   _rerenderTable(type: string): void {
     switch (type) {
       case "one":
-        this.model = new FizzBuzz(FizzBuzzType.one);
+        this.models = new FizzBuzzListCommand(FizzBuzzType.one).execute(
+          this.MAX_NUMBER
+        );
         break;
       case "two":
-        this.model = new FizzBuzz(FizzBuzzType.two);
+        this.models = new FizzBuzzListCommand(FizzBuzzType.two).execute(
+          this.MAX_NUMBER
+        );
         break;
       case "three":
-        this.model = new FizzBuzz(FizzBuzzType.three);
+        this.models = new FizzBuzzListCommand(FizzBuzzType.three).execute(
+          this.MAX_NUMBER
+        );
         break;
       default:
-        this.model = new FizzBuzz(FizzBuzzType.one);
+        this.models = new FizzBuzzListCommand(FizzBuzzType.one).execute(
+          this.MAX_NUMBER
+        );
     }
-    this.model.generateList();
     this._renderTable();
   }
 };
