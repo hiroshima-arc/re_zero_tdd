@@ -53,6 +53,7 @@ yarn upgrade react-scripts --latest
 yarn remove eslint eslint-config-react-app eslint-plugin-flowtype eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react babel-eslint
 yarn add typescript @types/node @types/react @types/react-dom @types/jest
 yarn add @types/react-router
+yarn add --dev prettier tslint typescript tslint-config-prettier tslint-plugin-prettier
 ```
 **[⬆ back to top](#構成)**
 
