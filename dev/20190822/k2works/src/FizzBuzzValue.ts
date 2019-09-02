@@ -1,3 +1,4 @@
+import { AssertionError } from "assert";
 import { IFizzBuzz } from "./IFizzBuzz";
 
 export class FizzBuzzValue implements IFizzBuzz {
@@ -14,6 +15,9 @@ export class FizzBuzzValue implements IFizzBuzz {
 
   // tslint:disable-next-line: variable-name
   constructor(number: number, value: string) {
+    if (number < 0) {
+      throw new Error("FizzBuzzValue can't generate by minus number");
+    }
     this._number = number;
     this._value = value;
   }

@@ -1,4 +1,4 @@
-import { assert } from "chai";
+import { assert, expect } from "chai";
 import { FizzBuzz } from "../src/FizzBuzz";
 import { FizzBuzzListCommand } from "../src/FizzBuzzListCommand";
 import { FizzBuzzType } from "../src/FizzBuzzType";
@@ -77,5 +77,13 @@ describe("FizzBuzz", () => {
     const command = new FizzBuzzListCommand(FizzBuzzType.one);
     const fizzbuzz = command.execute(100);
     assert.equal("", fizzbuzz.getValue());
+  });
+
+  it("FizzBuzzValueの値は正の値のみ許可する", () => {
+    const command = new FizzBuzzValueCommand(FizzBuzzType.one);
+    expect(() => command.execute(-3)).to.throw(
+      Error,
+      "FizzBuzzValue can't generate by minus number"
+    );
   });
 });
