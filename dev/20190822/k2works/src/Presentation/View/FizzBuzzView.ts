@@ -1,15 +1,12 @@
-import { FizzBuzzListCommand } from "../../Application/Command/FizzBuzzListCommand";
 import { FizzBuzzValue } from "../../Domain/Model/FizzBuzzValue";
-import { FizzBuzzType } from "../../Domain/Type/FizzBuzzType";
+import { FizzBuzzController } from "../Controller/FizzBuzzContoller";
 interface IHTMLElementEvent<T extends HTMLElement> extends Event {
   target: T;
 }
 export const fizzBuzzView = {
-  MAX_NUMBER: 100,
   create(): void {
-    this.models = new FizzBuzzListCommand(FizzBuzzType.one).execute(
-      this.MAX_NUMBER
-    );
+    this.controller = new FizzBuzzController();
+    this.models = this.controller.getModels("one");
     this._renderType();
     this._renderTable();
   },
@@ -75,27 +72,7 @@ export const fizzBuzzView = {
     document.querySelector("#app__table").innerHTML = table;
   },
   _rerenderTable(type: string): void {
-    switch (type) {
-      case "one":
-        this.models = new FizzBuzzListCommand(FizzBuzzType.one).execute(
-          this.MAX_NUMBER
-        );
-        break;
-      case "two":
-        this.models = new FizzBuzzListCommand(FizzBuzzType.two).execute(
-          this.MAX_NUMBER
-        );
-        break;
-      case "three":
-        this.models = new FizzBuzzListCommand(FizzBuzzType.three).execute(
-          this.MAX_NUMBER
-        );
-        break;
-      default:
-        this.models = new FizzBuzzListCommand(FizzBuzzType.one).execute(
-          this.MAX_NUMBER
-        );
-    }
+    this.models = this.controller.getModels(type);
     this._renderTable();
   }
 };

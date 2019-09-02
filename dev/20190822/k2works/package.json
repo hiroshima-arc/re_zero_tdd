@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "build:app": "tsc --target es5 --module amd src/*.ts --out dist/compiled.js",
+    "build:app": "tsc --target es5 --module amd src/**/*.ts --out dist/compiled.js",
     "start": "nf start -j Procfile",
     "app": "npm-run-all app:*",
     "app:frontend": "browser-sync start --config bs-config.js",
@@ -14,7 +14,7 @@
     "watch:app": "webpack --watch",
     "watch:test": "watch 'npm-run-all format lint test' ./test ",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register test/**/*.test.ts",
-    "format": "prettier --write src/**/*.*",
+    "format": "prettier --write src/**/**/*.*",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "lint": "tslint --fix src/**/*.ts"
   },
