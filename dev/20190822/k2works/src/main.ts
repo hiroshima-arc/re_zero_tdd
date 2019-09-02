@@ -1,15 +1,38 @@
 import { FizzBuzz } from "./FizzBuzz";
 import { FizzBuzzType } from "./FizzBuzzType";
 import { FizzBuzzValue } from "./FizzBuzzValue";
-
+interface IHTMLElementEvent<T extends HTMLElement> extends Event {
+  target: T;
+}
 const fizzBuzzView = {
   create(): void {
     this.model = new FizzBuzz(FizzBuzzType.one);
     this.model.generateList();
+    this._renderType();
     this._renderTable();
   },
   _range: (start: number, end: number) =>
     Array.from({ length: end - start + 1 }, (v, k) => k + start),
+  _renderType(): void {
+    const select = (() => {
+      return `
+      <select id="typeSelect" name="type">
+       <option value="one">タイプ1</option>
+       <option value="two">タイプ2</option>
+       <option value="three">タイプ3</option>
+      </select>
+      `;
+    })();
+
+    const changeType = (event: IHTMLElementEvent<HTMLInputElement>) => {
+      this._rerenderTable(event.target.value);
+    };
+
+    document.querySelector("#type").innerHTML = select;
+    document
+      .querySelector("#typeSelect")
+      .addEventListener("change", changeType);
+  },
   _renderTable(): void {
     const table = (() => {
       const header: string = (() => {
@@ -48,6 +71,23 @@ const fizzBuzzView = {
     })();
 
     document.querySelector("#app").innerHTML = table;
+  },
+  _rerenderTable(type: string): void {
+    switch (type) {
+      case "one":
+        this.model = new FizzBuzz(FizzBuzzType.one);
+        break;
+      case "two":
+        this.model = new FizzBuzz(FizzBuzzType.two);
+        break;
+      case "three":
+        this.model = new FizzBuzz(FizzBuzzType.three);
+        break;
+      default:
+        this.model = new FizzBuzz(FizzBuzzType.one);
+    }
+    this.model.generateList();
+    this._renderTable();
   }
 };
 
