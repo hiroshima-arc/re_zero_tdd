@@ -1,5 +1,5 @@
+import { IFizzBuzz } from "../../Application/Service/IFizzBuzz";
 import { FizzBuzzValue } from "./FizzBuzzValue";
-import { IFizzBuzz } from "./IFizzBuzz";
 
 export class FizzBuzzList implements IFizzBuzz {
   public get list(): FizzBuzzValue[] {

@@ -1,7 +1,7 @@
+import { IFizzBuzzType } from "../../Application/Service/IFizzBuzzType";
 import { FizzBuzzType01 } from "./FizzBuzzType01";
 import { FizzBuzzType02 } from "./FizzBuzzType02";
 import { FizzBuzzType03 } from "./FizzBuzzType03";
-import { IFizzBuzzType } from "./IFizzBuzzType";
 
 export class FizzBuzzType {
   public static readonly one = new FizzBuzzType01();

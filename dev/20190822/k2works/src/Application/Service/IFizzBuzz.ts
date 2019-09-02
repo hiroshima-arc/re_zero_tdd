@@ -1,4 +1,4 @@
-import { FizzBuzzValue } from "./FizzBuzzValue";
+import { FizzBuzzValue } from "../../Domain/Model/FizzBuzzValue";
 
 export abstract class IFizzBuzz {
   public static readonly range = (start: number, end: number) =>

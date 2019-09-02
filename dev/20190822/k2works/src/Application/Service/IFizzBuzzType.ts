@@ -1,4 +1,4 @@
-import { FizzBuzzValue } from "../Model/FizzBuzzValue";
+import { FizzBuzzValue } from "../../Domain/Model/FizzBuzzValue";
 
 export abstract class IFizzBuzzType {
   public static readonly FIZZ: string = "Fizz";

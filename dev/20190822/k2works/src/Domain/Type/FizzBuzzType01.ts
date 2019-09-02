@@ -1,5 +1,5 @@
+import { IFizzBuzzType } from "../../Application/Service/IFizzBuzzType";
 import { FizzBuzzValue } from "../Model/FizzBuzzValue";
-import { IFizzBuzzType } from "./IFizzBuzzType";
 
 export class FizzBuzzType01 extends IFizzBuzzType {
   public generate(input: number): FizzBuzzValue {

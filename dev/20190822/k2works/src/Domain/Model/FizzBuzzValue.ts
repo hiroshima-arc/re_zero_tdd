@@ -1,5 +1,4 @@
-import { AssertionError } from "assert";
-import { IFizzBuzz } from "./IFizzBuzz";
+import { IFizzBuzz } from "../../Application/Service/IFizzBuzz";
 
 export class FizzBuzzValue implements IFizzBuzz {
   public get number(): number {

@@ -1,5 +1,6 @@
-import { IFizzBuzzType } from "../../Domain/Type/IFizzBuzzType";
-import { IFizzBuzzCommand } from "./IFizzBuzzCommand";
+import { IFizzBuzz } from "../Service/IFizzBuzz";
+import { IFizzBuzzCommand } from "../Service/IFizzBuzzCommand";
+import { IFizzBuzzType } from "../Service/IFizzBuzzType";
 
 export class FizzBuzzValueCommand implements IFizzBuzzCommand {
   // tslint:disable-next-line: variable-name
@@ -8,9 +9,7 @@ export class FizzBuzzValueCommand implements IFizzBuzzCommand {
   constructor(type: IFizzBuzzType) {
     this._type = type;
   }
-  public execute(
-    input: number
-  ): import("../../Domain/Model/IFizzBuzz").IFizzBuzz {
+  public execute(input: number): IFizzBuzz {
     return this._type.generate(input);
   }
 }

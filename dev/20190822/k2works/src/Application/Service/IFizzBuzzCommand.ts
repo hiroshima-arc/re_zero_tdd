@@ -1,4 +1,4 @@
-import { IFizzBuzz } from "../../Domain/Model/IFizzBuzz";
+import { IFizzBuzz } from "./IFizzBuzz";
 
 export interface IFizzBuzzCommand {
   execute(input: number): IFizzBuzz;

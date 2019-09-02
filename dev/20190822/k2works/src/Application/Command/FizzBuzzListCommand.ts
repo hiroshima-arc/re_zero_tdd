@@ -1,7 +1,8 @@
 import { FizzBuzzList } from "../../Domain/Model/FizzBuzzList";
-import { IFizzBuzz } from "../../Domain/Model/IFizzBuzz";
-import { IFizzBuzzType } from "../../Domain/Type/IFizzBuzzType";
-import { IFizzBuzzCommand } from "./IFizzBuzzCommand";
+import { IFizzBuzz } from "../Service/IFizzBuzz";
+// tslint:disable-next-line: ordered-imports
+import { IFizzBuzzCommand } from "../Service/IFizzBuzzCommand";
+import { IFizzBuzzType } from "../Service/IFizzBuzzType";
 
 export class FizzBuzzListCommand implements IFizzBuzzCommand {
   // tslint:disable-next-line: variable-name
