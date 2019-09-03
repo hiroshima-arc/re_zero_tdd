@@ -14,4 +14,8 @@ describe("FizzBuzz", () => {
   test("5で割り切れる場合はBuzzをプリントする", () => {
     expect(FizzBuzz.generate(5)).toEqual("Buzz");
   });
+
+  test("15で割り切れる場合はFizzBuzzをプリントする", () => {
+    expect(FizzBuzz.generate(15)).toEqual("FizzBuzz");
+  });
 });
