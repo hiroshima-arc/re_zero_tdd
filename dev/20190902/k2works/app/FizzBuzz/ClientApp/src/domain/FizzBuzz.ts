@@ -7,10 +7,12 @@ export class FizzBuzz {
     return list;
   }
 
-  public static generate(number: number) {
-    let result = number.toString();
-    if (number % 3 === 0) {
+  public static generate(input: number) {
+    let result = input.toString();
+    if (input % 3 === 0) {
       result = "Fizz";
+    } else if (input % 5 === 0) {
+      result = "Buzz";
     }
     return result;
   }
