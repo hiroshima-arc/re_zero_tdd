@@ -14,12 +14,12 @@ export class Home extends Component {
 
     const body = (() => {
       let element = "<tbody><tr>";
-      for (let i = 1; i <= 100; i++) {
-        element += `<td>${FizzBuzz.generate(i)}</td>`;
-        if (i % 10 === 0) {
+      FizzBuzz.generateList().forEach((v: string, k: number) => {
+        element += `<td>${v}</td>`;
+        if ((k + 1) % 10 === 0) {
           element += "</tr>";
         }
-      }
+      });
       element += "</tbody>";
       return element;
     })();
