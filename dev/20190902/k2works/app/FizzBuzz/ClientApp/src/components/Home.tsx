@@ -7,9 +7,7 @@ export class Home extends Component {
   private table = (() => {
     const header = (() => {
       let element = "<thead><tr>";
-      for (let i = 1; i <= 10; i++) {
-        element += `<th>${i}</th>`;
-      }
+      FizzBuzz.range(1, 10).forEach(i => (element += `<th>${i}</th>`));
       element += "</tr></thead>";
       return element;
     })();
