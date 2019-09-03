@@ -8,13 +8,15 @@ export class FizzBuzz {
   }
 
   public static generate(input: number) {
-    if (input % 3 === 0 && input % 5 === 0) {
+    const isFizz: boolean = input % 3 === 0;
+    const isBuzz: boolean = input % 5 === 0;
+    if (isFizz && isBuzz) {
       return "FizzBuzz";
     }
-    if (input % 3 === 0) {
+    if (isFizz) {
       return "Fizz";
     }
-    if (input % 5 === 0) {
+    if (isBuzz) {
       return "Buzz";
     }
     return input.toString();
