@@ -8,13 +8,15 @@ export class FizzBuzz {
   }
 
   public static generate(input: number) {
-    let result = input.toString();
+    const result = input.toString();
     if (input % 3 === 0 && input % 5 === 0) {
-      result = "FizzBuzz";
-    } else if (input % 3 === 0) {
-      result = "Fizz";
-    } else if (input % 5 === 0) {
-      result = "Buzz";
+      return "FizzBuzz";
+    }
+    if (input % 3 === 0) {
+      return "Fizz";
+    }
+    if (input % 5 === 0) {
+      return "Buzz";
     }
     return result;
   }
