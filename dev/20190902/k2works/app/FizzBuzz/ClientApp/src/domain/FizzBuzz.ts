@@ -8,7 +8,6 @@ export class FizzBuzz {
   }
 
   public static generate(input: number) {
-    const result = input.toString();
     if (input % 3 === 0 && input % 5 === 0) {
       return "FizzBuzz";
     }
@@ -18,6 +17,6 @@ export class FizzBuzz {
     if (input % 5 === 0) {
       return "Buzz";
     }
-    return result;
+    return input.toString();
   }
 }
