@@ -6,4 +6,12 @@ export class FizzBuzz {
     }
     return list;
   }
+
+  public static generate(number: number) {
+    let result = number.toString();
+    if (number % 3 === 0) {
+      result = "Fizz";
+    }
+    return result;
+  }
 }
