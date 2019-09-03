@@ -3,11 +3,7 @@ export class FizzBuzz {
     Array.from({ length: end - start + 1 }, (v, k) => k + start);
 
   public static generateList(): string[] {
-    const list: string[] = [];
-    FizzBuzz.range(1, 100).forEach(i => {
-      list.push(FizzBuzz.generate(i));
-    });
-    return list;
+    return FizzBuzz.range(1, 100).map(i => FizzBuzz.generate(i));
   }
 
   public static generate(input: number) {
