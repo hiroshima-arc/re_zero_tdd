@@ -1,8 +1,8 @@
 export class FizzBuzz {
-  public static generateList(): any[] {
-    const list = [];
+  public static generateList(): string[] {
+    const list: string[] = [];
     for (let i = 1; i <= 100; i++) {
-      list[i - 1] = i;
+      list.push(FizzBuzz.generate(i));
     }
     return list;
   }

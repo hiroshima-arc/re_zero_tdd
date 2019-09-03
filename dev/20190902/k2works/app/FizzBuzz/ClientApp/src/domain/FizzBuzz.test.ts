@@ -2,9 +2,12 @@ import { FizzBuzz } from "./FizzBuzz";
 
 describe("FizzBuzz", () => {
   test("1から100までをプリントする", () => {
-    const list: any[] = FizzBuzz.generateList();
-    expect(list[0]).toBe(1);
-    expect(list[99]).toBe(100);
+    const list: string[] = FizzBuzz.generateList();
+    expect(list[0]).toEqual("1");
+    expect(list[2]).toEqual("Fizz");
+    expect(list[4]).toEqual("Buzz");
+    expect(list[14]).toEqual("FizzBuzz");
+    expect(list[99]).toEqual("Buzz");
   });
 
   test("3で割り切れる場合はFizzをプリントする", () => {
