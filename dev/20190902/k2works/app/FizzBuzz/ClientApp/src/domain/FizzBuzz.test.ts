@@ -2,7 +2,7 @@ import { FizzBuzz } from "./FizzBuzz";
 
 describe("FizzBuzz", () => {
   test("1から100までをプリントする", () => {
-    const list: any[] = FizzBuzz.print1To100();
+    const list: any[] = FizzBuzz.generateList();
     expect(list[0]).toBe(1);
     expect(list[99]).toBe(100);
   });
