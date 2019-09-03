@@ -5,8 +5,7 @@ export class FizzBuzz {
   public static generateList(): string[] {
     const list: string[] = [];
     FizzBuzz.range(1, 100).forEach(i => {
-      const value: string = FizzBuzz.generate(i);
-      list.push(value);
+      list.push(FizzBuzz.generate(i));
     });
     return list;
   }
