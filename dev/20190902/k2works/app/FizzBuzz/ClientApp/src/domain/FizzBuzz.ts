@@ -1,9 +1,10 @@
 export class FizzBuzz {
+  public static readonly range = (start: number, end: number) =>
+    Array.from({ length: end - start + 1 }, (v, k) => k + start);
+
   public static generateList(): string[] {
     const list: string[] = [];
-    const range = (start: number, end: number) =>
-      Array.from({ length: end - start + 1 }, (v, k) => k + start);
-    range(1, 100).forEach(i => {
+    FizzBuzz.range(1, 100).forEach(i => {
       const value: string = FizzBuzz.generate(i);
       list.push(value);
     });
