@@ -32,17 +32,21 @@ namespace FizzBuzz.Tests
         {
             Assert.Equal("Buzz", Domain.FizzBuzz.Generate(5));
         }
-
         [Fact]
         public void 値が15で割り切る場合はFizzBuzzをプリントする()
         {
             Assert.Equal("FizzBuzz", Domain.FizzBuzz.Generate(15));
         }
-
         [Fact]
         public void タイプ1は通常のパターンを返す()
         {
             Assert.Equal("Fizz", Domain.FizzBuzz.Generate(3, 1));
+        }
+        [Fact]
+        public void タイプ1は通常のパターンのリストを返す()
+        {
+            _fizzBuzzData.List = Domain.FizzBuzz.GenerateList(1);
+            Assert.Equal("Fizz", _fizzBuzzData.List[2]);
         }
     }
 }

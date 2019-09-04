@@ -16,6 +16,11 @@ namespace FizzBuzz.Domain
             return Enumerable.Range(1, MAX_NUMBER).Select(i => Generate(i)).ToList();
         }
 
+        public static List<string> GenerateList(int type)
+        {
+            return Enumerable.Range(1, MAX_NUMBER).Select(i => Generate(i, type)).ToList();
+        }
+        
         public static string Generate(int number)
         {
             var isFizz = number % 3 == 0;
