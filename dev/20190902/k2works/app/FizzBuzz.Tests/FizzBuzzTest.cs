@@ -68,5 +68,13 @@ namespace FizzBuzz.Tests
         {
             Assert.Equal(expected, Domain.FizzBuzz.Generate(input1, input2));
         }
+        [Theory]
+        [InlineData(14, "FizzBuzz")]
+        [InlineData(2, "3")]
+        public void タイプ3は数のみのパターンのリストを返す(int input, string expected)
+        {
+            _fizzBuzzData.List = Domain.FizzBuzz.GenerateList(3);
+            Assert.Equal(expected, _fizzBuzzData.List[input]);
+        }
     }
 }
