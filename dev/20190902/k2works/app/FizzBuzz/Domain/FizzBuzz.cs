@@ -17,11 +17,9 @@ namespace FizzBuzz.Domain
 
         public static string Generate(int number)
         {
-            var result = number.ToString();
             if (number % 3 == 0 && number % 5 == 0) return "FizzBuzz";
             if (number % 3 == 0) return "Fizz";
-            if (number % 5 == 0) return "Buzz";
-            return result;
+            return number % 5 == 0 ? "Buzz" : number.ToString();
         }
     }
 }
