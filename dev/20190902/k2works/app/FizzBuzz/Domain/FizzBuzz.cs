@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FizzBuzz.Domain
 {
@@ -7,9 +8,10 @@ namespace FizzBuzz.Domain
         public static List<string> GenerateList()
         {
             var list = new List<string>();
-            for (var i = 1; i <= 100; i++)
+            foreach (var i in Enumerable.Range(1, 100))
             {
-                list.Add(Generate(i));
+                var value = Generate(i);
+                list.Add(value);
             }
 
             return list;
