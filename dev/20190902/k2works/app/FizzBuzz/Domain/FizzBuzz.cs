@@ -13,7 +13,7 @@ namespace FizzBuzz.Domain
 
         public static List<string> GenerateList()
         {
-            return Enumerable.Range(1, MAX_NUMBER).Select(Generate).ToList();
+            return Enumerable.Range(1, MAX_NUMBER).Select(i => Generate(i)).ToList();
         }
 
         public static string Generate(int number)
@@ -23,6 +23,17 @@ namespace FizzBuzz.Domain
             if (isFizz && isBuzz) return FIZZ_BUZZ;
             if (isFizz) return FIZZ;
             return isBuzz ? BUZZ : number.ToString();
+        }
+
+        public static string Generate(int number, int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    return Generate(number);
+                default:
+                    return Generate(number);
+            }
         }
     }
 }

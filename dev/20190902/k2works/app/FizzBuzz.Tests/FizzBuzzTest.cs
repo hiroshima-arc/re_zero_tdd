@@ -38,5 +38,11 @@ namespace FizzBuzz.Tests
         {
             Assert.Equal("FizzBuzz", Domain.FizzBuzz.Generate(15));
         }
+
+        [Fact]
+        public void タイプ1は通常のパターンを返す()
+        {
+            Assert.Equal("Fizz", Domain.FizzBuzz.Generate(3, 1));
+        }
     }
 }
