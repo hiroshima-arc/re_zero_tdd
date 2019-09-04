@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace FizzBuzz.Domain
 {
     public class FizzBuzz
@@ -10,6 +12,16 @@ namespace FizzBuzz.Domain
                 list[i - 1] = i;
             }
             return list;
+        }
+
+        public static string Generate(int number)
+        {
+            var result = number.ToString();
+            if (number % 3 == 0)
+            {
+                result = "Fizz";
+            }
+            return result;
         }
     }
 }
