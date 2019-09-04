@@ -1,18 +1,26 @@
+using FizzBuzz.Domain;
 using Xunit;
 
 namespace FizzBuzz.Tests
 {
     public class FizzBuzzTest
     {
+        private FizzBuzzData _fizzBuzzData;
+
+        public FizzBuzzTest()
+        {
+            _fizzBuzzData = new FizzBuzzData();
+        }
         [Fact]
         public void 値を1から100までプリントする()
         {
-            var list = Domain.FizzBuzz.GenerateList();
-            Assert.Equal("1", list[0]);
-            Assert.Equal("Fizz", list[2]);
-            Assert.Equal("Buzz", list[4]);
-            Assert.Equal("FizzBuzz", list[14]);
-            Assert.Equal("Buzz", list[99]);
+            _fizzBuzzData.List = Domain.FizzBuzz.GenerateList();
+            
+            Assert.Equal("1", _fizzBuzzData.List[0]);
+            Assert.Equal("Fizz", _fizzBuzzData.List[2]);
+            Assert.Equal("Buzz", _fizzBuzzData.List[4]);
+            Assert.Equal("FizzBuzz", _fizzBuzzData.List[14]);
+            Assert.Equal("Buzz", _fizzBuzzData.List[99]);
         }
         [Fact]
         public void 値が3で割り切る場合はFizzをプリントする()
