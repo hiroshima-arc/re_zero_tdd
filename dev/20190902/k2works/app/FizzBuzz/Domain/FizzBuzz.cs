@@ -5,18 +5,24 @@ namespace FizzBuzz.Domain
 {
     public class FizzBuzz
     {
+        public static readonly int MAX_NUMBER = 100;
+        public static readonly string FIZZ = "Fizz";
+        public static readonly string BUZZ = "Buzz";
+        public static readonly string FIZZ_BUZZ = "FizzBuzz";
+        
+
         public static List<string> GenerateList()
         {
-            return Enumerable.Range(1, 100).Select(Generate).ToList();
+            return Enumerable.Range(1, MAX_NUMBER).Select(Generate).ToList();
         }
 
         public static string Generate(int number)
         {
             var isFizz = number % 3 == 0;
             var isBuzz = number % 5 == 0;
-            if (isFizz && isBuzz) return "FizzBuzz";
-            if (isFizz) return "Fizz";
-            return isBuzz ? "Buzz" : number.ToString();
+            if (isFizz && isBuzz) return FIZZ_BUZZ;
+            if (isFizz) return FIZZ;
+            return isBuzz ? BUZZ : number.ToString();
         }
     }
 }
