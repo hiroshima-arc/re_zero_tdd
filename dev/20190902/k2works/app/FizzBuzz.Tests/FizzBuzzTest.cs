@@ -8,8 +8,11 @@ namespace FizzBuzz.Tests
         public void 値を1から100までプリントする()
         {
             var list = Domain.FizzBuzz.GenerateList();
-            Assert.Equal(1, list[0]);
-            Assert.Equal(100, list[99]);
+            Assert.Equal("1", list[0]);
+            Assert.Equal("Fizz", list[2]);
+            Assert.Equal("Buzz", list[4]);
+            Assert.Equal("FizzBuzz", list[14]);
+            Assert.Equal("Buzz", list[99]);
         }
         [Fact]
         public void 値が3で割り切る場合はFizzをプリントする()

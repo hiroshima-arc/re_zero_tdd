@@ -1,16 +1,15 @@
-using System;
 using System.Collections.Generic;
 
 namespace FizzBuzz.Domain
 {
     public class FizzBuzz
     {
-        public static int[] GenerateList()
+        public static List<string> GenerateList()
         {
-            var list = new int[100];
+            var list = new List<string>();
             for (var i = 1; i <= 100; i++)
             {
-                list[i - 1] = i;
+                list.Add(Generate(i));
             }
 
             return list;
