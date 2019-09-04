@@ -8,12 +8,10 @@ namespace FizzBuzz.Domain
         public static List<string> GenerateList()
         {
             var list = new List<string>();
-            foreach (var i in Enumerable.Range(1, 100))
+            Enumerable.Range(1, 100).ToList().ForEach(i =>
             {
-                var value = Generate(i);
-                list.Add(value);
-            }
-
+                list.Add(Generate(i));
+            });
             return list;
         }
 
