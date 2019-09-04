@@ -61,5 +61,12 @@ namespace FizzBuzz.Tests
             _fizzBuzzData.List = Domain.FizzBuzz.GenerateList(2);
             Assert.Equal("3", _fizzBuzzData.List[2]);
         }
+        [Theory]
+        [InlineData(15, 3, "FizzBuzz")]
+        [InlineData(3, 3, "3")]
+        public void タイプ3は15で割り切る場合にFizzBuzzのパターンを返す(int input1, int input2, string expected)
+        {
+            Assert.Equal(expected, Domain.FizzBuzz.Generate(input1, input2));
+        }
     }
 }

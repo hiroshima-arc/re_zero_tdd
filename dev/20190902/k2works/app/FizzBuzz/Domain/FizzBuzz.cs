@@ -38,6 +38,13 @@ namespace FizzBuzz.Domain
                     return Generate(number);
                 case 2:
                     return number.ToString();
+                case 3:
+                    if (number % 3 == 0 && number % 5 == 0)
+                    {
+                        return FIZZ_BUZZ;
+                    }
+
+                    return number.ToString();
                 default:
                     return Generate(number);
             }
