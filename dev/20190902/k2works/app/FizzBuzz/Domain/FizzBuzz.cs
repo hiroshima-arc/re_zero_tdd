@@ -36,6 +36,8 @@ namespace FizzBuzz.Domain
             {
                 case 1:
                     return Generate(number);
+                case 2:
+                    return number.ToString();
                 default:
                     return Generate(number);
             }

@@ -48,5 +48,11 @@ namespace FizzBuzz.Tests
             _fizzBuzzData.List = Domain.FizzBuzz.GenerateList(1);
             Assert.Equal("Fizz", _fizzBuzzData.List[2]);
         }
+
+        [Fact]
+        public void タイプ2は数のみのパターンを返す()
+        {
+            Assert.Equal("3", Domain.FizzBuzz.Generate(3, 2));
+        }
     }
 }
