@@ -7,7 +7,7 @@ namespace FizzBuzz.Domain
     {
         public static List<string> GenerateList()
         {
-            return Enumerable.Range(1, 100).Select(i => Generate(i)).ToList();
+            return Enumerable.Range(1, 100).Select(Generate).ToList();
         }
 
         public static string Generate(int number)
