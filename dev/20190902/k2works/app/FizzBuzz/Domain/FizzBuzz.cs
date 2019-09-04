@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace FizzBuzz.Domain
@@ -17,9 +18,11 @@ namespace FizzBuzz.Domain
 
         public static string Generate(int number)
         {
-            if (number % 3 == 0 && number % 5 == 0) return "FizzBuzz";
-            if (number % 3 == 0) return "Fizz";
-            return number % 5 == 0 ? "Buzz" : number.ToString();
+            var isFizz = number % 3 == 0;
+            var isBuzz = number % 5 == 0;
+            if (isFizz && isBuzz) return "FizzBuzz";
+            if (isFizz) return "Fizz";
+            return isBuzz ? "Buzz" : number.ToString();
         }
     }
 }
