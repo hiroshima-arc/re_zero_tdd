@@ -89,5 +89,12 @@ namespace FizzBuzz.Tests
             var empy = new List<IFizzBuzz>();
             Assert.Equal(empy, fizzBuzz.GetList());
         }
+
+        [Fact]
+        public void FizzBuzzListはNullオブジェクトを返す()
+        {
+            var command = new FizzBuzzListCommand(FizzBuzzType.One);
+            Assert.Equal("", command.Execute(3).GetValue());
+        }
     }
 }

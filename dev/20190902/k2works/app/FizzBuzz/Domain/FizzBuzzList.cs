@@ -22,7 +22,7 @@ namespace FizzBuzz.Domain
 
         public string GetValue()
         {
-            return null;
+            return "";
         }
 
         public List<IFizzBuzz> GetList()
