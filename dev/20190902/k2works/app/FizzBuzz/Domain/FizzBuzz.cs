@@ -16,23 +16,9 @@ namespace FizzBuzz.Domain
 
         private List<string> _list;
         private FizzBuzzType _type;
-        public FizzBuzz(int type)
+        public FizzBuzz(FizzBuzzType type)
         {
-            switch (type)
-            {
-                case 1:
-                    _type = new FizzBuzzType01();
-                    break;
-                case 2:
-                    _type = new FizzBuzzType02();
-                    break;
-                case 3:
-                    _type = new FizzBuzzType03();
-                    break;
-                default:
-                    _type = new FizzBuzzType01();
-                    break;
-            }
+            _type = type;
         }
 
         public void GenerateList()

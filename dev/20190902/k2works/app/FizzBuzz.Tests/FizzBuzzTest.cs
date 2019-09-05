@@ -1,3 +1,4 @@
+using FizzBuzz.Domain;
 using Xunit;
 
 namespace FizzBuzz.Tests
@@ -10,9 +11,9 @@ namespace FizzBuzz.Tests
 
         public FizzBuzzTest()
         {
-            _fizzBuzzType01 = new Domain.FizzBuzz(1);
-            _fizzBuzzType02 = new Domain.FizzBuzz(2);
-            _fizzBuzzType03 = new Domain.FizzBuzz(3);
+            _fizzBuzzType01 = new Domain.FizzBuzz(new FizzBuzzType01());
+            _fizzBuzzType02 = new Domain.FizzBuzz(new FizzBuzzType02());
+            _fizzBuzzType03 = new Domain.FizzBuzz(new FizzBuzzType03());
         }
         [Theory]
         [InlineData(0,"1")]
