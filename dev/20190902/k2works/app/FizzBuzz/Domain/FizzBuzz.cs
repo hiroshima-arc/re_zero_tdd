@@ -12,22 +12,21 @@ namespace FizzBuzz.Domain
         public List<string> List
         {
             get => _list;
-            set => _list = value;
         }
 
         private List<string> _list;
 
-        public static List<string> GenerateList()
+        public void GenerateList()
         {
-            return Enumerable.Range(1, MAX_NUMBER).Select(i => Generate(i)).ToList();
+            _list = Enumerable.Range(1, MAX_NUMBER).Select(i => Generate(i)).ToList();
         }
 
-        public static List<string> GenerateList(int type)
+        public void GenerateList(int type)
         {
-            return Enumerable.Range(1, MAX_NUMBER).Select(i => Generate(i, type)).ToList();
+            _list = Enumerable.Range(1, MAX_NUMBER).Select(i => Generate(i, type)).ToList();
         }
         
-        public static string Generate(int number)
+        public string Generate(int number)
         {
             var isFizz = number % 3 == 0;
             var isBuzz = number % 5 == 0;
@@ -36,7 +35,7 @@ namespace FizzBuzz.Domain
             return isBuzz ? BUZZ : number.ToString();
         }
 
-        public static string Generate(int number, int type)
+        public string Generate(int number, int type)
         {
             switch (type)
             {
