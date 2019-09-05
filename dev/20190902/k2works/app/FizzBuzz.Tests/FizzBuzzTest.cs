@@ -5,18 +5,12 @@ namespace FizzBuzz.Tests
 {
     public class FizzBuzzTest
     {
-        private Domain.FizzBuzz _fizzBuzzType01;
-        private Domain.FizzBuzz _fizzBuzzType02;
-        private Domain.FizzBuzz _fizzBuzzType03;
         private FizzBuzzValueCommand _commandType01;
         private FizzBuzzValueCommand _commandType02;
         private FizzBuzzValueCommand _commandType03;
 
         public FizzBuzzTest()
         {
-            _fizzBuzzType01 = new Domain.FizzBuzz(FizzBuzzType.One);
-            _fizzBuzzType02 = new Domain.FizzBuzz(FizzBuzzType.Two);
-            _fizzBuzzType03 = new Domain.FizzBuzz(FizzBuzzType.Three);
             _commandType01 = new FizzBuzzValueCommand(FizzBuzzType.One);
             _commandType02 = new FizzBuzzValueCommand(FizzBuzzType.Two);
             _commandType03 = new FizzBuzzValueCommand(FizzBuzzType.Three);
