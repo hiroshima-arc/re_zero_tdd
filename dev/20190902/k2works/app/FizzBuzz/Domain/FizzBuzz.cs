@@ -18,7 +18,7 @@ namespace FizzBuzz.Domain
 
         public void GenerateList()
         {
-            _list = Enumerable.Range(1, MAX_NUMBER).Select(i => Generate(i)).ToList();
+            GenerateList(1);
         }
 
         public void GenerateList(int type)
