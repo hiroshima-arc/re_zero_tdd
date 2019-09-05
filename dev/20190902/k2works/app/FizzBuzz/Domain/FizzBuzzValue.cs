@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace FizzBuzz.Domain
 
         public FizzBuzzValue(int number, string value)
         {
-            Debug.Assert(number >= 0);
+            if (number <= 0) throw new ArgumentException("FizzBuzzValue can't generate by minus number'");
             _number = number;
             _value = value;
         }

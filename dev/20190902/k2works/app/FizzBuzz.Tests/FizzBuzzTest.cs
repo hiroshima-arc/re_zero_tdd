@@ -97,5 +97,23 @@ namespace FizzBuzz.Tests
             var command = new FizzBuzzListCommand(FizzBuzzType.One);
             Assert.Equal("", command.Execute(3).GetValue());
         }
+
+        [Fact]
+        public void FizzBuzzValueの値は正の値のみ許可する()
+        {
+            Assert.Throws<ArgumentException>(() => _commandType01.Execute(-1));
+        }
+        [Fact]
+        public void FizzBuzzListの値は正の値のみ許可する()
+        {
+            var command = new FizzBuzzListCommand(FizzBuzzType.One);
+            Assert.Throws<ArgumentException>(() => command.Execute(-1));
+        }
+        [Fact]
+        public void FizzBuzzListの値は101以上を許可しない()
+        {
+            var command = new FizzBuzzListCommand(FizzBuzzType.One);
+            Assert.Throws<ArgumentException>(() => command.Execute(101));
+        }
     }
 }

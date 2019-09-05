@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -6,10 +7,11 @@ namespace FizzBuzz.Domain
     public class FizzBuzzList: IFizzBuzz
     {
         private readonly List<IFizzBuzz> _list;
+        private static readonly int MAX_NUMBER = 100;
 
         public FizzBuzzList(List<IFizzBuzz> list)
         {
-            Debug.Assert(list.Count <= 100);
+            if (list.Count > MAX_NUMBER) throw new ArgumentException("FizzBuzzList can't generate over 100''");
             _list = list;
         }
 

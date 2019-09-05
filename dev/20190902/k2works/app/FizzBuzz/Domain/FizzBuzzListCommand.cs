@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace FizzBuzz.Domain
@@ -13,7 +14,8 @@ namespace FizzBuzz.Domain
 
         public IFizzBuzz Execute(int number)
         {
-           return new FizzBuzzList(Enumerable.Range(1, number).Select(i => _type.Generate(i)).ToList());
+            if (number < 0) throw new ArgumentException("FizzBuzzList can't generate by minus number'");
+            return new FizzBuzzList(Enumerable.Range(1, number).Select(i => _type.Generate(i)).ToList());
         }
     }
 }
