@@ -8,7 +8,7 @@ namespace FizzBuzz.Domain
             var isBuzz = number % 5 == 0;
             if (isFizz && isBuzz)
             {
-                return FizzBuzz.FIZZ_BUZZ;
+                return FIZZ_BUZZ;
             }
 
             return number.ToString();

@@ -9,17 +9,17 @@ namespace FizzBuzz.Domain
 
             if (isFizz && isBuzz)
             {
-                return FizzBuzz.FIZZ_BUZZ;
+                return FIZZ_BUZZ;
             }
 
             if (isFizz)
             {
-                return FizzBuzz.FIZZ;
+                return FIZZ;
             }
 
             if (isBuzz)
             {
-                return FizzBuzz.BUZZ;
+                return BUZZ;
             }
 
             return number.ToString();

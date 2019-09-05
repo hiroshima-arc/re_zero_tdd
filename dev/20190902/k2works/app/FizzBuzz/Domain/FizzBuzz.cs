@@ -6,9 +6,6 @@ namespace FizzBuzz.Domain
     public class FizzBuzz
     {
         public static readonly int MAX_NUMBER = 100;
-        public static readonly string FIZZ = "Fizz";
-        public static readonly string BUZZ = "Buzz";
-        public static readonly string FIZZ_BUZZ = "FizzBuzz";
         public List<string> List
         {
             get => _list;
