@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using FizzBuzz.Application.Command;
+using FizzBuzz.Application.Service;
 
 namespace FizzBuzz.Domain.Model
 {

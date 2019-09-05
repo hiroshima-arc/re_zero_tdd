@@ -1,12 +1,12 @@
-using FizzBuzz.Domain.Type;
+using FizzBuzz.Application.Service;
 
 namespace FizzBuzz.Application.Command
 {
     public class FizzBuzzValueCommand: IFizzBuzzCommand
     {
-        private FizzBuzzType _type;
+        private IFizzBuzzType _type;
 
-        public FizzBuzzValueCommand(FizzBuzzType type)
+        public FizzBuzzValueCommand(IFizzBuzzType type)
         {
             _type = type;
         }

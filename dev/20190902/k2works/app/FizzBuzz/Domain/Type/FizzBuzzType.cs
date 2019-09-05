@@ -1,9 +1,10 @@
 using System;
 using FizzBuzz.Application.Command;
+using FizzBuzz.Application.Service;
 
 namespace FizzBuzz.Domain.Type
 {
-    public abstract class FizzBuzzType: Enumeration
+    public abstract class FizzBuzzType: Enumeration, IFizzBuzzType
     {
         public static FizzBuzzType One = new FizzBuzzType01();
         public static FizzBuzzType Two = new FizzBuzzType02();

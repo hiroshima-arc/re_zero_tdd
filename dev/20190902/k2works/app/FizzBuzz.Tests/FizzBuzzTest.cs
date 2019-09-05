@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FizzBuzz.Application.Command;
+using FizzBuzz.Application.Service;
 using FizzBuzz.Domain.Type;
 using Xunit;
 
@@ -8,15 +9,15 @@ namespace FizzBuzz.Tests
 {
     public class FizzBuzzTest
     {
-        private FizzBuzzValueCommand _commandType01;
-        private FizzBuzzValueCommand _commandType02;
-        private FizzBuzzValueCommand _commandType03;
+        private FizzBuzzService _serviceType01;
+        private FizzBuzzService _serviceType02;
+        private FizzBuzzService _serviceType03;
 
         public FizzBuzzTest()
         {
-            _commandType01 = new FizzBuzzValueCommand(FizzBuzzType.One);
-            _commandType02 = new FizzBuzzValueCommand(FizzBuzzType.Two);
-            _commandType03 = new FizzBuzzValueCommand(FizzBuzzType.Three);
+            _serviceType01 = new FizzBuzzService(new FizzBuzzValueCommand(FizzBuzzType.One));
+            _serviceType02 = new FizzBuzzService(new FizzBuzzValueCommand(FizzBuzzType.Two));
+            _serviceType03 = new FizzBuzzService(new FizzBuzzValueCommand(FizzBuzzType.Three));
         }
         [Theory]
         [InlineData(0,"1")]
@@ -32,22 +33,22 @@ namespace FizzBuzz.Tests
         [Fact]
         public void 値が3で割り切る場合はFizzをプリントする()
         {
-           Assert.Equal("Fizz", _commandType01.Execute(3).GetValue()); 
+           Assert.Equal("Fizz", _serviceType01.Generate(3).GetValue()); 
         }
         [Fact]
         public void 値が5で割り切る場合はBuzzをプリントする()
         {
-            Assert.Equal("Buzz", _commandType01.Execute(5).GetValue());
+            Assert.Equal("Buzz", _serviceType01.Generate(5).GetValue());
         }
         [Fact]
         public void 値が15で割り切る場合はFizzBuzzをプリントする()
         {
-            Assert.Equal("FizzBuzz", _commandType01.Execute(15).GetValue());
+            Assert.Equal("FizzBuzz", _serviceType01.Generate(15).GetValue());
         }
         [Fact]
         public void タイプ1は通常のパターンを返す()
         {
-            Assert.Equal("Fizz", _commandType01.Execute(3).GetValue());
+            Assert.Equal("Fizz", _serviceType01.Generate(3).GetValue());
         }
         [Fact]
         public void タイプ1は通常のパターンのリストを返す()
@@ -59,7 +60,7 @@ namespace FizzBuzz.Tests
         [Fact]
         public void タイプ2は数のみのパターンを返す()
         {
-            Assert.Equal("3", _commandType02.Execute(3).GetValue());
+            Assert.Equal("3", _serviceType02.Generate(3).GetValue());
         }
 
         [Fact]
@@ -73,7 +74,7 @@ namespace FizzBuzz.Tests
         [InlineData(3, "3")]
         public void タイプ3は15で割り切る場合にFizzBuzzのパターンを返す(int input, string expected)
         {
-            Assert.Equal(expected, _commandType03.Execute(input).GetValue());
+            Assert.Equal(expected, _serviceType03.Generate(input).GetValue());
         }
         [Theory]
         [InlineData(14, "FizzBuzz")]
@@ -87,7 +88,7 @@ namespace FizzBuzz.Tests
         [Fact]
         public void FizzBuzzValueはNullオブジェクトを返す()
         {
-            var fizzBuzz = _commandType01.Execute(3);
+            var fizzBuzz = _serviceType01.Generate(3);
             var empy = new List<IFizzBuzz>();
             Assert.Equal(empy, fizzBuzz.GetList());
         }
@@ -102,7 +103,7 @@ namespace FizzBuzz.Tests
         [Fact]
         public void FizzBuzzValueの値は正の値のみ許可する()
         {
-            Assert.Throws<ArgumentException>(() => _commandType01.Execute(-1));
+            Assert.Throws<ArgumentException>(() => _serviceType01.Generate(-1));
         }
         [Fact]
         public void FizzBuzzListの値は正の値のみ許可する()

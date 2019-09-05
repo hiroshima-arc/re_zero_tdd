@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using FizzBuzz.Application.Service;
 using FizzBuzz.Domain.Model;
 using FizzBuzz.Domain.Type;
 

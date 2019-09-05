@@ -1,4 +1,4 @@
-using FizzBuzz.Application.Command;
+using FizzBuzz.Application.Service;
 using FizzBuzz.Domain.Model;
 
 namespace FizzBuzz.Domain.Type

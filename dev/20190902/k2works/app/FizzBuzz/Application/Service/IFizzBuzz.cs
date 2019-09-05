@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace FizzBuzz.Application.Command
+namespace FizzBuzz.Application.Service
 {
     public interface IFizzBuzz
     {

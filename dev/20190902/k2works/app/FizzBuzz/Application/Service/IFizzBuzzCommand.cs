@@ -1,4 +1,4 @@
-namespace FizzBuzz.Application.Command
+namespace FizzBuzz.Application.Service
 {
     public interface IFizzBuzzCommand
     {
