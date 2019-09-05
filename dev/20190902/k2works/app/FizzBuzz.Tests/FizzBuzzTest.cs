@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FizzBuzz.Domain;
 using Xunit;
 
@@ -79,6 +80,14 @@ namespace FizzBuzz.Tests
         {
             var command = new FizzBuzzListCommand(FizzBuzzType.Three);
             Assert.Equal(expected, command.Execute(15).GetList()[input].GetValue());
+        }
+
+        [Fact]
+        public void FizzBuzzValueはNullオブジェクトを返す()
+        {
+            var fizzBuzz = _commandType01.Execute(3);
+            var empy = new List<IFizzBuzz>();
+            Assert.Equal(empy, fizzBuzz.GetList());
         }
     }
 }

@@ -30,7 +30,7 @@ namespace FizzBuzz.Domain
 
         public List<IFizzBuzz> GetList()
         {
-            return null;
+            return new List<IFizzBuzz>();
         }
     }
 
