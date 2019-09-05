@@ -8,10 +8,10 @@ namespace FizzBuzz.Domain
         public static readonly int MAX_NUMBER = 100;
         public List<FizzBuzzValue> List
         {
-            get => _list;
+            get => _list.List;
         }
 
-        private List<FizzBuzzValue> _list;
+        private FizzBuzzList _list;
         private FizzBuzzType _type;
         public FizzBuzz(FizzBuzzType type)
         {
@@ -20,7 +20,7 @@ namespace FizzBuzz.Domain
 
         public void GenerateList()
         {
-            _list = Enumerable.Range(1, MAX_NUMBER).Select(i => _type.Generate(i)).ToList();
+            _list = new FizzBuzzList(Enumerable.Range(1, MAX_NUMBER).Select(i => _type.Generate(i)).ToList());
         }
         public FizzBuzzValue Generate(int number)
         {
