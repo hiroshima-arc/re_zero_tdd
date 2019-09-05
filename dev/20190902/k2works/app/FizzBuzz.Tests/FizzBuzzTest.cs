@@ -5,11 +5,11 @@ namespace FizzBuzz.Tests
 {
     public class FizzBuzzTest
     {
-        private FizzBuzzData _fizzBuzzData;
+        private Domain.FizzBuzz _fizzBuzz;
 
         public FizzBuzzTest()
         {
-            _fizzBuzzData = new FizzBuzzData();
+            _fizzBuzz = new Domain.FizzBuzz();
         }
         [Theory]
         [InlineData(0,"1")]
@@ -19,8 +19,8 @@ namespace FizzBuzz.Tests
         [InlineData(99,"Buzz")]
         public void 値を1から100までプリントする(int input, string expected)
         {
-            _fizzBuzzData.List = Domain.FizzBuzz.GenerateList();
-            Assert.Equal(expected, _fizzBuzzData.List[input]);
+            _fizzBuzz.List = Domain.FizzBuzz.GenerateList();
+            Assert.Equal(expected, _fizzBuzz.List[input]);
         }
         [Fact]
         public void 値が3で割り切る場合はFizzをプリントする()
@@ -45,8 +45,8 @@ namespace FizzBuzz.Tests
         [Fact]
         public void タイプ1は通常のパターンのリストを返す()
         {
-            _fizzBuzzData.List = Domain.FizzBuzz.GenerateList(1);
-            Assert.Equal("Fizz", _fizzBuzzData.List[2]);
+            _fizzBuzz.List = Domain.FizzBuzz.GenerateList(1);
+            Assert.Equal("Fizz", _fizzBuzz.List[2]);
         }
 
         [Fact]
@@ -58,8 +58,8 @@ namespace FizzBuzz.Tests
         [Fact]
         public void タイプ2は数のみのパターンのリストを返す()
         {
-            _fizzBuzzData.List = Domain.FizzBuzz.GenerateList(2);
-            Assert.Equal("3", _fizzBuzzData.List[2]);
+            _fizzBuzz.List = Domain.FizzBuzz.GenerateList(2);
+            Assert.Equal("3", _fizzBuzz.List[2]);
         }
         [Theory]
         [InlineData(15, 3, "FizzBuzz")]
@@ -73,8 +73,8 @@ namespace FizzBuzz.Tests
         [InlineData(2, "3")]
         public void タイプ3は数のみのパターンのリストを返す(int input, string expected)
         {
-            _fizzBuzzData.List = Domain.FizzBuzz.GenerateList(3);
-            Assert.Equal(expected, _fizzBuzzData.List[input]);
+            _fizzBuzz.List = Domain.FizzBuzz.GenerateList(3);
+            Assert.Equal(expected, _fizzBuzz.List[input]);
         }
     }
 }

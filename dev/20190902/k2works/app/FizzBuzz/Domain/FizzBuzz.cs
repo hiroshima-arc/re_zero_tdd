@@ -9,7 +9,13 @@ namespace FizzBuzz.Domain
         public static readonly string FIZZ = "Fizz";
         public static readonly string BUZZ = "Buzz";
         public static readonly string FIZZ_BUZZ = "FizzBuzz";
-        
+        public List<string> List
+        {
+            get => _list;
+            set => _list = value;
+        }
+
+        private List<string> _list;
 
         public static List<string> GenerateList()
         {
