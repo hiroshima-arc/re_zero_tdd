@@ -40,7 +40,7 @@ namespace FizzBuzz.Domain
             switch (type)
             {
                 case 1:
-                    return Generate(number);
+                    return new FizzBuzzType01(number).Generate();
                 case 2:
                     return number.ToString();
                 case 3:
