@@ -27,6 +27,11 @@ namespace FizzBuzz.Domain
         {
             return Value;
         }
+
+        public List<IFizzBuzz> GetList()
+        {
+            return null;
+        }
     }
 
     public abstract class ValueObject

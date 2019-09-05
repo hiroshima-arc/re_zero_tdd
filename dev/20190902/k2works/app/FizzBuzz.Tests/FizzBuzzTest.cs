@@ -29,8 +29,8 @@ namespace FizzBuzz.Tests
         [InlineData(99,"Buzz")]
         public void 値を1から100までプリントする(int input, string expected)
         {
-            _fizzBuzzType01.GenerateList();
-            Assert.Equal(expected, _fizzBuzzType01.List[input].GetValue());
+            var command = new FizzBuzzListCommand(FizzBuzzType.One);
+            Assert.Equal(expected, command.Execute(100).GetList()[input].GetValue());
         }
         [Fact]
         public void 値が3で割り切る場合はFizzをプリントする()
@@ -55,8 +55,8 @@ namespace FizzBuzz.Tests
         [Fact]
         public void タイプ1は通常のパターンのリストを返す()
         {
-            _fizzBuzzType01.GenerateList();
-            Assert.Equal("Fizz", _fizzBuzzType01.List[2].GetValue());
+            var command = new FizzBuzzListCommand(FizzBuzzType.One);
+            Assert.Equal("Fizz", command.Execute(3).GetList()[2].GetValue());
         }
 
         [Fact]
@@ -68,8 +68,8 @@ namespace FizzBuzz.Tests
         [Fact]
         public void タイプ2は数のみのパターンのリストを返す()
         {
-            _fizzBuzzType02.GenerateList();
-            Assert.Equal("3", _fizzBuzzType02.List[2].GetValue());
+            var command = new FizzBuzzListCommand(FizzBuzzType.Two);
+            Assert.Equal("3", command.Execute(3).GetList()[2].GetValue());
         }
         [Theory]
         [InlineData(15, "FizzBuzz")]
@@ -83,8 +83,8 @@ namespace FizzBuzz.Tests
         [InlineData(2, "3")]
         public void タイプ3は数のみのパターンのリストを返す(int input, string expected)
         {
-            _fizzBuzzType03.GenerateList();
-            Assert.Equal(expected, _fizzBuzzType03.List[input].GetValue());
+            var command = new FizzBuzzListCommand(FizzBuzzType.Three);
+            Assert.Equal(expected, command.Execute(15).GetList()[input].GetValue());
         }
     }
 }

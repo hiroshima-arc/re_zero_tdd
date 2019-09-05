@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace FizzBuzz.Domain
 {
-    public class FizzBuzzList
+    public class FizzBuzzList: IFizzBuzz
     {
         private readonly List<IFizzBuzz> _list;
 
@@ -18,6 +18,16 @@ namespace FizzBuzz.Domain
             var result = new List<IFizzBuzz>(_list);
             result.Add(value);
             return new FizzBuzzList(result);
+        }
+
+        public string GetValue()
+        {
+            return null;
+        }
+
+        public List<IFizzBuzz> GetList()
+        {
+            return List;
         }
     }
 }
