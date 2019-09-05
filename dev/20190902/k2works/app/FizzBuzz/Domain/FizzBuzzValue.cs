@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace FizzBuzz.Domain
@@ -10,6 +11,7 @@ namespace FizzBuzz.Domain
 
         public FizzBuzzValue(int number, string value)
         {
+            Debug.Assert(number >= 0);
             _number = number;
             _value = value;
         }

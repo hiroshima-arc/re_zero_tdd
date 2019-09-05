@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace FizzBuzz.Domain
 {
@@ -8,6 +9,7 @@ namespace FizzBuzz.Domain
 
         public FizzBuzzList(List<IFizzBuzz> list)
         {
+            Debug.Assert(list.Count <= 100);
             _list = list;
         }
 
