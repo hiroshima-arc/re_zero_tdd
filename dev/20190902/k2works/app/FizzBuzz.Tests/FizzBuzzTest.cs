@@ -11,16 +11,16 @@ namespace FizzBuzz.Tests
         {
             _fizzBuzzData = new FizzBuzzData();
         }
-        [Fact]
-        public void 値を1から100までプリントする()
+        [Theory]
+        [InlineData(0,"1")]
+        [InlineData(2,"Fizz")]
+        [InlineData(4,"Buzz")]
+        [InlineData(14,"FizzBuzz")]
+        [InlineData(99,"Buzz")]
+        public void 値を1から100までプリントする(int input, string expected)
         {
             _fizzBuzzData.List = Domain.FizzBuzz.GenerateList();
-            
-            Assert.Equal("1", _fizzBuzzData.List[0]);
-            Assert.Equal("Fizz", _fizzBuzzData.List[2]);
-            Assert.Equal("Buzz", _fizzBuzzData.List[4]);
-            Assert.Equal("FizzBuzz", _fizzBuzzData.List[14]);
-            Assert.Equal("Buzz", _fizzBuzzData.List[99]);
+            Assert.Equal(expected, _fizzBuzzData.List[input]);
         }
         [Fact]
         public void 値が3で割り切る場合はFizzをプリントする()
