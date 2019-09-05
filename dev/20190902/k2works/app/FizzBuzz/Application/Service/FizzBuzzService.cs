@@ -14,5 +14,10 @@ namespace FizzBuzz.Application.Service
             return _command.Execute(number);
         }
 
+        public IFizzBuzz GenerateList(int number)
+        {
+            return _command.Execute(number);
+        }
+
     }
 }

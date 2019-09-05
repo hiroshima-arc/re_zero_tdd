@@ -2,15 +2,14 @@ using System;
 using System.Linq;
 using FizzBuzz.Application.Service;
 using FizzBuzz.Domain.Model;
-using FizzBuzz.Domain.Type;
 
 namespace FizzBuzz.Application.Command
 {
     public class FizzBuzzListCommand: IFizzBuzzCommand
     {
-        private FizzBuzzType _type;
+        private IFizzBuzzType _type;
 
-        public FizzBuzzListCommand(FizzBuzzType type)
+        public FizzBuzzListCommand(IFizzBuzzType type)
         {
             _type = type;
         }

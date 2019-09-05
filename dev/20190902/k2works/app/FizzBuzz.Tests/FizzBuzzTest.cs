@@ -27,8 +27,8 @@ namespace FizzBuzz.Tests
         [InlineData(99,"Buzz")]
         public void 値を1から100までプリントする(int input, string expected)
         {
-            var command = new FizzBuzzListCommand(FizzBuzzType.One);
-            Assert.Equal(expected, command.Execute(100).GetList()[input].GetValue());
+            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.One));
+            Assert.Equal(expected, service.GenerateList(100).GetList()[input].GetValue());
         }
         [Fact]
         public void 値が3で割り切る場合はFizzをプリントする()
@@ -53,8 +53,8 @@ namespace FizzBuzz.Tests
         [Fact]
         public void タイプ1は通常のパターンのリストを返す()
         {
-            var command = new FizzBuzzListCommand(FizzBuzzType.One);
-            Assert.Equal("Fizz", command.Execute(3).GetList()[2].GetValue());
+            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.One));
+            Assert.Equal("Fizz", service.GenerateList(3).GetList()[2].GetValue());
         }
 
         [Fact]
@@ -66,8 +66,8 @@ namespace FizzBuzz.Tests
         [Fact]
         public void タイプ2は数のみのパターンのリストを返す()
         {
-            var command = new FizzBuzzListCommand(FizzBuzzType.Two);
-            Assert.Equal("3", command.Execute(3).GetList()[2].GetValue());
+            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.Two));
+            Assert.Equal("3", service.GenerateList(3).GetList()[2].GetValue());
         }
         [Theory]
         [InlineData(15, "FizzBuzz")]
@@ -81,8 +81,8 @@ namespace FizzBuzz.Tests
         [InlineData(2, "3")]
         public void タイプ3は数のみのパターンのリストを返す(int input, string expected)
         {
-            var command = new FizzBuzzListCommand(FizzBuzzType.Three);
-            Assert.Equal(expected, command.Execute(15).GetList()[input].GetValue());
+            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.Three));
+            Assert.Equal(expected, service.GenerateList(15).GetList()[input].GetValue());
         }
 
         [Fact]
@@ -96,8 +96,8 @@ namespace FizzBuzz.Tests
         [Fact]
         public void FizzBuzzListはNullオブジェクトを返す()
         {
-            var command = new FizzBuzzListCommand(FizzBuzzType.One);
-            Assert.Equal("", command.Execute(3).GetValue());
+            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.One));
+            Assert.Equal("", service.Generate(3).GetValue());
         }
 
         [Fact]
@@ -108,14 +108,14 @@ namespace FizzBuzz.Tests
         [Fact]
         public void FizzBuzzListの値は正の値のみ許可する()
         {
-            var command = new FizzBuzzListCommand(FizzBuzzType.One);
-            Assert.Throws<ArgumentException>(() => command.Execute(-1));
+            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.One));
+            Assert.Throws<ArgumentException>(() => service.GenerateList(-1));
         }
         [Fact]
         public void FizzBuzzListの値は101以上を許可しない()
         {
-            var command = new FizzBuzzListCommand(FizzBuzzType.One);
-            Assert.Throws<ArgumentException>(() => command.Execute(101));
+            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.One));
+            Assert.Throws<ArgumentException>(() => service.GenerateList(101));
         }
     }
 }
