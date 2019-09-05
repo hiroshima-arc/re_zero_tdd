@@ -42,7 +42,7 @@ namespace FizzBuzz.Domain
                 case 1:
                     return new FizzBuzzType01(number).Generate();
                 case 2:
-                    return number.ToString();
+                    return new FizzBuzzType02(number).Generate();
                 case 3:
                     if (number % 3 == 0 && number % 5 == 0)
                     {
