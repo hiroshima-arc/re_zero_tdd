@@ -1,4 +1,6 @@
-namespace FizzBuzz.Domain
+using FizzBuzz.Domain.Type;
+
+namespace FizzBuzz.Application.Command
 {
     public class FizzBuzzValueCommand: IFizzBuzzCommand
     {

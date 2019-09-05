@@ -1,4 +1,7 @@
-namespace FizzBuzz.Domain
+using FizzBuzz.Application.Command;
+using FizzBuzz.Domain.Model;
+
+namespace FizzBuzz.Domain.Type
 {
     public class FizzBuzzType02: FizzBuzzType
 

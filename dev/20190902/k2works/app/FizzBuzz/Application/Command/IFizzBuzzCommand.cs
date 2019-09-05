@@ -1,4 +1,4 @@
-namespace FizzBuzz.Domain
+namespace FizzBuzz.Application.Command
 {
     public interface IFizzBuzzCommand
     {

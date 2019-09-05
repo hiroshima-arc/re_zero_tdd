@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
+using FizzBuzz.Domain.Model;
+using FizzBuzz.Domain.Type;
 
-namespace FizzBuzz.Domain
+namespace FizzBuzz.Application.Command
 {
     public class FizzBuzzListCommand: IFizzBuzzCommand
     {

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using FizzBuzz.Application.Command;
 
-namespace FizzBuzz.Domain
+namespace FizzBuzz.Domain.Model
 {
     public class FizzBuzzList: IFizzBuzz
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using FizzBuzz.Application.Command;
 
-namespace FizzBuzz.Domain
+namespace FizzBuzz.Domain.Model
 {
     public class FizzBuzzValue : ValueObject,IFizzBuzz
     {
@@ -23,7 +23,7 @@ namespace FizzBuzz.Domain
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public string GetValue()

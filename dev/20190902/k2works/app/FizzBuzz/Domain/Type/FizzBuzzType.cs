@@ -1,6 +1,7 @@
 using System;
+using FizzBuzz.Application.Command;
 
-namespace FizzBuzz.Domain
+namespace FizzBuzz.Domain.Type
 {
     public abstract class FizzBuzzType: Enumeration
     {

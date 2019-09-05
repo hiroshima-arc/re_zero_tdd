@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using FizzBuzz.Domain;
+using FizzBuzz.Application.Command;
+using FizzBuzz.Domain.Type;
 using Xunit;
 
 namespace FizzBuzz.Tests
