@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using FizzBuzz.Application.Command;
 using FizzBuzz.Application.Service;
 using FizzBuzz.Domain.Type;
 using Xunit;
@@ -12,12 +11,18 @@ namespace FizzBuzz.Tests
         private FizzBuzzService _serviceType01;
         private FizzBuzzService _serviceType02;
         private FizzBuzzService _serviceType03;
+        private FizzBuzzService _serviceTYpe01List;
+        private FizzBuzzService _serviceTYpe02List;
+        private FizzBuzzService _serviceTYpe03List;
 
         public FizzBuzzTest()
         {
-            _serviceType01 = new FizzBuzzService(new FizzBuzzValueCommand(FizzBuzzType.One));
-            _serviceType02 = new FizzBuzzService(new FizzBuzzValueCommand(FizzBuzzType.Two));
-            _serviceType03 = new FizzBuzzService(new FizzBuzzValueCommand(FizzBuzzType.Three));
+            _serviceType01 = FizzBuzzServiceFactory.CreateGenerateService(FizzBuzzType.One);
+            _serviceType02 = FizzBuzzServiceFactory.CreateGenerateService(FizzBuzzType.Two);
+            _serviceType03 = FizzBuzzServiceFactory.CreateGenerateService(FizzBuzzType.Three);
+            _serviceTYpe01List = FizzBuzzServiceFactory.CreateGenerateListService(FizzBuzzType.One);
+            _serviceTYpe02List = FizzBuzzServiceFactory.CreateGenerateListService(FizzBuzzType.Two);
+            _serviceTYpe03List = FizzBuzzServiceFactory.CreateGenerateListService(FizzBuzzType.Three);
         }
         [Theory]
         [InlineData(0,"1")]
@@ -27,7 +32,7 @@ namespace FizzBuzz.Tests
         [InlineData(99,"Buzz")]
         public void 値を1から100までプリントする(int input, string expected)
         {
-            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.One));
+            var service = FizzBuzzServiceFactory.CreateGenerateListService(FizzBuzzType.One);
             Assert.Equal(expected, service.GenerateList(100).GetList()[input].GetValue());
         }
         [Fact]
@@ -53,8 +58,7 @@ namespace FizzBuzz.Tests
         [Fact]
         public void タイプ1は通常のパターンのリストを返す()
         {
-            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.One));
-            Assert.Equal("Fizz", service.GenerateList(3).GetList()[2].GetValue());
+            Assert.Equal("Fizz", _serviceTYpe01List.GenerateList(3).GetList()[2].GetValue());
         }
 
         [Fact]
@@ -66,8 +70,7 @@ namespace FizzBuzz.Tests
         [Fact]
         public void タイプ2は数のみのパターンのリストを返す()
         {
-            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.Two));
-            Assert.Equal("3", service.GenerateList(3).GetList()[2].GetValue());
+            Assert.Equal("3", _serviceTYpe02List.GenerateList(3).GetList()[2].GetValue());
         }
         [Theory]
         [InlineData(15, "FizzBuzz")]
@@ -81,8 +84,7 @@ namespace FizzBuzz.Tests
         [InlineData(2, "3")]
         public void タイプ3は数のみのパターンのリストを返す(int input, string expected)
         {
-            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.Three));
-            Assert.Equal(expected, service.GenerateList(15).GetList()[input].GetValue());
+            Assert.Equal(expected, _serviceTYpe03List.GenerateList(15).GetList()[input].GetValue());
         }
 
         [Fact]
@@ -96,8 +98,7 @@ namespace FizzBuzz.Tests
         [Fact]
         public void FizzBuzzListはNullオブジェクトを返す()
         {
-            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.One));
-            Assert.Equal("", service.Generate(3).GetValue());
+            Assert.Equal("", _serviceTYpe01List.Generate(3).GetValue());
         }
 
         [Fact]
@@ -108,14 +109,12 @@ namespace FizzBuzz.Tests
         [Fact]
         public void FizzBuzzListの値は正の値のみ許可する()
         {
-            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.One));
-            Assert.Throws<ArgumentException>(() => service.GenerateList(-1));
+            Assert.Throws<ArgumentException>(() => _serviceTYpe01List.GenerateList(-1));
         }
         [Fact]
         public void FizzBuzzListの値は101以上を許可しない()
         {
-            var service = new FizzBuzzService(new FizzBuzzListCommand(FizzBuzzType.One));
-            Assert.Throws<ArgumentException>(() => service.GenerateList(101));
+            Assert.Throws<ArgumentException>(() => _serviceTYpe01List.GenerateList(101));
         }
     }
 }
