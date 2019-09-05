@@ -95,3 +95,4 @@ yarn add --dev npm-run-all watch foreman cpx rimraf
 ## 参照
 - [ASP.NET Core で React プロジェクト テンプレートを使用する](https://docs.microsoft.com/ja-jp/aspnet/core/client-side/spa/react?view=aspnetcore-2.2&tabs=visual-studio)
 - [How to use Typescript with the ASP.NET Core 2.x React Project Template](https://jonhilton.net/new-aspnet-core-react-project/)
+- [enum 型の代わりに Enumeration クラスを使用する](https://docs.microsoft.com/ja-jp/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/enumeration-classes-over-enum-types)

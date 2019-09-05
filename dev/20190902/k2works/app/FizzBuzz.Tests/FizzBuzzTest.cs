@@ -11,9 +11,9 @@ namespace FizzBuzz.Tests
 
         public FizzBuzzTest()
         {
-            _fizzBuzzType01 = new Domain.FizzBuzz(new FizzBuzzType01());
-            _fizzBuzzType02 = new Domain.FizzBuzz(new FizzBuzzType02());
-            _fizzBuzzType03 = new Domain.FizzBuzz(new FizzBuzzType03());
+            _fizzBuzzType01 = new Domain.FizzBuzz(FizzBuzzTypeEnum.One);
+            _fizzBuzzType02 = new Domain.FizzBuzz(FizzBuzzTypeEnum.Two);
+            _fizzBuzzType03 = new Domain.FizzBuzz(FizzBuzzTypeEnum.Three);
         }
         [Theory]
         [InlineData(0,"1")]
