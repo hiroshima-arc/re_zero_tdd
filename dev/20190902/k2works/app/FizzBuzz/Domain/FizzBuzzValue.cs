@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace FizzBuzz.Domain
 {
-    public class FizzBuzzValue : ValueObject
+    public class FizzBuzzValue : ValueObject,IFizzBuzz
     {
         private readonly int _number;
         private readonly string _value;
@@ -21,6 +21,11 @@ namespace FizzBuzz.Domain
         protected override IEnumerable<object> GetAtomicValues()
         {
             throw new System.NotImplementedException();
+        }
+
+        public string GetValue()
+        {
+            return Value;
         }
     }
 

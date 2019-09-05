@@ -2,7 +2,7 @@ namespace FizzBuzz.Domain
 {
     public class FizzBuzzType03: FizzBuzzType
     {
-        public override FizzBuzzValue Generate(int number)
+        public override IFizzBuzz Generate(int number)
         {
             var isFizz = number % 3 == 0;
             var isBuzz = number % 5 == 0;
