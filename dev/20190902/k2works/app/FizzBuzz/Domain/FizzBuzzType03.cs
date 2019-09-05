@@ -9,10 +9,10 @@ namespace FizzBuzz.Domain
             _number = number;
         }
 
-        public string Generate(int number)
+        public string Generate()
         {
-            var isFizz = number % 3 == 0;
-            var isBuzz = number % 5 == 0;
+            var isFizz = _number % 3 == 0;
+            var isBuzz = _number % 5 == 0;
             if (isFizz && isBuzz)
             {
                 return FizzBuzz.FIZZ_BUZZ;

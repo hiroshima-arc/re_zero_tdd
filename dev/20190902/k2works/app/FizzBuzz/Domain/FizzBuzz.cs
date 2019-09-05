@@ -44,12 +44,7 @@ namespace FizzBuzz.Domain
                 case 2:
                     return new FizzBuzzType02(number).Generate();
                 case 3:
-                    if (number % 3 == 0 && number % 5 == 0)
-                    {
-                        return FIZZ_BUZZ;
-                    }
-
-                    return number.ToString();
+                    return new FizzBuzzType03(number).Generate();
                 default:
                     return Generate(number);
             }
