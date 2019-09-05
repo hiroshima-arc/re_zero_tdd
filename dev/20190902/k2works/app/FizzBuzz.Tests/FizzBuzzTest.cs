@@ -1,4 +1,3 @@
-using FizzBuzz.Domain;
 using Xunit;
 
 namespace FizzBuzz.Tests

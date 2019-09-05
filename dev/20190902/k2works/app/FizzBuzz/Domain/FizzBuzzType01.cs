@@ -1,5 +1,3 @@
-using System;
-
 namespace FizzBuzz.Domain
 {
     public class FizzBuzzType01
