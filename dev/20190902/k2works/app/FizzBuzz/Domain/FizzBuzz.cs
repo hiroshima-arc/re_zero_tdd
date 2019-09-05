@@ -15,25 +15,22 @@ namespace FizzBuzz.Domain
         }
 
         private List<string> _list;
-        private FizzBuzzType01 _type01;
-        private FizzBuzzType02 _type02;
-        private FizzBuzzType03 _type03;
-
+        private FizzBuzzType _type;
         public FizzBuzz(int type)
         {
             switch (type)
             {
                 case 1:
-                    _type01 = new FizzBuzzType01();
+                    _type = new FizzBuzzType01();
                     break;
                 case 2:
-                    _type02 = new FizzBuzzType02();
+                    _type = new FizzBuzzType02();
                     break;
                 case 3:
-                    _type03 = new FizzBuzzType03();
+                    _type = new FizzBuzzType03();
                     break;
                 default:
-                    _type01 = new FizzBuzzType01();
+                    _type = new FizzBuzzType01();
                     break;
             }
         }
@@ -62,13 +59,13 @@ namespace FizzBuzz.Domain
             switch (type)
             {
                 case 1:
-                    return _type01.Generate(number);
+                    return _type.Generate(number);
                 case 2:
-                    return _type02.Generate(number);
+                    return _type.Generate(number);
                 case 3:
-                    return _type03.Generate(number);
+                    return _type.Generate(number);
                 default:
-                    return _type01.Generate(number);
+                    return _type.Generate(number);
             }
         }
     }

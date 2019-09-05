@@ -1,8 +1,8 @@
 namespace FizzBuzz.Domain
 {
-    public class FizzBuzzType01
+    public class FizzBuzzType01: FizzBuzzType 
     {
-        public string Generate(int number)
+        public override string Generate(int number)
         {
             var isFizz = number % 3 == 0;
             var isBuzz = number % 5 == 0;

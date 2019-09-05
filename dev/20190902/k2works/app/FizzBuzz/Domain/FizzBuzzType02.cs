@@ -1,10 +1,11 @@
 namespace FizzBuzz.Domain
 {
-    public class FizzBuzzType02
+    public class FizzBuzzType02: FizzBuzzType
+
     {
-        public string Generate(int number)
-        {
-            return number.ToString();
-        }
+        public override string Generate(int number)
+    {
+        return number.ToString();
+    }
     }
 }
