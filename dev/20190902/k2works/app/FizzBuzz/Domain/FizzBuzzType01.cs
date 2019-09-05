@@ -2,17 +2,10 @@ namespace FizzBuzz.Domain
 {
     public class FizzBuzzType01
     {
-        private readonly int _number;
-
-        public FizzBuzzType01(int number)
+        public string Generate(int number)
         {
-            _number = number;
-        }
-
-        public string Generate()
-        {
-            var isFizz = _number % 3 == 0;
-            var isBuzz = _number % 5 == 0;
+            var isFizz = number % 3 == 0;
+            var isBuzz = number % 5 == 0;
 
             if (isFizz && isBuzz)
             {
@@ -29,7 +22,7 @@ namespace FizzBuzz.Domain
                 return FizzBuzz.BUZZ;
             }
 
-            return _number.ToString();
+            return number.ToString();
         }
     }
 }

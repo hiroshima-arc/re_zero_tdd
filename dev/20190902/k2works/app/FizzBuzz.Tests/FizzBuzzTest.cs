@@ -4,11 +4,15 @@ namespace FizzBuzz.Tests
 {
     public class FizzBuzzTest
     {
-        private Domain.FizzBuzz _fizzBuzz;
+        private Domain.FizzBuzz _fizzBuzzType01;
+        private Domain.FizzBuzz _fizzBuzzType02;
+        private Domain.FizzBuzz _fizzBuzzType03;
 
         public FizzBuzzTest()
         {
-            _fizzBuzz = new Domain.FizzBuzz();
+            _fizzBuzzType01 = new Domain.FizzBuzz(1);
+            _fizzBuzzType02 = new Domain.FizzBuzz(2);
+            _fizzBuzzType03 = new Domain.FizzBuzz(3);
         }
         [Theory]
         [InlineData(0,"1")]
@@ -18,62 +22,62 @@ namespace FizzBuzz.Tests
         [InlineData(99,"Buzz")]
         public void 値を1から100までプリントする(int input, string expected)
         {
-            _fizzBuzz.GenerateList();
-            Assert.Equal(expected, _fizzBuzz.List[input]);
+            _fizzBuzzType01.GenerateList();
+            Assert.Equal(expected, _fizzBuzzType01.List[input]);
         }
         [Fact]
         public void 値が3で割り切る場合はFizzをプリントする()
         {
-           Assert.Equal("Fizz", _fizzBuzz.Generate(3)); 
+           Assert.Equal("Fizz", _fizzBuzzType01.Generate(3)); 
         }
         [Fact]
         public void 値が5で割り切る場合はBuzzをプリントする()
         {
-            Assert.Equal("Buzz", _fizzBuzz.Generate(5));
+            Assert.Equal("Buzz", _fizzBuzzType01.Generate(5));
         }
         [Fact]
         public void 値が15で割り切る場合はFizzBuzzをプリントする()
         {
-            Assert.Equal("FizzBuzz", _fizzBuzz.Generate(15));
+            Assert.Equal("FizzBuzz", _fizzBuzzType01.Generate(15));
         }
         [Fact]
         public void タイプ1は通常のパターンを返す()
         {
-            Assert.Equal("Fizz", _fizzBuzz.Generate(3, 1));
+            Assert.Equal("Fizz", _fizzBuzzType01.Generate(3, 1));
         }
         [Fact]
         public void タイプ1は通常のパターンのリストを返す()
         {
-            _fizzBuzz.GenerateList(1);
-            Assert.Equal("Fizz", _fizzBuzz.List[2]);
+            _fizzBuzzType01.GenerateList(1);
+            Assert.Equal("Fizz", _fizzBuzzType01.List[2]);
         }
 
         [Fact]
         public void タイプ2は数のみのパターンを返す()
         {
-            Assert.Equal("3", _fizzBuzz.Generate(3, 2));
+            Assert.Equal("3", _fizzBuzzType02.Generate(3, 2));
         }
 
         [Fact]
         public void タイプ2は数のみのパターンのリストを返す()
         {
-            _fizzBuzz.GenerateList(2);
-            Assert.Equal("3", _fizzBuzz.List[2]);
+            _fizzBuzzType02.GenerateList(2);
+            Assert.Equal("3", _fizzBuzzType02.List[2]);
         }
         [Theory]
         [InlineData(15, 3, "FizzBuzz")]
         [InlineData(3, 3, "3")]
         public void タイプ3は15で割り切る場合にFizzBuzzのパターンを返す(int input1, int input2, string expected)
         {
-            Assert.Equal(expected, _fizzBuzz.Generate(input1, input2));
+            Assert.Equal(expected, _fizzBuzzType03.Generate(input1, input2));
         }
         [Theory]
         [InlineData(14, "FizzBuzz")]
         [InlineData(2, "3")]
         public void タイプ3は数のみのパターンのリストを返す(int input, string expected)
         {
-            _fizzBuzz.GenerateList(3);
-            Assert.Equal(expected, _fizzBuzz.List[input]);
+            _fizzBuzzType03.GenerateList(3);
+            Assert.Equal(expected, _fizzBuzzType03.List[input]);
         }
     }
 }
