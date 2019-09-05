@@ -24,53 +24,53 @@ namespace FizzBuzz.Tests
         public void 値を1から100までプリントする(int input, string expected)
         {
             _fizzBuzzType01.GenerateList();
-            Assert.Equal(expected, _fizzBuzzType01.List[input]);
+            Assert.Equal(expected, _fizzBuzzType01.List[input].Value);
         }
         [Fact]
         public void 値が3で割り切る場合はFizzをプリントする()
         {
-           Assert.Equal("Fizz", _fizzBuzzType01.Generate(3)); 
+           Assert.Equal("Fizz", _fizzBuzzType01.Generate(3).Value); 
         }
         [Fact]
         public void 値が5で割り切る場合はBuzzをプリントする()
         {
-            Assert.Equal("Buzz", _fizzBuzzType01.Generate(5));
+            Assert.Equal("Buzz", _fizzBuzzType01.Generate(5).Value);
         }
         [Fact]
         public void 値が15で割り切る場合はFizzBuzzをプリントする()
         {
-            Assert.Equal("FizzBuzz", _fizzBuzzType01.Generate(15));
+            Assert.Equal("FizzBuzz", _fizzBuzzType01.Generate(15).Value);
         }
         [Fact]
         public void タイプ1は通常のパターンを返す()
         {
-            Assert.Equal("Fizz", _fizzBuzzType01.Generate(3));
+            Assert.Equal("Fizz", _fizzBuzzType01.Generate(3).Value);
         }
         [Fact]
         public void タイプ1は通常のパターンのリストを返す()
         {
             _fizzBuzzType01.GenerateList();
-            Assert.Equal("Fizz", _fizzBuzzType01.List[2]);
+            Assert.Equal("Fizz", _fizzBuzzType01.List[2].Value);
         }
 
         [Fact]
         public void タイプ2は数のみのパターンを返す()
         {
-            Assert.Equal("3", _fizzBuzzType02.Generate(3));
+            Assert.Equal("3", _fizzBuzzType02.Generate(3).Value);
         }
 
         [Fact]
         public void タイプ2は数のみのパターンのリストを返す()
         {
             _fizzBuzzType02.GenerateList();
-            Assert.Equal("3", _fizzBuzzType02.List[2]);
+            Assert.Equal("3", _fizzBuzzType02.List[2].Value);
         }
         [Theory]
         [InlineData(15, "FizzBuzz")]
         [InlineData(3, "3")]
         public void タイプ3は15で割り切る場合にFizzBuzzのパターンを返す(int input, string expected)
         {
-            Assert.Equal(expected, _fizzBuzzType03.Generate(input));
+            Assert.Equal(expected, _fizzBuzzType03.Generate(input).Value);
         }
         [Theory]
         [InlineData(14, "FizzBuzz")]
@@ -78,7 +78,7 @@ namespace FizzBuzz.Tests
         public void タイプ3は数のみのパターンのリストを返す(int input, string expected)
         {
             _fizzBuzzType03.GenerateList();
-            Assert.Equal(expected, _fizzBuzzType03.List[input]);
+            Assert.Equal(expected, _fizzBuzzType03.List[input].Value);
         }
     }
 }

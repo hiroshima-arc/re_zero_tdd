@@ -11,7 +11,7 @@ namespace FizzBuzz.Domain
         public static readonly string FIZZ = "Fizz";
         public static readonly string BUZZ = "Buzz";
         public static readonly string FIZZ_BUZZ = "FizzBuzz";
-        public abstract string Generate(int number);
+        public abstract FizzBuzzValue Generate(int number);
     }
     public abstract class Enumeration : IComparable
     {
