@@ -11,9 +11,9 @@ export class Counter extends Component<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
-    this.state = { 
+    this.state = {
       currentValue: "",
-      currentCount: 0 
+      currentCount: 0
     };
     this.incrementCounter = this.incrementCounter.bind(this);
     this.generate = this.generate.bind(this);
@@ -24,16 +24,16 @@ export class Counter extends Component<IProps, IState> {
       currentCount: this.state.currentCount + 1
     });
   }
-  
+
   public generate() {
     let number = this.state.currentCount;
     let url = `api/FizzBuzz/Generate/${number + 1}`;
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        this.setState({ 
+        this.setState({
           currentCount: this.state.currentCount + 1,
-          currentValue: data.value 
+          currentValue: data.value
         });
       });
   }

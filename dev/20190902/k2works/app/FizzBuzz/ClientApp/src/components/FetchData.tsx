@@ -5,28 +5,55 @@ interface IProps {}
 interface IState {
   forecasts: [];
   loading: boolean;
+  fizzBuzzList: [];
 }
 export class FetchData extends Component<IProps, IState> {
   public static displayName = FetchData.name;
 
-  public static renderForecastsTable(forecasts: any) {
+  public static renderFizzBuzzListTable(fizzBuzzList: any) {
+    const tbody = (() => {
+      let table: any[] = [];
+      let row: any[] = [];
+      fizzBuzzList.forEach((item: any, key: number) => {
+        row.push(item.value);
+        if ((key + 1) % 10 === 0) {
+          table.push(row);
+          row = [];
+        }
+      });
+      return table;
+    })();
+
     return (
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
           </tr>
         </thead>
         <tbody>
-          {forecasts.map((forecast: any) => (
-            <tr key={forecast.dateFormatted}>
-              <td>{forecast.dateFormatted}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
+          {tbody.map((row: any, key: number) => (
+            <tr key={key}>
+              <td>{row[0]}</td>
+              <td>{row[1]}</td>
+              <td>{row[2]}</td>
+              <td>{row[3]}</td>
+              <td>{row[4]}</td>
+              <td>{row[5]}</td>
+              <td>{row[6]}</td>
+              <td>{row[7]}</td>
+              <td>{row[8]}</td>
+              <td>{row[9]}</td>
+              <td>{row[10]}</td>
             </tr>
           ))}
         </tbody>
@@ -36,12 +63,13 @@ export class FetchData extends Component<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
-    this.state = { forecasts: [], loading: true };
-
-    fetch("api/SampleData/WeatherForecasts")
+    this.state = { forecasts: [], fizzBuzzList: [], loading: true };
+    const number = 100;
+    let url = `api/FizzBuzz/GenerateList/${number}`;
+    fetch(url)
       .then(response => response.json())
       .then(data => {
-        this.setState({ forecasts: data, loading: false });
+        this.setState({ forecasts: data, fizzBuzzList: data, loading: false });
       });
   }
 
@@ -51,12 +79,12 @@ export class FetchData extends Component<IProps, IState> {
         <em>Loading...</em>
       </p>
     ) : (
-      FetchData.renderForecastsTable(this.state.forecasts)
+      FetchData.renderFizzBuzzListTable(this.state.fizzBuzzList)
     );
 
     return (
       <div>
-        <h1>Weather forecast</h1>
+        <h1>FizzBuzzList</h1>
         <p>This component demonstrates fetching data from the server.</p>
         {contents}
       </div>
