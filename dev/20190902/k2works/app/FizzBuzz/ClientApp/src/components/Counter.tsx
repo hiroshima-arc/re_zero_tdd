@@ -12,7 +12,7 @@ export class Counter extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      currentValue: "",
+      currentValue: "Ready...",
       currentCount: 0
     };
     this.incrementCounter = this.incrementCounter.bind(this);
@@ -41,7 +41,7 @@ export class Counter extends Component<IProps, IState> {
   public render() {
     return (
       <div>
-        <h1>Counter</h1>
+        <h1>FizzBuzzValue</h1>
 
         <p>This is a simple example of a React component.</p>
 

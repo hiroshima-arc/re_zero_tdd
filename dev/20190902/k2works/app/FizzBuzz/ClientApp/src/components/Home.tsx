@@ -35,7 +35,7 @@ export class Home extends Component {
   public render() {
     return (
       <div>
-        <h2>FizzBuzz</h2>
+        <h1>FizzBuzz</h1>
         <div id="app" dangerouslySetInnerHTML={{ __html: this.table }} />
       </div>
     );
