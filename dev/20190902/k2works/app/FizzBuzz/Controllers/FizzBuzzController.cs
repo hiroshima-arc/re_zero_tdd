@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using FizzBuzz.Application.Service;
-using FizzBuzz.Domain.Model;
 using FizzBuzz.Domain.Type;
 using Microsoft.AspNetCore.Mvc;
 
