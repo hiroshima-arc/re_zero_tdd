@@ -241,21 +241,19 @@
         };
         let body = () => {
           let element = "<tbody><tr>";
-          let list = generateList();
-          list.forEach((v, k) => {
+          generateList().forEach((v, k) => {
             element += `<td>${v}</td>`;
             if ((k + 1) % 10 === 0) element += "</tr><tr>";
           });
           element += "</tbody>";
           return element;
         };
-        let result = `
+        return `
                 <table class="table table-striped">
                     ${header()}
                     ${body()}
                 </table>
         `;
-        return result;
       }
 
       document.querySelector("#app").innerHTML = renderTable();
