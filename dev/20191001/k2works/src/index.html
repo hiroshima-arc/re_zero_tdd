@@ -244,9 +244,9 @@
         let body = () => {
           let element = "<tbody><tr>";
           let list = generateList();
-          for (let i = 0; i < 100; i++) {
-            element += `<td>${list[i]}</td>`;
-            if ((i + 1) % 10 === 0) element += "</tr><tr>";
+          for ([k, v] of Object.entries(list)) {
+            element += `<td>${v}</td>`;
+            if ((parseInt(k) + 1) % 10 === 0) element += "</tr><tr>";
           }
           element += "</tbody>";
           return element;
