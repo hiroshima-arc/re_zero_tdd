@@ -212,17 +212,22 @@
         });
       });
 
+      const FIZZ = "Fizz";
+      const BUZZ = "Buzz";
+      const MAX_COUNT = 100;
+
       function generateList() {
-        return [...Array(101).keys()].slice(1).map(generate);
+        // 配列は0から始まるので1を足さないと99までしか表示されない
+        return [...Array(MAX_COUNT + 1).keys()].slice(1).map(generate);
       }
 
       function generate(number) {
         const isFizz = number % 5 === 0;
         const isBuzz = number % 3 === 0;
 
-        if (isFizz && isBuzz) return "FizzBuzz";
-        if (isBuzz) return "Fizz";
-        if (isFizz) return "Buzz";
+        if (isFizz && isBuzz) return FIZZ + BUZZ;
+        if (isBuzz) return FIZZ;
+        if (isFizz) return BUZZ;
 
         return number;
       }
