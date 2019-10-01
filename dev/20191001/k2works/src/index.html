@@ -210,6 +210,23 @@
         test("15で割り切れる場合はFizzBuzzをプリントする", () => {
           assert.equal("FizzBuzz", generate(15));
         });
+        test("数字の合計は2632 ", () => {
+          assert.equal(
+            2632,
+            generateList()
+              .filter(Number.isInteger)
+              .reduce((acc, value) => acc + value)
+          );
+        });
+        test("Fizzの個数は27個", () => {
+          assert.equal(27, generateList().filter(i => i === "Fizz").length);
+        });
+        test("Buzzの個数は14個", () => {
+          assert.equal(14, generateList().filter(i => i === "Buzz").length);
+        });
+        test("FizzBuzzの個数は6個", () => {
+          assert.equal(6, generateList().filter(i => i === "FizzBuzz").length);
+        });
       });
 
       const FIZZ = "Fizz";
