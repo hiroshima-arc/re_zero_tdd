@@ -235,9 +235,7 @@
       function renderTable() {
         let header = () => {
           let element = "<thead>";
-          for (let i = 0; i < 10; i++) {
-            element += `<th>${i + 1}</th>`;
-          }
+          [...Array(10).keys()].forEach(i => (element += `<th>${i + 1}</th>`));
           element += "</thead>";
           return element;
         };
