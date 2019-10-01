@@ -233,13 +233,14 @@
       }
 
       function renderTable() {
-        let header = () => {
+        const header = (() => {
           let element = "<thead>";
           [...Array(10).keys()].forEach(i => (element += `<th>${i + 1}</th>`));
           element += "</thead>";
           return element;
-        };
-        let body = () => {
+        })();
+
+        const body = (() => {
           let element = "<tbody><tr>";
           generateList().forEach((v, k) => {
             element += `<td>${v}</td>`;
@@ -247,11 +248,12 @@
           });
           element += "</tbody>";
           return element;
-        };
+        })();
+
         return `
                 <table class="table table-striped">
-                    ${header()}
-                    ${body()}
+                    ${header}
+                    ${body}
                 </table>
         `;
       }
