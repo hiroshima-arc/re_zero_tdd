@@ -214,9 +214,9 @@
 
       function generateList() {
         let result = [];
-        for (let i = 0; i <= 99; i++) {
-          result[i] = generate(i + 1);
-        }
+        [...Array(100).keys()].forEach(i => {
+          result.push(generate(i + 1));
+        });
         return result;
       }
 
