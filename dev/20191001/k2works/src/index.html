@@ -242,6 +242,9 @@
         test("3で割り切れる場合はFizzをプリントする", () => {
           assert.equal("Fizz", fizzBuzz(3));
         });
+        test("5で割り切れる場合はBuzzをプリントする", () => {
+          assert.equal("Buzz", fizzBuzz(5));
+        });
       });
 
       function print1To100() {
@@ -256,6 +259,8 @@
         let result = number;
         if (number % 3 === 0) {
           result = "Fizz";
+        } else if (number % 5 === 0) {
+          result = "Buzz";
         }
         return result;
       }
