@@ -32,6 +32,13 @@ npx browser-sync init
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+mkdir src
+touch src/index.html
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
@@ -61,3 +68,6 @@ touch Procfile
 **[⬆ back to top](#構成)**
 
 ## 参照
+
+- [Bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
+
