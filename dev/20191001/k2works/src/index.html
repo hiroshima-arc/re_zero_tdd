@@ -221,9 +221,13 @@
       }
 
       function generate(number) {
-        if (number % 3 === 0 && number % 5 === 0) return "FizzBuzz";
-        if (number % 3 === 0) return "Fizz";
-        if (number % 5 === 0) return "Buzz";
+        const isFizz = number % 5 === 0;
+        const isBuzz = number % 3 === 0;
+
+        if (isFizz && isBuzz) return "FizzBuzz";
+        if (isBuzz) return "Fizz";
+        if (isFizz) return "Buzz";
+
         return number;
       }
 
