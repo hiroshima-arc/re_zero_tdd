@@ -1,205 +1,252 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
 
     <title>ゼロから始めるテスト駆動開発</title>
   </head>
   <body>
-      <!-- ヘッダー -->
-      <header class="py-4">
-          <div class="container text-center">
-              <h1>ゼロから始めるテスト駆動開発</h1>
-          </div>
-      </header>
-      <!-- /ヘッダー -->
-      <!-- ナビゲーションバー -->
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark stick-top">
-          <!-- サブコンポーネント -->
-          <div class="container">
-              <a href="index.html" class="navbar-brand">Zero TDD</a>
-              <!-- 切り替えボタン -->
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-              
-              <!-- ナビゲーション -->
-              <div class="collapse navbar-collapse" id="navbar-content">
-                  <!-- ナビゲーションメニュー -->
-                  <!-- 左側メニュー: トップページの各コンテンツへのリンク -->
-                  <ul class="navbar-nav mr-auto">
-                      <li class="nav-item active">
-                          <a href="#" class="nav-link">Top <span class="sr-only">(current)</span></a> 
-                      </li>
-                      <li class="nav-item">
-                          <a href="#" class="nav-link">About</a>
-                      </li>
-                      <li class="nav-item dropdown">
-                          <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-hhaspopup="true" aria-expanded="false">
-                              Contents
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a href="#" class="dropdown-item">FizzBuzz</a>
-                          </div>
-                      </li>
-                  </ul>
+    <!-- ヘッダー -->
+    <header class="py-4">
+      <div class="container text-center">
+        <h1>ゼロから始めるテスト駆動開発</h1>
+      </div>
+    </header>
+    <!-- /ヘッダー -->
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark stick-top">
+      <!-- サブコンポーネント -->
+      <div class="container">
+        <a href="index.html" class="navbar-brand">Zero TDD</a>
+        <!-- 切り替えボタン -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbar-content"
+          aria-controls="navbar-content"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-                  <!-- 右側メニュー: Contactページへのリンク -->
-                  <ul class="navbar-nav">
-                      <li class="nav-item">
-                          <a href="contact.html" class="nav-link btn btn-info">Contact</a>
-                      </li>
-                  </ul>
-                  <!-- /ナビゲーションメニュー -->
+        <!-- ナビゲーション -->
+        <div class="collapse navbar-collapse" id="navbar-content">
+          <!-- ナビゲーションメニュー -->
+          <!-- 左側メニュー: トップページの各コンテンツへのリンク -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a href="#" class="nav-link"
+                >Top <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-hhaspopup="true"
+                aria-expanded="false"
+              >
+                Contents
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a href="#" class="dropdown-item">FizzBuzz</a>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 右側メニュー: Contactページへのリンク -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link btn btn-info">Contact</a>
+            </li>
+          </ul>
+          <!-- /ナビゲーションメニュー -->
+        </div>
+      </div>
+      <!-- サブコンポーネント -->
+    </nav>
+    <!-- /ナビゲーションバー -->
+    <!-- メイン -->
+    <main>
+      <!-- コンテンツ01 -->
+      <div class="py-4">
+        <section id="app">
+          <div class="container">
+            <div class="row">
+              <h2>FizzBuzz</h2>
+            </div>
+            <div class="row p-3">
+              <!-- 左側カラム（画面幅md以上）　-->
+              <div class="col-md-2">
+                <h3>仕様</h3>
+              </div>
+              <!-- 右側カラム（画面幅md以上） -->
+              <div class="col-md-10">
+                <p>1 から 100 までの数をプリントするプログラムを書け。</p>
+                <p>
+                  ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5
+                  の倍数のときは｢Buzz｣とプリントし、
+                </p>
+                <p>3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること</p>
               </div>
             </div>
+            <div class="row p-3">
+              <!-- 左側カラム（画面幅md以上）　-->
+              <div class="col-md-2">
+                <h3>ToDoリスト</h3>
+              </div>
+              <!-- 右側カラム（画面幅md以上） -->
+              <div class="col-md-10">
+                <ul>
+                  <li>1 から 100 まで数をプリントできるようにする。</li>
+                  <li>
+                    3
+                    の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
+                  </li>
+                  <li>5 の倍数のときは｢Buzz｣とプリントできるようにする。</li>
+                  <li>
+                    3 と 5
+                    両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <dvi class="row p-3">
+              <div class="col-md-12 order-md-2">
+                <table class="table table-striped">
+                  <thead>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>Fizz</td>
+                      <td>4</td>
+                      <td>Buzz</td>
+                      <td>Fizz</td>
+                      <td>7</td>
+                      <td>8</td>
+                      <td>Fizz</td>
+                      <td>Buzz</td>
+                    </tr>
+                    <tr>
+                      <td>11</td>
+                      <td>Fizz</td>
+                      <td>13</td>
+                      <td>14</td>
+                      <td>FizzBuzz</td>
+                      <td>16</td>
+                      <td>17</td>
+                      <td>18</td>
+                      <td>19</td>
+                      <td>Buzz</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </dvi>
           </div>
-          <!-- サブコンポーネント -->
-      </nav>
-      <!-- /ナビゲーションバー -->
-      <!-- メイン -->
-      <main>
-          <!-- コンテンツ01 -->
-          <div class="py-4">
-              <section id="app">
-                  <div class="container">
-                      <div class="row">
-                          <h2>FizzBuzz</h2>
-                      </div>
-                      <div class="row p-3">
-                          <!-- 左側カラム（画面幅md以上）　-->
-                          <div class="col-md-2">
-                              <h3>仕様</h3>
-                          </div>
-                          <!-- 右側カラム（画面幅md以上） -->
-                          <div class="col-md-10">
-                              <p>1 から 100 までの数をプリントするプログラムを書け。</p>
-                              <p>ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5 の倍数のときは｢Buzz｣とプリントし、</p>
-                              <p>3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること</p>
-                          </div>
-                      </div>
-                      <div class="row p-3">
-                          <!-- 左側カラム（画面幅md以上）　-->
-                          <div class="col-md-2">
-                              <h3>ToDoリスト</h3>
-                          </div>
-                          <!-- 右側カラム（画面幅md以上） -->
-                          <div class="col-md-10">
-                              <ul>
-                                  <li>1 から 100 まで数をプリントできるようにする。</li>
-                                  <li>3 の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。</li>
-                                  <li>5 の倍数のときは｢Buzz｣とプリントできるようにする。</li>
-                                  <li>3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする</li>
-                              </ul>
-                          </div>
-                      </div>
-                      <dvi class="row p-3">
-                          <div class="col-md-12 order-md-2">
-                              <table class="table table-striped">
-                                   <thead>
-                                       <th>1</th>
-                                       <th>2</th>
-                                       <th>3</th>
-                                       <th>4</th>
-                                       <th>5</th>
-                                       <th>6</th>
-                                       <th>7</th>
-                                       <th>8</th>
-                                       <th>9</th>
-                                       <th>10</th>
-                                    </thead>
-                                  <tbody>
-                                      <tr>
-                                          <td>1</td>
-                                          <td>2</td>
-                                          <td>Fizz</td>
-                                          <td>4</td>
-                                          <td>Buzz</td>
-                                          <td>Fizz</td>
-                                          <td>7</td>
-                                          <td>8</td>
-                                          <td>Fizz</td>
-                                          <td>Buzz</td>
-                                      </tr>
-                                      <tr>
-                                          <td>11</td>
-                                          <td>Fizz</td>
-                                          <td>13</td>
-                                          <td>14</td>
-                                          <td>FizzBuzz</td>
-                                          <td>16</td>
-                                          <td>17</td>
-                                          <td>18</td>
-                                          <td>19</td>
-                                          <td>Buzz</td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </dvi>
-                  </div>
-              </section>
-              <section id="mocha"></section>
-          </div>
-          <!-- /コンテンツ01 -->
-      </main>
-      <!-- /メイン -->
-      <!-- フッター -->
-      <footer class="py-4 bg-dark text-light">
-          <div class="container text-center">
-              <!-- ナビゲーション -->
-              <ul class="nav justify-content-center mb-3">
-                  <li class="nav-item">
-                      <a href="#" class="nav-link">Top</a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="#" class="nav-link">About</a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="#" class="nav-link">Contents</a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="contact.html" class="nav-link">Contact</a>
-                  </li>
-              </ul>
-              <!-- /ナビゲーション -->
-              <p><small>Copyright &copy;2019 HiroshiamARC, All Rights Reserved.</small></p>
-          </div>
-
-      </footer>
-      <!-- /フッター -->
+        </section>
+        <section id="mocha"></section>
+      </div>
+      <!-- /コンテンツ01 -->
+    </main>
+    <!-- /メイン -->
+    <!-- フッター -->
+    <footer class="py-4 bg-dark text-light">
+      <div class="container text-center">
+        <!-- ナビゲーション -->
+        <ul class="nav justify-content-center mb-3">
+          <li class="nav-item">
+            <a href="#" class="nav-link">Top</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Contents</a>
+          </li>
+          <li class="nav-item">
+            <a href="contact.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+        <!-- /ナビゲーション -->
+        <p>
+          <small>Copyright &copy;2019 HiroshiamARC, All Rights Reserved.</small>
+        </p>
+      </div>
+    </footer>
+    <!-- /フッター -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
-    <script>mocha.setup("tdd");</script>
     <script>
-        const assert = chai.assert;
-        suite("FizzBuzzTest", () => {
-            test("greeting", () => {
-                assert.equal(greeting(), "Hello, world");
-            });
-        })
-
-        function greeting() {
-            return "Hello, world";
-        }
+      mocha.setup("tdd");
     </script>
     <script>
-    mocha.checkLeaks();
-    mocha.globals(["jQuery"]);
-    mocha.run();
+      const assert = chai.assert;
+      suite("FizzBuzzTest", () => {
+        test("greeting", () => {
+          assert.equal(greeting(), "Hello, world");
+        });
+      });
+
+      function greeting() {
+        return "Hello, world";
+      }
     </script>
-
-
-    </body>
+    <script>
+      mocha.checkLeaks();
+      mocha.globals(["jQuery"]);
+      mocha.run();
+    </script>
+  </body>
 </html>

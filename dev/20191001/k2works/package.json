@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/**/*.js",
     "format": "prettier --write src/**/*.*",
-    "watch": "watch 'npm-run-all format test' ./src ",
+    "watch": "watch 'npm-run-all format format' ./src ",
     "app": "npm-run-all app:*",
     "app:frontend": "browser-sync start --config bs-config.js"
   },
