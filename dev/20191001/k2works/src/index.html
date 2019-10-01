@@ -251,14 +251,20 @@
         })();
 
         return `
-                <table class="table table-striped">
+                <table>
                     ${header}
                     ${body}
                 </table>
         `;
       }
 
-      document.querySelector("#app").innerHTML = renderTable();
+      function renderFizzBuzzTable() {
+        document.querySelector("#app").innerHTML = renderTable();
+        document.querySelector("#app > table").classList.add("table");
+        document.querySelector("#app > table").classList.add("table-striped");
+      }
+
+      renderFizzBuzzTable();
     </script>
     <script>
       mocha.checkLeaks();
