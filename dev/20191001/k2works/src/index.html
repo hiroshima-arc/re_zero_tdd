@@ -242,10 +242,10 @@
         let body = () => {
           let element = "<tbody><tr>";
           let list = generateList();
-          for ([k, v] of Object.entries(list)) {
+          list.forEach((v, k) => {
             element += `<td>${v}</td>`;
-            if ((parseInt(k) + 1) % 10 === 0) element += "</tr><tr>";
-          }
+            if ((k + 1) % 10 === 0) element += "</tr><tr>";
+          });
           element += "</tbody>";
           return element;
         };
