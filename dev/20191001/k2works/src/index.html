@@ -213,11 +213,7 @@
       });
 
       function generateList() {
-        let result = [];
-        [...Array(100).keys()].forEach(i => {
-          result.push(generate(i + 1));
-        });
-        return result;
+        return [...Array(101).keys()].slice(1).map(generate);
       }
 
       function generate(number) {
