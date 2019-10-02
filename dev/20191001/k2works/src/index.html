@@ -295,6 +295,21 @@
         });
       });
 
+      const FizzBuzzType01 = function(number) {
+        this.number = number;
+
+        this.generate = () => {
+          const isFizz = this.number % 5 === 0;
+          const isBuzz = this.number % 3 === 0;
+
+          if (isFizz && isBuzz) return "FizzBuzz";
+          if (isBuzz) return "Fizz";
+          if (isFizz) return "Buzz";
+
+          return this.number;
+        };
+      };
+
       const FizzBuzz = {
         FIZZ: "Fizz",
         BUZZ: "Buzz",
@@ -314,10 +329,7 @@
 
           switch (type) {
             case 1:
-              if (isFizz && isBuzz) return this.FIZZ + this.BUZZ;
-              if (isBuzz) return this.FIZZ;
-              if (isFizz) return this.BUZZ;
-              return number;
+              return new FizzBuzzType01(number).generate();
             case 2:
               return number;
             case 3:
