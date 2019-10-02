@@ -233,17 +233,16 @@
       const assert = chai.assert;
       suite("FizzBuzzTest", () => {
         suite("タイプ1の場合", () => {
-          setup(() => {
-            const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
-            fizzBuzz.generateList();
-          });
-
           test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-            assert.equal(1, fizzBuzz.list.value[0].value);
-            assert.equal("Fizz", fizzBuzz.list.value[2].value);
-            assert.equal("Buzz", fizzBuzz.list.value[4].value);
-            assert.equal("FizzBuzz", fizzBuzz.list.value[14].value);
-            assert.equal("Buzz", fizzBuzz.list.value[99].value);
+            const command = FizzBuzzListCommand.create(
+              FizzBuzzTypeEnum.type01()
+            );
+            command.execute(100);
+            assert.equal(1, command.list.value[0].value);
+            assert.equal("Fizz", command.list.value[2].value);
+            assert.equal("Buzz", command.list.value[4].value);
+            assert.equal("FizzBuzz", command.list.value[14].value);
+            assert.equal("Buzz", command.list.value[99].value);
           });
           test("3で割り切れる場合はFizzをプリントする", () => {
             const command = FizzBuzzValueCommand.create(
@@ -264,29 +263,45 @@
             assert.equal("FizzBuzz", command.execute(15).value);
           });
           test("数字の合計は2632 ", () => {
+            const command = FizzBuzzListCommand.create(
+              FizzBuzzTypeEnum.type01()
+            );
+            command.execute(100);
             assert.equal(
               2632,
-              fizzBuzz.list.value
+              command.list.value
                 .filter(i => Number.isInteger(i.value))
                 .reduce((acc, value) => acc + value.value, 0)
             );
           });
           test("Fizzの個数は27個", () => {
+            const command = FizzBuzzListCommand.create(
+              FizzBuzzTypeEnum.type01()
+            );
+            command.execute(100);
             assert.equal(
               27,
-              fizzBuzz.list.value.filter(i => i.value === "Fizz").length
+              command.list.value.filter(i => i.value === "Fizz").length
             );
           });
           test("Buzzの個数は14個", () => {
+            const command = FizzBuzzListCommand.create(
+              FizzBuzzTypeEnum.type01()
+            );
+            command.execute(100);
             assert.equal(
               14,
-              fizzBuzz.list.value.filter(i => i.value === "Buzz").length
+              command.list.value.filter(i => i.value === "Buzz").length
             );
           });
           test("FizzBuzzの個数は6個", () => {
+            const command = FizzBuzzListCommand.create(
+              FizzBuzzTypeEnum.type01()
+            );
+            command.execute(100);
             assert.equal(
               6,
-              fizzBuzz.list.value.filter(i => i.value === "FizzBuzz").length
+              command.list.value.filter(i => i.value === "FizzBuzz").length
             );
           });
         });
@@ -466,26 +481,34 @@
         }
       };
 
-      const FizzBuzz = {
+      const FizzBuzzListCommand = {
         create(type) {
-          let self = Object.create(FizzBuzz.prototype);
-          self.MAX_COUNT = 100;
-          self.list = FizzBuzzList.create([]);
+          let self = Object.create(FizzBuzzListCommand.prototype);
+          Object.assign(self, FizzBuzzCommand.create());
           self.type = type;
+          self.list = FizzBuzzList.create([]);
           return self;
         },
         prototype: {
-          generateList() {
+          execute(number) {
             // 配列は0から始まるので1を足す
-            [...Array(this.MAX_COUNT + 1).keys()]
+            [...Array(number + 1).keys()]
               .slice(1)
-              .forEach(i => (this.list = this.list.add(this.generate(i))));
-          },
+              .forEach(i => (this.list = this.list.add(this.type.generate(i))));
+          }
+        }
+      };
 
-          generate(number) {
-            return this.type.generate(number);
-          },
-
+      const FizzBuzz = {
+        create(type) {
+          let self = Object.create(FizzBuzz.prototype);
+          this.MAX_COUNT = 100;
+          const command = FizzBuzzListCommand.create(type);
+          command.execute(this.MAX_COUNT);
+          self.list = command.list;
+          return self;
+        },
+        prototype: {
           createTable() {
             const header = (() => {
               let element = "<thead>";
@@ -515,7 +538,6 @@
           },
 
           renderTable() {
-            this.generateList();
             document.querySelector("#app").innerHTML = this.createTable();
             document.querySelector("#app > table").classList.add("table");
             document
