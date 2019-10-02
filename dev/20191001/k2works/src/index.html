@@ -590,6 +590,47 @@
             document
               .querySelector("#app__table > table")
               .classList.add("table-striped");
+
+            this.editTable();
+          },
+
+          editTable() {
+            $("#app__table > table > tbody > tr > td").on(
+              "click",
+              edit_toggle(this.service)
+            );
+
+            function edit_toggle(service) {
+              var edit_flag = false;
+              return function() {
+                if (edit_flag) return;
+                var $input = $("<input>")
+                  .attr("type", "text")
+                  .val($(this).text());
+                $(this).html($input);
+
+                $("input", this)
+                  .focus()
+                  .blur(function() {
+                    try {
+                      const value = service.generate($(this).val());
+                    } catch (e) {
+                      alert(e.message);
+                    }
+                    save(this);
+                    $(this)
+                      .after(service.generate($(this).val()))
+                      .unbind()
+                      .remove();
+                    edit_flag = false;
+                  });
+                edit_flag = true;
+              };
+            }
+
+            function save(elm) {
+              console.log("「" + $(elm).val() + "」を保存しました"); //保存する処理をここに書く
+            }
           },
 
           renderApp() {
