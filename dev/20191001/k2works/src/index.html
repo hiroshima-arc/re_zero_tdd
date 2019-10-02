@@ -521,6 +521,24 @@
             [...Array(number + 1).keys()]
               .slice(1)
               .forEach(i => (this.list = this.list.add(this.type.generate(i))));
+            return this.list;
+          }
+        }
+      };
+
+      const FizzBuzzService = {
+        create(type) {
+          let self = Object.create(FizzBuzzService.prototype);
+          self.valueCommand = FizzBuzzValueCommand.create(type);
+          self.listCommand = FizzBuzzListCommand.create(type);
+          return self;
+        },
+        prototype: {
+          generate(number) {
+            return this.valueCommand.execute(number).value;
+          },
+          generateList(number) {
+            return this.listCommand.execute(number).value;
           }
         }
       };
@@ -528,9 +546,8 @@
       const FizzBuzz = {
         create(type) {
           let self = Object.create(FizzBuzz.prototype);
-          const command = FizzBuzzListCommand.create(type);
-          command.execute(100);
-          self.list = command.list;
+          self.service = FizzBuzzService.create(type);
+          self.list = self.service.generateList(100);
           return self;
         },
         prototype: {
@@ -546,7 +563,7 @@
 
             const body = (() => {
               let element = "<tbody><tr>";
-              this.list.value.forEach((v, k) => {
+              this.list.forEach((v, k) => {
                 element += `<td>${v.value}</td>`;
                 if ((k + 1) % 10 === 0) element += "</tr><tr>";
               });
