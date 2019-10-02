@@ -301,7 +301,7 @@
           return number;
         },
 
-        renderTable() {
+        createTable() {
           const header = (() => {
             let element = "<thead>";
             [...Array(10).keys()].forEach(
@@ -329,14 +329,14 @@
         `;
         },
 
-        renderFizzBuzzTable() {
-          document.querySelector("#app").innerHTML = this.renderTable();
+        renderTable() {
+          document.querySelector("#app").innerHTML = this.createTable();
           document.querySelector("#app > table").classList.add("table");
           document.querySelector("#app > table").classList.add("table-striped");
         }
       };
 
-      FizzBuzz.renderFizzBuzzTable();
+      FizzBuzz.renderTable();
     </script>
     <script>
       mocha.checkLeaks();
