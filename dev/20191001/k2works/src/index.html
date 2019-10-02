@@ -246,13 +246,22 @@
             assert.equal("Buzz", fizzBuzz.list.value[99].value);
           });
           test("3で割り切れる場合はFizzをプリントする", () => {
-            assert.equal("Fizz", fizzBuzz.generate(3).value);
+            const command = FizzBuzzValueCommand.create(
+              FizzBuzzTypeEnum.type01()
+            );
+            assert.equal("Fizz", command.execute(3).value);
           });
           test("5で割り切れる場合はBuzzをプリントする", () => {
-            assert.equal("Buzz", fizzBuzz.generate(5).value);
+            const command = FizzBuzzValueCommand.create(
+              FizzBuzzTypeEnum.type01()
+            );
+            assert.equal("Buzz", command.execute(5).value);
           });
           test("15で割り切れる場合はFizzBuzzをプリントする", () => {
-            assert.equal("FizzBuzz", fizzBuzz.generate(15).value);
+            const command = FizzBuzzValueCommand.create(
+              FizzBuzzTypeEnum.type01()
+            );
+            assert.equal("FizzBuzz", command.execute(15).value);
           });
           test("数字の合計は2632 ", () => {
             assert.equal(
@@ -283,30 +292,42 @@
         });
         suite("タイプ2の場合", () => {
           test("3で割り切れる場合は3をプリントする", () => {
-            const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type02());
-            assert.equal(3, fizzBuzz.generate(3).value);
+            const command = FizzBuzzValueCommand.create(
+              FizzBuzzTypeEnum.type02()
+            );
+            assert.equal(3, command.execute(3).value);
           });
           test("5で割り切れる場合は5をプリントする", () => {
-            const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type02());
-            assert.equal(5, fizzBuzz.generate(5).value);
+            const command = FizzBuzzValueCommand.create(
+              FizzBuzzTypeEnum.type02()
+            );
+            assert.equal(5, command.execute(5).value);
           });
           test("15で割り切れる場合は15をプリントする", () => {
-            const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type02());
-            assert.equal(15, fizzBuzz.generate(15).value);
+            const command = FizzBuzzValueCommand.create(
+              FizzBuzzTypeEnum.type02()
+            );
+            assert.equal(15, command.execute(15).value);
           });
         });
         suite("タイプ3の場合", () => {
           test("3で割り切れる場合は3をプリントする", () => {
-            const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type03());
-            assert.equal(3, fizzBuzz.generate(3).value);
+            const command = FizzBuzzValueCommand.create(
+              FizzBuzzTypeEnum.type03()
+            );
+            assert.equal(3, command.execute(3).value);
           });
           test("5で割り切れる場合は5をプリントする", () => {
-            const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type03());
-            assert.equal(5, fizzBuzz.generate(5).value);
+            const command = FizzBuzzValueCommand.create(
+              FizzBuzzTypeEnum.type03()
+            );
+            assert.equal(5, command.execute(5).value);
           });
           test("15で割り切れる場合はFizzBuzzをプリントする", () => {
-            const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type03());
-            assert.equal("FizzBuzz", fizzBuzz.generate(15).value);
+            const command = FizzBuzzValueCommand.create(
+              FizzBuzzTypeEnum.type03()
+            );
+            assert.equal("FizzBuzz", command.execute(15).value);
           });
         });
       });
@@ -417,6 +438,30 @@
             let result = this.value;
             result.push(value);
             return FizzBuzzList.create(result);
+          }
+        }
+      };
+
+      const FizzBuzzCommand = {
+        create() {
+          let self = Object.create(FizzBuzzCommand.prototype);
+          return self;
+        },
+        prototype: {
+          execute() {}
+        }
+      };
+
+      const FizzBuzzValueCommand = {
+        create(type) {
+          let self = Object.create(FizzBuzzValueCommand.prototype);
+          Object.assign(self, FizzBuzzCommand.create());
+          self.type = type;
+          return self;
+        },
+        prototype: {
+          execute(number) {
+            return this.type.generate(number);
           }
         }
       };
