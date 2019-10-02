@@ -304,6 +304,18 @@
               command.list.value.filter(i => i.value === "FizzBuzz").length
             );
           });
+          test("値は正の値のみ許可する", () => {
+            const command = FizzBuzzValueCommand.create(
+              FizzBuzzTypeEnum.type01()
+            );
+            chai.expect(command.execute(-1)).to.throw();
+          });
+          test("100より多い数を許可しない", () => {
+            const command = FizzBuzzListCommand.create(
+              FizzBuzzTypeEnum.type01()
+            );
+            chai.expect(command.execute(101)).to.throw();
+          });
         });
         suite("タイプ2の場合", () => {
           test("3で割り切れる場合は3をプリントする", () => {
@@ -430,6 +442,7 @@
 
       const FizzBuzzValue = {
         create(number, value) {
+          assert(number >= 0);
           let self = Object.create(FizzBuzzValue.prototype);
           self.number = number;
           self.value = value;
@@ -444,6 +457,7 @@
 
       const FizzBuzzList = {
         create(list) {
+          assert(list.length <= 100);
           let self = Object.create(FizzBuzzList.prototype);
           self.value = list;
           return self;
