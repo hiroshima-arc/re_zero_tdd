@@ -233,8 +233,11 @@
       const assert = chai.assert;
       suite("FizzBuzzTest", () => {
         suite("タイプ1の場合", () => {
+          setup(() => {
+            FizzBuzz.generateList();
+          });
+
           test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-            FizzBuzz.list = FizzBuzz.generateList();
             assert.equal(1, FizzBuzz.list[0]);
             assert.equal("Fizz", FizzBuzz.list[2]);
             assert.equal("Buzz", FizzBuzz.list[4]);
@@ -253,28 +256,19 @@
           test("数字の合計は2632 ", () => {
             assert.equal(
               2632,
-              FizzBuzz.generateList()
+              FizzBuzz.list
                 .filter(Number.isInteger)
                 .reduce((acc, value) => acc + value)
             );
           });
           test("Fizzの個数は27個", () => {
-            assert.equal(
-              27,
-              FizzBuzz.generateList().filter(i => i === "Fizz").length
-            );
+            assert.equal(27, FizzBuzz.list.filter(i => i === "Fizz").length);
           });
           test("Buzzの個数は14個", () => {
-            assert.equal(
-              14,
-              FizzBuzz.generateList().filter(i => i === "Buzz").length
-            );
+            assert.equal(14, FizzBuzz.list.filter(i => i === "Buzz").length);
           });
           test("FizzBuzzの個数は6個", () => {
-            assert.equal(
-              6,
-              FizzBuzz.generateList().filter(i => i === "FizzBuzz").length
-            );
+            assert.equal(6, FizzBuzz.list.filter(i => i === "FizzBuzz").length);
           });
         });
         suite("タイプ2の場合", () => {
@@ -308,11 +302,10 @@
         list: [],
 
         generateList() {
-          this.list = [];
-          [...Array(this.MAX_COUNT).keys()].forEach(i =>
-            this.list.push(this.generate(i + 1))
-          );
-          return this.list;
+          // 配列は0から始まるので1を足す
+          this.list = [...Array(this.MAX_COUNT + 1).keys()]
+            .slice(1)
+            .map(i => this.generate(i, 1));
         },
 
         generate(number, type) {
@@ -350,7 +343,7 @@
 
           const body = (() => {
             let element = "<tbody><tr>";
-            this.generateList().forEach((v, k) => {
+            this.list.forEach((v, k) => {
               element += `<td>${v}</td>`;
               if ((k + 1) % 10 === 0) element += "</tr><tr>";
             });
@@ -367,6 +360,7 @@
         },
 
         renderTable() {
+          this.generateList();
           document.querySelector("#app").innerHTML = this.createTable();
           document.querySelector("#app > table").classList.add("table");
           document.querySelector("#app > table").classList.add("table-striped");
