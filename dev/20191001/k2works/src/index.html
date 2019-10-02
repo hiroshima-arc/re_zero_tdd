@@ -502,9 +502,9 @@
         }
       };
 
-      const FizzBuzz = {
+      const FizzBuzzView = {
         create(type) {
-          let self = Object.create(FizzBuzz.prototype);
+          let self = Object.create(FizzBuzzView.prototype);
           self.service = FizzBuzzService.create(type);
           self.list = self.service.generateList(100);
           return self;
@@ -548,7 +548,7 @@
         }
       };
 
-      const fizzBuzz = FizzBuzz.create(FizzBuzzTypeEnum.type01());
+      const fizzBuzz = FizzBuzzView.create(FizzBuzzTypeEnum.type01());
       fizzBuzz.renderTable();
     </script>
     <script>
