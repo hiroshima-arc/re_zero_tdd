@@ -234,12 +234,12 @@
       suite("FizzBuzzTest", () => {
         suite("タイプ1の場合", () => {
           test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-            let result = FizzBuzz.generateList();
-            assert.equal(1, result[0]);
-            assert.equal("Fizz", result[2]);
-            assert.equal("Buzz", result[4]);
-            assert.equal("FizzBuzz", result[14]);
-            assert.equal("Buzz", result[99]);
+            FizzBuzzData.list = FizzBuzz.generateList();
+            assert.equal(1, FizzBuzzData.list[0]);
+            assert.equal("Fizz", FizzBuzzData.list[2]);
+            assert.equal("Buzz", FizzBuzzData.list[4]);
+            assert.equal("FizzBuzz", FizzBuzzData.list[14]);
+            assert.equal("Buzz", FizzBuzzData.list[99]);
           });
           test("3で割り切れる場合はFizzをプリントする", () => {
             assert.equal("Fizz", FizzBuzz.generate(3, 1));
@@ -300,6 +300,10 @@
           });
         });
       });
+
+      const FizzBuzzData = {
+        list: []
+      };
 
       const FizzBuzz = {
         FIZZ: "Fizz",
