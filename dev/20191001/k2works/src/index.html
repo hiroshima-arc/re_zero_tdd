@@ -239,11 +239,11 @@
           });
 
           test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする", () => {
-            assert.equal(1, fizzBuzz.list[0].value);
-            assert.equal("Fizz", fizzBuzz.list[2].value);
-            assert.equal("Buzz", fizzBuzz.list[4].value);
-            assert.equal("FizzBuzz", fizzBuzz.list[14].value);
-            assert.equal("Buzz", fizzBuzz.list[99].value);
+            assert.equal(1, fizzBuzz.list.value[0].value);
+            assert.equal("Fizz", fizzBuzz.list.value[2].value);
+            assert.equal("Buzz", fizzBuzz.list.value[4].value);
+            assert.equal("FizzBuzz", fizzBuzz.list.value[14].value);
+            assert.equal("Buzz", fizzBuzz.list.value[99].value);
           });
           test("3で割り切れる場合はFizzをプリントする", () => {
             assert.equal("Fizz", fizzBuzz.generate(3).value);
@@ -257,7 +257,7 @@
           test("数字の合計は2632 ", () => {
             assert.equal(
               2632,
-              fizzBuzz.list
+              fizzBuzz.list.value
                 .filter(i => Number.isInteger(i.value))
                 .reduce((acc, value) => acc + value.value, 0)
             );
@@ -265,19 +265,19 @@
           test("Fizzの個数は27個", () => {
             assert.equal(
               27,
-              fizzBuzz.list.filter(i => i.value === "Fizz").length
+              fizzBuzz.list.value.filter(i => i.value === "Fizz").length
             );
           });
           test("Buzzの個数は14個", () => {
             assert.equal(
               14,
-              fizzBuzz.list.filter(i => i.value === "Buzz").length
+              fizzBuzz.list.value.filter(i => i.value === "Buzz").length
             );
           });
           test("FizzBuzzの個数は6個", () => {
             assert.equal(
               6,
-              fizzBuzz.list.filter(i => i.value === "FizzBuzz").length
+              fizzBuzz.list.value.filter(i => i.value === "FizzBuzz").length
             );
           });
         });
@@ -406,20 +406,35 @@
         }
       };
 
+      const FizzBuzzList = {
+        create(list) {
+          let self = Object.create(FizzBuzzList.prototype);
+          self.value = list;
+          return self;
+        },
+        prototype: {
+          add(value) {
+            let result = this.value;
+            result.push(value);
+            return FizzBuzzList.create(result);
+          }
+        }
+      };
+
       const FizzBuzz = {
         create(type) {
           let self = Object.create(FizzBuzz.prototype);
           self.MAX_COUNT = 100;
-          self.list = [];
+          self.list = FizzBuzzList.create([]);
           self.type = type;
           return self;
         },
         prototype: {
           generateList() {
             // 配列は0から始まるので1を足す
-            this.list = [...Array(this.MAX_COUNT + 1).keys()]
+            [...Array(this.MAX_COUNT + 1).keys()]
               .slice(1)
-              .map(i => this.generate(i));
+              .forEach(i => (this.list = this.list.add(this.generate(i))));
           },
 
           generate(number) {
@@ -438,7 +453,7 @@
 
             const body = (() => {
               let element = "<tbody><tr>";
-              this.list.forEach((v, k) => {
+              this.list.value.forEach((v, k) => {
                 element += `<td>${v.value}</td>`;
                 if ((k + 1) % 10 === 0) element += "</tr><tr>";
               });
