@@ -318,6 +318,15 @@
         };
       };
 
+      const FizzBuzzType03 = function(number) {
+        this.number = number;
+
+        this.generate = () => {
+          if (isFizz && isBuzz) return "FizzBuzz";
+          return number;
+        };
+      };
+
       const FizzBuzz = {
         FIZZ: "Fizz",
         BUZZ: "Buzz",
@@ -341,8 +350,7 @@
             case 2:
               return new FizzBuzzType02(number).generate();
             case 3:
-              if (isFizz && isBuzz) return this.FIZZ + this.BUZZ;
-              return number;
+              return new FizzBuzzType03(number).generate();
             default:
               if (isFizz && isBuzz) return this.FIZZ + this.BUZZ;
               if (isBuzz) return this.FIZZ;
