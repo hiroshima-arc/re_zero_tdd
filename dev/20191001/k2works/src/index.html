@@ -308,13 +308,17 @@
             const command = FizzBuzzValueCommand.create(
               FizzBuzzTypeEnum.type01()
             );
-            chai.expect(command.execute(-1)).to.throw();
+            chai
+              .expect(() => command.execute(-1))
+              .to.throw("FizzBuzzValue can't generate by minus number -1");
           });
           test("100より多い数を許可しない", () => {
             const command = FizzBuzzListCommand.create(
               FizzBuzzTypeEnum.type01()
             );
-            chai.expect(command.execute(101)).to.throw();
+            chai
+              .expect(() => command.execute(101))
+              .to.throw("FizzBuzzList can't generate over 100");
           });
         });
         suite("タイプ2の場合", () => {
@@ -442,7 +446,10 @@
 
       const FizzBuzzValue = {
         create(number, value) {
-          assert(number >= 0);
+          if (number < 0)
+            throw new Error(
+              `FizzBuzzValue can't generate by minus number ${number}`
+            );
           let self = Object.create(FizzBuzzValue.prototype);
           self.number = number;
           self.value = value;
@@ -456,8 +463,13 @@
       };
 
       const FizzBuzzList = {
+        MAX_NUMBER: 100,
+
         create(list) {
-          assert(list.length <= 100);
+          if (list.length > this.MAX_NUMBER)
+            throw new Error(
+              `FizzBuzzList can't generate over ${this.MAX_NUMBER}`
+            );
           let self = Object.create(FizzBuzzList.prototype);
           self.value = list;
           return self;
@@ -516,9 +528,8 @@
       const FizzBuzz = {
         create(type) {
           let self = Object.create(FizzBuzz.prototype);
-          this.MAX_COUNT = 100;
           const command = FizzBuzzListCommand.create(type);
-          command.execute(this.MAX_COUNT);
+          command.execute(100);
           self.list = command.list;
           return self;
         },
