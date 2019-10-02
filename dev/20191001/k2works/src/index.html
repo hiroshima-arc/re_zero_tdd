@@ -277,6 +277,17 @@
             );
           });
         });
+        suite("タイプ2の場合", () => {
+          test("3で割り切れる場合は3をプリントする", () => {
+            assert.equal(3, FizzBuzz.generate(3, 2));
+          });
+          test("5で割り切れる場合は5をプリントする", () => {
+            assert.equal(5, FizzBuzz.generate(5, 2));
+          });
+          test("15で割り切れる場合は15をプリントする", () => {
+            assert.equal(15, FizzBuzz.generate(15, 2));
+          });
+        });
       });
 
       const FizzBuzz = {
@@ -301,6 +312,8 @@
               if (isFizz && isBuzz) return this.FIZZ + this.BUZZ;
               if (isBuzz) return this.FIZZ;
               if (isFizz) return this.BUZZ;
+              return number;
+            case 2:
               return number;
             default:
               if (isFizz && isBuzz) return this.FIZZ + this.BUZZ;
