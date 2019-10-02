@@ -352,10 +352,7 @@
             case 3:
               return new FizzBuzzType03(number).generate();
             default:
-              if (isFizz && isBuzz) return this.FIZZ + this.BUZZ;
-              if (isBuzz) return this.FIZZ;
-              if (isFizz) return this.BUZZ;
-              return number;
+              return new FizzBuzzType01(number).generate();
           }
         },
 
