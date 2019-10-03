@@ -558,6 +558,16 @@
               assert.equal(3, data.length);
             });
           });
+          test("値を削除する", () => {
+            const data = { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] };
+            indexedDbSetItem(data);
+            const keyValue = "3";
+            indexedDbDeleteItem(keyValue);
+
+            return indexedDbGetItem(keyValue).then(data => {
+              assert.equal(null, data);
+            });
+          });
         });
       });
 
@@ -654,6 +664,20 @@
             };
           };
         });
+      }
+
+      function indexedDbDeleteItem(keyValue) {
+        const req = createRequest();
+        req.onsuccess = function(event) {
+          const db = event.target.result;
+          const trans = db.transaction(storeName, "readwrite");
+          const store = trans.objectStore(storeName);
+          const getReq = store.delete(keyValue);
+
+          getReq.onsuccess = function(event) {
+            console.log(event.target.result);
+          };
+        };
       }
 
       const FizzBuzzTypeEnum = {
