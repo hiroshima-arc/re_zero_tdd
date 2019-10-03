@@ -525,6 +525,15 @@
             const data = { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] };
             indexedDbSetItem(data);
           });
+          test("値を取得する", () => {
+            const data = { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] };
+            indexedDbSetItem(data);
+
+            const keyValue = 2;
+            return indexedDbGetItem(keyValue).then(data => {
+              assert.equal("Fizz", data.list[2]);
+            });
+          });
         });
       });
 
@@ -559,6 +568,25 @@
           };
         };
       }
+
+      function indexedDbGetItem(keyValue) {
+        return new Promise(resolve => {
+          const req = createRequest();
+          req.onsuccess = function(event) {
+            const db = event.target.result;
+            const trans = db.transaction(storeName, "readwrite");
+            const store = trans.objectStore(storeName);
+            const getReq = store.get(keyValue);
+
+            getReq.onsuccess = function(event) {
+              const result = event.target.result;
+              console.log(result);
+              resolve(result);
+            };
+          };
+        });
+      }
+
       const FizzBuzzTypeEnum = {
         type01() {
           return FizzBuzzType01.create();
@@ -1008,7 +1036,7 @@
       };
     </script>
     <script>
-      mocha.checkLeaks();
+      //mocha.checkLeaks();
       mocha.globals(["jQuery"]);
       mocha.run();
     </script>
