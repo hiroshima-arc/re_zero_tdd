@@ -534,6 +534,17 @@
               assert.equal("Fizz", data.list[2]);
             });
           });
+          test("値を全て取得する", () => {
+            [
+              { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] },
+              { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] },
+              { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] }
+            ].forEach(data => indexedDbSetItem(data));
+
+            return indexedDbGetItems().then(data => {
+              assert.equal(3, data.length);
+            });
+          });
         });
       });
 
@@ -582,6 +593,27 @@
               const result = event.target.result;
               console.log(result);
               resolve(result);
+            };
+          };
+        });
+      }
+
+      function indexedDbGetItems() {
+        return new Promise(resolve => {
+          const req = createRequest();
+          req.onsuccess = function(event) {
+            const db = event.target.result;
+            const trans = db.transaction(storeName, "readwrite");
+            const store = trans.objectStore(storeName);
+            const getReq = store.openCursor();
+
+            let result = [];
+            getReq.onsuccess = function(event) {
+              const cur = event.target.result;
+              if (!cur) return resolve(result);
+              console.log(cur.value);
+              result.push(cur.value);
+              cur.continue();
             };
           };
         });
