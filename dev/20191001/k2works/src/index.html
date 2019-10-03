@@ -189,6 +189,23 @@
               <div class="col-md-12 order-md-2" id="app">
                 <div id="app__select"></div>
                 <div id="app__table"></div>
+                <div id="app__message"></div>
+                <div id="app__db">
+                  <button
+                    id="app__db--save"
+                    type="button"
+                    class="btn btn-primary btn-rounded btn-sm my-0"
+                  >
+                    Save
+                  </button>
+                  <button
+                    id="app__db--delete"
+                    type="button"
+                    class="btn btn-danger btn-rounded btn-sm my-0"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </dvi>
           </div>
@@ -1024,9 +1041,25 @@
             }
           },
 
+          saveItems() {
+            document.querySelector("#app__db--save").onclick = () =>
+              alert("Save");
+          },
+
+          deleteItems() {
+            document.querySelector("#app__db--delete").onclick = () =>
+              alert("Delete");
+          },
+
+          renderButton() {
+            this.saveItems();
+            this.deleteItems();
+          },
+
           renderApp() {
             this.renderSelect();
             this.renderTable();
+            this.renderButton();
           }
         }
       };
