@@ -823,6 +823,16 @@
                       }
                     }
                   });
+
+                $("input", this)
+                  .focus()
+                  .blur(function(e) {
+                    $(this)
+                      .after($(this).val())
+                      .unbind()
+                      .remove();
+                    edit_flag = false;
+                  });
                 edit_flag = true;
               };
             }
