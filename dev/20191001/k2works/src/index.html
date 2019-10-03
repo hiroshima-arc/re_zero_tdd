@@ -719,12 +719,12 @@
           },
           createSelect() {
             return `
-            <select name="type" id="app__select--type">
-              <option value="one">タイプ1</option>
-              <option value="two">タイプ2</option>
-              <option value="three">タイプ3</option>
-            </select>
-            `;
+                  <select name="type" id="app__select--type">
+                    <option value="one">タイプ1</option>
+                    <option value="two">タイプ2</option>
+                    <option value="three">タイプ3</option>
+                  </select>
+                  `;
           },
           createTable() {
             const header = (() => {
@@ -747,11 +747,11 @@
             })();
 
             return `
-                <table>
-                    ${header}
-                    ${body}
-                </table>
-        `;
+                      <table>
+                          ${header}
+                          ${body}
+                      </table>
+              `;
           },
 
           renderSelect() {
@@ -800,18 +800,20 @@
 
                 $("input", this)
                   .focus()
-                  .blur(function() {
-                    try {
-                      const value = service.generate($(this).val());
-                    } catch (e) {
-                      alert(e.message);
+                  .keypress(function(e) {
+                    if (e.which == 13) {
+                      try {
+                        const value = service.generate($(this).val());
+                        save(this);
+                        $(this)
+                          .after(value)
+                          .unbind()
+                          .remove();
+                        edit_flag = false;
+                      } catch (e) {
+                        alert(e.message);
+                      }
                     }
-                    save(this);
-                    $(this)
-                      .after(service.generate($(this).val()))
-                      .unbind()
-                      .remove();
-                    edit_flag = false;
                   });
                 edit_flag = true;
               };
@@ -838,21 +840,45 @@
         const $EXPORT = $("#export");
 
         const newTr = `
-<tr class="hide">
-  <td class="pt-3-half" contenteditable="true">Example</td>
-  <td class="pt-3-half" contenteditable="true">Example</td>
-  <td class="pt-3-half" contenteditable="true">Example</td>
-  <td class="pt-3-half" contenteditable="true">Example</td>
-  <td class="pt-3-half" contenteditable="true">Example</td>
-  <td class="pt-3-half">
-    <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
-    <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
-  </td>
-  <td>
-    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button></span>
-  </td>
-</tr>`;
+      <tr class="hide">
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half" contenteditable="true">Example</td>
+        <td class="pt-3-half">
+          <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
+          <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
+        </td>
+        <td>
+          <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button></span>
+        </td>
+      </tr>`;
 
+        $("#table > table > tbody > tr > td").on("click", function(e) {
+          edit_toggle(e.target)();
+        });
+        $("#table > table > tbody > tr > td").on("keydown", function(e) {
+          edit_toggle(e.target)();
+        });
+
+        function edit_toggle(target) {
+          var edit_flag = false;
+          return function() {
+            if (edit_flag) return;
+            $(target, this)
+              .focus()
+              .blur(function(e) {
+                try {
+                  console.log($(this).text());
+                  edit_flag = false;
+                } catch (e) {
+                  alert(e.message);
+                }
+              });
+            edit_flag = true;
+          };
+        }
         $(".table-add").on("click", "i", () => {
           const $clone = $tableID
             .find("tbody tr")
