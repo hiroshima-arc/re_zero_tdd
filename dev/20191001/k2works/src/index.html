@@ -520,8 +520,45 @@
             assert.equal("FizzBuzz", service.generate(15));
           });
         });
+        suite("編集された内容を保存する", () => {
+          test("値を保存する", () => {
+            const data = { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] };
+            indexedDbSetItem(data);
+          });
+        });
       });
 
+      const dbName = "fizzbuzz.db";
+      const storeName = "items";
+
+      function createRequest() {
+        const openReq = indexedDB.open(dbName);
+
+        openReq.onupgradeneeded = function(event) {
+          const db = event.target.result;
+          const os = db.createObjectStore(storeName, { keyPath: "id" });
+        };
+
+        return openReq;
+      }
+
+      function indexedDbSetItem(data) {
+        const req = createRequest();
+        req.onsuccess = function(event) {
+          const db = event.target.result;
+          const trans = db.transaction(storeName, "readwrite");
+          const store = trans.objectStore(storeName);
+          const putReq = store.put(data);
+
+          putReq.onsuccess = function() {
+            console.log("put data success");
+          };
+
+          trans.oncomplete = function() {
+            console.log("transaction complete");
+          };
+        };
+      }
       const FizzBuzzTypeEnum = {
         type01() {
           return FizzBuzzType01.create();
