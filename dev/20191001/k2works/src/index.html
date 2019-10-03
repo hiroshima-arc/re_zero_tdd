@@ -189,17 +189,21 @@
               <div class="col-md-12 order-md-2" id="app">
                 <div id="app__select"></div>
                 <div id="app__table"></div>
+              </div>
+            </dvi>
+            <div class="row p-3">
+              <div class="col-md-12 order-md-2" id="app__db">
                 <div id="app__message"></div>
-                <div id="app__db">
+                <div id="app__button">
                   <button
-                    id="app__db--save"
+                    id="app__button--save"
                     type="button"
                     class="btn btn-primary btn-rounded btn-sm my-0"
                   >
                     Save
                   </button>
                   <button
-                    id="app__db--delete"
+                    id="app__button--delete"
                     type="button"
                     class="btn btn-danger btn-rounded btn-sm my-0"
                   >
@@ -207,7 +211,10 @@
                   </button>
                 </div>
               </div>
-            </dvi>
+            </div>
+            <div class="row p-3">
+              <div id="app__db--list"></div>
+            </div>
           </div>
         </section>
         <!-- Editable table -->
@@ -617,21 +624,25 @@
       }
 
       function indexedDbSetItem(data) {
-        const req = createRequest();
-        req.onsuccess = function(event) {
-          const db = event.target.result;
-          const trans = db.transaction(storeName, "readwrite");
-          const store = trans.objectStore(storeName);
-          const putReq = store.put(data);
+        return new Promise((resolve, reject) => {
+          const req = createRequest();
+          req.onsuccess = function(event) {
+            const db = event.target.result;
+            const trans = db.transaction(storeName, "readwrite");
+            const store = trans.objectStore(storeName);
+            const putReq = store.put(data);
 
-          putReq.onsuccess = function() {
-            console.log("put data success");
-          };
+            putReq.onsuccess = function() {
+              console.log("put data success");
+              resolve();
+            };
 
-          trans.oncomplete = function() {
-            console.log("transaction complete");
+            trans.oncomplete = function() {
+              console.log("transaction complete");
+              reject();
+            };
           };
-        };
+        });
       }
 
       function indexedDbGetItem(keyValue) {
@@ -697,28 +708,34 @@
       }
 
       function indexedDbDeleteItem(keyValue) {
-        const req = createRequest();
-        req.onsuccess = function(event) {
-          const db = event.target.result;
-          const trans = db.transaction(storeName, "readwrite");
-          const store = trans.objectStore(storeName);
-          const getReq = store.delete(keyValue);
+        return new Promise((resolve, reject) => {
+          const req = createRequest();
+          req.onsuccess = function(event) {
+            const db = event.target.result;
+            const trans = db.transaction(storeName, "readwrite");
+            const store = trans.objectStore(storeName);
+            const getReq = store.delete(keyValue);
 
-          getReq.onsuccess = function(event) {
-            console.log(event.target.result);
+            getReq.onsuccess = function(event) {
+              console.log(event.target.result);
+              resolve();
+            };
           };
-        };
+        });
       }
 
       function indexedDbDestroy() {
-        const deleteReq = indexedDB.deleteDatabase(dbName);
-        deleteReq.onsuccess = function(event) {
-          console.log("db delete success");
-        };
+        return new Promise(resolve => {
+          const deleteReq = indexedDB.deleteDatabase(dbName);
+          deleteReq.onsuccess = function(event) {
+            console.log("db delete success");
+            resolve();
+          };
 
-        deleteReq.onerror = function() {
-          console.log("db delete error");
-        };
+          deleteReq.onerror = function() {
+            console.log("db delete error");
+          };
+        });
       }
 
       const FizzBuzzTypeEnum = {
@@ -1042,13 +1059,102 @@
           },
 
           saveItems() {
-            document.querySelector("#app__db--save").onclick = () =>
-              alert("Save");
+            const saveItems = () => {
+              document.querySelector("#app__message").innerHTML = "処理中...";
+              let list = [];
+              let table = document.querySelector("#app__table > table");
+              for (i = 1; i < 10; i++) {
+                for (j = 0; j < 10; j++) {
+                  list.push(table.rows[i].cells[j].innerText);
+                }
+              }
+
+              indexedDbGetItems().then(data => {
+                let id;
+                if (data.length === 0) {
+                  id = 1;
+                } else {
+                  let array = data.map(i => i.id);
+                  id = Math.max(...array) + 1;
+                }
+                const newData = { id: id, list: list };
+                indexedDbSetItem(newData).then(() => {
+                  document.querySelector(
+                    "#app__message"
+                  ).innerHTML = `保存しました id:${id}`;
+
+                  indexedDbGetItems().then(data => {
+                    let row = "";
+                    data.forEach(item => {
+                      let listSummary = "";
+                      [...Array(19).keys()].forEach(
+                        i => (listSummary += `${item.list[i]},`)
+                      );
+                      listSummary += "・・・・";
+                      let deleteButton = `
+                      <span class="table-remove">
+                       <button value="${item.id}" type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
+                        Remove
+                       </button>
+                      </span>
+                    `;
+                      row += `
+                    <tr>
+                      <td>${deleteButton}</td>
+                      <td>${item.id}</td>
+                      <td>${listSummary}</td>
+                    </tr>
+                    `;
+                    });
+
+                    const table = `
+                <table class="table">
+                  <thead>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Contents</th>
+                  </thead>
+                  <tbody>${row}</tbody>
+                </table>
+                    `;
+                    document.querySelector("#app__db--list").innerHTML = table;
+
+                    $("#app__db--list > table").on(
+                      "click",
+                      ".table-remove",
+                      function() {
+                        const removeId = $(this).children()[0].value;
+                        indexedDbDeleteItem(Number.parseInt(removeId)).then(
+                          () => {
+                            document.querySelector("#app__message").innerHTML =
+                              "削除しました";
+                            $(this)
+                              .parents("tr")
+                              .detach();
+                          }
+                        );
+                      }
+                    );
+                  });
+                });
+              });
+            };
+            document.querySelector("#app__button--save").onclick = saveItems;
           },
 
           deleteItems() {
-            document.querySelector("#app__db--delete").onclick = () =>
-              alert("Delete");
+            const deleteItems = () => {
+              document.querySelector("#app__message").innerHTML = "処理中...";
+              indexedDbDestroy().then(() => {
+                document.querySelector("#app__db--list").innerHTML = "";
+                document.querySelector("#app__message").innerHTML =
+                  "削除しました";
+              });
+            };
+
+            document.querySelector(
+              "#app__button--delete"
+            ).onclick = deleteItems;
           },
 
           renderButton() {
