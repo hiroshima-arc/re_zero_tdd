@@ -545,6 +545,19 @@
               assert.equal(3, data.length);
             });
           });
+          test("特定の範囲の値を全て取得する", () => {
+            [
+              { id: 1, list: [1, 2, "Fizz", 4, "Buzz"], order: 1 },
+              { id: 2, list: [1, 2, "Fizz", 4, "Buzz"], order: 2 },
+              { id: 3, list: [1, 2, "Fizz", 4, "Buzz"], order: 3 },
+              { id: 4, list: [1, 2, "Fizz", 4, "Buzz"], order: 4 },
+              { id: 5, list: [1, 2, "Fizz", 4, "Buzz"], order: 5 }
+            ].forEach(data => indexedDbSetItem(data));
+
+            return indexedDbGetItemsByRange(2, 4).then(data => {
+              assert.equal(3, data.length);
+            });
+          });
         });
       });
 
@@ -557,6 +570,7 @@
         openReq.onupgradeneeded = function(event) {
           const db = event.target.result;
           const os = db.createObjectStore(storeName, { keyPath: "id" });
+          os.createIndex("order", "order", { unique: false });
         };
 
         return openReq;
@@ -613,6 +627,29 @@
               if (!cur) return resolve(result);
               console.log(cur.value);
               result.push(cur.value);
+              cur.continue();
+            };
+          };
+        });
+      }
+
+      function indexedDbGetItemsByRange(from, to) {
+        return new Promise(resolve => {
+          const req = createRequest();
+          req.onsuccess = function(event) {
+            const db = event.target.result;
+            const trans = db.transaction(storeName, "readwrite");
+            const store = trans.objectStore(storeName);
+            const index = store.index("order");
+            const range = IDBKeyRange.bound(from, to);
+            const getReq = index.openCursor(range);
+
+            let list = [];
+            getReq.onsuccess = function(event) {
+              let cur = event.target.result;
+              if (!cur) return resolve(list);
+              console.log(cur.value);
+              list.push(cur.value);
               cur.continue();
             };
           };
