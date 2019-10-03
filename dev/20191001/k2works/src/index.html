@@ -568,6 +568,19 @@
               assert.equal(null, data);
             });
           });
+          test("値を全て削除する", () => {
+            [
+              { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] },
+              { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] },
+              { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] }
+            ].forEach(data => indexedDbSetItem(data));
+
+            indexedDbDestroy();
+
+            return indexedDbGetItems().then(data => {
+              assert.equal(0, data.length);
+            });
+          });
         });
       });
 
@@ -677,6 +690,17 @@
           getReq.onsuccess = function(event) {
             console.log(event.target.result);
           };
+        };
+      }
+
+      function indexedDbDestroy() {
+        const deleteReq = indexedDB.deleteDatabase(dbName);
+        deleteReq.onsuccess = function(event) {
+          console.log("db delete success");
+        };
+
+        deleteReq.onerror = function() {
+          console.log("db delete error");
         };
       }
 
