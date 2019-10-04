@@ -1049,6 +1049,70 @@
             this.editTable();
           },
 
+          renderDbListTable() {
+            const createDbListTable = data => {
+              let row = "";
+              data.forEach(item => {
+                let listSummary = "";
+                [...Array(19).keys()].forEach(
+                  i => (listSummary += `${item.list[i]},`)
+                );
+                listSummary += "・・・・";
+                let deleteButton = `
+                      <span class="table-remove">
+                       <button value="${item.id}" type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
+                        Remove
+                       </button>
+                      </span>
+                    `;
+                row += `
+                    <tr>
+                      <td>${deleteButton}</td>
+                      <td>${item.id}</td>
+                      <td>${listSummary}</td>
+                    </tr>
+                    `;
+              });
+
+              return `
+                <table class="table">
+                  <thead>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Contents</th>
+                  </thead>
+                  <tbody>${row}</tbody>
+                </table>
+                    `;
+            };
+
+            const addEventDbListTable = repository => {
+              $("#app__db--list > table").on(
+                "click",
+                ".table-remove",
+                function() {
+                  const removeId = $(this).children()[0].value;
+                  repository
+                    .indexedDbDeleteItem(Number.parseInt(removeId))
+                    .then(() => {
+                      document.querySelector("#app__message").innerHTML =
+                        "削除しました";
+                      $(this)
+                        .parents("tr")
+                        .detach();
+                    });
+                }
+              );
+            };
+            this.service.repository.indexedDbGetItems().then(data => {
+              document.querySelector(
+                "#app__db--list"
+              ).innerHTML = createDbListTable(data);
+
+              addEventDbListTable(this.service.repository);
+            });
+          },
+
           editTable() {
             $("#app__table > table > tbody > tr > td").on(
               "click",
@@ -1123,61 +1187,6 @@
               return id;
             };
 
-            const createDbListTable = data => {
-              let row = "";
-              data.forEach(item => {
-                let listSummary = "";
-                [...Array(19).keys()].forEach(
-                  i => (listSummary += `${item.list[i]},`)
-                );
-                listSummary += "・・・・";
-                let deleteButton = `
-                      <span class="table-remove">
-                       <button value="${item.id}" type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
-                        Remove
-                       </button>
-                      </span>
-                    `;
-                row += `
-                    <tr>
-                      <td>${deleteButton}</td>
-                      <td>${item.id}</td>
-                      <td>${listSummary}</td>
-                    </tr>
-                    `;
-              });
-
-              return `
-                <table class="table">
-                  <thead>
-                    <th></th>
-                    <th>ID</th>
-                    <th>Contents</th>
-                  </thead>
-                  <tbody>${row}</tbody>
-                </table>
-                    `;
-            };
-
-            const addEventDbListTable = repository => {
-              $("#app__db--list > table").on(
-                "click",
-                ".table-remove",
-                function() {
-                  const removeId = $(this).children()[0].value;
-                  repository
-                    .indexedDbDeleteItem(Number.parseInt(removeId))
-                    .then(() => {
-                      document.querySelector("#app__message").innerHTML =
-                        "削除しました";
-                      $(this)
-                        .parents("tr")
-                        .detach();
-                    });
-                }
-              );
-            };
-
             const saveItems = () => {
               document.querySelector("#app__message").innerHTML = "処理中...";
 
@@ -1191,13 +1200,7 @@
                     "#app__message"
                   ).innerHTML = `保存しました id:${newData.id}`;
 
-                  this.service.repository.indexedDbGetItems().then(data => {
-                    document.querySelector(
-                      "#app__db--list"
-                    ).innerHTML = createDbListTable(data);
-
-                    addEventDbListTable(this.service.repository);
-                  });
+                  this.renderDbListTable();
                 });
               });
             };
@@ -1228,6 +1231,7 @@
           renderApp() {
             this.renderSelect();
             this.renderTable();
+            this.renderDbListTable();
             this.renderButton();
           }
         }
