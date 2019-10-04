@@ -1104,6 +1104,7 @@
                 }
               );
             };
+
             this.service.repository.indexedDbGetItems().then(data => {
               document.querySelector(
                 "#app__db--list"
@@ -1164,68 +1165,70 @@
             }
           },
 
-          saveItems() {
-            const createListFromTable = () => {
-              let list = [];
-              let table = document.querySelector("#app__table > table");
-              for (i = 1; i < 10; i++) {
-                for (j = 0; j < 10; j++) {
-                  list.push(table.rows[i].cells[j].innerText);
-                }
-              }
-              return list;
-            };
-
-            const createIdFromGetItems = data => {
-              let id;
-              if (data.length === 0) {
-                id = 1;
-              } else {
-                let array = data.map(i => i.id);
-                id = Math.max(...array) + 1;
-              }
-              return id;
-            };
-
-            const saveItems = () => {
-              document.querySelector("#app__message").innerHTML = "処理中...";
-
-              this.service.repository.indexedDbGetItems().then(data => {
-                const newData = {
-                  id: createIdFromGetItems(data),
-                  list: createListFromTable()
-                };
-                this.service.repository.indexedDbSetItem(newData).then(() => {
-                  document.querySelector(
-                    "#app__message"
-                  ).innerHTML = `保存しました id:${newData.id}`;
-
-                  this.renderDbListTable();
-                });
-              });
-            };
-
-            document.querySelector("#app__button--save").onclick = saveItems;
-          },
-
-          deleteItems() {
-            const deleteItems = () => {
-              document.querySelector("#app__message").innerHTML = "処理中...";
-              this.service.repository.indexedDbDestroy().then(() => {
-                document.querySelector("#app__db--list").innerHTML = "";
-                document.querySelector("#app__message").innerHTML =
-                  "削除しました";
-              });
-            };
-
-            document.querySelector(
-              "#app__button--delete"
-            ).onclick = deleteItems;
-          },
-
           renderButton() {
-            this.saveItems();
-            this.deleteItems();
+            const saveItems = () => {
+              const createListFromTable = () => {
+                let list = [];
+                let table = document.querySelector("#app__table > table");
+                for (i = 1; i < 10; i++) {
+                  for (j = 0; j < 10; j++) {
+                    list.push(table.rows[i].cells[j].innerText);
+                  }
+                }
+                return list;
+              };
+
+              const createIdFromGetItems = data => {
+                let id;
+                if (data.length === 0) {
+                  id = 1;
+                } else {
+                  let array = data.map(i => i.id);
+                  id = Math.max(...array) + 1;
+                }
+                return id;
+              };
+
+              const saveItemsEvent = () => {
+                document.querySelector("#app__message").innerHTML = "処理中...";
+
+                this.service.repository.indexedDbGetItems().then(data => {
+                  const newData = {
+                    id: createIdFromGetItems(data),
+                    list: createListFromTable()
+                  };
+                  this.service.repository.indexedDbSetItem(newData).then(() => {
+                    document.querySelector(
+                      "#app__message"
+                    ).innerHTML = `保存しました id:${newData.id}`;
+
+                    this.renderDbListTable();
+                  });
+                });
+              };
+
+              document.querySelector(
+                "#app__button--save"
+              ).onclick = saveItemsEvent;
+            };
+
+            const deleteItems = () => {
+              const deleteItems = () => {
+                document.querySelector("#app__message").innerHTML = "処理中...";
+                this.service.repository.indexedDbDestroy().then(() => {
+                  document.querySelector("#app__db--list").innerHTML = "";
+                  document.querySelector("#app__message").innerHTML =
+                    "削除しました";
+                });
+              };
+
+              document.querySelector(
+                "#app__button--delete"
+              ).onclick = deleteItems;
+            };
+
+            saveItems();
+            deleteItems();
           },
 
           renderApp() {
