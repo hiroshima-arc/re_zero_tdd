@@ -1059,8 +1059,7 @@
           },
 
           saveItems() {
-            const saveItems = () => {
-              document.querySelector("#app__message").innerHTML = "処理中...";
+            const createListFromTable = () => {
               let list = [];
               let table = document.querySelector("#app__table > table");
               for (i = 1; i < 10; i++) {
@@ -1068,46 +1067,45 @@
                   list.push(table.rows[i].cells[j].innerText);
                 }
               }
+              return list;
+            };
 
-              indexedDbGetItems().then(data => {
-                let id;
-                if (data.length === 0) {
-                  id = 1;
-                } else {
-                  let array = data.map(i => i.id);
-                  id = Math.max(...array) + 1;
-                }
-                const newData = { id: id, list: list };
-                indexedDbSetItem(newData).then(() => {
-                  document.querySelector(
-                    "#app__message"
-                  ).innerHTML = `保存しました id:${id}`;
+            const createIdFromGetItems = data => {
+              let id;
+              if (data.length === 0) {
+                id = 1;
+              } else {
+                let array = data.map(i => i.id);
+                id = Math.max(...array) + 1;
+              }
+              return id;
+            };
 
-                  indexedDbGetItems().then(data => {
-                    let row = "";
-                    data.forEach(item => {
-                      let listSummary = "";
-                      [...Array(19).keys()].forEach(
-                        i => (listSummary += `${item.list[i]},`)
-                      );
-                      listSummary += "・・・・";
-                      let deleteButton = `
+            const createDbListTable = data => {
+              let row = "";
+              data.forEach(item => {
+                let listSummary = "";
+                [...Array(19).keys()].forEach(
+                  i => (listSummary += `${item.list[i]},`)
+                );
+                listSummary += "・・・・";
+                let deleteButton = `
                       <span class="table-remove">
                        <button value="${item.id}" type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
                         Remove
                        </button>
                       </span>
                     `;
-                      row += `
+                row += `
                     <tr>
                       <td>${deleteButton}</td>
                       <td>${item.id}</td>
                       <td>${listSummary}</td>
                     </tr>
                     `;
-                    });
+              });
 
-                    const table = `
+              return `
                 <table class="table">
                   <thead>
                     <th></th>
@@ -1117,28 +1115,49 @@
                   <tbody>${row}</tbody>
                 </table>
                     `;
-                    document.querySelector("#app__db--list").innerHTML = table;
+            };
 
-                    $("#app__db--list > table").on(
-                      "click",
-                      ".table-remove",
-                      function() {
-                        const removeId = $(this).children()[0].value;
-                        indexedDbDeleteItem(Number.parseInt(removeId)).then(
-                          () => {
-                            document.querySelector("#app__message").innerHTML =
-                              "削除しました";
-                            $(this)
-                              .parents("tr")
-                              .detach();
-                          }
-                        );
-                      }
-                    );
+            const addEventDbListTable = () => {
+              $("#app__db--list > table").on(
+                "click",
+                ".table-remove",
+                function() {
+                  const removeId = $(this).children()[0].value;
+                  indexedDbDeleteItem(Number.parseInt(removeId)).then(() => {
+                    document.querySelector("#app__message").innerHTML =
+                      "削除しました";
+                    $(this)
+                      .parents("tr")
+                      .detach();
+                  });
+                }
+              );
+            };
+
+            const saveItems = () => {
+              document.querySelector("#app__message").innerHTML = "処理中...";
+
+              indexedDbGetItems().then(data => {
+                const newData = {
+                  id: createIdFromGetItems(data),
+                  list: createListFromTable()
+                };
+                indexedDbSetItem(newData).then(() => {
+                  document.querySelector(
+                    "#app__message"
+                  ).innerHTML = `保存しました id:${newData.id}`;
+
+                  indexedDbGetItems().then(data => {
+                    document.querySelector(
+                      "#app__db--list"
+                    ).innerHTML = createDbListTable(data);
+
+                    addEventDbListTable();
                   });
                 });
               });
             };
+
             document.querySelector("#app__button--save").onclick = saveItems;
           },
 
