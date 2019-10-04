@@ -637,9 +637,149 @@
         });
       });
 
+      const IndexedDbRepository = {
+        create(dbName, storeName) {
+          let self = Object.create(IndexedDbRepository.prototype);
+          self.dbName = dbName;
+          self.storeName = storeName;
+          return self;
+        },
+        prototype: {
+          createRequest() {
+            const openReq = indexedDB.open(this.dbName);
+
+            openReq.onupgradeneeded = function(event) {
+              const db = event.target.result;
+              const os = db.createObjectStore(this.storeName, {
+                keyPath: "id"
+              });
+              os.createIndex("order", "order", { unique: false });
+            };
+
+            return openReq;
+          },
+
+          indexedDbSetItem(data) {
+            return new Promise((resolve, reject) => {
+              const req = this.createRequest();
+              req.onsuccess = function(event) {
+                const db = event.target.result;
+                const trans = db.transaction(this.storeName, "readwrite");
+                const store = trans.objectStore(this.storeName);
+                const putReq = store.put(data);
+
+                putReq.onsuccess = function() {
+                  console.log("put data success");
+                  resolve();
+                };
+
+                trans.oncomplete = function() {
+                  console.log("transaction complete");
+                  reject();
+                };
+              };
+            });
+          },
+
+          indexedDbGetItem(keyValue) {
+            return new Promise(resolve => {
+              const req = this.createRequest();
+              req.onsuccess = function(event) {
+                const db = event.target.result;
+                const trans = db.transaction(this.storeName, "readwrite");
+                const store = trans.objectStore(this.storeName);
+                const getReq = store.get(keyValue);
+
+                getReq.onsuccess = function(event) {
+                  const result = event.target.result;
+                  console.log(result);
+                  resolve(result);
+                };
+              };
+            });
+          },
+
+          indexedDbGetItems() {
+            return new Promise(resolve => {
+              const req = this.createRequest();
+              req.onsuccess = function(event) {
+                const db = event.target.result;
+                const trans = db.transaction(this.storeName, "readwrite");
+                const store = trans.objectStore(this.storeName);
+                const getReq = store.openCursor();
+
+                let result = [];
+                getReq.onsuccess = function(event) {
+                  const cur = event.target.result;
+                  if (!cur) return resolve(result);
+                  console.log(cur.value);
+                  result.push(cur.value);
+                  cur.continue();
+                };
+              };
+            });
+          },
+
+          indexedDbGetItemsByRange(from, to) {
+            return new Promise(resolve => {
+              const req = this.createRequest();
+              req.onsuccess = function(event) {
+                const db = event.target.result;
+                const trans = db.transaction(this.storeName, "readwrite");
+                const store = trans.objectStore(this.storeName);
+                const index = store.index("order");
+                const range = IDBKeyRange.bound(from, to);
+                const getReq = index.openCursor(range);
+
+                let list = [];
+                getReq.onsuccess = function(event) {
+                  let cur = event.target.result;
+                  if (!cur) return resolve(list);
+                  console.log(cur.value);
+                  list.push(cur.value);
+                  cur.continue();
+                };
+              };
+            });
+          },
+
+          indexedDbDeleteItem(keyValue) {
+            return new Promise((resolve, reject) => {
+              const req = this.createRequest();
+              req.onsuccess = function(event) {
+                const db = event.target.result;
+                const trans = db.transaction(this.storeName, "readwrite");
+                const store = trans.objectStore(this.storeName);
+                const getReq = store.delete(keyValue);
+
+                getReq.onsuccess = function(event) {
+                  console.log(event.target.result);
+                  resolve();
+                };
+              };
+            });
+          },
+
+          indexedDbDestroy() {
+            return new Promise(resolve => {
+              const deleteReq = indexedDB.deleteDatabase(this.dbName);
+              deleteReq.onsuccess = function(event) {
+                console.log("db delete success");
+                resolve();
+              };
+
+              deleteReq.onerror = function() {
+                console.log("db delete error");
+              };
+            });
+          }
+        }
+      };
+
       const FizzBuzzRepository = {
         create(dbName, storeName) {
           let self = Object.create(FizzBuzzRepository.prototype);
+          Object.assign(self, IndexedDbRepository.create(dbName, storeName));
           self.dbName = dbName;
           self.storeName = storeName;
           return self;
