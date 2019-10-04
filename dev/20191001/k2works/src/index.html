@@ -983,47 +983,17 @@
                 FizzBuzzView.create(FizzBuzzTypeEnum.type01()).renderTable();
             }
           },
-          createSelect() {
-            return `
+          renderSelect() {
+            const createSelect = () => {
+              return `
                   <select name="type" id="app__select--type">
                     <option value="one">タイプ1</option>
                     <option value="two">タイプ2</option>
                     <option value="three">タイプ3</option>
                   </select>
                   `;
-          },
-          createTable() {
-            const header = (() => {
-              let element = "<thead>";
-              [...Array(10).keys()].forEach(
-                i => (element += `<th>${i + 1}</th>`)
-              );
-              element += "</thead>";
-              return element;
-            })();
-
-            const body = (() => {
-              let element = "<tbody><tr>";
-              this.list.forEach((v, k) => {
-                element += `<td>${v.value}</td>`;
-                if ((k + 1) % 10 === 0) element += "</tr><tr>";
-              });
-              element += "</tbody>";
-              return element;
-            })();
-
-            return `
-                      <table>
-                          ${header}
-                          ${body}
-                      </table>
-              `;
-          },
-
-          renderSelect() {
-            document.querySelector(
-              "#app__select"
-            ).innerHTML = this.createSelect();
+            };
+            document.querySelector("#app__select").innerHTML = createSelect();
             document
               .querySelector("#app__select--type")
               .addEventListener("change", this.changeEvent);
@@ -1036,9 +1006,86 @@
           },
 
           renderTable() {
-            document.querySelector(
-              "#app__table"
-            ).innerHTML = this.createTable();
+            const createTable = () => {
+              const header = (() => {
+                let element = "<thead>";
+                [...Array(10).keys()].forEach(
+                  i => (element += `<th>${i + 1}</th>`)
+                );
+                element += "</thead>";
+                return element;
+              })();
+
+              const body = (() => {
+                let element = "<tbody><tr>";
+                this.list.forEach((v, k) => {
+                  element += `<td>${v.value}</td>`;
+                  if ((k + 1) % 10 === 0) element += "</tr><tr>";
+                });
+                element += "</tbody>";
+                return element;
+              })();
+
+              return `
+                      <table>
+                          ${header}
+                          ${body}
+                      </table>
+              `;
+            };
+
+            const editTable = () => {
+              $("#app__table > table > tbody > tr > td").on(
+                "click",
+                edit_toggle(this.service)
+              );
+
+              function edit_toggle(service) {
+                var edit_flag = false;
+                return function() {
+                  if (edit_flag) return;
+                  var $input = $("<input>")
+                    .attr("type", "text")
+                    .val($(this).text());
+                  $(this).html($input);
+
+                  $("input", this)
+                    .focus()
+                    .keypress(function(e) {
+                      if (e.which == 13) {
+                        try {
+                          const value = service.generate($(this).val());
+                          save(this);
+                          $(this)
+                            .after(value)
+                            .unbind()
+                            .remove();
+                          edit_flag = false;
+                        } catch (e) {
+                          alert(e.message);
+                        }
+                      }
+                    });
+
+                  $("input", this)
+                    .focus()
+                    .blur(function(e) {
+                      $(this)
+                        .after($(this).val())
+                        .unbind()
+                        .remove();
+                      edit_flag = false;
+                    });
+                  edit_flag = true;
+                };
+              }
+
+              function save(elm) {
+                console.log("「" + $(elm).val() + "」を保存しました"); //保存する処理をここに書く
+              }
+            };
+
+            document.querySelector("#app__table").innerHTML = createTable();
             document
               .querySelector("#app__table > table")
               .classList.add("table");
@@ -1046,7 +1093,7 @@
               .querySelector("#app__table > table")
               .classList.add("table-striped");
 
-            this.editTable();
+            editTable();
           },
 
           renderDbListTable() {
@@ -1112,57 +1159,6 @@
 
               addEventDbListTable(this.service.repository);
             });
-          },
-
-          editTable() {
-            $("#app__table > table > tbody > tr > td").on(
-              "click",
-              edit_toggle(this.service)
-            );
-
-            function edit_toggle(service) {
-              var edit_flag = false;
-              return function() {
-                if (edit_flag) return;
-                var $input = $("<input>")
-                  .attr("type", "text")
-                  .val($(this).text());
-                $(this).html($input);
-
-                $("input", this)
-                  .focus()
-                  .keypress(function(e) {
-                    if (e.which == 13) {
-                      try {
-                        const value = service.generate($(this).val());
-                        save(this);
-                        $(this)
-                          .after(value)
-                          .unbind()
-                          .remove();
-                        edit_flag = false;
-                      } catch (e) {
-                        alert(e.message);
-                      }
-                    }
-                  });
-
-                $("input", this)
-                  .focus()
-                  .blur(function(e) {
-                    $(this)
-                      .after($(this).val())
-                      .unbind()
-                      .remove();
-                    edit_flag = false;
-                  });
-                edit_flag = true;
-              };
-            }
-
-            function save(elm) {
-              console.log("「" + $(elm).val() + "」を保存しました"); //保存する処理をここに書く
-            }
           },
 
           renderButton() {
