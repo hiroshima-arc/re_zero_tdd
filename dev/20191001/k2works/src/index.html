@@ -611,7 +611,7 @@
             const data = { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] };
             repository.save(data).then(() => {
               const keyValue = "3";
-              repository.indexedDbDeleteItem(keyValue);
+              repository.delete(keyValue);
 
               return repository.find(keyValue).then(data => {
                 assert.equal(null, data);
@@ -820,7 +820,7 @@
             );
           },
 
-          indexedDbDeleteItem(keyValue) {
+          delete(keyValue) {
             return IndexedDbRepository.prototype.deleteItem(
               this.dbName,
               this.storeName,
