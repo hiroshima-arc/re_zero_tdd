@@ -581,7 +581,7 @@
                 { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] }
               ].forEach(data => repository.save(data))
             ).then(() => {
-              return repository.indexedDbGetItems().then(data => {
+              return repository.selectAll().then(data => {
                 assert.equal(3, data.length);
               });
             });
@@ -637,7 +637,7 @@
             ).then(() => {
               repository.indexedDbDestroy();
 
-              return repository.indexedDbGetItems().then(data => {
+              return repository.selectAll().then(data => {
                 assert.equal(0, data.length);
               });
             });
@@ -808,7 +808,7 @@
             );
           },
 
-          indexedDbGetItems() {
+          selectAll() {
             return IndexedDbRepository.prototype.getItems(
               this.dbName,
               this.storeName,
@@ -1214,7 +1214,7 @@
               );
             };
 
-            this.service.repository.indexedDbGetItems().then(data => {
+            this.service.repository.selectAll().then(data => {
               document.querySelector(
                 "#app__db--list"
               ).innerHTML = createDbListTable(data);
@@ -1250,7 +1250,7 @@
               const saveItemsEvent = () => {
                 document.querySelector("#app__message").innerHTML = "処理中...";
 
-                this.service.repository.indexedDbGetItems().then(data => {
+                this.service.repository.selectAll().then(data => {
                   const newData = {
                     id: createIdFromGetItems(data),
                     list: createListFromTable()
