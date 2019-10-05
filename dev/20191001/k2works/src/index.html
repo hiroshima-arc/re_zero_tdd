@@ -214,121 +214,7 @@
             </div>
             <div class="row p-3">
               <div id="app__db--list"></div>
-              <div
-                class="modal fade"
-                id="app__db--modal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="modal01-label"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="modal01-label">DB List</h5>
-                      <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <table class="table">
-                        <thead>
-                          <th>1</th>
-                          <th>2</th>
-                          <th>3</th>
-                          <th>4</th>
-                          <th>5</th>
-                          <th>6</th>
-                          <th>7</th>
-                          <th>8</th>
-                          <th>9</th>
-                          <th>10</th>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                            <td>10</td>
-                          </tr>
-                          <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                            <td>10</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="container py-3">
-                      <form>
-                        <div class="form-group row">
-                          <label for="inputId" class="col-sm-2 col-form-label"
-                            >Id</label
-                          >
-                          <div class="col-sm-10">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="inputId"
-                              value="1"
-                              disabled
-                            />
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label
-                            for="inputDescription"
-                            class="col-sm-2 col-form-label"
-                            >Discription</label
-                          >
-                          <div class="col-sm-10">
-                            <textarea
-                              class="form-control"
-                              id="inputDescription"
-                              placeholder="Discription"
-                            >
-                            </textarea>
-                          </div>
-                        </div>
-                        <button
-                          type="button"
-                          class="btn btn-primary"
-                          id="app__db--modal-save"
-                        >
-                          Save
-                        </button>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div id="app__db--list-modal"></div>
             </div>
           </div>
         </section>
@@ -1351,6 +1237,133 @@
             });
           },
 
+          renderDbListModal() {
+            const table = `
+                      <table class="table">
+                        <thead>
+                          <th>1</th>
+                          <th>2</th>
+                          <th>3</th>
+                          <th>4</th>
+                          <th>5</th>
+                          <th>6</th>
+                          <th>7</th>
+                          <th>8</th>
+                          <th>9</th>
+                          <th>10</th>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                          </tr>
+                        </tbody>
+                      </table>
+            `;
+            const form = `
+                      <form>
+                        <div class="form-group row">
+                          <label for="inputId" class="col-sm-2 col-form-label"
+                            >Id</label
+                          >
+                          <div class="col-sm-10">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="inputId"
+                              value="1"
+                              disabled
+                            />
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label
+                            for="inputDescription"
+                            class="col-sm-2 col-form-label"
+                            >Discription</label
+                          >
+                          <div class="col-sm-10">
+                            <textarea
+                              class="form-control"
+                              id="inputDescription"
+                              placeholder="Discription"
+                            >
+                            </textarea>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          id="app__db--modal-save"
+                        >
+                          Save
+                        </button>
+                      </form>
+            `;
+            const modal = `
+              <div
+                class="modal fade"
+                id="app__db--modal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="modal01-label"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modal01-label">DB List</h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="container py-3">
+                      ${table}
+                      ${form}
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           `;
+            document.querySelector("#app__db--list-modal").innerHTML = modal;
+          },
+
           renderButton() {
             const saveItems = () => {
               const createListFromTable = () => {
@@ -1421,6 +1434,7 @@
             this.renderSelect();
             this.renderTable();
             this.renderDbListTable();
+            this.renderDbListModal();
             this.renderButton();
           }
         }
