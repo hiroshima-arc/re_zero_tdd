@@ -630,7 +630,7 @@
               { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] }
             ].forEach(data => repository.save(data));
 
-            repository.indexedDbDestroy();
+            repository.drop();
 
             return repository.selectAll().then(data => {
               assert.equal(0, data.length);
@@ -829,7 +829,7 @@
             );
           },
 
-          indexedDbDestroy() {
+          drop() {
             return IndexedDbRepository.prototype.destroy(this.dbName);
           }
         }
@@ -1265,7 +1265,7 @@
             const deleteItems = () => {
               const deleteItems = () => {
                 document.querySelector("#app__message").innerHTML = "処理中...";
-                this.service.repository.indexedDbDestroy().then(() => {
+                this.service.repository.drop().then(() => {
                   document.querySelector("#app__db--list").innerHTML = "";
                   document.querySelector("#app__message").innerHTML =
                     "削除しました";
