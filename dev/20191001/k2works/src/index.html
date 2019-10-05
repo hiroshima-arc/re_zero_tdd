@@ -552,7 +552,7 @@
             );
             const data = { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] };
 
-            return repository.indexedDbSetItem(data);
+            return repository.save(data);
           });
           test("値を取得する", () => {
             const repository = FizzBuzzRepository.create(
@@ -561,11 +561,11 @@
             );
             const data = { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] };
 
-            repository.indexedDbSetItem(data);
-
-            const keyValue = 2;
-            return repository.indexedDbGetItem(keyValue).then(data => {
-              assert.equal("Fizz", data.list[2]);
+            repository.save(data).then(() => {
+              const keyValue = 2;
+              return repository.indexedDbGetItem(keyValue).then(data => {
+                assert.equal("Fizz", data.list[2]);
+              });
             });
           });
           test("値を全て取得する", () => {
@@ -574,14 +574,16 @@
               "items"
             );
 
-            [
-              { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] },
-              { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] },
-              { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] }
-            ].forEach(data => repository.indexedDbSetItem(data));
-
-            return repository.indexedDbGetItems().then(data => {
-              assert.equal(3, data.length);
+            Promise.all(
+              [
+                { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] },
+                { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] },
+                { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] }
+              ].forEach(data => repository.save(data))
+            ).then(() => {
+              return repository.indexedDbGetItems().then(data => {
+                assert.equal(3, data.length);
+              });
             });
           });
           test("特定の範囲の値を全て取得する", () => {
@@ -590,16 +592,18 @@
               "items"
             );
 
-            [
-              { id: 1, list: [1, 2, "Fizz", 4, "Buzz"], order: 1 },
-              { id: 2, list: [1, 2, "Fizz", 4, "Buzz"], order: 2 },
-              { id: 3, list: [1, 2, "Fizz", 4, "Buzz"], order: 3 },
-              { id: 4, list: [1, 2, "Fizz", 4, "Buzz"], order: 4 },
-              { id: 5, list: [1, 2, "Fizz", 4, "Buzz"], order: 5 }
-            ].forEach(data => repository.indexedDbSetItem(data));
-
-            return repository.indexedDbGetItemsByRange(2, 4).then(data => {
-              assert.equal(3, data.length);
+            Promise.all(
+              [
+                { id: 1, list: [1, 2, "Fizz", 4, "Buzz"], order: 1 },
+                { id: 2, list: [1, 2, "Fizz", 4, "Buzz"], order: 2 },
+                { id: 3, list: [1, 2, "Fizz", 4, "Buzz"], order: 3 },
+                { id: 4, list: [1, 2, "Fizz", 4, "Buzz"], order: 4 },
+                { id: 5, list: [1, 2, "Fizz", 4, "Buzz"], order: 5 }
+              ].forEach(data => repository.save(data))
+            ).then(() => {
+              return repository.indexedDbGetItemsByRange(2, 4).then(data => {
+                assert.equal(3, data.length);
+              });
             });
           });
           test("値を削除する", () => {
@@ -607,14 +611,15 @@
               "fizzbuzz.test.db",
               "items"
             );
+
             const data = { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] };
-            repository.indexedDbSetItem(data);
+            repository.save(data).then(() => {
+              const keyValue = "3";
+              repository.indexedDbDeleteItem(keyValue);
 
-            const keyValue = "3";
-            repository.indexedDbDeleteItem(keyValue);
-
-            return repository.indexedDbGetItem(keyValue).then(data => {
-              assert.equal(null, data);
+              return repository.indexedDbGetItem(keyValue).then(data => {
+                assert.equal(null, data);
+              });
             });
           });
           test("値を全て削除する", () => {
@@ -622,16 +627,19 @@
               "fizzbuzz.test.db",
               "items"
             );
-            [
-              { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] },
-              { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] },
-              { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] }
-            ].forEach(data => repository.indexedDbSetItem(data));
 
-            repository.indexedDbDestroy();
+            Promise.all(
+              [
+                { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] },
+                { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] },
+                { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] }
+              ].forEach(data => repository.save(data))
+            ).then(() => {
+              repository.indexedDbDestroy();
 
-            return repository.indexedDbGetItems().then(data => {
-              assert.equal(0, data.length);
+              return repository.indexedDbGetItems().then(data => {
+                assert.equal(0, data.length);
+              });
             });
           });
         });
@@ -782,7 +790,7 @@
             return openReq;
           },
 
-          indexedDbSetItem(data) {
+          save(data) {
             return IndexedDbRepository.prototype.setItem(
               this.dbName,
               this.storeName,
@@ -1247,7 +1255,7 @@
                     id: createIdFromGetItems(data),
                     list: createListFromTable()
                   };
-                  this.service.repository.indexedDbSetItem(newData).then(() => {
+                  this.service.repository.save(newData).then(() => {
                     document.querySelector(
                       "#app__message"
                     ).innerHTML = `保存しました id:${newData.id}`;
