@@ -1195,15 +1195,13 @@
                 ".table-remove",
                 function() {
                   const removeId = $(this).children()[0].value;
-                  repository
-                    .indexedDbDeleteItem(Number.parseInt(removeId))
-                    .then(() => {
-                      document.querySelector("#app__message").innerHTML =
-                        "削除しました";
-                      $(this)
-                        .parents("tr")
-                        .detach();
-                    });
+                  repository.delete(Number.parseInt(removeId)).then(() => {
+                    document.querySelector("#app__message").innerHTML =
+                      "削除しました";
+                    $(this)
+                      .parents("tr")
+                      .detach();
+                  });
                 }
               );
             };
