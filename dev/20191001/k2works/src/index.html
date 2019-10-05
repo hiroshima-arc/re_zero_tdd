@@ -1012,6 +1012,18 @@
           },
           generateList(number) {
             return this.listCommand.execute(number).value;
+          },
+          save(data) {
+            return this.repository.save(data);
+          },
+          selectAll() {
+            return this.repository.selectAll();
+          },
+          delete(id) {
+            return this.repository.delete(id);
+          },
+          drop() {
+            return this.repository.drop();
           }
         }
       };
@@ -1189,13 +1201,13 @@
                     `;
             };
 
-            const addEventDbListTable = repository => {
+            const addEventDbListTable = service => {
               $("#app__db--list > table").on(
                 "click",
                 ".table-remove",
                 function() {
                   const removeId = $(this).children()[0].value;
-                  repository.delete(Number.parseInt(removeId)).then(() => {
+                  service.delete(Number.parseInt(removeId)).then(() => {
                     document.querySelector("#app__message").innerHTML =
                       "削除しました";
                     $(this)
@@ -1206,12 +1218,12 @@
               );
             };
 
-            this.service.repository.selectAll().then(data => {
+            this.service.selectAll().then(data => {
               document.querySelector(
                 "#app__db--list"
               ).innerHTML = createDbListTable(data);
 
-              addEventDbListTable(this.service.repository);
+              addEventDbListTable(this.service);
             });
           },
 
@@ -1242,12 +1254,12 @@
               const saveItemsEvent = () => {
                 document.querySelector("#app__message").innerHTML = "処理中...";
 
-                this.service.repository.selectAll().then(data => {
+                this.service.selectAll().then(data => {
                   const newData = {
                     id: createIdFromGetItems(data),
                     list: createListFromTable()
                   };
-                  this.service.repository.save(newData).then(() => {
+                  this.service.save(newData).then(() => {
                     document.querySelector(
                       "#app__message"
                     ).innerHTML = `保存しました id:${newData.id}`;
@@ -1265,7 +1277,7 @@
             const deleteItems = () => {
               const deleteItems = () => {
                 document.querySelector("#app__message").innerHTML = "処理中...";
-                this.service.repository.drop().then(() => {
+                this.service.drop().then(() => {
                   document.querySelector("#app__db--list").innerHTML = "";
                   document.querySelector("#app__message").innerHTML =
                     "削除しました";
