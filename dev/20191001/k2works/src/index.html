@@ -1017,6 +1017,9 @@
           save(data) {
             return this.repository.save(data);
           },
+          find(id) {
+            return this.repository.find(id);
+          },
           selectAll() {
             return this.repository.selectAll();
           },
@@ -1228,18 +1231,33 @@
               );
             };
 
+            const addEventDbListModal = (service, render) => {
+              $("#app__db--list > table").on(
+                "click",
+                ".table-edit",
+                function() {
+                  const currentId = $(this).children()[0].value;
+                  service.find(currentId).then(data => {
+                    render(data, currentId);
+                  });
+                }
+              );
+            };
+
             this.service.selectAll().then(data => {
               document.querySelector(
                 "#app__db--list"
               ).innerHTML = createDbListTable(data);
 
               addEventDbListTable(this.service);
+              addEventDbListModal(this.service, this.renderDbListModal);
             });
           },
 
-          renderDbListModal() {
+          renderDbListModal(data, id) {
+            alert(id);
             const table = `
-                      <table class="table">
+                      <table class="table table-responsive">
                         <thead>
                           <th>1</th>
                           <th>2</th>
@@ -1291,7 +1309,7 @@
                               type="text"
                               class="form-control"
                               id="inputId"
-                              value="1"
+                              value="${id}"
                               disabled
                             />
                           </div>
@@ -1434,7 +1452,6 @@
             this.renderSelect();
             this.renderTable();
             this.renderDbListTable();
-            this.renderDbListModal();
             this.renderButton();
           }
         }
