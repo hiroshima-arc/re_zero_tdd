@@ -563,7 +563,7 @@
 
             repository.save(data).then(() => {
               const keyValue = 2;
-              return repository.indexedDbGetItem(keyValue).then(data => {
+              return repository.find(keyValue).then(data => {
                 assert.equal("Fizz", data.list[2]);
               });
             });
@@ -617,7 +617,7 @@
               const keyValue = "3";
               repository.indexedDbDeleteItem(keyValue);
 
-              return repository.indexedDbGetItem(keyValue).then(data => {
+              return repository.find(keyValue).then(data => {
                 assert.equal(null, data);
               });
             });
@@ -799,7 +799,7 @@
             );
           },
 
-          indexedDbGetItem(keyValue) {
+          find(keyValue) {
             return IndexedDbRepository.prototype.getItem(
               this.dbName,
               this.storeName,
