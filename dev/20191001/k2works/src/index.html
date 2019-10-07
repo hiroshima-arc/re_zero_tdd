@@ -818,6 +818,14 @@
           generateList(number) {
             return this.listCommand.execute(number).value;
           },
+          createViewModel(id, contents, description) {
+            return {
+              id: id,
+              list: contents,
+              description: description || "",
+              order: id
+            };
+          },
           save(data) {
             return this.repository.save(data);
           },
@@ -1002,10 +1010,10 @@
                 document.querySelector("#app__message").innerHTML = "処理中...";
 
                 this.service.selectAll().then(data => {
-                  const newData = {
-                    id: createIdFromGetItems(data),
-                    list: createListFromTable()
-                  };
+                  const newData = this.service.createViewModel(
+                    createIdFromGetItems(data),
+                    createListFromTable()
+                  );
                   this.service.save(newData).then(() => {
                     document.querySelector(
                       "#app__message"
@@ -1278,12 +1286,11 @@
                 const id = document.querySelector("#inputId").value;
                 const description = document.querySelector("#inputDescription")
                   .value;
-                const newData = {
-                  id: Number.parseInt(id),
-                  list: createListFromTable(),
-                  description: description
-                };
-
+                const newData = service.createViewModel(
+                  Number.parseInt(id),
+                  createListFromTable(),
+                  description
+                );
                 service.save(newData).then(() => {
                   self(self, newData.id, service);
 
