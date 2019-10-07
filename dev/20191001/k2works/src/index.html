@@ -1055,10 +1055,10 @@
                 "click",
                 ".table-edit",
                 function() {
-                  const currentId = $(this).children()[0].value;
-                  service.find(Number.parseInt(currentId)).then(data => {
-                    render(data, service, render);
-                  });
+                  const currentId = Number.parseInt(
+                    $(this).children()[0].value
+                  );
+                  render(render, currentId, service);
                 }
               );
             };
@@ -1073,25 +1073,26 @@
             });
           },
 
-          renderDbListModal(data, service, render) {
-            const table = (() => {
-              const header = (() => {
-                let element = "";
-                [...Array(10).keys()].forEach(
-                  i => (element += `<th>${i + 1}</th>`)
-                );
-                return element;
-              })();
-              const body = (data => {
-                let element = "<tr>";
-                data.list.forEach((v, k) => {
-                  element += `<td contenteditable="true">${v}</td>`;
-                  if ((k + 1) % 10 === 0) element += "</tr>";
-                });
-                return element;
-              })(data);
+          renderDbListModal(self, id, service) {
+            const createDbListModal = data => {
+              const table = (() => {
+                const header = (() => {
+                  let element = "";
+                  [...Array(10).keys()].forEach(
+                    i => (element += `<th>${i + 1}</th>`)
+                  );
+                  return element;
+                })();
+                const body = (data => {
+                  let element = "<tr>";
+                  data.list.forEach((v, k) => {
+                    element += `<td contenteditable="true">${v}</td>`;
+                    if ((k + 1) % 10 === 0) element += "</tr>";
+                  });
+                  return element;
+                })(data);
 
-              return `
+                return `
                 <div class="card">
                   <h3
                     class="card-header text-center font-weight-bold text-uppercase py-4"
@@ -1115,18 +1116,18 @@
                   </div>
                 </div>
             `;
-            })(data);
-
-            const form = (() => {
-              const description = (data => {
-                if (data.description === undefined) {
-                  return "";
-                } else {
-                  return data.description;
-                }
               })(data);
 
-              return `
+              const form = (() => {
+                const description = (data => {
+                  if (data.description === undefined) {
+                    return "";
+                  } else {
+                    return data.description;
+                  }
+                })(data);
+
+                return `
                 <form id="app__db--list-form">
                   <div class="form-group row">
                     <label for="inputId" class="col-md-3 col-form-label"
@@ -1165,16 +1166,15 @@
                   </button>
                 </form>
             `;
-            })(data);
+              })(data);
 
-            const modal = `
+              return `
               <div class="container">
                 ${table}
                 ${form}
               </div>
            `;
-
-            document.querySelector("#app__db--list-modal").innerHTML = modal;
+            };
 
             const saveDbListItemsEvent = () => {
               const createListFromTable = () => {
@@ -1200,9 +1200,6 @@
                 document.querySelector(
                   "#app__message"
                 ).innerHTML = `保存しました id:${newData.id}`;
-                service.find(newData.id).then(data => {
-                  render(data, service, render);
-                });
               });
             };
 
@@ -1212,7 +1209,13 @@
               ).onclick = saveDbListItemsEvent;
             };
 
-            saveDbListItems();
+            service.find(id).then(data => {
+              document.querySelector(
+                "#app__db--list-modal"
+              ).innerHTML = createDbListModal(data);
+
+              saveDbListItems();
+            });
           },
 
           renderButton() {
