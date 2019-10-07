@@ -214,7 +214,7 @@
             </div>
             <div class="row p-3">
               <div class="table-responsive" id="app__db--list"></div>
-              <div class="table-responsive" id="app__db--list-modal"></div>
+              <div class="table-responsive" id="app__db--list-edit"></div>
             </div>
           </div>
         </section>
@@ -1045,12 +1045,14 @@
                     $(this)
                       .parents("tr")
                       .detach();
+                    document.querySelector("#app__db--list-edit").innerHTML =
+                      "";
                   });
                 }
               );
             };
 
-            const addEventDbListModal = (service, render) => {
+            const addEventDbListEdit = (service, render) => {
               $("#app__db--list > table").on(
                 "click",
                 ".table-edit",
@@ -1063,8 +1065,8 @@
               );
             };
 
-            const renderDbListModal = (self, id, service) => {
-              const createDbListModal = data => {
+            const renderDbListEdit = (self, id, service) => {
+              const createDbListEdit = data => {
                 const table = (() => {
                   const header = (() => {
                     let element = "";
@@ -1160,13 +1162,14 @@
 
                 return `
               <div class="container">
+                <div id="app__message-db--list-table"></div>
                 ${table}
                 ${form}
               </div>
            `;
               };
 
-              const saveDbListItemsEvent = () => {
+              const saveDbListEditItemsEvent = () => {
                 const createListFromTable = () => {
                   let list = [];
                   let table = document.querySelector("#app__db--list-table");
@@ -1186,26 +1189,37 @@
                   list: createListFromTable(),
                   description: description
                 };
+
                 service.save(newData).then(() => {
-                  document.querySelector(
-                    "#app__message"
-                  ).innerHTML = `保存しました id:${newData.id}`;
                   self(self, newData.id, service);
+
+                  service.selectAll().then(data => {
+                    document.querySelector(
+                      "#app__db--list"
+                    ).innerHTML = createDbListTable(data);
+
+                    addEventDbListTable(service);
+                    addEventDbListEdit(service, self);
+
+                    document.querySelector(
+                      "#app__message-db--list-table"
+                    ).innerHTML = `保存しました id:${newData.id}`;
+                  });
                 });
               };
 
-              const saveDbListItems = () => {
+              const saveDbListEditItems = () => {
                 document.querySelector(
                   "#app__db--modal-save"
-                ).onclick = saveDbListItemsEvent;
+                ).onclick = saveDbListEditItemsEvent;
               };
 
               service.find(id).then(data => {
                 document.querySelector(
-                  "#app__db--list-modal"
-                ).innerHTML = createDbListModal(data);
+                  "#app__db--list-edit"
+                ).innerHTML = createDbListEdit(data);
 
-                saveDbListItems();
+                saveDbListEditItems();
               });
             };
 
@@ -1215,7 +1229,7 @@
               ).innerHTML = createDbListTable(data);
 
               addEventDbListTable(this.service);
-              addEventDbListModal(this.service, renderDbListModal);
+              addEventDbListEdit(this.service, renderDbListEdit);
             });
           },
 
@@ -1256,6 +1270,9 @@
                       "#app__message"
                     ).innerHTML = `保存しました id:${newData.id}`;
 
+                    document.querySelector("#app__db--list-edit").innerHTML =
+                      "";
+
                     this.renderDbListTable();
                   });
                 });
@@ -1270,6 +1287,7 @@
               const deleteItems = () => {
                 document.querySelector("#app__message").innerHTML = "処理中...";
                 this.service.drop().then(() => {
+                  document.querySelector("#app__db--list-edit").innerHTML = "";
                   document.querySelector("#app__db--list").innerHTML = "";
                   document.querySelector("#app__message").innerHTML =
                     "削除しました";
