@@ -1057,7 +1057,7 @@
                 function() {
                   const currentId = $(this).children()[0].value;
                   service.find(Number.parseInt(currentId)).then(data => {
-                    render(data, currentId);
+                    render(data, service, render);
                   });
                 }
               );
@@ -1073,7 +1073,7 @@
             });
           },
 
-          renderDbListModal(data) {
+          renderDbListModal(data, service, render) {
             const table = (() => {
               const header = (() => {
                 let element = "";
@@ -1092,32 +1092,41 @@
               })(data);
 
               return `
-        <div class="card">
-          <h3
-            class="card-header text-center font-weight-bold text-uppercase py-4"
-          >
-            Editable table
-          </h3>
-          <div class="card-body">
-            <div id="table" class="table-editable">
-              <table
-                class="table table-bordered table-responsive-md table-striped text-center"
-              >
-                <thead>
-                  ${header}
-                </thead>
-                <tbody>
-                  ${body}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+                <div class="card">
+                  <h3
+                    class="card-header text-center font-weight-bold text-uppercase py-4"
+                  >
+                    Editable table
+                  </h3>
+                  <div class="card-body">
+                    <div class="table-editable">
+                      <table
+                        id="app__db--list-table"
+                        class="table table-bordered table-responsive-md table-striped text-center"
+                      >
+                        <thead>
+                          ${header}
+                        </thead>
+                        <tbody>
+                          ${body}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
             `;
             })(data);
 
+            const description = (data => {
+              if (data.description === undefined) {
+                return "";
+              } else {
+                return data.description;
+              }
+            })(data);
+
             const form = `
-                      <form>
+                      <form id="app__db--list-form">
                         <div class="form-group row">
                           <label for="inputId" class="col-md-3 col-form-label"
                             >Id</label
@@ -1143,8 +1152,7 @@
                               class="form-control"
                               id="inputDescription"
                               placeholder="Discription"
-                            >
-                            </textarea>
+                          >${description}</textarea>
                           </div>
                         </div>
                         <button
@@ -1163,6 +1171,44 @@
               </div>
            `;
             document.querySelector("#app__db--list-modal").innerHTML = modal;
+
+            const saveDbListItemsEvent = () => {
+              const createListFromTable = () => {
+                let list = [];
+                let table = document.querySelector("#app__db--list-table");
+                for (i = 1; i <= 10; i++) {
+                  for (j = 0; j < 10; j++) {
+                    list.push(table.rows[i].cells[j].innerText);
+                  }
+                }
+                return list;
+              };
+
+              const id = document.querySelector("#inputId").value;
+              const description = document.querySelector("#inputDescription")
+                .value;
+              const newData = {
+                id: Number.parseInt(id),
+                list: createListFromTable(),
+                description: description
+              };
+              service.save(newData).then(() => {
+                document.querySelector(
+                  "#app__message"
+                ).innerHTML = `保存しました id:${newData.id}`;
+                service.find(newData.id).then(data => {
+                  render(data, service, render);
+                });
+              });
+            };
+
+            const saveDbListItems = () => {
+              document.querySelector(
+                "#app__db--modal-save"
+              ).onclick = saveDbListItemsEvent;
+            };
+
+            saveDbListItems();
           },
 
           renderButton() {
