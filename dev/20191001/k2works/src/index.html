@@ -818,25 +818,42 @@
           generateList(number) {
             return this.listCommand.execute(number).value;
           },
-          createViewModel(id, contents, description) {
+          createViewModel(id, contents, description, order) {
             return {
               id: id,
               list: contents,
               description: description || "",
-              order: id
+              order: order || id
             };
           },
           save(data) {
-            return this.repository.save(data);
+            return this.repository.save(data).then(() => {
+              this.repository.selectAll().then(data => {
+                data.forEach((v, k) => {
+                  this.repository.save(
+                    this.createViewModel(v.id, v.list, v.description, k + 1)
+                  );
+                });
+              });
+            });
           },
           find(id) {
             return this.repository.find(id);
           },
-          selectAll() {
-            return this.repository.selectAll();
+          selectAll(options) {
+            let params = options || { from: 1, to: 30 };
+            return this.repository.selectBetween(params.from, params.to);
           },
           delete(id) {
-            return this.repository.delete(id);
+            return this.repository.delete(id).then(() => {
+              this.repository.selectAll().then(data => {
+                data.forEach((v, k) => {
+                  this.repository.save(
+                    this.createViewModel(v.id, v.list, v.description, k + 1)
+                  );
+                });
+              });
+            });
           },
           drop() {
             return this.repository.drop();
@@ -1101,10 +1118,13 @@
                     `;
               });
 
-              const pager = `
+              const pager = (() => {
+                const element = document.querySelector("#pager");
+                if (element === null) {
+                  return `
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                  <li class="page-item">
+                  <li id="page-item-prev" class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
@@ -1112,7 +1132,7 @@
                   <li class="page-item"><a class="page-link" href="#">1</a></li>
                   <li class="page-item"><a class="page-link" href="#">2</a></li>
                   <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
+                  <li id="page-item-next" class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
@@ -1120,9 +1140,15 @@
                 </ul>
               </nav>
               `;
+                } else {
+                  return element.innerHTML;
+                }
+              })();
 
               return `
-                ${pager}
+                <div id="pager">
+                  ${pager}
+                </div>
                 <table class="table">
                   <thead>
                     <th></th>
@@ -1135,7 +1161,7 @@
                     `;
             };
 
-            const addEventDbListTable = service => {
+            const addEventDbListTable = (service, render) => {
               $("#app__db--list > table").on(
                 "click",
                 ".table-remove",
@@ -1152,6 +1178,88 @@
                   });
                 }
               );
+
+              $(".page-link").on("click", e => {
+                e.preventDefault();
+                const no = Number.parseInt(e.target.text);
+                const options = [
+                  { from: 1, to: 3 },
+                  { from: 4, to: 6 },
+                  { from: 7, to: 9 },
+                  { from: 10, to: 12 },
+                  { from: 13, to: 15 }
+                ];
+                service.selectAll(options[no - 1]).then(data => {
+                  document.querySelector(
+                    "#app__db--list"
+                  ).innerHTML = createDbListTable(data);
+                  addEventDbListTable(service, render);
+                  addEventDbListEdit(service, render);
+                });
+              });
+
+              $("#page-item-prev > a").on("click", e => {
+                e.preventDefault();
+
+                const prev =
+                  e.target.parentElement.parentElement.nextElementSibling;
+                if (prev !== null) {
+                  const no = Number.parseInt(prev.innerText);
+                  if (no - 2 > 0) {
+                    document.querySelector("#pager").innerHTML = `
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li id="page-item-prev" class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">${no -
+                    2}</a></li>
+                  <li class="page-item"><a class="page-link" href="#">${no -
+                    1}</a></li>
+                  <li class="page-item"><a class="page-link" href="#">${no}</a></li>
+                  <li id="page-item-next" class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+                    `;
+                  }
+                }
+              });
+
+              $("#page-item-next > a").on("click", e => {
+                e.preventDefault();
+
+                const next = e.target.parentElement.previousElementSibling;
+                if (next !== null) {
+                  const no = Number.parseInt(next.innerText);
+                  document.querySelector("#pager").innerHTML = `
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li id="page-item-prev" class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">${no}</a></li>
+                  <li class="page-item"><a class="page-link" href="#">${no +
+                    1}</a></li>
+                  <li class="page-item"><a class="page-link" href="#">${no +
+                    2}</a></li>
+                  <li id="page-item-next" class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+                    `;
+                }
+              });
             };
 
             const addEventDbListEdit = (service, render) => {
@@ -1329,7 +1437,7 @@
                 "#app__db--list"
               ).innerHTML = createDbListTable(data);
 
-              addEventDbListTable(this.service);
+              addEventDbListTable(this.service, renderDbListEdit);
               addEventDbListEdit(this.service, renderDbListEdit);
             });
           },
