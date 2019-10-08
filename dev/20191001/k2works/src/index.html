@@ -841,7 +841,7 @@
             return this.repository.find(id);
           },
           selectAll(options) {
-            let params = options || { from: 1, to: 30 };
+            let params = options || { from: 1, to: 3 };
             return this.repository.selectBetween(params.from, params.to);
           },
           delete(id) {
@@ -1227,6 +1227,21 @@
                 </ul>
               </nav>
                     `;
+
+                    const options = [
+                      { from: 1, to: 3 },
+                      { from: 4, to: 6 },
+                      { from: 7, to: 9 },
+                      { from: 10, to: 12 },
+                      { from: 13, to: 15 }
+                    ];
+                    service.selectAll(options[no - 2 - 1]).then(data => {
+                      document.querySelector(
+                        "#app__db--list"
+                      ).innerHTML = createDbListTable(data);
+                      addEventDbListTable(service, render);
+                      addEventDbListEdit(service, render);
+                    });
                   }
                 }
               });
@@ -1258,6 +1273,21 @@
                 </ul>
               </nav>
                     `;
+
+                  const options = [
+                    { from: 1, to: 3 },
+                    { from: 4, to: 6 },
+                    { from: 7, to: 9 },
+                    { from: 10, to: 12 },
+                    { from: 13, to: 15 }
+                  ];
+                  service.selectAll(options[no - 1]).then(data => {
+                    document.querySelector(
+                      "#app__db--list"
+                    ).innerHTML = createDbListTable(data);
+                    addEventDbListTable(service, render);
+                    addEventDbListEdit(service, render);
+                  });
                 }
               });
             };
