@@ -1172,6 +1172,16 @@
             };
 
             const addEventDbListTable = (service, render) => {
+              const selectAllFromService = (service, render, options) => {
+                service.selectAll(options).then(data => {
+                  document.querySelector(
+                    "#app__db--list"
+                  ).innerHTML = createDbListTable(data);
+                  addEventDbListTable(service, render);
+                  addEventDbListEdit(service, render);
+                });
+              };
+
               $("#app__db--list > table").on(
                 "click",
                 ".table-remove",
@@ -1194,17 +1204,12 @@
 
                 const no = Number.parseInt(e.target.text);
                 const options = { from: no, to: no + 2 };
-                service.selectAll(options).then(data => {
-                  document.querySelector(
-                    "#app__db--list"
-                  ).innerHTML = createDbListTable(data);
-                  addEventDbListTable(service, render);
-                  addEventDbListEdit(service, render);
-                });
+                selectAllFromService(service, render, options);
               });
 
               $("#page-item-prev > a").on("click", e => {
                 e.preventDefault();
+
                 this.pagerNo[0] > 1
                   ? (this.pagerNo[0] = this.pagerNo[0] - 1)
                   : 1;
@@ -1216,29 +1221,18 @@
                   : 3;
 
                 const options = service.createOptions(this.pagerNo);
-                service.selectAll(options).then(data => {
-                  document.querySelector(
-                    "#app__db--list"
-                  ).innerHTML = createDbListTable(data);
-                  addEventDbListTable(service, render);
-                  addEventDbListEdit(service, render);
-                });
+                selectAllFromService(service, render, options);
               });
 
               $("#page-item-next > a").on("click", e => {
                 e.preventDefault();
+
                 this.pagerNo[0] = this.pagerNo[0] + 1;
                 this.pagerNo[1] = this.pagerNo[1] + 1;
                 this.pagerNo[2] = this.pagerNo[2] + 1;
 
                 const options = service.createOptions(this.pagerNo);
-                service.selectAll(options).then(data => {
-                  document.querySelector(
-                    "#app__db--list"
-                  ).innerHTML = createDbListTable(data);
-                  addEventDbListTable(service, render);
-                  addEventDbListEdit(service, render);
-                });
+                selectAllFromService(service, render, options);
               });
             };
 
