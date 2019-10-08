@@ -1127,29 +1127,32 @@
 
               const pager = (() => {
                 const element = document.querySelector("#pager");
-                if (element === null) {
-                  return `
-              <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li id="page-item-prev" class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+                return `
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <li id="page-item-prev" class="page-item">
+                      <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">${
+                      this.pagerNo[0]
+                    }</a></li>
+                    <li class="page-item"><a class="page-link" href="#">${
+                      this.pagerNo[1]
+                    }</a></li>
+                    <li class="page-item"><a class="page-link" href="#">${
+                      this.pagerNo[2]
+                    }</a></li>
                   <li id="page-item-next" class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+                      <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
               `;
-                } else {
-                  return element.innerHTML;
-                }
               })();
 
               return `
@@ -1212,32 +1215,6 @@
                   ? (this.pagerNo[2] = this.pagerNo[2] - 1)
                   : 3;
 
-                document.querySelector("#pager").innerHTML = `
-                    <nav aria-label="Page navigation example">
-                      <ul class="pagination">
-                        <li id="page-item-prev" class="page-item">
-                          <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                          </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">${
-                          this.pagerNo[0]
-                        }</a></li>
-                        <li class="page-item"><a class="page-link" href="#">${
-                          this.pagerNo[1]
-                        }</a></li>
-                        <li class="page-item"><a class="page-link" href="#">${
-                          this.pagerNo[2]
-                        }</a></li>
-                        <li id="page-item-next" class="page-item">
-                          <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </nav>
-                    `;
-
                 const options = service.createOptions(this.pagerNo);
                 service.selectAll(options).then(data => {
                   document.querySelector(
@@ -1253,32 +1230,6 @@
                 this.pagerNo[0] = this.pagerNo[0] + 1;
                 this.pagerNo[1] = this.pagerNo[1] + 1;
                 this.pagerNo[2] = this.pagerNo[2] + 1;
-
-                document.querySelector("#pager").innerHTML = `
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                      <li id="page-item-prev" class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">${
-                        this.pagerNo[0]
-                      }</a></li>
-                      <li class="page-item"><a class="page-link" href="#">${
-                        this.pagerNo[1]
-                      }</a></li>
-                      <li class="page-item"><a class="page-link" href="#">${
-                        this.pagerNo[2]
-                      }</a></li>
-                      <li id="page-item-next" class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                    `;
 
                 const options = service.createOptions(this.pagerNo);
                 service.selectAll(options).then(data => {
