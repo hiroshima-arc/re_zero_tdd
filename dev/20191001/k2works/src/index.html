@@ -832,6 +832,18 @@
           createOptions(pagerNoList) {
             return { from: pagerNoList[0], to: pagerNoList[2] };
           },
+          getId() {
+            return this.repository.selectAll().then(data => {
+              let id;
+              if (data.length === 0) {
+                id = 1;
+              } else {
+                let array = data.map(i => i.id);
+                id = Math.max(...array) + 1;
+              }
+              return id;
+            });
+          },
           save(data) {
             return this.repository.save(data).then(() => {
               this.repository.selectAll().then(data => {
@@ -1019,23 +1031,12 @@
                 return list;
               };
 
-              const createIdFromGetItems = data => {
-                let id;
-                if (data.length === 0) {
-                  id = 1;
-                } else {
-                  let array = data.map(i => i.id);
-                  id = Math.max(...array) + 1;
-                }
-                return id;
-              };
-
               const saveItemsEvent = () => {
                 document.querySelector("#app__message").innerHTML = "処理中...";
 
-                this.service.selectAll().then(data => {
+                this.service.getId().then(id => {
                   const newData = this.service.createViewModel(
-                    createIdFromGetItems(data),
+                    id,
                     createListFromTable()
                   );
                   this.service.save(newData).then(() => {
@@ -1046,6 +1047,10 @@
                     document.querySelector("#app__db--list-edit").innerHTML =
                       "";
 
+                    const first = id > 1 ? id - 2 : 1;
+                    const second = id > 2 ? id - 1 : 2;
+                    const third = id > 3 ? id : 3;
+                    this.pagerNo = [first, second, third];
                     this.renderDbListTable();
                   });
                 });
@@ -1406,7 +1411,8 @@
               });
             };
 
-            this.service.selectAll().then(data => {
+            const options = this.service.createOptions(this.pagerNo);
+            this.service.selectAll(options).then(data => {
               document.querySelector(
                 "#app__db--list"
               ).innerHTML = createDbListTable(data);
