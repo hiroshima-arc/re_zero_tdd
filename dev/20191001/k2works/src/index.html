@@ -1035,6 +1035,13 @@
                 document.querySelector("#app__message").innerHTML = "処理中...";
 
                 this.service.getId().then(id => {
+                  const updatePageNo = () => {
+                    const first = id <= 3 ? 1 : id - 2;
+                    const second = id <= 3 ? 2 : id - 1;
+                    const third = id <= 3 ? 3 : id;
+                    this.pagerNo = [first, second, third];
+                  };
+
                   const newData = this.service.createViewModel(
                     id,
                     createListFromTable()
@@ -1047,10 +1054,7 @@
                     document.querySelector("#app__db--list-edit").innerHTML =
                       "";
 
-                    const first = id > 1 ? id - 2 : 1;
-                    const second = id > 2 ? id - 1 : 2;
-                    const third = id > 3 ? id : 3;
-                    this.pagerNo = [first, second, third];
+                    updatePageNo();
                     this.renderDbListTable();
                   });
                 });
