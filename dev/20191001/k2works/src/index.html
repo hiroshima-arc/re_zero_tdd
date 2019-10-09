@@ -243,11 +243,25 @@
               <div class="tab-content" id="panel-menus">
                 <div
                   aria-labelledby="tab-menu01"
-                  class="tab-pane fade show active border border-top-0"
+                  class="tab-pane fade show active border border-top-0 jumbotron"
                   id="panel-menu01"
                   role="tabpanel"
                 >
-                  （FizzBuzz）
+                  <div id="app__counter" class="row d-flex align-items-center">
+                    <div class="col-md-1">
+                      <button class="btn btn-primary" onClick="{this.generate}">
+                        -
+                      </button>
+                    </div>
+                    <div class="col-md-10">
+                      <h1 class="display-1 text-center">FizzBuzz</h1>
+                    </div>
+                    <div class="col-md-1">
+                      <button class="btn btn-primary" onClick="{this.generate}">
+                        +
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <div
                   aria-labelledby="tab-menu02"
