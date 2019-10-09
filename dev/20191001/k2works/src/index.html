@@ -1596,11 +1596,12 @@
           },
 
           renderApp() {
-            const counterContainer = () => {
+            const counterContainer = (() => {
+              document.querySelector("#app__counter").innerHTML = ``;
               this.renderCounter();
-            };
+            })();
 
-            const tableContainer = () => {
+            const tableContainer = (() => {
               const renderContainer = (() => {
                 document.querySelector("#app__table").innerHTML = `
                 <dvi class="row p-3">
@@ -1615,19 +1616,15 @@
               this.renderSelect();
               this.renderTable();
               this.renderButton();
-            };
+            })();
 
-            const editContainer = () => {
+            const editContainer = (() => {
               document.querySelector("#app__edit").innerHTML = `
               <div class="table-responsive" id="app__edit-list"></div>
               <div class="table-responsive" id="app__edit-list-edit"></div>
               `;
               this.renderDbListTable();
-            };
-
-            counterContainer();
-            tableContainer();
-            editContainer();
+            })();
           }
         }
       };
