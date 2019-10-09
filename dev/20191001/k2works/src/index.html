@@ -221,7 +221,7 @@
                   href="#panel-menu03"
                   id="tab-menu03"
                   role="tab"
-                  >FizzBuzzTableEdit</a
+                  >FizzBuzzEdit</a
                 >
               </div>
 
@@ -254,8 +254,7 @@
                   role="tabpanel"
                 >
                   <div class="row p-3">
-                    <div class="table-responsive" id="app__db--list"></div>
-                    <div class="table-responsive" id="app__db--list-edit"></div>
+                    <div id="app__edit"></div>
                   </div>
                 </div>
               </div>
@@ -1175,7 +1174,7 @@
                         "#app__message"
                       ).innerHTML = `保存しました id:${newData.id}`;
 
-                      document.querySelector("#app__db--list-edit").innerHTML =
+                      document.querySelector("#app__edit-list-edit").innerHTML =
                         "";
 
                       this.renderDbListTable();
@@ -1193,8 +1192,8 @@
               const deleteItems = () => {
                 document.querySelector("#app__message").innerHTML = "処理中...";
                 this.service.drop().then(() => {
-                  document.querySelector("#app__db--list-edit").innerHTML = "";
-                  document.querySelector("#app__db--list").innerHTML = "";
+                  document.querySelector("#app__edit-list-edit").innerHTML = "";
+                  document.querySelector("#app__edit-list").innerHTML = "";
                   document.querySelector("#app__message").innerHTML =
                     "削除しました";
                 });
@@ -1308,19 +1307,19 @@
 
             const addEventDbListTable = (service, render) => {
               const clearDbListEdit = () =>
-                (document.querySelector("#app__db--list-edit").innerHTML = "");
+                (document.querySelector("#app__edit-list-edit").innerHTML = "");
 
               const selectAllFromService = (service, render, options) => {
                 service.selectAll(options).then(data => {
                   document.querySelector(
-                    "#app__db--list"
+                    "#app__edit-list"
                   ).innerHTML = createDbListTable(data);
                   addEventDbListTable(service, render);
                   addEventDbListEdit(service, render);
                 });
               };
 
-              $("#app__db--list > table").on(
+              $("#app__edit-list > table").on(
                 "click",
                 ".table-remove",
                 function() {
@@ -1395,7 +1394,7 @@
             };
 
             const addEventDbListEdit = (service, render) => {
-              $("#app__db--list > table").on(
+              $("#app__edit-list > table").on(
                 "click",
                 ".table-edit",
                 function() {
@@ -1436,7 +1435,7 @@
                   <div class="card-body">
                     <div class="table-editable">
                       <table
-                        id="app__db--list-table"
+                        id="app__edit-list-table"
                         class="table table-bordered table-responsive-md table-striped text-center"
                       >
                         <thead>
@@ -1462,7 +1461,7 @@
                   })(data);
 
                   return `
-                <form id="app__db--list-form">
+                <form id="app__edit-list-form">
                   <div class="form-group row">
                     <label for="inputId" class="col-md-3 col-form-label"
                       >Id</label
@@ -1494,7 +1493,7 @@
                   <button
                     type="button"
                     class="btn btn-primary"
-                    id="app__db--modal-save"
+                    id="app__edit-list-save"
                   >
                     Save
                   </button>
@@ -1504,7 +1503,6 @@
 
                 return `
               <div class="container">
-                <div id="app__message-db--list-table"></div>
                 ${table}
                 ${form}
               </div>
@@ -1514,7 +1512,7 @@
               const saveDbListEditItemsEvent = () => {
                 const createListFromTable = () => {
                   let list = [];
-                  let table = document.querySelector("#app__db--list-table");
+                  let table = document.querySelector("#app__edit-list-table");
                   for (i = 1; i <= 10; i++) {
                     for (j = 0; j < 10; j++) {
                       list.push(table.rows[i].cells[j].innerText);
@@ -1541,14 +1539,14 @@
                   };
                   service.selectAll(options).then(data => {
                     document.querySelector(
-                      "#app__db--list"
+                      "#app__edit-list"
                     ).innerHTML = createDbListTable(data);
 
                     addEventDbListTable(service, self);
                     addEventDbListEdit(service, self);
 
                     document.querySelector(
-                      "#app__message-db--list-table"
+                      "#app__message"
                     ).innerHTML = `保存しました id:${newData.id}`;
                   });
                 });
@@ -1556,13 +1554,13 @@
 
               const saveDbListEditItems = () => {
                 document.querySelector(
-                  "#app__db--modal-save"
+                  "#app__edit-list-save"
                 ).onclick = saveDbListEditItemsEvent;
               };
 
               service.find(id).then(data => {
                 document.querySelector(
-                  "#app__db--list-edit"
+                  "#app__edit-list-edit"
                 ).innerHTML = createDbListEdit(data);
 
                 saveDbListEditItems();
@@ -1572,7 +1570,7 @@
             const options = { from: this.pagerNo[0], to: this.pagerNo[2] };
             this.service.selectAll(options).then(data => {
               document.querySelector(
-                "#app__db--list"
+                "#app__edit-list"
               ).innerHTML = createDbListTable(data);
 
               addEventDbListTable(this.service, renderDbListEdit);
@@ -1602,9 +1600,17 @@
               this.renderButton();
             };
 
+            const editContainer = () => {
+              document.querySelector("#app__edit").innerHTML = `
+              <div class="table-responsive" id="app__edit-list"></div>
+              <div class="table-responsive" id="app__edit-list-edit"></div>
+              `;
+              this.renderDbListTable();
+            };
+
             counterContainer();
             tableContainer();
-            this.renderDbListTable();
+            editContainer();
           }
         }
       };
