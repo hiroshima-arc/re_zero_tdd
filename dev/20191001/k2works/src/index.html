@@ -1118,7 +1118,7 @@
               let row = "";
               data.forEach(item => {
                 let listSummary = "";
-                [...Array(14).keys()].forEach(
+                [...Array(7).keys()].forEach(
                   i => (listSummary += `${item.list[i]},`)
                 );
                 listSummary += "・・・・";
@@ -1142,6 +1142,7 @@
                       <td>${deleteButton}</td>
                       <td>${item.id}</td>
                       <td>${listSummary}</td>
+                      <td>${item.description}</td>
                     </tr>
                     `;
               });
@@ -1186,6 +1187,7 @@
                     <th></th>
                     <th>ID</th>
                     <th>Contents</th>
+                    <th>Description</th>
                   </thead>
                   <tbody>${row}</tbody>
                 </table>
@@ -1256,7 +1258,6 @@
                   from: this.pagerRange.get(no).from,
                   to: this.pagerRange.get(no).to
                 };
-                selectAllFromService(service, render, options);
                 selectAllFromService(service, render, options);
                 clearDbListEdit();
               });
@@ -1425,7 +1426,7 @@
                       "#app__db--list"
                     ).innerHTML = createDbListTable(data);
 
-                    addEventDbListTable(service);
+                    addEventDbListTable(service, self);
                     addEventDbListEdit(service, self);
 
                     document.querySelector(
