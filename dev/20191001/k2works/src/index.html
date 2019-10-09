@@ -200,7 +200,7 @@
                   href="#panel-menu01"
                   id="tab-menu01"
                   role="tab"
-                  >FizzBuzz</a
+                  >FizzBuzzCounter</a
                 >
                 <a
                   aria-controls="panel-menu02"
@@ -990,19 +990,8 @@
           },
 
           renderCounter() {
-            const increment = () => {
-              let number = this.currentNumber + 1;
-              this.currentValue = this.service.generate(number);
-              this.currentNumber = number;
-              this.renderCounter();
-            };
-            const decrement = () => {
-              let number = this.currentNumber <= 0 ? 0 : this.currentNumber - 1;
-              this.currentValue = this.service.generate(number);
-              this.currentNumber = number;
-              this.renderCounter();
-            };
-            const result = `
+            const createCounter = () => {
+              return `
                     <div class="col-md-1">
                       <button class="btn btn-primary" id="decrement">
                         -
@@ -1017,13 +1006,34 @@
                       </button>
                     </div>
             `;
-            document.querySelector("#app__counter").innerHTML = result;
-            document
-              .querySelector("#increment")
-              .addEventListener("click", increment);
-            document
-              .querySelector("#decrement")
-              .addEventListener("click", decrement);
+            };
+            const increment = () => {
+              let number = this.currentNumber + 1;
+              this.currentValue = this.service.generate(number);
+              this.currentNumber = number;
+              this.renderCounter();
+            };
+
+            const decrement = () => {
+              let number = this.currentNumber <= 0 ? 0 : this.currentNumber - 1;
+              this.currentValue = this.service.generate(number);
+              this.currentNumber = number;
+              this.renderCounter();
+            };
+
+            const render = () => {
+              document.querySelector(
+                "#app__counter"
+              ).innerHTML = createCounter();
+              document
+                .querySelector("#increment")
+                .addEventListener("click", increment);
+              document
+                .querySelector("#decrement")
+                .addEventListener("click", decrement);
+            };
+
+            render();
           },
 
           renderSelect() {
@@ -1575,7 +1585,11 @@
           },
 
           renderApp() {
-            this.renderCounter();
+            const counterContainer = () => {
+              this.renderCounter();
+            };
+
+            counterContainer();
             this.renderSelect();
             this.renderTable();
             this.renderButton();
