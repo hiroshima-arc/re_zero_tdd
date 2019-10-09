@@ -247,21 +247,10 @@
                   id="panel-menu01"
                   role="tabpanel"
                 >
-                  <div id="app__counter" class="row d-flex align-items-center">
-                    <div class="col-md-1">
-                      <button class="btn btn-primary" onClick="{this.generate}">
-                        -
-                      </button>
-                    </div>
-                    <div class="col-md-10">
-                      <h1 class="display-1 text-center">FizzBuzz</h1>
-                    </div>
-                    <div class="col-md-1">
-                      <button class="btn btn-primary" onClick="{this.generate}">
-                        +
-                      </button>
-                    </div>
-                  </div>
+                  <div
+                    id="app__counter"
+                    class="row d-flex align-items-center"
+                  ></div>
                 </div>
                 <div
                   aria-labelledby="tab-menu02"
@@ -976,6 +965,8 @@
           let self = Object.create(FizzBuzzView.prototype);
           self.service = FizzBuzzService.create(type);
           self.list = self.service.generateList(100);
+          self.currentNumber = 0;
+          self.currentValue = "FizzBuzz";
           self.pagerNo = [1, 2, 3];
           self.currentPageNo = 1;
           self.service.createPager().then(data => {
@@ -998,6 +989,43 @@
               default:
                 FizzBuzzView.create(FizzBuzzTypeEnum.type01()).renderTable();
             }
+          },
+
+          renderCounter() {
+            const increment = () => {
+              let number = this.currentNumber + 1;
+              this.currentValue = this.service.generate(number);
+              this.currentNumber = number;
+              this.renderCounter();
+            };
+            const decrement = () => {
+              let number = this.currentNumber <= 0 ? 0 : this.currentNumber - 1;
+              this.currentValue = this.service.generate(number);
+              this.currentNumber = number;
+              this.renderCounter();
+            };
+            const result = `
+                    <div class="col-md-1">
+                      <button class="btn btn-primary" id="decrement">
+                        -
+                      </button>
+                    </div>
+                    <div class="col-md-10">
+                      <h1 class="display-1 text-center">${this.currentValue}</h1>
+                    </div>
+                    <div class="col-md-1">
+                      <button class="btn btn-primary" id="increment">
+                        +
+                      </button>
+                    </div>
+            `;
+            document.querySelector("#app__counter").innerHTML = result;
+            document
+              .querySelector("#increment")
+              .addEventListener("click", increment);
+            document
+              .querySelector("#decrement")
+              .addEventListener("click", decrement);
           },
 
           renderSelect() {
@@ -1549,6 +1577,7 @@
           },
 
           renderApp() {
+            this.renderCounter();
             this.renderSelect();
             this.renderTable();
             this.renderButton();
