@@ -898,6 +898,7 @@
           self.service = FizzBuzzService.create(type);
           self.list = self.service.generateList(100);
           self.pagerNo = [1, 2, 3];
+          self.currentPageNo = 1;
           self.service.createPager().then(data => {
             self.pagerRange = data;
           });
@@ -1236,6 +1237,7 @@
                     };
                     selectAllFromService(service, render, options);
                     clearDbListEdit();
+                    this.currentPageNo = no;
                   }
                 }
               });
@@ -1421,7 +1423,12 @@
                 service.save(newData).then(() => {
                   self(self, newData.id, service);
 
-                  service.selectAll().then(data => {
+                  const page = this.pagerRange.get(this.currentPageNo);
+                  const options = {
+                    from: page.from,
+                    to: page.to
+                  };
+                  service.selectAll(options).then(data => {
                     document.querySelector(
                       "#app__db--list"
                     ).innerHTML = createDbListTable(data);
