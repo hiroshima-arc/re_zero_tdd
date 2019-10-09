@@ -1012,6 +1012,25 @@
             render();
           },
 
+          createMessage(message) {
+            return `
+              <div
+                class="alert alert-primary alert-dismissible fade show"
+                role="alert"
+              >
+                ${message}
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              `;
+          },
+
           renderSelect() {
             const createSelect = () => {
               return `
@@ -1181,7 +1200,9 @@
                       this.pagerRange = data;
                       document.querySelector(
                         "#app__message"
-                      ).innerHTML = `保存しました id:${newData.id}`;
+                      ).innerHTML = this.createMessage(
+                        `保存しました id:${newData.id}`
+                      );
 
                       document.querySelector("#app__edit-list-edit").innerHTML =
                         "";
@@ -1203,8 +1224,9 @@
                 this.service.drop().then(() => {
                   document.querySelector("#app__edit-list-edit").innerHTML = "";
                   document.querySelector("#app__edit-list").innerHTML = "";
-                  document.querySelector("#app__message").innerHTML =
-                    "削除しました";
+                  document.querySelector(
+                    "#app__message"
+                  ).innerHTML = this.createMessage("削除しました");
                 });
               };
 
@@ -1318,7 +1340,7 @@
                     `;
             };
 
-            const addEventDbListTable = (service, render) => {
+            const addEventDbListTable = (service, render, createMessage) => {
               const clearDbListEdit = () =>
                 (document.querySelector("#app__edit-list-edit").innerHTML = "");
 
@@ -1338,8 +1360,9 @@
                 function() {
                   const removeId = $(this).children()[0].value;
                   service.delete(Number.parseInt(removeId)).then(() => {
-                    document.querySelector("#app__message").innerHTML =
-                      "削除しました";
+                    document.querySelector(
+                      "#app__message"
+                    ).innerHTML = createMessage("削除しました");
                     $(this)
                       .parents("tr")
                       .detach();
@@ -1406,7 +1429,7 @@
               });
             };
 
-            const addEventDbListEdit = (service, render) => {
+            const addEventDbListEdit = (service, render, createMessage) => {
               $("#app__edit-list > table").on(
                 "click",
                 ".table-edit",
@@ -1414,12 +1437,12 @@
                   const currentId = Number.parseInt(
                     $(this).children()[0].value
                   );
-                  render(render, currentId, service);
+                  render(render, currentId, service, createMessage);
                 }
               );
             };
 
-            const renderDbListEdit = (self, id, service) => {
+            const renderDbListEdit = (self, id, service, createMessage) => {
               const createDbListEdit = data => {
                 const table = (() => {
                   const header = (() => {
@@ -1555,12 +1578,14 @@
                       "#app__edit-list"
                     ).innerHTML = createDbListTable(data);
 
-                    addEventDbListTable(service, self);
-                    addEventDbListEdit(service, self);
+                    addEventDbListTable(service, self, createMessage);
+                    addEventDbListEdit(service, self, createMessage);
 
                     document.querySelector(
                       "#app__message"
-                    ).innerHTML = `保存しました id:${newData.id}`;
+                    ).innerHTML = createMessage(
+                      `保存しました id:${newData.id}`
+                    );
                   });
                 });
               };
@@ -1587,8 +1612,16 @@
                   "#app__edit-list"
                 ).innerHTML = createDbListTable(data);
 
-                addEventDbListTable(this.service, renderDbListEdit);
-                addEventDbListEdit(this.service, renderDbListEdit);
+                addEventDbListTable(
+                  this.service,
+                  renderDbListEdit,
+                  this.createMessage
+                );
+                addEventDbListEdit(
+                  this.service,
+                  renderDbListEdit,
+                  this.createMessage
+                );
               });
             };
 
