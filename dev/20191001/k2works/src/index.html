@@ -964,22 +964,6 @@
           return self;
         },
         prototype: {
-          changeEvent(e) {
-            switch (e.target.value) {
-              case "one":
-                FizzBuzzView.create(FizzBuzzTypeEnum.type01()).renderTable();
-                break;
-              case "two":
-                FizzBuzzView.create(FizzBuzzTypeEnum.type02()).renderTable();
-                break;
-              case "three":
-                FizzBuzzView.create(FizzBuzzTypeEnum.type03()).renderTable();
-                break;
-              default:
-                FizzBuzzView.create(FizzBuzzTypeEnum.type01()).renderTable();
-            }
-          },
-
           renderCounter() {
             const createCounter = () => {
               return `
@@ -1039,11 +1023,27 @@
                   `;
             };
 
+            const changeEvent = e => {
+              switch (e.target.value) {
+                case "one":
+                  FizzBuzzView.create(FizzBuzzTypeEnum.type01()).renderTable();
+                  break;
+                case "two":
+                  FizzBuzzView.create(FizzBuzzTypeEnum.type02()).renderTable();
+                  break;
+                case "three":
+                  FizzBuzzView.create(FizzBuzzTypeEnum.type03()).renderTable();
+                  break;
+                default:
+                  FizzBuzzView.create(FizzBuzzTypeEnum.type01()).renderTable();
+              }
+            };
+
             const render = () => {
               document.querySelector("#app__select").innerHTML = createSelect();
               document
                 .querySelector("#app__select--type")
-                .addEventListener("change", this.changeEvent);
+                .addEventListener("change", changeEvent);
               document
                 .querySelector("#app__select--type")
                 .classList.add("browser-default");
