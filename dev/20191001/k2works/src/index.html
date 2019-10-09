@@ -1193,6 +1193,9 @@
             };
 
             const addEventDbListTable = (service, render) => {
+              const clearDbListEdit = () =>
+                (document.querySelector("#app__db--list-edit").innerHTML = "");
+
               const selectAllFromService = (service, render, options) => {
                 service.selectAll(options).then(data => {
                   document.querySelector(
@@ -1214,8 +1217,7 @@
                     $(this)
                       .parents("tr")
                       .detach();
-                    document.querySelector("#app__db--list-edit").innerHTML =
-                      "";
+                    clearDbListEdit();
                   });
                 }
               );
@@ -1231,6 +1233,7 @@
                       to: this.pagerRange.get(no).to
                     };
                     selectAllFromService(service, render, options);
+                    clearDbListEdit();
                   }
                 }
               });
@@ -1255,6 +1258,7 @@
                 };
                 selectAllFromService(service, render, options);
                 selectAllFromService(service, render, options);
+                clearDbListEdit();
               });
 
               $("#page-item-next > a").on("click", e => {
@@ -1271,6 +1275,7 @@
                     to: this.pagerRange.get(no).to
                   };
                   selectAllFromService(service, render, options);
+                  clearDbListEdit();
                 }
               });
             };
