@@ -191,6 +191,7 @@
           <section id="menu">
             <div class="container">
               <h3 class="mb-3">Menu</h3>
+              <div id="app__message"></div>
               <div class="nav nav-tabs" id="tab-menus" role="tablist">
                 <a
                   aria-controls="panel-menu01"
@@ -243,17 +244,8 @@
                   role="tabpanel"
                 >
                   <dvi class="row p-3">
-                    <div class="col-md-12 order-md-2" id="app">
-                      <div id="app__select"></div>
-                      <div class="table-responsive" id="app__table"></div>
-                    </div>
+                    <div id="app__table" class="col-md-12 order-md-2"></div>
                   </dvi>
-                  <div class="row p-3">
-                    <div class="col-md-12 order-md-2" id="app__db">
-                      <div id="app__message"></div>
-                      <div id="app__button"></div>
-                    </div>
-                  </div>
                 </div>
                 <div
                   aria-labelledby="tab-menu03"
@@ -1089,7 +1081,7 @@
             };
 
             const editTable = () => {
-              $("#app__table > table > tbody > tr > td").on(
+              $("#app__table-contents > table > tbody > tr > td").on(
                 "click",
                 edit_toggle(this.service)
               );
@@ -1139,12 +1131,14 @@
               }
             };
 
-            document.querySelector("#app__table").innerHTML = createTable();
+            document.querySelector(
+              "#app__table-contents"
+            ).innerHTML = createTable();
             document
-              .querySelector("#app__table > table")
+              .querySelector("#app__table-contents > table")
               .classList.add("table");
             document
-              .querySelector("#app__table > table")
+              .querySelector("#app__table-contents > table")
               .classList.add("table-striped");
 
             editTable();
@@ -1154,7 +1148,9 @@
             const saveItems = () => {
               const createListFromTable = () => {
                 let list = [];
-                let table = document.querySelector("#app__table > table");
+                let table = document.querySelector(
+                  "#app__table-contents > table"
+                );
                 for (i = 1; i <= 10; i++) {
                   for (j = 0; j < 10; j++) {
                     list.push(table.rows[i].cells[j].innerText);
@@ -1589,10 +1585,25 @@
               this.renderCounter();
             };
 
+            const tableContainer = () => {
+              const renderContainer = (() => {
+                document.querySelector("#app__table").innerHTML = `
+                <dvi class="row p-3">
+                  <div class="col-md-12 order-md-2">
+                    <div id="app__select"></div>
+                    <div class="table-responsive" id="app__table-contents"></div>
+                    <div id="app__button"></div>
+                  </div>
+                </dvi>
+                `;
+              })();
+              this.renderSelect();
+              this.renderTable();
+              this.renderButton();
+            };
+
             counterContainer();
-            this.renderSelect();
-            this.renderTable();
-            this.renderButton();
+            tableContainer();
             this.renderDbListTable();
           }
         }
