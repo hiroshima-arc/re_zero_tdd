@@ -998,6 +998,7 @@
                     </div>
             `;
             };
+
             const increment = () => {
               let number = this.currentNumber + 1;
               this.currentValue = this.service.generate(number);
@@ -1038,16 +1039,20 @@
                   `;
             };
 
-            document.querySelector("#app__select").innerHTML = createSelect();
-            document
-              .querySelector("#app__select--type")
-              .addEventListener("change", this.changeEvent);
-            document
-              .querySelector("#app__select--type")
-              .classList.add("browser-default");
-            document
-              .querySelector("#app__select--type")
-              .classList.add("custom-select");
+            const render = () => {
+              document.querySelector("#app__select").innerHTML = createSelect();
+              document
+                .querySelector("#app__select--type")
+                .addEventListener("change", this.changeEvent);
+              document
+                .querySelector("#app__select--type")
+                .classList.add("browser-default");
+              document
+                .querySelector("#app__select--type")
+                .classList.add("custom-select");
+            };
+
+            render();
           },
 
           renderTable() {
@@ -1130,17 +1135,21 @@
               }
             };
 
-            document.querySelector(
-              "#app__table-contents"
-            ).innerHTML = createTable();
-            document
-              .querySelector("#app__table-contents > table")
-              .classList.add("table");
-            document
-              .querySelector("#app__table-contents > table")
-              .classList.add("table-striped");
+            const render = () => {
+              document.querySelector(
+                "#app__table-contents"
+              ).innerHTML = createTable();
+              document
+                .querySelector("#app__table-contents > table")
+                .classList.add("table");
+              document
+                .querySelector("#app__table-contents > table")
+                .classList.add("table-striped");
 
-            editTable();
+              editTable();
+            };
+
+            render();
           },
 
           renderButton() {
@@ -1204,7 +1213,8 @@
               ).onclick = deleteItems;
             };
 
-            document.querySelector("#app__button").innerHTML = `
+            const render = () => {
+              document.querySelector("#app__button").innerHTML = `
                   <button
                     id="app__button--save"
                     type="button"
@@ -1220,8 +1230,11 @@
                     Delete
                   </button>
             `;
-            saveItems();
-            deleteItems();
+              saveItems();
+              deleteItems();
+            };
+
+            render();
           },
 
           renderDbListTable() {
@@ -1567,15 +1580,19 @@
               });
             };
 
-            const options = { from: this.pagerNo[0], to: this.pagerNo[2] };
-            this.service.selectAll(options).then(data => {
-              document.querySelector(
-                "#app__edit-list"
-              ).innerHTML = createDbListTable(data);
+            const render = () => {
+              const options = { from: this.pagerNo[0], to: this.pagerNo[2] };
+              this.service.selectAll(options).then(data => {
+                document.querySelector(
+                  "#app__edit-list"
+                ).innerHTML = createDbListTable(data);
 
-              addEventDbListTable(this.service, renderDbListEdit);
-              addEventDbListEdit(this.service, renderDbListEdit);
-            });
+                addEventDbListTable(this.service, renderDbListEdit);
+                addEventDbListEdit(this.service, renderDbListEdit);
+              });
+            };
+
+            render();
           },
 
           renderApp() {
