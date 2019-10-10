@@ -958,9 +958,6 @@
           self.currentValue = "FizzBuzz";
           self.pagerNo = [1, 2, 3];
           self.currentPageNo = 1;
-          self.service.createPager().then(data => {
-            self.pagerRange = data;
-          });
           return self;
         },
         prototype: {
@@ -1207,7 +1204,7 @@
                       document.querySelector("#app__edit-list-edit").innerHTML =
                         "";
 
-                      this.renderDbListTable();
+                      this.renderDbListTable(props);
                     });
                   });
                 });
@@ -1260,9 +1257,9 @@
           },
 
           renderDbListTable() {
-            const createDbListTable = data => {
+            const createDbListTable = props => {
               let row = "";
-              data.forEach(item => {
+              props.data.forEach(item => {
                 let listSummary = "";
                 [...Array(7).keys()].forEach(
                   i => (listSummary += `${item.list[i]},`)
@@ -1305,13 +1302,13 @@
                       </a>
                     </li>
                     <li class="page-item"><a class="page-link" href="#">${
-                      this.pagerNo[0]
+                      props.pager.pagerNo[0]
                     }</a></li>
                     <li class="page-item"><a class="page-link" href="#">${
-                      this.pagerNo[1]
+                      props.pager.pagerNo[1]
                     }</a></li>
                     <li class="page-item"><a class="page-link" href="#">${
-                      this.pagerNo[2]
+                      props.pager.pagerNo[2]
                     }</a></li>
                   <li id="page-item-next" class="page-item">
                       <a class="page-link" href="#" aria-label="Next">
@@ -1340,24 +1337,20 @@
                     `;
             };
 
-            const addEvent = (service, render, createMessage) => {
-              const addEventDbListTable = (service, render, createMessage) => {
+            const addEvent = props => {
+              const addEventDbListTable = render => {
                 const clearDbListEdit = () =>
                   (document.querySelector("#app__edit-list-edit").innerHTML =
                     "");
 
-                const selectAllFromService = (
-                  service,
-                  render,
-                  options,
-                  createMessage
-                ) => {
-                  service.selectAll(options).then(data => {
+                const selectAllFromService = props => {
+                  props.service.selectAll(props.options).then(data => {
+                    props.data = data;
                     document.querySelector(
                       "#app__edit-list"
-                    ).innerHTML = createDbListTable(data);
+                    ).innerHTML = createDbListTable(props);
 
-                    addEvent(service, render, createMessage);
+                    addEvent(props);
                   });
                 };
 
@@ -1366,10 +1359,10 @@
                   ".table-remove",
                   function() {
                     const removeId = $(this).children()[0].value;
-                    service.delete(Number.parseInt(removeId)).then(() => {
+                    props.service.delete(Number.parseInt(removeId)).then(() => {
                       document.querySelector(
                         "#app__message"
-                      ).innerHTML = createMessage("削除しました");
+                      ).innerHTML = props.utils.createMessage("削除しました");
                       $(this)
                         .parents("tr")
                         .detach();
@@ -1383,19 +1376,15 @@
 
                   const no = Number.parseInt(e.target.text);
                   if (Number.isInteger(no)) {
-                    if (this.pagerRange.get(no)) {
+                    if (props.pager.pagerRange.get(no)) {
                       const options = {
-                        from: this.pagerRange.get(no).from,
-                        to: this.pagerRange.get(no).to
+                        from: props.pager.pagerRange.get(no).from,
+                        to: props.pager.pagerRange.get(no).to
                       };
-                      selectAllFromService(
-                        service,
-                        render,
-                        options,
-                        createMessage
-                      );
+                      props.options = options;
+                      selectAllFromService(props);
                       clearDbListEdit();
-                      this.currentPageNo = no;
+                      props.pager.currentPageNo = no;
                     }
                   }
                 });
@@ -1403,50 +1392,47 @@
                 $("#page-item-prev > a").on("click", e => {
                   e.preventDefault();
 
-                  this.pagerNo[0] > 1
-                    ? (this.pagerNo[0] = this.pagerNo[0] - 3)
+                  props.pager.pagerNo[0] > 1
+                    ? (props.pager.pagerNo[0] = props.pager.pagerNo[0] - 3)
                     : 1;
-                  this.pagerNo[1] > 2
-                    ? (this.pagerNo[1] = this.pagerNo[1] - 3)
+                  props.pager.pagerNo[1] > 2
+                    ? (props.pager.pagerNo[1] = props.pager.pagerNo[1] - 3)
                     : 2;
-                  this.pagerNo[2] > 3
-                    ? (this.pagerNo[2] = this.pagerNo[2] - 3)
+                  props.pager.pagerNo[2] > 3
+                    ? (props.pager.pagerNo[2] = props.pager.pagerNo[2] - 3)
                     : 3;
 
-                  const no = this.pagerNo[0];
+                  const no = props.pager.pagerNo[0];
                   const options = {
-                    from: this.pagerRange.get(no).from,
-                    to: this.pagerRange.get(no).to
+                    from: props.pager.pagerRange.get(no).from,
+                    to: props.pager.pagerRange.get(no).to
                   };
-                  selectAllFromService(service, render, options, createMessage);
+                  props.options = options;
+                  selectAllFromService(props);
                   clearDbListEdit();
                 });
 
                 $("#page-item-next > a").on("click", e => {
                   e.preventDefault();
 
-                  const no = this.pagerNo[0] + 3;
-                  if (this.pagerRange.get(no)) {
-                    this.pagerNo[0] = this.pagerNo[0] + 3;
-                    this.pagerNo[1] = this.pagerNo[1] + 3;
-                    this.pagerNo[2] = this.pagerNo[2] + 3;
+                  const no = props.pager.pagerNo[0] + 3;
+                  if (props.pager.pagerRange.get(no)) {
+                    props.pager.pagerNo[0] = props.pager.pagerNo[0] + 3;
+                    props.pager.pagerNo[1] = props.pager.pagerNo[1] + 3;
+                    props.pager.pagerNo[2] = props.pager.pagerNo[2] + 3;
 
                     const options = {
-                      from: this.pagerRange.get(no).from,
-                      to: this.pagerRange.get(no).to
+                      from: props.pager.pagerRange.get(no).from,
+                      to: props.pager.pagerRange.get(no).to
                     };
-                    selectAllFromService(
-                      service,
-                      render,
-                      options,
-                      createMessage
-                    );
+                    props.options = options;
+                    selectAllFromService(props);
                     clearDbListEdit();
                   }
                 });
               };
 
-              const addEventDbListEdit = (service, render, createMessage) => {
+              const addEventDbListEdit = render => {
                 $("#app__edit-list > table").on(
                   "click",
                   ".table-edit",
@@ -1454,35 +1440,69 @@
                     const currentId = Number.parseInt(
                       $(this).children()[0].value
                     );
-                    render(render, currentId, service, createMessage);
+                    props.currentId = currentId;
+                    render(props);
                   }
                 );
               };
 
-              addEventDbListTable(service, render, createMessage);
-              addEventDbListEdit(service, render, createMessage);
+              addEventDbListTable(props.renderDbListEdit);
+              addEventDbListEdit(props.renderDbListEdit);
             };
 
-            const renderDbListEdit = (self, id, service, createMessage) => {
-              const createDbListEdit = data => {
-                const table = (() => {
-                  const header = (() => {
-                    let element = "";
-                    [...Array(10).keys()].forEach(
-                      i => (element += `<th>${i + 1}</th>`)
-                    );
-                    return element;
-                  })();
-                  const body = (data => {
-                    let element = "<tr>";
-                    data.list.forEach((v, k) => {
-                      element += `<td contenteditable="true">${v}</td>`;
-                      if ((k + 1) % 10 === 0) element += "</tr>";
-                    });
-                    return element;
-                  })(data);
+            const render = () => {
+              const props = {
+                service: this.service,
+                pager: {
+                  pagerNo: [1, 2, 3],
+                  pagerRange: this.pagerRange,
+                  currentPageNo: this.currentPageNo
+                },
+                utils: { createMessage: this.createMessage },
+                renderDbListEdit: this.renderDbListEdit,
+                renderDbListTable: this.renderDbListTable
+              };
 
-                  return `
+              const options = {
+                from: props.pager.pagerNo[0],
+                to: props.pager.pagerNo[2]
+              };
+
+              props.options = options;
+
+              this.service.selectAll(options).then(data => {
+                props.data = data;
+                document.querySelector(
+                  "#app__edit-list"
+                ).innerHTML = createDbListTable(props);
+
+                addEvent(props);
+              });
+            };
+
+            render();
+          },
+
+          renderDbListEdit(props) {
+            const createDbListEdit = data => {
+              const table = (() => {
+                const header = (() => {
+                  let element = "";
+                  [...Array(10).keys()].forEach(
+                    i => (element += `<th>${i + 1}</th>`)
+                  );
+                  return element;
+                })();
+                const body = (data => {
+                  let element = "<tr>";
+                  data.list.forEach((v, k) => {
+                    element += `<td contenteditable="true">${v}</td>`;
+                    if ((k + 1) % 10 === 0) element += "</tr>";
+                  });
+                  return element;
+                })(data);
+
+                return `
                 <div class="card">
                   <h3
                     class="card-header text-center font-weight-bold text-uppercase py-4"
@@ -1506,18 +1526,18 @@
                   </div>
                 </div>
             `;
+              })(data);
+
+              const form = (() => {
+                const description = (data => {
+                  if (data.description === undefined) {
+                    return "";
+                  } else {
+                    return data.description;
+                  }
                 })(data);
 
-                const form = (() => {
-                  const description = (data => {
-                    if (data.description === undefined) {
-                      return "";
-                    } else {
-                      return data.description;
-                    }
-                  })(data);
-
-                  return `
+                return `
                 <form id="app__edit-list-form">
                   <div class="form-group row">
                     <label for="inputId" class="col-md-3 col-form-label"
@@ -1556,87 +1576,73 @@
                   </button>
                 </form>
             `;
-                })(data);
+              })(data);
 
-                return `
+              return `
               <div class="container">
                 ${table}
                 ${form}
               </div>
            `;
+            };
+
+            const saveDbListEditItemsEvent = () => {
+              const createListFromTable = () => {
+                let list = [];
+                let table = document.querySelector("#app__edit-list-table");
+                for (i = 1; i <= 10; i++) {
+                  for (j = 0; j < 10; j++) {
+                    list.push(table.rows[i].cells[j].innerText);
+                  }
+                }
+                return list;
               };
 
-              const saveDbListEditItemsEvent = () => {
-                const createListFromTable = () => {
-                  let list = [];
-                  let table = document.querySelector("#app__edit-list-table");
-                  for (i = 1; i <= 10; i++) {
-                    for (j = 0; j < 10; j++) {
-                      list.push(table.rows[i].cells[j].innerText);
-                    }
-                  }
-                  return list;
-                };
-
-                const id = document.querySelector("#inputId").value;
-                const description = document.querySelector("#inputDescription")
-                  .value;
-                const newData = service.createViewModel(
-                  Number.parseInt(id),
-                  createListFromTable(),
-                  description
-                );
-                service.save(newData).then(() => {
-                  self(self, newData.id, service);
-
-                  const page = this.pagerRange.get(this.currentPageNo);
+              const id = document.querySelector("#inputId").value;
+              const description = document.querySelector("#inputDescription")
+                .value;
+              const newData = props.service.createViewModel(
+                Number.parseInt(id),
+                createListFromTable(),
+                description
+              );
+              props.service.save(newData).then(() => {
+                props.service.createPager().then(data => {
+                  props.pagerRange = data;
+                  const page = props.pager.pagerRange.get(
+                    props.pager.currentPageNo
+                  );
                   const options = {
                     from: page.from,
                     to: page.to
                   };
-                  service.selectAll(options).then(data => {
-                    document.querySelector(
-                      "#app__edit-list"
-                    ).innerHTML = createDbListTable(data);
-
-                    addEvent(service, self, createMessage);
+                  props.options = options;
+                  props.service.selectAll(options).then(data => {
+                    props.renderDbListTable(props);
 
                     document.querySelector(
                       "#app__message"
-                    ).innerHTML = createMessage(
+                    ).innerHTML = props.utils.createMessage(
                       `保存しました id:${newData.id}`
                     );
                   });
                 });
-              };
-
-              const saveDbListEditItems = () => {
-                document.querySelector(
-                  "#app__edit-list-save"
-                ).onclick = saveDbListEditItemsEvent;
-              };
-
-              service.find(id).then(data => {
-                document.querySelector(
-                  "#app__edit-list-edit"
-                ).innerHTML = createDbListEdit(data);
-
-                saveDbListEditItems();
               });
             };
 
-            const render = () => {
-              const options = { from: this.pagerNo[0], to: this.pagerNo[2] };
-              this.service.selectAll(options).then(data => {
-                document.querySelector(
-                  "#app__edit-list"
-                ).innerHTML = createDbListTable(data);
-
-                addEvent(this.service, renderDbListEdit, this.createMessage);
-              });
+            const saveDbListEditItems = () => {
+              document.querySelector(
+                "#app__edit-list-save"
+              ).onclick = saveDbListEditItemsEvent;
             };
 
-            render();
+            props.service.find(props.currentId).then(data => {
+              document.querySelector(
+                "#app__edit-list-edit"
+              ).innerHTML = createDbListEdit(data);
+
+              saveDbListEditItems();
+            });
           },
 
           renderApp() {
@@ -1664,10 +1670,14 @@
 
             const editContainer = (() => {
               document.querySelector("#app__edit").innerHTML = `
-              <div class="table-responsive" id="app__edit-list"></div>
-              <div class="table-responsive" id="app__edit-list-edit"></div>
+                <div class="table-responsive" id="app__edit-list"></div>
+                <div class="table-responsive" id="app__edit-list-edit"></div>
               `;
-              this.renderDbListTable();
+              this.service.createPager().then(data => {
+                this.pagerRange = data;
+
+                this.renderDbListTable();
+              });
             })();
           }
         }
