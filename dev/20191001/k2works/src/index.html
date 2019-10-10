@@ -1418,15 +1418,18 @@
               };
 
               const search = (props => {
+                const show = data => {
+                  props.data = data;
+                  document.querySelector("#app__edit-list").innerHTML = create(
+                    props
+                  );
+                };
+
                 $("#inputSearchDescription").on("keyup", function() {
                   clearDbListEdit();
                   const keyWord = $("#inputSearchDescription").val();
                   props.service.selectByKeyword(keyWord).then(data => {
-                    props.data = data;
-                    document.querySelector(
-                      "#app__edit-list"
-                    ).innerHTML = create(props);
-
+                    show(data);
                     addEvent(props);
                     $("#inputSearchDescription").val(keyWord);
                     $("#inputSearchDescription").focus();
@@ -1437,11 +1440,7 @@
                   clearDbListEdit();
                   const keyWord = $("#inputSearchDescription").val();
                   props.service.selectByKeyword(keyWord).then(data => {
-                    props.data = data;
-                    document.querySelector(
-                      "#app__edit-list"
-                    ).innerHTML = create(props);
-
+                    show(data);
                     addEvent(props);
                   });
                 });
