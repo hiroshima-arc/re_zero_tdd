@@ -1349,7 +1349,7 @@
                 });
               };
 
-              const pager = props => {
+              const pager = (props => {
                 $(".page-link").on("click", e => {
                   e.preventDefault();
 
@@ -1409,9 +1409,9 @@
                     clearDbListEdit();
                   }
                 });
-              };
+              })(props);
 
-              const button = render => {
+              const button = (props => {
                 $("#app__edit-list > table").on(
                   "click",
                   ".table-edit",
@@ -1420,7 +1420,7 @@
                       $(this).children()[0].value
                     );
                     props.currentId = currentId;
-                    render(props);
+                    props.renderDbListEdit(props);
                   }
                 );
 
@@ -1440,10 +1440,7 @@
                     });
                   }
                 );
-              };
-
-              pager(props);
-              button(props.renderDbListEdit);
+              })(props);
             };
 
             const render = () => {
@@ -1451,18 +1448,18 @@
                 const props = {
                   service: this.service,
                   pager: {
-                    pagerNo: [1, 2, 3],
+                    pagerNo: this.pager.pagerNo,
                     pagerRange: data,
-                    currentPageNo: 1
+                    currentPageNo: this.pager.currentPageNo
                   },
                   utils: { createMessage: this.utils.createMessage },
                   renderDbListEdit: this.renderDbListEdit,
                   renderDbListTable: this.renderDbListTable
                 };
-
+                const no = props.pager.currentPageNo;
                 const options = {
-                  from: props.pager.pagerNo[0],
-                  to: props.pager.pagerNo[2]
+                  from: props.pager.pagerRange.get(no).from,
+                  to: props.pager.pagerRange.get(no).to
                 };
 
                 props.options = options;
@@ -1667,6 +1664,9 @@
             })();
 
             const editContainer = (() => {
+              this.pager = {};
+              this.pager.pagerNo = [1, 2, 3];
+              this.pager.currentPageNo = 1;
               document.querySelector("#app__edit").innerHTML = `
                 <div class="table-responsive" id="app__edit-list"></div>
                 <div class="table-responsive" id="app__edit-list-edit"></div>
