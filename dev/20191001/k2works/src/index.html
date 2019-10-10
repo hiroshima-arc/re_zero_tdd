@@ -593,6 +593,33 @@
             });
           },
 
+          getItemsByRangeDescription(dbName, storeName, createRequest, str) {
+            return new Promise(resolve => {
+              const req = createRequest(dbName, storeName);
+              req.onsuccess = function(event) {
+                const nextStr =
+                  str.slice(0, -1) +
+                  String.fromCharCode(str.slice(-1).charCodeAt() + 1);
+
+                const db = event.target.result;
+                const trans = db.transaction(storeName, "readwrite");
+                const store = trans.objectStore(storeName);
+                const index = store.index("description");
+                const range = IDBKeyRange.bound(str, nextStr, false, true);
+                const getReq = index.openCursor(range);
+
+                let list = [];
+                getReq.onsuccess = function(event) {
+                  let cur = event.target.result;
+                  if (!cur) return resolve(list);
+                  console.log(cur.value);
+                  list.push(cur.value);
+                  cur.continue();
+                };
+              };
+            });
+          },
+
           deleteItem(dbName, storeName, createRequest, keyValue) {
             return new Promise((resolve, reject) => {
               const req = createRequest(dbName, storeName);
@@ -644,6 +671,7 @@
                 keyPath: "id"
               });
               os.createIndex("order", "order", { unique: false });
+              os.createIndex("description", "description", { unique: false });
             };
 
             return openReq;
@@ -682,6 +710,15 @@
               this.createRequest,
               from,
               to
+            );
+          },
+
+          selectByKeyword(keyWord) {
+            return IndexedDbRepository.prototype.getItemsByRangeDescription(
+              this.dbName,
+              this.storeName,
+              this.createRequest,
+              keyWord
             );
           },
 
@@ -931,6 +968,10 @@
           selectAll(options) {
             let params = options || { from: 1, to: 3 };
             return this.repository.selectBetween(params.from, params.to);
+          },
+          selectByKeyword(keyWord) {
+            return this.repository.selectByKeyword(keyWord);
+            return keyWord;
           },
           delete(id) {
             return this.repository.delete(id).then(() => {
@@ -1298,7 +1339,7 @@
                         <input
                           type="text"
                           class="form-control"
-                          id="inputDescription"
+                          id="inputSearchDescription"
                           placeholder="Description"
                         />
                       </div>
@@ -1375,6 +1416,36 @@
                   addEvent(props);
                 });
               };
+
+              const search = (props => {
+                $("#inputSearchDescription").on("keyup", function() {
+                  clearDbListEdit();
+                  const keyWord = $("#inputSearchDescription").val();
+                  props.service.selectByKeyword(keyWord).then(data => {
+                    props.data = data;
+                    document.querySelector(
+                      "#app__edit-list"
+                    ).innerHTML = create(props);
+
+                    addEvent(props);
+                    $("#inputSearchDescription").val(keyWord);
+                    $("#inputSearchDescription").focus();
+                  });
+                });
+
+                $("#search > form > div > button").on("click", function() {
+                  clearDbListEdit();
+                  const keyWord = $("#inputSearchDescription").val();
+                  props.service.selectByKeyword(keyWord).then(data => {
+                    props.data = data;
+                    document.querySelector(
+                      "#app__edit-list"
+                    ).innerHTML = create(props);
+
+                    addEvent(props);
+                  });
+                });
+              })(props);
 
               const pager = (props => {
                 $(".page-link").on("click", e => {
@@ -1571,7 +1642,7 @@
                     <label
                       for="inputDescription"
                       class="col-md-3 col-form-label"
-                      >Discription</label
+                      >Description</label
                     >
                     <div class="col-sm-10">
                       <textarea
