@@ -956,11 +956,30 @@
           self.list = self.service.generateList(100);
           self.currentNumber = 0;
           self.currentValue = "FizzBuzz";
-          self.pagerNo = [1, 2, 3];
-          self.currentPageNo = 1;
           return self;
         },
         prototype: {
+          utils: {
+            createMessage(message) {
+              return `
+              <div
+                class="alert alert-primary alert-dismissible fade show"
+                role="alert"
+              >
+                ${message}
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              `;
+            }
+          },
+
           renderCounter() {
             const createCounter = () => {
               return `
@@ -1007,25 +1026,6 @@
             };
 
             render();
-          },
-
-          createMessage(message) {
-            return `
-              <div
-                class="alert alert-primary alert-dismissible fade show"
-                role="alert"
-              >
-                ${message}
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="alert"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              `;
           },
 
           renderSelect() {
@@ -1193,19 +1193,16 @@
                   );
 
                   this.service.save(newData).then(() => {
-                    this.service.createPager().then(data => {
-                      this.pagerRange = data;
-                      document.querySelector(
-                        "#app__message"
-                      ).innerHTML = this.createMessage(
-                        `保存しました id:${newData.id}`
-                      );
+                    document.querySelector(
+                      "#app__message"
+                    ).innerHTML = this.utils.createMessage(
+                      `保存しました id:${newData.id}`
+                    );
 
-                      document.querySelector("#app__edit-list-edit").innerHTML =
-                        "";
+                    document.querySelector("#app__edit-list-edit").innerHTML =
+                      "";
 
-                      this.renderDbListTable(props);
-                    });
+                    this.renderDbListTable();
                   });
                 });
               };
@@ -1338,39 +1335,21 @@
             };
 
             const addEvent = props => {
-              const addEventDbListTable = render => {
-                const clearDbListEdit = () =>
-                  (document.querySelector("#app__edit-list-edit").innerHTML =
-                    "");
+              const clearDbListEdit = () =>
+                (document.querySelector("#app__edit-list-edit").innerHTML = "");
 
-                const selectAllFromService = props => {
-                  props.service.selectAll(props.options).then(data => {
-                    props.data = data;
-                    document.querySelector(
-                      "#app__edit-list"
-                    ).innerHTML = createDbListTable(props);
+              const selectAllFromService = props => {
+                props.service.selectAll(props.options).then(data => {
+                  props.data = data;
+                  document.querySelector(
+                    "#app__edit-list"
+                  ).innerHTML = createDbListTable(props);
 
-                    addEvent(props);
-                  });
-                };
+                  addEvent(props);
+                });
+              };
 
-                $("#app__edit-list > table").on(
-                  "click",
-                  ".table-remove",
-                  function() {
-                    const removeId = $(this).children()[0].value;
-                    props.service.delete(Number.parseInt(removeId)).then(() => {
-                      document.querySelector(
-                        "#app__message"
-                      ).innerHTML = props.utils.createMessage("削除しました");
-                      $(this)
-                        .parents("tr")
-                        .detach();
-                      clearDbListEdit();
-                    });
-                  }
-                );
-
+              const pager = props => {
                 $(".page-link").on("click", e => {
                   e.preventDefault();
 
@@ -1432,7 +1411,7 @@
                 });
               };
 
-              const addEventDbListEdit = render => {
+              const button = render => {
                 $("#app__edit-list > table").on(
                   "click",
                   ".table-edit",
@@ -1444,39 +1423,58 @@
                     render(props);
                   }
                 );
+
+                $("#app__edit-list > table").on(
+                  "click",
+                  ".table-remove",
+                  function() {
+                    const removeId = $(this).children()[0].value;
+                    props.service.delete(Number.parseInt(removeId)).then(() => {
+                      document.querySelector(
+                        "#app__message"
+                      ).innerHTML = props.utils.createMessage("削除しました");
+                      $(this)
+                        .parents("tr")
+                        .detach();
+                      clearDbListEdit();
+                    });
+                  }
+                );
               };
 
-              addEventDbListTable(props.renderDbListEdit);
-              addEventDbListEdit(props.renderDbListEdit);
+              pager(props);
+              button(props.renderDbListEdit);
             };
 
             const render = () => {
-              const props = {
-                service: this.service,
-                pager: {
-                  pagerNo: [1, 2, 3],
-                  pagerRange: this.pagerRange,
-                  currentPageNo: this.currentPageNo
-                },
-                utils: { createMessage: this.createMessage },
-                renderDbListEdit: this.renderDbListEdit,
-                renderDbListTable: this.renderDbListTable
-              };
+              this.service.createPager().then(data => {
+                const props = {
+                  service: this.service,
+                  pager: {
+                    pagerNo: [1, 2, 3],
+                    pagerRange: data,
+                    currentPageNo: 1
+                  },
+                  utils: { createMessage: this.utils.createMessage },
+                  renderDbListEdit: this.renderDbListEdit,
+                  renderDbListTable: this.renderDbListTable
+                };
 
-              const options = {
-                from: props.pager.pagerNo[0],
-                to: props.pager.pagerNo[2]
-              };
+                const options = {
+                  from: props.pager.pagerNo[0],
+                  to: props.pager.pagerNo[2]
+                };
 
-              props.options = options;
+                props.options = options;
 
-              this.service.selectAll(options).then(data => {
-                props.data = data;
-                document.querySelector(
-                  "#app__edit-list"
-                ).innerHTML = createDbListTable(props);
+                this.service.selectAll(options).then(data => {
+                  props.data = data;
+                  document.querySelector(
+                    "#app__edit-list"
+                  ).innerHTML = createDbListTable(props);
 
-                addEvent(props);
+                  addEvent(props);
+                });
               });
             };
 
@@ -1673,11 +1671,7 @@
                 <div class="table-responsive" id="app__edit-list"></div>
                 <div class="table-responsive" id="app__edit-list-edit"></div>
               `;
-              this.service.createPager().then(data => {
-                this.pagerRange = data;
-
-                this.renderDbListTable();
-              });
+              this.renderDbListTable();
             })();
           }
         }
