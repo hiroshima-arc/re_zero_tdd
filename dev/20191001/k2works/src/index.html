@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+      integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI="
+      crossorigin="anonymous"
+    />
+
+    <title>ゼロから始めるテスト駆動開発</title>
+  </head>
+  <body>
+    <!-- ヘッダー -->
+    <header class="py-4">
+      <div class="container text-center">
+        <h1>ゼロから始めるテスト駆動開発</h1>
+      </div>
+    </header>
+    <!-- /ヘッダー -->
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark stick-top">
+      <!-- サブコンポーネント -->
+      <div class="container">
+        <a href="index.html" class="navbar-brand">Zero TDD</a>
+        <!-- 切り替えボタン -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbar-content"
+          aria-controls="navbar-content"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- ナビゲーション -->
+        <div class="collapse navbar-collapse" id="navbar-content">
+          <!-- ナビゲーションメニュー -->
+          <!-- 左側メニュー: トップページの各コンテンツへのリンク -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a href="#" class="nav-link"
+                >Top <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-hhaspopup="true"
+                aria-expanded="false"
+              >
+                Contents
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a href="#" class="dropdown-item">FizzBuzz</a>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 右側メニュー: Contactページへのリンク -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link btn btn-info">Contact</a>
+            </li>
+          </ul>
+          <!-- /ナビゲーションメニュー -->
+        </div>
+      </div>
+      <!-- サブコンポーネント -->
+    </nav>
+    <!-- /ナビゲーションバー -->
+    <!-- メイン -->
+    <main>
+      <!-- コンテンツ01 -->
+      <div class="py-4">
+        <section id="fizz-buzz">
+          <div class="container">
+            <div class="row">
+              <h2>FizzBuzz</h2>
+            </div>
+            <div class="row p-3">
+              <!-- 左側カラム（画面幅md以上）　-->
+              <div class="col-md-2">
+                <h3>仕様</h3>
+              </div>
+              <!-- 右側カラム（画面幅md以上） -->
+              <div class="col-md-10">
+                <p>1 から 100 までの数をプリントするプログラムを書け。</p>
+                <p>
+                  ただし 3 の倍数のときは数の代わりに｢Fizz｣と、5
+                  の倍数のときは｢Buzz｣とプリントし、
+                </p>
+                <p>3 と 5 両方の倍数の場合には｢FizzBuzz｣とプリントすること</p>
+                <p>
+                  タイプごとに出力を切り替えることができる。
+                </p>
+
+                <p>
+                  タイプ１は通常、タイプ２は数字のみ、タイプ３は FizzBuzz
+                  の場合のみをプリントする。
+                </p>
+
+                <p>
+                  表示された内容を変更できる。入力した値は指定されたタイプに対応した値を表示する。
+                </p>
+
+                <p>
+                  編集された内容を保存できる。
+                </p>
+
+                <p>
+                  編集された内容を検索できる。
+                </p>
+              </div>
+            </div>
+            <div class="row p-3">
+              <!-- 左側カラム（画面幅md以上）　-->
+              <div class="col-md-2">
+                <h3>ToDoリスト</h3>
+              </div>
+              <!-- 右側カラム（画面幅md以上） -->
+              <div class="col-md-10">
+                <ul>
+                  <li>1 から 100 まで数をプリントできるようにする。</li>
+                  <li>
+                    3
+                    の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
+                  </li>
+                  <li>5 の倍数のときは｢Buzz｣とプリントできるようにする。</li>
+                  <li>
+                    3 と 5
+                    両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする
+                  </li>
+                </ul>
+                <ul>
+                  <li>タイプ 1 の場合</li>
+                  <ul>
+                    <li>
+                      3
+                      の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
+                    </li>
+                    <li>5 の倍数のときは｢Buzz｣とプリントできるようにする。</li>
+                    <li>
+                      3 と 5
+                      両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
+                    </li>
+                  </ul>
+                  <li>タイプ 2 の場合</li>
+                  <ul>
+                    <li>3 の倍数のときは数をプリントできるようにする。</li>
+                    <li>5 の倍数のときは数をプリントできるようにする。</li>
+                    <li>
+                      3 と 5 両方の倍数の場合には値をプリントできるようにする。
+                    </li>
+                  </ul>
+                  <li>タイプ 3 の場合</li>
+                  <ul>
+                    <li>3 の倍数のときは数をプリントできるようにする。</li>
+                    <li>5 の倍数のときは数をプリントできるようにする。</li>
+                    <li>
+                      3 と 5
+                      両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする。
+                    </li>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="py-4">
+          <section id="menu">
+            <div class="container">
+              <h3 class="mb-3">Menu</h3>
+              <div id="app__message"></div>
+              <div class="nav nav-tabs" id="tab-menus" role="tablist">
+                <a
+                  aria-controls="panel-menu01"
+                  aria-selected="true"
+                  class="nav-item nav-link active"
+                  data-toggle="tab"
+                  href="#panel-menu01"
+                  id="tab-menu01"
+                  role="tab"
+                  >FizzBuzzCounter</a
+                >
+                <a
+                  aria-controls="panel-menu02"
+                  aria-selected="false"
+                  class="nav-item nav-link"
+                  data-toggle="tab"
+                  href="#panel-menu02"
+                  id="tab-menu02"
+                  role="tab"
+                  >FizzBuzzTable</a
+                >
+                <a
+                  aria-controls="panel-menu03"
+                  aria-selected="false"
+                  class="nav-item nav-link"
+                  data-toggle="tab"
+                  href="#panel-menu03"
+                  id="tab-menu03"
+                  role="tab"
+                  >FizzBuzzEdit</a
+                >
+              </div>
+
+              <div class="tab-content" id="panel-menus">
+                <div
+                  aria-labelledby="tab-menu01"
+                  class="tab-pane fade show active border border-top-0 jumbotron"
+                  id="panel-menu01"
+                  role="tabpanel"
+                >
+                  <div
+                    id="app__counter"
+                    class="row d-flex align-items-center"
+                  ></div>
+                </div>
+                <div
+                  aria-labelledby="tab-menu02"
+                  class="tab-pane fade border border-top-0"
+                  id="panel-menu02"
+                  role="tabpanel"
+                >
+                  <dvi class="row p-3">
+                    <div id="app__table" class="col-md-12 order-md-2"></div>
+                  </dvi>
+                </div>
+                <div
+                  aria-labelledby="tab-menu03"
+                  class="tab-pane fade border border-top-0"
+                  id="panel-menu03"
+                  role="tabpanel"
+                >
+                  <div class="row p-3">
+                    <div id="app__edit"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section id="mocha"></section>
+      </div>
+      <!-- /コンテンツ01 -->
+    </main>
+    <!-- /メイン -->
+    <!-- フッター -->
+    <footer class="py-4 bg-dark text-light">
+      <div class="container text-center">
+        <!-- ナビゲーション -->
+        <ul class="nav justify-content-center mb-3">
+          <li class="nav-item">
+            <a href="#" class="nav-link">Top</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Contents</a>
+          </li>
+          <li class="nav-item">
+            <a href="contact.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+        <!-- /ナビゲーション -->
+        <p>
+          <small>Copyright &copy;2019 HiroshiamARC, All Rights Reserved.</small>
+        </p>
+      </div>
+    </footer>
+    <!-- /フッター -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js"></script>
+    <script>
+      mocha.setup("tdd");
+    </script>
+    <script>
+      const assert = chai.assert;
+      suite("FizzBuzzTest", () => {
+        suite("タイプ1の場合", () => {
+          test("1から100までプリントする、ただし3で割り切れる場合はFizz5で割り切れる場合はBuzz3と5で割り切れる場合はFizzBuzzをプリントする", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type01());
+            const list = service.generateList(100);
+            assert.equal(1, list[0].value);
+            assert.equal("Fizz", list[2].value);
+            assert.equal("Buzz", list[4].value);
+            assert.equal("FizzBuzz", list[14].value);
+            assert.equal("Buzz", list[99].value);
+          });
+          test("3で割り切れる場合はFizzをプリントする", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type01());
+            assert.equal("Fizz", service.generate(3));
+          });
+          test("5で割り切れる場合はBuzzをプリントする", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type01());
+            assert.equal("Buzz", service.generate(5));
+          });
+          test("15で割り切れる場合はFizzBuzzをプリントする", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type01());
+            assert.equal("FizzBuzz", service.generate(15));
+          });
+          test("数字の合計は2632 ", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type01());
+            const list = service.generateList(100);
+            assert.equal(
+              2632,
+              list
+                .filter(i => Number.isInteger(i.value))
+                .reduce((acc, value) => acc + value.value, 0)
+            );
+          });
+          test("Fizzの個数は27個", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type01());
+            const list = service.generateList(100);
+            assert.equal(27, list.filter(i => i.value === "Fizz").length);
+          });
+          test("Buzzの個数は14個", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type01());
+            const list = service.generateList(100);
+            assert.equal(14, list.filter(i => i.value === "Buzz").length);
+          });
+          test("FizzBuzzの個数は6個", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type01());
+            const list = service.generateList(100);
+            assert.equal(6, list.filter(i => i.value === "FizzBuzz").length);
+          });
+          test("値は正の値のみ許可する", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type01());
+            chai
+              .expect(() => service.generate(-1))
+              .to.throw("FizzBuzzValue can't generate by minus number -1");
+          });
+          test("100より多い数を許可しない", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type01());
+            chai
+              .expect(() => service.generateList(101))
+              .to.throw("FizzBuzzList can't generate over 100");
+          });
+        });
+        suite("タイプ2の場合", () => {
+          test("3で割り切れる場合は3をプリントする", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type02());
+            assert.equal(3, service.generate(3));
+          });
+          test("5で割り切れる場合は5をプリントする", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type02());
+            assert.equal(5, service.generate(5));
+          });
+          test("15で割り切れる場合は15をプリントする", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type02());
+            assert.equal(15, service.generate(15));
+          });
+        });
+        suite("タイプ3の場合", () => {
+          test("3で割り切れる場合は3をプリントする", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type03());
+            assert.equal(3, service.generate(3));
+          });
+          test("5で割り切れる場合は5をプリントする", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type03());
+            assert.equal(5, service.generate(5));
+          });
+          test("15で割り切れる場合はFizzBuzzをプリントする", () => {
+            const service = FizzBuzzService.create(FizzBuzzTypeEnum.type03());
+            assert.equal("FizzBuzz", service.generate(15));
+          });
+        });
+        suite("編集された内容を保存する", () => {
+          test("値を保存する", () => {
+            const repository = FizzBuzzRepository.create(
+              "fizzbuzz.test.db",
+              "items"
+            );
+            const data = { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] };
+
+            return repository.save(data);
+          });
+          test("値を取得する", () => {
+            const repository = FizzBuzzRepository.create(
+              "fizzbuzz.test.db",
+              "items"
+            );
+            const data = { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] };
+
+            repository.save(data).then(() => {
+              const keyValue = 2;
+              return repository.find(keyValue).then(data => {
+                assert.equal("Fizz", data.list[2]);
+              });
+            });
+          });
+          test("値を全て取得する", () => {
+            const repository = FizzBuzzRepository.create(
+              "fizzbuzz.test.db",
+              "items"
+            );
+
+            [
+              { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] },
+              { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] },
+              { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] }
+            ].forEach(data => repository.save(data));
+
+            return repository.selectAll().then(data => {
+              assert.equal(3, data.length);
+            });
+          });
+          test("特定の範囲の値を全て取得する", () => {
+            const repository = FizzBuzzRepository.create(
+              "fizzbuzz.test.db",
+              "items"
+            );
+
+            [
+              { id: 1, list: [1, 2, "Fizz", 4, "Buzz"], order: 1 },
+              { id: 2, list: [1, 2, "Fizz", 4, "Buzz"], order: 2 },
+              { id: 3, list: [1, 2, "Fizz", 4, "Buzz"], order: 3 },
+              { id: 4, list: [1, 2, "Fizz", 4, "Buzz"], order: 4 },
+              { id: 5, list: [1, 2, "Fizz", 4, "Buzz"], order: 5 }
+            ].forEach(data => repository.save(data));
+
+            return repository.selectBetween(2, 4).then(data => {
+              assert.equal(3, data.length);
+            });
+          });
+          test("値を削除する", () => {
+            const repository = FizzBuzzRepository.create(
+              "fizzbuzz.test.db",
+              "items"
+            );
+
+            const data = { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] };
+            repository.save(data).then(() => {
+              const keyValue = "3";
+              repository.delete(keyValue);
+
+              return repository.find(keyValue).then(data => {
+                assert.equal(null, data);
+              });
+            });
+          });
+          test("値を全て削除する", () => {
+            const repository = FizzBuzzRepository.create(
+              "fizzbuzz.test.db",
+              "items"
+            );
+
+            [
+              { id: 1, list: [1, 2, "Fizz", 4, "Buzz"] },
+              { id: 2, list: [1, 2, "Fizz", 4, "Buzz"] },
+              { id: 3, list: [1, 2, "Fizz", 4, "Buzz"] }
+            ].forEach(data => repository.save(data));
+
+            repository.drop();
+
+            return repository.selectAll().then(data => {
+              assert.equal(0, data.length);
+            });
+          });
+        });
+      });
+
+      const IndexedDbRepository = {
+        create() {
+          return Object.create(IndexedDbRepository.prototype);
+        },
+        prototype: {
+          setItem(dbName, storeName, createRequest, data) {
+            return new Promise((resolve, reject) => {
+              const req = createRequest(dbName, storeName);
+              req.onsuccess = function(event) {
+                const db = event.target.result;
+                const trans = db.transaction(storeName, "readwrite");
+                const store = trans.objectStore(storeName);
+                const putReq = store.put(data);
+
+                putReq.onsuccess = function() {
+                  console.log("put data success");
+                  resolve();
+                };
+
+                trans.oncomplete = function() {
+                  console.log("transaction complete");
+                  reject();
+                };
+              };
+            });
+          },
+
+          getItem(dbName, storeName, createRequest, keyValue) {
+            return new Promise(resolve => {
+              const req = createRequest(dbName, storeName);
+              req.onsuccess = function(event) {
+                const db = event.target.result;
+                const trans = db.transaction(storeName, "readwrite");
+                const store = trans.objectStore(storeName);
+                const getReq = store.get(keyValue);
+
+                getReq.onsuccess = function(event) {
+                  const result = event.target.result;
+                  console.log(result);
+                  resolve(result);
+                };
+              };
+            });
+          },
+
+          getItems(dbName, storeName, createRequest) {
+            return new Promise(resolve => {
+              const req = createRequest(dbName, storeName);
+              req.onsuccess = function(event) {
+                const db = event.target.result;
+                const trans = db.transaction(storeName, "readwrite");
+                const store = trans.objectStore(storeName);
+                const getReq = store.openCursor();
+
+                let result = [];
+                getReq.onsuccess = function(event) {
+                  const cur = event.target.result;
+                  if (!cur) return resolve(result);
+                  console.log(cur.value);
+                  result.push(cur.value);
+                  cur.continue();
+                };
+              };
+            });
+          },
+
+          getItemsByRange(dbName, storeName, createRequest, from, to) {
+            return new Promise(resolve => {
+              const req = createRequest(dbName, storeName);
+              req.onsuccess = function(event) {
+                from = isNaN(from) ? 0 : from;
+                to = isNaN(to) ? 0 : to;
+
+                const db = event.target.result;
+                const trans = db.transaction(storeName, "readwrite");
+                const store = trans.objectStore(storeName);
+                const index = store.index("order");
+                const range = IDBKeyRange.bound(from, to);
+                const getReq = index.openCursor(range);
+
+                let list = [];
+                getReq.onsuccess = function(event) {
+                  let cur = event.target.result;
+                  if (!cur) return resolve(list);
+                  console.log(cur.value);
+                  list.push(cur.value);
+                  cur.continue();
+                };
+              };
+            });
+          },
+
+          getItemsByRangeDescription(dbName, storeName, createRequest, str) {
+            return new Promise(resolve => {
+              const req = createRequest(dbName, storeName);
+              req.onsuccess = function(event) {
+                const nextStr =
+                  str.slice(0, -1) +
+                  String.fromCharCode(str.slice(-1).charCodeAt() + 1);
+
+                const db = event.target.result;
+                const trans = db.transaction(storeName, "readwrite");
+                const store = trans.objectStore(storeName);
+                const index = store.index("description");
+                const range = IDBKeyRange.bound(str, nextStr, false, true);
+                const getReq = index.openCursor(range);
+
+                let list = [];
+                getReq.onsuccess = function(event) {
+                  let cur = event.target.result;
+                  if (!cur) return resolve(list);
+                  console.log(cur.value);
+                  list.push(cur.value);
+                  cur.continue();
+                };
+              };
+            });
+          },
+
+          deleteItem(dbName, storeName, createRequest, keyValue) {
+            return new Promise((resolve, reject) => {
+              const req = createRequest(dbName, storeName);
+              req.onsuccess = function(event) {
+                const db = event.target.result;
+                const trans = db.transaction(storeName, "readwrite");
+                const store = trans.objectStore(storeName);
+                const getReq = store.delete(keyValue);
+
+                getReq.onsuccess = function(event) {
+                  console.log(event.target.result);
+                  resolve();
+                };
+              };
+            });
+          },
+
+          destroy(dbName) {
+            return new Promise(resolve => {
+              const deleteReq = indexedDB.deleteDatabase(dbName);
+              deleteReq.onsuccess = function(event) {
+                console.log("db delete success");
+                resolve();
+              };
+
+              deleteReq.onerror = function() {
+                console.log("db delete error");
+              };
+            });
+          }
+        }
+      };
+
+      const FizzBuzzRepository = {
+        create(dbName, storeName) {
+          let self = Object.create(FizzBuzzRepository.prototype);
+          Object.assign(self, IndexedDbRepository.create());
+          self.dbName = dbName;
+          self.storeName = storeName;
+          return self;
+        },
+        prototype: {
+          createRequest(dbName, storeName) {
+            const openReq = indexedDB.open(dbName);
+
+            openReq.onupgradeneeded = function(event) {
+              const db = event.target.result;
+              const os = db.createObjectStore(storeName, {
+                keyPath: "id"
+              });
+              os.createIndex("order", "order", { unique: false });
+              os.createIndex("description", "description", { unique: false });
+            };
+
+            return openReq;
+          },
+
+          save(data) {
+            return IndexedDbRepository.prototype.setItem(
+              this.dbName,
+              this.storeName,
+              this.createRequest,
+              data
+            );
+          },
+
+          find(keyValue) {
+            return IndexedDbRepository.prototype.getItem(
+              this.dbName,
+              this.storeName,
+              this.createRequest,
+              keyValue
+            );
+          },
+
+          selectAll() {
+            return IndexedDbRepository.prototype.getItems(
+              this.dbName,
+              this.storeName,
+              this.createRequest
+            );
+          },
+
+          selectBetween(from, to) {
+            return IndexedDbRepository.prototype.getItemsByRange(
+              this.dbName,
+              this.storeName,
+              this.createRequest,
+              from,
+              to
+            );
+          },
+
+          selectByKeyword(keyWord) {
+            return IndexedDbRepository.prototype.getItemsByRangeDescription(
+              this.dbName,
+              this.storeName,
+              this.createRequest,
+              keyWord
+            );
+          },
+
+          delete(keyValue) {
+            return IndexedDbRepository.prototype.deleteItem(
+              this.dbName,
+              this.storeName,
+              this.createRequest,
+              keyValue
+            );
+          },
+
+          drop() {
+            return IndexedDbRepository.prototype.destroy(this.dbName);
+          }
+        }
+      };
+
+      const FizzBuzzTypeEnum = {
+        type01() {
+          return FizzBuzzType01.create();
+        },
+        type02() {
+          return FizzBuzzType02.create();
+        },
+        type03() {
+          return FizzBuzzType03.create();
+        }
+      };
+
+      const FizzBuzzType = {
+        create() {
+          let self = Object.create(FizzBuzzType.prototype);
+          self.FIZZ = "Fizz";
+          self.BUZZ = "Buzz";
+          return self;
+        },
+        prototype: {
+          isFizz(number) {
+            return number % 3 === 0;
+          },
+          isBuzz(number) {
+            return number % 5 === 0;
+          }
+        }
+      };
+
+      const FizzBuzzType01 = {
+        create() {
+          let self = Object.create(FizzBuzzType01.prototype);
+          Object.assign(self, FizzBuzzType.create());
+          return self;
+        },
+        prototype: {
+          generate(number) {
+            const isFizz = FizzBuzzType.prototype.isFizz(number);
+            const isBuzz = FizzBuzzType.prototype.isBuzz(number);
+
+            if (isFizz && isBuzz)
+              return FizzBuzzValue.create(number, this.FIZZ + this.BUZZ);
+            if (isFizz) return FizzBuzzValue.create(number, this.FIZZ);
+            if (isBuzz) return FizzBuzzValue.create(number, this.BUZZ);
+
+            return FizzBuzzValue.create(number, number);
+          }
+        }
+      };
+
+      const FizzBuzzType02 = {
+        create() {
+          let self = Object.create(FizzBuzzType02.prototype);
+          Object.assign(self, FizzBuzzType.create());
+          return self;
+        },
+        prototype: {
+          generate(number) {
+            return FizzBuzzValue.create(number, number);
+          }
+        }
+      };
+
+      const FizzBuzzType03 = {
+        create() {
+          let self = Object.create(FizzBuzzType03.prototype);
+          Object.assign(self, FizzBuzzType.create());
+          return self;
+        },
+        prototype: {
+          generate(number) {
+            const isFizz = FizzBuzzType.prototype.isFizz(number);
+            const isBuzz = FizzBuzzType.prototype.isBuzz(number);
+
+            if (isFizz && isBuzz)
+              return FizzBuzzValue.create(number, this.FIZZ + this.BUZZ);
+            return FizzBuzzValue.create(number, number);
+          }
+        }
+      };
+
+      const FizzBuzzValue = {
+        create(number, value) {
+          if (number < 0)
+            throw new Error(
+              `FizzBuzzValue can't generate by minus number ${number}`
+            );
+          let self = Object.create(FizzBuzzValue.prototype);
+          self.number = number;
+          self.value = value;
+          return self;
+        },
+        prototype: {
+          equals(other) {
+            return this.number === other.number && this.value === other.value;
+          }
+        }
+      };
+
+      const FizzBuzzList = {
+        MAX_NUMBER: 100,
+
+        create(list) {
+          if (list.length > this.MAX_NUMBER)
+            throw new Error(
+              `FizzBuzzList can't generate over ${this.MAX_NUMBER}`
+            );
+          let self = Object.create(FizzBuzzList.prototype);
+          self.value = list;
+          return self;
+        },
+        prototype: {
+          add(value) {
+            let result = this.value;
+            result.push(value);
+            return FizzBuzzList.create(result);
+          }
+        }
+      };
+
+      const FizzBuzzCommand = {
+        create() {
+          let self = Object.create(FizzBuzzCommand.prototype);
+          return self;
+        },
+        prototype: {
+          execute() {}
+        }
+      };
+
+      const FizzBuzzValueCommand = {
+        create(type) {
+          let self = Object.create(FizzBuzzValueCommand.prototype);
+          Object.assign(self, FizzBuzzCommand.create());
+          self.type = type;
+          return self;
+        },
+        prototype: {
+          execute(number) {
+            return this.type.generate(number);
+          }
+        }
+      };
+
+      const FizzBuzzListCommand = {
+        create(type) {
+          let self = Object.create(FizzBuzzListCommand.prototype);
+          Object.assign(self, FizzBuzzCommand.create());
+          self.type = type;
+          self.list = FizzBuzzList.create([]);
+          return self;
+        },
+        prototype: {
+          execute(number) {
+            // 配列は0から始まるので1を足す
+            [...Array(number + 1).keys()]
+              .slice(1)
+              .forEach(i => (this.list = this.list.add(this.type.generate(i))));
+            return this.list;
+          }
+        }
+      };
+
+      const FizzBuzzService = {
+        create(type) {
+          let self = Object.create(FizzBuzzService.prototype);
+          self.valueCommand = FizzBuzzValueCommand.create(type);
+          self.listCommand = FizzBuzzListCommand.create(type);
+          self.repository = FizzBuzzRepository.create("fizzbuzz.db", "items");
+          return self;
+        },
+        prototype: {
+          generate(number) {
+            return this.valueCommand.execute(number).value;
+          },
+          generateList(number) {
+            return this.listCommand.execute(number).value;
+          },
+          createViewModel(id, contents, description, order) {
+            return {
+              id: id,
+              list: contents,
+              description: description || "",
+              order: order || id
+            };
+          },
+          createPager() {
+            return this.repository.selectAll().then(data => {
+              const map = new Map();
+              let from = 1;
+              let to = 3;
+              let count = Math.ceil(data.length / 3);
+              [...Array(count).keys()].forEach(i => {
+                let key = i + 1;
+                let value = { from: from, to: to };
+                map.set(key, value);
+                from = from + 3;
+                to = to + 3;
+              });
+              return map;
+            });
+          },
+          getId() {
+            return this.repository.selectAll().then(data => {
+              let id;
+              if (data.length === 0) {
+                id = 1;
+              } else {
+                let array = data.map(i => i.id);
+                id = Math.max(...array) + 1;
+              }
+              return id;
+            });
+          },
+          save(data) {
+            return this.repository.save(data).then(() => {
+              this.repository.selectAll().then(data => {
+                data.forEach((v, k) => {
+                  this.repository.save(
+                    this.createViewModel(v.id, v.list, v.description, k + 1)
+                  );
+                });
+              });
+            });
+          },
+          find(id) {
+            return this.repository.find(id);
+          },
+          selectAll(options) {
+            let params = options || { from: 1, to: 3 };
+            return this.repository.selectBetween(params.from, params.to);
+          },
+          selectByKeyword(keyWord) {
+            return this.repository.selectByKeyword(keyWord);
+            return keyWord;
+          },
+          delete(id) {
+            return this.repository.delete(id).then(() => {
+              this.repository.selectAll().then(data => {
+                data.forEach((v, k) => {
+                  this.repository.save(
+                    this.createViewModel(v.id, v.list, v.description, k + 1)
+                  );
+                });
+              });
+            });
+          },
+          drop() {
+            return this.repository.drop();
+          }
+        }
+      };
+
+      const FizzBuzzView = {
+        create(type) {
+          let self = Object.create(FizzBuzzView.prototype);
+          self.service = FizzBuzzService.create(type);
+          self.list = self.service.generateList(100);
+          self.currentNumber = 0;
+          self.currentValue = "FizzBuzz";
+          return self;
+        },
+        prototype: {
+          utils: {
+            createMessage(message) {
+              return `
+              <div
+                class="alert alert-primary alert-dismissible fade show"
+                role="alert"
+              >
+                ${message}
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              `;
+            }
+          },
+
+          renderCounter() {
+            const createCounter = () => {
+              return `
+                    <div class="col-md-1">
+                      <button class="btn btn-primary" id="decrement">
+                        -
+                      </button>
+                    </div>
+                    <div class="col-md-10">
+                      <h1 class="display-1 text-center">${this.currentValue}</h1>
+                    </div>
+                    <div class="col-md-1">
+                      <button class="btn btn-primary" id="increment">
+                        +
+                      </button>
+                    </div>
+            `;
+            };
+
+            const increment = () => {
+              let number = this.currentNumber + 1;
+              this.currentValue = this.service.generate(number);
+              this.currentNumber = number;
+              this.renderCounter();
+            };
+
+            const decrement = () => {
+              let number = this.currentNumber <= 0 ? 0 : this.currentNumber - 1;
+              this.currentValue = this.service.generate(number);
+              this.currentNumber = number;
+              this.renderCounter();
+            };
+
+            const render = () => {
+              document.querySelector(
+                "#app__counter"
+              ).innerHTML = createCounter();
+              document
+                .querySelector("#increment")
+                .addEventListener("click", increment);
+              document
+                .querySelector("#decrement")
+                .addEventListener("click", decrement);
+            };
+
+            render();
+          },
+
+          renderSelect() {
+            const createSelect = () => {
+              return `
+                  <select name="type" id="app__select--type">
+                    <option value="one">タイプ1</option>
+                    <option value="two">タイプ2</option>
+                    <option value="three">タイプ3</option>
+                  </select>
+                  `;
+            };
+
+            const changeEvent = e => {
+              switch (e.target.value) {
+                case "one":
+                  FizzBuzzView.create(FizzBuzzTypeEnum.type01()).renderTable();
+                  break;
+                case "two":
+                  FizzBuzzView.create(FizzBuzzTypeEnum.type02()).renderTable();
+                  break;
+                case "three":
+                  FizzBuzzView.create(FizzBuzzTypeEnum.type03()).renderTable();
+                  break;
+                default:
+                  FizzBuzzView.create(FizzBuzzTypeEnum.type01()).renderTable();
+              }
+            };
+
+            const render = () => {
+              document.querySelector("#app__select").innerHTML = createSelect();
+              document
+                .querySelector("#app__select--type")
+                .addEventListener("change", changeEvent);
+              document
+                .querySelector("#app__select--type")
+                .classList.add("browser-default");
+              document
+                .querySelector("#app__select--type")
+                .classList.add("custom-select");
+            };
+
+            render();
+          },
+
+          renderTable() {
+            const createTable = () => {
+              const header = (() => {
+                let element = "<thead>";
+                [...Array(10).keys()].forEach(
+                  i => (element += `<th>${i + 1}</th>`)
+                );
+                element += "</thead>";
+                return element;
+              })();
+
+              const body = (() => {
+                let element = "<tbody><tr>";
+                this.list.forEach((v, k) => {
+                  element += `<td>${v.value}</td>`;
+                  if ((k + 1) % 10 === 0) element += "</tr><tr>";
+                });
+                element += "</tbody>";
+                return element;
+              })();
+
+              return `
+                      <table>
+                          ${header}
+                          ${body}
+                      </table>
+              `;
+            };
+
+            const editTable = () => {
+              $("#app__table-contents > table > tbody > tr > td").on(
+                "click",
+                edit_toggle(this.service)
+              );
+
+              function edit_toggle(service) {
+                var edit_flag = false;
+                return function() {
+                  if (edit_flag) return;
+                  var $input = $("<input>")
+                    .attr("type", "text")
+                    .val($(this).text());
+                  $(this).html($input);
+
+                  $("input", this)
+                    .focus()
+                    .keypress(function(e) {
+                      if (e.which == 13) {
+                        try {
+                          const value = service.generate($(this).val());
+                          save(this);
+                          $(this)
+                            .after(value)
+                            .unbind()
+                            .remove();
+                          edit_flag = false;
+                        } catch (e) {
+                          alert(e.message);
+                        }
+                      }
+                    });
+
+                  $("input", this)
+                    .focus()
+                    .blur(function(e) {
+                      $(this)
+                        .after($(this).val())
+                        .unbind()
+                        .remove();
+                      edit_flag = false;
+                    });
+                  edit_flag = true;
+                };
+              }
+
+              function save(elm) {
+                console.log("「" + $(elm).val() + "」を保存しました"); //保存する処理をここに書く
+              }
+            };
+
+            const render = () => {
+              document.querySelector(
+                "#app__table-contents"
+              ).innerHTML = createTable();
+              document
+                .querySelector("#app__table-contents > table")
+                .classList.add("table");
+              document
+                .querySelector("#app__table-contents > table")
+                .classList.add("table-striped");
+
+              editTable();
+            };
+
+            render();
+          },
+
+          renderButton() {
+            const saveItems = () => {
+              const createListFromTable = () => {
+                let list = [];
+                let table = document.querySelector(
+                  "#app__table-contents > table"
+                );
+                for (i = 1; i <= 10; i++) {
+                  for (j = 0; j < 10; j++) {
+                    list.push(table.rows[i].cells[j].innerText);
+                  }
+                }
+                return list;
+              };
+
+              const saveItemsEvent = () => {
+                document.querySelector("#app__message").innerHTML = "処理中...";
+
+                this.service.getId().then(id => {
+                  const newData = this.service.createViewModel(
+                    id,
+                    createListFromTable()
+                  );
+
+                  this.service.save(newData).then(() => {
+                    document.querySelector(
+                      "#app__message"
+                    ).innerHTML = this.utils.createMessage(
+                      `保存しました id:${newData.id}`
+                    );
+
+                    document.querySelector("#app__edit-list-edit").innerHTML =
+                      "";
+
+                    this.renderDbList();
+                  });
+                });
+              };
+
+              document.querySelector(
+                "#app__button--save"
+              ).onclick = saveItemsEvent;
+            };
+
+            const deleteItems = () => {
+              const deleteItems = () => {
+                document.querySelector("#app__message").innerHTML = "処理中...";
+                this.service.drop().then(() => {
+                  document.querySelector("#app__edit-list-edit").innerHTML = "";
+                  document.querySelector("#app__edit-list").innerHTML = "";
+                  document.querySelector(
+                    "#app__message"
+                  ).innerHTML = this.utils.createMessage("削除しました");
+                });
+              };
+
+              document.querySelector(
+                "#app__button--delete"
+              ).onclick = deleteItems;
+            };
+
+            const render = () => {
+              document.querySelector("#app__button").innerHTML = `
+                  <button
+                    id="app__button--save"
+                    type="button"
+                    class="btn btn-primary btn-rounded btn-sm my-0"
+                  >
+                    Save
+                  </button>
+                  <button
+                    id="app__button--delete"
+                    type="button"
+                    class="btn btn-danger btn-rounded btn-sm my-0"
+                  >
+                    Delete
+                  </button>
+            `;
+              saveItems();
+              deleteItems();
+            };
+
+            render();
+          },
+
+          renderDbList() {
+            const create = props => {
+              let row = "";
+              props.data.forEach(item => {
+                let listSummary = "";
+                [...Array(7).keys()].forEach(
+                  i => (listSummary += `${item.list[i]},`)
+                );
+                listSummary += "・・・・";
+                const editButton = `
+                      <span class="table-edit">
+                       <button value="${item.id}" type="button" class="btn btn-primary btn-rounded btn-sm my-0 waves-effect waves-light" data-toggle="modal" data-target="#app__db--modal">
+                        Edit
+                       </button>
+                      </span>
+                    `;
+                const deleteButton = `
+                      <span class="table-remove">
+                       <button value="${item.id}" type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
+                        Remove
+                       </button>
+                      </span>
+                    `;
+                row += `
+                    <tr>
+                      <td>${editButton}</td>
+                      <td>${deleteButton}</td>
+                      <td>${item.id}</td>
+                      <td>${listSummary}</td>
+                      <td>${item.description}</td>
+                    </tr>
+                    `;
+              });
+
+              const search = (() => {
+                return `
+                    <form class="form-inline">
+                      <div class="form-group mb-2">
+                      <div class="form-group mx-sm-3 mb-2">
+                        <label for="inputPassword2" class="sr-only"
+                          >Description</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="inputSearchDescription"
+                          placeholder="Description"
+                        />
+                      </div>
+                      <button type="button" class="btn btn-primary mb-2">
+                        Search
+                      </button>
+                    </form>
+                `;
+              })();
+
+              const pager = (() => {
+                const element = document.querySelector("#pager");
+
+                return `
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <li id="page-item-prev" class="page-item">
+                      <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">${
+                      props.pager.pagerNo[0]
+                    }</a></li>
+                    <li class="page-item"><a class="page-link" href="#">${
+                      props.pager.pagerNo[1]
+                    }</a></li>
+                    <li class="page-item"><a class="page-link" href="#">${
+                      props.pager.pagerNo[2]
+                    }</a></li>
+                  <li id="page-item-next" class="page-item">
+                      <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              `;
+              })();
+
+              return `
+                <div id="search">
+                  ${search}
+                </div>
+                <div id="pager">
+                  ${pager}
+                </div>
+                <div id="dblist">
+                <table class="table table-responsive-md">
+                  <thead>
+                    <th></th>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Contents</th>
+                    <th>Description</th>
+                  </thead>
+                  <tbody>${row}</tbody>
+                </table>
+                </div>
+                    `;
+            };
+
+            const addEvent = props => {
+              const clearDbListEdit = () =>
+                (document.querySelector("#app__edit-list-edit").innerHTML = "");
+
+              const selectAllFromService = props => {
+                props.service.selectAll(props.options).then(data => {
+                  props.data = data;
+                  document.querySelector("#app__edit-list").innerHTML = create(
+                    props
+                  );
+
+                  addEvent(props);
+                });
+              };
+
+              const search = (props => {
+                const show = data => {
+                  props.data = data;
+                  document.querySelector("#app__edit-list").innerHTML = create(
+                    props
+                  );
+                };
+
+                $("#inputSearchDescription").on("keyup", function() {
+                  clearDbListEdit();
+                  const keyWord = $("#inputSearchDescription").val();
+                  props.service.selectByKeyword(keyWord).then(data => {
+                    show(data);
+                    addEvent(props);
+                    $("#inputSearchDescription").val(keyWord);
+                    $("#inputSearchDescription").focus();
+                  });
+                });
+
+                $("#search > form > div > button").on("click", function() {
+                  clearDbListEdit();
+                  const keyWord = $("#inputSearchDescription").val();
+                  props.service.selectByKeyword(keyWord).then(data => {
+                    show(data);
+                    addEvent(props);
+                  });
+                });
+              })(props);
+
+              const pager = (props => {
+                $(".page-link").on("click", e => {
+                  e.preventDefault();
+
+                  const no = Number.parseInt(e.target.text);
+                  if (Number.isInteger(no)) {
+                    if (props.pager.pagerRange.get(no)) {
+                      const options = {
+                        from: props.pager.pagerRange.get(no).from,
+                        to: props.pager.pagerRange.get(no).to
+                      };
+                      props.options = options;
+                      selectAllFromService(props);
+                      clearDbListEdit();
+                      props.pager.currentPageNo = no;
+                    }
+                  }
+                });
+
+                $("#page-item-prev > a").on("click", e => {
+                  e.preventDefault();
+
+                  props.pager.pagerNo[0] > 1
+                    ? (props.pager.pagerNo[0] = props.pager.pagerNo[0] - 3)
+                    : 1;
+                  props.pager.pagerNo[1] > 2
+                    ? (props.pager.pagerNo[1] = props.pager.pagerNo[1] - 3)
+                    : 2;
+                  props.pager.pagerNo[2] > 3
+                    ? (props.pager.pagerNo[2] = props.pager.pagerNo[2] - 3)
+                    : 3;
+
+                  const no = props.pager.pagerNo[0];
+                  const options = {
+                    from: props.pager.pagerRange.get(no).from,
+                    to: props.pager.pagerRange.get(no).to
+                  };
+                  props.options = options;
+                  selectAllFromService(props);
+                  clearDbListEdit();
+                });
+
+                $("#page-item-next > a").on("click", e => {
+                  e.preventDefault();
+
+                  const no = props.pager.pagerNo[0] + 3;
+                  if (props.pager.pagerRange.get(no)) {
+                    props.pager.pagerNo[0] = props.pager.pagerNo[0] + 3;
+                    props.pager.pagerNo[1] = props.pager.pagerNo[1] + 3;
+                    props.pager.pagerNo[2] = props.pager.pagerNo[2] + 3;
+
+                    const options = {
+                      from: props.pager.pagerRange.get(no).from,
+                      to: props.pager.pagerRange.get(no).to
+                    };
+                    props.options = options;
+                    selectAllFromService(props);
+                    clearDbListEdit();
+                  }
+                });
+              })(props);
+
+              const button = (props => {
+                $("#dblist > table").on("click", ".table-edit", function() {
+                  const currentId = Number.parseInt(
+                    $(this).children()[0].value
+                  );
+                  props.currentId = currentId;
+                  props.renderDbListEdit(props);
+                });
+
+                $("#dblist > table").on("click", ".table-remove", function() {
+                  const removeId = $(this).children()[0].value;
+                  props.service.delete(Number.parseInt(removeId)).then(() => {
+                    document.querySelector(
+                      "#app__message"
+                    ).innerHTML = props.utils.createMessage("削除しました");
+                    $(this)
+                      .parents("tr")
+                      .detach();
+                    clearDbListEdit();
+                  });
+                });
+              })(props);
+            };
+
+            const render = () => {
+              this.service.createPager().then(data => {
+                const props = {
+                  service: this.service,
+                  pager: {
+                    pagerNo: this.pager.pagerNo,
+                    pagerRange: data,
+                    currentPageNo: this.pager.currentPageNo
+                  },
+                  utils: { createMessage: this.utils.createMessage },
+                  renderDbListEdit: this.renderDbListEdit,
+                  renderDbList: this.renderDbList
+                };
+                const no = props.pager.currentPageNo;
+                const options = {
+                  from: props.pager.pagerRange.get(no).from,
+                  to: props.pager.pagerRange.get(no).to
+                };
+
+                props.options = options;
+
+                this.service.selectAll(options).then(data => {
+                  props.data = data;
+                  document.querySelector("#app__edit-list").innerHTML = create(
+                    props
+                  );
+
+                  addEvent(props);
+                });
+              });
+            };
+
+            render();
+          },
+
+          renderDbListEdit(props) {
+            const create = data => {
+              const table = (() => {
+                const header = (() => {
+                  let element = "";
+                  [...Array(10).keys()].forEach(
+                    i => (element += `<th>${i + 1}</th>`)
+                  );
+                  return element;
+                })();
+                const body = (data => {
+                  let element = "<tr>";
+                  data.list.forEach((v, k) => {
+                    element += `<td contenteditable="true">${v}</td>`;
+                    if ((k + 1) % 10 === 0) element += "</tr>";
+                  });
+                  return element;
+                })(data);
+
+                return `
+                <div class="card">
+                  <h3
+                    class="card-header text-center font-weight-bold text-uppercase py-4"
+                  >
+                    Editable table
+                  </h3>
+                  <div class="card-body">
+                    <div class="table-editable">
+                      <table
+                        id="app__edit-list-table"
+                        class="table table-bordered table-responsive-md table-striped text-center"
+                      >
+                        <thead>
+                          ${header}
+                        </thead>
+                        <tbody>
+                          ${body}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            `;
+              })(data);
+
+              const form = (() => {
+                const description = (data => {
+                  if (data.description === undefined) {
+                    return "";
+                  } else {
+                    return data.description;
+                  }
+                })(data);
+
+                return `
+                <form id="app__edit-list-form">
+                  <div class="form-group row">
+                    <label for="inputId" class="col-md-3 col-form-label"
+                      >Id</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputId"
+                        value="${data.id}"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="inputDescription"
+                      class="col-md-3 col-form-label"
+                      >Description</label
+                    >
+                    <div class="col-sm-10">
+                      <textarea
+                        class="form-control"
+                        id="inputDescription"
+                        placeholder="Discription"
+                    >${description}</textarea>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="app__edit-list-save"
+                  >
+                    Save
+                  </button>
+                </form>
+            `;
+              })(data);
+
+              return `
+              <div class="container">
+                ${table}
+                ${form}
+              </div>
+           `;
+            };
+
+            const addEvent = () => {
+              const save = () => {
+                const createListFromTable = () => {
+                  let list = [];
+                  let table = document.querySelector("#app__edit-list-table");
+                  for (i = 1; i <= 10; i++) {
+                    for (j = 0; j < 10; j++) {
+                      list.push(table.rows[i].cells[j].innerText);
+                    }
+                  }
+                  return list;
+                };
+
+                const id = document.querySelector("#inputId").value;
+                const description = document.querySelector("#inputDescription")
+                  .value;
+                const newData = props.service.createViewModel(
+                  Number.parseInt(id),
+                  createListFromTable(),
+                  description
+                );
+                props.service.save(newData).then(() => {
+                  props.service.createPager().then(data => {
+                    props.pagerRange = data;
+                    const page = props.pager.pagerRange.get(
+                      props.pager.currentPageNo
+                    );
+                    const options = {
+                      from: page.from,
+                      to: page.to
+                    };
+                    props.options = options;
+                    props.service.selectAll(options).then(data => {
+                      props.renderDbList(props);
+
+                      document.querySelector(
+                        "#app__message"
+                      ).innerHTML = props.utils.createMessage(
+                        `保存しました id:${newData.id}`
+                      );
+                    });
+                  });
+                });
+              };
+
+              document.querySelector("#app__edit-list-save").onclick = save;
+            };
+
+            const render = () => {
+              props.service.find(props.currentId).then(data => {
+                document.querySelector(
+                  "#app__edit-list-edit"
+                ).innerHTML = create(data);
+
+                addEvent();
+              });
+            };
+
+            render();
+          },
+
+          renderApp() {
+            const counterContainer = (() => {
+              document.querySelector("#app__counter").innerHTML = ``;
+              this.renderCounter();
+            })();
+
+            const tableContainer = (() => {
+              const renderContainer = (() => {
+                document.querySelector("#app__table").innerHTML = `
+                <dvi class="row p-3">
+                  <div class="col-md-12 order-md-2">
+                    <div id="app__select"></div>
+                    <div class="table-responsive" id="app__table-contents"></div>
+                    <div id="app__button"></div>
+                  </div>
+                </dvi>
+                `;
+              })();
+              this.renderSelect();
+              this.renderTable();
+              this.renderButton();
+            })();
+
+            const editContainer = (() => {
+              this.pager = {};
+              this.pager.pagerNo = [1, 2, 3];
+              this.pager.currentPageNo = 1;
+              document.querySelector("#app__edit").innerHTML = `
+                <div class="table-responsive" id="app__edit-list"></div>
+                <div class="table-responsive" id="app__edit-list-edit"></div>
+              `;
+              this.renderDbList();
+            })();
+          }
+        }
+      };
+
+      window.onload = () => {
+        const fizzBuzz = FizzBuzzView.create(FizzBuzzTypeEnum.type01());
+        fizzBuzz.renderApp();
+      };
+    </script>
+    <script>
+      //mocha.checkLeaks();
+      mocha.globals(["jQuery"]);
+      mocha.run();
+    </script>
+  </body>
+</html>
