@@ -1220,7 +1220,7 @@
                   document.querySelector("#app__edit-list").innerHTML = "";
                   document.querySelector(
                     "#app__message"
-                  ).innerHTML = this.createMessage("削除しました");
+                  ).innerHTML = this.utils.createMessage("削除しました");
                 });
               };
 
@@ -1343,7 +1343,7 @@
                   props.data = data;
                   document.querySelector(
                     "#app__edit-list"
-                  ).innerHTML = createDbListTable(props);
+                  ).innerHTML = createDbList(props);
 
                   addEvent(props);
                 });
