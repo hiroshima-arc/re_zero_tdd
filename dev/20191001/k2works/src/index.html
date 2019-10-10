@@ -1631,13 +1631,17 @@
               ).onclick = saveDbListEditItemsEvent;
             };
 
-            props.service.find(props.currentId).then(data => {
-              document.querySelector(
-                "#app__edit-list-edit"
-              ).innerHTML = createDbListEdit(data);
+            const render = () => {
+              props.service.find(props.currentId).then(data => {
+                document.querySelector(
+                  "#app__edit-list-edit"
+                ).innerHTML = createDbListEdit(data);
 
-              saveDbListEditItems();
-            });
+                saveDbListEditItems();
+              });
+            };
+
+            render();
           },
 
           renderApp() {
