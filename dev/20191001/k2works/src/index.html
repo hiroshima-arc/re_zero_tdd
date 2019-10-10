@@ -1581,51 +1581,51 @@
            `;
             };
 
-            const saveDbListEditItemsEvent = () => {
-              const createListFromTable = () => {
-                let list = [];
-                let table = document.querySelector("#app__edit-list-table");
-                for (i = 1; i <= 10; i++) {
-                  for (j = 0; j < 10; j++) {
-                    list.push(table.rows[i].cells[j].innerText);
+            const saveDbListEditItems = () => {
+              const saveDbListEditItemsEvent = () => {
+                const createListFromTable = () => {
+                  let list = [];
+                  let table = document.querySelector("#app__edit-list-table");
+                  for (i = 1; i <= 10; i++) {
+                    for (j = 0; j < 10; j++) {
+                      list.push(table.rows[i].cells[j].innerText);
+                    }
                   }
-                }
-                return list;
-              };
+                  return list;
+                };
 
-              const id = document.querySelector("#inputId").value;
-              const description = document.querySelector("#inputDescription")
-                .value;
-              const newData = props.service.createViewModel(
-                Number.parseInt(id),
-                createListFromTable(),
-                description
-              );
-              props.service.save(newData).then(() => {
-                props.service.createPager().then(data => {
-                  props.pagerRange = data;
-                  const page = props.pager.pagerRange.get(
-                    props.pager.currentPageNo
-                  );
-                  const options = {
-                    from: page.from,
-                    to: page.to
-                  };
-                  props.options = options;
-                  props.service.selectAll(options).then(data => {
-                    props.renderDbList(props);
-
-                    document.querySelector(
-                      "#app__message"
-                    ).innerHTML = props.utils.createMessage(
-                      `保存しました id:${newData.id}`
+                const id = document.querySelector("#inputId").value;
+                const description = document.querySelector("#inputDescription")
+                  .value;
+                const newData = props.service.createViewModel(
+                  Number.parseInt(id),
+                  createListFromTable(),
+                  description
+                );
+                props.service.save(newData).then(() => {
+                  props.service.createPager().then(data => {
+                    props.pagerRange = data;
+                    const page = props.pager.pagerRange.get(
+                      props.pager.currentPageNo
                     );
+                    const options = {
+                      from: page.from,
+                      to: page.to
+                    };
+                    props.options = options;
+                    props.service.selectAll(options).then(data => {
+                      props.renderDbList(props);
+
+                      document.querySelector(
+                        "#app__message"
+                      ).innerHTML = props.utils.createMessage(
+                        `保存しました id:${newData.id}`
+                      );
+                    });
                   });
                 });
-              });
-            };
+              };
 
-            const saveDbListEditItems = () => {
               document.querySelector(
                 "#app__edit-list-save"
               ).onclick = saveDbListEditItemsEvent;
