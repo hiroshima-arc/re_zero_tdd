@@ -1287,6 +1287,28 @@
                     `;
               });
 
+              const search = (() => {
+                return `
+                    <form class="form-inline">
+                      <div class="form-group mb-2">
+                      <div class="form-group mx-sm-3 mb-2">
+                        <label for="inputPassword2" class="sr-only"
+                          >Description</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="inputDescription"
+                          placeholder="Description"
+                        />
+                      </div>
+                      <button type="button" class="btn btn-primary mb-2">
+                        Search
+                      </button>
+                    </form>
+                `;
+              })();
+
               const pager = (() => {
                 const element = document.querySelector("#pager");
 
@@ -1318,9 +1340,13 @@
               })();
 
               return `
+                <div id="search">
+                  ${search}
+                </div>
                 <div id="pager">
                   ${pager}
                 </div>
+                <div id="dblist">
                 <table class="table">
                   <thead>
                     <th></th>
@@ -1331,6 +1357,7 @@
                   </thead>
                   <tbody>${row}</tbody>
                 </table>
+                </div>
                     `;
             };
 
@@ -1412,34 +1439,26 @@
               })(props);
 
               const button = (props => {
-                $("#app__edit-list > table").on(
-                  "click",
-                  ".table-edit",
-                  function() {
-                    const currentId = Number.parseInt(
-                      $(this).children()[0].value
-                    );
-                    props.currentId = currentId;
-                    props.renderDbListEdit(props);
-                  }
-                );
+                $("#dblist > table").on("click", ".table-edit", function() {
+                  const currentId = Number.parseInt(
+                    $(this).children()[0].value
+                  );
+                  props.currentId = currentId;
+                  props.renderDbListEdit(props);
+                });
 
-                $("#app__edit-list > table").on(
-                  "click",
-                  ".table-remove",
-                  function() {
-                    const removeId = $(this).children()[0].value;
-                    props.service.delete(Number.parseInt(removeId)).then(() => {
-                      document.querySelector(
-                        "#app__message"
-                      ).innerHTML = props.utils.createMessage("削除しました");
-                      $(this)
-                        .parents("tr")
-                        .detach();
-                      clearDbListEdit();
-                    });
-                  }
-                );
+                $("#dblist > table").on("click", ".table-remove", function() {
+                  const removeId = $(this).children()[0].value;
+                  props.service.delete(Number.parseInt(removeId)).then(() => {
+                    document.querySelector(
+                      "#app__message"
+                    ).innerHTML = props.utils.createMessage("削除しました");
+                    $(this)
+                      .parents("tr")
+                      .detach();
+                    clearDbListEdit();
+                  });
+                });
               })(props);
             };
 
