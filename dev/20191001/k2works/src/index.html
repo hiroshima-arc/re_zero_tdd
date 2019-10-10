@@ -1254,7 +1254,7 @@
           },
 
           renderDbList() {
-            const createDbList = props => {
+            const create = props => {
               let row = "";
               props.data.forEach(item => {
                 let listSummary = "";
@@ -1341,9 +1341,9 @@
               const selectAllFromService = props => {
                 props.service.selectAll(props.options).then(data => {
                   props.data = data;
-                  document.querySelector(
-                    "#app__edit-list"
-                  ).innerHTML = createDbList(props);
+                  document.querySelector("#app__edit-list").innerHTML = create(
+                    props
+                  );
 
                   addEvent(props);
                 });
@@ -1466,9 +1466,9 @@
 
                 this.service.selectAll(options).then(data => {
                   props.data = data;
-                  document.querySelector(
-                    "#app__edit-list"
-                  ).innerHTML = createDbList(props);
+                  document.querySelector("#app__edit-list").innerHTML = create(
+                    props
+                  );
 
                   addEvent(props);
                 });
@@ -1479,7 +1479,7 @@
           },
 
           renderDbListEdit(props) {
-            const createDbListEdit = data => {
+            const create = data => {
               const table = (() => {
                 const header = (() => {
                   let element = "";
@@ -1581,8 +1581,8 @@
            `;
             };
 
-            const saveDbListEditItems = () => {
-              const saveDbListEditItemsEvent = () => {
+            const addEvent = () => {
+              const save = () => {
                 const createListFromTable = () => {
                   let list = [];
                   let table = document.querySelector("#app__edit-list-table");
@@ -1626,18 +1626,16 @@
                 });
               };
 
-              document.querySelector(
-                "#app__edit-list-save"
-              ).onclick = saveDbListEditItemsEvent;
+              document.querySelector("#app__edit-list-save").onclick = save;
             };
 
             const render = () => {
               props.service.find(props.currentId).then(data => {
                 document.querySelector(
                   "#app__edit-list-edit"
-                ).innerHTML = createDbListEdit(data);
+                ).innerHTML = create(data);
 
-                saveDbListEditItems();
+                addEvent();
               });
             };
 
