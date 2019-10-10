@@ -1340,118 +1340,6 @@
                     `;
             };
 
-            const addEventDbListTable = (service, render, createMessage) => {
-              const clearDbListEdit = () =>
-                (document.querySelector("#app__edit-list-edit").innerHTML = "");
-
-              const selectAllFromService = (
-                service,
-                render,
-                options,
-                createMessage
-              ) => {
-                service.selectAll(options).then(data => {
-                  document.querySelector(
-                    "#app__edit-list"
-                  ).innerHTML = createDbListTable(data);
-
-                  addEvent(service, render, createMessage);
-                });
-              };
-
-              $("#app__edit-list > table").on(
-                "click",
-                ".table-remove",
-                function() {
-                  const removeId = $(this).children()[0].value;
-                  service.delete(Number.parseInt(removeId)).then(() => {
-                    document.querySelector(
-                      "#app__message"
-                    ).innerHTML = createMessage("削除しました");
-                    $(this)
-                      .parents("tr")
-                      .detach();
-                    clearDbListEdit();
-                  });
-                }
-              );
-
-              $(".page-link").on("click", e => {
-                e.preventDefault();
-
-                const no = Number.parseInt(e.target.text);
-                if (Number.isInteger(no)) {
-                  if (this.pagerRange.get(no)) {
-                    const options = {
-                      from: this.pagerRange.get(no).from,
-                      to: this.pagerRange.get(no).to
-                    };
-                    selectAllFromService(
-                      service,
-                      render,
-                      options,
-                      createMessage
-                    );
-                    clearDbListEdit();
-                    this.currentPageNo = no;
-                  }
-                }
-              });
-
-              $("#page-item-prev > a").on("click", e => {
-                e.preventDefault();
-
-                this.pagerNo[0] > 1
-                  ? (this.pagerNo[0] = this.pagerNo[0] - 3)
-                  : 1;
-                this.pagerNo[1] > 2
-                  ? (this.pagerNo[1] = this.pagerNo[1] - 3)
-                  : 2;
-                this.pagerNo[2] > 3
-                  ? (this.pagerNo[2] = this.pagerNo[2] - 3)
-                  : 3;
-
-                const no = this.pagerNo[0];
-                const options = {
-                  from: this.pagerRange.get(no).from,
-                  to: this.pagerRange.get(no).to
-                };
-                selectAllFromService(service, render, options, createMessage);
-                clearDbListEdit();
-              });
-
-              $("#page-item-next > a").on("click", e => {
-                e.preventDefault();
-
-                const no = this.pagerNo[0] + 3;
-                if (this.pagerRange.get(no)) {
-                  this.pagerNo[0] = this.pagerNo[0] + 3;
-                  this.pagerNo[1] = this.pagerNo[1] + 3;
-                  this.pagerNo[2] = this.pagerNo[2] + 3;
-
-                  const options = {
-                    from: this.pagerRange.get(no).from,
-                    to: this.pagerRange.get(no).to
-                  };
-                  selectAllFromService(service, render, options, createMessage);
-                  clearDbListEdit();
-                }
-              });
-            };
-
-            const addEventDbListEdit = (service, render, createMessage) => {
-              $("#app__edit-list > table").on(
-                "click",
-                ".table-edit",
-                function() {
-                  const currentId = Number.parseInt(
-                    $(this).children()[0].value
-                  );
-                  render(render, currentId, service, createMessage);
-                }
-              );
-            };
-
             const renderDbListEdit = (self, id, service, createMessage) => {
               const createDbListEdit = data => {
                 const table = (() => {
@@ -1615,6 +1503,124 @@
             };
 
             const addEvent = (service, render, createMessage) => {
+              const addEventDbListTable = (service, render, createMessage) => {
+                const clearDbListEdit = () =>
+                  (document.querySelector("#app__edit-list-edit").innerHTML =
+                    "");
+
+                const selectAllFromService = (
+                  service,
+                  render,
+                  options,
+                  createMessage
+                ) => {
+                  service.selectAll(options).then(data => {
+                    document.querySelector(
+                      "#app__edit-list"
+                    ).innerHTML = createDbListTable(data);
+
+                    addEvent(service, render, createMessage);
+                  });
+                };
+
+                $("#app__edit-list > table").on(
+                  "click",
+                  ".table-remove",
+                  function() {
+                    const removeId = $(this).children()[0].value;
+                    service.delete(Number.parseInt(removeId)).then(() => {
+                      document.querySelector(
+                        "#app__message"
+                      ).innerHTML = createMessage("削除しました");
+                      $(this)
+                        .parents("tr")
+                        .detach();
+                      clearDbListEdit();
+                    });
+                  }
+                );
+
+                $(".page-link").on("click", e => {
+                  e.preventDefault();
+
+                  const no = Number.parseInt(e.target.text);
+                  if (Number.isInteger(no)) {
+                    if (this.pagerRange.get(no)) {
+                      const options = {
+                        from: this.pagerRange.get(no).from,
+                        to: this.pagerRange.get(no).to
+                      };
+                      selectAllFromService(
+                        service,
+                        render,
+                        options,
+                        createMessage
+                      );
+                      clearDbListEdit();
+                      this.currentPageNo = no;
+                    }
+                  }
+                });
+
+                $("#page-item-prev > a").on("click", e => {
+                  e.preventDefault();
+
+                  this.pagerNo[0] > 1
+                    ? (this.pagerNo[0] = this.pagerNo[0] - 3)
+                    : 1;
+                  this.pagerNo[1] > 2
+                    ? (this.pagerNo[1] = this.pagerNo[1] - 3)
+                    : 2;
+                  this.pagerNo[2] > 3
+                    ? (this.pagerNo[2] = this.pagerNo[2] - 3)
+                    : 3;
+
+                  const no = this.pagerNo[0];
+                  const options = {
+                    from: this.pagerRange.get(no).from,
+                    to: this.pagerRange.get(no).to
+                  };
+                  selectAllFromService(service, render, options, createMessage);
+                  clearDbListEdit();
+                });
+
+                $("#page-item-next > a").on("click", e => {
+                  e.preventDefault();
+
+                  const no = this.pagerNo[0] + 3;
+                  if (this.pagerRange.get(no)) {
+                    this.pagerNo[0] = this.pagerNo[0] + 3;
+                    this.pagerNo[1] = this.pagerNo[1] + 3;
+                    this.pagerNo[2] = this.pagerNo[2] + 3;
+
+                    const options = {
+                      from: this.pagerRange.get(no).from,
+                      to: this.pagerRange.get(no).to
+                    };
+                    selectAllFromService(
+                      service,
+                      render,
+                      options,
+                      createMessage
+                    );
+                    clearDbListEdit();
+                  }
+                });
+              };
+
+              const addEventDbListEdit = (service, render, createMessage) => {
+                $("#app__edit-list > table").on(
+                  "click",
+                  ".table-edit",
+                  function() {
+                    const currentId = Number.parseInt(
+                      $(this).children()[0].value
+                    );
+                    render(render, currentId, service, createMessage);
+                  }
+                );
+              };
+
               addEventDbListTable(service, render, createMessage);
               addEventDbListEdit(service, render, createMessage);
             };
