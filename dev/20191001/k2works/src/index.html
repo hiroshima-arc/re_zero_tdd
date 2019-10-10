@@ -1344,13 +1344,18 @@
               const clearDbListEdit = () =>
                 (document.querySelector("#app__edit-list-edit").innerHTML = "");
 
-              const selectAllFromService = (service, render, options) => {
+              const selectAllFromService = (
+                service,
+                render,
+                options,
+                createMessage
+              ) => {
                 service.selectAll(options).then(data => {
                   document.querySelector(
                     "#app__edit-list"
                   ).innerHTML = createDbListTable(data);
-                  addEventDbListTable(service, render);
-                  addEventDbListEdit(service, render);
+
+                  addEvent(service, render, createMessage);
                 });
               };
 
@@ -1381,7 +1386,12 @@
                       from: this.pagerRange.get(no).from,
                       to: this.pagerRange.get(no).to
                     };
-                    selectAllFromService(service, render, options);
+                    selectAllFromService(
+                      service,
+                      render,
+                      options,
+                      createMessage
+                    );
                     clearDbListEdit();
                     this.currentPageNo = no;
                   }
@@ -1406,7 +1416,7 @@
                   from: this.pagerRange.get(no).from,
                   to: this.pagerRange.get(no).to
                 };
-                selectAllFromService(service, render, options);
+                selectAllFromService(service, render, options, createMessage);
                 clearDbListEdit();
               });
 
@@ -1423,7 +1433,7 @@
                     from: this.pagerRange.get(no).from,
                     to: this.pagerRange.get(no).to
                   };
-                  selectAllFromService(service, render, options);
+                  selectAllFromService(service, render, options, createMessage);
                   clearDbListEdit();
                 }
               });
@@ -1578,8 +1588,7 @@
                       "#app__edit-list"
                     ).innerHTML = createDbListTable(data);
 
-                    addEventDbListTable(service, self, createMessage);
-                    addEventDbListEdit(service, self, createMessage);
+                    addEvent(service, self, createMessage);
 
                     document.querySelector(
                       "#app__message"
@@ -1605,6 +1614,11 @@
               });
             };
 
+            const addEvent = (service, render, createMessage) => {
+              addEventDbListTable(service, render, createMessage);
+              addEventDbListEdit(service, render, createMessage);
+            };
+
             const render = () => {
               const options = { from: this.pagerNo[0], to: this.pagerNo[2] };
               this.service.selectAll(options).then(data => {
@@ -1612,16 +1626,7 @@
                   "#app__edit-list"
                 ).innerHTML = createDbListTable(data);
 
-                addEventDbListTable(
-                  this.service,
-                  renderDbListEdit,
-                  this.createMessage
-                );
-                addEventDbListEdit(
-                  this.service,
-                  renderDbListEdit,
-                  this.createMessage
-                );
+                addEvent(this.service, renderDbListEdit, this.createMessage);
               });
             };
 
