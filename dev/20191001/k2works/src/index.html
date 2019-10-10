@@ -1202,7 +1202,7 @@
                     document.querySelector("#app__edit-list-edit").innerHTML =
                       "";
 
-                    this.renderDbListTable();
+                    this.renderDbList();
                   });
                 });
               };
@@ -1253,8 +1253,8 @@
             render();
           },
 
-          renderDbListTable() {
-            const createDbListTable = props => {
+          renderDbList() {
+            const createDbList = props => {
               let row = "";
               props.data.forEach(item => {
                 let listSummary = "";
@@ -1454,7 +1454,7 @@
                   },
                   utils: { createMessage: this.utils.createMessage },
                   renderDbListEdit: this.renderDbListEdit,
-                  renderDbListTable: this.renderDbListTable
+                  renderDbList: this.renderDbList
                 };
                 const no = props.pager.currentPageNo;
                 const options = {
@@ -1468,7 +1468,7 @@
                   props.data = data;
                   document.querySelector(
                     "#app__edit-list"
-                  ).innerHTML = createDbListTable(props);
+                  ).innerHTML = createDbList(props);
 
                   addEvent(props);
                 });
@@ -1613,7 +1613,7 @@
                   };
                   props.options = options;
                   props.service.selectAll(options).then(data => {
-                    props.renderDbListTable(props);
+                    props.renderDbList(props);
 
                     document.querySelector(
                       "#app__message"
@@ -1671,7 +1671,7 @@
                 <div class="table-responsive" id="app__edit-list"></div>
                 <div class="table-responsive" id="app__edit-list-edit"></div>
               `;
-              this.renderDbListTable();
+              this.renderDbList();
             })();
           }
         }
